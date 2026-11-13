@@ -5,7 +5,7 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Culture & Trends",
         description: "Interactive IELTS lesson exploring the attention economy and modern media habits.",
-        file: "lessons/IELTS_Attention_Economy_Interactive_Lesson.html"
+        file: "lessons/IELTS_Attention_Economy"
     },
     {
         title: "Wisdom Temple",
@@ -13,7 +13,7 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Culture & Trends",
         description: "Advanced C1 interactive lesson exploring philosophical concepts and rich vocabulary.",
-        file: "lessons/Wisdom_Temple_Student_Interactive_Lesson_C1.html"
+        file: "lessons/Wisdom_Temple"
     },
     {
         title: "Great American Food Quest",
@@ -29,7 +29,7 @@ const LESSONS = [
         type: "Speaking",
         category: "Daily Life",
         description: "Talk about weekend routines, hobbies, and planning the ideal Saturday.",
-        file: "lessons/perfect_saturday_fixed.html"
+        file: "lessons/perfect_saturday"
     },
      {
         title: "Family",
@@ -45,6 +45,6 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Vocabulary", "Listening",
         description: "Learn how to buy souvenirs when you travel abroad",
-        file: "lessons/Souvenir_Hunt_A0_A1_interactive_v2.html"
+        file: "lessons/Souvenir_Hunt"
     },  
 ];
