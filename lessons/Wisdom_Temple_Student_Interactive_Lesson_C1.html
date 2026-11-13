@@ -1,0 +1,704 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Wisdom Temple</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout concept: a pilgrimage in six chapters. Each chapter is a full-width hall with its own colour, all sharing one gold-and-parchment vocabulary. */
+:root{
+  --burgundy:#6b1e22;
+  --burgundy-deep:#3a0f12;
+  --gold:#b8923a;
+  --gold-light:#e3c982;
+  --parchment:#f3e8d0;
+  --parchment-deep:#e4d3ae;
+  --forest:#2c4636;
+  --forest-deep:#1b2e22;
+  --ink:#2b1b15;
+  --font-display:"Cormorant Garamond","Palatino Linotype",Georgia,serif;
+  --font-body:"Lora",Georgia,"Times New Roman",serif;
+  --font-label:"Cinzel","Trajan Pro",Georgia,serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--burgundy-deep);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.65;padding-left:0;padding-right:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--burgundy-deep);z-index:30}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:980px;margin:0 auto;padding-block:64px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--font-label);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase}
+
+/* Navigation */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--burgundy-deep);border-bottom:1px solid var(--gold)}
+.nav ul{list-style:none;margin:0 auto;max-width:980px;display:flex;gap:4px 18px;flex-wrap:wrap;justify-content:center;padding:10px max(14px,env(safe-area-inset-left,0px))}
+.nav a{font-family:var(--font-label);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);text-decoration:none;padding:4px 2px;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:focus-visible{border-bottom-color:var(--gold-light);outline:none}
+
+/* Hero */
+.hero{background:linear-gradient(180deg,var(--burgundy-deep) 0%,var(--burgundy) 62%,#8a3a2a 100%);color:var(--parchment);text-align:center;position:relative;overflow:hidden}
+.hero .scene{display:block;width:100%;height:auto;max-height:340px}
+.hero .wrap{padding-block:28px 56px;position:relative}
+.hero h1{font-size:clamp(2.4rem,7vw,4.6rem);color:var(--gold-light);margin:14px 0 14px}
+.hero p.sub{font-size:1.2rem;max-width:34em;margin:0 auto 28px;color:var(--parchment)}
+.mandala-hero{position:absolute;left:50%;top:-120px;transform:translateX(-50%);width:520px;max-width:120%;opacity:.16;pointer-events:none}
+.btn{display:inline-block;font-family:var(--font-label);font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--burgundy-deep);background:var(--gold-light);border:1px solid var(--gold);padding:13px 26px;cursor:pointer;text-decoration:none;box-shadow:0 0 0 3px var(--burgundy-deep),0 0 0 4px var(--gold)}
+.btn:hover{background:#f0dba0}
+.btn:focus-visible{outline:3px solid var(--parchment);outline-offset:4px}
+.btn.small{font-size:.7rem;padding:9px 16px;box-shadow:none}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+
+/* Chapters */
+.sec{position:relative}
+.sec .sh{display:flex;flex-direction:column;gap:10px;margin-bottom:30px;align-items:flex-start}
+.sec .kicker{font-family:var(--font-label);font-size:.76rem;letter-spacing:.24em;text-transform:uppercase}
+.sec h2{font-size:clamp(2rem,5vw,3.2rem)}
+.sec .rule{width:120px;height:10px;background:radial-gradient(circle at 5px 5px,currentColor 2.5px,transparent 3px) 0 0/20px 10px repeat-x;opacity:.8}
+.lead{font-size:1.18rem;max-width:36em;margin-bottom:26px}
+.sec p+p{margin-top:14px}
+
+.s1{background:var(--burgundy);color:var(--parchment)}
+.s1 .kicker,.s1 h2{color:var(--gold-light)}
+.s2{background:var(--parchment);color:var(--ink)}
+.s2 .kicker{color:var(--burgundy)} .s2 h2{color:var(--burgundy)}
+.s3{background:var(--forest);color:var(--parchment)}
+.s3 .kicker,.s3 h2{color:var(--gold-light)}
+.s4{background:var(--parchment-deep);color:var(--ink)}
+.s4 .kicker,.s4 h2{color:var(--burgundy)}
+.s5{background:var(--burgundy-deep);color:var(--parchment)}
+.s5 .kicker,.s5 h2{color:var(--gold-light)}
+.s6{background:var(--forest-deep);color:var(--parchment)}
+.s6 .kicker,.s6 h2{color:var(--gold-light)}
+
+/* Panels */
+.panel{background:var(--parchment);color:var(--ink);border:1px solid var(--gold);padding:24px;position:relative;box-shadow:0 0 0 5px rgba(184,146,58,.25)}
+.panel.dark{background:rgba(0,0,0,.26);color:var(--parchment);box-shadow:none;border-color:var(--gold)}
+.panel h3{font-size:1.5rem;margin-bottom:10px;color:var(--burgundy)}
+.panel.dark h3{color:var(--gold-light)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:start}
+.grid2>*{min-width:0}
+.prompt{font-family:var(--font-display);font-size:1.5rem;font-weight:600;line-height:1.25;margin-bottom:14px}
+.note{font-size:.95rem;opacity:.85}
+
+/* Options and feedback */
+.opts{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.opt{font:inherit;text-align:left;cursor:pointer;color:inherit;background:transparent;border:1px solid currentColor;padding:12px 16px;line-height:1.4;min-width:0;width:100%}
+.opt:hover{background:rgba(184,146,58,.2)}
+.opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opt.sel{background:rgba(184,146,58,.28)}
+.opt.good{background:#2f6b45;color:#fff;border-color:#2f6b45}
+.opt.bad{background:#8a2b2b;color:#fff;border-color:#8a2b2b}
+.fb{margin-top:12px;padding:14px 16px;border-left:4px solid var(--gold);background:rgba(184,146,58,.18);font-size:1rem}
+.fb.good{border-left-color:#2f6b45}
+.fb.try{border-left-color:#8a2b2b}
+.fb[hidden]{display:none}
+
+/* Vocabulary cards */
+.vrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px;margin-top:34px}
+.vcard{background:var(--parchment);color:var(--ink);border:1px solid var(--gold);padding:16px 18px 18px;position:relative;min-width:0}
+.vcard::before{content:"";position:absolute;inset:5px;border:1px solid rgba(107,30,34,.35);pointer-events:none}
+.vcard b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--burgundy);line-height:1.2;margin-bottom:6px}
+.vcard .def{display:block;font-size:.95rem;margin-bottom:8px}
+.vcard i{font-size:.92rem;color:#5a3d2e}
+.vlabel{margin:34px 0 -18px;color:var(--gold-light)}
+.s2 .vlabel,.s4 .vlabel{color:var(--burgundy)}
+
+/* Textareas */
+textarea{font:inherit;width:100%;min-height:130px;padding:14px;border:1px solid var(--gold);background:#fbf5e6;color:var(--ink);resize:vertical;line-height:1.5}
+textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.counter{font-size:.85rem;margin-top:6px;opacity:.85}
+
+/* Illusion */
+.illusion svg,.blind svg,.temple svg{width:100%;height:auto;display:block}
+.guide{opacity:0;transition:opacity .4s}
+.guide.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.guide{transition:none}html{scroll-behavior:auto}}
+
+/* Quiz rows */
+.qrow{border-top:1px solid rgba(107,30,34,.35);padding-top:18px;margin-top:18px}
+.qrow:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.tf{display:flex;gap:10px;flex-wrap:wrap}
+.tf .opt{width:auto;flex:1 1 140px;text-align:center}
+
+/* Slider */
+input[type=range]{width:100%;accent-color:var(--gold-light);margin:10px 0}
+.scale{display:flex;justify-content:space-between;font-size:.85rem;gap:12px}
+
+/* Gap fill */
+.gap{margin:0 0 14px;line-height:2}
+select{font:inherit;color:var(--ink);background:#fbf5e6;border:1px solid var(--gold);padding:3px 6px;max-width:100%}
+select.ok{background:#cfe6d4;border-color:#2f6b45}
+select.no{background:#f1cfcf;border-color:#8a2b2b}
+.result{margin-top:10px;font-weight:600}
+
+/* Statement cards */
+.stmts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;margin:16px 0 22px}
+.stmts .opt{font-family:var(--font-display);font-size:1.4rem;font-weight:600;text-align:center;padding:22px 14px}
+
+/* Tracker */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.chip{font-size:.85rem;padding:5px 11px;border:1px solid var(--gold);color:var(--parchment);opacity:.75;transition:background .3s}
+.chip.hit{background:var(--gold-light);color:var(--burgundy-deep);opacity:1;font-weight:600}
+
+/* Homework */
+.hw{display:grid;gap:24px}
+.resource{background:var(--parchment);color:var(--ink);border:1px solid var(--gold);padding:28px;box-shadow:0 0 0 5px rgba(184,146,58,.25)}
+.resource h3{font-size:2rem;color:var(--burgundy);margin-bottom:6px}
+.resource .by{margin-bottom:14px;color:var(--forest);font-family:var(--font-label);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
+.resource a.btn{margin-top:18px;background:var(--burgundy);color:var(--parchment);box-shadow:none;border-color:var(--burgundy)}
+.resource a.btn:hover{background:var(--burgundy-deep)}
+.hw ul{margin:8px 0 0;padding-left:1.2em}
+.hw li{margin-bottom:8px}
+
+/* Footer and teacher notes */
+footer{background:var(--burgundy-deep);color:var(--gold-light);text-align:center}
+footer .wrap{padding-block:36px}
+.tnotes{background:#fff8e6;color:#2b1b15;border-top:6px solid #c0392b}
+.tnotes .wrap{padding-block:40px}
+.tnotes h2{font-size:2rem;color:#8a2b2b;margin-bottom:6px}
+.tnotes h3{font-size:1.3rem;margin:22px 0 6px;color:#2b1b15}
+.tnotes ul{padding-left:1.2em;margin:6px 0}
+.tnotes li{margin-bottom:6px}
+.tnotes .warn{font-family:var(--font-label);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:#8a2b2b;margin-bottom:12px}
+</style>
+
+<nav class="nav" aria-label="Chapters">
+  <ul>
+    <li><a href="#s1">I Illusion</a></li>
+    <li><a href="#s2">II The Storyteller</a></li>
+    <li><a href="#s3">III Other Worlds</a></li>
+    <li><a href="#s4">IV The Temple Beam</a></li>
+    <li><a href="#s5">V Doubt Well</a></li>
+    <li><a href="#s6">VI Journey On</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="mandala-hero" data-mandala="hero" aria-hidden="true"></div>
+  <svg class="scene" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Snow mountains at dawn above a small temple with prayer flags">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a0f12"/><stop offset=".55" stop-color="#7a2a2a"/><stop offset="1" stop-color="#d89a4e"/>
+      </linearGradient>
+      <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f6ecd6"/><stop offset="1" stop-color="#b9a38a"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="340" fill="url(#sky)"/>
+    <circle cx="840" cy="150" r="62" fill="#f3d58a" opacity=".9"/>
+    <circle cx="840" cy="150" r="90" fill="#f3d58a" opacity=".18"/>
+    <polygon points="0,340 0,210 120,120 200,180 300,70 410,190 520,110 640,200 760,90 890,200 1010,120 1120,190 1200,150 1200,340" fill="url(#snow)" opacity=".85"/>
+    <polygon points="0,340 0,250 140,190 260,240 380,170 520,250 680,185 820,250 960,200 1100,255 1200,220 1200,340" fill="#5b2a2c"/>
+    <polygon points="0,340 0,290 180,250 340,290 520,262 700,300 900,270 1060,300 1200,280 1200,340" fill="#2c4636"/>
+    <g transform="translate(560 214)">
+      <rect x="-48" y="26" width="96" height="42" fill="#f3e8d0"/>
+      <rect x="-34" y="38" width="14" height="30" fill="#6b1e22"/><rect x="20" y="38" width="14" height="30" fill="#6b1e22"/>
+      <polygon points="-62,26 62,26 40,4 -40,4" fill="#b8923a"/>
+      <polygon points="-34,4 34,4 18,-14 -18,-14" fill="#b8923a"/>
+      <rect x="-3" y="-28" width="6" height="14" fill="#b8923a"/><circle cx="0" cy="-30" r="4" fill="#e3c982"/>
+    </g>
+    <path d="M110 300 Q 330 252 540 236" stroke="#f3e8d0" stroke-width="1.5" fill="none"/>
+    <g>
+      <rect x="150" y="281" width="22" height="16" fill="#3d6fb5" transform="rotate(-8 161 289)"/>
+      <rect x="196" y="272" width="22" height="16" fill="#f6efe0" transform="rotate(-6 207 280)"/>
+      <rect x="244" y="266" width="22" height="16" fill="#c0392b" transform="rotate(-5 255 274)"/>
+      <rect x="296" y="260" width="22" height="16" fill="#3f8a4f" transform="rotate(-4 307 268)"/>
+      <rect x="352" y="254" width="22" height="16" fill="#e0b030" transform="rotate(-3 363 262)"/>
+      <rect x="410" y="249" width="22" height="16" fill="#3d6fb5" transform="rotate(-3 421 257)"/>
+      <rect x="468" y="244" width="22" height="16" fill="#f6efe0" transform="rotate(-2 479 252)"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <span class="label" style="color:var(--gold-light)">The Wisdom Temple</span>
+    <h1>Do You See the World as It Is?</h1>
+    <p class="sub">An English lesson about perception, change and the art of doubting well. Six chapters, a few surprises and fourteen expressions worth keeping.</p>
+    <a class="btn" href="#s1">Enter the temple</a>
+  </div>
+</header>
+
+<!-- CHAPTER I -->
+<section class="sec s1" id="s1">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter I · The Gate of Illusion</span>
+      <h2>Two Lines, One Question</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">Before you walk through the gate, test your eyes. Look at the two horizontal lines below. Trust your first impression.</p>
+
+    <div class="grid2">
+      <div class="panel illusion">
+        <svg viewBox="0 0 440 250" role="img" aria-label="Two horizontal lines of equal length, one with outward arrowheads and one with inward arrowheads">
+          <g stroke="#6b1e22" stroke-width="5" stroke-linecap="round" fill="none">
+            <line x1="80" y1="70" x2="360" y2="70"/>
+            <polyline points="104,46 80,70 104,94"/><polyline points="336,46 360,70 336,94"/>
+            <line x1="80" y1="180" x2="360" y2="180"/>
+            <polyline points="56,156 80,180 56,204"/><polyline points="384,156 360,180 384,204"/>
+          </g>
+          <text x="20" y="40" font-family="Cinzel,serif" font-size="18" fill="#b8923a">A</text>
+          <text x="20" y="150" font-family="Cinzel,serif" font-size="18" fill="#b8923a">B</text>
+          <g class="guide" id="guide" stroke="#2f6b45" stroke-width="2" stroke-dasharray="6 5">
+            <line x1="80" y1="20" x2="80" y2="230"/><line x1="360" y1="20" x2="360" y2="230"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="panel dark q" data-answer="c">
+        <p class="prompt">Which line is longer?</p>
+        <div class="opts">
+          <button class="opt" data-k="a" data-fb="Line A looks longer, doesn't it? Most people say so. Press 'Measure them' to see what the dotted guides reveal.">Line A, the one on top</button>
+          <button class="opt" data-k="b" data-fb="Line B seems to stretch further for many people. Press 'Measure them' and check the dotted guides.">Line B, the one below</button>
+          <button class="opt" data-k="c" data-fb="Yes, they are exactly the same length. Your eyes were taken in by the arrowheads, and here is the strange part: even now that you know, line B probably still looks longer.">They look the same to me</button>
+        </div>
+        <div class="fb" hidden></div>
+        <p style="margin-top:16px"><button class="btn small ghost" id="measure" type="button">Measure them</button></p>
+      </div>
+    </div>
+
+    <div class="panel dark" style="margin-top:24px">
+      <p class="prompt">Your turn to think</p>
+      <p>Even when you know the truth, the illusion does not disappear. Why do you think your brain refuses to correct itself? Write two or three sentences, and try to use one of the expressions below.</p>
+      <label for="r1" class="note" style="display:block;margin:12px 0 6px">Your thoughts</label>
+      <textarea id="r1" data-count="c1" placeholder="I think my brain refuses to correct itself because…"></textarea>
+      <div class="counter" id="c1">0 words</div>
+    </div>
+
+    <p class="label vlabel">Expressions from this chapter</p>
+    <div class="vrow">
+      <div class="vcard"><b>to be taken in by</b><span class="def">to be fooled into believing something, often because it looks convincing</span><i>“I was completely taken in by the website; it looked so professional.”</i></div>
+      <div class="vcard"><b>to take something at face value</b><span class="def">to accept something exactly as it appears, without questioning it</span><i>“You can’t take his promises at face value.”</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER II -->
+<section class="sec s2" id="s2">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter II · The Hall of the Storyteller</span>
+      <h2>Your Brain Is Making It Up</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">Imagine a film editor who has to finish the film before it is shown, and has no time to ask the director what happens next. That editor is your brain. It guesses, patches and smooths so that the world feels continuous and complete.</p>
+
+    <div class="grid2">
+      <div class="panel blind">
+        <h3>Find your blind spot</h3>
+        <svg viewBox="0 0 440 130" role="img" aria-label="A cross on the left and a filled circle on the right">
+          <rect x="0" y="0" width="440" height="130" fill="#fbf5e6"/>
+          <g stroke="#2b1b15" stroke-width="5"><line x1="60" y1="65" x2="100" y2="65"/><line x1="80" y1="45" x2="80" y2="85"/></g>
+          <circle cx="340" cy="65" r="17" fill="#6b1e22"/>
+        </svg>
+        <ol style="padding-left:1.2em;margin:14px 0 0">
+          <li>Cover your <b>left</b> eye.</li>
+          <li>Look at the cross with your right eye. Do not look at the circle.</li>
+          <li>Start about 20 cm from the screen and move slowly <b>closer</b>, then back.</li>
+        </ol>
+        <p style="margin-top:12px"><button class="btn small" id="blindbtn" type="button">What just happened?</button></p>
+        <div class="fb" id="blindfb" hidden>At one distance the circle vanished, and the screen did not look broken. Where the nerve leaves your eye there are no light-sensing cells, so there is a hole in your vision. Your brain fills in the gap with the background around it and you never notice.</div>
+      </div>
+
+      <div class="panel">
+        <h3>Fact or myth?</h3>
+        <div class="qrow q" data-answer="myth">
+          <p class="prompt" style="font-size:1.25rem">Your eyes send a complete, sharp picture of the world to your brain.</p>
+          <div class="tf"><button class="opt" data-k="fact" data-fb="Not quite. Only a tiny central area of your retina sees in sharp detail. Your eyes jump around several times a second, and the brain stitches the pieces into one smooth picture.">Fact</button><button class="opt" data-k="myth" data-fb="Correct. Only a small central area sees sharply. The rest of the picture is assembled and filled in by your brain.">Myth</button></div>
+          <div class="fb" hidden></div>
+        </div>
+        <div class="qrow q" data-answer="fact">
+          <p class="prompt" style="font-size:1.25rem">Each of your eyes has a blind spot that you normally never notice.</p>
+          <div class="tf"><button class="opt" data-k="fact" data-fb="Correct. You have just seen it for yourself.">Fact</button><button class="opt" data-k="myth" data-fb="It is true, and you have just found yours in the experiment on the left.">Myth</button></div>
+          <div class="fb" hidden></div>
+        </div>
+        <div class="qrow q" data-answer="myth">
+          <p class="prompt" style="font-size:1.25rem">When you see something, you are seeing what is happening at this exact moment.</p>
+          <div class="tf"><button class="opt" data-k="fact" data-fb="Not exactly. Processing takes time, so your brain predicts a split second ahead to keep your experience in step with reality.">Fact</button><button class="opt" data-k="myth" data-fb="Correct. Your brain needs time to process what your eyes send, so it constantly predicts what is about to happen. What you experience is partly a forecast.">Myth</button></div>
+          <div class="fb" hidden></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:24px">
+      <p class="prompt">A question for you</p>
+      <p>If your brain fills in so much, how much of what you “see” every day is actually there, and how much is a good guess? Give your honest estimate and explain it.</p>
+      <label for="r2" class="note" style="display:block;margin:12px 0 6px">Your answer</label>
+      <textarea id="r2" data-count="c2" placeholder="I would say that roughly…"></textarea>
+      <div class="counter" id="c2">0 words</div>
+    </div>
+
+    <p class="label vlabel">Expressions from this chapter</p>
+    <div class="vrow">
+      <div class="vcard"><b>to fill in the gaps</b><span class="def">to supply the missing information yourself, from guesswork or experience</span><i>“The report was vague, so I filled in the gaps with my own assumptions.”</i></div>
+      <div class="vcard"><b>to jump to conclusions</b><span class="def">to decide something too quickly, before you know all the facts</span><i>“Don’t jump to conclusions; she may simply be running late.”</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER III -->
+<section class="sec s3" id="s3">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter III · The Garden of Other Worlds</span>
+      <h2>Same Apple, Different Minds</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">If every brain builds its own version of reality, then perhaps no two people live in exactly the same world. Scientists have found striking differences in how people experience even simple things.</p>
+
+    <div class="grid2">
+      <div class="panel dark">
+        <p class="prompt">Close your eyes and picture a red apple.</p>
+        <p>Hold it for ten seconds. How clear is the picture in your mind?</p>
+        <input type="range" id="vivid" min="1" max="5" value="3" aria-label="How vivid is your mental image, from nothing at all to as clear as a photograph">
+        <div class="scale"><span>Nothing at all</span><span>Like a photograph</span></div>
+        <div class="fb" id="vividfb"></div>
+      </div>
+
+      <div class="panel dark q">
+        <p class="prompt">Which of these experiences do you think are real?</p>
+        <div class="opts">
+          <button class="opt" data-k="1" data-fb="Real. Synaesthesia is when one sense triggers another, so that a person might see a colour for every letter or taste a flavour when they hear a word. It is far more common than most people expect.">Seeing colours when you read letters or numbers</button>
+          <button class="opt" data-k="2" data-fb="Real. It is called aphantasia. People with it have no mental pictures at all, and many do not realise this until adulthood, because they assume that “picture it in your head” is just a figure of speech.">Having no mental images at all</button>
+          <button class="opt" data-k="3" data-fb="Real. Some healthy people regularly hear voices, and scientists study how the brain produces such experiences. A fascinating part of this research is that the boundary between “normal” and “unusual” is blurrier than we tend to think.">Hearing voices that nobody else can hear</button>
+        </div>
+        <div class="fb" hidden></div>
+        <p class="note" style="margin-top:10px">Surprise: all three are real. Researchers discuss them in the podcast you will meet at the end of the lesson.</p>
+      </div>
+    </div>
+
+    <div class="panel dark" style="margin-top:24px">
+      <p class="prompt">Think about it</p>
+      <p>Imagine you could swap minds with a friend for one hour. What would you most like to find out about how they experience the world? What do you think would surprise you?</p>
+      <label for="r3" class="note" style="display:block;margin:12px 0 6px">Your thoughts</label>
+      <textarea id="r3" data-count="c3" placeholder="If I could see the world through my friend’s eyes, I would want to know…"></textarea>
+      <div class="counter" id="c3">0 words</div>
+    </div>
+
+    <p class="label vlabel">Expressions from this chapter</p>
+    <div class="vrow">
+      <div class="vcard"><b>a matter of perspective</b><span class="def">something that depends on how you look at it</span><i>“Whether the city is noisy or lively is a matter of perspective.”</i></div>
+      <div class="vcard"><b>It’s tempting to assume that…</b><span class="def">a polite way to introduce a common belief you are about to question</span><i>“It’s tempting to assume that everyone pictures things the way we do.”</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER IV -->
+<section class="sec s4" id="s4">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter IV · The Courtyard of Change</span>
+      <h2>The Beam That Was Replaced</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">So far we have doubted what we see. Now let us doubt something even more basic: what it means for anything to stay the same.</p>
+
+    <div class="grid2">
+      <div class="panel temple">
+        <svg viewBox="0 0 400 260" role="img" aria-label="A small temple with a golden roof beside a pile of old wooden beams">
+          <rect width="400" height="260" fill="#fbf5e6"/>
+          <polygon points="0,260 0,200 100,170 200,205 320,160 400,195 400,260" fill="#2c4636" opacity=".85"/>
+          <g transform="translate(160 70)">
+            <rect x="-70" y="60" width="140" height="80" fill="#f3e8d0" stroke="#6b1e22" stroke-width="3"/>
+            <rect x="-50" y="80" width="22" height="60" fill="#6b1e22"/><rect x="28" y="80" width="22" height="60" fill="#6b1e22"/>
+            <polygon points="-92,60 92,60 62,22 -62,22" fill="#b8923a" stroke="#6b1e22" stroke-width="3"/>
+            <polygon points="-50,22 50,22 28,-8 -28,-8" fill="#b8923a" stroke="#6b1e22" stroke-width="3"/>
+            <line x1="0" y1="-8" x2="0" y2="-34" stroke="#6b1e22" stroke-width="4"/><circle cx="0" cy="-38" r="6" fill="#e3c982" stroke="#6b1e22" stroke-width="2"/>
+          </g>
+          <g stroke="#5a3d2e" stroke-width="3">
+            <rect x="290" y="200" width="80" height="12" fill="#a8825a"/><rect x="298" y="186" width="70" height="12" fill="#946f48"/><rect x="292" y="172" width="76" height="12" fill="#a8825a"/>
+          </g>
+          <text x="330" y="236" text-anchor="middle" font-family="Lora,serif" font-size="13" fill="#5a3d2e">old beams</text>
+        </svg>
+      </div>
+
+      <div class="panel q">
+        <p class="prompt">The temple keeper replaces one old wooden beam every year. After forty years, not a single original beam remains. Is it still the same temple?</p>
+        <div class="opts">
+          <button class="opt" data-k="1" data-fb="Many people say yes: the place, the name, the purpose and the people who gather there never changed. So what makes it the same, if not the material? Perhaps a temple is more like a pattern than an object.">Yes, it is the same temple</button>
+          <button class="opt" data-k="2" data-fb="A strict answer, and a consistent one: if nothing original remains, nothing of it remains. But then, at what year did it stop being the original? After the first beam, the tenth, the fortieth? That is the difficulty.">No, it is a different temple</button>
+          <button class="opt" data-k="3" data-fb="A thoughtful answer. The puzzle depends on what we mean by “the same”: the same material, the same shape, or the same story. Different answers to that quietly produce different verdicts.">It depends what we mean by “the same”</button>
+        </div>
+        <div class="fb" hidden></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:24px">
+      <p class="prompt">Now make it personal</p>
+      <p>Think of something in your own life that has changed completely but still has the same name: a city, a friendship, a job, even you. In what sense is it still “the same”? Is that comforting or unsettling?</p>
+      <label for="r4" class="note" style="display:block;margin:12px 0 6px">Your reflection</label>
+      <textarea id="r4" data-count="c4" placeholder="The city where I grew up is still called the same, but…"></textarea>
+      <div class="counter" id="c4">0 words</div>
+    </div>
+
+    <p class="label vlabel">Expressions from this chapter</p>
+    <div class="vrow">
+      <div class="vcard"><b>in a constant state of flux</b><span class="def">always changing, never settled</span><i>“The job market is in a constant state of flux.”</i></div>
+      <div class="vcard"><b>to come to terms with</b><span class="def">to slowly accept something difficult</span><i>“It took her years to come to terms with moving abroad.”</i></div>
+      <div class="vcard"><b>to cling to</b><span class="def">to hold on tightly to a person, idea or habit, often when it is better to let go</span><i>“He clung to the belief that nothing would change.”</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER V -->
+<section class="sec s5" id="s5">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter V · The Hall of Debate</span>
+      <h2>How to Doubt Well</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">Wise people do not simply say “you are wrong”. They question gently and precisely. Here are five expressions that let you disagree, hesitate and probe in a way that sounds confident and thoughtful.</p>
+
+    <div class="vrow" style="margin-top:0">
+      <div class="vcard"><b>I’m not entirely convinced that…</b><span class="def">a polite, firm way to express doubt</span><i>“I’m not entirely convinced that speed is the same as progress.”</i></div>
+      <div class="vcard"><b>up to a point</b><span class="def">partly, but not completely</span><i>“Seeing is believing, up to a point.”</i></div>
+      <div class="vcard"><b>for all we know</b><span class="def">we have no evidence against this possibility</span><i>“For all we know, the person next to you sees blue as you see green.”</i></div>
+      <div class="vcard"><b>It strikes me that…</b><span class="def">a thoughtful way to share an observation</span><i>“It strikes me that we trust our eyes far more than we should.”</i></div>
+      <div class="vcard"><b>That can’t be the whole story</b><span class="def">there must be more to it than what has been said</span><i>“Brains guess; fine, but that can’t be the whole story.”</i></div>
+    </div>
+
+    <div class="panel" style="margin-top:34px">
+      <h3>Challenge 1 · Choose the right expression</h3>
+      <form id="gapform" onsubmit="return false">
+        <p class="gap">1. The advert looked wonderful, but I refused to be <select data-a="b"><option value="">choose…</option><option value="a">taken up</option><option value="b">taken in</option><option value="c">taken off</option></select> by it.</p>
+        <p class="gap">2. Wait until you have heard both sides. Please don’t <select data-a="a"><option value="">choose…</option><option value="a">jump to conclusions</option><option value="b">jump the queue</option><option value="c">jump at the chance</option></select>.</p>
+        <p class="gap">3. Whether this view is beautiful or bleak is really <select data-a="c"><option value="">choose…</option><option value="a">a matter of urgency</option><option value="b">a matter of course</option><option value="c">a matter of perspective</option></select>.</p>
+        <p class="gap">4. She <select data-a="b"><option value="">choose…</option><option value="a">clung with</option><option value="b">clung to</option><option value="c">clung up</option></select> her old beliefs, even after the evidence had changed.</p>
+        <p class="gap">5. The data is incomplete, so, <select data-a="a"><option value="">choose…</option><option value="a">for all we know</option><option value="b">as we all know</option><option value="c">all for knowing</option></select>, the whole theory could be wrong.</p>
+        <p class="gap">6. The plan works <select data-a="b"><option value="">choose…</option><option value="a">at a point</option><option value="b">up to a point</option><option value="c">to the point</option></select>, but it ignores the cost.</p>
+        <button class="btn small" id="gapcheck" type="button">Check my answers</button>
+        <div class="result" id="gapresult" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="panel dark" style="margin-top:24px">
+      <h3>Challenge 2 · Take a stand</h3>
+      <p>Pick the statement that provokes you most. Then react to it in five or six sentences, using as many of the fourteen expressions as you can. The chips light up as you use them.</p>
+      <div class="stmts q">
+        <button class="opt" data-k="1" data-fb="Your statement: “Seeing is believing.” Do you agree, disagree or agree up to a point?">“Seeing is believing.”</button>
+        <button class="opt" data-k="2" data-fb="Your statement: “You can never step in the same river twice.” What stays the same, and what does not?">“You can never step in the same river twice.”</button>
+        <button class="opt" data-k="3" data-fb="Your statement: “Nobody really knows what anyone else sees.” Is that sad, or oddly exciting?">“Nobody really knows what anyone else sees.”</button>
+        <div class="fb" hidden style="grid-column:1/-1"></div>
+      </div>
+      <label for="talk" class="note" style="display:block;margin:12px 0 6px">Your response</label>
+      <textarea id="talk" data-count="ctalk" style="min-height:170px" placeholder="It strikes me that…"></textarea>
+      <div class="counter" id="ctalk">0 words</div>
+      <div class="chips" id="chips" aria-label="Expressions used"></div>
+      <div class="counter" id="chipcount">Expressions used: 0 of 14</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER VI -->
+<section class="sec s6" id="s6">
+  <div class="wrap">
+    <header class="sh">
+      <span class="kicker">Chapter VI · The Road Beyond the Temple</span>
+      <h2>Keep Exploring</h2>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+    <p class="lead">The best part of any journey is the road home with something new in your head. Here is your companion for the week.</p>
+
+    <div class="hw">
+      <div class="resource">
+        <div class="by">Podcast · Clearer Thinking with Spencer Greenberg</div>
+        <h3>The Range of Human Perceptual Experiences</h3>
+        <p>A conversation with neuroscientist Anil Seth. I chose it because it follows directly from today. He explains why perception is closer to a “controlled hallucination” than a recording of reality, and why some people can see sounds, imagine nothing in their minds or hear voices. If you enjoyed the blind spot and the apple, you will love this one.</p>
+        <a class="btn" href="https://podcast.clearerthinking.org/episode/156/anil-seth-the-range-of-human-perceptual-experiences/" target="_blank" rel="noopener noreferrer">Listen or read the transcript</a>
+        <p class="note" style="margin-top:12px">The page includes a full transcript, so you can read along or check any phrase you miss.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel dark">
+          <h3>Listen for these</h3>
+          <ul>
+            <li><b>controlled hallucination</b>: the brain’s best guess, kept in check by the senses</li>
+            <li><b>synaesthesia</b> and <b>aphantasia</b>: you met both today</li>
+            <li>Which expressions from the lesson can you catch? Count them.</li>
+          </ul>
+        </div>
+        <div class="panel dark">
+          <h3>Questions to chew on</h3>
+          <ul>
+            <li>If perception is a controlled hallucination, who or what is doing the controlling?</li>
+            <li>What would change in your life if you truly believed other people see a different world?</li>
+            <li>Which idea did you resist at first, and why?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Your creative response</h3>
+        <p>Choose <b>one</b>:</p>
+        <ul>
+          <li><b>The Museum Label.</b> Pick an ordinary object you take for granted. Write a 120-word museum label for it, as if you were describing it to someone who has never seen it. What have you never noticed before?</li>
+          <li><b>The Other Eyes.</b> Write a short diary entry (150 words) from the perspective of someone who experiences the world very differently from you. Use at least five expressions from this lesson.</li>
+        </ul>
+        <p class="note" style="margin-top:10px">Bring it to our next lesson. A photo or sketch to go with it would be a lovely bonus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="mandala-foot" data-mandala="foot" style="width:90px;margin:0 auto 12px" aria-hidden="true"></div>
+    <p class="label">The Wisdom Temple</p>
+    <p class="note" style="margin-top:8px">May your questions outlive your answers.</p>
+    <p style="margin-top:20px"><button class="btn small ghost" id="tbtn" type="button" style="font-size:.62rem;opacity:.55">Teacher notes</button></p>
+  </div>
+</footer>
+
+<!-- TEACHER NOTES: hidden until the teacher opens them with the footer button -->
+<section class="tnotes" id="tnotes" hidden>
+  <div class="wrap">
+    <div class="warn">Teacher notes · not for the student</div>
+    <h2>Teacher Notes</h2>
+    <p>Close this panel before screen sharing again. About 60 to 75 minutes with a C1 learner.</p>
+
+    <h3>Timing</h3>
+    <ul>
+      <li>Chapter I: 10 minutes · Chapter II: 12 · Chapter III: 10 · Chapter IV: 12</li>
+      <li>Chapter V: 15 (gap fill 4 minutes, take-a-stand 10) · Chapter VI: 3 to introduce the homework</li>
+    </ul>
+
+    <h3>Answers</h3>
+    <ul>
+      <li>Müller-Lyer: both lines are equal. Let the student commit before pressing “Measure them”.</li>
+      <li>Fact or myth: myth, fact, myth.</li>
+      <li>Gap fill: 1 taken in, 2 jump to conclusions, 3 a matter of perspective, 4 clung to, 5 for all we know, 6 up to a point.</li>
+      <li>Chapter III experiences: all three are real; there is no wrong choice.</li>
+      <li>Temple beam: no correct answer. Push the student to justify with the expressions.</li>
+    </ul>
+
+    <h3>Facilitation tips</h3>
+    <ul>
+      <li>Let each textarea answer be spoken first, then typed if you want written practice.</li>
+      <li>After the blind spot, ask: “What else might your brain be filling in right now?”</li>
+      <li>In Chapter V, feed back on the quality of the doubt (precision, tone), not only the grammar.</li>
+      <li>Note two errors and two strong phrases from the student’s talk for delayed correction at the end.</li>
+      <li>If the student is quick, add: “Now argue against your own opinion for 30 seconds.”</li>
+    </ul>
+
+    <h3>Notes on content</h3>
+    <ul>
+      <li>Homework source: Clearer Thinking, episode 156 with Anil Seth (May 2023); the episode page carries a transcript.</li>
+      <li>Photography was not embedded; the scenes are drawn illustrations in the Wisdom Temple palette.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* Mandalas */
+  function mandala(el,c1,c2){
+    var s='<svg viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="1.4">';
+    var i,r;
+    for(i=0;i<16;i++){r=i*22.5;s+='<g transform="rotate('+r+')"><path d="M0 -92 Q 14 -72 0 -52 Q -14 -72 0 -92Z" stroke="'+c1+'"/><circle cx="0" cy="-44" r="4" stroke="'+c2+'"/></g>';}
+    for(i=0;i<8;i++){r=i*45+22.5;s+='<g transform="rotate('+r+')"><path d="M0 -50 Q 18 -34 0 -16 Q -18 -34 0 -50Z" stroke="'+c2+'"/></g>';}
+    s+='<circle r="98" stroke="'+c1+'"/><circle r="56" stroke="'+c2+'"/><circle r="12" stroke="'+c1+'"/><circle r="4" fill="'+c2+'"/></svg>';
+    el.innerHTML=s;
+  }
+  document.querySelectorAll('[data-mandala]').forEach(function(el){
+    mandala(el,'#e3c982','#f3e8d0');
+  });
+
+  /* Multiple choice and fact/myth */
+  document.querySelectorAll('.q').forEach(function(q){
+    var ans=q.dataset.answer;
+    var fb=q.querySelector('.fb');
+    q.querySelectorAll('.opt').forEach(function(b){
+      b.addEventListener('click',function(){
+        q.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel','good','bad');});
+        b.classList.add('sel');
+        if(ans){b.classList.add(b.dataset.k===ans?'good':'bad');}
+        fb.hidden=false;
+        fb.className='fb '+(ans?(b.dataset.k===ans?'good':'try'):'');
+        fb.textContent=b.dataset.fb;
+      });
+    });
+  });
+
+  /* Illusion guides */
+  var m=document.getElementById('measure'),g=document.getElementById('guide');
+  m.addEventListener('click',function(){g.classList.toggle('on');m.textContent=g.classList.contains('on')?'Hide the guides':'Measure them';});
+
+  /* Blind spot reveal */
+  var bb=document.getElementById('blindbtn'),bf=document.getElementById('blindfb');
+  bb.addEventListener('click',function(){bf.hidden=!bf.hidden;});
+
+  /* Vividness slider */
+  var vv=document.getElementById('vivid'),vf=document.getElementById('vividfb');
+  var vt={
+    1:'Nothing at all? Some people really do experience this, and it is called aphantasia. If that is you, you are in interesting company. You think, remember and dream without a picture show.',
+    2:'A very faint image. You are near one end of a wide range; some people can barely picture anything.',
+    3:'Somewhere in the middle. Most people are here, and most are surprised to learn how differently others experience the same task.',
+    4:'Quite vivid. You probably find it easy to imagine faces, places and scenes.',
+    5:'Almost like a photograph. Some people can even inspect details of the apple, such as the tiny marks on its skin.'
+  };
+  function vup(){vf.textContent=vt[vv.value];}
+  vv.addEventListener('input',vup);vup();
+
+  /* Gap fill */
+  var gb=document.getElementById('gapcheck'),gr=document.getElementById('gapresult');
+  gb.addEventListener('click',function(){
+    var sel=document.querySelectorAll('#gapform select'),ok=0,empty=0;
+    sel.forEach(function(s){
+      s.classList.remove('ok','no');
+      if(!s.value){empty++;return;}
+      if(s.value===s.dataset.a){s.classList.add('ok');ok++;}else{s.classList.add('no');}
+    });
+    if(empty){gr.textContent='Please answer all six sentences first.';return;}
+    gr.textContent=ok===6?'Six out of six. Beautifully done.':ok+' out of 6. Look at the red ones again and try a different option.';
+  });
+
+  /* Word counters */
+  document.querySelectorAll('textarea[data-count]').forEach(function(t){
+    var c=document.getElementById(t.dataset.count);
+    t.addEventListener('input',function(){
+      var n=(t.value.trim().match(/\S+/g)||[]).length;
+      c.textContent=n+(n===1?' word':' words');
+    });
+  });
+
+  /* Expression tracker */
+  var ex=[
+    ['taken in',/taken in|take[s]? in\b|took in\b/i],
+    ['at face value',/face value/i],
+    ['fill in the gaps',/fill(s|ed|ing)? in the gaps?/i],
+    ['jump to conclusions',/jump(s|ed|ing)? to (a )?conclusions?/i],
+    ['a matter of perspective',/matter of perspective/i],
+    ['it’s tempting to assume',/tempting to assume/i],
+    ['in a state of flux',/state of flux/i],
+    ['come to terms with',/(come|comes|came|coming) to terms/i],
+    ['cling to',/cling(s|ing)? to|clung to/i],
+    ['not entirely convinced',/not entirely convinced/i],
+    ['up to a point',/up to a point/i],
+    ['for all we know',/for all (we|i|you) know/i],
+    ['it strikes me',/strikes me/i],
+    ['can’t be the whole story',/(can.?t|cannot) be the whole story/i]
+  ];
+  var chips=document.getElementById('chips'),cc=document.getElementById('chipcount'),talk=document.getElementById('talk');
+  ex.forEach(function(e){var s=document.createElement('span');s.className='chip';s.textContent=e[0];chips.appendChild(s);});
+  function track(){
+    var n=0;
+    ex.forEach(function(e,i){
+      var hit=e[1].test(talk.value);
+      chips.children[i].classList.toggle('hit',hit);
+      if(hit)n++;
+    });
+    cc.textContent='Expressions used: '+n+' of 14';
+  }
+  talk.addEventListener('input',track);
+
+  /* Teacher notes toggle */
+  var tb=document.getElementById('tbtn'),tn=document.getElementById('tnotes');
+  tb.addEventListener('click',function(){
+    tn.hidden=!tn.hidden;
+    tb.textContent=tn.hidden?'Teacher notes':'Hide teacher notes';
+    if(!tn.hidden){tn.scrollIntoView({block:'start'});}
+  });
+})();
+</script>
+
+</body></html>
