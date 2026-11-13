@@ -30,5 +30,13 @@ const LESSONS = [
         category: "Daily Life",
         description: "Talk about weekend routines, hobbies, and planning the ideal Saturday.",
         file: "lessons/perfect_saturday_fixed.html"
-    }
+    },
+     {
+        title: "Family",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary",
+        description: "Basic lesson about family",
+        file: "lessons/family.html"
+    },
 ];
