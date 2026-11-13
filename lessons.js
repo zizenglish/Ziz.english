@@ -35,8 +35,16 @@ const LESSONS = [
         title: "Family",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary",
+        category: "Vocabulary", "Listening",
         description: "Basic lesson about family",
         file: "lessons/family.html"
     },
+   {
+        title: "Souvenirs",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary", "Listening",
+        description: "Learn how to buy souvenirs when you travel abroad",
+        file: "lessons/Souvenir_Hunt_A0_A1_interactive_v2.html"
+    },  
 ];
