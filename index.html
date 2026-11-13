@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя бібліотека уроків | EngHub Style</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>ziz.english | Lesson Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #ff4757;
@@ -32,11 +32,12 @@
             min-height: 100vh;
         }
 
+        /* --- SIDEBAR (FILTERS) --- */
         aside {
             width: 300px;
             background: var(--card-bg);
             border-right: 1px solid var(--border-color);
-            padding: 40px 24px;
+            padding: 36px 24px;
             height: 100vh;
             position: sticky;
             top: 0;
@@ -44,18 +45,33 @@
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
         }
 
-        aside h2 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 24px;
+        .brand-logo {
+            display: inline-block;
+            font-size: 26px;
+            font-weight: 800;
             color: var(--text-main);
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            margin-bottom: 32px;
+            text-decoration: none;
         }
 
-        .filter-group { margin-bottom: 30px; }
+        .brand-logo span {
+            color: var(--primary);
+        }
+
+        aside h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .filter-group {
+            margin-bottom: 28px;
+        }
 
         .filter-group h3 {
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             color: var(--text-muted);
             margin-bottom: 12px;
@@ -75,7 +91,9 @@
             transition: color 0.2s;
         }
 
-        .filter-label:hover { color: var(--primary); }
+        .filter-label:hover {
+            color: var(--primary);
+        }
 
         .filter-label input {
             appearance: none;
@@ -88,7 +106,6 @@
             transition: all 0.2s;
             display: grid;
             place-content: center;
-            flex: 0 0 18px;
         }
 
         .filter-label input:checked {
@@ -103,18 +120,53 @@
             font-weight: bold;
         }
 
+        .btn-clear {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-clear:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+        }
+
+        /* --- MAIN CONTENT --- */
         main {
             flex: 1;
             padding: 40px 50px;
             max-width: 1400px;
-            width: 100%;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
 
         .header-title {
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 24px;
             letter-spacing: -1px;
+        }
+
+        .lessons-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
         }
 
         .search-bar {
@@ -135,6 +187,7 @@
             box-shadow: 0 6px 20px rgba(255, 71, 87, 0.1);
         }
 
+        /* --- CARDS GRID --- */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -159,7 +212,9 @@
             border-color: #dcdceb;
         }
 
-        .card-content { padding: 24px; }
+        .card-content {
+            padding: 24px;
+        }
 
         .badge-container {
             display: flex;
@@ -182,6 +237,11 @@
         .badge.level {
             background: var(--accent-yellow);
             color: var(--yellow-text);
+        }
+
+        .badge.category {
+            background: #f0f2f8;
+            color: #57606f;
         }
 
         .card h4 {
@@ -221,40 +281,47 @@
             transition: background 0.2s, transform 0.1s;
         }
 
-        .btn-show:hover { background: var(--primary); }
-        .btn-show:active { transform: scale(0.96); }
+        .btn-show:hover {
+            background: var(--primary);
+        }
+
+        .btn-show:active {
+            transform: scale(0.96);
+        }
 
         .empty-state {
-            display: none;
-            color: var(--text-muted);
-            background: white;
-            border: 1px dashed var(--border-color);
-            border-radius: 16px;
-            padding: 28px;
-            text-align: center;
             grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 16px;
         }
 
         @media (max-width: 768px) {
-            body { flex-direction: column; }
+            body {
+                flex-direction: column;
+            }
             aside {
                 width: 100%;
                 height: auto;
                 position: relative;
-                padding: 20px;
+                padding: 24px 20px;
             }
-            main { padding: 20px; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .header-title { font-size: 27px; }
+            main {
+                padding: 24px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <aside>
-        <h2>Фільтри</h2>
 
+    <!-- FILTERS SIDEBAR -->
+    <aside>
+        <a href="#" class="brand-logo">ziz<span>.</span>english</a>
+        <h2>Filters</h2>
+        
         <div class="filter-group">
-            <h3>Рівень</h3>
+            <h3>Level</h3>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="level" value="A1"> A1 / Elementary</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="level" value="A2"> A2 / Pre-intermediate</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="level" value="B1"> B1 / Intermediate</label>
@@ -263,100 +330,116 @@
         </div>
 
         <div class="filter-group">
-            <h3>Тип заняття</h3>
+            <h3>Lesson Focus</h3>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="type" value="Lesson plan"> Lesson plan</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="type" value="Grammar"> Grammar activity</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="type" value="Speaking"> Speaking activity</label>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="type" value="Vocabulary"> Vocabulary</label>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="type" value="Reading"> Reading</label>
         </div>
+
+        <div class="filter-group">
+            <h3>Categories</h3>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Daily Life"> Daily Life</label>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Culture & Trends"> Culture & Trends</label>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Entertainment"> Entertainment</label>
+            <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Literature"> Literature</label>
+        </div>
+
+        <button class="btn-clear" id="clearFilters">Clear all filters</button>
     </aside>
 
+    <!-- MAIN CONTENT -->
     <main>
-        <h1 class="header-title">Усі матеріали</h1>
-        <input type="text" id="searchInput" class="search-bar" placeholder="Шукати урок за назвою..." aria-label="Шукати урок за назвою">
+        <div class="top-header">
+            <h1 class="header-title">All materials</h1>
+            <span class="lessons-count" id="lessonsCount">0 materials</span>
+        </div>
+
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search lessons by title or keyword...">
 
         <div class="cards-grid" id="cardsGrid">
-            <div class="card" data-level="B2" data-type="Lesson plan" data-title="The Rise of the Performative Male">
-                <div class="card-content">
-                    <div class="badge-container">
-                        <span class="badge level">B2</span>
-                        <span class="badge">Lesson plan</span>
-                    </div>
-                    <h4>The Rise of the Performative Male</h4>
-                    <p>In this B2 lesson, students develop reading and speaking skills while exploring modern cultural trends.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="lessons/lesson1.html" class="btn-show">SHOW</a>
-                </div>
-            </div>
-
-            <div class="card" data-level="A2" data-type="Lesson plan" data-title="A Day in Bed - Bed Rotting">
-                <div class="card-content">
-                    <div class="badge-container">
-                        <span class="badge level">A2</span>
-                        <span class="badge">Lesson plan</span>
-                    </div>
-                    <h4>A Day in Bed - Bed Rotting</h4>
-                    <p>Explore the trend of bed rotting, read opinions and learn useful vocabulary to talk about rest.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="lessons/lesson2.html" class="btn-show">SHOW</a>
-                </div>
-            </div>
-
-            <div class="card" data-level="B1" data-type="Grammar" data-title="Future in the Past Structures">
-                <div class="card-content">
-                    <div class="badge-container">
-                        <span class="badge level">B1</span>
-                        <span class="badge">Grammar</span>
-                    </div>
-                    <h4>Future in the Past Structures</h4>
-                    <p>Explore past plans, intentions, and expectations using Future in the Past grammatical structures.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="lessons/lesson3.html" class="btn-show">SHOW</a>
-                </div>
-            </div>
-
-            <div class="empty-state" id="emptyState">За вашим запитом уроків не знайдено.</div>
+            <!-- Cards are dynamically loaded from lessons.js -->
         </div>
     </main>
 
+    <!-- EXTERNAL LESSONS DATABASE -->
+    <script src="lessons.js"></script>
+
+    <!-- RENDER & FILTER SCRIPT -->
     <script>
+        const cardsGrid = document.getElementById('cardsGrid');
         const searchInput = document.getElementById('searchInput');
         const checkboxes = document.querySelectorAll('.filter-checkbox');
-        const cards = document.querySelectorAll('.card');
-        const emptyState = document.getElementById('emptyState');
+        const clearBtn = document.getElementById('clearFilters');
+        const lessonsCount = document.getElementById('lessonsCount');
 
-        function filterCards() {
-            const searchText = searchInput.value.trim().toLowerCase();
-            const activeLevels = Array.from(
-                document.querySelectorAll('[data-filter="level"]:checked')
-            ).map(cb => cb.value);
-            const activeTypes = Array.from(
-                document.querySelectorAll('[data-filter="type"]:checked')
-            ).map(cb => cb.value);
+        function renderCards(data) {
+            cardsGrid.innerHTML = '';
+            lessonsCount.textContent = `${data.length} ${data.length === 1 ? 'material' : 'materials'}`;
 
-            let visibleCount = 0;
+            if (data.length === 0) {
+                cardsGrid.innerHTML = '<div class="empty-state">No lessons found matching your criteria. Try clearing some filters!</div>';
+                return;
+            }
 
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title').toLowerCase();
-                const level = card.getAttribute('data-level');
-                const type = card.getAttribute('data-type');
-
-                const matchesSearch = title.includes(searchText);
-                const matchesLevel = activeLevels.length === 0 || activeLevels.includes(level);
-                const matchesType = activeTypes.length === 0 || activeTypes.includes(type);
-                const isVisible = matchesSearch && matchesLevel && matchesType;
-
-                card.style.display = isVisible ? 'flex' : 'none';
-                if (isVisible) visibleCount++;
+            data.forEach(lesson => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-content">
+                        <div class="badge-container">
+                            <span class="badge level">${lesson.level}</span>
+                            <span class="badge">${lesson.type}</span>
+                            ${lesson.category ? `<span class="badge category">#${lesson.category}</span>` : ''}
+                        </div>
+                        <h4>${lesson.title}</h4>
+                        <p>${lesson.description}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${lesson.file}" class="btn-show">SHOW</a>
+                    </div>
+                `;
+                cardsGrid.appendChild(card);
             });
-
-            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        searchInput.addEventListener('input', filterCards);
-        checkboxes.forEach(checkbox => checkbox.addEventListener('change', filterCards));
+        function filterLessons() {
+            if (typeof LESSONS === 'undefined') {
+                cardsGrid.innerHTML = '<div class="empty-state">Please make sure <b>lessons.js</b> is in the same folder as index.html.</div>';
+                return;
+            }
+
+            const searchText = searchInput.value.toLowerCase();
+            const activeLevels = Array.from(document.querySelectorAll('[data-filter="level"]:checked')).map(cb => cb.value);
+            const activeTypes = Array.from(document.querySelectorAll('[data-filter="type"]:checked')).map(cb => cb.value);
+            const activeCategories = Array.from(document.querySelectorAll('[data-filter="category"]:checked')).map(cb => cb.value);
+
+            const filtered = LESSONS.filter(lesson => {
+                const matchesSearch = lesson.title.toLowerCase().includes(searchText) || 
+                                      lesson.description.toLowerCase().includes(searchText);
+                const matchesLevel = activeLevels.length === 0 || activeLevels.includes(lesson.level);
+                const matchesType = activeTypes.length === 0 || activeTypes.includes(lesson.type);
+                const matchesCategory = activeCategories.length === 0 || activeCategories.includes(lesson.category);
+
+                return matchesSearch && matchesLevel && matchesType && matchesCategory;
+            });
+
+            renderCards(filtered);
+        }
+
+        searchInput.addEventListener('input', filterLessons);
+        checkboxes.forEach(cb => cb.addEventListener('change', filterLessons));
+        
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            checkboxes.forEach(cb => cb.checked = false);
+            filterLessons();
+        });
+
+        // Initial load
+        filterLessons();
     </script>
+
 </body>
 </html>
