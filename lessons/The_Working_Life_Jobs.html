@@ -310,4 +310,5 @@ function checkReading(){let ans=['Elena','Daniel','Priya','Daniel'],ids=['r1','r
 function checkMatches(){let els=[...document.querySelectorAll('#matchList select')];let n=els.filter(e=>e.value===e.dataset.answer).length;document.getElementById('matchFeedback').textContent=`You got ${n}/6 correct.`;els.forEach(e=>e.style.borderColor=e.value===e.dataset.answer?'#69745a':e.value?'#a45b5b':'#cfc6b7')}
 function checkGrammar(){let ans=['starts',"don't",'Does','deal','does'];let ids=['g1','g2','g3','g4','g5'];let n=ids.filter((id,i)=>document.getElementById(id).value===ans[i]).length;document.getElementById('grammarFeedback').textContent=`You got ${n}/5 correct. ${n===5?'Excellent control of the Present Simple.':'Review the structure and try again.'}`}
 </script>
+  <script src="../tracker.js"></script>
 </body></html>
