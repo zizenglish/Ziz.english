@@ -6,14 +6,11 @@
     const hwId = params.get('hw_id');
     const studentId = params.get('student_id');
 
-    // Трекер вмикається ТІЛЬКИ коли учень відкриває урок як домашнє завдання
-    // (через кнопку в My Classroom, де передаються hw_id та student_id)
     if (!hwId || !studentId) return;
 
     const SUPABASE_URL = 'https://vnvjcgafvfkmqbzeyajo.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_Ij_gV7Q-X7j617TkJR84xg_0EyJPLOi';
 
-    // Стан трекінгу
     const state = {
         started_at: new Date().toISOString(),
         active_seconds: 0,
@@ -26,19 +23,16 @@
     let isTabVisible = !document.hidden;
     let saveTimeout = null;
 
-    // 1. Підрахунок активного часу (секунди, коли вкладка відкрита)
     setInterval(() => {
         if (!document.hidden) {
             state.active_seconds += 1;
         }
     }, 1000);
 
-    // Автоматичне збереження прогресу кожні 15 секунд
     setInterval(() => {
         syncToSupabase();
-    }, 15000);
+    }, 10000);
 
-    // 2. Відстеження виходів з вкладки / згортання браузера
     document.addEventListener('visibilitychange', () => {
         if (document.hidden && isTabVisible) {
             isTabVisible = false;
@@ -49,7 +43,6 @@
         }
     });
 
-    // Допоміжна функція для визначення назви/контексту поля введення
     function getFieldLabel(el, index) {
         if (el.id) return el.id;
         if (el.name) return el.name;
@@ -59,7 +52,6 @@
         return clean || `Field #${index + 1}`;
     }
 
-    // 3. Відстеження вставки тексту (Ctrl+V / Paste) у відкриті відповіді
     document.addEventListener('paste', (e) => {
         const target = e.target;
         if (target && (target.tagName === 'TEXTAREA' || (target.tagName === 'INPUT' && ['text', 'search', ''].includes(target.type)) || target.isContentEditable)) {
@@ -80,7 +72,6 @@
         }
     }, true);
 
-    // 4. Збір усіх відповідей учня (текстові поля, випадаючі списки, радіокнопки, чекбокси)
     function collectAllAnswers() {
         const collected = {};
         const elements = document.querySelectorAll('input, textarea, select');
@@ -121,7 +112,6 @@
         scheduleSave(false);
     }, true);
 
-    // 5. Відправка даних у Supabase через REST API (працює без додаткових бібліотек)
     function scheduleSave(immediate) {
         if (immediate) {
             clearTimeout(saveTimeout);
@@ -131,7 +121,7 @@
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
             syncToSupabase();
-        }, 2500);
+        }, 2000);
     }
 
     async function syncToSupabase() {
@@ -139,32 +129,32 @@
         state.last_updated = new Date().toISOString();
 
         try {
-            await fetch(`${SUPABASE_URL}/rest/v1/assignments?id=eq.${encodeURIComponent(hwId)}`, {
-                method: 'PATCH',
+            await fetch(`${SUPABASE_URL}/rest/v1/rpc/save_homework_tracking`, {
+                method: 'POST',
                 headers: {
                     'apikey': SUPABASE_KEY,
-                    'Authorization': `Bearer ${SUPABASE_KEY}`,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    tracking_data: state
+                    p_hw_id: hwId,
+                    p_student_id: studentId,
+                    p_tracking: state
                 }),
                 keepalive: true
             });
         } catch (err) {
-            // Тиха обробка помилок мережі
+            console.error('Tracker sync error:', err);
         }
     }
 
-    // Збереження перед закриттям вкладки
     window.addEventListener('beforeunload', () => {
         syncToSupabase();
     });
 
-    // Невеликий індикатор для учня внизу екрана, що відповіді автозберігаються
-    window.addEventListener('DOMContentLoaded', () => {
+    function initTracker() {
+        if (document.getElementById('ziz-tracker-badge')) return;
         const badge = document.createElement('div');
+        badge.id = 'ziz-tracker-badge';
         badge.innerHTML = '🟢 ziz.english • Progress auto-saved';
         Object.assign(badge.style, {
             position: 'fixed',
@@ -182,5 +172,11 @@
         });
         document.body.appendChild(badge);
         syncToSupabase();
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', initTracker);
+    } else {
+        initTracker();
+    }
 })();
