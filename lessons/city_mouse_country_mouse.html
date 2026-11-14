@@ -330,4 +330,5 @@ let timerInt=null,remaining=60;function drawTimer(){document.getElementById('tim
 function startTimer(){if(timerInt)return;timerInt=setInterval(()=>{remaining--;drawTimer();if(remaining<=0){clearInterval(timerInt);timerInt=null;document.getElementById('timer').textContent='Time!'}},1000)}
 function resetTimer(){clearInterval(timerInt);timerInt=null;remaining=60;drawTimer()}
 </script>
+ <script src="../tracker.js"></script>
 </body></html>
