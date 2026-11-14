@@ -1,4 +1,4 @@
-// =========================================================================
+js_fixed = r'''// =========================================================================
 // ziz.english — Homework Activity Tracker + Canva-Style Smooth Teaching Dock
 // =========================================================================
 (function () {
@@ -206,7 +206,7 @@
                 borderRadius: '20px',
                 fontSize: '12px',
                 fontFamily: 'sans-serif',
-                zIndex: '99998',
+                zIndex: '2147483640',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                 pointerEvents: 'none'
             });
@@ -222,7 +222,7 @@
     }
 
     // =====================================================================
-    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK (швидкий, плавний, для мишки)
+    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK (максимальний z-index + pointer fix)
     // =====================================================================
     function initCanvaBoard() {
         if (document.getElementById('ziz-dock')) return;
@@ -230,76 +230,85 @@
         const style = document.createElement('style');
         style.textContent = `
             #ziz-viewport-canvas {
-                position: fixed;
-                inset: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 99990;
-                pointer-events: none;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: 2147483640 !important;
+                pointer-events: none !important;
+                touch-action: none !important;
             }
             #ziz-viewport-canvas.active {
-                pointer-events: auto;
+                pointer-events: auto !important;
             }
 
             #ziz-objects-layer {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 0;
-                z-index: 99992;
-                pointer-events: none;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 0 !important;
+                z-index: 2147483642 !important;
+                pointer-events: none !important;
             }
 
             #ziz-dock {
-                position: fixed;
-                left: 16px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: #ffffff;
-                border-radius: 999px;
-                padding: 8px 6px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 6px;
-                z-index: 99999;
-                box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.06);
-                border: 1px solid rgba(15, 23, 42, 0.06);
-                user-select: none;
-                transition: opacity 0.2s;
+                position: fixed !important;
+                left: 16px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                background: #ffffff !important;
+                border-radius: 999px !important;
+                padding: 8px 6px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 6px !important;
+                z-index: 2147483647 !important;
+                pointer-events: auto !important;
+                box-shadow: 0 8px 30px rgba(15, 23, 42, 0.14), 0 1px 3px rgba(15, 23, 42, 0.08) !important;
+                border: 1px solid rgba(15, 23, 42, 0.08) !important;
+                user-select: none !important;
             }
 
             #ziz-dock.minimized .ziz-dock-item:not(#zizToggleDockBtn) {
-                display: none;
+                display: none !important;
             }
 
             .ziz-dock-btn {
-                width: 42px;
-                height: 42px;
-                border-radius: 50%;
-                border: none;
-                background: transparent;
-                color: #1e293b;
-                display: grid;
-                place-items: center;
-                cursor: pointer;
-                transition: all 0.15s ease;
-                position: relative;
+                width: 42px !important;
+                height: 42px !important;
+                min-width: 42px !important;
+                min-height: 42px !important;
+                border-radius: 50% !important;
+                border: none !important;
+                background: transparent !important;
+                color: #1e293b !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                transition: background 0.15s ease !important;
+                position: relative !important;
             }
 
             .ziz-dock-btn:hover {
-                background: #f1f5f9;
+                background: #f1f5f9 !important;
             }
 
             .ziz-dock-btn.active {
-                background: #e2e8f0;
-                color: #0f172a;
+                background: #e2e8f0 !important;
+                color: #0f172a !important;
             }
 
             .ziz-dock-btn svg {
-                width: 21px;
-                height: 21px;
+                width: 21px !important;
+                height: 21px !important;
+                pointer-events: none !important;
             }
 
             .ziz-dock-btn::after {
@@ -327,188 +336,191 @@
             }
 
             #ziz-subdock {
-                position: fixed;
-                left: 76px;
-                top: 50%;
-                transform: translateY(-50%) scale(0.95);
-                background: #ffffff;
-                border-radius: 999px;
-                padding: 12px 8px;
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                z-index: 99998;
-                box-shadow: 0 10px 32px rgba(15, 23, 42, 0.14), 0 1px 3px rgba(15, 23, 42, 0.06);
-                border: 1px solid rgba(15, 23, 42, 0.06);
-                user-select: none;
-                opacity: 0;
-                transition: opacity 0.15s ease, transform 0.15s ease;
+                position: fixed !important;
+                left: 76px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                background: #ffffff !important;
+                border-radius: 999px !important;
+                padding: 12px 8px !important;
+                display: none !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 10px !important;
+                z-index: 2147483646 !important;
+                pointer-events: auto !important;
+                box-shadow: 0 10px 32px rgba(15, 23, 42, 0.16), 0 1px 3px rgba(15, 23, 42, 0.08) !important;
+                border: 1px solid rgba(15, 23, 42, 0.08) !important;
+                user-select: none !important;
             }
 
             #ziz-subdock.open {
-                display: flex;
-                opacity: 1;
-                transform: translateY(-50%) scale(1);
+                display: flex !important;
             }
 
             .ziz-nib-btn {
-                width: 38px;
-                height: 38px;
-                border-radius: 12px;
-                border: none;
-                background: transparent;
-                cursor: pointer;
-                display: grid;
-                place-items: center;
-                transition: all 0.15s;
+                width: 38px !important;
+                height: 38px !important;
+                border-radius: 12px !important;
+                border: none !important;
+                background: transparent !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                transition: all 0.15s !important;
             }
 
             .ziz-nib-btn:hover {
-                background: #f1f5f9;
+                background: #f1f5f9 !important;
             }
 
             .ziz-nib-btn.active {
-                background: #f1f5f9;
-                box-shadow: inset 0 0 0 2px #cbd5e1;
+                background: #f1f5f9 !important;
+                box-shadow: inset 0 0 0 2px #cbd5e1 !important;
+            }
+
+            .ziz-nib-btn svg {
+                pointer-events: none !important;
             }
 
             .ziz-sub-divider {
-                width: 24px;
-                height: 1px;
-                background: #e2e8f0;
+                width: 24px !important;
+                height: 1px !important;
+                background: #e2e8f0 !important;
             }
 
             .ziz-swatch {
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                border: 2px solid #ffffff;
-                box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
-                cursor: pointer;
-                transition: transform 0.12s;
+                width: 24px !important;
+                height: 24px !important;
+                border-radius: 50% !important;
+                border: 2px solid #ffffff !important;
+                box-shadow: 0 0 0 1px rgba(0,0,0,0.18) !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                transition: transform 0.12s !important;
             }
 
             .ziz-swatch:hover {
-                transform: scale(1.15);
+                transform: scale(1.15) !important;
             }
 
             .ziz-swatch.active {
-                transform: scale(1.2);
-                box-shadow: 0 0 0 2px #0f172a;
+                transform: scale(1.2) !important;
+                box-shadow: 0 0 0 2px #0f172a !important;
             }
 
             .ziz-size-btn {
-                width: 32px;
-                height: 26px;
-                border-radius: 8px;
-                border: none;
-                background: transparent;
-                cursor: pointer;
-                display: grid;
-                place-items: center;
+                width: 32px !important;
+                height: 26px !important;
+                border-radius: 8px !important;
+                border: none !important;
+                background: transparent !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
             }
 
             .ziz-size-btn:hover, .ziz-size-btn.active {
-                background: #f1f5f9;
+                background: #f1f5f9 !important;
+            }
+
+            .ziz-size-btn span {
+                pointer-events: none !important;
             }
 
             .ziz-sticky {
-                position: absolute;
-                pointer-events: auto;
-                width: 190px;
-                min-height: 165px;
-                padding: 14px 16px;
-                border-radius: 6px 6px 22px 6px;
-                box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
-                font-family: 'Outfit', -apple-system, sans-serif;
-                display: flex;
-                flex-direction: column;
-                transition: box-shadow 0.15s;
+                position: absolute !important;
+                pointer-events: auto !important;
+                width: 195px !important;
+                min-height: 165px !important;
+                padding: 14px 16px !important;
+                border-radius: 6px 6px 22px 6px !important;
+                box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16) !important;
+                font-family: 'Outfit', -apple-system, sans-serif !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
 
-            .ziz-sticky:hover {
-                box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
-            }
-
-            .ziz-sticky.yellow { background: #fef08a; color: #1e293b; }
-            .ziz-sticky.pink   { background: #fbcfe8; color: #1e293b; }
-            .ziz-sticky.mint   { background: #bbf7d0; color: #1e293b; }
-            .ziz-sticky.blue   { background: #bae6fd; color: #1e293b; }
+            .ziz-sticky.yellow { background: #fef08a !important; color: #1e293b !important; }
+            .ziz-sticky.pink   { background: #fbcfe8 !important; color: #1e293b !important; }
+            .ziz-sticky.mint   { background: #bbf7d0 !important; color: #1e293b !important; }
+            .ziz-sticky.blue   { background: #bae6fd !important; color: #1e293b !important; }
 
             .ziz-text-box {
-                position: absolute;
-                pointer-events: auto;
-                min-width: 110px;
-                max-width: 420px;
-                padding: 6px 10px;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(4px);
-                border: 1.5px solid transparent;
-                font-family: 'Outfit', -apple-system, sans-serif;
-                font-size: 18px;
-                font-weight: 600;
-                line-height: 1.35;
-                box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+                position: absolute !important;
+                pointer-events: auto !important;
+                min-width: 120px !important;
+                max-width: 440px !important;
+                padding: 6px 10px !important;
+                border-radius: 8px !important;
+                background: rgba(255, 255, 255, 0.92) !important;
+                border: 1.5px solid #cbd5e1 !important;
+                font-family: 'Outfit', -apple-system, sans-serif !important;
+                font-size: 18px !important;
+                font-weight: 600 !important;
+                line-height: 1.35 !important;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.08) !important;
             }
 
-            .ziz-text-box:hover, .ziz-text-box:focus-within {
-                border-color: #9333ea;
-                background: #ffffff;
+            .ziz-text-box:focus-within {
+                border-color: #9333ea !important;
+                background: #ffffff !important;
             }
 
             .ziz-item-bar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: grab;
-                margin-bottom: 6px;
-                opacity: 0.45;
-                transition: opacity 0.15s;
-                height: 16px;
-            }
-
-            .ziz-sticky:hover .ziz-item-bar,
-            .ziz-text-box:hover .ziz-item-bar,
-            .ziz-text-box:focus-within .ziz-item-bar {
-                opacity: 1;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                cursor: grab !important;
+                margin-bottom: 6px !important;
+                height: 18px !important;
+                user-select: none !important;
             }
 
             .ziz-item-bar:active {
-                cursor: grabbing;
+                cursor: grabbing !important;
             }
 
             .ziz-drag-dots {
-                font-size: 12px;
-                letter-spacing: 2px;
-                color: #475569;
+                font-size: 13px !important;
+                letter-spacing: 2px !important;
+                color: #475569 !important;
+                pointer-events: none !important;
             }
 
             .ziz-del-btn {
-                background: rgba(0,0,0,0.08);
-                border: none;
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                font-size: 12px;
-                line-height: 1;
-                cursor: pointer;
-                color: #334155;
-                display: grid;
-                place-items: center;
+                background: rgba(0,0,0,0.1) !important;
+                border: none !important;
+                width: 20px !important;
+                height: 20px !important;
+                border-radius: 50% !important;
+                font-size: 13px !important;
+                line-height: 1 !important;
+                cursor: pointer !important;
+                color: #334155 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
             }
 
             .ziz-del-btn:hover {
-                background: #ef4444;
-                color: #fff;
+                background: #ef4444 !important;
+                color: #ffffff !important;
             }
 
             .ziz-editable {
-                outline: none;
-                flex: 1;
-                word-break: break-word;
-                cursor: text;
+                outline: none !important;
+                flex: 1 !important;
+                word-break: break-word !important;
+                cursor: text !important;
+                min-height: 24px !important;
             }
         `;
         document.head.appendChild(style);
@@ -632,7 +644,7 @@
 
         let strokes = [];
         let currentStroke = null;
-        let isPointerDown = false;
+        let isDrawingNow = false;
         let stickyIdx = 0;
         const stickyThemes = ['yellow', 'pink', 'mint', 'blue'];
 
@@ -716,7 +728,7 @@
         }
 
         function eraseAtPoint(pageX, pageY) {
-            const threshold = 16;
+            const threshold = 18;
             const beforeCount = strokes.length;
             strokes = strokes.filter(s => {
                 for (let i = 0; i < s.points.length; i++) {
@@ -733,10 +745,12 @@
             }
         }
 
-        canvas.addEventListener('pointerdown', (e) => {
+        // Надійне малювання мишкою через mousedown / mousemove / mouseup
+        canvas.addEventListener('mousedown', (e) => {
             if (mode !== 'draw' || e.button !== 0) return;
-            canvas.setPointerCapture(e.pointerId);
-            isPointerDown = true;
+            e.preventDefault();
+            e.stopPropagation();
+            isDrawingNow = true;
 
             const pageX = e.clientX + window.scrollX;
             const pageY = e.clientY + window.scrollY;
@@ -755,8 +769,8 @@
             requestRender();
         });
 
-        canvas.addEventListener('pointermove', (e) => {
-            if (!isPointerDown || mode !== 'draw') return;
+        window.addEventListener('mousemove', (e) => {
+            if (!isDrawingNow || mode !== 'draw') return;
             const pageX = e.clientX + window.scrollX;
             const pageY = e.clientY + window.scrollY;
 
@@ -775,18 +789,15 @@
             }
         });
 
-        function finishPointer() {
-            if (!isPointerDown) return;
-            isPointerDown = false;
+        window.addEventListener('mouseup', () => {
+            if (!isDrawingNow) return;
+            isDrawingNow = false;
             if (currentStroke) {
                 strokes.push(currentStroke);
                 currentStroke = null;
                 requestRender();
             }
-        }
-
-        canvas.addEventListener('pointerup', finishPointer);
-        canvas.addEventListener('pointercancel', finishPointer);
+        });
 
         function setMode(newMode) {
             mode = newMode;
@@ -808,8 +819,10 @@
             canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
         }
 
+        // Обробка кліків по головній панелі
         dock.querySelectorAll('[data-mode]').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 if (btn.dataset.mode === 'draw' && mode === 'draw') {
                     subdock.classList.toggle('open');
                 } else {
@@ -819,7 +832,8 @@
         });
 
         subdock.querySelectorAll('[data-nib]').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 subdock.querySelectorAll('[data-nib]').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 nib = btn.dataset.nib;
@@ -828,7 +842,8 @@
         });
 
         subdock.querySelectorAll('.ziz-swatch').forEach(sw => {
-            sw.addEventListener('click', () => {
+            sw.addEventListener('click', (e) => {
+                e.stopPropagation();
                 subdock.querySelectorAll('.ziz-swatch').forEach(s => s.classList.remove('active'));
                 sw.classList.add('active');
                 color = sw.dataset.color;
@@ -839,14 +854,16 @@
         });
 
         subdock.querySelectorAll('.ziz-size-btn').forEach(sb => {
-            sb.addEventListener('click', () => {
+            sb.addEventListener('click', (e) => {
+                e.stopPropagation();
                 subdock.querySelectorAll('.ziz-size-btn').forEach(s => s.classList.remove('active'));
                 sb.classList.add('active');
                 sizeScale = parseFloat(sb.dataset.scale);
             });
         });
 
-        document.getElementById('zizToggleDockBtn').addEventListener('click', () => {
+        document.getElementById('zizToggleDockBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
             dock.classList.toggle('minimized');
             if (dock.classList.contains('minimized')) {
                 setMode('cursor');
@@ -860,14 +877,19 @@
             }
         }
 
-        document.getElementById('zizBtnUndo').addEventListener('click', undoLast);
+        document.getElementById('zizBtnUndo').addEventListener('click', (e) => {
+            e.stopPropagation();
+            undoLast();
+        });
+
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.target.isContentEditable && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
                 undoLast();
             }
         });
 
-        document.getElementById('zizBtnClear').addEventListener('click', () => {
+        document.getElementById('zizBtnClear').addEventListener('click', (e) => {
+            e.stopPropagation();
             if (strokes.length === 0 && objectsLayer.children.length === 0) return;
             strokes = [];
             objectsLayer.innerHTML = '';
@@ -910,16 +932,19 @@
             sel.removeAllRanges();
             sel.addRange(range);
 
-            el.querySelector('.ziz-del-btn').addEventListener('click', () => el.remove());
+            el.querySelector('.ziz-del-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                el.remove();
+            });
 
             const bar = el.querySelector('.ziz-item-bar');
             let dragging = false;
             let startX = 0, startY = 0, origLeft = 0, origTop = 0;
 
-            bar.addEventListener('pointerdown', (e) => {
+            bar.addEventListener('mousedown', (e) => {
                 if (e.target.closest('.ziz-del-btn')) return;
                 e.preventDefault();
-                bar.setPointerCapture(e.pointerId);
+                e.stopPropagation();
                 dragging = true;
                 startX = e.clientX;
                 startY = e.clientY;
@@ -927,19 +952,25 @@
                 origTop = parseFloat(el.style.top) || 0;
             });
 
-            bar.addEventListener('pointermove', (e) => {
+            window.addEventListener('mousemove', (e) => {
                 if (!dragging) return;
                 el.style.left = (origLeft + (e.clientX - startX)) + 'px';
                 el.style.top = (origTop + (e.clientY - startY)) + 'px';
             });
 
-            bar.addEventListener('pointerup', () => {
+            window.addEventListener('mouseup', () => {
                 dragging = false;
             });
         }
 
-        document.getElementById('zizBtnSticky').addEventListener('click', () => spawnDraggableElement('sticky'));
-        document.getElementById('zizBtnText').addEventListener('click', () => spawnDraggableElement('text'));
+        document.getElementById('zizBtnSticky').addEventListener('click', (e) => {
+            e.stopPropagation();
+            spawnDraggableElement('sticky');
+        });
+        document.getElementById('zizBtnText').addEventListener('click', (e) => {
+            e.stopPropagation();
+            spawnDraggableElement('text');
+        });
     }
 
     if (document.readyState === 'loading') {
@@ -948,3 +979,9 @@
         initCanvaBoard();
     }
 })();
+'''
+
+with open("tracker_fixed.js", "w", encoding="utf-8") as f:
+    f.write(js_fixed)
+
+print("tracker_fixed.js written successfully")
