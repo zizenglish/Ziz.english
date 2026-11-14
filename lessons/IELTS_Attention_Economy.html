@@ -225,4 +225,5 @@ function startTimer(){if(interval)return;interval=setInterval(()=>{if(remaining>
 function pauseTimer(){clearInterval(interval);interval=null}function resetTimer(){pauseTimer();remaining=900;draw()}
 const sections=[...document.querySelectorAll('main section')];window.addEventListener('scroll',()=>{let done=sections.filter(s=>s.getBoundingClientRect().top<window.innerHeight*.55).length;document.getElementById('progress').style.width=(done/sections.length*100)+'%'});
 </script>
+  <script src="../tracker.js"></script>
 </body></html>
