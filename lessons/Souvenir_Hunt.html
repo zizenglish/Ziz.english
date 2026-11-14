@@ -318,4 +318,5 @@ function downloadHomework(){
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const ids=['m1','m2','m3','m4','m5','m6','final','homework'];const i=ids.indexOf(e.target.id);document.getElementById('progress').style.width=((i+1)/ids.length*100)+'%';}}),{threshold:.25});
 document.querySelectorAll('main section').forEach(s=>observer.observe(s));
 </script>
+ <script src="../tracker.js"></script>
 </body></html>
