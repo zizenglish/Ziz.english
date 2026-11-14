@@ -419,6 +419,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            position: relative;
         }
 
         .form-group.full {
@@ -439,6 +440,7 @@
             outline: none;
             background: var(--bg-color);
             transition: border-color 0.2s;
+            width: 100%;
         }
 
         .form-control:focus {
@@ -449,6 +451,93 @@
         textarea.form-control {
             resize: vertical;
             min-height: 90px;
+        }
+
+        /* --- SEARCHABLE LESSON SELECTOR --- */
+        .lesson-picker-wrapper {
+            position: relative;
+        }
+
+        .lesson-search-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .lesson-clear-selection {
+            position: absolute;
+            right: 12px;
+            background: #e5e5ef;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--text-main);
+            display: none;
+            place-content: center;
+        }
+
+        .lesson-clear-selection.visible {
+            display: grid;
+        }
+
+        .lesson-dropdown-list {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+            max-height: 260px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+        }
+
+        .lesson-dropdown-list.open {
+            display: block;
+        }
+
+        .lesson-dropdown-item {
+            padding: 11px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 1px solid #f4f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            transition: background 0.15s;
+        }
+
+        .lesson-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-dropdown-item:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .lesson-dropdown-item .lvl-tag {
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--accent-yellow);
+            color: var(--yellow-text);
+            padding: 2px 8px;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .lesson-dropdown-empty {
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
         }
 
         .hw-list {
@@ -488,7 +577,33 @@
         .hw-meta {
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .due-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: #f0f2f8;
+            color: #4b4b60;
+        }
+
+        .due-badge.overdue {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .due-badge.upcoming {
+            background: var(--accent-yellow);
+            color: var(--yellow-text);
         }
 
         .hw-instructions {
@@ -716,10 +831,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Attach Lesson from Catalog (optional)</label>
-                            <select id="lessonSelect" class="form-control">
-                                <option value="">-- No catalog lesson (custom task) --</option>
-                            </select>
+                            <label>Due Date / Deadline (optional)</label>
+                            <input type="date" id="hwDueDate" class="form-control">
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Attach Lesson from Catalog (type to search)</label>
+                            <div class="lesson-picker-wrapper" id="lessonPickerWrapper">
+                                <div class="lesson-search-input-wrap">
+                                    <input type="text" id="lessonSearchInput" class="form-control" placeholder="🔍 Type lesson title, level (e.g. B2), or topic..." autocomplete="off">
+                                    <button type="button" class="lesson-clear-selection" id="clearLessonBtn" title="Clear selected lesson">&times;</button>
+                                </div>
+                                <input type="hidden" id="selectedLessonFile" value="">
+                                <div class="lesson-dropdown-list" id="lessonDropdownList"></div>
+                            </div>
                         </div>
 
                         <div class="form-group full">
@@ -870,23 +995,76 @@
             filterLessons();
         });
 
-        // Populate lesson dropdown in Teacher Form
-        function populateLessonDropdown() {
-            const lessonSelect = document.getElementById('lessonSelect');
-            if (typeof LESSONS !== 'undefined') {
-                LESSONS.forEach(l => {
-                    const opt = document.createElement('option');
-                    opt.value = l.file;
-                    opt.textContent = `[${l.level}] ${l.title}`;
-                    opt.dataset.title = l.title;
-                    lessonSelect.appendChild(opt);
+        // --- SEARCHABLE LESSON PICKER IN TEACHER FORM ---
+        function initSearchableLessonPicker() {
+            const input = document.getElementById('lessonSearchInput');
+            const listEl = document.getElementById('lessonDropdownList');
+            const hiddenFile = document.getElementById('selectedLessonFile');
+            const clearSelectionBtn = document.getElementById('clearLessonBtn');
+            const wrapper = document.getElementById('lessonPickerWrapper');
+
+            function renderDropdown(query = '') {
+                listEl.innerHTML = '';
+                const catalog = typeof LESSONS !== 'undefined' ? LESSONS : [];
+                const q = query.toLowerCase().trim();
+
+                const matches = catalog.filter(l =>
+                    l.title.toLowerCase().includes(q) ||
+                    l.level.toLowerCase().includes(q) ||
+                    (l.category && l.category.toLowerCase().includes(q)) ||
+                    (l.type && l.type.toLowerCase().includes(q))
+                );
+
+                if (matches.length === 0) {
+                    listEl.innerHTML = '<div class="lesson-dropdown-empty">No lessons found. You can still assign a custom task!</div>';
+                    return;
+                }
+
+                matches.forEach(l => {
+                    const item = document.createElement('div');
+                    item.className = 'lesson-dropdown-item';
+                    item.innerHTML = `
+                        <span>${l.title}</span>
+                        <span class="lvl-tag">${l.level}</span>
+                    `;
+                    item.addEventListener('click', () => {
+                        input.value = `[${l.level}] ${l.title}`;
+                        hiddenFile.value = l.file;
+                        clearSelectionBtn.classList.add('visible');
+                        listEl.classList.remove('open');
+
+                        const titleInput = document.getElementById('hwTitle');
+                        if (!titleInput.value) {
+                            titleInput.value = l.title;
+                        }
+                    });
+                    listEl.appendChild(item);
                 });
             }
-            lessonSelect.addEventListener('change', (e) => {
-                const selectedOpt = e.target.options[e.target.selectedIndex];
-                const titleInput = document.getElementById('hwTitle');
-                if (selectedOpt.dataset.title && !titleInput.value) {
-                    titleInput.value = selectedOpt.dataset.title;
+
+            input.addEventListener('focus', () => {
+                renderDropdown(hiddenFile.value ? '' : input.value);
+                listEl.classList.add('open');
+            });
+
+            input.addEventListener('input', (e) => {
+                hiddenFile.value = '';
+                clearSelectionBtn.classList.toggle('visible', e.target.value.length > 0);
+                renderDropdown(e.target.value);
+                listEl.classList.add('open');
+            });
+
+            clearSelectionBtn.addEventListener('click', () => {
+                input.value = '';
+                hiddenFile.value = '';
+                clearSelectionBtn.classList.remove('visible');
+                renderDropdown('');
+                input.focus();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!wrapper.contains(e.target)) {
+                    listEl.classList.remove('open');
                 }
             });
         }
@@ -1029,7 +1207,6 @@
             document.getElementById('classroomTitle').textContent = isTeacher ? 'Teacher Classroom Dashboard' : 'My Homework';
 
             if (isTeacher) {
-                // Load all students for dropdown
                 const { data: students } = await supabaseClient
                     .from('profiles')
                     .select('*')
@@ -1047,7 +1224,6 @@
                     });
                 }
 
-                // Load all assignments across students
                 const { data: assignments } = await supabaseClient
                     .from('assignments')
                     .select('*, profiles(full_name, email)')
@@ -1055,7 +1231,6 @@
 
                 renderAssignments(assignments || [], true);
             } else {
-                // Load only this student's assignments
                 const { data: assignments } = await supabaseClient
                     .from('assignments')
                     .select('*')
@@ -1064,6 +1239,17 @@
 
                 renderAssignments(assignments || [], false);
             }
+        }
+
+        function formatDueBadge(dueDateStr, isCompleted) {
+            if (!dueDateStr) return '';
+            const due = new Date(dueDateStr + 'T23:59:59');
+            const now = new Date();
+            const formatted = new Date(dueDateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            const isOverdue = !isCompleted && due < now;
+            const badgeClass = isOverdue ? 'overdue' : 'upcoming';
+            const label = isOverdue ? `⚠️ Overdue (Due ${formatted})` : `📅 Due: ${formatted}`;
+            return `<span class="due-badge ${badgeClass}">${label}</span>`;
         }
 
         function renderAssignments(list, isTeacher) {
@@ -1077,14 +1263,15 @@
 
             list.forEach(hw => {
                 const dateStr = new Date(hw.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-                const studentInfo = isTeacher && hw.profiles ? `Assigned to: <b>${hw.profiles.full_name}</b> • ` : '';
+                const studentInfo = isTeacher && hw.profiles ? `<span>Assigned to: <b>${hw.profiles.full_name}</b></span> • ` : '';
+                const dueBadgeHtml = formatDueBadge(hw.due_date, hw.is_completed);
 
                 const card = document.createElement('div');
                 card.className = `hw-card ${hw.is_completed ? 'completed' : ''}`;
                 card.innerHTML = `
                     <div class="hw-header">
                         <div>
-                            <div class="hw-meta">${studentInfo}${dateStr}</div>
+                            <div class="hw-meta">${studentInfo}<span>Posted: ${dateStr}</span> ${dueBadgeHtml}</div>
                             <div class="hw-title">${hw.title}</div>
                         </div>
                         <div style="display: flex; gap: 8px; align-items: center;">
@@ -1116,7 +1303,8 @@
             submitBtn.textContent = 'Assigning...';
 
             const studentId = document.getElementById('studentSelect').value;
-            const lessonFile = document.getElementById('lessonSelect').value || null;
+            const dueDate = document.getElementById('hwDueDate').value || null;
+            const lessonFile = document.getElementById('selectedLessonFile').value || null;
             const title = document.getElementById('hwTitle').value.trim();
             const instructions = document.getElementById('hwInstructions').value.trim();
             const extraLink = document.getElementById('hwLink').value.trim() || null;
@@ -1124,7 +1312,6 @@
 
             let imageUrl = null;
 
-            // Upload image if attached
             if (imageFile) {
                 const fileExt = imageFile.name.split('.').pop();
                 const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
@@ -1144,6 +1331,7 @@
 
             const { error } = await supabaseClient.from('assignments').insert([{
                 student_id: studentId,
+                due_date: dueDate,
                 title: title,
                 lesson_file: lessonFile,
                 instructions: instructions,
@@ -1158,6 +1346,8 @@
                 alert('Error assigning homework: ' + error.message);
             } else {
                 document.getElementById('assignForm').reset();
+                document.getElementById('selectedLessonFile').value = '';
+                document.getElementById('clearLessonBtn').classList.remove('visible');
                 loadClassroomData();
             }
         });
@@ -1178,7 +1368,7 @@
 
         // --- INITIALIZE APP ---
         filterLessons();
-        populateLessonDropdown();
+        initSearchableLessonPicker();
         checkSession();
     </script>
 
