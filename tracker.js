@@ -1,4 +1,4 @@
-js_fixed = r'''// =========================================================================
+// =========================================================================
 // ziz.english — Homework Activity Tracker + Canva-Style Smooth Teaching Dock
 // =========================================================================
 (function () {
@@ -8,7 +8,7 @@ js_fixed = r'''// ==============================================================
     const isHomeworkMode = Boolean(hwId && studentId);
 
     // =====================================================================
-    // PART 1: HOMEWORK TRACKER (активний тільки коли урок відкрито як ДЗ)
+    // PART 1: HOMEWORK TRACKER
     // =====================================================================
     if (isHomeworkMode) {
         const SUPABASE_URL = 'https://vnvjcgafvfkmqbzeyajo.supabase.co';
@@ -192,7 +192,7 @@ js_fixed = r'''// ==============================================================
         window.addEventListener('beforeunload', () => syncToSupabase());
 
         function initTrackerBadge() {
-            if (document.getElementById('ziz-tracker-badge')) return;
+            if (!document.body || document.getElementById('ziz-tracker-badge')) return;
             const badge = document.createElement('div');
             badge.id = 'ziz-tracker-badge';
             badge.innerHTML = '🟢 ziz.english • Progress auto-saved';
@@ -215,16 +215,20 @@ js_fixed = r'''// ==============================================================
         }
 
         if (document.readyState === 'loading') {
-            window.addEventListener('DOMContentLoaded', initTrackerBadge);
+            document.addEventListener('DOMContentLoaded', initTrackerBadge);
         } else {
             initTrackerBadge();
         }
     }
 
     // =====================================================================
-    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK (максимальний z-index + pointer fix)
+    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK
     // =====================================================================
     function initCanvaBoard() {
+        if (!document.body) {
+            setTimeout(initCanvaBoard, 50);
+            return;
+        }
         if (document.getElementById('ziz-dock')) return;
 
         const style = document.createElement('style');
@@ -242,7 +246,6 @@ js_fixed = r'''// ==============================================================
             #ziz-viewport-canvas.active {
                 pointer-events: auto !important;
             }
-
             #ziz-objects-layer {
                 position: absolute !important;
                 top: 0 !important;
@@ -252,7 +255,6 @@ js_fixed = r'''// ==============================================================
                 z-index: 2147483642 !important;
                 pointer-events: none !important;
             }
-
             #ziz-dock {
                 position: fixed !important;
                 left: 16px !important;
@@ -271,11 +273,9 @@ js_fixed = r'''// ==============================================================
                 border: 1px solid rgba(15, 23, 42, 0.08) !important;
                 user-select: none !important;
             }
-
             #ziz-dock.minimized .ziz-dock-item:not(#zizToggleDockBtn) {
                 display: none !important;
             }
-
             .ziz-dock-btn {
                 width: 42px !important;
                 height: 42px !important;
@@ -295,46 +295,18 @@ js_fixed = r'''// ==============================================================
                 transition: background 0.15s ease !important;
                 position: relative !important;
             }
-
             .ziz-dock-btn:hover {
                 background: #f1f5f9 !important;
             }
-
             .ziz-dock-btn.active {
                 background: #e2e8f0 !important;
                 color: #0f172a !important;
             }
-
             .ziz-dock-btn svg {
                 width: 21px !important;
                 height: 21px !important;
                 pointer-events: none !important;
             }
-
-            .ziz-dock-btn::after {
-                content: attr(data-tip);
-                position: absolute;
-                left: 52px;
-                background: #1e293b;
-                color: #fff;
-                font-family: 'Outfit', -apple-system, sans-serif;
-                font-size: 12px;
-                font-weight: 500;
-                padding: 5px 10px;
-                border-radius: 8px;
-                white-space: nowrap;
-                opacity: 0;
-                pointer-events: none;
-                transform: translateX(-4px);
-                transition: all 0.15s ease;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            }
-
-            .ziz-dock-btn:hover::after {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
             #ziz-subdock {
                 position: fixed !important;
                 left: 76px !important;
@@ -353,11 +325,9 @@ js_fixed = r'''// ==============================================================
                 border: 1px solid rgba(15, 23, 42, 0.08) !important;
                 user-select: none !important;
             }
-
             #ziz-subdock.open {
                 display: flex !important;
             }
-
             .ziz-nib-btn {
                 width: 38px !important;
                 height: 38px !important;
@@ -370,28 +340,22 @@ js_fixed = r'''// ==============================================================
                 align-items: center !important;
                 justify-content: center !important;
                 padding: 0 !important;
-                transition: all 0.15s !important;
             }
-
             .ziz-nib-btn:hover {
                 background: #f1f5f9 !important;
             }
-
             .ziz-nib-btn.active {
                 background: #f1f5f9 !important;
                 box-shadow: inset 0 0 0 2px #cbd5e1 !important;
             }
-
             .ziz-nib-btn svg {
                 pointer-events: none !important;
             }
-
             .ziz-sub-divider {
                 width: 24px !important;
                 height: 1px !important;
                 background: #e2e8f0 !important;
             }
-
             .ziz-swatch {
                 width: 24px !important;
                 height: 24px !important;
@@ -400,18 +364,11 @@ js_fixed = r'''// ==============================================================
                 box-shadow: 0 0 0 1px rgba(0,0,0,0.18) !important;
                 cursor: pointer !important;
                 pointer-events: auto !important;
-                transition: transform 0.12s !important;
             }
-
-            .ziz-swatch:hover {
-                transform: scale(1.15) !important;
-            }
-
             .ziz-swatch.active {
                 transform: scale(1.2) !important;
                 box-shadow: 0 0 0 2px #0f172a !important;
             }
-
             .ziz-size-btn {
                 width: 32px !important;
                 height: 26px !important;
@@ -425,15 +382,12 @@ js_fixed = r'''// ==============================================================
                 justify-content: center !important;
                 padding: 0 !important;
             }
-
             .ziz-size-btn:hover, .ziz-size-btn.active {
                 background: #f1f5f9 !important;
             }
-
             .ziz-size-btn span {
                 pointer-events: none !important;
             }
-
             .ziz-sticky {
                 position: absolute !important;
                 pointer-events: auto !important;
@@ -442,16 +396,14 @@ js_fixed = r'''// ==============================================================
                 padding: 14px 16px !important;
                 border-radius: 6px 6px 22px 6px !important;
                 box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16) !important;
-                font-family: 'Outfit', -apple-system, sans-serif !important;
+                font-family: sans-serif !important;
                 display: flex !important;
                 flex-direction: column !important;
             }
-
             .ziz-sticky.yellow { background: #fef08a !important; color: #1e293b !important; }
             .ziz-sticky.pink   { background: #fbcfe8 !important; color: #1e293b !important; }
             .ziz-sticky.mint   { background: #bbf7d0 !important; color: #1e293b !important; }
             .ziz-sticky.blue   { background: #bae6fd !important; color: #1e293b !important; }
-
             .ziz-text-box {
                 position: absolute !important;
                 pointer-events: auto !important;
@@ -459,20 +411,14 @@ js_fixed = r'''// ==============================================================
                 max-width: 440px !important;
                 padding: 6px 10px !important;
                 border-radius: 8px !important;
-                background: rgba(255, 255, 255, 0.92) !important;
+                background: rgba(255, 255, 255, 0.94) !important;
                 border: 1.5px solid #cbd5e1 !important;
-                font-family: 'Outfit', -apple-system, sans-serif !important;
+                font-family: sans-serif !important;
                 font-size: 18px !important;
                 font-weight: 600 !important;
                 line-height: 1.35 !important;
                 box-shadow: 0 4px 14px rgba(0,0,0,0.08) !important;
             }
-
-            .ziz-text-box:focus-within {
-                border-color: #9333ea !important;
-                background: #ffffff !important;
-            }
-
             .ziz-item-bar {
                 display: flex !important;
                 justify-content: space-between !important;
@@ -482,18 +428,6 @@ js_fixed = r'''// ==============================================================
                 height: 18px !important;
                 user-select: none !important;
             }
-
-            .ziz-item-bar:active {
-                cursor: grabbing !important;
-            }
-
-            .ziz-drag-dots {
-                font-size: 13px !important;
-                letter-spacing: 2px !important;
-                color: #475569 !important;
-                pointer-events: none !important;
-            }
-
             .ziz-del-btn {
                 background: rgba(0,0,0,0.1) !important;
                 border: none !important;
@@ -501,20 +435,16 @@ js_fixed = r'''// ==============================================================
                 height: 20px !important;
                 border-radius: 50% !important;
                 font-size: 13px !important;
-                line-height: 1 !important;
                 cursor: pointer !important;
                 color: #334155 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                padding: 0 !important;
             }
-
             .ziz-del-btn:hover {
                 background: #ef4444 !important;
                 color: #ffffff !important;
             }
-
             .ziz-editable {
                 outline: none !important;
                 flex: 1 !important;
@@ -539,49 +469,43 @@ js_fixed = r'''// ==============================================================
         if (isHomeworkMode) dock.classList.add('minimized');
 
         dock.innerHTML = `
-            <button type="button" class="ziz-dock-btn ziz-dock-item active" data-mode="cursor" data-tip="Курсор (взаємодія з уроком)">
+            <button type="button" class="ziz-dock-btn ziz-dock-item active" data-mode="cursor" title="Курсор">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" data-mode="draw" data-tip="Пензлик і маркер">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" data-mode="draw" title="Пензлик і маркер">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 2l4 4L7.5 20.5 2 22l1.5-5.5L18 2z" fill="#ef4444" fill-opacity="0.18" stroke="#ef4444"/>
                     <path d="M14.5 5.5l4 4" stroke="#ef4444"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnSticky" data-tip="Додати стікер">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnSticky" title="Додати стікер">
                 <svg viewBox="0 0 24 24" fill="#facc15" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/>
                     <path d="M15 3v6h6" fill="#fef08a"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnText" data-tip="Вставити текст">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnText" title="Вставити текст">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="4 7 4 4 20 4 20 7"/>
                     <line x1="9" y1="20" x2="15" y2="20"/>
                     <line x1="12" y1="4" x2="12" y2="20"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnUndo" data-tip="Скасувати дію (Ctrl+Z)">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnUndo" title="Скасувати (Ctrl+Z)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 7v6h6"/>
                     <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnClear" data-tip="Очистити все">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnClear" title="Очистити все">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"/>
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizToggleDockBtn" data-tip="Згорнути / Розгорнути">
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizToggleDockBtn" title="Згорнути / Розгорнути">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="2"/>
                     <circle cx="12" cy="5" r="2"/>
@@ -594,44 +518,38 @@ js_fixed = r'''// ==============================================================
         const subdock = document.createElement('div');
         subdock.id = 'ziz-subdock';
         subdock.innerHTML = `
-            <button type="button" class="ziz-nib-btn active" data-nib="pen" title="Пензлик (тонкий)">
+            <button type="button" class="ziz-nib-btn active" data-nib="pen" title="Пензлик">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-nib-btn" data-nib="highlighter" title="Маркер-виділювач">
+            <button type="button" class="ziz-nib-btn" data-nib="highlighter" title="Маркер">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 11-6 6v3h9l3-3"/>
                     <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" fill="#fef08a"/>
                 </svg>
             </button>
-
-            <button type="button" class="ziz-nib-btn" data-nib="eraser" title="Гумка (натисни на штрих щоб стерти)">
+            <button type="button" class="ziz-nib-btn" data-nib="eraser" title="Гумка">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/>
                     <path d="M22 21H7"/>
                     <path d="m5 11 9 9" fill="#ffe4e6"/>
                 </svg>
             </button>
-
             <div class="ziz-sub-divider"></div>
-
-            <div class="ziz-swatch active" data-color="#ef4444" style="background: #ef4444;" title="Червоний"></div>
-            <div class="ziz-swatch" data-color="#facc15" style="background: #facc15;" title="Жовтий"></div>
-            <div class="ziz-swatch" data-color="#3b82f6" style="background: #3b82f6;" title="Синій"></div>
-            <div class="ziz-swatch" data-color="#22c55e" style="background: #22c55e;" title="Зелений"></div>
-            <div class="ziz-swatch" data-color="#1e293b" style="background: #1e293b;" title="Чорний"></div>
-
+            <div class="ziz-swatch active" data-color="#ef4444" style="background: #ef4444;"></div>
+            <div class="ziz-swatch" data-color="#facc15" style="background: #facc15;"></div>
+            <div class="ziz-swatch" data-color="#3b82f6" style="background: #3b82f6;"></div>
+            <div class="ziz-swatch" data-color="#22c55e" style="background: #22c55e;"></div>
+            <div class="ziz-swatch" data-color="#1e293b" style="background: #1e293b;"></div>
             <div class="ziz-sub-divider"></div>
-
-            <button type="button" class="ziz-size-btn active" data-scale="1" title="Тонка лінія">
+            <button type="button" class="ziz-size-btn active" data-scale="1">
                 <span style="width: 18px; height: 2px; background: #1e293b; border-radius: 2px; display: block;"></span>
             </button>
-            <button type="button" class="ziz-size-btn" data-scale="1.8" title="Середня лінія">
+            <button type="button" class="ziz-size-btn" data-scale="1.8">
                 <span style="width: 18px; height: 5px; background: #1e293b; border-radius: 3px; display: block;"></span>
             </button>
-            <button type="button" class="ziz-size-btn" data-scale="2.8" title="Товста лінія">
+            <button type="button" class="ziz-size-btn" data-scale="2.8">
                 <span style="width: 18px; height: 8px; background: #1e293b; border-radius: 4px; display: block;"></span>
             </button>
         `;
@@ -641,7 +559,6 @@ js_fixed = r'''// ==============================================================
         let nib = 'pen';
         let color = '#ef4444';
         let sizeScale = 1;
-
         let strokes = [];
         let currentStroke = null;
         let isDrawingNow = false;
@@ -673,7 +590,6 @@ js_fixed = r'''// ==============================================================
 
         function renderSingleStroke(s, scrollX, scrollY) {
             if (!s.points || s.points.length === 0) return;
-
             ctx.save();
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -701,13 +617,11 @@ js_fixed = r'''// ==============================================================
 
             ctx.beginPath();
             ctx.moveTo(pts[0].x - scrollX, pts[0].y - scrollY);
-
             for (let i = 1; i < pts.length - 1; i++) {
                 const midX = (pts[i].x + pts[i + 1].x) / 2 - scrollX;
                 const midY = (pts[i].y + pts[i + 1].y) / 2 - scrollY;
                 ctx.quadraticCurveTo(pts[i].x - scrollX, pts[i].y - scrollY, midX, midY);
             }
-
             const last = pts[pts.length - 1];
             ctx.lineTo(last.x - scrollX, last.y - scrollY);
             ctx.stroke();
@@ -718,7 +632,6 @@ js_fixed = r'''// ==============================================================
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             const scrollX = window.scrollX;
             const scrollY = window.scrollY;
-
             for (let i = 0; i < strokes.length; i++) {
                 renderSingleStroke(strokes[i], scrollX, scrollY);
             }
@@ -734,24 +647,18 @@ js_fixed = r'''// ==============================================================
                 for (let i = 0; i < s.points.length; i++) {
                     const dx = s.points[i].x - pageX;
                     const dy = s.points[i].y - pageY;
-                    if (dx * dx + dy * dy <= threshold * threshold) {
-                        return false;
-                    }
+                    if (dx * dx + dy * dy <= threshold * threshold) return false;
                 }
                 return true;
             });
-            if (strokes.length !== beforeCount) {
-                requestRender();
-            }
+            if (strokes.length !== beforeCount) requestRender();
         }
 
-        // Надійне малювання мишкою через mousedown / mousemove / mouseup
         canvas.addEventListener('mousedown', (e) => {
             if (mode !== 'draw' || e.button !== 0) return;
             e.preventDefault();
             e.stopPropagation();
             isDrawingNow = true;
-
             const pageX = e.clientX + window.scrollX;
             const pageY = e.clientY + window.scrollY;
 
@@ -759,13 +666,7 @@ js_fixed = r'''// ==============================================================
                 eraseAtPoint(pageX, pageY);
                 return;
             }
-
-            currentStroke = {
-                nib: nib,
-                color: color,
-                scale: sizeScale,
-                points: [{ x: pageX, y: pageY }]
-            };
+            currentStroke = { nib: nib, color: color, scale: sizeScale, points: [{ x: pageX, y: pageY }] };
             requestRender();
         });
 
@@ -778,7 +679,6 @@ js_fixed = r'''// ==============================================================
                 eraseAtPoint(pageX, pageY);
                 return;
             }
-
             if (currentStroke) {
                 const pts = currentStroke.points;
                 const prev = pts[pts.length - 1];
@@ -801,25 +701,17 @@ js_fixed = r'''// ==============================================================
 
         function setMode(newMode) {
             mode = newMode;
-            dock.querySelectorAll('[data-mode]').forEach(b => {
-                b.classList.toggle('active', b.dataset.mode === newMode);
-            });
-
+            dock.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === newMode));
             if (newMode === 'draw') {
                 canvas.classList.add('active');
                 subdock.classList.add('open');
-                updateCursorIcon();
+                canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
             } else {
                 canvas.classList.remove('active');
                 subdock.classList.remove('open');
             }
         }
 
-        function updateCursorIcon() {
-            canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
-        }
-
-        // Обробка кліків по головній панелі
         dock.querySelectorAll('[data-mode]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -837,7 +729,7 @@ js_fixed = r'''// ==============================================================
                 subdock.querySelectorAll('[data-nib]').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 nib = btn.dataset.nib;
-                updateCursorIcon();
+                canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
             });
         });
 
@@ -847,9 +739,7 @@ js_fixed = r'''// ==============================================================
                 subdock.querySelectorAll('.ziz-swatch').forEach(s => s.classList.remove('active'));
                 sw.classList.add('active');
                 color = sw.dataset.color;
-                if (nib === 'eraser') {
-                    subdock.querySelector('[data-nib="pen"]').click();
-                }
+                if (nib === 'eraser') subdock.querySelector('[data-nib="pen"]').click();
             });
         });
 
@@ -865,9 +755,7 @@ js_fixed = r'''// ==============================================================
         document.getElementById('zizToggleDockBtn').addEventListener('click', (e) => {
             e.stopPropagation();
             dock.classList.toggle('minimized');
-            if (dock.classList.contains('minimized')) {
-                setMode('cursor');
-            }
+            if (dock.classList.contains('minimized')) setMode('cursor');
         });
 
         function undoLast() {
@@ -898,7 +786,6 @@ js_fixed = r'''// ==============================================================
 
         function spawnDraggableElement(type) {
             setMode('cursor');
-
             const el = document.createElement('div');
             if (type === 'sticky') {
                 const theme = stickyThemes[stickyIdx % stickyThemes.length];
@@ -915,15 +802,14 @@ js_fixed = r'''// ==============================================================
             el.style.left = Math.max(90, leftPos) + 'px';
 
             el.innerHTML = `
-                <div class="ziz-item-bar" title="Потягни за цю панель, щоб перемістити">
-                    <span class="ziz-drag-dots">⋮⋮</span>
+                <div class="ziz-item-bar" title="Потягни щоб перемістити">
+                    <span style="font-size: 13px; letter-spacing: 2px; color: #475569; pointer-events: none;">⋮⋮</span>
                     <button type="button" class="ziz-del-btn" title="Видалити">&times;</button>
                 </div>
                 <div class="ziz-editable" contenteditable="true">${type === 'sticky' ? 'Нотатка...' : 'Введіть текст...'}</div>
             `;
 
             objectsLayer.appendChild(el);
-
             const editable = el.querySelector('.ziz-editable');
             editable.focus();
             const range = document.createRange();
@@ -974,14 +860,8 @@ js_fixed = r'''// ==============================================================
     }
 
     if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', initCanvaBoard);
+        document.addEventListener('DOMContentLoaded', initCanvaBoard);
     } else {
         initCanvaBoard();
     }
 })();
-'''
-
-with open("tracker_fixed.js", "w", encoding="utf-8") as f:
-    f.write(js_fixed)
-
-print("tracker_fixed.js written successfully")
