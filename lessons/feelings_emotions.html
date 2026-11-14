@@ -1,0 +1,2691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feelings, Emotions & Adjectives — Interactive Lesson (A1–A2)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Nunito"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            },
+            warm: {
+              50: '#fdfbf7',
+              100: '#f7f2e8',
+              200: '#efe5d1',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #fdfbf7 0%, #f3f0ff 50%, #eef6ff 100%);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Card Flip Animation for Speaking Cards & Baamboozle */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Lined Notebook Paper Effect for Mary's Diary Writing Pad */
+    .notebook-paper {
+      background-color: #fffdf9;
+      background-image: linear-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 100% 2.1rem;
+      line-height: 2.1rem;
+      padding-top: 0.35rem;
+    }
+
+    /* Subtle Pop Animation */
+    @keyframes popIn {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalBounce {
+      0% { transform: scale(0.82) translateY(16px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .animate-modal {
+      animation: modalBounce 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Pulse ring for audio playing */
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar {
+      animation: soundWave 0.8s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+
+    /* Hide scrollbar for top nav on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-violet-200 selection:text-violet-900">
+
+  <!-- ==================== STICKY HEADER & NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <!-- Lesson Title & Badge -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 text-white flex items-center justify-center font-display font-extrabold text-xl shadow-md shadow-violet-200">
+            😊
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-display font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight">
+                Feelings, Emotions &amp; Adjectives
+              </h1>
+              <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-100 text-violet-700">
+                A1–A2 Interactive
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 hidden sm:block">Online Screen-Share Lesson • Click tabs to navigate</p>
+          </div>
+        </div>
+
+        <!-- Progress & Sound Controls -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Sequential Prev / Next Arrow Controls -->
+          <div class="flex items-center gap-1 bg-violet-50 px-2 py-1 rounded-2xl border border-violet-200/80">
+            <button id="header-prev-btn" onclick="prevTab()" title="Previous Exercise (Left Arrow)"
+              class="px-2.5 py-1 rounded-xl text-xs font-extrabold bg-white hover:bg-violet-600 hover:text-white text-violet-800 border border-violet-200 shadow-xs disabled:opacity-40 disabled:pointer-events-none transition cursor-pointer">
+              ← Prev
+            </button>
+            <span id="header-step-label" class="px-2 text-xs font-extrabold text-violet-950 whitespace-nowrap">
+              1 / 7
+            </span>
+            <button id="header-next-btn" onclick="nextTab()" title="Next Exercise (Right Arrow)"
+              class="px-2.5 py-1 rounded-xl text-xs font-extrabold bg-violet-600 hover:bg-violet-700 text-white shadow-xs disabled:opacity-40 disabled:pointer-events-none transition cursor-pointer">
+              Next →
+            </button>
+          </div>
+
+          <!-- Overall Progress Pill -->
+          <div class="hidden md:flex items-center gap-2.5 bg-slate-100 px-3.5 py-1.5 rounded-2xl border border-slate-200/70">
+            <span class="text-xs font-bold text-slate-600">Progress:</span>
+            <div class="w-20 sm:w-24 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="global-progress-text" class="text-xs font-extrabold text-teal-700">0/6</span>
+          </div>
+
+          <!-- Sound Effects Toggle -->
+          <button id="sound-toggle-btn" onclick="toggleSound()" title="Toggle Sound Effects"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition cursor-pointer">
+            <span id="sound-icon">🔊</span>
+            <span class="hidden md:inline" id="sound-label">SFX On</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 7 Section Navigation Tabs -->
+      <nav id="lesson-tabs" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-3 pb-0.5" aria-label="Lesson Sections">
+        <button onclick="switchTab(0)" data-tab="0" class="tab-btn active-tab flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-white/25 flex items-center justify-center text-xs">1</span>
+          Warm-up
+          <span id="badge-0" class="hidden text-emerald-300">✓</span>
+        </button>
+        <button onclick="switchTab(1)" data-tab="1" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">2</span>
+          Vocabulary
+          <span id="badge-1" class="hidden text-emerald-600">✓</span>
+        </button>
+        <button onclick="switchTab(2)" data-tab="2" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">3</span>
+          Listening
+          <span id="badge-2" class="hidden text-emerald-600">✓</span>
+        </button>
+        <button onclick="switchTab(3)" data-tab="3" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">4</span>
+          Video Time
+          <span id="badge-3" class="hidden text-emerald-600">✓</span>
+        </button>
+        <button onclick="switchTab(4)" data-tab="4" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">5</span>
+          Game Time
+          <span id="badge-4" class="hidden text-emerald-600">✓</span>
+        </button>
+        <button onclick="switchTab(5)" data-tab="5" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">6</span>
+          Mary's Diary
+          <span id="badge-5" class="hidden text-emerald-600">✓</span>
+        </button>
+        <button onclick="switchTab(6)" data-tab="6" class="tab-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-slate-200/80 text-slate-700 flex items-center justify-center text-xs">7</span>
+          Speaking Cards
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toast Notification Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300">
+    <div id="toast-content" class="px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2.5 bg-slate-900 text-white">
+      <span id="toast-icon">🎉</span>
+      <span id="toast-text">Great job!</span>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: WARM-UP (HOW ARE YOU?)                            -->
+    <!-- ============================================================ -->
+    <section id="section-0" class="lesson-section animate-pop">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 mb-2">
+              STEP 1 • WARM-UP
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              How are you?
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">
+              Complete the table with the words in the box. They answer the question <em class="font-semibold text-violet-700">How are you?</em>
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkWarmup()" class="px-4 py-2.5 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Check Answers
+            </button>
+            <button onclick="resetWarmup()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Word Bank -->
+        <div class="mt-6 bg-amber-50/70 border-2 border-dashed border-amber-300 rounded-2xl p-4">
+          <p class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-2.5">
+            📦 Word Box (Click a phrase, then click a blank line — or drag &amp; drop)
+          </p>
+          <div id="warmup-wordbank" class="flex flex-wrap gap-2.5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- 5-Row Scale Table -->
+        <div class="mt-6 max-w-xl mx-auto bg-warm-50 rounded-3xl border border-warm-200 p-4 sm:p-6 shadow-inner">
+          <div class="divide-y divide-amber-200/70">
+            <!-- Row 1 -->
+            <div class="py-3.5 flex items-center gap-4 sm:gap-6">
+              <div class="w-14 h-14 rounded-2xl bg-rose-100 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                🙁
+              </div>
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-500">not very well</div>
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-slate-400">1</span>
+                  <button type="button" onclick="placeWarmupWord(0)" ondragover="allowDrop(event)" ondrop="dropWarmupWord(event, 0)"
+                    id="warmup-slot-0"
+                    class="warmup-slot min-w-[170px] h-10 px-4 rounded-xl border-2 border-dashed border-slate-300 bg-white text-left font-bold text-sm text-slate-800 hover:border-violet-400 transition flex items-center justify-between cursor-pointer">
+                    <span class="text-slate-400 font-normal">Click or drop here...</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="py-3.5 flex items-center gap-4 sm:gap-6">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                😐
+              </div>
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-500">OK</div>
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-slate-400">2</span>
+                  <button type="button" onclick="placeWarmupWord(1)" ondragover="allowDrop(event)" ondrop="dropWarmupWord(event, 1)"
+                    id="warmup-slot-1"
+                    class="warmup-slot min-w-[170px] h-10 px-4 rounded-xl border-2 border-dashed border-slate-300 bg-white text-left font-bold text-sm text-slate-800 hover:border-violet-400 transition flex items-center justify-between cursor-pointer">
+                    <span class="text-slate-400 font-normal">Click or drop here...</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="py-3.5 flex items-center gap-4 sm:gap-6">
+              <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                🙂
+              </div>
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-500">well</div>
+                <div class="my-1 flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-slate-400">3</span>
+                  <button type="button" onclick="placeWarmupWord(2)" ondragover="allowDrop(event)" ondrop="dropWarmupWord(event, 2)"
+                    id="warmup-slot-2"
+                    class="warmup-slot min-w-[170px] h-10 px-4 rounded-xl border-2 border-dashed border-slate-300 bg-white text-left font-bold text-sm text-slate-800 hover:border-violet-400 transition flex items-center justify-between cursor-pointer">
+                    <span class="text-slate-400 font-normal">Click or drop here...</span>
+                  </button>
+                </div>
+                <div class="text-sm font-semibold text-slate-500">fine</div>
+              </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="py-3.5 flex items-center gap-4 sm:gap-6">
+              <div class="w-14 h-14 rounded-2xl bg-lime-100 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                😊
+              </div>
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-slate-500">very well</div>
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-slate-400">4</span>
+                  <button type="button" onclick="placeWarmupWord(3)" ondragover="allowDrop(event)" ondrop="dropWarmupWord(event, 3)"
+                    id="warmup-slot-3"
+                    class="warmup-slot min-w-[170px] h-10 px-4 rounded-xl border-2 border-dashed border-slate-300 bg-white text-left font-bold text-sm text-slate-800 hover:border-violet-400 transition flex items-center justify-between cursor-pointer">
+                    <span class="text-slate-400 font-normal">Click or drop here...</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="py-3.5 flex items-center gap-4 sm:gap-6">
+              <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl shadow-sm shrink-0">
+                😄
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-extrabold text-slate-400">5</span>
+                  <button type="button" onclick="placeWarmupWord(4)" ondragover="allowDrop(event)" ondrop="dropWarmupWord(event, 4)"
+                    id="warmup-slot-4"
+                    class="warmup-slot min-w-[170px] h-10 px-4 rounded-xl border-2 border-dashed border-slate-300 bg-white text-left font-bold text-sm text-slate-800 hover:border-violet-400 transition flex items-center justify-between cursor-pointer">
+                    <span class="text-slate-400 font-normal">Click or drop here...</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="warmup-feedback" class="mt-4 text-center font-bold text-sm hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: VOCABULARY & OPPOSITES                            -->
+    <!-- ============================================================ -->
+    <section id="section-1" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Part A: Opposites -->
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-sky-100 text-sky-800 mb-2">
+              STEP 2A • ADJECTIVES
+            </span>
+            <h2 class="font-display font-extrabold text-2xl text-slate-900">
+              Match adjectives 1–8 with their opposites, a–h
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Click a word on the left, then click its opposite on the right to connect them!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkOpposites()" class="px-4 py-2.5 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Check Pairs
+            </button>
+            <button onclick="resetOpposites()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <!-- Left Column 1-8 -->
+          <div class="space-y-2.5" id="opposites-left">
+            <!-- Rendered by JS -->
+          </div>
+          <!-- Right Column a-h -->
+          <div class="space-y-2.5" id="opposites-right">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <div id="opposites-feedback" class="mt-4 text-center font-bold text-sm hidden"></div>
+      </div>
+
+      <!-- Part B: Connect the pictures with feelings -->
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 mb-2">
+              STEP 2B • EMOTIONS VOCABULARY
+            </span>
+            <h2 class="font-display font-extrabold text-2xl text-slate-900">
+              1. Connect the pictures with the feelings
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Select a feeling label below, then click the matching character face!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkFaces()" class="px-4 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Check Faces
+            </button>
+            <button onclick="resetFaces()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Feeling Labels Bank -->
+        <div id="faces-wordbank" class="mt-5 flex flex-wrap justify-center gap-2.5">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- 7 Illustrated SVG Character Cards -->
+        <div id="faces-grid" class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- Rendered by JS -->
+        </div>
+        <div id="faces-feedback" class="mt-4 text-center font-bold text-sm hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: LISTENING (IN THE CITY & NATURE)                  -->
+    <!-- ============================================================ -->
+    <section id="section-2" class="lesson-section hidden animate-pop">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-100 text-indigo-800 mb-2">
+              STEP 3 • LISTENING COMPREHENSION
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              Listen &amp; Match the Situations
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Press <strong>Play Audio</strong> for each dialogue (powered by Speech Synthesis), match to pictures A–C, and circle the correct words.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleTranscripts()" id="transcript-toggle-btn" class="px-3.5 py-2.5 rounded-2xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs sm:text-sm border border-indigo-200 transition cursor-pointer">
+              📄 Show Scripts
+            </button>
+            <button onclick="checkListening()" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Check Answers
+            </button>
+            <button onclick="resetListening()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 Visual Cards (A, B, C) -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Picture A: High Snowy Mountain -->
+          <div class="rounded-2xl overflow-hidden border-2 border-slate-200 bg-sky-50 relative group">
+            <span class="absolute top-3 left-3 z-10 w-9 h-9 rounded-xl bg-slate-900/85 text-white font-display font-extrabold text-lg flex items-center justify-center shadow">
+              A
+            </span>
+            <svg viewBox="0 0 320 190" class="w-full h-44 object-cover block">
+              <defs>
+                <linearGradient id="skyGradA" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#e0f2fe" />
+                </linearGradient>
+              </defs>
+              <rect width="320" height="190" fill="url(#skyGradA)" />
+              <!-- Clouds -->
+              <circle cx="65" cy="45" r="18" fill="#ffffff" opacity="0.85" />
+              <circle cx="85" cy="42" r="22" fill="#ffffff" opacity="0.9" />
+              <circle cx="105" cy="47" r="16" fill="#ffffff" opacity="0.85" />
+              <!-- Distant Mountain -->
+              <polygon points="155,22 65,175 245,175" fill="#64748b" />
+              <polygon points="155,22 122,78 140,70 155,85 170,68 188,78" fill="#ffffff" />
+              <!-- Foreground Snow Ridge -->
+              <path d="M0,155 Q120,130 320,160 L320,190 L0,190 Z" fill="#f8fafc" />
+              <!-- Two Hikers -->
+              <g transform="translate(105, 118)">
+                <rect x="6" y="14" width="12" height="18" rx="4" fill="#1e293b" />
+                <rect x="1" y="15" width="7" height="14" rx="3" fill="#0284c7" />
+                <circle cx="12" cy="8" r="5" fill="#334155" />
+                <line x1="8" y1="32" x2="7" y2="44" stroke="#0f172a" stroke-width="3" />
+                <line x1="15" y1="32" x2="16" y2="44" stroke="#0f172a" stroke-width="3" />
+              </g>
+              <g transform="translate(135, 115)">
+                <rect x="6" y="14" width="13" height="19" rx="4" fill="#be123c" />
+                <rect x="14" y="14" width="8" height="15" rx="3" fill="#f59e0b" />
+                <circle cx="12" cy="8" r="5" fill="#1e293b" />
+                <line x1="8" y1="33" x2="8" y2="46" stroke="#0f172a" stroke-width="3" />
+                <line x1="16" y1="33" x2="16" y2="46" stroke="#0f172a" stroke-width="3" />
+              </g>
+            </svg>
+            <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-600">Snowy Mountain Peak</span>
+              <select id="match-pic-A" class="text-xs font-extrabold bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 text-slate-800 cursor-pointer">
+                <option value="">Audio ?</option>
+                <option value="1">Audio 1</option>
+                <option value="2">Audio 2</option>
+                <option value="3">Audio 3</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Picture B: Office Meeting -->
+          <div class="rounded-2xl overflow-hidden border-2 border-slate-200 bg-amber-50 relative">
+            <span class="absolute top-3 left-3 z-10 w-9 h-9 rounded-xl bg-slate-900/85 text-white font-display font-extrabold text-lg flex items-center justify-center shadow">
+              B
+            </span>
+            <svg viewBox="0 0 320 190" class="w-full h-44 object-cover block">
+              <rect width="320" height="190" fill="#f1f5f9" />
+              <!-- Office Window -->
+              <rect x="30" y="18" width="110" height="85" rx="6" fill="#bae6fd" stroke="#cbd5e1" stroke-width="4" />
+              <line x1="85" y1="18" x2="85" y2="103" stroke="#cbd5e1" stroke-width="3" />
+              <!-- Meeting Participants -->
+              <circle cx="115" cy="78" r="14" fill="#92400e" />
+              <path d="M92,125 Q115,96 138,125 Z" fill="#7c2d12" />
+              <circle cx="185" cy="72" r="15" fill="#fed7aa" />
+              <path d="M160,125 Q185,92 210,125 Z" fill="#475569" />
+              <circle cx="245" cy="80" r="14" fill="#78350f" />
+              <path d="M222,125 Q245,98 268,125 Z" fill="#1e293b" />
+              <!-- Conference Table -->
+              <polygon points="40,125 280,125 305,190 15,190" fill="#d97706" />
+              <!-- Laptops on table -->
+              <polygon points="105,135 145,135 150,152 100,152" fill="#334155" />
+              <rect x="108" y="114" width="34" height="21" rx="2" fill="#94a3b8" />
+              <polygon points="185,138 225,138 230,155 180,155" fill="#334155" />
+              <rect x="188" y="117" width="34" height="21" rx="2" fill="#64748b" />
+            </svg>
+            <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-600">Office Team Meeting</span>
+              <select id="match-pic-B" class="text-xs font-extrabold bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 text-slate-800 cursor-pointer">
+                <option value="">Audio ?</option>
+                <option value="1">Audio 1</option>
+                <option value="2">Audio 2</option>
+                <option value="3">Audio 3</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Picture C: Busy Subway Train -->
+          <div class="rounded-2xl overflow-hidden border-2 border-slate-200 bg-slate-100 relative">
+            <span class="absolute top-3 left-3 z-10 w-9 h-9 rounded-xl bg-slate-900/85 text-white font-display font-extrabold text-lg flex items-center justify-center shadow">
+              C
+            </span>
+            <svg viewBox="0 0 320 190" class="w-full h-44 object-cover block">
+              <rect width="320" height="190" fill="#334155" />
+              <!-- Train Windows -->
+              <rect x="20" y="25" width="75" height="65" rx="8" fill="#fef08a" opacity="0.85" />
+              <rect x="115" y="25" width="90" height="65" rx="8" fill="#fef08a" opacity="0.85" />
+              <rect x="225" y="25" width="75" height="65" rx="8" fill="#fef08a" opacity="0.85" />
+              <!-- Handrails -->
+              <line x1="0" y1="35" x2="320" y2="35" stroke="#cbd5e1" stroke-width="5" />
+              <line x1="95" y1="35" x2="95" y2="190" stroke="#cbd5e1" stroke-width="6" />
+              <line x1="215" y1="35" x2="215" y2="190" stroke="#cbd5e1" stroke-width="6" />
+              <!-- Crowded Passengers -->
+              <circle cx="55" cy="92" r="16" fill="#fda4af" />
+              <path d="M25,190 Q55,115 85,190 Z" fill="#0f172a" />
+              <circle cx="128" cy="86" r="17" fill="#fcd34d" />
+              <path d="M95,190 Q128,110 160,190 Z" fill="#1d4ed8" />
+              <circle cx="178" cy="95" r="16" fill="#fdba74" />
+              <path d="M145,190 Q178,118 210,190 Z" fill="#047857" />
+              <circle cx="255" cy="88" r="17" fill="#d8b4fe" />
+              <path d="M220,190 Q255,112 290,190 Z" fill="#be185d" />
+            </svg>
+            <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-600">Crowded City Train</span>
+              <select id="match-pic-C" class="text-xs font-extrabold bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 text-slate-800 cursor-pointer">
+                <option value="">Audio ?</option>
+                <option value="1">Audio 1</option>
+                <option value="2">Audio 2</option>
+                <option value="3">Audio 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio Players Bar -->
+        <div class="mt-6 space-y-4">
+          <!-- Speed & Voice Controls Header -->
+          <div class="flex flex-wrap items-center justify-end gap-3 bg-slate-100/90 px-4 py-3 rounded-2xl border border-slate-200">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold text-slate-500">Speed:</span>
+              <button type="button" onclick="setAudioSpeed(0.72)" id="speed-slow-btn"
+                class="px-3 py-1 rounded-xl text-xs font-extrabold bg-white text-slate-700 border border-slate-300 hover:border-indigo-400 transition cursor-pointer">
+                🐢 0.75× Slow
+              </button>
+              <button type="button" onclick="setAudioSpeed(0.96)" id="speed-normal-btn"
+                class="px-3 py-1 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-xs transition cursor-pointer">
+                🐇 1.0× Normal
+              </button>
+            </div>
+          </div>
+
+          <!-- 3 Track Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Track 1 -->
+            <div class="p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-display font-extrabold text-indigo-950">🎧 Track 1 • Office</span>
+                  <span id="track-status-1" class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-white text-indigo-600 border border-indigo-200">
+                    Ready
+                  </span>
+                </div>
+                <!-- Play / Pause / Stop Controls -->
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="playOrResumeDialogue(1)" id="play-btn-1"
+                    class="flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 shadow-xs transition cursor-pointer">
+                    <span>▶</span> Play
+                  </button>
+                  <button type="button" onclick="pauseDialogue()" id="pause-btn-1"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-extrabold text-xs transition cursor-pointer" title="Pause">
+                    ⏸
+                  </button>
+                  <button type="button" onclick="stopDialogue()" id="stop-btn-1"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-rose-50 text-rose-700 border border-rose-300 font-extrabold text-xs transition cursor-pointer" title="Stop">
+                    ⏹
+                  </button>
+                </div>
+              </div>
+              <div id="script-1" class="hidden mt-3 space-y-1.5 text-xs text-slate-700 bg-white p-3 rounded-xl border border-indigo-100 leading-relaxed">
+                <p id="line-1-0" class="px-1.5 py-0.5 rounded transition"><strong>👩 Emma:</strong> Hey Mark! How was work today?</p>
+                <p id="line-1-1" class="px-1.5 py-0.5 rounded transition"><strong>👨 Mark:</strong> Ugh, so exhausting! The meeting today was about new <strong>computers</strong> for the office.</p>
+                <p id="line-1-2" class="px-1.5 py-0.5 rounded transition"><strong>👨 Mark:</strong> It was a really <strong>long</strong> meeting — almost three hours!</p>
+              </div>
+            </div>
+
+            <!-- Track 2 -->
+            <div class="p-4 rounded-2xl bg-sky-50/80 border border-sky-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-display font-extrabold text-sky-950">🎧 Track 2 • Mountain</span>
+                  <span id="track-status-2" class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-white text-sky-600 border border-sky-200">
+                    Ready
+                  </span>
+                </div>
+                <!-- Play / Pause / Stop Controls -->
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="playOrResumeDialogue(2)" id="play-btn-2"
+                    class="flex-1 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 shadow-xs transition cursor-pointer">
+                    <span>▶</span> Play
+                  </button>
+                  <button type="button" onclick="pauseDialogue()" id="pause-btn-2"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-extrabold text-xs transition cursor-pointer" title="Pause">
+                    ⏸
+                  </button>
+                  <button type="button" onclick="stopDialogue()" id="stop-btn-2"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-rose-50 text-rose-700 border border-rose-300 font-extrabold text-xs transition cursor-pointer" title="Stop">
+                    ⏹
+                  </button>
+                </div>
+              </div>
+              <div id="script-2" class="hidden mt-3 space-y-1.5 text-xs text-slate-700 bg-white p-3 rounded-xl border border-sky-100 leading-relaxed">
+                <p id="line-2-0" class="px-1.5 py-0.5 rounded transition"><strong>👩 Chloe:</strong> Oh, wow! Look at your holiday photos!</p>
+                <p id="line-2-1" class="px-1.5 py-0.5 rounded transition"><strong>👨 Leo:</strong> Right?! The mountain was really <strong>high</strong> — over three thousand meters!</p>
+                <p id="line-2-2" class="px-1.5 py-0.5 rounded transition"><strong>👨 Leo:</strong> Brrr! There was snow everywhere, so we were super <strong>cold</strong>!</p>
+              </div>
+            </div>
+
+            <!-- Track 3 -->
+            <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-display font-extrabold text-amber-950">🎧 Track 3 • Train</span>
+                  <span id="track-status-3" class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-white text-amber-700 border border-amber-200">
+                    Ready
+                  </span>
+                </div>
+                <!-- Play / Pause / Stop Controls -->
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="playOrResumeDialogue(3)" id="play-btn-3"
+                    class="flex-1 py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 shadow-xs transition cursor-pointer">
+                    <span>▶</span> Play
+                  </button>
+                  <button type="button" onclick="pauseDialogue()" id="pause-btn-3"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-extrabold text-xs transition cursor-pointer" title="Pause">
+                    ⏸
+                  </button>
+                  <button type="button" onclick="stopDialogue()" id="stop-btn-3"
+                    class="py-2 px-2.5 rounded-xl bg-white hover:bg-rose-50 text-rose-700 border border-rose-300 font-extrabold text-xs transition cursor-pointer" title="Stop">
+                    ⏹
+                  </button>
+                </div>
+              </div>
+              <div id="script-3" class="hidden mt-3 space-y-1.5 text-xs text-slate-700 bg-white p-3 rounded-xl border border-amber-100 leading-relaxed">
+                <p id="line-3-0" class="px-1.5 py-0.5 rounded transition"><strong>👩 Sara:</strong> Hey! Why are you so late?</p>
+                <p id="line-3-1" class="px-1.5 py-0.5 rounded transition"><strong>👨 Tom:</strong> Oh, I'm so sorry! The morning train was super <strong>busy</strong> — there were no seats at all.</p>
+                <p id="line-3-2" class="px-1.5 py-0.5 rounded transition"><strong>👨 Tom:</strong> Phew! And it was really slow and <strong>hot</strong> inside!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise b: Choose the correct alternatives -->
+        <div class="mt-6 bg-warm-50 rounded-2xl border border-warm-200 p-5 sm:p-6">
+          <h3 class="font-display font-extrabold text-lg text-slate-900 mb-3">
+            b. Listen again and choose the correct alternatives
+          </h3>
+          <div id="listening-choices-container" class="space-y-3 text-sm sm:text-base">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div id="listening-feedback" class="mt-4 text-center font-bold text-sm hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: YOUTUBE VIDEO EXERCISE                            -->
+    <!-- ============================================================ -->
+    <section id="section-3" class="lesson-section hidden animate-pop">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-rose-100 text-rose-800 mb-2">
+              STEP 4 • VIDEO &amp; COMPREHENSION
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              Watch &amp; Check: Guess the Feelings!
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Watch the short Pixar <em>Inside Out</em> clip about emotions, then answer the 5 quick questions!
+            </p>
+          </div>
+          <button onclick="resetVideoQuiz()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+            Reset Quiz
+          </button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Responsive YouTube Embed -->
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-slate-900 aspect-video">
+              <iframe class="w-full h-full"
+                src="https://www.youtube.com/embed/dOkyKyVFnSs?rel=0"
+                title="Inside Out: Guessing the Feelings"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <p class="text-xs text-slate-500 mt-2.5 flex items-center justify-between">
+              <span>🎬 Clip: Pixar's <em>Inside Out</em> — Meet the 5 Emotions</span>
+              <a href="https://www.youtube.com/watch?v=dOkyKyVFnSs" target="_blank" rel="noopener" class="text-violet-600 font-bold hover:underline">
+                Open on YouTube ↗
+              </a>
+            </p>
+          </div>
+
+          <!-- Interactive Video Quiz -->
+          <div class="lg:col-span-6 space-y-3" id="video-quiz-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: GAME TIME (BAAMBOOZLE QUIZ & FEELINGS BINGO)      -->
+    <!-- ============================================================ -->
+    <section id="section-4" class="lesson-section hidden animate-pop">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-purple-100 text-purple-800 mb-2">
+              STEP 5 • INTERACTIVE GAMES
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              Game Time: Quiz Battle &amp; Feelings Bingo
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Switch between the <strong>Team Tile Quiz</strong> (Baamboozle/Kahoot style) and <strong>Feelings Bingo</strong>!
+            </p>
+          </div>
+
+          <!-- Game Mode Switcher -->
+          <div class="flex bg-slate-100 p-1 rounded-2xl border border-slate-200">
+            <button onclick="switchGameMode('baamboozle')" id="game-tab-baamboozle"
+              class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-violet-600 text-white shadow-sm transition cursor-pointer">
+              🎲 Team Tile Quiz
+            </button>
+            <button onclick="switchGameMode('bingo')" id="game-tab-bingo"
+              class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+              🎯 Feelings Bingo
+            </button>
+          </div>
+        </div>
+
+        <!-- GAME A: BAAMBOOZLE / KAHOOT TEAM GRID -->
+        <div id="game-panel-baamboozle" class="mt-6">
+          <!-- Scoreboard -->
+          <div class="flex flex-wrap items-center justify-between gap-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white p-4 rounded-2xl shadow-md mb-6">
+            <div class="flex items-center gap-3">
+              <div id="team-1-box" onclick="setActiveTeam(1)" class="px-4 py-2 rounded-xl bg-white text-indigo-900 font-extrabold text-sm shadow ring-4 ring-amber-300 cursor-pointer transition">
+                🦁 Team 1: <span id="team-1-score" class="text-lg">0</span>
+              </div>
+              <div id="team-2-box" onclick="setActiveTeam(2)" class="px-4 py-2 rounded-xl bg-white/20 text-white font-extrabold text-sm hover:bg-white/30 cursor-pointer transition">
+                🐯 Team 2: <span id="team-2-score" class="text-lg">0</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="active-team-indicator" class="text-xs font-extrabold bg-amber-400 text-slate-900 px-3 py-1.5 rounded-xl">
+                Turn: Team 1
+              </span>
+              <button onclick="initBaamboozle()" class="px-3.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs transition cursor-pointer">
+                🔄 New Board
+              </button>
+            </div>
+          </div>
+
+          <!-- 12 Numbered Tiles -->
+          <div id="baamboozle-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- GAME B: FEELINGS BINGO 3x3 -->
+        <div id="game-panel-bingo" class="hidden mt-6">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-5 bg-amber-50 p-4 rounded-2xl border border-amber-200">
+            <div>
+              <h3 class="font-display font-extrabold text-lg text-amber-950">Feelings Bingo (3×3)</h3>
+              <p class="text-xs text-amber-800">Click <strong>Call Random Feeling</strong> or click any emoji face to mark it! Get 3 in a row for BINGO!</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="callRandomBingo()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs sm:text-sm shadow-sm transition cursor-pointer">
+                📢 Call Random Feeling
+              </button>
+              <button onclick="resetBingo()" class="px-3.5 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 font-bold text-xs sm:text-sm hover:bg-amber-100 transition cursor-pointer">
+                Clear Board
+              </button>
+            </div>
+          </div>
+
+          <!-- Called Feeling Banner -->
+          <div id="bingo-caller-banner" class="hidden mb-5 p-3.5 rounded-2xl bg-violet-600 text-white text-center font-display font-extrabold text-lg shadow-md animate-pop">
+            Teacher calls: <span id="bingo-called-word" class="underline decoration-amber-300">HAPPY</span>!
+          </div>
+
+          <!-- 3x3 Bingo Grid -->
+          <div id="bingo-grid" class="max-w-md mx-auto grid grid-cols-3 gap-3 bg-warm-100 p-4 rounded-3xl border-2 border-warm-200 shadow-inner">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: READING & WRITING (MARY'S DIARY)                  -->
+    <!-- ============================================================ -->
+    <section id="section-5" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Reading Gap-Fill -->
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800 mb-2">
+              STEP 6A • READING &amp; VOCABULARY IN CONTEXT
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              2. Read Mary’s diary and fill in the gaps
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Click a feeling word from the box, then click a numbered gap (1–7) in Mary’s diary!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkDiary()" class="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition cursor-pointer">
+              Check Diary
+            </button>
+            <button onclick="resetDiary()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Diary Word Bank -->
+        <div class="mt-5 p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200 flex flex-wrap items-center justify-center gap-2.5" id="diary-wordbank">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Diary Entries -->
+        <div class="mt-6 space-y-4 bg-warm-50 p-5 sm:p-7 rounded-3xl border border-warm-200 text-slate-800 leading-relaxed text-sm sm:text-base">
+          <div>
+            <h3 class="font-display font-extrabold text-slate-900">Friday 13th October</h3>
+            <p>
+              I'm so
+              <button type="button" onclick="placeDiaryWord(0)" id="diary-gap-0" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(1) ______</button>!
+              Today is my birthday and I'm 12 years old. My parents are going to give me a new bike. I hope it's red. It's sunny today. My friends and I are going to go to the park after school.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-display font-extrabold text-slate-900">Monday 16th October</h3>
+            <p>
+              It was a terrible weekend. I'm so
+              <button type="button" onclick="placeDiaryWord(1)" id="diary-gap-1" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(2) ______</button>.
+              My parents didn't give me a bike for my birthday. They gave me a mobile phone. But I don't want a mobile phone. I already have one. I wanted a bike. I will never speak to them again.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-display font-extrabold text-slate-900">Thursday 19th October</h3>
+            <p>
+              I'm really
+              <button type="button" onclick="placeDiaryWord(2)" id="diary-gap-2" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(3) ______</button>
+              with my best friend, Amy. Last night she told everyone in class I love Tom. Now Tom knows and he looked at me today. I hate Amy. I'm not her best friend anymore.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-display font-extrabold text-slate-900">Sunday 22nd October</h3>
+            <p>
+              Ugh! Today we went to the zoo. I'm
+              <button type="button" onclick="placeDiaryWord(3)" id="diary-gap-3" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(4) ______</button>.
+              We saw snakes and spiders. Yuck! Then we went to McDonald's for lunch. Double yuck! I don't like McDonald's. I wanted pizza.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-display font-extrabold text-slate-900">Wednesday 25th October</h3>
+            <p>
+              I'm really
+              <button type="button" onclick="placeDiaryWord(4)" id="diary-gap-4" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(5) ______</button>.
+              Tomorrow we have a test in French and I don't know anything. I will fail the test. Then my parents will be
+              <button type="button" onclick="placeDiaryWord(5)" id="diary-gap-5" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(6) ______</button>
+              with me. And my teacher will call me stupid. I'm really
+              <button type="button" onclick="placeDiaryWord(6)" id="diary-gap-6" class="diary-gap inline-flex items-center justify-center min-w-[115px] px-3 py-0.5 mx-1 rounded-lg border-2 border-dashed border-slate-400 bg-white font-extrabold text-violet-700 text-sm hover:border-violet-500 transition cursor-pointer">(7) ______</button>.
+            </p>
+          </div>
+        </div>
+
+        <div id="diary-feedback" class="mt-4 text-center font-bold text-sm hidden"></div>
+      </div>
+
+      <!-- Creative Writing Notebook -->
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 mb-1">
+              STEP 6B • MY DIARY WRITING
+            </span>
+            <h3 class="font-display font-extrabold text-xl text-slate-900">
+              🐱 Write your own diary about your feelings today or from last week
+            </h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" onclick="insertPrompt('Today I feel really happy because... ')" class="px-2.5 py-1 rounded-lg bg-violet-50 hover:bg-violet-100 text-violet-700 text-xs font-bold border border-violet-200 cursor-pointer">+ Today I feel...</button>
+            <button type="button" onclick="insertPrompt('Yesterday I was a bit tired because... ')" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-bold border border-sky-200 cursor-pointer">+ Yesterday I was...</button>
+          </div>
+        </div>
+
+        <textarea id="student-diary-input" rows="5" placeholder="Dear Diary, today I feel..."
+          class="w-full rounded-2xl border-2 border-amber-300/80 p-4 notebook-paper text-slate-800 font-medium text-base focus:outline-none focus:border-violet-500 shadow-inner"></textarea>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 7: SPEAKING CARDS (WORDWALL STYLE DECK)              -->
+    <!-- ============================================================ -->
+    <section id="section-6" class="lesson-section hidden animate-pop">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-pink-100 text-pink-800 mb-2">
+              STEP 7 • SPEAKING PRACTICE
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+              Speaking Cards: Feelings &amp; Emotions
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Deal a random card from the shuffled deck and discuss the question together!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="deck-counter" class="px-3 py-2 rounded-xl bg-slate-100 text-slate-700 font-extrabold text-xs">
+              Card 1 of 10
+            </span>
+            <button onclick="shuffleSpeakingDeck()" class="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm transition cursor-pointer">
+              🔀 Shuffle Deck
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Card Stage -->
+        <div class="mt-8 max-w-xl mx-auto">
+          <div onclick="flipSpeakingCard()" class="perspective-1000 cursor-pointer select-none">
+            <div id="speaking-card-inner" class="transform-style-3d relative w-full min-h-[270px] rounded-3xl shadow-xl">
+              <!-- Front of Card (Face Down / Ready) -->
+              <div id="speaking-card-front" class="backface-hidden absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 text-white p-8 flex flex-col items-center justify-center text-center border-4 border-white shadow-lg">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-4xl mb-4 shadow-inner">
+                  🗣️
+                </div>
+                <span class="uppercase tracking-widest text-xs font-extrabold text-pink-200 mb-1">
+                  Feelings A1–A2 Deck
+                </span>
+                <h3 class="font-display font-extrabold text-2xl sm:text-3xl">
+                  Click to Reveal Question
+                </h3>
+                <p class="text-xs text-white/80 mt-3">
+                  Or click "Deal Next Card" below
+                </p>
+              </div>
+
+              <!-- Back of Card (Question Revealed) -->
+              <div id="speaking-card-back" class="backface-hidden rotate-y-180 absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-50 via-white to-violet-50 text-slate-900 p-7 sm:p-9 flex flex-col justify-between border-4 border-violet-300 shadow-lg">
+                <div class="flex items-center justify-between">
+                  <span id="speaking-card-tag" class="px-3 py-1 rounded-full text-xs font-extrabold bg-violet-100 text-violet-800">
+                    Core Question #1
+                  </span>
+                  <span id="speaking-card-emoji" class="text-3xl">😊</span>
+                </div>
+
+                <p id="speaking-card-question" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 text-center my-4 leading-snug">
+                  What and who makes you feel happy?
+                </p>
+
+                <div class="bg-white/90 rounded-2xl p-3 border border-slate-200/80 text-xs text-slate-600 text-center">
+                  <span class="font-bold text-violet-700">Useful starter:</span> <span id="speaking-card-hint">"I feel really happy when..."</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="mt-6 flex items-center justify-center gap-3">
+            <button onclick="flipSpeakingCard()" class="px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm transition cursor-pointer">
+              🔄 Flip Card
+            </button>
+            <button onclick="dealNextSpeakingCard()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-700 hover:to-pink-700 text-white font-extrabold text-sm shadow-md shadow-violet-200 transition cursor-pointer">
+              🃏 Deal Next Card →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Sequential Navigation Bar (Always visible under current exercise) -->
+    <div class="mt-6 flex items-center justify-between gap-4 bg-white/90 backdrop-blur-sm px-5 py-4 rounded-3xl border border-slate-200/80 shadow-sm">
+      <button id="bottom-prev-btn" onclick="prevTab()"
+        class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-sm disabled:opacity-40 disabled:pointer-events-none transition cursor-pointer">
+        <span>←</span>
+        <span>Previous Exercise</span>
+      </button>
+
+      <div class="text-center">
+        <span id="bottom-step-indicator" class="text-xs sm:text-sm font-extrabold text-slate-500">
+          Exercise 1 of 7
+        </span>
+      </div>
+
+      <button id="bottom-next-btn" onclick="nextTab()"
+        class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-extrabold text-sm shadow-sm disabled:opacity-40 disabled:pointer-events-none transition cursor-pointer">
+        <span>Next Exercise</span>
+        <span>→</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==================== CENTER-SCREEN BAAMBOOZLE MODAL POP-UP ==================== -->
+  <div id="baamboozle-modal-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div id="baamboozle-card-modal" class="w-full max-w-2xl rounded-3xl bg-white border-4 border-amber-300 shadow-2xl p-6 sm:p-9 animate-modal relative overflow-hidden">
+      <!-- Top Decorative Accent Bar -->
+      <div class="absolute top-0 left-0 right-0 h-2.5 bg-gradient-to-r from-amber-400 via-orange-500 to-violet-600"></div>
+
+      <!-- Header: Tile Info & Active Team Badge -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pt-1">
+        <div class="flex items-center gap-2.5">
+          <span id="bm-card-badge" class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold bg-amber-100 text-amber-900 border border-amber-300">
+            Tile #1 • 10 Points
+          </span>
+          <span id="bm-team-badge" class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold bg-violet-600 text-white shadow-xs">
+            🦁 Team 1's Turn
+          </span>
+        </div>
+        <button onclick="closeBaamboozleCard()" title="Close Card"
+          class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold text-base flex items-center justify-center transition cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <!-- Question or Special Power-Up Content -->
+      <div class="bg-warm-50 rounded-2xl p-5 sm:p-6 border border-warm-200 mb-6 text-center">
+        <div id="bm-special-icon" class="hidden text-5xl mb-3">🎁</div>
+        <h3 id="bm-question-text" class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 leading-snug">
+          Question goes here
+        </h3>
+      </div>
+
+      <!-- Big Clickable Answer Options -->
+      <div id="bm-options" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+        <!-- Options rendered by JS -->
+      </div>
+
+      <!-- Instant Feedback & Continue Button -->
+      <div id="bm-result-area" class="hidden mt-6 pt-5 border-t border-slate-100 text-center animate-pop">
+        <p id="bm-result-message" class="font-display font-extrabold text-lg sm:text-xl mb-4"></p>
+        <button onclick="finishBaamboozleTurn()"
+          class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-extrabold text-base shadow-lg shadow-violet-200 transition cursor-pointer">
+          Continue / Back to Board →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /* ------------------------------------------------------------
+       1. SOUND EFFECTS & GLOBAL STATE
+    ------------------------------------------------------------ */
+    let soundEnabled = true;
+    let audioCtx = null;
+    const completedSections = new Set();
+    let currentTabIndex = 0;
+    const totalTabs = 7;
+
+    function playTone(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(175, now + 0.2);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (e) {
+        // Ignore audio context errors on restricted devices
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-label').textContent = soundEnabled ? 'SFX On' : 'SFX Off';
+      if (soundEnabled) playTone('click');
+    }
+
+    function showToast(icon, text, isError = false) {
+      const banner = document.getElementById('toast-banner');
+      const content = document.getElementById('toast-content');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-text').textContent = text;
+      content.className = `px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2.5 ${
+        isError ? 'bg-rose-600 text-white' : 'bg-slate-900 text-white'
+      }`;
+      banner.classList.remove('translate-y-16', 'opacity-0');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        banner.classList.add('translate-y-16', 'opacity-0');
+      }, 2800);
+    }
+
+    function markSectionComplete(sectionIndex) {
+      completedSections.add(sectionIndex);
+      const badge = document.getElementById(`badge-${sectionIndex}`);
+      if (badge) badge.classList.remove('hidden');
+      const pct = Math.round((completedSections.size / 6) * 100);
+      document.getElementById('global-progress-bar').style.width = `${pct}%`;
+      document.getElementById('global-progress-text').textContent = `${completedSections.size}/6`;
+    }
+
+    function switchTab(index) {
+      if (index < 0 || index >= totalTabs) return;
+      currentTabIndex = index;
+      playTone('click');
+      document.querySelectorAll('.lesson-section').forEach((sec, idx) => {
+        sec.classList.toggle('hidden', idx !== index);
+      });
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.className = 'tab-btn active-tab bg-violet-600 text-white shadow-sm flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer';
+          btn.querySelector('span').className = 'w-5 h-5 rounded-full bg-white/25 text-white flex items-center justify-center text-xs';
+        } else {
+          btn.className = 'tab-btn bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition cursor-pointer';
+          btn.querySelector('span').className = 'w-5 h-5 rounded-full bg-white text-slate-700 flex items-center justify-center text-xs';
+        }
+      });
+
+      // Update Top & Bottom Arrow Controls and Step Counters
+      document.getElementById('header-step-label').textContent = `${index + 1} / ${totalTabs}`;
+      document.getElementById('bottom-step-indicator').textContent = `Exercise ${index + 1} of ${totalTabs}`;
+
+      document.getElementById('header-prev-btn').disabled = index === 0;
+      document.getElementById('bottom-prev-btn').disabled = index === 0;
+      document.getElementById('header-next-btn').disabled = index === totalTabs - 1;
+      document.getElementById('bottom-next-btn').disabled = index === totalTabs - 1;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevTab() {
+      if (currentTabIndex > 0) switchTab(currentTabIndex - 1);
+    }
+
+    function nextTab() {
+      if (currentTabIndex < totalTabs - 1) switchTab(currentTabIndex + 1);
+    }
+
+    // Keyboard Left/Right Arrow support when not typing in inputs
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      const modalOpen = !document.getElementById('baamboozle-modal-overlay').classList.contains('hidden');
+      if (modalOpen) {
+        if (e.key === 'Escape') closeBaamboozleCard();
+        return;
+      }
+      if (e.key === 'ArrowRight') nextTab();
+      if (e.key === 'ArrowLeft') prevTab();
+    });
+
+    /* ------------------------------------------------------------
+       2. SECTION 1: WARM-UP (HOW ARE YOU?)
+    ------------------------------------------------------------ */
+    const warmupWords = ['good', 'great', 'not bad', 'really good', 'not very good'];
+    const warmupAnswers = ['not very good', 'not bad', 'good', 'really good', 'great'];
+    let warmupPlaced = [null, null, null, null, null];
+    let selectedWarmupWord = null;
+
+    function renderWarmupBank() {
+      const bank = document.getElementById('warmup-wordbank');
+      bank.innerHTML = '';
+      warmupWords.forEach((word) => {
+        const isUsed = warmupPlaced.includes(word);
+        const isSelected = selectedWarmupWord === word;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.draggable = !isUsed;
+        btn.textContent = word;
+        btn.ondragstart = (e) => {
+          e.dataTransfer.setData('text/plain', word);
+        };
+        btn.onclick = () => {
+          if (isUsed) return;
+          playTone('click');
+          selectedWarmupWord = isSelected ? null : word;
+          renderWarmupBank();
+        };
+        btn.className = `px-4 py-2 rounded-xl font-bold text-sm transition ${
+          isUsed
+            ? 'bg-slate-200/60 text-slate-400 cursor-not-allowed line-through'
+            : isSelected
+            ? 'bg-violet-600 text-white shadow-md scale-105 cursor-pointer ring-2 ring-violet-300'
+            : 'bg-white text-slate-800 border border-amber-300 shadow-sm hover:border-violet-400 cursor-pointer'
+        }`;
+        bank.appendChild(btn);
+      });
+    }
+
+    function updateWarmupSlotsUI() {
+      for (let i = 0; i < 5; i++) {
+        const slot = document.getElementById(`warmup-slot-${i}`);
+        const val = warmupPlaced[i];
+        slot.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+        if (val) {
+          slot.innerHTML = `<span>${val}</span><span class="text-xs text-slate-400 ml-2">✕</span>`;
+          slot.classList.remove('border-dashed', 'border-slate-300');
+          slot.classList.add('border-solid', 'border-violet-400', 'bg-violet-50/40');
+        } else {
+          slot.innerHTML = `<span class="text-slate-400 font-normal">Click or drop here...</span>`;
+          slot.classList.add('border-dashed', 'border-slate-300');
+          slot.classList.remove('border-solid', 'border-violet-400', 'bg-violet-50/40');
+        }
+      }
+    }
+
+    function placeWarmupWord(slotIdx) {
+      playTone('click');
+      if (selectedWarmupWord) {
+        warmupPlaced[slotIdx] = selectedWarmupWord;
+        selectedWarmupWord = null;
+      } else if (warmupPlaced[slotIdx]) {
+        warmupPlaced[slotIdx] = null;
+      }
+      renderWarmupBank();
+      updateWarmupSlotsUI();
+    }
+
+    function allowDrop(e) {
+      e.preventDefault();
+    }
+
+    function dropWarmupWord(e, slotIdx) {
+      e.preventDefault();
+      const word = e.dataTransfer.getData('text/plain');
+      if (word && warmupWords.includes(word)) {
+        playTone('click');
+        const existingIdx = warmupPlaced.indexOf(word);
+        if (existingIdx !== -1) warmupPlaced[existingIdx] = null;
+        warmupPlaced[slotIdx] = word;
+        selectedWarmupWord = null;
+        renderWarmupBank();
+        updateWarmupSlotsUI();
+      }
+    }
+
+    function checkWarmup() {
+      let correctCount = 0;
+      for (let i = 0; i < 5; i++) {
+        const slot = document.getElementById(`warmup-slot-${i}`);
+        if (warmupPlaced[i] === warmupAnswers[i]) {
+          correctCount++;
+          slot.classList.remove('border-violet-400', 'border-rose-500', 'bg-rose-50');
+          slot.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          slot.classList.remove('border-violet-400', 'border-emerald-500', 'bg-emerald-50');
+          slot.classList.add('border-rose-500', 'bg-rose-50');
+        }
+      }
+      const fb = document.getElementById('warmup-feedback');
+      fb.classList.remove('hidden');
+      if (correctCount === 5) {
+        playTone('success');
+        fb.className = 'mt-4 text-center font-bold text-sm text-emerald-700';
+        fb.textContent = '🎉 Awesome! All 5 expressions are in the right order!';
+        markSectionComplete(0);
+        showToast('🎉', 'Warm-up completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 text-center font-bold text-sm text-rose-600';
+        fb.textContent = `You got ${correctCount}/5 right. Click any red box to clear and try again!`;
+      }
+    }
+
+    function resetWarmup() {
+      playTone('click');
+      warmupPlaced = [null, null, null, null, null];
+      selectedWarmupWord = null;
+      document.getElementById('warmup-feedback').classList.add('hidden');
+      renderWarmupBank();
+      updateWarmupSlotsUI();
+    }
+
+    /* ------------------------------------------------------------
+       3. SECTION 2: VOCABULARY & OPPOSITES
+    ------------------------------------------------------------ */
+    const oppositesData = [
+      { id: 1, left: 'cold', right: 'hot', letter: 'c' },
+      { id: 2, left: 'dark', right: 'light', letter: 'h' },
+      { id: 3, left: 'difficult', right: 'easy', letter: 'a' },
+      { id: 4, left: 'fast', right: 'slow', letter: 'f' },
+      { id: 5, left: 'happy', right: 'sad', letter: 'b' },
+      { id: 6, left: 'high', right: 'low', letter: 'g' },
+      { id: 7, left: 'long', right: 'short', letter: 'e' },
+      { id: 8, left: 'old', right: 'young', letter: 'd' }
+    ];
+
+    const rightColumnOrder = [
+      { letter: 'a', word: 'easy' },
+      { letter: 'b', word: 'sad' },
+      { letter: 'c', word: 'hot' },
+      { letter: 'd', word: 'young' },
+      { letter: 'e', word: 'short' },
+      { letter: 'f', word: 'slow' },
+      { letter: 'g', word: 'low' },
+      { letter: 'h', word: 'light' }
+    ];
+
+    const pairBadgeColors = [
+      'bg-violet-100 border-violet-400 text-violet-900',
+      'bg-sky-100 border-sky-400 text-sky-900',
+      'bg-emerald-100 border-emerald-400 text-emerald-900',
+      'bg-amber-100 border-amber-400 text-amber-900',
+      'bg-pink-100 border-pink-400 text-pink-900',
+      'bg-indigo-100 border-indigo-400 text-indigo-900',
+      'bg-teal-100 border-teal-400 text-teal-900',
+      'bg-orange-100 border-orange-400 text-orange-900'
+    ];
+
+    let selectedLeftAdj = null;
+    let userOppositeMatches = {}; // leftWord -> rightWord
+
+    function renderOpposites() {
+      const leftContainer = document.getElementById('opposites-left');
+      const rightContainer = document.getElementById('opposites-right');
+      leftContainer.innerHTML = '';
+      rightContainer.innerHTML = '';
+
+      oppositesData.forEach((item, idx) => {
+        const matchedRight = userOppositeMatches[item.left];
+        const isSelected = selectedLeftAdj === item.left;
+        const colorStyle = matchedRight ? pairBadgeColors[idx % pairBadgeColors.length] : '';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `opp-left-${item.left}`;
+        btn.onclick = () => {
+          playTone('click');
+          if (matchedRight) {
+            delete userOppositeMatches[item.left];
+          }
+          selectedLeftAdj = isSelected ? null : item.left;
+          renderOpposites();
+        };
+        btn.className = `w-full px-4 py-2.5 rounded-xl border-2 font-bold text-sm flex items-center justify-between transition cursor-pointer ${
+          isSelected
+            ? 'border-violet-600 bg-violet-600 text-white shadow-md'
+            : matchedRight
+            ? colorStyle
+            : 'border-slate-200 bg-slate-50 hover:border-sky-400 text-slate-800'
+        }`;
+        btn.innerHTML = `
+          <span><span class="opacity-60 mr-2">${item.id}.</span>${item.left}</span>
+          ${matchedRight ? `<span class="text-xs px-2 py-0.5 rounded-lg bg-white/80 font-extrabold">↔ ${matchedRight}</span>` : ''}
+        `;
+        leftContainer.appendChild(btn);
+      });
+
+      rightColumnOrder.forEach((item) => {
+        const matchedLeftEntry = Object.entries(userOppositeMatches).find(([, r]) => r === item.word);
+        const leftIdx = matchedLeftEntry ? oppositesData.findIndex((o) => o.left === matchedLeftEntry[0]) : -1;
+        const colorStyle = leftIdx !== -1 ? pairBadgeColors[leftIdx % pairBadgeColors.length] : '';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `opp-right-${item.word}`;
+        btn.onclick = () => {
+          if (!selectedLeftAdj) {
+            showToast('👈', 'Click an adjective on the left first!');
+            return;
+          }
+          playTone('click');
+          Object.keys(userOppositeMatches).forEach((k) => {
+            if (userOppositeMatches[k] === item.word) delete userOppositeMatches[k];
+          });
+          userOppositeMatches[selectedLeftAdj] = item.word;
+          selectedLeftAdj = null;
+          renderOpposites();
+        };
+        btn.className = `w-full px-4 py-2.5 rounded-xl border-2 font-bold text-sm flex items-center justify-between transition cursor-pointer ${
+          matchedLeftEntry
+            ? colorStyle
+            : selectedLeftAdj
+            ? 'border-dashed border-sky-400 bg-sky-50/50 hover:bg-sky-100 text-slate-800'
+            : 'border-slate-200 bg-white text-slate-700'
+        }`;
+        btn.innerHTML = `
+          <span><span class="opacity-60 mr-2">${item.letter})</span>${item.word}</span>
+          ${matchedLeftEntry ? `<span class="text-xs font-extrabold opacity-75">✓</span>` : ''}
+        `;
+        rightContainer.appendChild(btn);
+      });
+    }
+
+    function checkOpposites() {
+      let correct = 0;
+      oppositesData.forEach((item) => {
+        const btn = document.getElementById(`opp-left-${item.left}`);
+        if (userOppositeMatches[item.left] === item.right) {
+          correct++;
+          btn.className = 'w-full px-4 py-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex items-center justify-between';
+        } else {
+          btn.className = 'w-full px-4 py-2.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-sm flex items-center justify-between';
+        }
+      });
+      const fb = document.getElementById('opposites-feedback');
+      fb.classList.remove('hidden');
+      if (correct === 8) {
+        playTone('success');
+        fb.className = 'mt-4 text-center font-bold text-sm text-emerald-700';
+        fb.textContent = '🎉 Perfect! All 8 adjective opposites matched correctly!';
+        checkSection2Completion();
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 text-center font-bold text-sm text-rose-600';
+        fb.textContent = `You matched ${correct}/8 pairs correctly. Click any red item to fix it!`;
+      }
+    }
+
+    function resetOpposites() {
+      playTone('click');
+      selectedLeftAdj = null;
+      userOppositeMatches = {};
+      document.getElementById('opposites-feedback').classList.add('hidden');
+      renderOpposites();
+    }
+
+    /* Part B: 7 SVG Character Faces */
+    const facesData = [
+      {
+        id: 'tired',
+        answer: 'tired',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="54" r="32" fill="#8d5524" />
+          <path d="M22,42 Q50,15 78,42 Q74,24 50,24 Q26,24 22,42 Z" fill="#1e293b" />
+          <rect x="30" y="45" width="15" height="9" rx="2" fill="none" stroke="#1e293b" stroke-width="2.5" />
+          <rect x="55" y="45" width="15" height="9" rx="2" fill="none" stroke="#1e293b" stroke-width="2.5" />
+          <line x1="45" y1="49" x2="55" y2="49" stroke="#1e293b" stroke-width="2.5" />
+          <line x1="33" y1="50" x2="42" y2="50" stroke="#1e293b" stroke-width="2" />
+          <line x1="58" y1="50" x2="67" y2="50" stroke="#1e293b" stroke-width="2" />
+          <ellipse cx="50" cy="68" rx="5" ry="4" fill="#451a03" />
+          <text x="72" y="26" font-size="11" font-weight="bold" fill="#3b82f6">Z</text>
+          <text x="80" y="18" font-size="14" font-weight="bold" fill="#3b82f6">z</text>
+        </svg>`
+      },
+      {
+        id: 'excited',
+        answer: 'excited',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="52" r="31" fill="#ffdbac" />
+          <path d="M22,40 Q50,14 78,40 L74,24 Q50,14 26,24 Z" fill="#facc15" />
+          <circle cx="38" cy="46" r="4" fill="#1e293b" />
+          <circle cx="62" cy="46" r="4" fill="#1e293b" />
+          <path d="M32,40 Q38,34 44,40" fill="none" stroke="#ca8a04" stroke-width="2.5" />
+          <path d="M56,40 Q62,34 68,40" fill="none" stroke="#ca8a04" stroke-width="2.5" />
+          <path d="M36,58 Q50,76 64,58 Z" fill="#ef4444" />
+          <path d="M12,68 Q18,52 26,64" fill="none" stroke="#ffdbac" stroke-width="6" stroke-linecap="round" />
+          <path d="M88,68 Q82,52 74,64" fill="none" stroke="#ffdbac" stroke-width="6" stroke-linecap="round" />
+        </svg>`
+      },
+      {
+        id: 'happy',
+        answer: 'happy',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="54" r="32" fill="#6f4e37" />
+          <path d="M20,50 Q20,20 50,20 Q80,20 80,50 L76,36 Q50,26 24,36 Z" fill="#1e293b" />
+          <circle cx="38" cy="48" r="3.5" fill="#1e293b" />
+          <circle cx="62" cy="48" r="3.5" fill="#1e293b" />
+          <path d="M36,60 Q50,74 64,60" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+        </svg>`
+      },
+      {
+        id: 'angry',
+        answer: 'angry',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="54" r="31" fill="#fca5a5" />
+          <path d="M22,40 Q50,16 78,40 L74,24 Q50,16 26,24 Z" fill="#fde047" />
+          <line x1="31" y1="41" x2="45" y2="47" stroke="#7f1d1d" stroke-width="3.5" stroke-linecap="round" />
+          <line x1="69" y1="41" x2="55" y2="47" stroke="#7f1d1d" stroke-width="3.5" stroke-linecap="round" />
+          <circle cx="39" cy="50" r="3.5" fill="#1e293b" />
+          <circle cx="61" cy="50" r="3.5" fill="#1e293b" />
+          <path d="M37,68 Q50,58 63,68" fill="none" stroke="#7f1d1d" stroke-width="3.5" stroke-linecap="round" />
+        </svg>`
+      },
+      {
+        id: 'sad',
+        answer: 'sad',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="54" r="32" fill="#8d5524" />
+          <path d="M22,42 Q50,18 78,42 L74,26 Q50,18 26,26 Z" fill="#1e293b" />
+          <line x1="32" y1="44" x2="43" y2="40" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="68" y1="44" x2="57" y2="40" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" />
+          <circle cx="39" cy="50" r="3.5" fill="#1e293b" />
+          <circle cx="61" cy="50" r="3.5" fill="#1e293b" />
+          <path d="M37,68 Q50,59 63,68" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round" />
+        </svg>`
+      },
+      {
+        id: 'nervous',
+        answer: 'nervous',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="54" r="32" fill="#6f4e37" />
+          <path d="M22,46 Q35,20 75,34 Q86,44 84,66 L76,64 Q76,42 50,34 Q28,36 22,46 Z" fill="#1e293b" />
+          <circle cx="38" cy="49" r="3.5" fill="#1e293b" />
+          <circle cx="62" cy="49" r="3.5" fill="#1e293b" />
+          <path d="M37,65 Q43,61 50,65 Q57,69 63,65" fill="none" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" />
+          <path d="M76,38 Q81,46 76,50 Q71,46 76,38 Z" fill="#38bdf8" />
+        </svg>`
+      },
+      {
+        id: 'scared',
+        answer: 'scared',
+        svg: `<svg viewBox="0 0 100 100" class="w-20 h-20 mx-auto">
+          <circle cx="50" cy="52" r="31" fill="#ffdbac" />
+          <path d="M22,38 Q50,14 78,38 L74,22 Q50,14 26,22 Z" fill="#fde047" />
+          <circle cx="38" cy="46" r="5" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+          <circle cx="38" cy="46" r="2" fill="#1e293b" />
+          <circle cx="62" cy="46" r="5" fill="#ffffff" stroke="#1e293b" stroke-width="2" />
+          <circle cx="62" cy="46" r="2" fill="#1e293b" />
+          <ellipse cx="50" cy="64" rx="7" ry="9" fill="#1e293b" />
+          <ellipse cx="28" cy="68" rx="6" ry="9" fill="#ffdbac" stroke="#d97706" stroke-width="1.5" />
+          <ellipse cx="72" cy="68" rx="6" ry="9" fill="#ffdbac" stroke="#d97706" stroke-width="1.5" />
+        </svg>`
+      }
+    ];
+
+    const feelingLabelsList = ['nervous', 'excited', 'sad', 'scared', 'happy', 'angry', 'tired'];
+    let selectedFaceLabel = null;
+    let userFaceAssignments = {}; // faceId -> label
+
+    function renderFacesExercise() {
+      const bank = document.getElementById('faces-wordbank');
+      bank.innerHTML = '';
+      const usedLabels = Object.values(userFaceAssignments);
+
+      feelingLabelsList.forEach((label) => {
+        const isUsed = usedLabels.includes(label);
+        const isSelected = selectedFaceLabel === label;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = label;
+        btn.onclick = () => {
+          if (isUsed) return;
+          playTone('click');
+          selectedFaceLabel = isSelected ? null : label;
+          renderFacesExercise();
+        };
+        btn.className = `px-4 py-2 rounded-xl font-extrabold text-sm transition ${
+          isUsed
+            ? 'bg-slate-200/70 text-slate-400 line-through cursor-not-allowed'
+            : isSelected
+            ? 'bg-amber-500 text-white shadow-md scale-105 cursor-pointer ring-2 ring-amber-300'
+            : 'bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 cursor-pointer'
+        }`;
+        bank.appendChild(btn);
+      });
+
+      const grid = document.getElementById('faces-grid');
+      grid.innerHTML = '';
+      facesData.forEach((face) => {
+        const assigned = userFaceAssignments[face.id];
+        const card = document.createElement('div');
+        card.id = `face-card-${face.id}`;
+        card.onclick = () => {
+          playTone('click');
+          if (selectedFaceLabel) {
+            userFaceAssignments[face.id] = selectedFaceLabel;
+            selectedFaceLabel = null;
+          } else if (assigned) {
+            delete userFaceAssignments[face.id];
+          }
+          renderFacesExercise();
+        };
+        card.className = `p-4 rounded-2xl border-2 text-center transition cursor-pointer flex flex-col items-center justify-between ${
+          assigned
+            ? 'border-amber-400 bg-amber-50/60 shadow-sm'
+            : selectedFaceLabel
+            ? 'border-dashed border-amber-400 bg-white hover:bg-amber-50/40'
+            : 'border-slate-200 bg-warm-50 hover:border-slate-300'
+        }`;
+        card.innerHTML = `
+          ${face.svg}
+          <div class="mt-3 w-full py-1.5 px-3 rounded-xl text-xs font-extrabold ${
+            assigned
+              ? 'bg-amber-500 text-white shadow-sm'
+              : 'bg-white border border-slate-200 text-slate-400'
+          }">
+            ${assigned ? `${assigned} ✕` : 'Click to label'}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkFaces() {
+      let correct = 0;
+      facesData.forEach((face) => {
+        const card = document.getElementById(`face-card-${face.id}`);
+        if (userFaceAssignments[face.id] === face.answer) {
+          correct++;
+          card.classList.remove('border-amber-400', 'border-rose-500', 'bg-rose-50');
+          card.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          card.classList.remove('border-amber-400', 'border-emerald-500', 'bg-emerald-50');
+          card.classList.add('border-rose-500', 'bg-rose-50');
+        }
+      });
+      const fb = document.getElementById('faces-feedback');
+      fb.classList.remove('hidden');
+      if (correct === 7) {
+        playTone('success');
+        fb.className = 'mt-4 text-center font-bold text-sm text-emerald-700';
+        fb.textContent = '🎉 Spot on! You identified all 7 feelings!';
+        checkSection2Completion();
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 text-center font-bold text-sm text-rose-600';
+        fb.textContent = `You got ${correct}/7 right. Click any red card to clear its label and retry!`;
+      }
+    }
+
+    function resetFaces() {
+      playTone('click');
+      selectedFaceLabel = null;
+      userFaceAssignments = {};
+      document.getElementById('faces-feedback').classList.add('hidden');
+      renderFacesExercise();
+    }
+
+    function checkSection2Completion() {
+      const oppDone = oppositesData.every((o) => userOppositeMatches[o.left] === o.right);
+      const facesDone = facesData.every((f) => userFaceAssignments[f.id] === f.answer);
+      if (oppDone && facesDone) {
+        markSectionComplete(1);
+        showToast('🌟', 'Vocabulary & Opposites mastered!');
+      }
+    }
+
+    /* ------------------------------------------------------------
+       4. SECTION 3: LISTENING (EXPRESSIVE 2-SPEAKER AUDIO + CONTROLS)
+    ------------------------------------------------------------ */
+    const expressiveDialogues = {
+      1: [
+        { speaker: 'A', pitch: 1.18, rateMod: 1.04, text: 'Hey Mark! How was work today?' },
+        { speaker: 'B', pitch: 0.90, rateMod: 0.93, text: 'Ugh, so exhausting! The meeting today was about new computers for the office.' },
+        { speaker: 'B', pitch: 0.86, rateMod: 0.90, text: 'It was a really long meeting... almost three hours!' }
+      ],
+      2: [
+        { speaker: 'A', pitch: 1.22, rateMod: 1.06, text: 'Oh, wow! Look at your holiday photos!' },
+        { speaker: 'B', pitch: 0.96, rateMod: 1.02, text: 'Right?! The mountain was really high — over three thousand meters!' },
+        { speaker: 'B', pitch: 0.92, rateMod: 0.95, text: 'Brrr! There was snow everywhere, so we were super cold!' }
+      ],
+      3: [
+        { speaker: 'A', pitch: 1.15, rateMod: 1.02, text: 'Hey! Why are you so late?' },
+        { speaker: 'B', pitch: 0.92, rateMod: 0.96, text: 'Oh, I am so sorry! The morning train was super busy — there were no seats at all.' },
+        { speaker: 'B', pitch: 0.88, rateMod: 0.92, text: 'Phew! And it was really slow and hot inside!' }
+      ]
+    };
+
+    const listeningQuestions = [
+      { id: '1a', prefix: '1a. The meeting today was about new', opt1: 'computers', opt2: 'phones', suffix: '.', answer: 'computers' },
+      { id: '1b', prefix: '1b. It was a', opt1: 'difficult', opt2: 'long', suffix: 'meeting.', answer: 'long' },
+      { id: '2a', prefix: '2a. The mountain was really', opt1: 'high', opt2: 'short', suffix: '.', answer: 'high' },
+      { id: '2b', prefix: '2b. They were', opt1: 'slow', opt2: 'cold', suffix: '.', answer: 'cold' },
+      { id: '3a', prefix: '3a. The train was', opt1: 'dark', opt2: 'busy', suffix: '.', answer: 'busy' },
+      { id: '3b', prefix: '3b. It was really slow and', opt1: 'hot', opt2: 'old', suffix: '.', answer: 'hot' }
+    ];
+
+    let userListeningChoices = {};
+    let scriptsVisible = false;
+    let audioPlaybackSpeed = 0.96;
+    let activeTrackNum = null;
+    let isAudioPaused = false;
+    let playbackSessionToken = 0;
+
+    function pickNaturalVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      const enVoices = voices.filter((v) => v.lang && v.lang.toLowerCase().startsWith('en'));
+      const rankVoice = (v) => {
+        let score = 0;
+        const n = v.name.toLowerCase();
+        if (n.includes('natural') || n.includes('online') || n.includes('neural')) score += 50;
+        if (n.includes('google')) score += 30;
+        if (n.includes('samantha') || n.includes('daniel') || n.includes('aria') || n.includes('jenny') || n.includes('guy') || n.includes('libby') || n.includes('ryan')) score += 25;
+        if (v.lang.includes('GB') || v.lang.includes('US')) score += 10;
+        return score;
+      };
+      const sorted = [...enVoices].sort((a, b) => rankVoice(b) - rankVoice(a));
+
+      const femaleHints = ['female', 'woman', 'aria', 'jenny', 'libby', 'sonia', 'samantha', 'victoria', 'karen', 'zira', 'uk english female', 'us english'];
+      const maleHints = ['male', 'man', 'guy', 'ryan', 'christopher', 'eric', 'daniel', 'george', 'david', 'uk english male'];
+
+      const voiceA = sorted.find((v) => femaleHints.some((h) => v.name.toLowerCase().includes(h))) || sorted[0] || null;
+      const voiceB = sorted.find((v) => v !== voiceA && maleHints.some((h) => v.name.toLowerCase().includes(h))) || sorted[1] || voiceA;
+
+      return { voiceA, voiceB };
+    }
+
+    function playAmbientSceneCue(trackNum) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (trackNum === 1) {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.setValueAtTime(880, now + 0.12);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (trackNum === 2) {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(660, now + 0.3);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (trackNum === 3) {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(659.25, now);
+          osc.frequency.setValueAtTime(523.25, now + 0.16);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+          osc.start(now);
+          osc.stop(now + 0.38);
+        }
+      } catch (e) {}
+    }
+
+    function setAudioSpeed(rate) {
+      playTone('click');
+      audioPlaybackSpeed = rate;
+      const isSlow = rate < 0.85;
+      document.getElementById('speed-slow-btn').className = isSlow
+        ? 'px-3 py-1 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-xs transition cursor-pointer'
+        : 'px-3 py-1 rounded-xl text-xs font-extrabold bg-white text-slate-700 border border-slate-300 hover:border-indigo-400 transition cursor-pointer';
+      document.getElementById('speed-normal-btn').className = !isSlow
+        ? 'px-3 py-1 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-xs transition cursor-pointer'
+        : 'px-3 py-1 rounded-xl text-xs font-extrabold bg-white text-slate-700 border border-slate-300 hover:border-indigo-400 transition cursor-pointer';
+      showToast(isSlow ? '🐢' : '🐇', isSlow ? 'Speed set to 0.75× (Slow & Clear)' : 'Speed set to 1.0× (Normal)');
+    }
+
+    function resetAllTrackUI() {
+      [1, 2, 3].forEach((n) => {
+        const playBtn = document.getElementById(`play-btn-${n}`);
+        const status = document.getElementById(`track-status-${n}`);
+        if (playBtn) playBtn.innerHTML = '<span>▶</span> Play';
+        if (status) status.textContent = 'Ready';
+        [0, 1, 2].forEach((lineIdx) => {
+          const lineEl = document.getElementById(`line-${n}-${lineIdx}`);
+          if (lineEl) lineEl.classList.remove('bg-amber-100', 'font-semibold');
+        });
+      });
+    }
+
+    function playOrResumeDialogue(trackNum) {
+      if (!('speechSynthesis' in window)) {
+        showToast('⚠️', 'Speech synthesis not supported here. Click Show Scripts!', true);
+        return;
+      }
+
+      if (activeTrackNum === trackNum && isAudioPaused && window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        isAudioPaused = false;
+        document.getElementById(`play-btn-${trackNum}`).innerHTML = '<span>🔊</span> Playing...';
+        document.getElementById(`track-status-${trackNum}`).textContent = 'Playing';
+        return;
+      }
+
+      stopDialogue(false);
+      activeTrackNum = trackNum;
+      isAudioPaused = false;
+      const myToken = ++playbackSessionToken;
+
+      playAmbientSceneCue(trackNum);
+      document.getElementById(`play-btn-${trackNum}`).innerHTML = '<span>🔊</span> Playing...';
+      document.getElementById(`track-status-${trackNum}`).textContent = 'Playing';
+
+      const lines = expressiveDialogues[trackNum];
+      const { voiceA, voiceB } = pickNaturalVoices();
+      let lineIndex = 0;
+
+      function speakNextLine() {
+        if (myToken !== playbackSessionToken) return;
+        if (lineIndex >= lines.length) {
+          resetAllTrackUI();
+          activeTrackNum = null;
+          return;
+        }
+
+        [0, 1, 2].forEach((idx) => {
+          const el = document.getElementById(`line-${trackNum}-${idx}`);
+          if (el) {
+            el.classList.toggle('bg-amber-100', idx === lineIndex);
+            el.classList.toggle('font-semibold', idx === lineIndex);
+          }
+        });
+
+        const part = lines[lineIndex];
+        const utter = new SpeechSynthesisUtterance(part.text);
+        const chosenVoice = part.speaker === 'A' ? voiceA : voiceB;
+        if (chosenVoice) utter.voice = chosenVoice;
+        utter.pitch = part.pitch;
+        utter.rate = Math.max(0.55, Math.min(1.25, audioPlaybackSpeed * part.rateMod));
+
+        utter.onend = () => {
+          if (myToken !== playbackSessionToken) return;
+          lineIndex++;
+          setTimeout(speakNextLine, 220);
+        };
+        utter.onerror = () => {
+          if (myToken !== playbackSessionToken) return;
+          resetAllTrackUI();
+          activeTrackNum = null;
+        };
+
+        window.speechSynthesis.speak(utter);
+      }
+
+      setTimeout(speakNextLine, 260);
+    }
+
+    function pauseDialogue() {
+      if (!('speechSynthesis' in window) || !activeTrackNum) return;
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        isAudioPaused = true;
+        document.getElementById(`play-btn-${activeTrackNum}`).innerHTML = '<span>▶</span> Resume';
+        document.getElementById(`track-status-${activeTrackNum}`).textContent = 'Paused';
+      }
+    }
+
+    function stopDialogue(playClick = true) {
+      if (playClick) playTone('click');
+      playbackSessionToken++;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      activeTrackNum = null;
+      isAudioPaused = false;
+      resetAllTrackUI();
+    }
+
+    function toggleTranscripts() {
+      playTone('click');
+      scriptsVisible = !scriptsVisible;
+      [1, 2, 3].forEach((n) => {
+        document.getElementById(`script-${n}`).classList.toggle('hidden', !scriptsVisible);
+      });
+      document.getElementById('transcript-toggle-btn').textContent = scriptsVisible ? '🙈 Hide Scripts' : '📄 Show Scripts';
+    }
+
+    function renderListeningChoices() {
+      const container = document.getElementById('listening-choices-container');
+      container.innerHTML = '';
+      listeningQuestions.forEach((q) => {
+        const chosen = userListeningChoices[q.id];
+        const row = document.createElement('div');
+        row.id = `listen-row-${q.id}`;
+        row.className = 'flex flex-wrap items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200/80';
+        row.innerHTML = `
+          <span class="font-medium text-slate-800">${q.prefix}</span>
+          <button type="button" onclick="selectListeningOpt('${q.id}', '${q.opt1}')"
+            class="px-3 py-1 rounded-lg font-extrabold text-sm transition cursor-pointer ${
+              chosen === q.opt1
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'bg-slate-100 hover:bg-indigo-100 text-slate-700'
+            }">${q.opt1}</button>
+          <span class="text-slate-400 font-bold">/</span>
+          <button type="button" onclick="selectListeningOpt('${q.id}', '${q.opt2}')"
+            class="px-3 py-1 rounded-lg font-extrabold text-sm transition cursor-pointer ${
+              chosen === q.opt2
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'bg-slate-100 hover:bg-indigo-100 text-slate-700'
+            }">${q.opt2}</button>
+          <span class="font-medium text-slate-800">${q.suffix}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function selectListeningOpt(qId, val) {
+      playTone('click');
+      userListeningChoices[qId] = val;
+      renderListeningChoices();
+    }
+
+    function checkListening() {
+      const picA = document.getElementById('match-pic-A').value;
+      const picB = document.getElementById('match-pic-B').value;
+      const picC = document.getElementById('match-pic-C').value;
+
+      let picCorrect = 0;
+      if (picA === '2') picCorrect++;
+      if (picB === '1') picCorrect++;
+      if (picC === '3') picCorrect++;
+
+      let wordCorrect = 0;
+      listeningQuestions.forEach((q) => {
+        const row = document.getElementById(`listen-row-${q.id}`);
+        if (userListeningChoices[q.id] === q.answer) {
+          wordCorrect++;
+          row.className = 'flex flex-wrap items-center gap-2 p-2.5 rounded-xl bg-emerald-50 border-2 border-emerald-400';
+        } else {
+          row.className = 'flex flex-wrap items-center gap-2 p-2.5 rounded-xl bg-rose-50 border-2 border-rose-400';
+        }
+      });
+
+      const fb = document.getElementById('listening-feedback');
+      fb.classList.remove('hidden');
+      if (picCorrect === 3 && wordCorrect === 6) {
+        playTone('success');
+        fb.className = 'mt-4 text-center font-bold text-sm text-emerald-700';
+        fb.textContent = '🎧 Fantastic listening! Pictures (A=2, B=1, C=3) and all 6 sentences are 100% correct!';
+        markSectionComplete(2);
+        showToast('🎧', 'Listening section completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 text-center font-bold text-sm text-rose-600';
+        fb.textContent = `Pictures matched: ${picCorrect}/3 • Sentences correct: ${wordCorrect}/6. Check the red rows and try again!`;
+      }
+    }
+
+    function resetListening() {
+      stopDialogue(true);
+      document.getElementById('match-pic-A').value = '';
+      document.getElementById('match-pic-B').value = '';
+      document.getElementById('match-pic-C').value = '';
+      userListeningChoices = {};
+      document.getElementById('listening-feedback').classList.add('hidden');
+      renderListeningChoices();
+    }
+
+    /* ------------------------------------------------------------
+       5. SECTION 4: VIDEO TIME QUIZ
+    ------------------------------------------------------------ */
+    const videoQuestions = [
+      {
+        q: '1. Which emotion is bright yellow and always positive?',
+        options: ['Joy', 'Sadness', 'Anger'],
+        answer: 'Joy',
+        tip: 'Joy is yellow and loves happy memories!'
+      },
+      {
+        q: '2. When Riley cries or misses her old home, which emotion takes control?',
+        options: ['Disgust', 'Sadness', 'Fear'],
+        answer: 'Sadness',
+        tip: 'Blue Sadness helps Riley express her grief.'
+      },
+      {
+        q: '3. Which emotion turns red and shoots fire when things are unfair?',
+        options: ['Anger', 'Joy', 'Fear'],
+        answer: 'Anger',
+        tip: 'Anger gets mad very easily!'
+      },
+      {
+        q: '4. When Riley sees broccoli on her pizza, how does Disgust react?',
+        options: ['She feels excited', 'She says "Yuck!" and refuses it', 'She feels sleepy'],
+        answer: 'She says "Yuck!" and refuses it',
+        tip: 'Green Disgust protects Riley from gross food!'
+      },
+      {
+        q: '5. Which purple emotion worries about danger and keeps Riley safe?',
+        options: ['Fear', 'Anger', 'Joy'],
+        answer: 'Fear',
+        tip: 'Fear is always careful and nervous about accidents.'
+      }
+    ];
+
+    let videoUserAnswers = {};
+
+    function renderVideoQuiz() {
+      const container = document.getElementById('video-quiz-container');
+      container.innerHTML = '';
+      videoQuestions.forEach((item, idx) => {
+        const chosen = videoUserAnswers[idx];
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-2xl bg-slate-50 border border-slate-200';
+        card.innerHTML = `
+          <p class="font-bold text-sm text-slate-900 mb-2.5">${item.q}</p>
+          <div class="flex flex-wrap gap-2">
+            ${item.options
+              .map((opt) => {
+                let style = 'bg-white border-slate-300 text-slate-700 hover:border-violet-400';
+                if (chosen) {
+                  if (opt === item.answer) {
+                    style = 'bg-emerald-600 border-emerald-600 text-white shadow-sm';
+                  } else if (opt === chosen) {
+                    style = 'bg-rose-500 border-rose-500 text-white';
+                  } else {
+                    style = 'bg-white border-slate-200 text-slate-400';
+                  }
+                }
+                return `<button type="button" onclick="answerVideoQ(${idx}, '${opt.replace(/'/g, "\\'")}')"
+                  class="px-3 py-1.5 rounded-xl border text-xs font-extrabold transition cursor-pointer ${style}">
+                  ${opt}
+                </button>`;
+              })
+              .join('')}
+          </div>
+          ${
+            chosen
+              ? `<p class="mt-2 text-xs font-semibold ${
+                  chosen === item.answer ? 'text-emerald-700' : 'text-rose-600'
+                }">${chosen === item.answer ? '✓ ' : '✗ '}${item.tip}</p>`
+              : ''
+          }
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function answerVideoQ(idx, opt) {
+      videoUserAnswers[idx] = opt;
+      if (opt === videoQuestions[idx].answer) {
+        playTone('success');
+      } else {
+        playTone('error');
+      }
+      renderVideoQuiz();
+
+      const allRight = videoQuestions.every((q, i) => videoUserAnswers[i] === q.answer);
+      if (allRight) {
+        markSectionComplete(3);
+        showToast('🎬', 'All 5 Video Quiz questions solved!');
+      }
+    }
+
+    function resetVideoQuiz() {
+      playTone('click');
+      videoUserAnswers = {};
+      renderVideoQuiz();
+    }
+
+    /* ------------------------------------------------------------
+       6. SECTION 5: GAME TIME (BAAMBOOZLE QUIZ & FEELINGS BINGO)
+    ------------------------------------------------------------ */
+    function switchGameMode(mode) {
+      playTone('click');
+      const isBm = mode === 'baamboozle';
+      document.getElementById('game-panel-baamboozle').classList.toggle('hidden', !isBm);
+      document.getElementById('game-panel-bingo').classList.toggle('hidden', isBm);
+
+      document.getElementById('game-tab-baamboozle').className = isBm
+        ? 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-violet-600 text-white shadow-sm transition cursor-pointer'
+        : 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition cursor-pointer';
+      document.getElementById('game-tab-bingo').className = !isBm
+        ? 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-violet-600 text-white shadow-sm transition cursor-pointer'
+        : 'px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-slate-600 hover:text-slate-900 transition cursor-pointer';
+    }
+
+    /* 5A: Baamboozle Team Grid */
+    const baamboozlePool = [
+      { type: 'q', pts: 10, q: 'What is the opposite of "difficult"?', opts: ['easy', 'slow', 'short'], ans: 'easy' },
+      { type: 'q', pts: 15, q: 'You did not sleep last night. How do you feel?', opts: ['tired', 'excited', 'disgusted'], ans: 'tired' },
+      { type: 'bonus', pts: 15, icon: '🎁', text: 'LUCKY STAR! +15 Bonus Points for your team!' },
+      { type: 'q', pts: 10, q: 'What is the opposite of "high"?', opts: ['low', 'young', 'light'], ans: 'low' },
+      { type: 'q', pts: 15, q: 'Tomorrow is your birthday party! You feel very...', opts: ['excited', 'bored', 'angry'], ans: 'excited' },
+      { type: 'swap', pts: 0, icon: '🔄', text: 'SWAP SCORES! Team 1 and Team 2 switch points!' },
+      { type: 'q', pts: 10, q: 'What is the opposite of "old"?', opts: ['young', 'fast', 'hot'], ans: 'young' },
+      { type: 'q', pts: 20, q: 'There is a huge spider on your desk! You feel...', opts: ['scared', 'hungry', 'fine'], ans: 'scared' },
+      { type: 'steal', pts: 10, icon: '🏴‍☠️', text: 'STEAL 10 POINTS from the other team!' },
+      { type: 'q', pts: 15, q: 'Complete: "How are you?" — "Not _____, thanks!"', opts: ['bad', 'sad', 'low'], ans: 'bad' },
+      { type: 'q', pts: 15, q: 'You have a big exam in 5 minutes. You feel...', opts: ['nervous', 'disgusted', 'great'], ans: 'nervous' },
+      { type: 'q', pts: 20, q: 'What is the opposite of "dark"?', opts: ['light', 'short', 'cold'], ans: 'light' }
+    ];
+
+    let bmTiles = [];
+    let teamScores = { 1: 0, 2: 0 };
+    let activeTeam = 1;
+    let activeTileIdx = null;
+    let bmTurnAnswered = false;
+    function setActiveTeam(teamNum) {
+      playTone('click');
+      activeTeam = teamNum;
+      document.getElementById('active-team-indicator').textContent = `Turn: Team ${teamNum}`;
+      document.getElementById('team-1-box').className =
+        teamNum === 1
+          ? 'px-4 py-2 rounded-xl bg-white text-indigo-900 font-extrabold text-sm shadow ring-4 ring-amber-300 transition cursor-pointer'
+          : 'px-4 py-2 rounded-xl bg-white/20 text-white font-extrabold text-sm hover:bg-white/30 transition cursor-pointer';
+      document.getElementById('team-2-box').className =
+        teamNum === 2
+          ? 'px-4 py-2 rounded-xl bg-white text-indigo-900 font-extrabold text-sm shadow ring-4 ring-amber-300 transition cursor-pointer'
+          : 'px-4 py-2 rounded-xl bg-white/20 text-white font-extrabold text-sm hover:bg-white/30 transition cursor-pointer';
+    }
+
+    function updateScoresUI() {
+      document.getElementById('team-1-score').textContent = teamScores[1];
+      document.getElementById('team-2-score').textContent = teamScores[2];
+    }
+
+    function initBaamboozle() {
+      playTone('click');
+      teamScores = { 1: 0, 2: 0 };
+      setActiveTeam(1);
+      updateScoresUI();
+      closeBaamboozleCard();
+      bmTiles = [...baamboozlePool]
+        .sort(() => Math.random() - 0.5)
+        .map((item, idx) => ({ ...item, num: idx + 1, opened: false }));
+      renderBaamboozleGrid();
+    }
+
+    function renderBaamboozleGrid() {
+      const grid = document.getElementById('baamboozle-grid');
+      grid.innerHTML = '';
+      bmTiles.forEach((tile, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.disabled = tile.opened;
+        btn.onclick = () => openBaamboozleTile(idx);
+        btn.className = tile.opened
+          ? 'h-24 rounded-2xl bg-slate-100 border-2 border-slate-200 text-slate-400 font-display font-extrabold text-xl flex flex-col items-center justify-center cursor-default'
+          : 'h-24 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-display font-extrabold text-3xl shadow-md hover:-translate-y-0.5 transition flex items-center justify-center cursor-pointer border-b-4 border-orange-600';
+        btn.innerHTML = tile.opened ? `<span class="text-xs uppercase">Done</span>✓` : tile.num;
+        grid.appendChild(btn);
+      });
+    }
+
+    function openBaamboozleTile(idx) {
+      const tile = bmTiles[idx];
+      if (tile.opened) return;
+      tile.opened = true;
+      activeTileIdx = idx;
+      bmTurnAnswered = false;
+      renderBaamboozleGrid();
+
+      const overlay = document.getElementById('baamboozle-modal-overlay');
+      const specialIcon = document.getElementById('bm-special-icon');
+      const optsDiv = document.getElementById('bm-options');
+      const resultArea = document.getElementById('bm-result-area');
+      const resultMsg = document.getElementById('bm-result-message');
+
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      document.getElementById('bm-team-badge').textContent = activeTeam === 1 ? "🦁 Team 1's Turn" : "🐯 Team 2's Turn";
+
+      if (tile.type !== 'q') {
+        playTone('success');
+        document.getElementById('bm-card-badge').textContent = `Tile #${tile.num} • Power-Up Card!`;
+        specialIcon.textContent = tile.icon || '🎁';
+        specialIcon.classList.remove('hidden');
+        document.getElementById('bm-question-text').textContent = tile.text;
+        optsDiv.innerHTML = '';
+
+        if (tile.type === 'bonus') {
+          teamScores[activeTeam] += tile.pts;
+          resultMsg.className = 'font-display font-extrabold text-lg sm:text-xl mb-4 text-emerald-700';
+          resultMsg.textContent = `🎉 +${tile.pts} points added to Team ${activeTeam}!`;
+        } else if (tile.type === 'steal') {
+          const otherTeam = activeTeam === 1 ? 2 : 1;
+          const stolen = Math.min(teamScores[otherTeam], tile.pts);
+          teamScores[otherTeam] -= stolen;
+          teamScores[activeTeam] += tile.pts;
+          resultMsg.className = 'font-display font-extrabold text-lg sm:text-xl mb-4 text-amber-700';
+          resultMsg.textContent = `🏴‍☠️ Team ${activeTeam} gains +${tile.pts} points!`;
+        } else if (tile.type === 'swap') {
+          const temp = teamScores[1];
+          teamScores[1] = teamScores[2];
+          teamScores[2] = temp;
+          resultMsg.className = 'font-display font-extrabold text-lg sm:text-xl mb-4 text-indigo-700';
+          resultMsg.textContent = '🔄 Scores have been swapped!';
+        }
+
+        updateScoresUI();
+        bmTurnAnswered = true;
+        resultArea.classList.remove('hidden');
+        return;
+      }
+
+      playTone('click');
+      specialIcon.classList.add('hidden');
+      resultArea.classList.add('hidden');
+      document.getElementById('bm-card-badge').textContent = `Tile #${tile.num} • ${tile.pts} Points`;
+      document.getElementById('bm-question-text').textContent = tile.q;
+
+      optsDiv.innerHTML = '';
+      tile.opts.forEach((opt) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = opt;
+        b.onclick = () => submitBaamboozleAnswer(opt, b);
+        b.className = 'bm-opt-btn py-4 px-5 rounded-2xl bg-white hover:bg-violet-600 hover:text-white border-2 border-amber-300 hover:border-violet-600 font-extrabold text-lg text-slate-800 shadow-sm transition cursor-pointer';
+        optsDiv.appendChild(b);
+      });
+    }
+
+    function submitBaamboozleAnswer(chosen, clickedBtn) {
+      if (bmTurnAnswered) return;
+      bmTurnAnswered = true;
+      const tile = bmTiles[activeTileIdx];
+      const allBtns = document.querySelectorAll('.bm-opt-btn');
+
+      allBtns.forEach((btn) => {
+        btn.disabled = true;
+        if (btn.textContent === tile.ans) {
+          btn.className = 'bm-opt-btn py-4 px-5 rounded-2xl bg-emerald-600 text-white border-2 border-emerald-700 font-extrabold text-lg shadow-md';
+        } else if (btn === clickedBtn && chosen !== tile.ans) {
+          btn.className = 'bm-opt-btn py-4 px-5 rounded-2xl bg-rose-600 text-white border-2 border-rose-700 font-extrabold text-lg shadow-md';
+        } else {
+          btn.className = 'bm-opt-btn py-4 px-5 rounded-2xl bg-slate-100 text-slate-400 border-2 border-slate-200 font-extrabold text-lg';
+        }
+      });
+
+      const resultArea = document.getElementById('bm-result-area');
+      const resultMsg = document.getElementById('bm-result-message');
+      resultArea.classList.remove('hidden');
+
+      if (chosen === tile.ans) {
+        playTone('success');
+        teamScores[activeTeam] += tile.pts;
+        updateScoresUI();
+        resultMsg.className = 'font-display font-extrabold text-lg sm:text-xl mb-4 text-emerald-700';
+        resultMsg.textContent = `✅ Correct! +${tile.pts} points for Team ${activeTeam}!`;
+      } else {
+        playTone('error');
+        resultMsg.className = 'font-display font-extrabold text-lg sm:text-xl mb-4 text-rose-600';
+        resultMsg.textContent = `❌ Oops! The correct answer is "${tile.ans}".`;
+      }
+    }
+
+    function finishBaamboozleTurn() {
+      playTone('click');
+      closeBaamboozleCard();
+      setActiveTeam(activeTeam === 1 ? 2 : 1);
+      checkGameSectionComplete();
+    }
+
+    function closeBaamboozleCard() {
+      const overlay = document.getElementById('baamboozle-modal-overlay');
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex');
+      activeTileIdx = null;
+    }
+
+    function checkGameSectionComplete() {
+      const openedCount = bmTiles.filter((t) => t.opened).length;
+      if (openedCount >= 6) {
+        markSectionComplete(4);
+      }
+    }
+
+    /* 5B: Feelings Bingo 3x3 */
+    const bingoItems = [
+      { emoji: '😭', word: 'crying / sad' },
+      { emoji: '😍', word: 'in love / amazed' },
+      { emoji: '😏', word: 'smirking / proud' },
+      { emoji: '🥺', word: 'pleading / upset' },
+      { emoji: '😜', word: 'silly / playful' },
+      { emoji: '🤢', word: 'disgusted / sick' },
+      { emoji: '😒', word: 'annoyed / bored' },
+      { emoji: '😅', word: 'nervous / relieved' },
+      { emoji: '😉', word: 'happy / winking' }
+    ];
+
+    let bingoMarked = Array(9).fill(false);
+
+    function renderBingo() {
+      const grid = document.getElementById('bingo-grid');
+      grid.innerHTML = '';
+      bingoItems.forEach((item, idx) => {
+        const marked = bingoMarked[idx];
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.onclick = () => toggleBingoCell(idx);
+        cell.className = `aspect-square rounded-2xl border-2 p-2 flex flex-col items-center justify-center transition cursor-pointer relative ${
+          marked
+            ? 'bg-emerald-500 border-emerald-600 text-white shadow-md scale-[0.98]'
+            : 'bg-white border-warm-200 hover:border-violet-400 text-slate-800 shadow-sm'
+        }`;
+        cell.innerHTML = `
+          <span class="text-4xl sm:text-5xl">${item.emoji}</span>
+          <span class="mt-2 text-[11px] sm:text-xs font-extrabold ${marked ? 'text-white' : 'text-slate-600'}">
+            ${item.word}
+          </span>
+          ${marked ? '<span class="absolute top-2 right-2 text-xs bg-white text-emerald-700 font-black px-1.5 py-0.5 rounded-full">✓</span>' : ''}
+        `;
+        grid.appendChild(cell);
+      });
+    }
+
+    function toggleBingoCell(idx) {
+      bingoMarked[idx] = !bingoMarked[idx];
+      playTone(bingoMarked[idx] ? 'success' : 'click');
+      renderBingo();
+      checkBingoWin();
+    }
+
+    function callRandomBingo() {
+      playTone('click');
+      const unmarkedIndices = bingoMarked.map((m, i) => (!m ? i : -1)).filter((i) => i !== -1);
+      if (unmarkedIndices.length === 0) return;
+      const randIdx = unmarkedIndices[Math.floor(Math.random() * unmarkedIndices.length)];
+      const banner = document.getElementById('bingo-caller-banner');
+      banner.classList.remove('hidden');
+      document.getElementById('bingo-called-word').textContent = bingoItems[randIdx].word.toUpperCase();
+    }
+
+    function checkBingoWin() {
+      const lines = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
+        [0, 4, 8], [2, 4, 6]             // diags
+      ];
+      const hasBingo = lines.some(([a, b, c]) => bingoMarked[a] && bingoMarked[b] && bingoMarked[c]);
+      if (hasBingo) {
+        playTone('success');
+        showToast('🏆', 'BINGO! 3 in a row! Amazing job!');
+        markSectionComplete(4);
+      }
+    }
+
+    function resetBingo() {
+      playTone('click');
+      bingoMarked = Array(9).fill(false);
+      document.getElementById('bingo-caller-banner').classList.add('hidden');
+      renderBingo();
+    }
+
+    /* ------------------------------------------------------------
+       7. SECTION 6: READING & WRITING (MARY'S DIARY)
+    ------------------------------------------------------------ */
+    const diaryBankChips = [
+      { id: 'chip-happy', word: 'happy' },
+      { id: 'chip-scared-1', word: 'scared' },
+      { id: 'chip-scared-2', word: 'scared' },
+      { id: 'chip-disgusted', word: 'disgusted' },
+      { id: 'chip-sad', word: 'sad' },
+      { id: 'chip-angry-1', word: 'angry' },
+      { id: 'chip-angry-2', word: 'angry' }
+    ];
+
+    const diaryAnswers = ['happy', 'sad', 'angry', 'disgusted', 'scared', 'angry', 'scared'];
+    let diarySlots = Array(7).fill(null); // stores chip object or null
+    let selectedDiaryChipId = null;
+
+    function renderDiaryBank() {
+      const bank = document.getElementById('diary-wordbank');
+      bank.innerHTML = '';
+      const usedChipIds = diarySlots.filter(Boolean).map((c) => c.id);
+
+      diaryBankChips.forEach((chip) => {
+        const isUsed = usedChipIds.includes(chip.id);
+        const isSelected = selectedDiaryChipId === chip.id;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = chip.word;
+        btn.onclick = () => {
+          if (isUsed) return;
+          playTone('click');
+          selectedDiaryChipId = isSelected ? null : chip.id;
+          renderDiaryBank();
+        };
+        btn.className = `px-4 py-1.5 rounded-full font-extrabold text-sm transition ${
+          isUsed
+            ? 'bg-slate-200/70 text-slate-400 line-through cursor-not-allowed'
+            : isSelected
+            ? 'bg-emerald-600 text-white shadow-md scale-105 cursor-pointer ring-2 ring-emerald-300'
+            : 'bg-white text-emerald-900 border border-emerald-300 hover:bg-emerald-100 cursor-pointer'
+        }`;
+        bank.appendChild(btn);
+      });
+    }
+
+    function updateDiarySlotsUI() {
+      for (let i = 0; i < 7; i++) {
+        const gap = document.getElementById(`diary-gap-${i}`);
+        const chip = diarySlots[i];
+        gap.classList.remove('border-emerald-500', 'bg-emerald-100', 'border-rose-500', 'bg-rose-100');
+        if (chip) {
+          gap.textContent = `(${i + 1}) ${chip.word} ✕`;
+          gap.classList.remove('border-dashed', 'border-slate-400');
+          gap.classList.add('border-solid', 'border-violet-500', 'bg-violet-50');
+        } else {
+          gap.textContent = `(${i + 1}) ______`;
+          gap.classList.add('border-dashed', 'border-slate-400');
+          gap.classList.remove('border-solid', 'border-violet-500', 'bg-violet-50');
+        }
+      }
+    }
+
+    function placeDiaryWord(gapIdx) {
+      playTone('click');
+      if (selectedDiaryChipId) {
+        const chipObj = diaryBankChips.find((c) => c.id === selectedDiaryChipId);
+        diarySlots[gapIdx] = chipObj;
+        selectedDiaryChipId = null;
+      } else if (diarySlots[gapIdx]) {
+        diarySlots[gapIdx] = null;
+      }
+      renderDiaryBank();
+      updateDiarySlotsUI();
+    }
+
+    function checkDiary() {
+      let correct = 0;
+      for (let i = 0; i < 7; i++) {
+        const gap = document.getElementById(`diary-gap-${i}`);
+        const word = diarySlots[i]?.word;
+        if (word === diaryAnswers[i]) {
+          correct++;
+          gap.classList.remove('border-violet-500', 'border-rose-500', 'bg-rose-100');
+          gap.classList.add('border-emerald-500', 'bg-emerald-100');
+        } else {
+          gap.classList.remove('border-violet-500', 'border-emerald-500', 'bg-emerald-100');
+          gap.classList.add('border-rose-500', 'bg-rose-100');
+        }
+      }
+      const fb = document.getElementById('diary-feedback');
+      fb.classList.remove('hidden');
+      if (correct === 7) {
+        playTone('success');
+        fb.className = 'mt-4 text-center font-bold text-sm text-emerald-700';
+        fb.textContent = "🎉 Brilliant! You completed Mary's entire diary accurately!";
+        markSectionComplete(5);
+        showToast('📖', "Mary's Diary completed!");
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 text-center font-bold text-sm text-rose-600';
+        fb.textContent = `You got ${correct}/7 gaps right. Click any red gap to clear and retry!`;
+      }
+    }
+
+    function resetDiary() {
+      playTone('click');
+      diarySlots = Array(7).fill(null);
+      selectedDiaryChipId = null;
+      document.getElementById('diary-feedback').classList.add('hidden');
+      renderDiaryBank();
+      updateDiarySlotsUI();
+    }
+
+    function insertPrompt(text) {
+      playTone('click');
+      const area = document.getElementById('student-diary-input');
+      area.value = area.value ? `${area.value}\n${text}` : text;
+      area.focus();
+    }
+
+    /* ------------------------------------------------------------
+       8. SECTION 7: SPEAKING CARDS DECK
+    ------------------------------------------------------------ */
+    const speakingCardsPool = [
+      {
+        tag: 'Core Question #1',
+        emoji: '😊',
+        q: 'What and who makes you feel happy?',
+        hint: '"I feel really happy when I spend time with..."'
+      },
+      {
+        tag: 'Core Question #2',
+        emoji: '😢',
+        q: 'Have you ever felt sad for no reason? What did you do when it happened?',
+        hint: '"Yes, sometimes I feel sad. When that happens, I usually..."'
+      },
+      {
+        tag: 'Core Question #3',
+        emoji: '💬',
+        q: 'Do you like talking about your feelings and emotions with others? Who do you talk with?',
+        hint: '"Yes, I like talking to my best friend / mom because..."'
+      },
+      {
+        tag: 'Core Question #4',
+        emoji: '🧠',
+        q: "Do you think it's important to understand your own feelings? Why / why not?",
+        hint: '"I think it is very important because..."'
+      },
+      {
+        tag: 'Bonus Card #5',
+        emoji: '🤩',
+        q: 'When did you feel really excited recently?',
+        hint: '"I felt super excited last week when..."'
+      },
+      {
+        tag: 'Bonus Card #6',
+        emoji: '🤢',
+        q: 'What food or smell makes you feel disgusted?',
+        hint: '"Ugh! I feel disgusted when I see / eat..."'
+      },
+      {
+        tag: 'Bonus Card #7',
+        emoji: '😱',
+        q: 'Are you scared of spiders, heights, or the dark?',
+        hint: '"I am a little scared of... because..."'
+      },
+      {
+        tag: 'Bonus Card #8',
+        emoji: '😴',
+        q: 'How do you usually feel on Monday mornings?',
+        hint: '"On Monday mornings, I usually feel..."'
+      },
+      {
+        tag: 'Bonus Card #9',
+        emoji: '🥱',
+        q: 'Describe a time when you were very tired.',
+        hint: '"I was really tired after..."'
+      },
+      {
+        tag: 'Bonus Card #10',
+        emoji: '😠',
+        q: 'What makes you feel angry or annoyed?',
+        hint: '"I get angry when people..."'
+      }
+    ];
+
+    let speakingDeck = [...speakingCardsPool];
+    let currentCardIdx = 0;
+    let isCardFlipped = false;
+
+    function updateSpeakingCardUI() {
+      const card = speakingDeck[currentCardIdx];
+      document.getElementById('deck-counter').textContent = `Card ${currentCardIdx + 1} of ${speakingDeck.length}`;
+      document.getElementById('speaking-card-tag').textContent = card.tag;
+      document.getElementById('speaking-card-emoji').textContent = card.emoji;
+      document.getElementById('speaking-card-question').textContent = card.q;
+      document.getElementById('speaking-card-hint').textContent = card.hint;
+
+      const inner = document.getElementById('speaking-card-inner');
+      if (isCardFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+    }
+
+    function flipSpeakingCard() {
+      playTone('click');
+      isCardFlipped = !isCardFlipped;
+      updateSpeakingCardUI();
+    }
+
+    function dealNextSpeakingCard() {
+      playTone('click');
+      isCardFlipped = false;
+      updateSpeakingCardUI();
+      setTimeout(() => {
+        currentCardIdx = (currentCardIdx + 1) % speakingDeck.length;
+        isCardFlipped = true;
+        updateSpeakingCardUI();
+      }, 180);
+    }
+
+    function shuffleSpeakingDeck() {
+      playTone('success');
+      speakingDeck = [...speakingCardsPool].sort(() => Math.random() - 0.5);
+      currentCardIdx = 0;
+      isCardFlipped = false;
+      updateSpeakingCardUI();
+      showToast('🔀', 'Speaking deck shuffled!');
+    }
+
+    /* ------------------------------------------------------------
+       INITIALIZE ALL EXERCISES ON PAGE LOAD
+    ------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab(0);
+      renderWarmupBank();
+      updateWarmupSlotsUI();
+      renderOpposites();
+      renderFacesExercise();
+      renderListeningChoices();
+      renderVideoQuiz();
+      initBaamboozle();
+      renderBingo();
+      renderDiaryBank();
+      updateDiarySlotsUI();
+      updateSpeakingCardUI();
+
+      // Preload speech synthesis voices if available
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+      }
+    });
+  </script>
+</body>
+</html>

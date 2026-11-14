@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Have to — The Rules of Real Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f8f4ec;--paper2:#fffdf8;--ink:#29251f;--muted:#756d63;--coral:#e9785e;--coral2:#f2a18c;--line:#dfd4c6;--sage:#71816c;--shadow:0 12px 35px rgba(74,53,38,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.58;background-image:radial-gradient(#e8ded1 .7px,transparent .7px);background-size:19px 19px}a{color:inherit}.shell{max-width:1120px;margin:auto;padding:0 28px}.topline{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:var(--muted)}.topline strong{color:var(--coral)}.progress{height:3px;background:#eadfd4;position:sticky;top:0;z-index:10}.progress span{display:block;height:100%;width:0;background:var(--coral)}
+.hero{background:var(--paper2);margin:28px auto 34px;padding:48px 6% 34px;position:relative;text-align:center;border:1px solid #eee5d9;box-shadow:var(--shadow);overflow:hidden}.eyebrow{font-family:'Playfair Display',serif;color:var(--coral);font-size:18px;letter-spacing:.03em}.hero h1{font-family:'Permanent Marker',cursive;font-size:clamp(58px,10vw,112px);font-weight:400;line-height:.9;letter-spacing:-.045em;color:var(--coral);margin:24px 0 18px;transform:rotate(-1deg)}.hero h1 span{display:block}.subtitle{font-family:'Playfair Display',serif;color:var(--coral);font-size:clamp(17px,2.6vw,25px);line-height:1.25;max-width:670px;margin:0 auto}.hero-art{display:flex;justify-content:center;align-items:center;gap:clamp(12px,4vw,55px);margin:30px auto 28px;max-width:700px;color:var(--coral)}.hero-art svg{width:clamp(90px,17vw,170px);height:auto;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.88}.hero-meta{border-top:2px solid var(--coral);border-bottom:2px solid var(--coral);display:grid;grid-template-columns:1fr 2fr;margin:24px auto 0;max-width:760px;text-align:center;color:var(--coral);font-family:'Playfair Display',serif}.hero-meta>div{padding:16px 18px}.hero-meta>div+div{border-left:2px solid var(--coral)}.hero-meta b{display:block;font-size:20px;font-weight:500}.hero-meta span{font-size:14px}.introline{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:25px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 auto 34px}.navlink{font-size:11px;text-decoration:none;border:1px solid var(--line);padding:7px 12px;border-radius:30px;background:#fffaf3;color:var(--muted)}.navlink:hover{border-color:var(--coral);color:var(--coral)}
+.section{padding:35px 0 48px;border-bottom:1px solid var(--line)}.sectionhead{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:start;margin-bottom:24px}.number{font-family:'Permanent Marker',cursive;color:var(--coral);font-size:27px;transform:rotate(-7deg);padding-top:2px}.section h2{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,47px);font-weight:500;line-height:1.03;margin:0}.sectionhead p{margin:8px 0 0;color:var(--muted);max-width:720px}.tinylabel{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:8px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}.paper-card{background:var(--paper2);border:1px solid #eee4d8;padding:23px;box-shadow:var(--shadow);position:relative}.paper-card.soft{background:#f2e9dc}.paper-card.sage{background:#e9eee5}.paper-card h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin:0 0 10px}.paper-card p{margin:8px 0}.video-link{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;padding:14px 16px;background:#f4e7df;border:1px solid #ebd4c9;text-decoration:none}.video-link:hover{background:#f7ddd3}.video-link small{display:block;color:var(--muted);font-size:10px;letter-spacing:.13em;text-transform:uppercase}.video-link b{font-family:'Playfair Display',serif;font-size:18px;font-weight:500}.play{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--coral);color:white;flex:none}.rulegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.rule{padding:16px 18px;border-left:3px solid var(--coral);background:#fffaf4}.rule:nth-child(2n){border-color:var(--sage)}.rule b{font-family:'Playfair Display',serif;font-size:21px;font-weight:600}.rule p{margin:5px 0 0;font-size:14px;color:#61584f}.note{margin-top:16px;padding:18px 20px;background:#f4e3db;border-left:4px solid var(--coral);font-family:'Playfair Display',serif;font-size:19px;line-height:1.45}.note em{color:#b94f3b}
+.formula{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.formula>div{background:var(--paper2);padding:17px 19px;border-bottom:2px solid var(--coral)}.formula label{display:block;color:var(--coral);font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}.formula p{font-family:'Playfair Display',serif;font-size:21px;margin:7px 0 0}.formula mark{background:#f7d4c9;color:var(--ink);padding:0 4px}.task{background:var(--paper2);border:1px solid #e9dfd3;padding:22px;margin-top:17px;box-shadow:var(--shadow)}.tasktop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.task h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin:0}.tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);border:1px solid #edc7bb;padding:5px 8px;white-space:nowrap}.q{padding:12px 0;border-bottom:1px solid #eee7de}.q:last-child{border-bottom:0}.q input[type=text],.q select,.inline-input{font:500 15px 'DM Sans',sans-serif;color:var(--ink);border:0;border-bottom:1.5px solid #b8a99b;background:#fffaf3;padding:5px 8px;min-width:112px;max-width:100%;outline:none;border-radius:0}.q input:focus,.q select:focus{border-color:var(--coral);background:#fff}.story{font:19px/2 'Playfair Display',serif}.story input{width:122px}.btn{border:1px solid var(--coral);background:var(--coral);color:#fff;padding:10px 16px;font:700 10px 'DM Sans',sans-serif;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;margin-top:12px}.btn:hover{background:#c85f48}.btn.secondary{background:transparent;color:var(--coral)}.feedback{min-height:22px;margin-top:9px;font-size:13px;font-weight:700}.ok{color:#52724c}.no{color:#b64d3c}.two-col-task{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wordbank{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.wordbank span{padding:5px 10px;background:#f2e7dc;font-size:13px}.dialogue{display:grid;grid-template-columns:105px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed #dfd4c6}.who{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--coral);font-weight:700;padding-top:4px}.dialogue p{margin:0}.callout{padding:15px 18px;background:#e9eee5;margin-top:15px;font-size:14px}.signs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.sign{background:#fffaf3;border:1px solid #e8ddd0;padding:14px 8px;text-align:center}.sign .emoji{font-size:34px;display:block}.sign b{display:block;font-size:11px;margin-top:5px}.sign small{font-size:10px;color:var(--muted)}.discussion{background:#eee8dc;padding:20px;margin-top:18px}.discussion h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:500;margin:0 0 8px}.discussion li{margin:6px 0}.external{display:grid;grid-template-columns:1fr 1fr;gap:14px}.external a{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#e9eee5;padding:17px 18px;text-decoration:none;border-bottom:2px solid var(--sage)}.external a:hover{background:#dce6d6}.external b{font-family:'Playfair Display',serif;font-size:21px;font-weight:500}.external small{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}.arrow{font-size:24px;color:var(--sage)}
+.homework{background:var(--paper2);border:2px solid var(--coral);padding:clamp(22px,5vw,42px);position:relative;box-shadow:var(--shadow)}.homework:before{content:'YOUR TURN';position:absolute;top:-15px;left:25px;background:var(--coral);color:white;padding:5px 13px;font-size:10px;letter-spacing:.18em;font-weight:700}.homework h3{font-family:'Permanent Marker',cursive;color:var(--coral);font-size:clamp(30px,5vw,48px);font-weight:400;line-height:1.05;margin:4px 0 14px}.homework .brief{font-family:'Playfair Display',serif;font-size:21px;line-height:1.45;max-width:850px}.homework ul{padding-left:20px}.homework li{margin:7px 0}.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.checklist label{background:#f4eee5;padding:14px 16px;font-size:17px;line-height:1.5;display:flex;align-items:flex-start;gap:10px}.checklist input{accent-color:var(--coral);width:19px;height:19px;flex:none;margin:3px 0 0}.footer{padding:30px 0 40px;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px;letter-spacing:.16em;text-transform:uppercase}.sketch-divider{display:flex;align-items:center;gap:12px;color:var(--coral);margin:28px 0}.sketch-divider:before,.sketch-divider:after{content:'';height:2px;background:var(--coral);flex:1;transform:rotate(-.4deg)}
+@media(max-width:720px){.shell{padding:0 17px}.hero{padding:35px 5% 26px}.hero-meta{grid-template-columns:1fr}.hero-meta>div+div{border-left:0;border-top:1px solid var(--coral)}.sectionhead{grid-template-columns:42px 1fr;gap:8px}.cols,.formula,.rulegrid,.two-col-task,.external{grid-template-columns:1fr}.signs{grid-template-columns:repeat(2,1fr)}.task{padding:17px}.story{font-size:17px}.dialogue{grid-template-columns:78px 1fr}.footer{flex-direction:column}.topline{font-size:9px}.hero-art svg{width:26vw}}
+
+/* Video exercise and readable form controls */
+.video-quiz{margin-top:22px;background:#fffdf8}
+.quiz-intro{color:var(--muted);margin:0 0 12px}
+.video-question{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:16px 0;border-top:1px solid #eee4d8;align-items:start}
+.question-number{font-family:'Playfair Display',serif;font-size:22px;color:var(--coral);font-weight:600}
+.question-body{font-size:18px;line-height:1.55}
+.question-body>b{font-size:15px;letter-spacing:.02em}
+.question-body p{margin:5px 0 8px;font-family:'Playfair Display',serif;font-size:21px}
+.video-question select,.video-question input[type=text],
+.story input[type=text],.q input[type=text],.q select{
+  appearance:auto!important;background:#fffaf3!important;color:#29251f!important;
+  border:1px solid #d8c9b9!important;border-bottom:2px solid #c9ad9c!important;
+  border-radius:3px!important;padding:9px 12px!important;min-height:43px;
+  font:500 17px 'DM Sans',sans-serif!important;box-shadow:none!important;
+}
+.video-question select{min-width:220px;max-width:100%}
+.video-answer{width:min(100%,520px)}
+.video-answer.short{width:min(100%,210px)}
+.video-question input::placeholder{color:#9a8d80;opacity:1}
+.video-question input:focus,.video-question select:focus,.story input:focus{outline:2px solid #e8b6a7!important;outline-offset:2px}
+.video-question .wordbank{margin:8px 0}
+.video-question .wordbank span{font-size:15px;padding:6px 11px;background:#f1e6da;border:1px solid #e6d8ca}
+.video-question.correct input,.video-question.correct select{border-color:#71816c!important;background:#f1f5ed!important}
+.video-question.incorrect input,.video-question.incorrect select{border-color:#c85f48!important;background:#fff1ed!important}
+.q{font-size:18px;line-height:1.7}
+.q select{font-size:17px!important}
+@media(max-width:720px){.video-question{grid-template-columns:30px 1fr;gap:8px}.question-body{font-size:16px}.question-body p{font-size:19px}.video-question select{width:100%;min-width:0}.video-answer{width:100%}}
+
+
+/* Progressive video quiz */
+.quiz-progress{height:7px;background:#eee5da;border-radius:10px;overflow:hidden;margin:18px 0 7px}
+.quiz-progress span{display:block;height:100%;width:9.09%;background:var(--coral);transition:width .25s ease}
+.quiz-progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.04em}
+.video-question{display:none}
+.video-question.active{display:grid;animation:questionIn .25s ease}
+@keyframes questionIn{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.quiz-feedback{min-height:30px;margin-top:12px;font-size:16px;font-weight:700}
+.quiz-feedback.good{color:#52724c}.quiz-feedback.try{color:#b64d3c}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.quiz-actions [hidden],.quiz-finish[hidden]{display:none!important}
+.quiz-finish{margin-top:15px;padding:18px;background:#e9eee5;font-family:'Playfair Display',serif;font-size:22px}
+.checklist label{font-size:17px!important;line-height:1.5!important}
+@media(max-width:720px){.checklist{grid-template-columns:1fr}.checklist label{font-size:16px!important}}
+
+</style></head>
+<body>
+<div class="shell"><div class="topline"><span><strong>Field notes</strong> / English in everyday life</span><span>Grammar focus · A2–B1</span></div></div><div class="progress"><span id="progress"></span></div>
+<header class="shell"><div class="hero">
+<div class="eyebrow">A little guide to everyday obligations</div>
+<h1>HAVE TO <span>& the rules of real life</span></h1>
+<p class="subtitle">Talk about responsibilities, rules and the things you are — or aren't — required to do.</p>
+<div class="hero-art" aria-label="Hand-drawn illustration of a checklist, pencil and clock">
+<svg viewBox="0 0 180 150"><path d="M28 18h93l24 24v94H28z"/><path d="M121 18v26h24M48 60l8 8 14-18M82 61h40M48 91l8 8 14-18M82 92h40M48 120l8 8 14-18M82 121h40"/><path d="M18 29l-7 8 7 8M15 37h13"/></svg>
+<svg viewBox="0 0 180 150"><path d="M40 112L119 22l17 15-79 90-25 9z"/><path d="M119 22l9-10 17 15-9 10M32 136l25-9M119 22l17 15"/><path d="M83 68l17 15"/></svg>
+<svg viewBox="0 0 180 150"><circle cx="87" cy="75" r="57"/><path d="M87 32v44l30 18M87 18v8M87 124v8M30 75h8M136 75h8"/><path d="M68 12h38"/></svg>
+</div>
+<div class="hero-meta"><div><b>Today’s focus</b><span>must · have to · had to</span></div><div><b>What you’ll practise</b><span>meaning · form · listening · speaking · real-life decisions</span></div></div>
+<div class="introline">Read it · notice it · use it</div>
+</div>
+<nav><a class="navlink" href="#watch">01 Watch</a><a class="navlink" href="#meaning">02 Meaning</a><a class="navlink" href="#form">03 Form</a><a class="navlink" href="#practice">04 Practice</a><a class="navlink" href="#signs">05 Signs</a><a class="navlink" href="#listen">06 Listen & speak</a><a class="navlink" href="#homework">Homework</a></nav>
+</header>
+<main>
+<section class="section" id="watch"><div class="shell"><div class="sectionhead"><div class="number">01</div><div><div class="tinylabel">Start here / Watch & notice</div><h2>Where do the rules come from?</h2><p>Watch the two short videos. As you watch, notice whether the obligation comes from the speaker, another person or the situation itself.</p></div></div>
+<div class="cols">
+<div class="paper-card"><div class="tinylabel">Video one</div><h3>Have to: the basic rule</h3><p>Focus on the meaning of <em>have to</em> and how we use it to talk about necessity.</p><a class="video-link" href="https://www.youtube.com/watch?v=mOPVxZRnIz0" target="_blank" rel="noopener"><span><small>Open on YouTube</small><b>Watch the explanation</b></span><span class="play">▶</span></a></div>
+<div class="paper-card soft"><div class="tinylabel">Video two</div><h3>Have to: watch & notice</h3><p>Watch the video first. Then complete the step-by-step quiz below.</p><a class="video-link" href="https://www.youtube.com/watch?v=i-80SGWfEjM" target="_blank" rel="noopener"><span><small>Open on YouTube</small><b>Watch the second video</b></span><span class="play">▶</span></a></div>
+</div>
+
+<div class="video-quiz task" id="video-two-exercise">
+  <div class="tasktop">
+    <div><div class="tinylabel">Exercise two / Video quiz</div><h3>How well were you watching?</h3></div>
+    <span class="tag">11 questions</span>
+  </div>
+  <p class="quiz-intro">Answer one question at a time. Check your answer to unlock the next one.</p>
+  <div class="quiz-progress"><span id="video-quiz-progress"></span></div>
+  <div class="quiz-progress-label"><span id="video-quiz-count">Question 1 of 11</span><span id="video-quiz-score">0 correct</span></div>
+
+  <div class="video-question">
+    <div class="question-number">01</div><div class="question-body"><b>Choose the correct option.</b><p>Gidget's owner ______ go to work.</p>
+    <select data-video-answer="has to"><option value="">Choose an answer</option><option>have to</option><option>has to</option><option>don't have to</option></select></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">02</div><div class="question-body"><b>Unmix the sentence.</b>
+    <div class="wordbank"><span>has</span><span>say</span><span>to</span><span>to</span><span>Gidget</span><span>friend.</span><span>hello</span><span>her</span></div>
+    <input class="video-answer" type="text" data-video-answer="Gidget has to say hello to her friend." placeholder="Write the complete sentence" aria-label="Unmix sentence 2"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">03</div><div class="question-body"><b>Correct the wrong word.</b><p>Max <u>have</u> to wait for his owner.</p>
+    <input class="video-answer short" type="text" data-video-answer="has" placeholder="Correct word" aria-label="Correct word in sentence 3"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">04</div><div class="question-body"><b>Choose the correct option.</b><p>Chloe ______ eat her food.</p>
+    <select data-video-answer="doesn't have to"><option value="">Choose an answer</option><option>have to</option><option>don't have to</option><option>doesn't have to</option></select></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">05</div><div class="question-body"><b>Fill the gap.</b><p>Pets ______ wait for their owners.</p>
+    <input class="video-answer short" type="text" data-video-answer="have to" placeholder="Your answer" aria-label="Fill the gap 5"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">06</div><div class="question-body"><b>Choose the correct option.</b><p>Parrots ______ fly to feel good.</p>
+    <select data-video-answer="have to"><option value="">Choose an answer</option><option>has to</option><option>have to</option><option>don't have to</option><option>doesn't have to</option></select></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">07</div><div class="question-body"><b>Choose the correct option.</b><p>Gidget ______ eat this chicken.</p>
+    <select data-video-answer="doesn't have to"><option value="">Choose an answer</option><option>doesn't have to</option><option>has to</option><option>have to</option><option>don't have to</option></select></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">08</div><div class="question-body"><b>Unmix the sentence.</b>
+    <div class="wordbank"><span>to</span><span>play</span><span>have</span><span>feel</span><span>to</span><span>happy.</span><span>Dogs</span></div>
+    <input class="video-answer" type="text" data-video-answer="Dogs have to play to feel happy." placeholder="Write the complete sentence" aria-label="Unmix sentence 8"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">09</div><div class="question-body"><b>Find the extra word.</b><p>This dog doesn't <u>has</u> to relax.</p>
+    <input class="video-answer short" type="text" data-video-answer="has" placeholder="Extra word" aria-label="Extra word in sentence 9"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">10</div><div class="question-body"><b>Fill the gap.</b><p>Gidget ______ be hungry.</p>
+    <input class="video-answer short" type="text" data-video-answer="has to" placeholder="Your answer" aria-label="Fill the gap 10"></div>
+  </div>
+  <div class="video-question">
+    <div class="question-number">11</div><div class="question-body"><b>Choose the correct option.</b><p>Leonard ______ be a good boy.</p>
+    <select data-video-answer="has to"><option value="">Choose an answer</option><option>don't have to</option><option>doesn't have to</option><option>has to</option><option>have to</option></select></div>
+  </div>
+  <div class="quiz-feedback" id="video-quiz-feedback" aria-live="polite"></div>
+  <div class="quiz-actions">
+    <button class="btn" id="video-check-button" type="button" onclick="checkCurrentVideoQuestion()">Check answer</button>
+    <button class="btn" id="video-next-button" type="button" onclick="nextVideoQuestion()" hidden>Next question →</button>
+    <button class="btn secondary" id="video-retry-button" type="button" onclick="retryVideoQuestion()" hidden>Try again</button>
+  </div>
+  <div class="quiz-finish" id="video-quiz-finish" hidden></div>
+</div>
+
+<div class="paper-card sage" style="margin-top:16px"><div class="tinylabel">A quick reflection</div><h3>While watching, think about these questions</h3><ol><li>Who decides that something is necessary?</li><li>Is <em>don't have to</em> the same as <em>mustn't</em>?</li><li>What happens to <em>have to</em> when we talk about the past?</li></ol></div>
+</div></section>
+<section class="section" id="meaning"><div class="shell"><div class="sectionhead"><div class="number">02</div><div><div class="tinylabel">Meaning / Choose the right shade</div><h2>Obligation is not prohibition.</h2><p>These forms are close, but they do not mean the same thing. The difference matters in real conversations.</p></div></div>
+<div class="rulegrid">
+<div class="rule"><b>MUST</b><p>The speaker feels something is necessary. Often a personal opinion, strong recommendation or written instruction.</p></div>
+<div class="rule"><b>HAVE TO</b><p>Another person, a rule or the situation makes something necessary. It is an external obligation.</p></div>
+<div class="rule"><b>HAD TO</b><p>Past obligation: <em>I had to pay for the ticket yesterday.</em></p></div>
+<div class="rule"><b>DON’T / DOESN’T HAVE TO</b><p>There is no obligation. It is not necessary — but it is not forbidden.</p></div>
+</div>
+<div class="note"><em>You don't have to</em> wear a uniform = it isn't necessary.<br><em>You mustn't</em> smoke here = it is forbidden.</div>
+<div class="task" data-task><div class="tasktop"><h3>Check the meaning</h3><span class="tag">Choose the best answer</span></div>
+<div class="q">1. “You don't have to come early.” This means… <select data-answer="It isn't necessary."><option value="">Choose</option><option>It is forbidden.</option><option>It isn't necessary.</option><option>You must come early.</option></select></div>
+<div class="q">2. “You mustn't use your phone here.” This means… <select data-answer="It is forbidden."><option value="">Choose</option><option>It isn't necessary.</option><option>It is forbidden.</option><option>You can use it.</option></select></div>
+<div class="q">3. “I had to work late yesterday.” This refers to… <select data-answer="A past obligation."><option value="">Choose</option><option>A future plan.</option><option>A past obligation.</option><option>A personal preference.</option></select></div>
+<button class="btn" onclick="checkTask(this)">Check my answers</button><div class="feedback" aria-live="polite"></div></div>
+</div></section>
+<section class="section" id="form"><div class="shell"><div class="sectionhead"><div class="number">03</div><div><div class="tinylabel">Form / Build it correctly</div><h2>Same idea. Different structures.</h2><p>Remember: in questions and negatives, use <strong>do / does / did</strong>. After these auxiliaries, write <strong>have</strong>, not <em>has</em>.</p></div></div>
+<div class="formula">
+<div><label>Affirmative</label><p>I <mark>have to</mark> work.<br>She <mark>has to</mark> work.</p></div>
+<div><label>Negative</label><p>I <mark>don't have to</mark> work.<br>She <mark>doesn't have to</mark> work.</p></div>
+<div><label>Question</label><p><mark>Do</mark> you have to work?<br><mark>Does</mark> she have to work?</p></div>
+<div><label>Past</label><p>We <mark>had to</mark> leave early.<br><mark>Did</mark> you have to leave?</p></div>
+</div>
+<div class="task" data-task><div class="tasktop"><h3>Grammar tune-up</h3><span class="tag">Choose the correct form</span></div>
+<div class="q">1. My manager says I <select data-answer="have to"><option value="">Choose</option><option>has to</option><option>have to</option><option>had to</option></select> attend the meeting.</div>
+<div class="q">2. She <select data-answer="doesn't have to"><option value="">Choose</option><option>don't have to</option><option>doesn't have to</option><option>doesn't has to</option></select> work on Sundays.</div>
+<div class="q">3. <select data-answer="Did"><option value="">Choose</option><option>Do</option><option>Does</option><option>Did</option></select> you have to pay for the ticket yesterday?</div>
+<div class="q">4. We <select data-answer="had to"><option value="">Choose</option><option>have to</option><option>has to</option><option>had to</option></select> change our plans last night.</div>
+<button class="btn" onclick="checkTask(this)">Check my answers</button><div class="feedback" aria-live="polite"></div></div>
+</div></section>
+<section class="section" id="practice"><div class="shell"><div class="sectionhead"><div class="number">04</div><div><div class="tinylabel">Practice / Put it to work</div><h2>A day full of obligations.</h2><p>Complete the short text. Use the correct form of <em>have to</em>, <em>don't have to</em> or <em>mustn't</em>.</p></div></div>
+<div class="task" data-task><div class="tasktop"><h3>Monday is not messing around.</h3><span class="tag">Fill in the gaps</span></div>
+<p class="story">Today is going to be a very busy day. I <input type="text" data-answer="have to" aria-label="gap 1"> wake up early because I have a dentist appointment. I don't really like the dentist, but I <input type="text" data-answer="have to" aria-label="gap 2"> go anyway. My mum <input type="text" data-answer="has to" aria-label="gap 3"> drive me afterwards. We <input type="text" data-answer="mustn't" aria-label="gap 4"> be late. At work, I also <input type="text" data-answer="have to" aria-label="gap 5"> finish an important report. My colleague <input type="text" data-answer="has to" aria-label="gap 6"> check the figures. We <input type="text" data-answer="don't have to" aria-label="gap 7"> stay late, but we need to finish the task today.</p>
+<button class="btn" onclick="checkTask(this)">Check my answers</button><div class="feedback" aria-live="polite"></div></div>
+<div class="discussion"><h3>Now make it personal</h3><p>Talk about your own routine. Give details and ask follow-up questions.</p><ul><li>What do you have to do every weekday?</li><li>What don't you have to do at weekends?</li><li>What did you have to do yesterday?</li><li>Which responsibility would you happily give up?</li></ul></div>
+</div></section>
+<section class="section" id="signs"><div class="shell"><div class="sectionhead"><div class="number">05</div><div><div class="tinylabel">Real-world English / Public signs</div><h2>Read the signs. Read the rules.</h2><p>Look at each sign and decide what people can, can't or have to do.</p></div></div>
+<div class="signs"><div class="sign"><span class="emoji">🚭</span><b>NO SMOKING</b><small>prohibition</small></div><div class="sign"><span class="emoji">🅿️</span><b>PARKING</b><small>permission / place</small></div><div class="sign"><span class="emoji">📵</span><b>NO PHONES</b><small>prohibition</small></div><div class="sign"><span class="emoji">📶</span><b>FREE WI-FI</b><small>permission</small></div><div class="sign"><span class="emoji">20</span><b>SPEED LIMIT</b><small>maximum speed</small></div></div>
+<div class="task" data-task><div class="tasktop"><h3>What do the signs mean?</h3><span class="tag">Can / can't / have to</span></div>
+<div class="q">1. You <select data-answer="can't"><option value="">Choose</option><option>can</option><option>can't</option><option>don't have to</option></select> smoke here.</div>
+<div class="q">2. You <select data-answer="can"><option value="">Choose</option><option>can</option><option>can't</option><option>have to</option></select> park here.</div>
+<div class="q">3. You <select data-answer="can't"><option value="">Choose</option><option>can</option><option>can't</option><option>don't have to</option></select> use your phone here.</div>
+<div class="q">4. You <select data-answer="can"><option value="">Choose</option><option>can</option><option>can't</option><option>have to</option></select> use the Wi-Fi here.</div>
+<div class="q">5. You <select data-answer="have to"><option value="">Choose</option><option>can</option><option>can't</option><option>have to</option></select> drive at 20 km/h or less.</div>
+<button class="btn" onclick="checkTask(this)">Check my answers</button><div class="feedback" aria-live="polite"></div></div>
+</div></section>
+<section class="section" id="listen"><div class="shell"><div class="sectionhead"><div class="number">06</div><div><div class="tinylabel">Listening / Speaking</div><h2>A phone call to the driving instructor.</h2><p>Read the conversation once. Then use the read-aloud button as a listening aid, practise the roles and change the details.</p></div></div>
+<div class="paper-card"><div class="tinylabel">Dialogue / Anna books a lesson</div>
+<div class="dialogue"><div class="who">Instructor</div><p>Hello, can I help you?</p></div><div class="dialogue"><div class="who">Anna</div><p>Yes, can I have some driving lessons, please?</p></div><div class="dialogue"><div class="who">Instructor</div><p>Of course. When can I arrange a lesson?</p></div><div class="dialogue"><div class="who">Anna</div><p>I'm free on Monday. We can meet at your house.</p></div><div class="dialogue"><div class="who">Instructor</div><p>Can you come at 8.30?</p></div><div class="dialogue"><div class="who">Anna</div><p>No, sorry. I can't. I have a lesson at 8.00.</p></div><div class="dialogue"><div class="who">Instructor</div><p>OK. Can you come at ten o'clock?</p></div><div class="dialogue"><div class="who">Anna</div><p>Yes, I can. The lesson is one hour, so 10.00 to 11.00 works for me.</p></div>
+<button class="btn" onclick="speakDialogue()">▶ Listen to the dialogue</button> <button class="btn secondary" onclick="stopDialogue()">Stop</button><p class="feedback" id="speech-note">Audio note: this uses your browser's text-to-speech voice; it is not the original course recording.</p></div>
+<div class="callout"><b>Role-play:</b> You want to book a driving lesson, dentist appointment or language class. Ask about availability, explain when you can't come, and agree on a time. Then swap roles.</div>
+</div></section>
+
+<section class="section" id="homework"><div class="shell"><div class="sectionhead"><div class="number">07</div><div><div class="tinylabel">After class / Independent work</div><h2>Take the grammar into your own life.</h2><p>This task is designed for an adult learner: reflect, organise information and write for a real audience.</p></div></div>
+<div class="homework"><div class="tinylabel">Mini feature · personal essay</div><h3>THE RULES I LIVE BY</h3><p class="brief">Create a short magazine-style feature (180–220 words) about the responsibilities, rules and expectations that shape your everyday life — at work, at home, in your studies or in your city.</p>
+<p><b>Your feature must include:</b></p><ul><li>At least 5 obligations using <b>have to / has to</b>.</li><li>At least 2 things you <b>don't have to</b> do.</li><li>2 rules or prohibitions using <b>mustn't / can't</b>.</li><li>One past situation using <b>had to</b>.</li><li>At least 3 time expressions (e.g. every morning, once a week, last month).</li><li>A short reflection: which rules are useful, and which would you change?</li></ul>
+<p><b>Give it a magazine feel:</b> add a headline, one relevant photo and 2–3 short subheadings. Avoid writing only a list — connect your ideas into a coherent text.</p>
+<div class="checklist"><label><input type="checkbox"> I used have to / has to accurately.</label><label><input type="checkbox"> I included don't have to.</label><label><input type="checkbox"> I distinguished mustn't from don't have to.</label><label><input type="checkbox"> I used had to for a past obligation.</label><label><input type="checkbox"> I included time expressions.</label><label><input type="checkbox"> I checked word order and punctuation.</label></div></div>
+</div></section>
+</main>
+<footer class="shell"><div class="footer"><span>Field notes / English in everyday life</span><span>Make the rules work for you.</span></div></footer>
+<script>
+
+
+let videoQuestionIndex = 0;
+let videoCorrectCount = 0;
+let videoQuestionChecked = false;
+
+function normalizeAnswer(value){
+  return (value||'').toLowerCase().trim().replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+}
+function videoQuestions(){
+  return [...document.querySelectorAll('#video-two-exercise .video-question')];
+}
+function showVideoQuestion(){
+  const questions=videoQuestions();
+  questions.forEach((q,i)=>q.classList.toggle('active',i===videoQuestionIndex));
+  document.getElementById('video-quiz-progress').style.width=((videoQuestionIndex+1)/questions.length*100)+'%';
+  document.getElementById('video-quiz-count').textContent=`Question ${videoQuestionIndex+1} of ${questions.length}`;
+  document.getElementById('video-quiz-score').textContent=`${videoCorrectCount} correct`;
+  document.getElementById('video-check-button').hidden=false;
+  document.getElementById('video-next-button').hidden=true;
+  document.getElementById('video-retry-button').hidden=true;
+  document.getElementById('video-quiz-feedback').textContent='';
+  document.getElementById('video-quiz-feedback').className='quiz-feedback';
+  videoQuestionChecked=false;
+}
+function checkCurrentVideoQuestion(){
+  if(videoQuestionChecked)return;
+  const q=videoQuestions()[videoQuestionIndex];
+  const field=q.querySelector('[data-video-answer]');
+  const actual=normalizeAnswer(field.value);
+  const expected=normalizeAnswer(field.dataset.videoAnswer);
+  const feedback=document.getElementById('video-quiz-feedback');
+  if(!actual){
+    feedback.textContent='Choose or type an answer first.';
+    feedback.className='quiz-feedback try';
+    return;
+  }
+  if(actual===expected){
+    videoCorrectCount++;
+    videoQuestionChecked=true;
+    q.classList.add('correct');
+    q.classList.remove('incorrect');
+    feedback.textContent='Correct! Nicely done.';
+    feedback.className='quiz-feedback good';
+    document.getElementById('video-check-button').hidden=true;
+    if(videoQuestionIndex===videoQuestions().length-1){
+      document.getElementById('video-next-button').hidden=true;
+      document.getElementById('video-quiz-finish').hidden=false;
+      document.getElementById('video-quiz-finish').textContent=`Quiz complete — ${videoCorrectCount} out of ${videoQuestions().length} correct.`;
+    }else{
+      document.getElementById('video-next-button').hidden=false;
+    }
+    document.getElementById('video-quiz-score').textContent=`${videoCorrectCount} correct`;
+  }else{
+    q.classList.add('incorrect');
+    feedback.textContent='Not quite. Have another look and try again.';
+    feedback.className='quiz-feedback try';
+    document.getElementById('video-retry-button').hidden=false;
+    document.getElementById('video-check-button').hidden=true;
+  }
+}
+function retryVideoQuestion(){
+  const q=videoQuestions()[videoQuestionIndex];
+  q.classList.remove('incorrect');
+  document.getElementById('video-quiz-feedback').textContent='';
+  document.getElementById('video-quiz-feedback').className='quiz-feedback';
+  document.getElementById('video-retry-button').hidden=true;
+  document.getElementById('video-check-button').hidden=false;
+}
+function nextVideoQuestion(){
+  if(videoQuestionIndex<videoQuestions().length-1){
+    videoQuestionIndex++;
+    showVideoQuestion();
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  if(document.getElementById('video-two-exercise'))showVideoQuestion();
+});
+function resetVideoQuiz(){
+  videoQuestions().forEach(q=>{
+    const field=q.querySelector('[data-video-answer]');
+    field.value='';
+    q.classList.remove('correct','incorrect','active');
+  });
+  videoQuestionIndex=0;
+  videoCorrectCount=0;
+  document.getElementById('video-quiz-finish').hidden=true;
+  showVideoQuestion();
+}
+function checkTask(btn){const task=btn.closest('[data-task]');let total=0,correct=0;task.querySelectorAll('[data-answer]').forEach(el=>{total++;const expected=el.dataset.answer.toLowerCase().trim();const actual=(el.value||'').toLowerCase().trim();el.style.borderBottomColor=actual===expected?'#71816c':(actual?'#c85f48':'#b8a99b');if(actual===expected)correct++;});const f=task.querySelector('.feedback');f.textContent=`${correct} / ${total} correct`;f.className='feedback '+(correct===total?'ok':'no');}
+const dialogue=['Instructor. Hello, can I help you?','Anna. Yes, can I have some driving lessons, please?','Instructor. Of course. When can I arrange a lesson?','Anna. I am free on Monday. We can meet at your house.','Instructor. Can you come at eight thirty?','Anna. No, sorry. I cannot. I have a lesson at eight.','Instructor. OK. Can you come at ten o’clock?','Anna. Yes, I can. The lesson is one hour, so ten to eleven works for me.'];
+function speakDialogue(){if(!('speechSynthesis'in window)){document.getElementById('speech-note').textContent='Speech playback is not available in this browser.';return;}speechSynthesis.cancel();dialogue.forEach((line,i)=>{const u=new SpeechSynthesisUtterance(line);u.rate=.88;u.pitch=i%2?1.06:.94;speechSynthesis.speak(u);});document.getElementById('speech-note').textContent='Playing with your browser’s text-to-speech voice…';}
+function stopDialogue(){if('speechSynthesis'in window)speechSynthesis.cancel();document.getElementById('speech-note').textContent='Playback stopped. This is browser text-to-speech, not the original course recording.';}
+window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progress').style.width=(max>0?window.scrollY/max*100:0)+'%';});
+</script></body></html>

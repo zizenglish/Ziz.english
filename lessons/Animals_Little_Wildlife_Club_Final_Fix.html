@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animals — The Little Wildlife Club</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Patrick+Hand:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--ink:#101d2b;--navy:#142b40;--paper:#f4f2e9;--lime:#d9f36a;--coral:#ff775e;--blue:#80c8dc;--muted:#6d7b82;--line:#d7ded8;--white:#fffefa;--shadow:0 18px 50px #10283a18}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e8ece5;color:var(--ink);font-family:Manrope,Arial,sans-serif}
+.topbar{background:var(--navy);color:white;padding:14px max(5vw,22px);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;border-bottom:4px solid var(--lime)}
+.brand{font:700 15px 'DM Mono';letter-spacing:.16em}.brand span{color:var(--lime)}.topmeta{font:12px 'DM Mono';color:#c8d6db}
+.hero{min-height:440px;background:var(--navy);color:white;padding:65px max(6vw,24px) 55px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-20%;opacity:.22;background:repeating-radial-gradient(ellipse at 75% 55%,transparent 0 38px,#9bd2d0 39px 40px,transparent 41px 78px);transform:rotate(-12deg)}
+.hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #d9f36a66;border-radius:50%;right:8%;top:30px;box-shadow:0 0 0 28px #d9f36a0d,0 0 0 58px #d9f36a0d}
+.hero-inner{position:relative;z-index:1;max-width:1150px;margin:auto}
+.kicker{font:12px 'DM Mono';letter-spacing:.18em;color:var(--lime);text-transform:uppercase}
+h1{font:700 clamp(50px,9vw,106px)/.9 'Space Grotesk';letter-spacing:-.075em;margin:22px 0 20px;max-width:760px}
+h1 em{font-style:normal;color:var(--lime)}
+.hero p{font-size:17px;max-width:550px;line-height:1.65;color:#d6e1e1}
+.hero-stamp{position:absolute;right:12%;bottom:55px;z-index:2;border:1px solid var(--lime);color:var(--lime);padding:16px 20px;font:12px 'DM Mono';transform:rotate(5deg);background:#142b40cc}
+.progress-wrap{background:#d8e0d9;padding:14px max(5vw,22px);border-bottom:1px solid #c7d0c9}
+.progress-inner{max-width:1150px;margin:auto;display:flex;gap:8px;align-items:center}
+.progress{height:7px;background:#c1cbc4;border-radius:10px;flex:1;overflow:hidden}.progress>i{display:block;width:0;height:100%;background:#8aa82d;transition:.3s}
+.progress-label{font:11px 'DM Mono';min-width:90px;text-align:right}
+main{max-width:1150px;margin:36px auto;padding:0 22px 80px}
+.mission{background:var(--white);border:1px solid #dbe0d8;box-shadow:var(--shadow);margin:0 0 26px;position:relative;overflow:hidden}
+.mission-head{display:flex;align-items:center;gap:17px;padding:23px 28px;border-bottom:1px solid var(--line);background:#fbfcf7}
+.num{font:700 13px 'DM Mono';background:var(--lime);width:42px;height:42px;display:grid;place-items:center;border-radius:50%;flex:none}
+.mission-head h2{font:700 clamp(22px,3vw,30px) 'Space Grotesk';margin:0;letter-spacing:-.04em}
+.tag{margin-left:auto;font:10px 'DM Mono';letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.content{padding:26px 28px 30px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.note{background:#f0f4ed;border-left:4px solid var(--lime);padding:15px 17px;line-height:1.6}
+.small{font-size:13px;color:var(--muted);line-height:1.55}
+.btn{border:0;background:var(--navy);color:white;padding:12px 17px;font:600 13px 'DM Mono';cursor:pointer;border-radius:3px;transition:.2s}
+.btn:hover{background:#294d66;transform:translateY(-1px)}.btn.lime{background:var(--lime);color:var(--ink)}.btn.outline{background:transparent;color:var(--ink);border:1px solid #9eaaa2}
+.linkbtn{display:inline-flex;text-decoration:none;margin:5px 7px 5px 0}
+.video-card{background:#142b40;color:white;padding:22px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.video-card .play{font-size:50px;color:var(--lime)}.video-card h3{font:600 23px 'Space Grotesk';margin:8px 0}.video-card p{color:#d3e0e0;font-size:13px;line-height:1.5}
+.cliplinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.animal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.animal{border:1px solid var(--line);background:#fbfcf8;padding:13px 8px;text-align:center;cursor:pointer;transition:.18s;min-height:115px}
+.animal:hover,.animal.selected{border-color:#a3be3c;background:#f2f8d9;transform:translateY(-2px)}
+.animal .emoji{font-size:37px;display:block;margin-bottom:6px}.animal b{font:600 13px 'DM Mono'}
+.audio-word{font:10px 'DM Mono';color:#718077;display:block;margin-top:4px}
+.scene{border:1px solid #cbd5ca;background:#dce9df;padding:15px;min-height:190px;position:relative;overflow:hidden}
+.scene h3{font:700 18px 'Space Grotesk';margin:0 0 12px}.scene.forest{background:linear-gradient(180deg,#c8e2d7,#e8efc9)}.scene.sea{background:linear-gradient(180deg,#b8ddeb,#d5f0e9)}.scene.sky{background:linear-gradient(180deg,#b6d5e5,#e8f0e5)}
+.scene .creatures{font-size:34px;line-height:1.7;letter-spacing:7px}
+.sort-bank{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.chip{background:white;border:1px solid #cbd4cb;padding:9px 13px;border-radius:20px;font:600 12px 'DM Mono';cursor:grab;user-select:none}
+.chip:active{cursor:grabbing}.dropzone{min-height:70px;border:2px dashed #aab8aa;background:#fbfcf8;padding:10px;display:flex;gap:6px;flex-wrap:wrap;align-content:flex-start}
+.dropzone.over{background:#f2f8d9;border-color:#879e2c}.zone-title{font:700 15px 'Space Grotesk';margin-bottom:7px}
+.feedback{font:12px 'DM Mono';margin-top:12px;min-height:20px;color:#587321}
+.rule{background:var(--navy);color:white;padding:20px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.rule strong{font:700 28px 'Space Grotesk';color:var(--lime)}.rule p{margin:0;color:#e1e9e7;line-height:1.5}
+.verb-list{display:flex;flex-wrap:wrap;gap:8px}.verb{background:#f2f5ed;border:1px solid #d7dfd2;padding:10px 14px;font:600 13px 'DM Mono';cursor:pointer}.verb:hover{background:#eaf4c9}
+.quiz-q{border:1px solid var(--line);padding:16px;margin:10px 0;background:#fcfcf8}.quiz-q p{font-weight:700;margin:0 0 12px}
+.options{display:flex;flex-wrap:wrap;gap:8px}.options button{background:white;border:1px solid #cbd5ca;padding:9px 13px;border-radius:3px;cursor:pointer;font:600 12px 'DM Mono'}.options button.chosen{background:#eaf4c9;border-color:#8aa82d}
+input[type=text]{padding:11px;border:1px solid #bfc9bf;background:#fffefa;font:14px Manrope;max-width:100%;border-radius:3px}
+.adverb-card{padding:15px;background:#f4f0e6;border-top:3px solid var(--coral)}.adverb-card b{font:700 17px 'Space Grotesk'}
+.match-row{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;align-items:center;margin:10px 0}.match-row select{padding:10px;border:1px solid #cbd5ca;background:white;font:13px Manrope}
+.gameboard{background:#172f43;color:white;padding:24px;position:relative;overflow:hidden}.gameboard:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(135deg,transparent 0 24px,#ffffff07 25px 26px)}
+.game-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}.score{font:12px 'DM Mono';color:var(--lime)}
+.game-question{font:700 clamp(22px,4vw,36px) 'Space Grotesk';margin:24px 0;position:relative;z-index:1}
+.game-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1}.game-options button{padding:17px;background:#f7f8ef;border:0;text-align:left;font:600 14px 'DM Mono';cursor:pointer;color:var(--ink)}.game-options button:hover{background:var(--lime)}
+.game-feedback{min-height:25px;color:var(--lime);font:12px 'DM Mono';margin-top:16px;position:relative;z-index:1}
+.footer{font:11px 'DM Mono';color:#75827a;text-align:center;padding:20px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}.animal-grid{grid-template-columns:repeat(3,1fr)}.tag{display:none}.hero-stamp{display:none}.content{padding:20px}.mission-head{padding:18px}.game-options{grid-template-columns:1fr}.match-row{grid-template-columns:1fr}}
+
+:root{--ink:#182d43;--navy:#244c83;--paper:#e9f7fb;--lime:#bfe5a2;--coral:#f28e9d;--blue:#a9d5f1;--muted:#49647a;--line:#a8cce0;--white:#f5fcff;--shadow:0 7px 0 #7ca9c466,0 13px 24px #355c7a20}
+body{background:radial-gradient(circle,#d9e5ec 1.8px,transparent 2px) 0 0/18px 18px,#f8fcfd;color:var(--ink);font-family:Nunito,Arial,sans-serif}
+.topbar{background:#eaf7fb;color:#214b80;padding:12px max(5vw,22px);border-bottom:2px solid #a9cfe6;box-shadow:0 3px 0 #c8e1ef}
+.brand{font:700 14px 'Patrick Hand';letter-spacing:.12em}.brand span{color:#e47f96}.topmeta{font:13px 'Patrick Hand';color:#547899}
+.hero{min-height:330px;padding:35px max(6vw,24px) 45px;background:radial-gradient(ellipse 170px 30px at 12% 18%,#effaff 0 68%,transparent 70%),radial-gradient(ellipse 210px 36px at 74% 24%,#effaff 0 68%,transparent 70%),radial-gradient(ellipse 125px 26px at 92% 58%,#effaff 0 68%,transparent 70%),linear-gradient(180deg,#8fc5ef 0%,#b8e0f2 67%,#d9f1f3 100%);color:#173f86;overflow:hidden;position:relative}
+.hero:before{content:"";position:absolute;inset:auto -5% -65px;height:160px;background:linear-gradient(180deg,#a9d68b,#77b66c);border-radius:50% 50% 0 0/30% 30% 0 0;transform:rotate(-2deg)}
+.hero-inner{max-width:1150px;margin:auto;text-align:center;z-index:2}
+.kicker{font:700 17px 'Patrick Hand';letter-spacing:.08em;color:#244e91;text-transform:none}
+h1{font:400 clamp(68px,10vw,112px)/.9 Allura,cursive;letter-spacing:0;margin:8px 0;color:#174c9a;text-shadow:2px 3px 0 #ffffff88;max-width:none}
+h1 em{color:#174c9a;font-style:normal}.hero p{font:20px 'Patrick Hand';color:#244b6c;max-width:610px;margin:8px auto}
+.hero-stamp{right:7%;bottom:32px;z-index:3;border:2px dashed #3b6eae;color:#24528c;padding:10px 15px;font:14px 'Patrick Hand';transform:rotate(4deg);background:#f4fbffdd;border-radius:12px}
+.progress-wrap{background:#e8f6fa;padding:12px max(5vw,22px);border-bottom:1px solid #c3dfed}.progress{background:#d2e8f1}.progress>i{background:#4c83d4}.progress-label{font:13px 'Patrick Hand';color:#315b8a}
+main{max-width:1240px;margin:28px auto;padding:0 22px 75px}
+.mission{background:#e4f4f9;border:3px solid #a9cde2;border-radius:9px;box-shadow:var(--shadow);margin:0 0 23px;overflow:visible;position:relative}
+.mission:before{content:"";position:absolute;left:-18px;top:18px;width:37px;height:37px;border:4px solid #477bd0;background:#fff;border-radius:50%;z-index:3;pointer-events:none}
+.mission-head{background:#d8edf6;border-bottom:2px solid #b6d5e6;padding:14px 20px 14px 29px;gap:12px}
+.num{background:#fff;color:#183f86;border:3px solid #477bd0;font:800 17px Nunito;width:34px;height:34px;box-shadow:0 0 0 3px #ffffff99}
+.mission-head h2{font:700 25px 'Patrick Hand';letter-spacing:0;color:#183f86}.tag{font:13px 'Patrick Hand';color:#547a9a;letter-spacing:.04em}
+.content{padding:22px 24px 25px}.note{background:#f5fbfc;border-left:4px solid #9acbe4;border-radius:5px;line-height:1.65}.small{font:14px 'Patrick Hand';color:#49677e;line-height:1.5}
+.btn{background:#3f72bd;color:#fff;border-radius:18px;font:700 14px 'Patrick Hand';padding:10px 17px;box-shadow:0 3px 0 #2c548d}.btn:hover{background:#315fa5;transform:translateY(-1px)}.btn.lime{background:#d6ee9d;color:#25452e;box-shadow:0 3px 0 #9dbd68}.btn.outline{background:#f6fcff;color:#315b8a;border:1px solid #9fc6dd;box-shadow:none}
+.video-card{background:#244a7d;border-radius:7px;box-shadow:0 5px 0 #9fc6dd;min-height:240px}.video-card .play{color:#d7ee9f}.video-card h3{font:700 25px 'Patrick Hand'}.video-card p{font:15px 'Patrick Hand';color:#e2f1fa}
+.animal{background:#f7fcfd;border:2px solid #c1dce9;border-radius:12px;box-shadow:0 3px 0 #b4d1e1;min-height:112px}.animal:hover,.animal.selected{border-color:#79a9dc;background:#f2f8d8;transform:translateY(-2px)}.animal .emoji{font-size:39px}.animal b{font:700 16px 'Patrick Hand'}.audio-word{font:11px 'Patrick Hand';color:#6886a0}
+.scene{border:2px solid #b4d6e5;border-radius:8px;box-shadow:0 4px 0 #a7c9d9}.scene h3{font:700 20px 'Patrick Hand'}.scene.forest{background:linear-gradient(180deg,#c8e9e7,#e3f0c9)}.scene.sea{background:linear-gradient(180deg,#a8dcf2,#d6f0f0)}.scene.sky{background:linear-gradient(180deg,#a9d6f3,#e8f4fa)}
+.chip{background:#fff;border:1px solid #b9d7e5;border-radius:13px;font:700 14px 'Patrick Hand';box-shadow:0 2px 0 #d0e4ed}.dropzone{border:2px dashed #9ec5d9;background:#f5fbfc;border-radius:8px}.dropzone.over{background:#f1f8d8;border-color:#7da34b}.zone-title{font:700 20px 'Patrick Hand';color:#28558b}
+.rule{background:#d6edf6;color:#21476b;border:2px solid #a7cde2;border-radius:9px}.rule strong{font:700 31px 'Patrick Hand';color:#2457a0}.rule p{color:#315b78;font:16px 'Patrick Hand'}
+.quiz-q{border:1px solid #c2dce8;border-radius:8px;background:#f7fcfd}.options button{border:1px solid #b9d5e3;border-radius:15px;font:700 14px 'Patrick Hand';color:#244d7d}.options button.chosen{background:#e5f3c9;border-color:#91b45d}
+.verb{background:#f6fbfc;border:1px solid #b9d7e5;border-radius:14px;font:700 16px 'Patrick Hand'}.adverb-card{background:#f7fbf5;border-top:4px solid #f2a3ad;border-radius:8px}.adverb-card b{font:700 23px 'Patrick Hand'}
+.match-row select,input[type=text]{border:1px solid #b9d5e3;border-radius:8px;font:15px 'Patrick Hand'}
+.gameboard{background:linear-gradient(135deg,#244b80,#3f75b0);border:4px solid #a6cde4;border-radius:12px;box-shadow:0 5px 0 #a5c9dc}.gameboard:after{background:radial-gradient(circle,#ffffff15 1.5px,transparent 2px) 0 0/16px 16px}.game-question{font:700 clamp(24px,4vw,38px) 'Patrick Hand'}.game-options button{border-radius:12px;font:700 17px 'Patrick Hand';box-shadow:0 3px 0 #c3d9e3}.game-options button:hover{background:#e5f3bd}.score{font:14px 'Patrick Hand';color:#e2f5a9}.game-feedback{font:15px 'Patrick Hand'}.footer{font:15px 'Patrick Hand';color:#5d7d93}
+@media(max-width:760px){.hero{min-height:290px;padding-top:40px}.hero-stamp{display:none}.mission:before{left:-11px;width:26px;height:26px}.mission-head{padding-left:22px}.mission-head h2{font-size:22px}.animal-grid{grid-template-columns:repeat(3,1fr)}.content{padding:17px}}
+
+.habitat-decor{font-size:clamp(25px,3vw,38px);letter-spacing:2px;white-space:nowrap;filter:saturate(.85);animation:none!important;transform:none!important}
+.habitat-decor *{animation:none!important;transform:none!important}
+
+/* Mission 3: readable draggable labels in the word bank and habitat zones */
+#animalBank .chip, .dropzone .chip{
+  display:inline-flex!important;align-items:center;justify-content:center;
+  min-width:72px;min-height:42px;padding:9px 15px!important;
+  color:#244d7d!important;background:#ffffff!important;
+  border:1.5px solid #a9cde2!important;border-radius:14px!important;
+  font:700 16px 'Patrick Hand',sans-serif!important;
+  text-shadow:none!important;opacity:1!important;visibility:visible!important;
+  -webkit-text-fill-color:#244d7d!important;
+}
+#animalBank .chip:hover,.dropzone .chip:hover{background:#f1f8d8!important}
+#animalBank{display:flex;flex-wrap:wrap;gap:9px;min-height:64px}
+.dropzone{min-height:82px}
+
+
+/* Mission 5: force readable text on the action-verb audio buttons */
+#verbList .verb,
+.verb-list .verb,
+button.verb{
+  color:#244d7d!important;
+  -webkit-text-fill-color:#244d7d!important;
+  background:#ffffff!important;
+  border:2px solid #a9cde2!important;
+  font-family:'Patrick Hand',sans-serif!important;
+  font-size:19px!important;
+  font-weight:700!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  min-height:54px;
+  padding:12px 18px!important;
+  border-radius:16px!important;
+  box-shadow:0 3px 0 #c4dce9!important;
+}
+#verbList .verb:hover,
+.verb-list .verb:hover,
+button.verb:hover{
+  color:#1e4778!important;
+  -webkit-text-fill-color:#1e4778!important;
+  background:#f1f8d8!important;
+}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">THE LITTLE WILDLIFE CLUB <span>✦</span></div><div class="topmeta">LEVEL A0–A1 &nbsp;·&nbsp; 60 MIN &nbsp;·&nbsp; UNIT 04</div></header>
+<section class="hero"><div class="hero-inner"><div class="kicker">A little journey into the animal world</div><h1>Animals</h1><p>Meet the animals. Explore their habitats. Discover what they can and can't do. Your mission: become an animal expert.</p></div><div class="hero-stamp">EXPEDITION No. 004<br>OBSERVE · LISTEN · PLAY</div></section>
+<div class="progress-wrap"><div class="progress-inner"><div class="progress"><i id="progressBar"></i></div><div class="progress-label" id="progressLabel">0 / 9 missions</div></div></div>
+<main>
+<section class="mission" id="m1"><div class="mission-head"><div class="num">01</div><h2>Wildlife on your feed</h2><span class="tag">Watch · 7 min</span></div><div class="content grid2">
+<div class="video-card"><div><div class="play">▶</div><h3>Animal moments</h3><p>Watch 3–4 short clips. Look for different animals and actions. First watch: just enjoy. Second watch: name what you see.</p></div><div class="small" style="color:#cbd9d9">Teacher: choose short, classroom-appropriate clips before the lesson. TikTok recommendations can change and may include unrelated content.</div></div>
+<div><h3 style="font:700 20px 'Space Grotesk';margin-top:0">Your clip collection</h3><p class="small">Open a feed or creator collection and select clips with a mix of pets, wild animals, birds and sea life.</p>
+<div class="cliplinks"><a class="btn linkbtn lime" target="_blank" rel="noopener" href="https://www.tiktok.com/tag/animals">#animals ↗</a><a class="btn linkbtn" target="_blank" rel="noopener" href="https://www.instagram.com/reels/DPwXuqskZsl/">WATCH THE INSTAGRAM REEL ↗</a></div>
+<div class="note" style="margin-top:14px"><b>Talk together</b><br>What animals can you see?<br>Do you like animals?<br>Do you have a pet? What is its name?</div></div>
+</div></section>
+
+<section class="mission" id="m2"><div class="mission-head"><div class="num">02</div><h2>Wildlife field guide</h2><span class="tag">Vocabulary · 8 min</span></div><div class="content">
+<p class="small">Tap an animal to hear its name. Say it aloud. Then choose five animals you want to remember.</p>
+<div class="animal-grid" id="animalGrid"></div><div class="feedback" id="animalFeedback">Tap any animal card to hear the word.</div>
+</div></section>
+
+<section class="mission" id="m3"><div class="mission-head"><div class="num">03</div><h2>Where do they live?</h2><span class="tag">Sort · 7 min</span></div><div class="content">
+<p>Drag each animal into its habitat. You can also tap an animal and then tap a habitat.</p>
+<div class="sort-bank" id="animalBank"></div>
+<div class="grid3">
+<div><div class="zone-title">🌊 OCEAN</div><div class="scene sea"><div class="creatures habitat-decor">🐚　🪸　🌿　🫧</div></div><div class="dropzone" data-zone="ocean"></div></div>
+<div><div class="zone-title">🌳 FOREST</div><div class="scene forest"><div class="creatures habitat-decor">🌲　🍄　🌿　🌳</div></div><div class="dropzone" data-zone="forest"></div></div>
+<div><div class="zone-title">☁️ SKY</div><div class="scene sky"><div class="creatures habitat-decor">☁️　☀️　☁️　🪽</div></div><div class="dropzone" data-zone="sky"></div></div>
+</div><button class="btn lime" onclick="checkSort()" style="margin-top:16px">CHECK MY HABITATS</button><div class="feedback" id="sortFeedback"></div>
+</div></section>
+
+<section class="mission" id="m4"><div class="mission-head"><div class="num">04</div><h2>Can it do that?</h2><span class="tag">Grammar · 8 min</span></div><div class="content">
+<div class="rule"><strong>CAN / CAN'T</strong><p>Use <b>can + verb</b> to talk about ability.<br>Use <b>can't + verb</b> when something is not possible.</p></div>
+<div class="grid2" style="margin-top:18px">
+<div class="note"><b>✓ CAN</b><br>A bird can fly.<br>A dolphin can swim.<br>A kangaroo can jump.</div>
+<div class="note" style="border-color:var(--coral)"><b>✕ CAN'T</b><br>A fish can't walk.<br>A penguin can't fly.<br>A snail can't run fast.</div>
+</div>
+<p class="small" style="margin-top:18px">Remember: after <b>can / can't</b>, use the verb without <i>to</i> and without <i>-s</i>.</p>
+<div class="quiz-q"><p>Choose the correct sentence.</p><div class="options" data-answer="A"><button onclick="choose(this)">A bird can fly.</button><button onclick="choose(this)">A bird can to fly.</button><button onclick="choose(this)">A bird cans fly.</button></div></div>
+</div></section>
+
+<section class="mission" id="m5"><div class="mission-head"><div class="num">05</div><h2>Action lab</h2><span class="tag">Vocabulary · 5 min</span></div><div class="content">
+<p class="small">Tap the verbs to hear them. Mime the action. Your partner guesses the word.</p>
+<div class="verb-list" id="verbList"></div>
+<div class="grid2" style="margin-top:18px">
+<div class="video-card" style="min-height:220px"><div><div class="play">▶</div><h3>Animal action video</h3><p>Watch the animal-actions video. Listen for action verbs and say which animals can do each action.</p></div><a class="btn lime" href="https://www.youtube.com/watch?v=_5IyCB5V2bQ" target="_blank" rel="noopener">OPEN VIDEO ↗</a></div>
+<div class="note"><b>While watching</b><br>1. Write down three action verbs.<br>2. Name two animals in the video.<br>3. Make one sentence with <i>can</i> and one with <i>can't</i>.</div>
+</div>
+<div class="grid3" style="margin-top:18px">
+<div class="adverb-card"><b>FAST</b><p class="small">A cheetah runs fast.</p></div>
+<div class="adverb-card"><b>SLOWLY</b><p class="small">A turtle walks slowly.</p></div>
+<div class="adverb-card"><b>WELL</b><p class="small">A dolphin swims well.</p></div>
+</div>
+<p style="margin-top:18px"><b>Make a sentence:</b> Choose one animal + one verb + one adverb.</p>
+<input type="text" id="sentenceInput" placeholder="A dolphin can swim well." style="width:min(100%,520px)"><button class="btn" onclick="speak(document.getElementById('sentenceInput').value)">🔊 LISTEN</button>
+</div></section>
+
+<section class="mission" id="m6"><div class="mission-head"><div class="num">06</div><h2>Meet the unusual animals</h2><span class="tag">Match · 6 min</span></div><div class="content">
+<p>Match each animal name to the correct picture. These are not only the usual pets!</p>
+<div class="grid3" id="matchGrid"></div><button class="btn lime" onclick="checkMatch()" style="margin-top:16px">CHECK MATCHES</button><div class="feedback" id="matchFeedback"></div>
+</div></section>
+
+<section class="mission" id="m7"><div class="mission-head"><div class="num">07</div><h2>Action detectives</h2><span class="tag">Read & write · 5 min</span></div><div class="content">
+<p>Look at the mini-scenes. Complete each sentence with a verb from the word bank.</p>
+<div class="note"><b>Word bank:</b> fly · swim · climb · jump · talk · walk</div>
+<div id="fillTasks"></div><button class="btn lime" onclick="checkFill()" style="margin-top:12px">CHECK MY ANSWERS</button><div class="feedback" id="fillFeedback"></div>
+</div></section>
+
+<section class="mission" id="m8"><div class="mission-head"><div class="num">08</div><h2>Can you? Can they?</h2><span class="tag">Speaking · 5 min</span></div><div class="content">
+<div class="grid2">
+<div class="note"><b>Ask:</b><br>Can you swim?<br>Can a bird fly?<br>Can elephants jump?</div>
+<div class="note"><b>Answer:</b><br>Yes, I can. / No, I can't.<br>Yes, it can. / No, it can't.<br>Yes, they can. / No, they can't.</div>
+</div>
+<div id="speakingTasks"></div><p class="small">Take turns. Ask the question first, then choose the answer you think is correct.</p>
+</div></section>
+
+<section class="mission" id="m9"><div class="mission-head"><div class="num">09</div><h2>THE WILD QUIZ — final challenge</h2><span class="tag">Game · 9 min</span></div><div class="content">
+<div class="gameboard"><div class="game-top"><div class="kicker">Field test / 10 questions</div><div class="score" id="gameScore">SCORE 0</div></div><div class="game-question" id="gameQuestion">Ready to enter the wild?</div><div class="game-options" id="gameOptions"><button onclick="startGame()">START THE CHALLENGE →</button></div><div class="game-feedback" id="gameFeedback">Choose carefully. Every correct answer earns 10 points.</div></div>
+<div class="note" style="margin-top:18px"><b>Mission complete?</b> Tell your partner three things animals can do and one thing an animal can't do. Use <i>fast</i>, <i>slowly</i> or <i>well</i> in one sentence.</div>
+</div></section>
+
+<section class="mission"><div class="mission-head"><div class="num">★</div><h2>Wildlife travel briefing</h2><span class="tag">Homework · 20–25 min</span></div><div class="content">
+<div class="grid2">
+<div class="note"><b>YOUR ROLE: You are planning a nature trip.</b>
+<p>Imagine a friend is visiting a place famous for its wildlife. Prepare a short, useful wildlife briefing to help them understand one animal they may see there.</p>
+<p>Choose a real destination: a national park, a forest, a coastline, an island or a wildlife reserve. Choose one animal that lives there.</p></div>
+<div class="note"><b>YOUR FIELD BRIEFING</b>
+<ol>
+<li><b>Destination:</b> Where can visitors go?</li>
+<li><b>Animal:</b> What animal might they see?</li>
+<li><b>Habitat:</b> Where does it live?</li>
+<li><b>Abilities:</b> What can it do? Give two examples.</li>
+<li><b>Limitations:</b> What can't it do?</li>
+<li><b>Behaviour:</b> Describe how it moves using <i>fast</i>, <i>slowly</i> or <i>well</i>.</li>
+</ol></div>
+</div>
+<div class="rule" style="margin-top:16px"><strong>THE LANGUAGE CHALLENGE</strong>
+<p>Write a short guide of <b>6–8 sentences</b>. Use <b>can</b> at least twice, <b>can't</b> at least once, and one adverb. Keep the sentences clear and informative — imagine a real visitor will use your guide.</p></div>
+<div class="grid2" style="margin-top:16px">
+<div class="note"><b>🎙️ ORAL BRIEFING</b>
+<p>Record a <b>45–60 second</b> audio guide for your visitor. Introduce the destination and animal, describe its abilities and give one useful tip, for example: “You can see…” or “Please don't…”</p></div>
+<div class="note"><b>BE READY TO DISCUSS</b>
+<p>At the next lesson, give your partner three clues about the animal without naming it. Your partner must guess the animal and ask you one question about its habitat or abilities.</p></div>
+</div>
+<div class="note" style="margin-top:16px"><b>SELF-CHECK</b>
+<ul>
+<li>☐ My destination and animal are real.</li>
+<li>☐ I wrote 6–8 complete sentences.</li>
+<li>☐ I used <i>can</i>, <i>can't</i> and an adverb correctly.</li>
+<li>☐ My information is useful to a visitor.</li>
+<li>☐ I recorded a 45–60 second audio briefing.</li>
+</ul></div>
+</div></section>
+<div class="footer">ANIMALS · THE LITTLE WILDLIFE CLUB · END OF FIELD BRIEFING</div>
+</main>
+<script>
+const animals=[
+['owl','🦉'],['butterfly','🦋'],['squirrel','🐿️'],['wolf','🐺'],['beaver','🦫'],
+['bear','🐻'],['deer','🦌'],['hare','🐇'],['frog','🐸'],['snail','🐌'],
+['fox','🦊'],['hedgehog','🦔'],['seagull','🕊️'],['dolphin','🐬'],['whale','🐳'],
+['seahorse','🐉'],['fish','🐠'],['octopus','🐙'],['crab','🦀'],['turtle','🐢'],['starfish','⭐']
+];
+const verbs=['jump','fly','run','read','swim','walk','climb','talk','eat','speak','make'];
+function speak(t){if(!('speechSynthesis'in window)){alert('Speech is not supported in this browser.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.88;speechSynthesis.speak(u)}
+document.getElementById('animalGrid').innerHTML=animals.map(([w,e])=>`<button class="animal" onclick="speak('${w}');document.getElementById('animalFeedback').textContent='Listen and repeat: ${w}'"><span class="emoji">${e}</span><b>${w}</b><span class="audio-word">TAP TO HEAR</span></button>`).join('');
+document.getElementById('verbList').innerHTML=verbs.map(v=>`<button class="verb" onclick="speak('${v}')">${v}　🔊</button>`).join('');
+const habitat={ocean:['dolphin','whale','seahorse','fish','octopus','crab','turtle','starfish'],forest:['owl','squirrel','wolf','beaver','bear','deer','hare','frog','snail','fox','hedgehog'],sky:['butterfly','seagull']};
+const allSort=Object.entries(habitat).flatMap(([z,ws])=>ws.map(w=>({w,z}))).sort(()=>Math.random()-.5);
+let selectedAnimal=null;
+const bank=document.getElementById('animalBank');
+allSort.forEach(({w,z})=>{let b=document.createElement('button');b.className='chip';b.textContent=w;b.draggable=true;b.dataset.word=w;b.dataset.zone=z;b.onclick=()=>{selectedAnimal=b;document.querySelectorAll('.chip').forEach(x=>x.style.outline='');b.style.outline='3px solid #d9f36a'};b.ondragstart=e=>e.dataTransfer.setData('text/plain',w);bank.appendChild(b)});
+document.querySelectorAll('.dropzone').forEach(zone=>{zone.ondragover=e=>{e.preventDefault();zone.classList.add('over')};zone.ondragleave=()=>zone.classList.remove('over');zone.ondrop=e=>{e.preventDefault();zone.classList.remove('over');let w=e.dataTransfer.getData('text/plain');moveAnimal(w,zone)};zone.onclick=()=>{if(selectedAnimal)moveAnimal(selectedAnimal.dataset.word,zone)}});
+function moveAnimal(w,zone){let b=[...document.querySelectorAll('.chip')].find(x=>x.dataset.word===w);if(b){zone.appendChild(b);b.style.outline='';selectedAnimal=null}}
+function checkSort(){let good=0,total=allSort.length;document.querySelectorAll('.dropzone').forEach(z=>z.querySelectorAll('.chip').forEach(b=>{if(b.dataset.zone===z.dataset.zone)good++}));document.getElementById('sortFeedback').textContent=`You sorted ${good} of ${total} animals correctly. ${good===total?'Excellent field work!':'Have another look at the habitats.'}`}
+function choose(btn){let p=btn.parentElement;p.querySelectorAll('button').forEach(b=>b.classList.remove('chosen'));btn.classList.add('chosen');let right=p.dataset.answer==='A'&&btn.textContent==='A bird can fly.';p.nextElementSibling?.remove();let f=document.createElement('div');f.className='feedback';f.textContent=right?'Correct! CAN + base verb.':'Try again. Remember: can + fly.';p.after(f)}
+const matchItems=[['capybara','🦫','capybara'],['owl','🦉','owl'],['kangaroo','🦘','kangaroo'],['panda','🐼','panda'],['giraffe','🦒','giraffe'],['elephant','🐘','elephant'],['leopard','🐆','leopard']];
+document.getElementById('matchGrid').innerHTML=matchItems.map(([w,e])=>`<div class="quiz-q"><div style="font-size:55px;text-align:center">${e}</div><label class="small">Choose the animal name</label><select data-match="${w}"><option value="">Select…</option>${matchItems.map(x=>`<option>${x[0]}</option>`).sort(()=>Math.random()-.5).join('')}</select></div>`).join('');
+function checkMatch(){let n=0;document.querySelectorAll('[data-match]').forEach(s=>{if(s.value===s.dataset.match)n++});document.getElementById('matchFeedback').textContent=`${n} / ${matchItems.length} correct. ${n===matchItems.length?'Perfect matching!':'Try the ones you missed again.'}`}
+const fills=[['A bird can _____.','fly'],['A fish can _____.','swim'],['A monkey can _____.','climb'],['A kangaroo can _____.','jump'],['A person can _____.','walk'],['A parrot can _____.','talk']];
+document.getElementById('fillTasks').innerHTML=fills.map(([q,a],i)=>`<div class="match-row"><label>${i+1}. ${q}</label><input type="text" data-fill="${a}" placeholder="Type the verb"></div>`).join('');
+function checkFill(){let n=0;document.querySelectorAll('[data-fill]').forEach(x=>{if(x.value.trim().toLowerCase()===x.dataset.fill)n++});document.getElementById('fillFeedback').textContent=`${n} / ${fills.length} correct. ${n===fills.length?'Great work!':'Check the word bank and try again.'}`}
+const speakQ=[['Can a bird fly?','Yes, it can.','No, it can’t.'],['Can a fish walk?','Yes, it can.','No, it can’t.'],['Can you swim?','Yes, I can.','No, I can’t.'],['Can a kangaroo jump?','Yes, it can.','No, it can’t.']];
+document.getElementById('speakingTasks').innerHTML=speakQ.map(([q,a,b])=>`<div class="quiz-q"><p>${q}</p><div class="options"><button onclick="speak('${a.replace('’',"'")}')">${a}</button><button onclick="speak('${b.replace('’',"'")}')">${b}</button></div></div>`).join('');
+const questions=[
+['Which animal lives in the ocean?',['fox','dolphin','owl','deer'],1],
+['A bird can…',['fly','swim in the sky','climb under the sea','drive'],0],
+['Which animal is very slow?',['cheetah','snail','wolf','dolphin'],1],
+['A kangaroo can…',['fly','read','jump','talk'],2],
+['Which animal has a shell?',['turtle','fox','owl','bear'],0],
+['Choose the correct sentence.',['A fish can walk.','A fish cans swim.','A fish can swim.','A fish can to swim.'],2],
+['A monkey can…',['climb','drive','write','make a cake'],0],
+['Which animal can swim well?',['dolphin','butterfly','owl','squirrel'],0],
+['Complete: A turtle walks…',['fast','slowly','wellly','quick'],1],
+['Choose the correct negative sentence.',['A penguin can’t fly.','A penguin don’t fly.','A penguin can’t to fly.','A penguin cans not fly.'],0]
+];
+let qi=0,score=0;
+function startGame(){qi=0;score=0;showQuestion()}
+function showQuestion(){document.getElementById('gameScore').textContent='SCORE '+score;document.getElementById('gameFeedback').textContent='Question '+(qi+1)+' of '+questions.length;let q=questions[qi];document.getElementById('gameQuestion').textContent=q[0];document.getElementById('gameOptions').innerHTML=q[1].map((o,i)=>`<button onclick="answerGame(${i})">${String.fromCharCode(65+i)}　${o}</button>`).join('')}
+function answerGame(i){let q=questions[qi];let correct=i===q[2];if(correct)score+=10;document.getElementById('gameScore').textContent='SCORE '+score;document.getElementById('gameFeedback').textContent=correct?'✓ Correct! +10 points':'Not quite. Correct answer: '+q[1][q[2]];document.getElementById('gameOptions').innerHTML='<button onclick="nextGame()">CONTINUE →</button>'}
+function nextGame(){qi++;if(qi>=questions.length){document.getElementById('gameQuestion').textContent='EXPEDITION COMPLETE!';document.getElementById('gameOptions').innerHTML='<button onclick="startGame()">PLAY AGAIN ↻</button>';document.getElementById('gameFeedback').textContent=`Final score: ${score} / 100. ${score>=80?'You are a wildlife expert!':'Good effort. Review your field notes and try again.'}`;return}showQuestion()}
+const missions=[...document.querySelectorAll('.mission')];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){let idx=missions.indexOf(e.target)+1;document.getElementById('progressBar').style.width=(idx/missions.length*100)+'%';document.getElementById('progressLabel').textContent=idx+' / '+missions.length+' missions'}})},{threshold:.35});missions.forEach(m=>observer.observe(m));
+</script>
+</body></html>

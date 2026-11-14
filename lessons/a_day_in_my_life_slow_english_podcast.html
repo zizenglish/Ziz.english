@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Day in My Life — Slow English Podcast Lesson (Level A1)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Fraunces (Editorial), Plus Jakarta Sans & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Fraunces"', 'serif'],
+            script: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            sage: {
+              50: '#F4F7F4',
+              100: '#E5EDE6',
+              200: '#CBD9CD',
+              600: '#4F6F57',
+              700: '#3D5844',
+              800: '#2E4333',
+            },
+            parchment: {
+              50: '#FDFBF5',
+              100: '#F6F0DF',
+              200: '#E9DEC1',
+              300: '#D6C59C',
+            },
+            honey: {
+              100: '#FEF3C7',
+              500: '#D97706',
+              600: '#B45309',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Soft Botanical Sage Watercolor Background */
+    body {
+      background-color: #EEF3EE;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(163, 191, 168, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 88% 22%, rgba(214, 197, 156, 0.28) 0%, transparent 42%),
+        radial-gradient(circle at 75% 85%, rgba(143, 175, 150, 0.32) 0%, transparent 50%),
+        linear-gradient(180deg, #F4F7F4 0%, #E7EFE8 100%);
+      min-height: 100vh;
+      color: #263028;
+    }
+
+    /* Vintage Parchment Paper Sheet */
+    .parchment-sheet {
+      background: linear-gradient(180deg, #FCF8EC 0%, #F5ECD6 100%);
+      border: 1px solid #DFD2B0;
+      box-shadow: 0 10px 25px -8px rgba(46, 67, 51, 0.14), inset 0 0 30px rgba(214, 197, 156, 0.22);
+    }
+
+    /* Sticky Note Card with Red Pin */
+    .sticky-note {
+      background: #FEF9E7;
+      border: 1px solid #EBD9A8;
+      box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.12);
+      position: relative;
+    }
+    .note-pin {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 35% 30%, #f87171, #dc2626 65%, #7f1d1d 100%);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.97); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sage-200 selection:text-sage-800">
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sage-200 shadow-2xs">
+    <div class="max-w-5xl mx-auto px-4 py-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <!-- Title -->
+        <div class="flex items-baseline gap-2.5">
+          <h1 class="font-display font-extrabold text-xl sm:text-2xl text-sage-800 tracking-tight">
+            A Day in My Life
+          </h1>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-honey-100 text-honey-600 border border-amber-300">
+            Miss Honey • Level A1
+          </span>
+        </div>
+
+        <!-- Sequential Arrows + Speed + Progress -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center border border-sage-600 rounded-lg overflow-hidden bg-white text-xs font-extrabold">
+            <button id="header-prev-btn" onclick="prevTab()" title="Previous (Left Arrow)"
+              class="px-2.5 py-1 text-sage-700 hover:bg-sage-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              ←
+            </button>
+            <span id="header-step-label" class="px-2.5 py-1 bg-sage-700 text-white">
+              1 / 6
+            </span>
+            <button id="header-next-btn" onclick="nextTab()" title="Next (Right Arrow)"
+              class="px-2.5 py-1 text-sage-700 hover:bg-sage-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              →
+            </button>
+          </div>
+
+          <!-- Audio Speed -->
+          <div class="hidden sm:flex items-center bg-sage-50 p-0.5 rounded-lg border border-sage-200 text-[11px] font-extrabold">
+            <button type="button" onclick="setGlobalSpeed(0.75)" id="speed-btn-slow"
+              class="px-2 py-0.5 rounded text-sage-800 hover:bg-white transition cursor-pointer">
+              0.75×
+            </button>
+            <button type="button" onclick="setGlobalSpeed(0.95)" id="speed-btn-norm"
+              class="px-2 py-0.5 rounded bg-sage-700 text-white transition cursor-pointer">
+              1.0×
+            </button>
+          </div>
+
+          <!-- Progress -->
+          <div class="hidden md:flex items-center gap-1.5 bg-sage-50 px-2.5 py-1 rounded-lg border border-sage-200">
+            <div class="w-12 h-1.5 bg-sage-200 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="h-full bg-sage-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="global-progress-text" class="text-[11px] font-extrabold text-sage-800">0/6</span>
+          </div>
+
+          <button id="sound-toggle-btn" onclick="toggleSound()" title="Sound Effects"
+            class="px-2 py-1 rounded-lg text-xs font-bold bg-white text-sage-800 border border-sage-200 hover:bg-sage-50 transition cursor-pointer">
+            <span id="sound-icon">🔊</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 Navigation Tabs -->
+      <nav class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 pt-2.5">
+        <button onclick="switchTab(0)" data-tab="0" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>1. Video &amp; Words</span>
+          <span id="badge-0" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(1)" data-tab="1" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>2. Morning Quiz</span>
+          <span id="badge-1" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(2)" data-tab="2" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>3. Text &amp; Pics</span>
+          <span id="badge-2" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(3)" data-tab="3" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>4. Shadowing</span>
+          <span id="badge-3" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(4)" data-tab="4" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>5. Part 2 Video</span>
+          <span id="badge-4" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(5)" data-tab="5" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer">
+          <span>6. Evening Order</span>
+          <span id="badge-5" class="hidden">✓</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300">
+    <div id="toast-content" class="px-5 py-3 rounded-xl shadow-xl font-bold text-sm flex items-center gap-2.5 bg-sage-800 text-white">
+      <span id="toast-icon">🌿</span>
+      <span id="toast-text">Great job!</span>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-5xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: VIDEO (00:00 - 04:03) & MATCH THE WORDS           -->
+    <!-- ============================================================ -->
+    <section id="section-0" class="lesson-section animate-pop space-y-6">
+      <div class="bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-sage-100">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-sage-100 text-sage-800 mb-2">
+              PART 1 • WATCH &amp; VOCABULARY (00:00 – 04:03)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-sage-800">
+              Morning Routine: Watch &amp; Match the Words
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Watch the first part of Miss Honey's podcast (<strong>00:00 – 04:03</strong>), then match the English phrases with their Ukrainian translations.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkVocab1()" class="px-4 py-2.5 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-bold text-xs sm:text-sm shadow-xs transition cursor-pointer">
+              Check Matches
+            </button>
+            <button onclick="resetVocab1()" class="px-4 py-2.5 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs sm:text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Styled Podcast Card (Replaces YouTube Error 153) -->
+          <div class="lg:col-span-5">
+            <div class="rounded-2xl overflow-hidden border-2 border-sage-200 shadow-md bg-sage-800 relative group">
+              <a href="https://www.youtube.com/watch?v=VJyK8k2GJoY&t=0s" target="_blank" rel="noopener" class="block relative aspect-video overflow-hidden">
+                <img src="https://i.ytimg.com/vi/VJyK8k2GJoY/hqdefault.jpg"
+                  onerror="this.src='https://placehold.co/640x360/2E4333/FDFBF5?text=Miss+Honey+Podcast+%E2%80%A2+Part+1'"
+                  alt="A Day in My Life - Miss Honey"
+                  class="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-95 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-sage-950/85 via-sage-900/25 to-transparent flex flex-col items-center justify-center p-4 text-center">
+                  <div class="w-14 h-14 rounded-full bg-rose-600 group-hover:bg-rose-500 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                    <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <span class="mt-2.5 px-3.5 py-1 rounded-full bg-white/95 text-sage-900 font-extrabold text-xs shadow">
+                    Watch Part 1 on YouTube (00:00 – 04:03) ↗
+                  </span>
+                </div>
+              </a>
+              <div class="p-3.5 bg-parchment-50 border-t border-sage-200 flex items-center justify-between gap-2">
+                <span class="text-xs font-extrabold text-sage-800">🎧 Or listen directly here:</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" onclick="playPodcastAudio(1)" class="px-3 py-1.5 rounded-lg bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs cursor-pointer">▶ Play</button>
+                  <button type="button" onclick="pausePodcastAudio()" class="px-2 py-1.5 rounded-lg bg-white border border-sage-300 text-sage-800 font-bold text-xs cursor-pointer">⏸</button>
+                  <button type="button" onclick="stopPodcastAudio()" class="px-2 py-1.5 rounded-lg bg-white border border-sage-300 text-rose-700 font-bold text-xs cursor-pointer">⏹</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Matching Grid -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3" id="vocab1-container">
+            <div class="space-y-2" id="vocab1-left"></div>
+            <div class="space-y-2" id="vocab1-right"></div>
+          </div>
+        </div>
+        <div id="vocab1-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: COMPREHENSION QUIZ, VERB FILL & GRAMMAR NOTE      -->
+    <!-- ============================================================ -->
+    <section id="section-1" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Top Row: 5 Multiple-Choice Questions + Grammar Sticky Note -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- 5 Questions -->
+        <div class="lg:col-span-8 bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-7">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-sage-100">
+            <div>
+              <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-honey-100 text-honey-600 mb-1.5">
+                PART 2A • LISTENING CHECK
+              </span>
+              <h2 class="font-display font-extrabold text-2xl text-sage-800">
+                Answer the Questions (00:00 – 04:03)
+              </h2>
+            </div>
+            <button onclick="resetMorningQuiz()" class="px-3.5 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs cursor-pointer">
+              Reset
+            </button>
+          </div>
+
+          <div class="mt-5 space-y-3.5" id="morning-quiz-list"></div>
+        </div>
+
+        <!-- Grammar Sticky Note Card -->
+        <div class="lg:col-span-4 space-y-5">
+          <div class="sticky-note rounded-2xl p-6 pt-7">
+            <div class="note-pin"></div>
+            <h3 class="font-script font-bold text-3xl text-center text-sage-800 mb-3">
+              Grammar time!
+            </h3>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-800">
+              <div class="bg-white/80 p-3 rounded-xl border border-amber-200/80">
+                <p class="font-extrabold text-sage-800">be going to — збиратись щось робити</p>
+                <p class="text-slate-600 mt-0.5"><strong>is / am / are + be going to</strong></p>
+                <p class="text-xs text-slate-500 mt-1">Near future, your plans, no arrangements</p>
+                <p class="text-xs italic text-sage-700 mt-1">"Today I'm going to tell you about my daily routine."</p>
+              </div>
+              <div class="bg-white/80 p-3 rounded-xl border border-amber-200/80">
+                <p class="font-extrabold text-sage-800">saw — see</p>
+                <p class="text-slate-600">Past form of the verb</p>
+                <p class="font-bold text-honey-600 mt-1">see – saw – seen</p>
+                <p class="text-xs italic text-sage-700 mt-1">"This morning I saw a little gecko."</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Complete the sentences with verbs -->
+          <div class="bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-sage-100 text-sage-800 mb-1.5">
+              PART 2B • PRESENT SIMPLE VERBS
+            </span>
+            <h3 class="font-display font-extrabold text-lg text-sage-800 mb-2">
+              Complete with the verbs
+            </h3>
+            <div class="flex flex-wrap gap-1.5 bg-sage-50 p-2.5 rounded-xl border border-sage-200 text-xs font-bold text-sage-800 mb-3">
+              <span>(drives,</span><span>checks,</span><span>edits,</span><span>brushes,</span><span>makes,</span><span>wears)</span>
+            </div>
+
+            <div class="space-y-2.5 text-xs sm:text-sm text-slate-800" id="morning-verbs-box"></div>
+
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <button onclick="resetMorningVerbs()" class="px-3 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs cursor-pointer">
+                Reset
+              </button>
+              <button onclick="checkMorningVerbs()" class="px-4 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs cursor-pointer">
+                Check Verbs
+              </button>
+            </div>
+            <div id="morning-verbs-fb" class="mt-2.5 font-bold text-xs hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: PARCHMENT TRANSCRIPT & MATCH PICTURES WITH WORDS  -->
+    <!-- ============================================================ -->
+    <section id="section-2" class="lesson-section hidden animate-pop space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Parchment Transcript (Part 1) -->
+        <div class="lg:col-span-6 parchment-sheet rounded-2xl p-6 sm:p-7">
+          <div class="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-parchment-300">
+            <div>
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-honey-600">Podcast Script • Part 1</span>
+              <h2 class="font-display font-extrabold text-xl text-sage-800">Morning Routine Transcript</h2>
+            </div>
+            <button type="button" onclick="toggleScript1Blur()" id="script1-blur-btn"
+              class="px-3 py-1.5 rounded-xl bg-white/80 hover:bg-white text-sage-800 border border-parchment-300 text-xs font-extrabold cursor-pointer">
+              🙈 Hide Text
+            </button>
+          </div>
+
+          <div id="parchment-text-1" class="space-y-3 text-xs sm:text-sm leading-relaxed text-slate-800 transition-all">
+            <p>
+              Hello and welcome back to my Slow English podcast. Today I'm going to tell you about my daily <mark class="bg-honey-100 px-1 rounded">routine</mark>. I'll speak slowly and clearly so that you can understand and practice listening.
+            </p>
+            <p>
+              I <mark class="bg-honey-100 px-1 rounded">wake up</mark> around 5 a.m. to have an early start to the morning. I like to start my day slowly, so first I read a book.
+            </p>
+            <p>
+              This morning I saw a little <mark class="bg-honey-100 px-1 rounded">gecko</mark>, a small lizard hanging on my sheets. They are so cute! I love the <mark class="bg-honey-100 px-1 rounded">sounds</mark> they make.
+            </p>
+            <p>
+              After making my bed, I stretch, I breathe, and I <mark class="bg-honey-100 px-1 rounded">meditate</mark>. Once I finish warming up for the day, I go downstairs. I brush my teeth and I sit down to start work. I check emails, I edit videos, I plan my lessons, and I hop on video calls and meetings.
+            </p>
+            <p>
+              Then I make breakfast — something filling so I can feel full for a long time. Most mornings I like to eat chickpeas, <mark class="bg-honey-100 px-1 rounded">onions</mark>, and potatoes. It's delicious!
+            </p>
+            <p>
+              After I finish eating breakfast, I put on my <mark class="bg-honey-100 px-1 rounded">shoes</mark>, I grab my <mark class="bg-honey-100 px-1 rounded">helmet</mark>, and I drive to the supermarket. I go through each aisle to make sure I don't forget anything. Of course, the bakery is my favorite part because I always crave a sweet treat at the end of the day. I like to be well prepared for when I crave something sweet. That way I don't have to go back to the supermarket again. I get vegetables and fruits, and I stroll through the <mark class="bg-honey-100 px-1 rounded">detergent aisle</mark>. I love the <mark class="bg-honey-100 px-1 rounded">smell</mark> of the detergent aisle.
+            </p>
+          </div>
+        </div>
+
+        <!-- Match the pictures with the words in the text -->
+        <div class="lg:col-span-6 bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-7">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-sage-100">
+            <div>
+              <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-sage-100 text-sage-800 mb-1">
+                PART 3 • PICTURE VOCABULARY
+              </span>
+              <h3 class="font-display font-extrabold text-xl text-sage-800">
+                Match the pictures with the words
+              </h3>
+            </div>
+            <div class="flex gap-1.5">
+              <button onclick="checkPicWords()" class="px-3.5 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs cursor-pointer">
+                Check
+              </button>
+              <button onclick="resetPicWords()" class="px-3 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs cursor-pointer">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600 mt-3 mb-4">
+            Select the matching word from the text for each illustration (1–8):
+          </p>
+
+          <div class="grid grid-cols-2 gap-3" id="pic-words-grid"></div>
+          <div id="pic-words-fb" class="mt-3 font-bold text-xs text-center hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: SHADOWING TIME!                                   -->
+    <!-- ============================================================ -->
+    <section id="section-3" class="lesson-section hidden animate-pop">
+      <div class="bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-sage-100">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-honey-100 text-honey-600 mb-2">
+              PART 4 • PRONUNCIATION &amp; FLUENCY
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-sage-800">
+              Shadowing Time! 🎙️
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Open the YouTube video, put <strong>one earphone</strong> in your ear, listen through it, and repeat the sentences at the exact same time as the speaker.
+            </p>
+          </div>
+          <button onclick="markSectionComplete(3); showToast('🎙️', 'Shadowing practice completed!')"
+            class="px-4 py-2.5 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-bold text-xs sm:text-sm cursor-pointer">
+            ✓ Mark Practice Done
+          </button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Styled Podcast Card for Shadowing -->
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl overflow-hidden border-2 border-sage-200 shadow-md bg-sage-800 relative group">
+              <a href="https://www.youtube.com/watch?v=VJyK8k2GJoY&t=32s" target="_blank" rel="noopener" class="block relative aspect-video overflow-hidden">
+                <img src="https://i.ytimg.com/vi/VJyK8k2GJoY/hqdefault.jpg"
+                  onerror="this.src='https://placehold.co/640x360/2E4333/FDFBF5?text=Shadowing+Time+%E2%80%A2+Miss+Honey'"
+                  alt="Shadowing Time - Miss Honey"
+                  class="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-95 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-sage-950/85 via-sage-900/25 to-transparent flex flex-col items-center justify-center p-4 text-center">
+                  <div class="w-16 h-16 rounded-full bg-rose-600 group-hover:bg-rose-500 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                    <svg class="w-7 h-7 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <span class="mt-3 px-4 py-1.5 rounded-full bg-white/95 text-sage-900 font-extrabold text-xs sm:text-sm shadow">
+                    Open Video on YouTube for Shadowing ↗
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div class="mt-3 p-4 rounded-2xl bg-sage-50 border border-sage-200 text-xs sm:text-sm text-slate-700 space-y-1.5">
+              <p class="font-extrabold text-sage-800">🎧 Shadowing Instructions:</p>
+              <p>1. Open the video on YouTube (click the cover image above).</p>
+              <p>2. Take <strong>one earphone</strong> and put it into your ear (so you can clearly hear your own voice with your other ear).</p>
+              <p>3. Listen to the video through this earphone and <strong>speak simultaneously with the girl</strong>, copying her rhythm and intonation.</p>
+            </div>
+          </div>
+
+          <!-- Intentionally Left Blank Stage -->
+          <div class="lg:col-span-6 min-h-[260px] rounded-2xl border-2 border-dashed border-sage-200 bg-sage-50/40"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: PART 2 VIDEO (04:03 - 06:00), TRANSLATION & T/F   -->
+    <!-- ============================================================ -->
+    <section id="section-4" class="lesson-section hidden animate-pop space-y-6">
+      <div class="bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-sage-100">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-sage-100 text-sage-800 mb-2">
+              PART 5 • AFTERNOON &amp; DINNER (04:03 – 06:00)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-sage-800">
+              Beach &amp; Dinner: Match &amp; True / False
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Watch from <strong>04:03 to 06:00</strong>, match the new expressions, and decide if statements 1–5 are True or False.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkPart5All()" class="px-4 py-2.5 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-bold text-xs sm:text-sm cursor-pointer">
+              Check Part 5
+            </button>
+            <button onclick="resetPart5All()" class="px-4 py-2.5 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs sm:text-sm cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Styled Podcast Card for Part 2 (04:03) -->
+          <div class="lg:col-span-5">
+            <div class="rounded-2xl overflow-hidden border-2 border-sage-200 shadow-md bg-sage-800 relative group">
+              <a href="https://www.youtube.com/watch?v=VJyK8k2GJoY&t=243s" target="_blank" rel="noopener" class="block relative aspect-video overflow-hidden">
+                <img src="https://i.ytimg.com/vi/VJyK8k2GJoY/hqdefault.jpg"
+                  onerror="this.src='https://placehold.co/640x360/2E4333/FDFBF5?text=Miss+Honey+Podcast+%E2%80%A2+Part+2'"
+                  alt="A Day in My Life - Part 2"
+                  class="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-95 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-sage-950/85 via-sage-900/25 to-transparent flex flex-col items-center justify-center p-4 text-center">
+                  <div class="w-14 h-14 rounded-full bg-rose-600 group-hover:bg-rose-500 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                    <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <span class="mt-2.5 px-3.5 py-1 rounded-full bg-white/95 text-sage-900 font-extrabold text-xs shadow">
+                    Watch Part 2 on YouTube (04:03 – 06:00) ↗
+                  </span>
+                </div>
+              </a>
+              <div class="p-3.5 bg-parchment-50 border-t border-sage-200 flex items-center justify-between gap-2">
+                <span class="text-xs font-extrabold text-sage-800">🎧 Or listen directly here:</span>
+                <div class="flex items-center gap-1">
+                  <button type="button" onclick="playPodcastAudio(2)" class="px-3 py-1.5 rounded-lg bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs cursor-pointer">▶ Play</button>
+                  <button type="button" onclick="pausePodcastAudio()" class="px-2 py-1.5 rounded-lg bg-white border border-sage-300 text-sage-800 font-bold text-xs cursor-pointer">⏸</button>
+                  <button type="button" onclick="stopPodcastAudio()" class="px-2 py-1.5 rounded-lg bg-white border border-sage-300 text-rose-700 font-bold text-xs cursor-pointer">⏹</button>
+                </div>
+              </div>
+            </div>
+            <p class="mt-2 text-xs text-slate-500">⏱️ Segment: <strong>04:03 – 06:00</strong> (Opens right at 04:03)</p>
+          </div>
+
+          <!-- Match the words with the translation + True/False -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Match 1-5 -->
+            <div class="bg-sage-50/70 rounded-2xl p-4 sm:p-5 border border-sage-200">
+              <h3 class="font-display font-extrabold text-lg text-sage-800 mb-3">
+                1. Match the words with the translation
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="vocab2-grid">
+                <div class="space-y-2" id="vocab2-left"></div>
+                <div class="space-y-2" id="vocab2-right"></div>
+              </div>
+            </div>
+
+            <!-- True / False 1-5 -->
+            <div class="bg-parchment-50 rounded-2xl p-4 sm:p-5 border border-parchment-200">
+              <h3 class="font-display font-extrabold text-lg text-sage-800 mb-3">
+                2. Watch (04:03 – 06:00) and answer True (T) or False (F)
+              </h3>
+              <div class="space-y-2.5" id="part2-tf-list"></div>
+            </div>
+          </div>
+        </div>
+        <div id="part5-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: EVENING ROUTINE ORDER (1-5) & PART 2 TRANSCRIPT   -->
+    <!-- ============================================================ -->
+    <section id="section-5" class="lesson-section hidden animate-pop space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Put the evening routine in the correct order (1-5) -->
+        <div class="lg:col-span-6 bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-7">
+          <div class="flex items-center justify-between gap-2 pb-4 border-b border-sage-100">
+            <div>
+              <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-honey-100 text-honey-600 mb-1">
+                PART 6 • SEQUENCING
+              </span>
+              <h2 class="font-display font-extrabold text-xl sm:text-2xl text-sage-800">
+                Put the Evening Routine in Order (1–5)
+              </h2>
+            </div>
+            <div class="flex gap-1.5">
+              <button onclick="checkEveningOrder()" class="px-4 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs cursor-pointer">
+                Check
+              </button>
+              <button onclick="resetEveningOrder()" class="px-3 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-bold text-xs cursor-pointer">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 mt-3 mb-4">
+            Number the actions from <strong>1 to 5</strong> according to the video:
+          </p>
+
+          <div class="space-y-2.5" id="evening-order-list"></div>
+          <div id="evening-order-fb" class="mt-4 font-bold text-sm hidden"></div>
+
+          <!-- Speaking Wrap-Up Prompt -->
+          <div class="mt-6 p-4 rounded-2xl bg-sage-50 border border-sage-200">
+            <h3 class="font-display font-extrabold text-base text-sage-800 mb-1">
+              💬 Your Turn! What's your daily routine?
+            </h3>
+            <p class="text-xs text-slate-600 mb-2.5">
+              Tell your teacher about your morning, afternoon, and evening!
+            </p>
+            <textarea rows="3" placeholder="In the morning I wake up at... In the afternoon I... In the evening I..."
+              class="w-full p-3 rounded-xl bg-white border border-sage-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-sage-600"></textarea>
+          </div>
+        </div>
+
+        <!-- Parchment Transcript (Part 2) -->
+        <div class="lg:col-span-6 parchment-sheet rounded-2xl p-6 sm:p-7">
+          <div class="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-parchment-300">
+            <div>
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-honey-600">Podcast Script • Part 2</span>
+              <h2 class="font-display font-extrabold text-xl text-sage-800">Afternoon &amp; Evening Transcript</h2>
+            </div>
+            <button type="button" onclick="toggleScript2Blur()" id="script2-blur-btn"
+              class="px-3 py-1.5 rounded-xl bg-white/80 hover:bg-white text-sage-800 border border-parchment-300 text-xs font-extrabold cursor-pointer">
+              🙈 Hide Text
+            </button>
+          </div>
+
+          <div id="parchment-text-2" class="space-y-3 text-xs sm:text-sm leading-relaxed text-slate-800 transition-all">
+            <p>
+              We drive home and I make lunch. I love to eat broccoli pasta with cheese and ham. What do you like to eat for lunch?
+            </p>
+            <p>
+              After lunch, I <mark class="bg-honey-100 px-1 rounded">take advantage of</mark> a beautiful day and I visit the beach. I pack my beach bag and I <mark class="bg-honey-100 px-1 rounded">head to the beach</mark>. It was a stunning beach! I swim for the whole afternoon.
+            </p>
+            <p>
+              And finally, my favorite part of the day: dinner! I pick a nice restaurant on the beach and I <mark class="bg-honey-100 px-1 rounded">order some food</mark>. This is the barbecue chicken burger with fries and <mark class="bg-honey-100 px-1 rounded">salad on the side</mark>. I also love fish tacos, and those were just as delicious.
+            </p>
+            <p>
+              After I eat dinner, I head home. I get ready for bed, I brush my teeth, I take a shower, and I <mark class="bg-honey-100 px-1 rounded">put on my pajamas</mark>. And finally, I go to bed.
+            </p>
+            <p>
+              All in all, it was a great day! That's a day in my life. Now it's your turn: tell me about a day in your life. What's your daily routine?
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Shadowing Block for Part 2 (t=250) -->
+      <div class="bg-white/95 rounded-3xl shadow-sm border border-sage-200 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-sage-100">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-honey-100 text-honey-600 mb-2">
+              FINALE • SHADOWING TIME (PART 2)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-sage-800">
+              Shadowing Time! (Afternoon &amp; Evening) 🎙️
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Open the YouTube video from <strong>04:10</strong>, put <strong>one earphone</strong> in your ear, listen through it, and speak at the exact same time as the speaker.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl overflow-hidden border-2 border-sage-200 shadow-md bg-sage-800 relative group">
+              <a href="https://youtu.be/VJyK8k2GJoY?t=250" target="_blank" rel="noopener" class="block relative aspect-video overflow-hidden">
+                <img src="https://i.ytimg.com/vi/VJyK8k2GJoY/hqdefault.jpg"
+                  onerror="this.src='https://placehold.co/640x360/2E4333/FDFBF5?text=Shadowing+Time+%E2%80%A2+Part+2'"
+                  alt="Shadowing Time Part 2 - Miss Honey"
+                  class="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-95 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-sage-950/85 via-sage-900/25 to-transparent flex flex-col items-center justify-center p-4 text-center">
+                  <div class="w-16 h-16 rounded-full bg-rose-600 group-hover:bg-rose-500 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                    <svg class="w-7 h-7 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <span class="mt-3 px-4 py-1.5 rounded-full bg-white/95 text-sage-900 font-extrabold text-xs sm:text-sm shadow">
+                    Open Video on YouTube (04:10) for Shadowing ↗
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div class="mt-3 p-4 rounded-2xl bg-sage-50 border border-sage-200 text-xs sm:text-sm text-slate-700 space-y-1.5">
+              <p class="font-extrabold text-sage-800">🎧 Shadowing Instructions:</p>
+              <p>1. Open the video on YouTube (click the cover image above — it starts right at 04:10).</p>
+              <p>2. Take <strong>one earphone</strong> and put it into your ear.</p>
+              <p>3. Listen to the video through this earphone and <strong>speak simultaneously with the girl</strong>.</p>
+            </div>
+          </div>
+
+          <!-- Intentionally Left Blank Stage -->
+          <div class="lg:col-span-6 min-h-[260px] rounded-2xl border-2 border-dashed border-sage-200 bg-sage-50/40"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Sequential Navigation Bar -->
+    <div class="mt-7 flex items-center justify-between gap-4 bg-white/95 px-5 py-3.5 rounded-2xl border border-sage-200 shadow-2xs">
+      <button id="bottom-prev-btn" onclick="prevTab()"
+        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 font-extrabold text-xs sm:text-sm disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>←</span>
+        <span>Previous</span>
+      </button>
+
+      <span id="bottom-step-indicator" class="text-xs sm:text-sm font-extrabold text-sage-800">
+        Part 1 of 6
+      </span>
+
+      <button id="bottom-next-btn" onclick="nextTab()"
+        class="flex items-center gap-2 px-5 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white font-extrabold text-xs sm:text-sm disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>Next</span>
+        <span>→</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /* ------------------------------------------------------------
+       5. SECTION 4: SHADOWING TIME (INTENTIONALLY BLANK)
+    ------------------------------------------------------------ */
+    let soundEnabled = true;
+    let audioCtx = null;
+    const completedSections = new Set();
+    let currentTabIndex = 0;
+    const totalTabs = 6;
+    let globalSpeechRate = 0.95;
+
+    function playTone(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.11, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(175, now + 0.2);
+          gain.gain.setValueAtTime(0.07, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playTone('click');
+    }
+
+    function setGlobalSpeed(rate) {
+      playTone('click');
+      globalSpeechRate = rate;
+      const isSlow = rate < 0.85;
+      document.getElementById('speed-btn-slow').className = isSlow
+        ? 'px-2 py-0.5 rounded bg-sage-700 text-white transition cursor-pointer'
+        : 'px-2 py-0.5 rounded text-sage-800 hover:bg-white transition cursor-pointer';
+      document.getElementById('speed-btn-norm').className = !isSlow
+        ? 'px-2 py-0.5 rounded bg-sage-700 text-white transition cursor-pointer'
+        : 'px-2 py-0.5 rounded text-sage-800 hover:bg-white transition cursor-pointer';
+      showToast('🎧', isSlow ? 'Voice speed: 0.75×' : 'Voice speed: 1.0×');
+    }
+
+    function speakPhrase(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const voices = window.speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().startsWith('en'));
+      const femaleVoice = voices.find((v) => /female|woman|aria|jenny|samantha|libby|victoria/i.test(v.name)) || voices[0] || null;
+      const u = new SpeechSynthesisUtterance(text);
+      if (femaleVoice) u.voice = femaleVoice;
+      u.pitch = 1.12;
+      u.rate = globalSpeechRate;
+      window.speechSynthesis.speak(u);
+    }
+
+    const podcastScripts = {
+      1: "Hello and welcome back to my Slow English podcast. Today I'm going to tell you about my daily routine. I'll speak slowly and clearly so that you can understand and practice listening. I wake up around 5 a.m. to have an early start to the morning. I like to start my day slowly, so first I read a book. This morning I saw a little gecko, a small lizard hanging on my sheets. They are so cute! I love the sounds they make. After making my bed, I stretch, I breathe, and I meditate. Once I finish warming up for the day, I go downstairs. I brush my teeth and I sit down to start work. I check emails, I edit videos, I plan my lessons, and I hop on video calls and meetings. Then I make breakfast, something filling so I can feel full for a long time. Most mornings I like to eat chickpeas, onions, and potatoes. It's delicious! After I finish eating breakfast, I put on my shoes, I grab my helmet, and I drive to the supermarket. I go through each aisle to make sure I don't forget anything. Of course, the bakery is my favorite part because I always crave a sweet treat at the end of the day. I like to be well prepared for when I crave something sweet. That way I don't have to go back to the supermarket again. I get vegetables and fruits, and I stroll through the detergent aisle. I love the smell of the detergent aisle.",
+      2: "We drive home and I make lunch. I love to eat broccoli pasta with cheese and ham. What do you like to eat for lunch? After lunch, I take advantage of a beautiful day and I visit the beach. I pack my beach bag and I head to the beach. It was a stunning beach! I swim for the whole afternoon. And finally, my favorite part of the day: dinner! I pick a nice restaurant on the beach and I order some food. This is the barbecue chicken burger with fries and salad on the side. I also love fish tacos, and those were just as delicious. After I eat dinner, I head home. I get ready for bed, I brush my teeth, I take a shower, and I put on my pajamas. And finally, I go to bed. All in all, it was a great day! That's a day in my life. Now it's your turn: tell me about a day in your life. What's your daily routine?"
+    };
+
+    function playPodcastAudio(partNum) {
+      if (!('speechSynthesis' in window)) return;
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        return;
+      }
+      speakPhrase(podcastScripts[partNum]);
+    }
+
+    function pausePodcastAudio() {
+      if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+      }
+    }
+
+    function stopPodcastAudio() {
+      playTone('click');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function markSectionComplete(idx) {
+      completedSections.add(idx);
+      const badge = document.getElementById(`badge-${idx}`);
+      if (badge) badge.classList.remove('hidden');
+      const pct = Math.round((completedSections.size / totalTabs) * 100);
+      document.getElementById('global-progress-bar').style.width = `${pct}%`;
+      document.getElementById('global-progress-text').textContent = `${completedSections.size}/${totalTabs}`;
+    }
+
+    function switchTab(index) {
+      if (index < 0 || index >= totalTabs) return;
+      currentTabIndex = index;
+      playTone('click');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+      document.querySelectorAll('.lesson-section').forEach((sec, idx) => {
+        sec.classList.toggle('hidden', idx !== index);
+      });
+
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.className = idx === index
+          ? 'tab-btn bg-sage-700 text-white shadow-2xs flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer'
+          : 'tab-btn bg-sage-50 hover:bg-sage-100 text-sage-800 border border-sage-200 flex items-center justify-center gap-1 px-2 py-1.5 rounded-lg text-xs font-bold truncate transition cursor-pointer';
+      });
+
+      document.getElementById('header-step-label').textContent = `${index + 1} / ${totalTabs}`;
+      document.getElementById('bottom-step-indicator').textContent = `Part ${index + 1} of ${totalTabs}`;
+      document.getElementById('header-prev-btn').disabled = index === 0;
+      document.getElementById('bottom-prev-btn').disabled = index === 0;
+      document.getElementById('header-next-btn').disabled = index === totalTabs - 1;
+      document.getElementById('bottom-next-btn').disabled = index === totalTabs - 1;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevTab() { if (currentTabIndex > 0) switchTab(currentTabIndex - 1); }
+    function nextTab() { if (currentTabIndex < totalTabs - 1) switchTab(currentTabIndex + 1); }
+
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'ArrowRight') nextTab();
+      if (e.key === 'ArrowLeft') prevTab();
+    });
+
+    /* ------------------------------------------------------------
+       2. SECTION 1: MATCH THE WORDS (8 PAIRS)
+    ------------------------------------------------------------ */
+    const vocab1Pairs = [
+      { id: 1, en: 'Wake up', ua: 'Прокидатися' },
+      { id: 2, en: 'Make the bed', ua: 'Застеляти ліжко' },
+      { id: 3, en: 'Stretch', ua: 'Розтягуватись' },
+      { id: 4, en: 'Edit videos', ua: 'Редагувати відео' },
+      { id: 5, en: 'Chickpeas', ua: 'Нут (турецький горох)' },
+      { id: 6, en: 'Grocery shopping', ua: 'Робити покупки в супермаркеті' },
+      { id: 7, en: 'Detergent aisle', ua: 'Відділ побутової хімії' },
+      { id: 8, en: 'Hop on calls', ua: 'Приймати дзвінки' }
+    ];
+
+    const vocab1UaOrder = [
+      { letter: 'a', ua: 'Розтягуватись' },
+      { letter: 'b', ua: 'Робити покупки в супермаркеті' },
+      { letter: 'c', ua: 'Прокидатися' },
+      { letter: 'd', ua: 'Застеляти ліжко' },
+      { letter: 'e', ua: 'Приймати дзвінки' },
+      { letter: 'f', ua: 'Нут (турецький горох)' },
+      { letter: 'g', ua: 'Редагувати відео' },
+      { letter: 'h', ua: 'Відділ побутової хімії' }
+    ];
+
+    let selVocab1En = null;
+    let userVocab1Matches = {};
+
+    function renderVocab1() {
+      const left = document.getElementById('vocab1-left');
+      const right = document.getElementById('vocab1-right');
+      left.innerHTML = '';
+      right.innerHTML = '';
+
+      vocab1Pairs.forEach((item) => {
+        const matchedUa = userVocab1Matches[item.en];
+        const isSel = selVocab1En === item.en;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `v1-left-${item.id}`;
+        btn.onclick = () => {
+          playTone('click');
+          if (matchedUa) delete userVocab1Matches[item.en];
+          selVocab1En = isSel ? null : item.en;
+          renderVocab1();
+        };
+        btn.className = `w-full px-3.5 py-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold flex items-center justify-between transition cursor-pointer ${
+          isSel
+            ? 'border-sage-700 bg-sage-700 text-white shadow-xs'
+            : matchedUa
+            ? 'border-sage-400 bg-sage-50 text-sage-800'
+            : 'border-slate-200 bg-white hover:border-sage-400 text-slate-800'
+        }`;
+        btn.innerHTML = `
+          <span>${item.en}</span>
+          ${matchedUa ? '<span class="text-xs font-extrabold text-sage-700">↔ ✓</span>' : ''}
+        `;
+        left.appendChild(btn);
+      });
+
+      vocab1UaOrder.forEach((item) => {
+        const matchedEntry = Object.entries(userVocab1Matches).find(([, u]) => u === item.ua);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => {
+          if (!selVocab1En) {
+            showToast('👈', 'Click an English phrase on the left first!');
+            return;
+          }
+          playTone('click');
+          Object.keys(userVocab1Matches).forEach((k) => {
+            if (userVocab1Matches[k] === item.ua) delete userVocab1Matches[k];
+          });
+          userVocab1Matches[selVocab1En] = item.ua;
+          selVocab1En = null;
+          renderVocab1();
+        };
+        btn.className = `w-full px-3.5 py-2.5 rounded-xl border-2 text-left text-xs font-bold flex items-center justify-between transition cursor-pointer ${
+          matchedEntry
+            ? 'border-sage-400 bg-sage-100/70 text-sage-800'
+            : selVocab1En
+            ? 'border-dashed border-sage-500 bg-sage-50/50 hover:bg-sage-100 text-slate-800'
+            : 'border-slate-200 bg-white text-slate-700'
+        }`;
+        btn.innerHTML = `
+          <span><strong class="opacity-60 mr-1">${item.letter}.</strong> ${item.ua}</span>
+          ${matchedEntry ? `<span class="text-[10px] px-1.5 py-0.5 rounded bg-white text-sage-800 font-extrabold">${matchedEntry[0]}</span>` : ''}
+        `;
+        right.appendChild(btn);
+      });
+    }
+
+    function checkVocab1() {
+      let ok = 0;
+      vocab1Pairs.forEach((item) => {
+        const btn = document.getElementById(`v1-left-${item.id}`);
+        if (userVocab1Matches[item.en] === item.ua) {
+          ok++;
+          btn.className = 'w-full px-3.5 py-2.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 text-left text-xs sm:text-sm font-bold flex items-center justify-between';
+        } else {
+          btn.className = 'w-full px-3.5 py-2.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 text-left text-xs sm:text-sm font-bold flex items-center justify-between';
+        }
+      });
+      const fb = document.getElementById('vocab1-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 8) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Excellent! All 8 vocabulary pairs matched!';
+        markSectionComplete(0);
+        showToast('🌿', 'Part 1 Vocabulary completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You matched ${ok}/8 correctly. Fix the red phrases and try again!`;
+      }
+    }
+
+    function resetVocab1() {
+      playTone('click');
+      selVocab1En = null;
+      userVocab1Matches = {};
+      document.getElementById('vocab1-feedback').classList.add('hidden');
+      renderVocab1();
+    }
+
+    /* ------------------------------------------------------------
+       3. SECTION 2: MORNING QUIZ (5 Qs) & VERBS (6 GAPS)
+    ------------------------------------------------------------ */
+    const morningQuizData = [
+      {
+        q: '1. What time does the speaker wake up?',
+        opts: ['A) At 6:00 a.m.', 'B) Around 5:00 a.m.', 'C) At 7:30 a.m.'],
+        ans: 'B) Around 5:00 a.m.'
+      },
+      {
+        q: '2. What small animal did she see on her sheets in the morning?',
+        opts: ['A) A cat', 'B) A little lizard (gecko)', 'C) A bird'],
+        ans: 'B) A little lizard (gecko)'
+      },
+      {
+        q: '3. What does she do BEFORE going downstairs?',
+        opts: ['A) She drives to the store.', 'B) She eats breakfast.', 'C) She stretches, breathes, and meditates.'],
+        ans: 'C) She stretches, breathes, and meditates.'
+      },
+      {
+        q: '4. What does she eat for breakfast?',
+        opts: ['A) Chickpeas, onions, and potatoes', 'B) Eggs, bacon, and toast', 'C) Pancakes and fruits'],
+        ans: 'A) Chickpeas, onions, and potatoes'
+      },
+      {
+        q: '5. Why is the bakery her favorite part of the supermarket?',
+        opts: ['A) She loves buying fresh bread for lunch.', 'B) She always craves a sweet treat.', 'C) It is cheap and fast.'],
+        ans: 'B) She always craves a sweet treat.'
+      }
+    ];
+
+    let morningQuizUser = {};
+
+    function renderMorningQuiz() {
+      const list = document.getElementById('morning-quiz-list');
+      list.innerHTML = '';
+      morningQuizData.forEach((item, idx) => {
+        const chosen = morningQuizUser[idx];
+        const card = document.createElement('div');
+        card.className = 'p-3.5 rounded-2xl bg-sage-50/70 border border-sage-200';
+        card.innerHTML = `
+          <p class="font-bold text-xs sm:text-sm text-sage-800 mb-2">${item.q}</p>
+          <div class="flex flex-wrap gap-2">
+            ${item.opts.map((opt) => {
+              let cls = 'bg-white border-sage-200 text-slate-700 hover:border-sage-600';
+              if (chosen) {
+                if (opt === item.ans) cls = 'bg-emerald-600 border-emerald-600 text-white shadow-2xs';
+                else if (opt === chosen) cls = 'bg-rose-500 border-rose-500 text-white';
+              }
+              return `<button type="button" onclick="selectMorningQ(${idx}, '${opt.replace(/'/g, "\\'")}')"
+                class="px-3 py-1.5 rounded-xl border text-xs font-extrabold transition cursor-pointer ${cls}">${opt}</button>`;
+            }).join('')}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function selectMorningQ(idx, opt) {
+      morningQuizUser[idx] = opt;
+      playTone(opt === morningQuizData[idx].ans ? 'success' : 'error');
+      renderMorningQuiz();
+      checkSection2Done();
+    }
+
+    function resetMorningQuiz() {
+      playTone('click');
+      morningQuizUser = {};
+      renderMorningQuiz();
+    }
+
+    /* Verb Fill-in (4 sentences, 6 blanks) */
+    const verbOptsList = ['brushes', 'checks', 'drives', 'edits', 'makes', 'wears'];
+
+    function renderMorningVerbs() {
+      const box = document.getElementById('morning-verbs-box');
+      const selHtml = (id) => `
+        <select id="${id}" class="mx-1 px-2 py-0.5 rounded-lg border border-sage-400 bg-white font-extrabold text-sage-800 text-xs cursor-pointer">
+          <option value="">---</option>
+          ${verbOptsList.map((v) => `<option value="${v}">${v}</option>`).join('')}
+        </select>
+      `;
+      box.innerHTML = `
+        <p class="leading-relaxed">1. She ${selHtml('mv-1')} her teeth after going downstairs.</p>
+        <p class="leading-relaxed">2. She ${selHtml('mv-2')} emails and ${selHtml('mv-3')} videos for work.</p>
+        <p class="leading-relaxed">3. She ${selHtml('mv-4')} breakfast with chickpeas and potatoes.</p>
+        <p class="leading-relaxed">4. She ${selHtml('mv-5')} a helmet and ${selHtml('mv-6')} her scooter/bike to the supermarket.</p>
+      `;
+    }
+
+    function checkMorningVerbs() {
+      const keys = {
+        'mv-1': 'brushes',
+        'mv-2': 'checks',
+        'mv-3': 'edits',
+        'mv-4': 'makes',
+        'mv-5': 'wears',
+        'mv-6': 'drives'
+      };
+      let ok = 0;
+      Object.entries(keys).forEach(([id, ans]) => {
+        const el = document.getElementById(id);
+        if (el.value === ans) {
+          ok++;
+          el.className = 'mx-1 px-2 py-0.5 rounded-lg border-2 border-emerald-500 bg-emerald-50 font-extrabold text-emerald-900 text-xs';
+        } else {
+          el.className = 'mx-1 px-2 py-0.5 rounded-lg border-2 border-rose-500 bg-rose-50 font-extrabold text-rose-900 text-xs';
+        }
+      });
+      const fb = document.getElementById('morning-verbs-fb');
+      fb.classList.remove('hidden');
+      if (ok === 6) {
+        playTone('success');
+        fb.className = 'mt-2.5 font-bold text-xs text-emerald-700';
+        fb.textContent = '🎉 All 6 verbs are correct!';
+        checkSection2Done();
+      } else {
+        playTone('error');
+        fb.className = 'mt-2.5 font-bold text-xs text-rose-600';
+        fb.textContent = `Got ${ok}/6 right. Check the red boxes!`;
+      }
+    }
+
+    function resetMorningVerbs() {
+      playTone('click');
+      document.getElementById('morning-verbs-fb').classList.add('hidden');
+      renderMorningVerbs();
+    }
+
+    function checkSection2Done() {
+      const qDone = morningQuizData.every((q, i) => morningQuizUser[i] === q.ans);
+      const vDone =
+        document.getElementById('mv-1')?.value === 'brushes' &&
+        document.getElementById('mv-2')?.value === 'checks' &&
+        document.getElementById('mv-3')?.value === 'edits' &&
+        document.getElementById('mv-4')?.value === 'makes' &&
+        document.getElementById('mv-5')?.value === 'wears' &&
+        document.getElementById('mv-6')?.value === 'drives';
+      if (qDone && vDone) {
+        markSectionComplete(1);
+        showToast('🌟', 'Part 2 completed!');
+      }
+    }
+
+    /* ------------------------------------------------------------
+       4. SECTION 3: PARCHMENT SCRIPT & PICTURE MATCHING
+    ------------------------------------------------------------ */
+    let script1Hidden = false;
+    function toggleScript1Blur() {
+      playTone('click');
+      script1Hidden = !script1Hidden;
+      const el = document.getElementById('parchment-text-1');
+      el.classList.toggle('blur-xs', script1Hidden);
+      el.classList.toggle('select-none', script1Hidden);
+      document.getElementById('script1-blur-btn').textContent = script1Hidden ? '👁️ Show Text' : '🙈 Hide Text';
+    }
+
+    const picWordsData = [
+      { id: 1, emoji: '🦎', label: 'Small lizard', ans: 'gecko' },
+      { id: 2, emoji: '🧘‍♀️', label: 'Calm breathing', ans: 'meditate' },
+      { id: 3, emoji: '🧅', label: 'Purple vegetable', ans: 'onions' },
+      { id: 4, emoji: '👟', label: 'Footwear', ans: 'shoes' },
+      { id: 5, emoji: '🪖', label: 'Head protection', ans: 'helmet' },
+      { id: 6, emoji: '🧼', label: 'Cleaning products', ans: 'detergent aisle' },
+      { id: 7, emoji: '👂', label: 'What you hear', ans: 'sounds' },
+      { id: 8, emoji: '👃', label: 'Nice scent', ans: 'smell' }
+    ];
+
+    const picWordChoices = ['detergent aisle', 'gecko', 'helmet', 'meditate', 'onions', 'shoes', 'smell', 'sounds'];
+
+    function renderPicWords() {
+      const grid = document.getElementById('pic-words-grid');
+      grid.innerHTML = '';
+      picWordsData.forEach((item) => {
+        const card = document.createElement('div');
+        card.id = `picword-card-${item.id}`;
+        card.className = 'p-3 rounded-2xl bg-sage-50/70 border border-sage-200 flex flex-col items-center text-center gap-2';
+        card.innerHTML = `
+          <span class="text-3xl">${item.emoji}</span>
+          <select id="picword-sel-${item.id}" class="w-full px-2 py-1.5 rounded-xl border border-sage-300 bg-white font-extrabold text-xs text-sage-800 cursor-pointer">
+            <option value="">-- word --</option>
+            ${picWordChoices.map((w) => `<option value="${w}">${w}</option>`).join('')}
+          </select>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkPicWords() {
+      let ok = 0;
+      picWordsData.forEach((item) => {
+        const val = document.getElementById(`picword-sel-${item.id}`).value;
+        const card = document.getElementById(`picword-card-${item.id}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex flex-col items-center text-center gap-2';
+        } else {
+          card.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex flex-col items-center text-center gap-2';
+        }
+      });
+      const fb = document.getElementById('pic-words-fb');
+      fb.classList.remove('hidden');
+      if (ok === 8) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-xs text-center text-emerald-700';
+        fb.textContent = '🎉 Perfect! All 8 picture words matched!';
+        markSectionComplete(2);
+        showToast('🖼️', 'Picture vocabulary completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-xs text-center text-rose-600';
+        fb.textContent = `You matched ${ok}/8 pictures. Check the red boxes!`;
+      }
+    }
+
+    function resetPicWords() {
+      playTone('click');
+      document.getElementById('pic-words-fb').classList.add('hidden');
+      renderPicWords();
+    }
+
+    /* ------------------------------------------------------------
+       6. SECTION 5: PART 2 VOCABULARY & TRUE / FALSE
+    ------------------------------------------------------------ */
+    const vocab2Pairs = [
+      { id: 1, en: 'Take advantage of a beautiful day', ua: 'Скористатися гарним днем' },
+      { id: 2, en: 'Head to the beach', ua: 'Відправлятися / їхати на пляж' },
+      { id: 3, en: 'Order some food', ua: 'Замовляти їжу в ресторані' },
+      { id: 4, en: 'Put on pajamas', ua: 'Вдягати піжаму' },
+      { id: 5, en: 'Salad on the side', ua: 'Салат на гарнір' }
+    ];
+
+    const vocab2UaOrder = [
+      { letter: 'a', ua: 'Замовляти їжу в ресторані' },
+      { letter: 'b', ua: 'Скористатися гарним днем' },
+      { letter: 'c', ua: 'Вдягати піжаму' },
+      { letter: 'd', ua: 'Відправлятися / їхати на пляж' },
+      { letter: 'e', ua: 'Салат на гарнір' }
+    ];
+
+    let selVocab2En = null;
+    let userVocab2Matches = {};
+
+    function renderVocab2() {
+      const left = document.getElementById('vocab2-left');
+      const right = document.getElementById('vocab2-right');
+      left.innerHTML = '';
+      right.innerHTML = '';
+
+      vocab2Pairs.forEach((item) => {
+        const matchedUa = userVocab2Matches[item.en];
+        const isSel = selVocab2En === item.en;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `v2-left-${item.id}`;
+        btn.onclick = () => {
+          playTone('click');
+          if (matchedUa) delete userVocab2Matches[item.en];
+          selVocab2En = isSel ? null : item.en;
+          renderVocab2();
+        };
+        btn.className = `w-full px-3 py-2 rounded-xl border-2 text-left text-xs font-bold flex items-center justify-between transition cursor-pointer ${
+          isSel
+            ? 'border-sage-700 bg-sage-700 text-white'
+            : matchedUa
+            ? 'border-sage-400 bg-white text-sage-800'
+            : 'border-slate-200 bg-white hover:border-sage-400 text-slate-800'
+        }`;
+        btn.innerHTML = `<span>${item.id}. ${item.en}</span>${matchedUa ? '<span>✓</span>' : ''}`;
+        left.appendChild(btn);
+      });
+
+      vocab2UaOrder.forEach((item) => {
+        const matchedEntry = Object.entries(userVocab2Matches).find(([, u]) => u === item.ua);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => {
+          if (!selVocab2En) {
+            showToast('👈', 'Click an English phrase first!');
+            return;
+          }
+          playTone('click');
+          Object.keys(userVocab2Matches).forEach((k) => {
+            if (userVocab2Matches[k] === item.ua) delete userVocab2Matches[k];
+          });
+          userVocab2Matches[selVocab2En] = item.ua;
+          selVocab2En = null;
+          renderVocab2();
+        };
+        btn.className = `w-full px-3 py-2 rounded-xl border-2 text-left text-xs font-bold flex items-center justify-between transition cursor-pointer ${
+          matchedEntry
+            ? 'border-sage-400 bg-sage-100 text-sage-800'
+            : selVocab2En
+            ? 'border-dashed border-sage-500 bg-white hover:bg-sage-50 text-slate-800'
+            : 'border-slate-200 bg-white text-slate-700'
+        }`;
+        btn.innerHTML = `<span><strong class="opacity-60 mr-1">${item.letter}.</strong> ${item.ua}</span>`;
+        right.appendChild(btn);
+      });
+    }
+
+    const part2TFQuestions = [
+      { num: 1, text: 'For lunch, she eats broccoli pasta with cheese and ham.', ans: 'T' },
+      { num: 2, text: 'She goes to the beach in the morning.', ans: 'F' },
+      { num: 3, text: 'She swims at the beach for the whole afternoon.', ans: 'T' },
+      { num: 4, text: 'For dinner, she cooks food at home.', ans: 'F' },
+      { num: 5, text: 'She eats a chicken burger with fries and also tries fish tacos.', ans: 'T' }
+    ];
+
+    let part2TFUser = {};
+
+    function renderPart2TF() {
+      const list = document.getElementById('part2-tf-list');
+      list.innerHTML = '';
+      part2TFQuestions.forEach((q) => {
+        const chosen = part2TFUser[q.num];
+        const row = document.createElement('div');
+        row.id = `p2tf-row-${q.num}`;
+        row.className = 'p-2.5 rounded-xl bg-white border border-parchment-200 flex items-center justify-between gap-2';
+        row.innerHTML = `
+          <span class="text-xs font-semibold text-slate-800"><strong>${q.num}.</strong> ${q.text}</span>
+          <div class="flex gap-1 shrink-0">
+            <button type="button" onclick="selectP2TF(${q.num}, 'T')"
+              class="w-8 h-8 rounded-lg font-extrabold text-xs cursor-pointer ${
+                chosen === 'T' ? 'bg-sage-800 text-white' : 'bg-sage-50 border border-sage-200 text-slate-700'
+              }">T</button>
+            <button type="button" onclick="selectP2TF(${q.num}, 'F')"
+              class="w-8 h-8 rounded-lg font-extrabold text-xs cursor-pointer ${
+                chosen === 'F' ? 'bg-sage-800 text-white' : 'bg-sage-50 border border-sage-200 text-slate-700'
+              }">F</button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function selectP2TF(num, val) {
+      playTone('click');
+      part2TFUser[num] = val;
+      renderPart2TF();
+    }
+
+    function checkPart5All() {
+      let vOk = 0;
+      vocab2Pairs.forEach((item) => {
+        const btn = document.getElementById(`v2-left-${item.id}`);
+        if (userVocab2Matches[item.en] === item.ua) {
+          vOk++;
+          btn.className = 'w-full px-3 py-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 text-left text-xs font-bold flex items-center justify-between';
+        } else {
+          btn.className = 'w-full px-3 py-2 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 text-left text-xs font-bold flex items-center justify-between';
+        }
+      });
+
+      let tfOk = 0;
+      part2TFQuestions.forEach((q) => {
+        const row = document.getElementById(`p2tf-row-${q.num}`);
+        if (part2TFUser[q.num] === q.ans) {
+          tfOk++;
+          row.className = 'p-2.5 rounded-xl bg-emerald-50 border-2 border-emerald-500 flex items-center justify-between gap-2';
+        } else {
+          row.className = 'p-2.5 rounded-xl bg-rose-50 border-2 border-rose-500 flex items-center justify-between gap-2';
+        }
+      });
+
+      const fb = document.getElementById('part5-feedback');
+      fb.classList.remove('hidden');
+      if (vOk === 5 && tfOk === 5) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Fantastic! All translations and True/False answers are correct!';
+        markSectionComplete(4);
+        showToast('🏖️', 'Part 5 completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `Translations: ${vOk}/5 • True/False: ${tfOk}/5. Fix the red items and try again!`;
+      }
+    }
+
+    function resetPart5All() {
+      playTone('click');
+      selVocab2En = null;
+      userVocab2Matches = {};
+      part2TFUser = {};
+      document.getElementById('part5-feedback').classList.add('hidden');
+      renderVocab2();
+      renderPart2TF();
+    }
+
+    /* ------------------------------------------------------------
+       7. SECTION 6: EVENING ORDER (1-5) & SCRIPT 2
+    ------------------------------------------------------------ */
+    const eveningActions = [
+      { id: 'sh', text: 'She takes a shower.', correctPos: '4' },
+      { id: 'din', text: 'She eats dinner at a beach restaurant.', correctPos: '1' },
+      { id: 'paj', text: 'She puts on her pajamas and goes to bed.', correctPos: '5' },
+      { id: 'home', text: 'She heads home from the beach.', correctPos: '2' },
+      { id: 'br', text: 'She brushes her teeth.', correctPos: '3' }
+    ];
+
+    function renderEveningOrder() {
+      const list = document.getElementById('evening-order-list');
+      list.innerHTML = '';
+      eveningActions.forEach((act) => {
+        const row = document.createElement('div');
+        row.id = `ev-row-${act.id}`;
+        row.className = 'p-3 rounded-2xl bg-sage-50/70 border border-sage-200 flex items-center gap-3';
+        row.innerHTML = `
+          <select id="ev-sel-${act.id}" class="w-14 h-9 rounded-xl border-2 border-sage-400 bg-white font-extrabold text-center text-sm text-sage-800 cursor-pointer">
+            <option value="">#</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <span class="text-xs sm:text-sm font-bold text-slate-800">${act.text}</span>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function checkEveningOrder() {
+      let ok = 0;
+      eveningActions.forEach((act) => {
+        const val = document.getElementById(`ev-sel-${act.id}`).value;
+        const row = document.getElementById(`ev-row-${act.id}`);
+        if (val === act.correctPos) {
+          ok++;
+          row.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex items-center gap-3';
+        } else {
+          row.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex items-center gap-3';
+        }
+      });
+      const fb = document.getElementById('evening-order-fb');
+      fb.classList.remove('hidden');
+      if (ok === 5) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-emerald-700';
+        fb.textContent = '🌙 Perfect evening sequence (1 → 2 → 3 → 4 → 5)!';
+        markSectionComplete(5);
+        showToast('🏆', 'Whole lesson completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-rose-600';
+        fb.textContent = `You got ${ok}/5 in the right order. Check the transcript on the right!`;
+      }
+    }
+
+    function resetEveningOrder() {
+      playTone('click');
+      document.getElementById('evening-order-fb').classList.add('hidden');
+      renderEveningOrder();
+    }
+
+    let script2Hidden = false;
+    function toggleScript2Blur() {
+      playTone('click');
+      script2Hidden = !script2Hidden;
+      const el = document.getElementById('parchment-text-2');
+      el.classList.toggle('blur-xs', script2Hidden);
+      el.classList.toggle('select-none', script2Hidden);
+      document.getElementById('script2-blur-btn').textContent = script2Hidden ? '👁️ Show Text' : '🙈 Hide Text';
+    }
+
+    /* ------------------------------------------------------------
+       INITIALIZE ALL EXERCISES
+    ------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab(0);
+      renderVocab1();
+      renderMorningQuiz();
+      renderMorningVerbs();
+      renderPicWords();
+      renderVocab2();
+      renderPart2TF();
+      renderEveningOrder();
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+      }
+    });
+  </script>
+</body>
+</html>

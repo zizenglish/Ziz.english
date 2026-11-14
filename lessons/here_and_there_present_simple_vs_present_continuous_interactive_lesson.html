@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Here and There: Present Simple vs Present Continuous (A1–A2)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Editorial Serif + Handwriting + Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+            script: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            paper: {
+              50: '#FAF8F4',
+              100: '#F2EFE9',
+              200: '#E5DFD3',
+              300: '#D3C9B8',
+            },
+            terracotta: {
+              50: '#FDF4F2',
+              100: '#FAE5E1',
+              500: '#C45B4D',
+              600: '#B85042',
+              700: '#9A3F33',
+            },
+            asphalt: {
+              800: '#2E2E2E',
+              900: '#212121',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Textured Vintage Cream Paper Background */
+    body {
+      background-color: #F2EFE9;
+      background-image:
+        radial-gradient(rgba(184, 80, 66, 0.06) 1px, transparent 0),
+        radial-gradient(rgba(33, 33, 33, 0.04) 1px, transparent 0);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      min-height: 100vh;
+      color: #262626;
+    }
+
+    /* Polaroid Frame & Realistic Red 3D Pushpin */
+    .polaroid-card {
+      background: #FFFFFF;
+      padding: 1.5rem 1.5rem 1.75rem 1.5rem;
+      border: 1px solid #E5DFD3;
+      box-shadow: 0 12px 28px -8px rgba(33, 33, 33, 0.12), 0 4px 10px -2px rgba(33, 33, 33, 0.06);
+      position: relative;
+    }
+    .pushpin {
+      position: absolute;
+      top: -13px;
+      right: 26px;
+      width: 26px;
+      height: 26px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 32% 30%, #f87171, #B85042 62%, #7f1d1d 100%);
+      box-shadow: -5px 8px 10px rgba(0, 0, 0, 0.28), inset 0 2px 3px rgba(255, 255, 255, 0.45);
+      z-index: 20;
+    }
+    .pushpin::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 6px;
+      width: 7px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+      transform: rotate(-25deg);
+    }
+
+    /* Vintage Ticket Box */
+    .ticket-box {
+      border: 2px solid #B85042;
+      background: #FAF8F4;
+    }
+
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+
+    @keyframes popIn {
+      0% { transform: scale(0.96); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="antialiased selection:bg-terracotta-100 selection:text-terracotta-700 relative overflow-x-hidden">
+
+  <!-- Decorative Winding Asphalt Road SVG Backdrop -->
+  <svg class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-20" viewBox="0 0 1440 900" preserveAspectRatio="none">
+    <path d="M -80,760 C 260,740 340,560 660,520 C 980,480 920,250 1520,180"
+          fill="none" stroke="#262626" stroke-width="58" stroke-linecap="round" />
+    <path d="M -80,760 C 260,740 340,560 660,520 C 980,480 920,250 1520,180"
+          fill="none" stroke="#FAF8F4" stroke-width="4" stroke-dasharray="18 18" stroke-linecap="round" />
+  </svg>
+
+  <!-- ==================== STICKY HEADER & TOUR ROUTE NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-paper-50/95 backdrop-blur-md border-b border-paper-300 shadow-2xs">
+    <div class="max-w-5xl mx-auto px-4 py-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <!-- Clean Editorial Header -->
+        <div class="flex items-baseline gap-3">
+          <h1 class="font-display font-extrabold text-xl sm:text-2xl text-terracotta-600 tracking-wide uppercase">
+            Here &amp; There
+          </h1>
+          <span class="font-script text-lg sm:text-xl text-asphalt-800">
+            Present Simple vs. Present Continuous
+          </span>
+        </div>
+
+        <!-- Compact Controls: Arrows + Speed + Progress -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center border border-terracotta-600 rounded-md overflow-hidden bg-white text-xs font-extrabold">
+            <button id="header-prev-btn" onclick="prevTab()" title="Previous (Left Arrow)"
+              class="px-2.5 py-1 text-terracotta-700 hover:bg-terracotta-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              ←
+            </button>
+            <span id="header-step-label" class="px-2.5 py-1 bg-terracotta-600 text-white tracking-wider">
+              1 / 6
+            </span>
+            <button id="header-next-btn" onclick="nextTab()" title="Next (Right Arrow)"
+              class="px-2.5 py-1 text-terracotta-700 hover:bg-terracotta-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              →
+            </button>
+          </div>
+
+          <!-- Clean Audio Speed Toggle -->
+          <div class="hidden sm:flex items-center bg-paper-100 p-0.5 rounded-md border border-paper-300 text-[11px] font-extrabold">
+            <button type="button" onclick="setGlobalSpeed(0.72)" id="global-speed-slow"
+              class="px-2 py-0.5 rounded text-asphalt-800 hover:bg-white transition cursor-pointer">
+              0.75×
+            </button>
+            <button type="button" onclick="setGlobalSpeed(0.96)" id="global-speed-normal"
+              class="px-2 py-0.5 rounded bg-asphalt-900 text-paper-50 transition cursor-pointer">
+              1.0×
+            </button>
+          </div>
+
+          <!-- Compact Progress -->
+          <div class="hidden md:flex items-center gap-1.5 bg-paper-100 px-2.5 py-1 rounded-md border border-paper-300">
+            <div class="w-12 h-1.5 bg-paper-300 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="h-full bg-terracotta-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="global-progress-text" class="text-[11px] font-extrabold text-terracotta-700">0/6</span>
+          </div>
+
+          <button id="sound-toggle-btn" onclick="toggleSound()" title="Sound Effects"
+            class="px-2 py-1 rounded-md text-xs font-bold bg-white text-asphalt-800 border border-paper-300 hover:bg-paper-100 transition cursor-pointer">
+            <span id="sound-icon">🔊</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 Compact Tabs (All Fit Comfortably Without Overflow) -->
+      <nav class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 pt-2.5">
+        <button onclick="switchTab(0)" data-tab="0" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>1. Call</span>
+          <span id="badge-0" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(1)" data-tab="1" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>2. Grammar</span>
+          <span id="badge-1" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(2)" data-tab="2" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>3. Chat</span>
+          <span id="badge-2" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(3)" data-tab="3" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>4. Reading</span>
+          <span id="badge-3" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(4)" data-tab="4" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>5. Verbs</span>
+          <span id="badge-4" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(5)" data-tab="5" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer">
+          <span>6. Taxi &amp; Meal</span>
+          <span id="badge-5" class="hidden">✓</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300">
+    <div id="toast-content" class="px-5 py-3 rounded-xl shadow-xl font-bold text-sm flex items-center gap-2.5 bg-asphalt-900 text-paper-50 border border-terracotta-500">
+      <span id="toast-icon">📍</span>
+      <span id="toast-text">Great job!</span>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 py-7 sm:py-9">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: HERE AND THERE (CAROL & TONY)                     -->
+    <!-- ============================================================ -->
+    <section id="section-0" class="lesson-section animate-pop space-y-7">
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+              STOP 01 • LISTENING &amp; READING (9.1)
+            </span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-terracotta-600 uppercase tracking-tight">
+              Here and There
+            </h2>
+            <p class="font-script text-xl text-asphalt-800 mt-0.5">
+              Zurich Business Trip &amp; Home in the UK
+            </p>
+            <p class="text-stone-600 text-sm mt-1.5">
+              Listen carefully to the phone call! Click on <strong>any sentence Tony says</strong> to underline <strong>three things which are NOT true</strong>.
+            </p>
+          </div>
+          <!-- Audio Controls for 9.1 -->
+          <div class="flex items-center gap-1.5 bg-paper-100 p-2 rounded-xl border border-paper-300">
+            <button type="button" onclick="playTrack('carol')" id="btn-play-carol"
+              class="px-4 py-2 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-xs">
+              <span>▶</span> Play Call
+            </button>
+            <button type="button" onclick="pauseTrack()" class="px-2.5 py-2 rounded-lg bg-white hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-extrabold text-xs cursor-pointer" title="Pause">⏸</button>
+            <button type="button" onclick="stopTrack()" class="px-2.5 py-2 rounded-lg bg-white hover:bg-paper-200 text-terracotta-700 border border-paper-300 font-extrabold text-xs cursor-pointer" title="Stop">⏹</button>
+          </div>
+        </div>
+
+        <!-- Interactive Dialogue Script (All Tony's statements look identical — no spoilers!) -->
+        <div class="mt-6 bg-paper-50 rounded-xl border border-paper-200 p-5 sm:p-6 space-y-2.5 text-sm sm:text-base leading-relaxed">
+          <p><strong class="text-terracotta-700">Carol:</strong> Hello? Tony?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t0')" id="tony-claim-t0" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Oh, hi, darling.</span>
+            How's Zurich?
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> Fine, fine. I'm staying in a nice hotel – but it's raining. Can you hear it?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t1')" id="tony-claim-t1" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Yes, yes, I can.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> How are the children?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t2')" id="tony-claim-t2" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Oh, they're fine.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> Where are they? What are they doing?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t3')" id="tony-claim-t3" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Lily's in the living room.</span>
+            <span onclick="toggleTonyClaim('lie0')" id="tony-claim-lie0" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">She's doing her homework.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> And Matt and Josh?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t4')" id="tony-claim-t4" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">They're in their bedroom.</span>
+            <span onclick="toggleTonyClaim('lie1')" id="tony-claim-lie1" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">They're reading.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> I think I can hear them. Are you sure they're reading?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong> Yes, yes.
+            <span onclick="toggleTonyClaim('t5')" id="tony-claim-t5" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">That noise is the TV.</span>
+            <span onclick="toggleTonyClaim('t6')" id="tony-claim-t6" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Your mother's watching a film.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> What about you? Are you OK?</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t7')" id="tony-claim-t7" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">I'm fine.</span>
+            <span onclick="toggleTonyClaim('lie2')" id="tony-claim-lie2" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">I'm making dinner – fish and vegetables.</span>
+          </p>
+          <p><strong class="text-terracotta-700">Carol:</strong> Oh great! Very healthy. OK darling, I need to go now. See you on Tuesday.</p>
+          <p>
+            <strong class="text-asphalt-900">Tony:</strong>
+            <span onclick="toggleTonyClaim('t8')" id="tony-claim-t8" class="tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer">Have a good day tomorrow. Bye.</span>
+          </p>
+        </div>
+
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+          <p class="text-xs font-bold text-stone-500">Listen to what happens after Carol hangs up! Click 3 sentences in Tony's speech to underline them.</p>
+          <div class="flex items-center gap-2">
+            <button onclick="resetCarolLies()" class="px-4 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+              Clear
+            </button>
+            <button onclick="checkCarolLies()" class="px-5 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-sm cursor-pointer">
+              Check 3 Untrue Things
+            </button>
+          </div>
+        </div>
+        <div id="carol-feedback" class="mt-3 font-bold text-sm hidden"></div>
+      </div>
+
+      <!-- Mini Speaking Prompt Ticket -->
+      <div class="ticket-box rounded-xl p-5 sm:p-6 shadow-xs">
+        <h3 class="font-display font-extrabold text-xl text-terracotta-700 mb-1">
+          Think about your family and friends
+        </h3>
+        <p class="text-sm text-stone-700 mb-3">
+          Where do you think they are now? What do you think they are doing?
+        </p>
+        <div class="bg-white rounded-lg p-3.5 border border-paper-200 font-script text-xl text-asphalt-800 mb-3">
+          Example: "I think my brother's in his bedroom. He's sleeping."
+        </div>
+        <input type="text" placeholder="Write your own sentence here..."
+          class="w-full px-3.5 py-2 rounded-lg bg-white border border-paper-300 text-sm text-asphalt-900 focus:outline-none focus:border-terracotta-600" />
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: GRAMMAR HUB & WORDWALL SPEAKING CARDS             -->
+    <!-- ============================================================ -->
+    <section id="section-1" class="lesson-section hidden animate-pop space-y-7">
+      <!-- Grammar Comparison Card -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+          STOP 02A • GRAMMAR GUIDEBOOK
+        </span>
+        <h2 class="font-display font-extrabold text-3xl text-terracotta-600 uppercase tracking-tight mb-5">
+          Present Simple vs. Present Continuous
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Present Simple -->
+          <div class="rounded-xl bg-paper-50 border-2 border-paper-300 p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-extrabold text-xl text-asphalt-900">1. Present Simple</h3>
+              <span class="px-2.5 py-0.5 rounded text-xs font-extrabold uppercase bg-paper-200 text-asphalt-900">Routine &amp; Facts</span>
+            </div>
+            <p class="text-sm font-bold text-asphalt-900 bg-white p-3 rounded-lg border border-paper-200 mb-3">
+              "I <span class="underline decoration-terracotta-600 decoration-2">live</span> in a van with my boyfriend, our cat, and our dog."
+            </p>
+            <ul class="space-y-2 text-xs sm:text-sm text-stone-700">
+              <li>📍 <strong>Always true / facts:</strong> <em>The sun rises in the east.</em></li>
+              <li>📍 <strong>Habits &amp; routines:</strong> <em>every day, usually, always, on Mondays, at the weekend.</em></li>
+              <li>📍 <strong>Stative verbs (no -ing!):</strong> <em>like, love, hate, want, need, know, understand, have.</em></li>
+              <li>✍️ <strong>Forms:</strong> I/you/we/they <strong>talk / don't talk</strong> • He/she/it <strong>talks / doesn't talk</strong></li>
+            </ul>
+          </div>
+
+          <!-- Present Continuous -->
+          <div class="rounded-xl bg-terracotta-50/70 border-2 border-terracotta-500/40 p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-extrabold text-xl text-terracotta-700">2. Present Continuous</h3>
+              <span class="px-2.5 py-0.5 rounded text-xs font-extrabold uppercase bg-terracotta-600 text-white">Now &amp; Temporary</span>
+            </div>
+            <p class="text-sm font-bold text-terracotta-700 bg-white p-3 rounded-lg border border-terracotta-100 mb-3">
+              "Right now, I <span class="underline decoration-terracotta-600 decoration-2">am sitting</span> outside and <span class="underline decoration-terracotta-600 decoration-2">drinking</span> my coffee."
+            </p>
+            <ul class="space-y-2 text-xs sm:text-sm text-stone-700">
+              <li>📍 <strong>Happening right now:</strong> <em>now, at the moment, Look!, Listen!</em></li>
+              <li>📍 <strong>Temporary situations:</strong> <em>today, this week, these days, currently.</em></li>
+              <li>✍️ <strong>Forms:</strong> I <strong>am ('m not)</strong> + V-ing • He/she/it <strong>is (isn't)</strong> + V-ing • You/we/they <strong>are (aren't)</strong> + V-ing</li>
+              <li>🔤 <strong>Spelling:</strong> <em>make → making • run → running • lie → lying</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Speaking Cards -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-asphalt-900 text-paper-50 mb-2">
+              STOP 02B • POSTCARD DECK
+            </span>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Complete &amp; Answer
+            </h3>
+            <p class="text-stone-600 text-sm mt-1">
+              Put the verb in brackets into <strong>Present Simple</strong> or <strong>Present Continuous</strong>, flip to check, then answer!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="grammar-card-counter" class="px-3 py-2 rounded-lg bg-paper-100 text-asphalt-900 border border-paper-300 font-extrabold text-xs">
+              Card 1 of 10
+            </span>
+            <button onclick="shuffleGrammarDeck()" class="px-4 py-2 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-900 border border-paper-300 font-bold text-xs sm:text-sm cursor-pointer">
+              🔀 Shuffle
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 max-w-xl mx-auto">
+          <div onclick="flipGrammarCard()" class="perspective-1000 cursor-pointer select-none">
+            <div id="grammar-card-inner" class="transform-style-3d relative w-full min-h-[245px] rounded-xl shadow-lg">
+              <!-- Front -->
+              <div class="backface-hidden absolute inset-0 rounded-xl bg-asphalt-900 text-paper-50 p-7 flex flex-col justify-between border-4 border-white">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-extrabold uppercase tracking-widest bg-terracotta-600 px-3 py-1 rounded">Travel Question</span>
+                  <span class="font-script text-2xl text-paper-200">Postcard #01</span>
+                </div>
+                <p id="grammar-card-front-text" class="font-display font-bold text-xl sm:text-2xl text-center leading-snug my-3">
+                  What ______ you ______ (do) right now?
+                </p>
+                <p class="text-center text-xs text-paper-300 font-bold uppercase tracking-wider">
+                  👆 Click card to reveal verb form
+                </p>
+              </div>
+
+              <!-- Back -->
+              <div class="backface-hidden rotate-y-180 absolute inset-0 rounded-xl bg-paper-50 text-asphalt-900 p-7 flex flex-col justify-between border-4 border-terracotta-600">
+                <div class="flex justify-between items-center">
+                  <span id="grammar-card-tense-tag" class="text-xs font-extrabold uppercase px-3 py-1 rounded bg-terracotta-600 text-white">
+                    Present Continuous
+                  </span>
+                  <span class="text-xl">📍</span>
+                </div>
+                <p id="grammar-card-back-text" class="font-display font-extrabold text-xl sm:text-2xl text-center text-terracotta-700 my-3">
+                  What are you doing right now?
+                </p>
+                <p id="grammar-card-reason" class="text-center text-xs font-bold text-stone-600 bg-white p-2.5 rounded-lg border border-paper-200">
+                  Signal word: "right now" → action happening at this moment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-center gap-3">
+            <button onclick="flipGrammarCard()" class="px-5 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-900 border border-paper-300 font-bold text-xs uppercase tracking-wider cursor-pointer">
+              🔄 Flip Card
+            </button>
+            <button onclick="nextGrammarCard()" class="px-6 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-sm cursor-pointer">
+              Next Card →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: 4 CONVERSATIONS (9.6) + MIKE & LINA CHAT          -->
+    <!-- ============================================================ -->
+    <section id="section-2" class="lesson-section hidden animate-pop space-y-7">
+      <!-- Part A: 9.6 Listen to four conversations -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+              STOP 03A • LISTENING (9.6)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Four City Conversations
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Play each short audio clip and choose what the people are doing right now!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkFourConvos()" class="px-4 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer">
+              Check Answers
+            </button>
+            <button onclick="resetFourConvos()" class="px-4 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" id="four-convos-grid">
+          <!-- Rendered by JS -->
+        </div>
+        <div id="four-convos-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+
+      <!-- Part B: Mike and Lina are going to the cinema -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-asphalt-900 text-paper-50 mb-2">
+              STOP 03B • CINEMA ROUTE CHAT
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Mike &amp; Lina: Going to the Cinema
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Read Mike's messages (1–5) on the left, then match Lina's replies (A–E) on the right!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkCinemaChat()" class="px-4 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer">
+              Check Chat
+            </button>
+            <button onclick="resetCinemaChat()" class="px-4 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-3 bg-paper-50 p-4 rounded-xl border border-paper-200" id="mike-messages-col"></div>
+          <div class="space-y-3 bg-paper-100 p-4 rounded-xl border border-paper-300" id="lina-replies-col"></div>
+        </div>
+        <div id="cinema-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: READING (A DAY IN THE LIFE OF A PRIVATE INVESTIGATOR) -->
+    <!-- ============================================================ -->
+    <section id="section-3" class="lesson-section hidden animate-pop">
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+              STOP 04 • CITY CHRONICLE READING
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              A Day in the Life of a Private Investigator
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Read the article about Matt, then mark sentences 1–8 <strong>T (True)</strong> or <strong>F (False)</strong>.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkInvestigatorTF()" class="px-4 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer">
+              Check T / F
+            </button>
+            <button onclick="resetInvestigatorTF()" class="px-4 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-7 bg-paper-50 rounded-xl border border-paper-200 p-5 sm:p-6 space-y-3.5 text-sm leading-relaxed text-asphalt-800">
+            <p class="font-bold text-asphalt-900">
+              People think a private investigator's job is exciting, but is it really true? See what you think.
+            </p>
+            <p>
+              On a typical day, I get up early and I go to my office. I don't need to wear a suit, I normally wear jeans and a sweater. I start work at about 9.00. I sit at my desk and work at my computer. I answer phone calls. I speak to colleagues. Then at about 6.00, I finish work and go home.
+            </p>
+            <p>
+              Sometimes I meet clients – new clients or current clients. With a new client, first I usually meet them in person in our office. Some clients are private individuals. Perhaps they want us to find a missing person. Other clients are companies. Perhaps they want us to check that an employee is really ill or not. Then we need to investigate the problem. We usually do this online. Clients pay for each day we work, and they don't want us to pay a lot of money, so we try to work fast.
+            </p>
+            <p class="bg-terracotta-50 p-3.5 rounded-lg border-l-4 border-terracotta-600">
+              <strong>But sometimes our work is different, and today is one of these days.</strong> I'm not working in the office, I'm working in the street. I'm sitting in my car with my camera. I'm watching and waiting. I'm hoping to see a woman. She lives in the building opposite, and my client wants me to follow her. I'm wearing a jacket, and I'm wearing sunglasses because I don't want the woman to see my face. Is this more exciting than being in the office? Sometimes. But waiting in a car when it's raining, and it's a long day, not just 9.00 till 6.00. Sometimes it's difficult to stay awake!
+            </p>
+            <p>
+              The life of a private investigator is not like in films and on TV. But each case is different, and solving a case is very satisfying.
+            </p>
+
+            <div class="bg-white rounded-lg p-3.5 border border-paper-200 text-xs text-stone-600 space-y-1">
+              <p><strong class="text-terracotta-700 uppercase">📚 Glossary:</strong></p>
+              <p>• <strong>my colleague:</strong> a person I work with</p>
+              <p>• <strong>my client:</strong> a person who pays our company</p>
+              <p>• <strong>my employee:</strong> a person who works for me</p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-2.5" id="investigator-tf-list"></div>
+        </div>
+        <div id="investigator-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: EVERYDAY VERBS (DO YOU...?) & TAXI MINI-QUIZ      -->
+    <!-- ============================================================ -->
+    <section id="section-4" class="lesson-section hidden animate-pop space-y-7">
+      <!-- Part A -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+              STOP 05A • PRESENT SIMPLE QUESTIONS
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Complete 2–10 with a Verb
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Choose the right everyday verb for each question, then ask your student!
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkDoYouVerbs()" class="px-4 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer">
+              Check Verbs
+            </button>
+            <button onclick="resetDoYouVerbs()" class="px-4 py-2.5 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2 bg-paper-100 p-3.5 rounded-xl border border-paper-300">
+          <span class="text-xs font-extrabold uppercase text-terracotta-700 mr-1 self-center">Verbs:</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">drink</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">eat</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">go</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">have</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">listen</span>
+          <span class="px-2.5 py-1 rounded bg-paper-200 text-xs font-bold text-stone-400 line-through">live</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">need</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">read</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">speak</span>
+          <span class="px-2.5 py-1 rounded bg-white text-xs font-bold text-asphalt-800 border border-paper-300">watch</span>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm" id="doyou-verbs-grid"></div>
+        <div id="doyou-feedback" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+
+      <!-- Part B: Asphalt Road Taxi Contrast Quiz -->
+      <div class="bg-asphalt-900 text-paper-50 rounded-xl shadow-lg p-6 sm:p-8 border-4 border-white relative">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-stone-700">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-600 text-white mb-2">
+              STOP 05B • ROAD CHECKPOINT
+            </span>
+            <h3 class="font-display font-extrabold text-2xl sm:text-3xl">
+              🚕 "I drive a taxi. But I'm not driving now."
+            </h3>
+            <p class="text-stone-300 text-xs sm:text-sm mt-1">
+              Choose the correct tense (Present Simple vs. Present Continuous) in these 5 situations!
+            </p>
+          </div>
+          <button onclick="resetTaxiQuiz()" class="px-3.5 py-2 rounded-lg bg-stone-800 hover:bg-stone-700 text-xs font-extrabold uppercase tracking-wider cursor-pointer border border-stone-600">
+            Reset Quiz
+          </button>
+        </div>
+
+        <div class="mt-5 space-y-3" id="taxi-contrast-quiz"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: EVE'S TAXI (6.14) & ANNA'S FAVOURITE MEAL (5.6)   -->
+    <!-- ============================================================ -->
+    <section id="section-5" class="lesson-section hidden animate-pop space-y-7">
+      <!-- Part A -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-terracotta-100 text-terracotta-700 mb-2">
+              STOP 06A • JFK AIRPORT TRANSFER (6.14)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Eve's Taxi to the Airport
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Listen to Eve and the taxi driver, then select <strong>a</strong> or <strong>b</strong> for each sentence (1–10).
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 bg-paper-100 p-2 rounded-xl border border-paper-300">
+            <button type="button" onclick="playTrack('taxi')" id="btn-play-taxi"
+              class="px-4 py-2 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
+              <span>▶</span> Play Taxi Audio
+            </button>
+            <button type="button" onclick="pauseTrack()" class="px-2.5 py-2 rounded-lg bg-white text-asphalt-800 border border-paper-300 font-extrabold text-xs cursor-pointer">⏸</button>
+            <button type="button" onclick="stopTrack()" class="px-2.5 py-2 rounded-lg bg-white text-terracotta-700 border border-paper-300 font-extrabold text-xs cursor-pointer">⏹</button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm" id="eve-taxi-grid"></div>
+
+        <div class="mt-5 flex items-center justify-between">
+          <button onclick="resetEveTaxi()" class="px-4 py-2 rounded-lg bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 font-bold text-xs uppercase cursor-pointer">
+            Reset
+          </button>
+          <button onclick="checkEveTaxi()" class="px-5 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-sm cursor-pointer">
+            Check Answers (1–10)
+          </button>
+        </div>
+        <div id="eve-feedback" class="mt-3 font-bold text-sm text-center hidden"></div>
+      </div>
+
+      <!-- Part B -->
+      <div class="polaroid-card rounded-sm sm:p-8">
+        <div class="pushpin"></div>
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-paper-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded text-xs font-extrabold uppercase tracking-wider bg-asphalt-900 text-paper-50 mb-2">
+              STOP 06B • DINNER GUIDE (5.6)
+            </span>
+            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-terracotta-600 uppercase">
+              Anna's Favourite Meal
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Listen to Anna and complete her column in the chart!
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 bg-paper-100 p-2 rounded-xl border border-paper-300">
+            <button type="button" onclick="playTrack('anna')" id="btn-play-anna"
+              class="px-4 py-2 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
+              <span>▶</span> Play Anna
+            </button>
+            <button type="button" onclick="pauseTrack()" class="px-2.5 py-2 rounded-lg bg-white text-asphalt-800 border border-paper-300 font-extrabold text-xs cursor-pointer">⏸</button>
+            <button type="button" onclick="stopTrack()" class="px-2.5 py-2 rounded-lg bg-white text-terracotta-700 border border-paper-300 font-extrabold text-xs cursor-pointer">⏹</button>
+          </div>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+          <table class="w-full text-left border-collapse rounded-xl overflow-hidden border border-paper-300 text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-asphalt-900 text-paper-50 font-display font-bold">
+                <th class="p-3.5 border-b border-stone-700 w-28">Category</th>
+                <th class="p-3.5 border-b border-l border-stone-700 bg-terracotta-600 text-white w-1/3">👩 Anna (Complete!)</th>
+                <th class="p-3.5 border-b border-l border-stone-700 text-paper-300">👨 Will</th>
+                <th class="p-3.5 border-b border-l border-stone-700 text-paper-300">👩 Sarah</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-paper-200 bg-white">
+              <tr>
+                <td class="p-3.5 font-extrabold bg-paper-50">Favourite meal</td>
+                <td class="p-3.5 border-l border-paper-200 bg-terracotta-50/50 font-extrabold text-terracotta-700">dinner</td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">lunch</td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">breakfast</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-extrabold bg-paper-50">Where?</td>
+                <td class="p-3.5 border-l border-paper-200 bg-terracotta-50/50">
+                  At
+                  <select id="anna-where-1" class="mx-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="home">home</option>
+                    <option value="school">school</option>
+                  </select>
+                  or at a
+                  <select id="anna-where-2" class="mx-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="restaurant">restaurant</option>
+                    <option value="park">park</option>
+                  </select>
+                </td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">At work</td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">Usually at home. On Wednesdays at a café.</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-extrabold bg-paper-50">Food</td>
+                <td class="p-3.5 border-l border-paper-200 bg-terracotta-50/50">
+                  <select id="anna-food-1" class="mr-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Pasta">Pasta</option>
+                  </select>
+                  or
+                  <select id="anna-food-2" class="mx-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="fish">fish</option>
+                    <option value="soup">soup</option>
+                  </select>
+                  and
+                  <select id="anna-food-3" class="ml-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="vegetables">vegetables</option>
+                    <option value="chips">chips</option>
+                  </select>
+                </td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">Different things, but with salad</td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">Toast and fruit. On Wednesdays a croissant.</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-extrabold bg-paper-50">Drink</td>
+                <td class="p-3.5 border-l border-paper-200 bg-terracotta-50/50">
+                  A glass of
+                  <select id="anna-drink" class="ml-1 px-2 py-1 rounded border border-terracotta-500/50 bg-white font-bold text-asphalt-900">
+                    <option value="">---</option>
+                    <option value="wine">wine</option>
+                    <option value="milk">milk</option>
+                    <option value="tea">tea</option>
+                  </select>
+                </td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">Water and then a coffee</td>
+                <td class="p-3.5 border-l border-paper-200 text-stone-500">Tea or coffee. On Wednesdays hot chocolate.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-4 flex justify-end">
+          <button onclick="checkAnnaChart()" class="px-5 py-2.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-sm cursor-pointer">
+            Check Anna's Chart
+          </button>
+        </div>
+        <div id="anna-feedback" class="mt-3 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- Bottom Ticket-Style Sequential Navigation Bar -->
+    <div class="mt-8 ticket-box rounded-xl overflow-hidden shadow-sm flex items-stretch justify-between">
+      <button id="bottom-prev-btn" onclick="prevTab()"
+        class="flex items-center gap-2 px-5 py-3.5 bg-paper-50 hover:bg-terracotta-100 text-terracotta-700 font-extrabold text-xs sm:text-sm uppercase tracking-wider disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>←</span>
+        <span>Previous Stop</span>
+      </button>
+
+      <div class="flex items-center justify-center px-4 bg-paper-100 border-x border-terracotta-500/30">
+        <span id="bottom-step-indicator" class="font-display font-bold text-sm sm:text-base text-asphalt-900">
+          Tour Stop 1 of 6
+        </span>
+      </div>
+
+      <button id="bottom-next-btn" onclick="nextTab()"
+        class="flex items-center gap-2 px-6 py-3.5 bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>Next Stop</span>
+        <span>→</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /* ------------------------------------------------------------
+       1. SOUND EFFECTS, NAVIGATION & PROGRESS
+    ------------------------------------------------------------ */
+    let soundEnabled = true;
+    let audioCtx = null;
+    const completedSections = new Set();
+    let currentTabIndex = 0;
+    const totalTabs = 6;
+
+    function playTone(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.07, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.11, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(175, now + 0.2);
+          gain.gain.setValueAtTime(0.07, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playTone('click');
+    }
+
+    function showToast(icon, text, isError = false) {
+      const banner = document.getElementById('toast-banner');
+      const content = document.getElementById('toast-content');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-text').textContent = text;
+      content.className = `px-5 py-3 rounded-xl shadow-xl font-bold text-sm flex items-center gap-2.5 ${
+        isError ? 'bg-terracotta-700 text-white border border-white' : 'bg-asphalt-900 text-paper-50 border border-terracotta-500'
+      }`;
+      banner.classList.remove('translate-y-16', 'opacity-0');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => banner.classList.add('translate-y-16', 'opacity-0'), 2800);
+    }
+
+    function markSectionComplete(idx) {
+      completedSections.add(idx);
+      const badge = document.getElementById(`badge-${idx}`);
+      if (badge) badge.classList.remove('hidden');
+      const pct = Math.round((completedSections.size / totalTabs) * 100);
+      document.getElementById('global-progress-bar').style.width = `${pct}%`;
+      document.getElementById('global-progress-text').textContent = `${completedSections.size}/${totalTabs}`;
+    }
+
+    function switchTab(index) {
+      if (index < 0 || index >= totalTabs) return;
+      currentTabIndex = index;
+      playTone('click');
+      stopTrack(false);
+
+      document.querySelectorAll('.lesson-section').forEach((sec, idx) => {
+        sec.classList.toggle('hidden', idx !== index);
+      });
+
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.className = 'tab-btn bg-terracotta-600 text-white shadow-2xs flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer';
+        } else {
+          btn.className = 'tab-btn bg-paper-100 hover:bg-paper-200 text-asphalt-800 border border-paper-300 flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-xs font-bold truncate transition cursor-pointer';
+        }
+      });
+
+      document.getElementById('header-step-label').textContent = `${index + 1} / ${totalTabs}`;
+      document.getElementById('bottom-step-indicator').textContent = `Tour Stop ${index + 1} of ${totalTabs}`;
+      document.getElementById('header-prev-btn').disabled = index === 0;
+      document.getElementById('bottom-prev-btn').disabled = index === 0;
+      document.getElementById('header-next-btn').disabled = index === totalTabs - 1;
+      document.getElementById('bottom-next-btn').disabled = index === totalTabs - 1;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevTab() { if (currentTabIndex > 0) switchTab(currentTabIndex - 1); }
+    function nextTab() { if (currentTabIndex < totalTabs - 1) switchTab(currentTabIndex + 1); }
+
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'ArrowRight') nextTab();
+      if (e.key === 'ArrowLeft') prevTab();
+    });
+
+    /* ------------------------------------------------------------
+       2. MULTI-SPEAKER NATURAL SPEECH SYNTHESIS ENGINE
+    ------------------------------------------------------------ */
+    let globalSpeechRate = 0.96;
+    let activeAudioKey = null;
+    let isSpeechPaused = false;
+    let speechSessionId = 0;
+
+    const audioDialogues = {
+      carol: [
+        { spk: 'F', pitch: 1.15, text: 'Hello? Tony?' },
+        { spk: 'M', pitch: 0.92, text: 'Oh, hi, darling! How is Zurich?' },
+        { spk: 'F', pitch: 1.12, text: 'Fine, fine. I am staying in a nice hotel, but it is raining. Can you hear it?' },
+        { spk: 'M', pitch: 0.92, text: 'Yes, yes, I can.' },
+        { spk: 'F', pitch: 1.15, text: 'How are the children?' },
+        { spk: 'M', pitch: 0.94, text: 'Oh, they are fine.' },
+        { spk: 'F', pitch: 1.15, text: 'Where are they? What are they doing?' },
+        { spk: 'M', pitch: 0.90, text: 'Lily is in the living room. She is doing her homework.' },
+        { spk: 'F', pitch: 1.14, text: 'And Matt and Josh?' },
+        { spk: 'M', pitch: 0.90, text: 'They are in their bedroom. They are reading.' },
+        { spk: 'F', pitch: 1.16, text: 'I think I can hear them! Are you sure they are reading?' },
+        { spk: 'M', pitch: 0.88, text: 'Yes, yes! That noise is the TV. Your mother is watching a film.' },
+        { spk: 'F', pitch: 1.14, text: 'What about you? Are you OK?' },
+        { spk: 'M', pitch: 0.92, text: 'I am fine. I am making dinner — fish and vegetables.' },
+        { spk: 'F', pitch: 1.18, text: 'Oh great! Very healthy. OK darling, I need to go now. See you on Tuesday.' },
+        { spk: 'M', pitch: 0.94, text: 'Have a good day tomorrow. Bye!' }
+      ],
+      conv1: [
+        { spk: 'F', pitch: 1.15, text: 'Where are the suitcases? Are they in the car?' },
+        { spk: 'M', pitch: 0.92, text: 'Yes! Let me close the boot. Okay, get in! Do you have our passports?' },
+        { spk: 'F', pitch: 1.15, text: 'Yes, right here in my bag. Let us drive to the airport!' }
+      ],
+      conv2: [
+        { spk: 'F', pitch: 1.12, text: 'Let us see... pasta, tomatoes, olive oil, and fresh basil. Now I am cutting the onions and cooking dinner!' }
+      ],
+      conv3: [
+        { spk: 'M', pitch: 0.92, text: 'Come on! Goal! Yes! What a fantastic match! Pass the ball! Shoot!' }
+      ],
+      conv4: [
+        { spk: 'M', pitch: 0.94, text: 'Here are the keys to room 304. The lift is on the left.' },
+        { spk: 'F', pitch: 1.16, text: 'Thank you very much! What time is breakfast tomorrow morning?' }
+      ],
+      taxi: [
+        { spk: 'M', pitch: 0.92, text: 'Where to, maam?' },
+        { spk: 'F', pitch: 1.15, text: 'JFK Airport, please. Terminal 4.' },
+        { spk: 'M', pitch: 0.92, text: 'Okay! Oh, look at the traffic today — it is really good! No delays at all.' },
+        { spk: 'F', pitch: 1.15, text: 'That is great. I am flying back to London.' },
+        { spk: 'M', pitch: 0.94, text: 'Oh, London! I am from Puerto Rico, and my wife is from New York. London is very expensive, right?' },
+        { spk: 'F', pitch: 1.14, text: 'Yes, it is quite expensive! Do you have children?' },
+        { spk: 'M', pitch: 0.95, text: 'Yes, two daughters! Here we are, Terminal 4. That is 87 dollars and 50 cents.' },
+        { spk: 'F', pitch: 1.15, text: 'Here you are. Keep the change!' },
+        { spk: 'M', pitch: 0.96, text: 'Thank you! Have a good flight!' },
+        { spk: 'F', pitch: 1.18, text: 'Thanks! Oh, let me check the screen... Great, I am not late. My gate is C5!' }
+      ],
+      anna: [
+        { spk: 'F', pitch: 1.15, text: 'Hi, I am Anna! My favourite meal of the day is dinner. During the week I usually eat at home with my family, or on Fridays we go to a nice restaurant. I normally eat meat or fish and vegetables. And with dinner, I always love a glass of red wine!' }
+      ]
+    };
+
+    function pickVoices() {
+      const voices = window.speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().startsWith('en'));
+      const score = (v) => {
+        const n = v.name.toLowerCase();
+        let s = 0;
+        if (n.includes('natural') || n.includes('neural') || n.includes('online')) s += 40;
+        if (n.includes('google')) s += 25;
+        if (n.includes('samantha') || n.includes('daniel') || n.includes('aria') || n.includes('jenny') || n.includes('guy')) s += 20;
+        return s;
+      };
+      const sorted = [...voices].sort((a, b) => score(b) - score(a));
+      const fVoice = sorted.find((v) => /female|woman|aria|jenny|libby|samantha|victoria|karen|zira/i.test(v.name)) || sorted[0] || null;
+      const mVoice = sorted.find((v) => v !== fVoice && /male|man|guy|ryan|daniel|george|david|christopher/i.test(v.name)) || sorted[1] || fVoice;
+      return { fVoice, mVoice };
+    }
+
+    function setGlobalSpeed(rate) {
+      playTone('click');
+      globalSpeechRate = rate;
+      const isSlow = rate < 0.85;
+      document.getElementById('global-speed-slow').className = isSlow
+        ? 'px-2 py-0.5 rounded bg-terracotta-600 text-white transition cursor-pointer'
+        : 'px-2 py-0.5 rounded text-asphalt-800 hover:bg-white transition cursor-pointer';
+      document.getElementById('global-speed-normal').className = !isSlow
+        ? 'px-2 py-0.5 rounded bg-asphalt-900 text-paper-50 transition cursor-pointer'
+        : 'px-2 py-0.5 rounded text-asphalt-800 hover:bg-white transition cursor-pointer';
+      showToast('🎧', isSlow ? 'Audio speed: 0.75×' : 'Audio speed: 1.0×');
+    }
+
+    function playTrack(key) {
+      if (!('speechSynthesis' in window)) {
+        showToast('⚠️', 'Speech synthesis not supported in this browser.', true);
+        return;
+      }
+      if (activeAudioKey === key && isSpeechPaused && window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        isSpeechPaused = false;
+        return;
+      }
+      stopTrack(false);
+      activeAudioKey = key;
+      isSpeechPaused = false;
+      const token = ++speechSessionId;
+      const lines = audioDialogues[key];
+      const { fVoice, mVoice } = pickVoices();
+      let idx = 0;
+
+      function nextLine() {
+        if (token !== speechSessionId || idx >= lines.length) {
+          activeAudioKey = null;
+          return;
+        }
+        const item = lines[idx];
+        const u = new SpeechSynthesisUtterance(item.text);
+        const v = item.spk === 'F' ? fVoice : mVoice;
+        if (v) u.voice = v;
+        u.pitch = item.pitch;
+        u.rate = globalSpeechRate;
+        u.onend = () => {
+          if (token !== speechSessionId) return;
+          idx++;
+          setTimeout(nextLine, 200);
+        };
+        u.onerror = () => { activeAudioKey = null; };
+        window.speechSynthesis.speak(u);
+      }
+      nextLine();
+    }
+
+    function pauseTrack() {
+      if ('speechSynthesis' in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        isSpeechPaused = true;
+      }
+    }
+
+    function stopTrack(clickSound = true) {
+      if (clickSound) playTone('click');
+      speechSessionId++;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      activeAudioKey = null;
+      isSpeechPaused = false;
+    }
+
+    /* ------------------------------------------------------------
+       3. SECTION 1 LOGIC: CAROL & TONY 3 LIES (NO SPOILERS!)
+    ------------------------------------------------------------ */
+    const selectedTonyClaims = new Set();
+    const actualCarolLies = ['lie0', 'lie1', 'lie2'];
+
+    // Update Carol's audio so students actually HEAR the twist at the end!
+    audioDialogues.carol = [
+      { spk: 'F', pitch: 1.15, text: 'Hello? Tony?' },
+      { spk: 'M', pitch: 0.92, text: 'Oh, hi, darling! How is Zurich?' },
+      { spk: 'F', pitch: 1.12, text: 'Fine, fine. I am staying in a nice hotel, but it is raining. Can you hear it?' },
+      { spk: 'M', pitch: 0.92, text: 'Yes, yes, I can.' },
+      { spk: 'F', pitch: 1.15, text: 'How are the children?' },
+      { spk: 'M', pitch: 0.94, text: 'Oh, they are fine.' },
+      { spk: 'F', pitch: 1.15, text: 'Where are they? What are they doing?' },
+      { spk: 'M', pitch: 0.90, text: 'Lily is in the living room. She is doing her homework.' },
+      { spk: 'F', pitch: 1.14, text: 'And Matt and Josh?' },
+      { spk: 'M', pitch: 0.90, text: 'They are in their bedroom. They are reading.' },
+      { spk: 'F', pitch: 1.16, text: 'I think I can hear them! Are you sure they are reading?' },
+      { spk: 'M', pitch: 0.88, text: 'Yes, yes! That noise is the TV. Your mother is watching a film.' },
+      { spk: 'F', pitch: 1.14, text: 'What about you? Are you OK?' },
+      { spk: 'M', pitch: 0.92, text: 'I am fine. I am making dinner — fish and vegetables.' },
+      { spk: 'F', pitch: 1.18, text: 'Oh great! Very healthy. OK darling, I need to go now. See you on Tuesday.' },
+      { spk: 'M', pitch: 0.94, text: 'Have a good day tomorrow. Bye!' },
+      { spk: 'M', pitch: 0.86, text: 'Phew, she hung up! Lily, stop jumping on the sofa and put your toys away! Matt and Josh, turn off that video game! And Grandma, wake up! Let us order pizza, I am not cooking tonight!' }
+    ];
+
+    function toggleTonyClaim(id) {
+      playTone('click');
+      const el = document.getElementById(`tony-claim-${id}`);
+      if (selectedTonyClaims.has(id)) {
+        selectedTonyClaims.delete(id);
+        el.className = 'tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer';
+      } else {
+        selectedTonyClaims.add(id);
+        el.className = 'tony-claim px-1.5 py-0.5 rounded bg-terracotta-100 text-terracotta-800 font-bold underline decoration-terracotta-600 decoration-2 transition cursor-pointer';
+      }
+    }
+
+    function resetCarolLies() {
+      playTone('click');
+      selectedTonyClaims.clear();
+      document.querySelectorAll('.tony-claim').forEach((el) => {
+        el.className = 'tony-claim px-1.5 py-0.5 rounded hover:bg-paper-200/70 transition cursor-pointer';
+      });
+      document.getElementById('carol-feedback').classList.add('hidden');
+    }
+
+    function checkCarolLies() {
+      const fb = document.getElementById('carol-feedback');
+      fb.classList.remove('hidden');
+
+      let rightCount = 0;
+      let wrongCount = 0;
+
+      selectedTonyClaims.forEach((id) => {
+        const el = document.getElementById(`tony-claim-${id}`);
+        if (actualCarolLies.includes(id)) {
+          rightCount++;
+          el.className = 'tony-claim px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900 font-extrabold underline decoration-emerald-600 decoration-2 cursor-pointer';
+        } else {
+          wrongCount++;
+          el.className = 'tony-claim px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 font-bold line-through cursor-pointer';
+        }
+      });
+
+      if (rightCount === 3 && wrongCount === 0) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-emerald-700';
+        fb.textContent = "🎉 Caught him! Lily is playing with toys, Matt & Josh are playing video games, and Tony is ordering pizza!";
+        markSectionComplete(0);
+        showToast('🎉', 'Step 1 completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-rose-600';
+        fb.textContent = `You found ${rightCount}/3 untrue sentences${wrongCount > 0 ? ` (${wrongCount} incorrect)` : ''}. Listen to the end of the call and try again!`;
+      }
+    }
+
+    /* ------------------------------------------------------------
+       4. SECTION 2 LOGIC: GRAMMAR SPEAKING CARDS
+    ------------------------------------------------------------ */
+    const grammarCardsPool = [
+      {
+        front: 'What ______ you ______ (do) right now?',
+        back: 'What are you doing right now?',
+        tense: 'Present Continuous',
+        reason: 'Signal: "right now" → action happening at this moment.'
+      },
+      {
+        front: 'How often ______ you ______ (go) to the cinema?',
+        back: 'How often do you go to the cinema?',
+        tense: 'Present Simple',
+        reason: 'Signal: "How often" → regular habit or routine.'
+      },
+      {
+        front: '______ it ______ (rain) outside at the moment?',
+        back: 'Is it raining outside at the moment?',
+        tense: 'Present Continuous',
+        reason: 'Signal: "at the moment" → weather right now.'
+      },
+      {
+        front: 'What ______ your best friend usually ______ (wear) at the weekend?',
+        back: 'What does your best friend usually wear at the weekend?',
+        tense: 'Present Simple',
+        reason: 'Signal: "usually / at the weekend" → routine + he/she takes "does".'
+      },
+      {
+        front: '______ you ______ (like) spicy food?',
+        back: 'Do you like spicy food?',
+        tense: 'Present Simple (Stative Verb)',
+        reason: '"Like" is a stative verb — we do not use -ing!'
+      },
+      {
+        front: 'Look! What ______ the teacher ______ (do) now?',
+        back: 'Look! What is the teacher doing now?',
+        tense: 'Present Continuous',
+        reason: 'Signal: "Look! / now" → happening right in front of you.'
+      },
+      {
+        front: 'What time ______ you normally ______ (get up) on Mondays?',
+        back: 'What time do you normally get up on Mondays?',
+        tense: 'Present Simple',
+        reason: 'Signal: "normally / on Mondays" → repeated schedule.'
+      },
+      {
+        front: '______ you ______ (read) a good book these days?',
+        back: 'Are you reading a good book these days?',
+        tense: 'Present Continuous',
+        reason: 'Signal: "these days" → temporary activity around now.'
+      },
+      {
+        front: 'Why ______ you ______ (learn) English this year?',
+        back: 'Why are you learning English this year?',
+        tense: 'Present Continuous',
+        reason: 'Signal: "this year" → ongoing temporary project.'
+      },
+      {
+        front: '______ your parents ______ (work) in an office?',
+        back: 'Do your parents work in an office?',
+        tense: 'Present Simple',
+        reason: 'Permanent job / general fact about "they" (your parents).'
+      }
+    ];
+
+    let grammarDeck = [...grammarCardsPool];
+    let gCardIdx = 0;
+    let gCardFlipped = false;
+
+    function renderGrammarCard() {
+      const c = grammarDeck[gCardIdx];
+      document.getElementById('grammar-card-counter').textContent = `Card ${gCardIdx + 1} of ${grammarDeck.length}`;
+      document.getElementById('grammar-card-front-text').textContent = c.front;
+      document.getElementById('grammar-card-back-text').textContent = c.back;
+      document.getElementById('grammar-card-tense-tag').textContent = c.tense;
+      document.getElementById('grammar-card-reason').textContent = c.reason;
+
+      const inner = document.getElementById('grammar-card-inner');
+      inner.classList.toggle('rotate-y-180', gCardFlipped);
+    }
+
+    function flipGrammarCard() {
+      playTone('click');
+      gCardFlipped = !gCardFlipped;
+      renderGrammarCard();
+      if (gCardFlipped && gCardIdx >= 2) markSectionComplete(1);
+    }
+
+    function nextGrammarCard() {
+      playTone('click');
+      gCardFlipped = false;
+      renderGrammarCard();
+      setTimeout(() => {
+        gCardIdx = (gCardIdx + 1) % grammarDeck.length;
+        renderGrammarCard();
+      }, 150);
+    }
+
+    function shuffleGrammarDeck() {
+      playTone('success');
+      grammarDeck = [...grammarCardsPool].sort(() => Math.random() - 0.5);
+      gCardIdx = 0;
+      gCardFlipped = false;
+      renderGrammarCard();
+      showToast('🔀', 'Grammar deck shuffled!');
+    }
+
+    /* ------------------------------------------------------------
+       5. SECTION 3 LOGIC: 4 CONVERSATIONS + MIKE & LINA CHAT
+    ------------------------------------------------------------ */
+    const fourConvosData = [
+      {
+        id: 'conv1',
+        num: 1,
+        prompt: 'The man and the woman are...',
+        options: ['getting into a car / going to the airport', 'waiting for a train', 'cleaning the kitchen'],
+        answer: 'getting into a car / going to the airport'
+      },
+      {
+        id: 'conv2',
+        num: 2,
+        prompt: 'The woman is...',
+        options: ['making / cooking dinner', 'reading a newspaper', 'driving a taxi'],
+        answer: 'making / cooking dinner'
+      },
+      {
+        id: 'conv3',
+        num: 3,
+        prompt: 'The man is...',
+        options: ['watching a football match', 'sleeping in bed', 'studying French'],
+        answer: 'watching a football match'
+      },
+      {
+        id: 'conv4',
+        num: 4,
+        prompt: 'The man and the woman are...',
+        options: ['checking into a hotel', 'buying cinema tickets', 'running in the park'],
+        answer: 'checking into a hotel'
+      }
+    ];
+
+    function renderFourConvos() {
+      const grid = document.getElementById('four-convos-grid');
+      grid.innerHTML = '';
+      fourConvosData.forEach((item) => {
+        const card = document.createElement('div');
+        card.id = `convo-card-${item.num}`;
+        card.className = 'p-4 rounded-xl bg-paper-50 border border-paper-300 flex flex-col justify-between gap-3';
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-extrabold text-asphalt-900">🎧 Conversation ${item.num}</span>
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="playTrack('${item.id}')" class="px-3 py-1 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-extrabold text-xs uppercase cursor-pointer">▶ Play</button>
+              <button type="button" onclick="stopTrack()" class="px-2 py-1 rounded-lg bg-white border border-paper-300 text-xs font-bold cursor-pointer">⏹</button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1.5">${item.num}. ${item.prompt}</label>
+            <select id="convo-select-${item.num}" class="w-full px-3 py-2 rounded-lg border border-paper-300 bg-white font-bold text-xs sm:text-sm text-asphalt-900 cursor-pointer">
+              <option value="">-- Choose what they are doing --</option>
+              ${item.options.map((o) => `<option value="${o}">${o}</option>`).join('')}
+            </select>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkFourConvos() {
+      let ok = 0;
+      fourConvosData.forEach((item) => {
+        const sel = document.getElementById(`convo-select-${item.num}`);
+        const card = document.getElementById(`convo-card-${item.num}`);
+        if (sel.value === item.answer) {
+          ok++;
+          card.className = 'p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex flex-col justify-between gap-3';
+        } else {
+          card.className = 'p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 flex flex-col justify-between gap-3';
+        }
+      });
+      const fb = document.getElementById('four-convos-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 4) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Spot on! All 4 conversations matched!';
+        checkSection3Complete();
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You got ${ok}/4 right. Listen again to the red cards!`;
+      }
+    }
+
+    function resetFourConvos() {
+      stopTrack(true);
+      document.getElementById('four-convos-feedback').classList.add('hidden');
+      renderFourConvos();
+    }
+
+    /* Mike & Lina Chat */
+    const mikeMessages = [
+      { num: 1, text: "Hi. I'm just leaving the house now.", ans: 'C' },
+      { num: 2, text: "No, I'm not. I'm walking. See you in 20 minutes?", ans: 'B' },
+      { num: 3, text: "Where are you? I'm at the cinema, but I can't see you. I'm waiting outside.", ans: 'A' },
+      { num: 4, text: "It's really cold outside. I'm going in.", ans: 'D' },
+      { num: 5, text: "I'm standing near the box office. I'm wearing a black jacket. Can you see me?", ans: 'E' }
+    ];
+
+    const linaReplies = [
+      { letter: 'A', text: "I'm arriving at the cinema now. Where are you?" },
+      { letter: 'B', text: "Me too. I'm walking to the bus stop. Are you getting the bus, too?" },
+      { letter: 'C', text: "Sorry, we're in a lot of traffic. There in five minutes." },
+      { letter: 'D', text: "OK. See you then." },
+      { letter: 'E', text: "Yes, I can! Can you see me? I'm walking towards you now!" }
+    ];
+
+    function renderCinemaChat() {
+      const mCol = document.getElementById('mike-messages-col');
+      const lCol = document.getElementById('lina-replies-col');
+      mCol.innerHTML = '<p class="text-xs font-extrabold uppercase text-slate-500 mb-2">📱 Mike\'s Messages</p>';
+      lCol.innerHTML = '<p class="text-xs font-extrabold uppercase text-emerald-800 mb-2">💬 Lina\'s Replies</p>';
+
+      mikeMessages.forEach((m) => {
+        const row = document.createElement('div');
+        row.id = `mike-row-${m.num}`;
+        row.className = 'p-3 rounded-xl bg-white border border-paper-200 flex items-center justify-between gap-3 shadow-2xs';
+        row.innerHTML = `
+          <div class="text-xs sm:text-sm text-asphalt-800">
+            <span class="inline-flex w-6 h-6 rounded-full bg-terracotta-600 text-white font-extrabold text-xs items-center justify-center mr-1.5">${m.num}</span>
+            ${m.text}
+          </div>
+          <select id="chat-match-${m.num}" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-paper-100 border border-paper-300 font-extrabold text-xs text-asphalt-900 cursor-pointer">
+            <option value="">Reply ?</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+        `;
+        mCol.appendChild(row);
+      });
+
+      linaReplies.forEach((l) => {
+        const bubble = document.createElement('div');
+        bubble.className = 'p-3 rounded-xl bg-white border border-paper-300 text-xs sm:text-sm text-asphalt-800 flex items-start gap-2';
+        bubble.innerHTML = `
+          <span class="shrink-0 inline-flex w-6 h-6 rounded-full bg-asphalt-900 text-paper-50 font-extrabold text-xs items-center justify-center">${l.letter}</span>
+          <span>${l.text}</span>
+        `;
+        lCol.appendChild(bubble);
+      });
+    }
+
+    function checkCinemaChat() {
+      let ok = 0;
+      mikeMessages.forEach((m) => {
+        const val = document.getElementById(`chat-match-${m.num}`).value;
+        const row = document.getElementById(`mike-row-${m.num}`);
+        if (val === m.ans) {
+          ok++;
+          row.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex items-center justify-between gap-3';
+        } else {
+          row.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex items-center justify-between gap-3';
+        }
+      });
+      const fb = document.getElementById('cinema-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 5) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Awesome! You matched all 5 messages (1-C, 2-B, 3-A, 4-D, 5-E)!';
+        checkSection3Complete();
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You matched ${ok}/5 correctly. Fix the red messages and check again!`;
+      }
+    }
+
+    function resetCinemaChat() {
+      playTone('click');
+      document.getElementById('cinema-feedback').classList.add('hidden');
+      renderCinemaChat();
+    }
+
+    function checkSection3Complete() {
+      const cOk = fourConvosData.every((i) => document.getElementById(`convo-select-${i.num}`).value === i.answer);
+      const mOk = mikeMessages.every((m) => document.getElementById(`chat-match-${m.num}`).value === m.ans);
+      if (cOk && mOk) {
+        markSectionComplete(2);
+        showToast('🌟', 'Step 3 completed!');
+      }
+    }
+
+    /* ------------------------------------------------------------
+       6. SECTION 4 LOGIC: PRIVATE INVESTIGATOR TRUE / FALSE
+    ------------------------------------------------------------ */
+    const investigatorStatements = [
+      { num: 1, text: "Matt doesn't usually wear a suit when he goes to his office.", ans: 'T' },
+      { num: 2, text: 'He works from 9.00 to 5.00.', ans: 'F' },
+      { num: 3, text: 'He meets new clients online.', ans: 'F' },
+      { num: 4, text: 'Some of his jobs are for companies.', ans: 'T' },
+      { num: 5, text: 'Today Matt is watching a client.', ans: 'F' },
+      { num: 6, text: "He's wearing sunglasses because it's very hot.", ans: 'F' },
+      { num: 7, text: "When he's working in the street it can be more exciting.", ans: 'T' },
+      { num: 8, text: 'A private investigator’s life is very different from in films.', ans: 'T' }
+    ];
+
+    let userTF = {};
+
+    function renderInvestigatorTF() {
+      const list = document.getElementById('investigator-tf-list');
+      list.innerHTML = '';
+      investigatorStatements.forEach((s) => {
+        const chosen = userTF[s.num];
+        const row = document.createElement('div');
+        row.id = `tf-row-${s.num}`;
+        row.className = 'p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2.5';
+        row.innerHTML = `
+          <span class="text-xs sm:text-sm font-medium text-slate-800"><strong>${s.num}.</strong> ${s.text}</span>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" onclick="selectTF(${s.num}, 'T')"
+              class="w-9 h-9 rounded-xl font-extrabold text-xs transition cursor-pointer ${
+                chosen === 'T' ? 'bg-slate-900 text-white shadow' : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+              }">T</button>
+            <button type="button" onclick="selectTF(${s.num}, 'F')"
+              class="w-9 h-9 rounded-xl font-extrabold text-xs transition cursor-pointer ${
+                chosen === 'F' ? 'bg-slate-900 text-white shadow' : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+              }">F</button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function selectTF(num, val) {
+      playTone('click');
+      userTF[num] = val;
+      renderInvestigatorTF();
+    }
+
+    function checkInvestigatorTF() {
+      let ok = 0;
+      investigatorStatements.forEach((s) => {
+        const row = document.getElementById(`tf-row-${s.num}`);
+        if (userTF[s.num] === s.ans) {
+          ok++;
+          row.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex items-center justify-between gap-2.5';
+        } else {
+          row.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex items-center justify-between gap-2.5';
+        }
+      });
+      const fb = document.getElementById('investigator-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 8) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🕵️‍♂️ Detective level! All 8 True/False statements are correct!';
+        markSectionComplete(3);
+        showToast('🕵️‍♂️', 'Reading comprehension completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You got ${ok}/8 right. Re-read the text to fix the red statements!`;
+      }
+    }
+
+    function resetInvestigatorTF() {
+      playTone('click');
+      userTF = {};
+      document.getElementById('investigator-feedback').classList.add('hidden');
+      renderInvestigatorTF();
+    }
+
+    /* ------------------------------------------------------------
+       7. SECTION 5 LOGIC: DO YOU...? VERBS & TAXI CONTRAST QUIZ
+    ------------------------------------------------------------ */
+    const doYouQuestions = [
+      { num: 2, rest: 'brothers and sisters? / a cat or a dog?', ans: 'have' },
+      { num: 3, rest: 'TV on your phone? / YouTube videos?', ans: 'watch' },
+      { num: 4, rest: 'to pop music? / to classical music?', ans: 'listen' },
+      { num: 5, rest: 'a newspaper? / magazines?', ans: 'read' },
+      { num: 6, rest: 'meat? / a lot of chocolate?', ans: 'eat' },
+      { num: 7, rest: 'Coke? / beer?', ans: 'drink' },
+      { num: 8, rest: 'French? / German?', ans: 'speak' },
+      { num: 9, rest: 'a new phone? / a new car?', ans: 'need' },
+      { num: 10, rest: 'to a gym? / to the cinema at weekends?', ans: 'go' }
+    ];
+
+    const verbChoices = ['drink', 'eat', 'go', 'have', 'listen', 'need', 'read', 'speak', 'watch'];
+
+    function renderDoYouVerbs() {
+      const grid = document.getElementById('doyou-verbs-grid');
+      grid.innerHTML = `
+        <div class="p-3 rounded-2xl bg-slate-100 border border-slate-200 flex items-center gap-2 text-slate-600">
+          <span class="font-extrabold">1. Do you</span>
+          <span class="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-extrabold">live</span>
+          <span>near here? / in a house or a flat?</span>
+        </div>
+      `;
+
+      doYouQuestions.forEach((q) => {
+        const card = document.createElement('div');
+        card.id = `doyou-card-${q.num}`;
+        card.className = 'p-3 rounded-xl bg-paper-50 border border-paper-200 flex flex-wrap items-center gap-1.5';
+        card.innerHTML = `
+          <span class="font-extrabold text-asphalt-900">${q.num}. Do you</span>
+          <select id="doyou-sel-${q.num}" class="px-2.5 py-1 rounded-lg border border-terracotta-500/60 bg-white font-extrabold text-terracotta-700 text-xs sm:text-sm cursor-pointer">
+            <option value="">verb?</option>
+            ${verbChoices.map((v) => `<option value="${v}">${v}</option>`).join('')}
+          </select>
+          <span class="text-stone-700">${q.rest}</span>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkDoYouVerbs() {
+      let ok = 0;
+      doYouQuestions.forEach((q) => {
+        const val = document.getElementById(`doyou-sel-${q.num}`).value;
+        const card = document.getElementById(`doyou-card-${q.num}`);
+        if (val === q.ans) {
+          ok++;
+          card.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex flex-wrap items-center gap-1.5';
+        } else {
+          card.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex flex-wrap items-center gap-1.5';
+        }
+      });
+      const fb = document.getElementById('doyou-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 9) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Excellent! All 9 "Do you...?" questions are complete!';
+        markSectionComplete(4);
+        showToast('🌟', 'Everyday verbs mastered!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You got ${ok}/9 right. Fix the red sentences and try again!`;
+      }
+    }
+
+    function resetDoYouVerbs() {
+      playTone('click');
+      document.getElementById('doyou-feedback').classList.add('hidden');
+      renderDoYouVerbs();
+    }
+
+    /* Taxi Contrast Quiz */
+    const taxiQuizItems = [
+      { q: '1. Mark is a taxi driver. He ______ a taxi every day.', opts: ['drives', 'is driving'], ans: 'drives' },
+      { q: '2. Right now Mark is on holiday in Spain. He ______ his taxi!', opts: ["doesn't drive", "isn't driving"], ans: "isn't driving" },
+      { q: '3. Listen! Someone ______ the piano upstairs.', opts: ['plays', 'is playing'], ans: 'is playing' },
+      { q: '4. We usually ______ dinner at 7:30 p.m.', opts: ['have', 'are having'], ans: 'have' },
+      { q: '5. Shh! The baby ______ at the moment.', opts: ['sleeps', 'is sleeping'], ans: 'is sleeping' }
+    ];
+    let taxiQuizUser = {};
+
+    function renderTaxiQuiz() {
+      const box = document.getElementById('taxi-contrast-quiz');
+      box.innerHTML = '';
+      taxiQuizItems.forEach((item, idx) => {
+        const chosen = taxiQuizUser[idx];
+        const row = document.createElement('div');
+        row.className = 'p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700 flex flex-wrap items-center justify-between gap-3';
+        row.innerHTML = `
+          <span class="text-sm font-semibold text-slate-100">${item.q}</span>
+          <div class="flex gap-2">
+            ${item.opts.map((o) => {
+              let cls = 'bg-slate-700 hover:bg-slate-600 text-white';
+              if (chosen) {
+                if (o === item.ans) cls = 'bg-emerald-500 text-slate-950 font-black';
+                else if (o === chosen) cls = 'bg-rose-500 text-white';
+              }
+              return `<button type="button" onclick="answerTaxiQuiz(${idx}, '${o.replace(/'/g, "\\'")}')"
+                class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${cls}">${o}</button>`;
+            }).join('')}
+          </div>
+        `;
+        box.appendChild(row);
+      });
+    }
+
+    function answerTaxiQuiz(idx, val) {
+      taxiQuizUser[idx] = val;
+      playTone(val === taxiQuizItems[idx].ans ? 'success' : 'error');
+      renderTaxiQuiz();
+    }
+
+    function resetTaxiQuiz() {
+      playTone('click');
+      taxiQuizUser = {};
+      renderTaxiQuiz();
+    }
+
+    /* ------------------------------------------------------------
+       8. SECTION 6 LOGIC: EVE'S TAXI (6.14) & ANNA'S MEAL (5.6)
+    ------------------------------------------------------------ */
+    const eveTaxiItems = [
+      { num: 1, a: 'Her flight is from Newark airport.', b: 'Her flight is from JFK.', ans: 'b' },
+      { num: 2, a: 'The traffic is bad.', b: 'The traffic is good.', ans: 'b' },
+      { num: 3, a: 'Eve is from Manchester.', b: 'Eve is from London.', ans: 'b' },
+      { num: 4, a: 'The taxi driver is from New York.', b: 'The taxi driver is from Puerto Rico.', ans: 'b' },
+      { num: 5, a: 'London is very cheap.', b: 'London is very expensive.', ans: 'b' },
+      { num: 6, a: 'The taxi driver has two sons.', b: 'The taxi driver has two daughters.', ans: 'b' },
+      { num: 7, a: 'The taxi is $87.50.', b: 'The taxi is $87.15.', ans: 'a' },
+      { num: 8, a: "The taxi driver says 'Have a good day.'", b: "The taxi driver says 'Have a good flight.'", ans: 'b' },
+      { num: 9, a: 'Eve is late.', b: "Eve isn't late.", ans: 'b' },
+      { num: 10, a: 'The gate number is B5.', b: 'The gate number is C5.', ans: 'b' }
+    ];
+
+    let eveUserChoices = {};
+
+    function renderEveTaxi() {
+      const grid = document.getElementById('eve-taxi-grid');
+      grid.innerHTML = '';
+      eveTaxiItems.forEach((item) => {
+        const chosen = eveUserChoices[item.num];
+        const card = document.createElement('div');
+        card.id = `eve-card-${item.num}`;
+        card.className = 'p-3.5 rounded-xl bg-paper-50 border border-paper-200 space-y-2';
+        card.innerHTML = `
+          <div class="text-xs font-extrabold uppercase tracking-wider text-terracotta-700">Stop Detail #${item.num}</div>
+          <button type="button" onclick="selectEveOpt(${item.num}, 'a')"
+            class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition cursor-pointer ${
+              chosen === 'a' ? 'bg-terracotta-600 text-white shadow-xs' : 'bg-white border border-paper-300 text-asphalt-800 hover:border-terracotta-500'
+            }">
+            <span class="font-black mr-1.5">a)</span> ${item.a}
+          </button>
+          <button type="button" onclick="selectEveOpt(${item.num}, 'b')"
+            class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition cursor-pointer ${
+              chosen === 'b' ? 'bg-terracotta-600 text-white shadow-xs' : 'bg-white border border-paper-300 text-asphalt-800 hover:border-terracotta-500'
+            }">
+            <span class="font-black mr-1.5">b)</span> ${item.b}
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function selectEveOpt(num, opt) {
+      playTone('click');
+      eveUserChoices[num] = opt;
+      renderEveTaxi();
+    }
+
+    function checkEveTaxi() {
+      let ok = 0;
+      eveTaxiItems.forEach((item) => {
+        const card = document.getElementById(`eve-card-${item.num}`);
+        if (eveUserChoices[item.num] === item.ans) {
+          ok++;
+          card.className = 'p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-500 space-y-2';
+        } else {
+          card.className = 'p-3.5 rounded-2xl bg-rose-50 border-2 border-rose-500 space-y-2';
+        }
+      });
+      const fb = document.getElementById('eve-feedback');
+      fb.classList.remove('hidden');
+      if (ok === 10) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🚕 Perfect! All 10 details from Eve’s taxi ride are correct!';
+        checkSection6Complete();
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You got ${ok}/10 right. Listen again to check the red items!`;
+      }
+    }
+
+    function resetEveTaxi() {
+      playTone('click');
+      eveUserChoices = {};
+      document.getElementById('eve-feedback').classList.add('hidden');
+      renderEveTaxi();
+    }
+
+    function checkAnnaChart() {
+      const w1 = document.getElementById('anna-where-1').value === 'home';
+      const w2 = document.getElementById('anna-where-2').value === 'restaurant';
+      const f1 = document.getElementById('anna-food-1').value === 'Meat';
+      const f2 = document.getElementById('anna-food-2').value === 'fish';
+      const f3 = document.getElementById('anna-food-3').value === 'vegetables';
+      const d1 = document.getElementById('anna-drink').value === 'wine';
+
+      const fb = document.getElementById('anna-feedback');
+      fb.classList.remove('hidden');
+      if (w1 && w2 && f1 && f2 && f3 && d1) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🍷 Delicious! You completed Anna’s entire meal chart (home / restaurant, Meat / fish and vegetables, wine)!';
+        checkSection6Complete();
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = 'Some items in Anna’s column are missing or incorrect. Play Anna’s audio once more!';
+      }
+    }
+
+    function checkSection6Complete() {
+      const eveDone = eveTaxiItems.every((i) => eveUserChoices[i.num] === i.ans);
+      const annaDone =
+        document.getElementById('anna-where-1').value === 'home' &&
+        document.getElementById('anna-where-2').value === 'restaurant' &&
+        document.getElementById('anna-food-1').value === 'Meat' &&
+        document.getElementById('anna-food-2').value === 'fish' &&
+        document.getElementById('anna-food-3').value === 'vegetables' &&
+        document.getElementById('anna-drink').value === 'wine';
+
+      if (eveDone && annaDone) {
+        markSectionComplete(5);
+        showToast('🏆', 'Congratulations! Whole lesson completed!');
+      }
+    }
+
+    /* ------------------------------------------------------------
+       INITIALIZE ALL EXERCISES
+    ------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab(0);
+      renderGrammarCard();
+      renderFourConvos();
+      renderCinemaChat();
+      renderInvestigatorTF();
+      renderDoYouVerbs();
+      renderTaxiQuiz();
+      renderEveTaxi();
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food &amp; Drink — Interactive Lesson (A1–A2)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Anton (Poster Display), Fraunces & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            poster: ['"Anton"', 'sans-serif'],
+            display: ['"Fraunces"', 'serif'],
+            script: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            cream: {
+              50: '#FFFDF9',
+              100: '#FDF8EE',
+              200: '#F6EBD7',
+              300: '#E8D5B7',
+            },
+            rust: {
+              50: '#FDF3F0',
+              100: '#FAE2DC',
+              500: '#C44D38',
+              600: '#B3422E',
+              700: '#8F3120',
+            },
+            butter: {
+              300: '#F8D974',
+              400: '#F5C94C',
+              500: '#EAB308',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Warm Cream Picnic Tablecloth Aesthetic (Matching Reference Photo 2) */
+    body {
+      background-color: #FDF8EE;
+      min-height: 100vh;
+      color: #2B211D;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Corner Pink-Terracotta Gingham Checkered Napkins */
+    .gingham-corner {
+      background-color: #FFFDF9;
+      background-image:
+        linear-gradient(90deg, rgba(196, 77, 56, 0.22) 50%, transparent 50%),
+        linear-gradient(rgba(196, 77, 56, 0.22) 50%, transparent 50%);
+      background-size: 36px 36px;
+    }
+
+    /* Starburst Badge (like the '&' sticker in the reference poster) */
+    .starburst-badge {
+      background: #F5C94C;
+      clip-path: polygon(
+        50% 0%, 63% 12%, 79% 6%, 84% 22%, 98% 28%, 92% 44%, 100% 58%,
+        87% 69%, 88% 85%, 72% 87%, 64% 100%, 50% 91%, 36% 100%, 28% 87%,
+        12% 85%, 13% 69%, 0% 58%, 8% 44%, 2% 28%, 16% 22%, 21% 6%, 37% 12%
+      );
+    }
+
+    /* Cozy Cafe Menu Card */
+    .cafe-card {
+      background: #FFFDF9;
+      border: 2px solid #E8D5B7;
+      box-shadow: 0 10px 26px -10px rgba(143, 49, 32, 0.14);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.97); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-butter-300 selection:text-rust-700">
+
+  <!-- Decorative Corner Gingham Tablecloths -->
+  <div class="fixed -top-16 -right-16 w-72 h-72 gingham-corner rotate-12 pointer-events-none z-0 opacity-75 rounded-3xl"></div>
+  <div class="fixed -bottom-16 -left-16 w-72 h-72 gingham-corner -rotate-12 pointer-events-none z-0 opacity-75 rounded-3xl"></div>
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-cream-50/95 backdrop-blur-md border-b-2 border-cream-300 shadow-2xs">
+    <div class="max-w-5xl mx-auto px-4 py-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <!-- Poster-Style Brand Title -->
+        <div class="flex items-center gap-2.5">
+          <div class="flex items-center font-poster text-2xl sm:text-3xl tracking-wide text-rust-600 uppercase leading-none">
+            <span>FOOD</span>
+            <span class="starburst-badge w-7 h-7 mx-1 flex items-center justify-center text-rust-700 font-display font-extrabold text-sm">
+              &amp;
+            </span>
+            <span>DRINK</span>
+          </div>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700">
+            Yummy! • A1–A2
+          </span>
+        </div>
+
+        <!-- Compact Controls: Arrows + Speed + Progress -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center border-2 border-rust-600 rounded-xl overflow-hidden bg-white text-xs font-extrabold">
+            <button id="header-prev-btn" onclick="prevTab()" title="Previous (Left Arrow)"
+              class="px-2.5 py-1 text-rust-700 hover:bg-rust-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              ←
+            </button>
+            <span id="header-step-label" class="px-2.5 py-1 bg-rust-600 text-white">
+              1 / 6
+            </span>
+            <button id="header-next-btn" onclick="nextTab()" title="Next (Right Arrow)"
+              class="px-2.5 py-1 text-rust-700 hover:bg-rust-50 disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+              →
+            </button>
+          </div>
+
+          <!-- Voice Speed -->
+          <div class="hidden sm:flex items-center bg-cream-100 p-0.5 rounded-xl border border-cream-300 text-[11px] font-extrabold">
+            <button type="button" onclick="setGlobalSpeed(0.74)" id="speed-slow-btn"
+              class="px-2 py-0.5 rounded-lg text-rust-700 hover:bg-white transition cursor-pointer">
+              0.75×
+            </button>
+            <button type="button" onclick="setGlobalSpeed(0.95)" id="speed-norm-btn"
+              class="px-2 py-0.5 rounded-lg bg-rust-600 text-white transition cursor-pointer">
+              1.0×
+            </button>
+          </div>
+
+          <!-- Progress -->
+          <div class="hidden md:flex items-center gap-1.5 bg-cream-100 px-2.5 py-1 rounded-xl border border-cream-300">
+            <div class="w-12 h-1.5 bg-cream-300 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="h-full bg-rust-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span id="global-progress-text" class="text-[11px] font-extrabold text-rust-700">0/6</span>
+          </div>
+
+          <button id="sound-toggle-btn" onclick="toggleSound()" title="Sound Effects"
+            class="px-2 py-1 rounded-xl text-xs font-bold bg-white text-rust-700 border border-cream-300 hover:bg-cream-100 transition cursor-pointer">
+            <span id="sound-icon">🔊</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 Navigation Tabs -->
+      <nav class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 pt-2.5">
+        <button onclick="switchTab(0)" data-tab="0" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>1. Breakfast</span>
+          <span id="badge-0" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(1)" data-tab="1" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>2. Article</span>
+          <span id="badge-1" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(2)" data-tab="2" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>3. Frequency</span>
+          <span id="badge-2" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(3)" data-tab="3" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>4. Restaurant</span>
+          <span id="badge-3" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(4)" data-tab="4" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>5. Food &amp; You</span>
+          <span id="badge-4" class="hidden">✓</span>
+        </button>
+        <button onclick="switchTab(5)" data-tab="5" class="tab-btn flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer">
+          <span>6. Homework</span>
+          <span id="badge-5" class="hidden">✓</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300">
+    <div id="toast-content" class="px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2.5 bg-rust-700 text-white border-2 border-butter-400">
+      <span id="toast-icon">🥐</span>
+      <span id="toast-text">Yummy!</span>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: WARM-UP (ANAGRAMS A–E & LUNCH PHOTOS A–D)         -->
+    <!-- ============================================================ -->
+    <section id="section-0" class="lesson-section animate-pop space-y-6">
+      <!-- Part 1A: Breakfast Anagrams -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 1A • MORNING MENU WARM-UP
+            </span>
+            <h2 class="font-poster text-3xl sm:text-4xl text-rust-600 uppercase tracking-wide">
+              Unscramble Food &amp; Drink Words
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Re-order the letters to make food and drink words, then match each item to pictures <strong>A–E</strong>!
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="checkAnagrams()" class="px-4 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm shadow-xs transition cursor-pointer">
+              Check Words
+            </button>
+            <button onclick="resetAnagrams()" class="px-4 py-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 font-bold text-xs sm:text-sm transition cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 Illustrated Breakfast Cards A-E -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
+          <div class="p-3 rounded-2xl bg-cream-100 border border-cream-300 text-center">
+            <span class="inline-block w-6 h-6 rounded-full bg-rust-600 text-white font-extrabold text-xs leading-6 mb-1">A</span>
+            <div class="text-4xl my-1">🥪</div>
+            <span class="text-[11px] font-bold text-stone-500">Picture A</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-cream-100 border border-cream-300 text-center">
+            <span class="inline-block w-6 h-6 rounded-full bg-rust-600 text-white font-extrabold text-xs leading-6 mb-1">B</span>
+            <div class="text-4xl my-1">🧃</div>
+            <span class="text-[11px] font-bold text-stone-500">Picture B</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-cream-100 border border-cream-300 text-center">
+            <span class="inline-block w-6 h-6 rounded-full bg-rust-600 text-white font-extrabold text-xs leading-6 mb-1">C</span>
+            <div class="text-4xl my-1">🧀</div>
+            <span class="text-[11px] font-bold text-stone-500">Picture C</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-cream-100 border border-cream-300 text-center">
+            <span class="inline-block w-6 h-6 rounded-full bg-rust-600 text-white font-extrabold text-xs leading-6 mb-1">D</span>
+            <div class="text-4xl my-1">🥚</div>
+            <span class="text-[11px] font-bold text-stone-500">Picture D</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-cream-100 border border-cream-300 text-center col-span-2 sm:col-span-1">
+            <span class="inline-block w-6 h-6 rounded-full bg-rust-600 text-white font-extrabold text-xs leading-6 mb-1">E</span>
+            <div class="text-4xl my-1">☕</div>
+            <span class="text-[11px] font-bold text-stone-500">Picture E</span>
+          </div>
+        </div>
+
+        <!-- 5 Anagram Inputs -->
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3" id="anagrams-list"></div>
+        <div id="anagrams-fb" class="mt-3 font-bold text-sm text-center hidden"></div>
+      </div>
+
+      <!-- Part 1B: Match words in the box with photos A–D -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-rust-100 text-rust-700 mb-2">
+              STEP 1B • LUNCH &amp; DINNER PLATES
+            </span>
+            <h3 class="font-display font-extrabold text-2xl text-rust-700">
+              Which foods can you see in photos A–D?
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1">
+              Look at the 4 meal plates below and choose which ingredients are on each plate!
+            </p>
+          </div>
+          <button onclick="checkPlatesAD()" class="px-4 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer">
+            Check Plates
+          </button>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2 bg-cream-100 p-3 rounded-2xl border border-cream-300 text-xs font-extrabold text-rust-700">
+          <span>Box:</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">apple</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">banana</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">chicken</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">egg</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">fish</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">mushroom</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">pasta</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">rice</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">sandwich</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">steak</span>
+          <span class="px-2 py-0.5 rounded bg-white border border-cream-300">tomato</span>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="plates-ad-grid"></div>
+        <div id="plates-fb" class="mt-3 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: READING — A GOOD BREAKFAST: IS IT IMPORTANT?      -->
+    <!-- ============================================================ -->
+    <section id="section-1" class="lesson-section hidden animate-pop">
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 2 • GLOBAL BREAKFAST BLOG
+            </span>
+            <h2 class="font-poster text-3xl sm:text-4xl text-rust-600 uppercase tracking-wide">
+              A Good Breakfast — Is It Important?
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Read the article and the 4 comments. Complete the missing foods and decide who thinks breakfast is important!
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="checkBreakfastReading()" class="px-4 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer">
+              Check Reading
+            </button>
+            <button onclick="resetBreakfastReading()" class="px-4 py-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 font-bold text-xs sm:text-sm cursor-pointer">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Intro Article Box -->
+        <div class="mt-5 p-4 rounded-2xl bg-rust-50 border-l-4 border-rust-600 text-xs sm:text-sm text-stone-800 leading-relaxed">
+          <p class="font-bold text-rust-700 mb-1">Is breakfast a very important meal, or not important at all?</p>
+          <p>
+            Scientists and doctors have different opinions: some think that a big breakfast is good for you, because you eat less during the day; others say that if you aren't hungry, don't have breakfast — it's only extra calories! <strong>Is breakfast important for you? Send us a photo of your breakfast.</strong>
+          </p>
+        </div>
+
+        <!-- 4 Reader Comments -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" id="breakfast-comments-grid"></div>
+        <div id="reading-bf-fb" class="mt-4 font-bold text-sm text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: ADVERBS OF FREQUENCY + WORDWALL INTERACTIVE GAMES -->
+    <!-- ============================================================ -->
+    <section id="section-2" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Part 3A: 4A Scale 0% to 100% -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 3A • GRAMMAR SCALE (4A)
+            </span>
+            <h2 class="font-poster text-3xl text-rust-600 uppercase tracking-wide">
+              Adverbs of Frequency (0% → 100%)
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Read sentences 1–5 and put the adverbs in bold in the correct place on the percentage line!
+            </p>
+          </div>
+          <button onclick="checkFrequencyScale()" class="px-4 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer">
+            Check Scale
+          </button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <!-- 5 Example Sentences -->
+          <div class="lg:col-span-6 space-y-2.5 bg-cream-100 p-5 rounded-2xl border border-cream-300 text-sm">
+            <p><strong>1.</strong> We <span class="px-1.5 py-0.5 rounded bg-butter-300 font-extrabold text-rust-700">usually</span> have lunch together.</p>
+            <p><strong>2.</strong> I <span class="px-1.5 py-0.5 rounded bg-butter-300 font-extrabold text-rust-700">never</span> drink coffee. I hate it.</p>
+            <p><strong>3.</strong> After lunch I <span class="px-1.5 py-0.5 rounded bg-butter-300 font-extrabold text-rust-700">always</span> drink tea, green tea, every day.</p>
+            <p><strong>4.</strong> I <span class="px-1.5 py-0.5 rounded bg-butter-300 font-extrabold text-rust-700">sometimes</span> eat my sandwich at my desk or I sometimes go to the park.</p>
+            <p><strong>5.</strong> We <span class="px-1.5 py-0.5 rounded bg-butter-300 font-extrabold text-rust-700">often</span> eat fruit, an apple or a banana.</p>
+          </div>
+
+          <!-- Vertical 0% - 100% Scale -->
+          <div class="lg:col-span-6 bg-white p-5 rounded-2xl border-2 border-cream-300 space-y-3" id="freq-scale-box"></div>
+        </div>
+        <div id="freq-scale-fb" class="mt-3 font-bold text-sm text-center hidden"></div>
+      </div>
+
+      <!-- Part 3B: Wordwall Sentence Unjumble + Speaking Wheel -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-rust-100 text-rust-700 mb-1.5">
+              STEP 3B • WORDWALL WORD ORDER PRACTICE
+            </span>
+            <h3 class="font-display font-extrabold text-2xl text-rust-700">
+              Put the Words in the Correct Order
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-0.5">
+              Remember: Adverbs go <strong>BEFORE</strong> main verbs (<em>I always drink...</em>), but <strong>AFTER</strong> <em>am / is / are</em> (<em>I am never late</em>)!
+            </p>
+          </div>
+          <span id="unjumble-progress" class="px-3 py-1.5 rounded-xl bg-butter-400 text-rust-700 font-extrabold text-xs">
+            Sentence 1 / 6
+          </span>
+        </div>
+
+        <div class="mt-5 max-w-2xl mx-auto">
+          <!-- Answer Drop Area -->
+          <div id="unjumble-answer-box" class="min-h-[58px] p-3 rounded-2xl bg-cream-100 border-2 border-dashed border-rust-500/60 flex flex-wrap items-center gap-2 mb-4">
+            <span class="text-xs text-stone-400 font-semibold">Click words below to build the sentence...</span>
+          </div>
+
+          <!-- Shuffled Word Tiles -->
+          <div id="unjumble-tiles-box" class="flex flex-wrap justify-center gap-2 mb-5"></div>
+
+          <div class="flex flex-wrap items-center justify-center gap-2.5">
+            <button onclick="clearUnjumble()" class="px-4 py-2 rounded-xl bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 font-bold text-xs cursor-pointer">
+              Clear
+            </button>
+            <button onclick="checkUnjumble()" class="px-5 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer">
+              Check Sentence
+            </button>
+            <button onclick="nextUnjumble()" class="px-4 py-2 rounded-xl bg-butter-400 hover:bg-butter-300 text-rust-700 font-extrabold text-xs cursor-pointer">
+              Next Sentence →
+            </button>
+          </div>
+          <div id="unjumble-fb" class="mt-3 font-bold text-sm text-center hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: RESTAURANT LISTENING, MORE/LESS & ANNA'S MEAL     -->
+    <!-- ============================================================ -->
+    <section id="section-3" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Part 4A: At the Restaurant Dialogue + More/Less -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 4A • LISTENING AT THE RESTAURANT (5.20)
+            </span>
+            <h2 class="font-poster text-3xl text-rust-600 uppercase tracking-wide">
+              Ordering Food &amp; "More / Less"
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Listen to the conversation in a restaurant and complete each space with <strong>one word</strong>!
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 bg-cream-100 p-2 rounded-2xl border border-cream-300">
+            <button type="button" onclick="playRestaurantAudio('rest')"
+              class="px-4 py-2 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer">
+              <span>▶</span> Play Dialogue
+            </button>
+            <button type="button" onclick="pauseRestaurantAudio()" class="px-2.5 py-2 rounded-xl bg-white border border-cream-300 text-rust-700 font-extrabold text-xs cursor-pointer">⏸</button>
+            <button type="button" onclick="stopRestaurantAudio()" class="px-2.5 py-2 rounded-xl bg-white border border-cream-300 text-rust-700 font-extrabold text-xs cursor-pointer">⏹</button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Conversation Gap-Fill (12 gaps) -->
+          <div class="lg:col-span-8 bg-cream-100 p-5 rounded-2xl border border-cream-300 space-y-2 text-xs sm:text-sm leading-relaxed" id="restaurant-dialogue-box"></div>
+
+          <!-- Side Box: More = ↑ / Less = ↓ (from Wordwall More/Less) -->
+          <div class="lg:col-span-4 space-y-4">
+            <div class="p-4 rounded-2xl bg-butter-300/40 border-2 border-butter-400">
+              <div class="flex items-center justify-around font-poster text-xl text-rust-700 pb-2 mb-2 border-b border-butter-400">
+                <span>MORE = ↑</span>
+                <span>LESS = ↓</span>
+              </div>
+              <p class="text-xs text-stone-700 mb-3">
+                Quick check: Does the customer want <strong>more</strong> or <strong>less</strong>?
+              </p>
+              <div class="space-y-2 text-xs">
+                <div class="p-2.5 rounded-xl bg-white border border-cream-300">
+                  <p class="font-bold text-stone-800 mb-1.5">A: "Fourteen euros." — B: "Oh, it's expensive. No, ___."</p>
+                  <div class="flex gap-2">
+                    <button type="button" onclick="checkMoreLessBtn(this, false)" class="flex-1 py-1 rounded-lg bg-cream-100 font-extrabold hover:bg-butter-300 cursor-pointer">More ↑</button>
+                    <button type="button" onclick="checkMoreLessBtn(this, true)" class="flex-1 py-1 rounded-lg bg-cream-100 font-extrabold hover:bg-butter-300 cursor-pointer">Less ↓</button>
+                  </div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-cream-300">
+                  <p class="font-bold text-stone-800 mb-1.5">A: "One orange juice?" — B: "Two, please! ___ juice!"</p>
+                  <div class="flex gap-2">
+                    <button type="button" onclick="checkMoreLessBtn(this, true)" class="flex-1 py-1 rounded-lg bg-cream-100 font-extrabold hover:bg-butter-300 cursor-pointer">More ↑</button>
+                    <button type="button" onclick="checkMoreLessBtn(this, false)" class="flex-1 py-1 rounded-lg bg-cream-100 font-extrabold hover:bg-butter-300 cursor-pointer">Less ↓</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="checkRestaurantGaps()" class="w-full py-3 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-sm cursor-pointer">
+              Check Restaurant Gaps
+            </button>
+            <div id="rest-gaps-fb" class="font-bold text-xs text-center hidden"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 4B: Anna's Favourite Meal Chart (5.6) -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-rust-100 text-rust-700 mb-1">
+              STEP 4B • LISTENING REVIEW (5.6)
+            </span>
+            <h3 class="font-display font-extrabold text-xl text-rust-700">
+              Anna's Favourite Meal
+            </h3>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" onclick="playRestaurantAudio('anna')" class="px-3.5 py-2 rounded-xl bg-rust-600 text-white font-extrabold text-xs cursor-pointer">▶ Play Anna</button>
+            <button type="button" onclick="stopRestaurantAudio()" class="px-2.5 py-2 rounded-xl bg-cream-100 border border-cream-300 text-xs font-bold cursor-pointer">⏹</button>
+            <button onclick="checkAnnaReview()" class="px-4 py-2 rounded-xl bg-butter-400 text-rust-700 font-extrabold text-xs cursor-pointer">Check</button>
+          </div>
+        </div>
+
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-left border-collapse rounded-xl overflow-hidden border border-cream-300 text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-rust-600 text-white font-display">
+                <th class="p-3">Category</th>
+                <th class="p-3 bg-rust-700">👩 Anna</th>
+                <th class="p-3">👨 Will</th>
+                <th class="p-3">👩 Sarah</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-cream-200 bg-white">
+              <tr>
+                <td class="p-3 font-bold bg-cream-100">Favourite meal</td>
+                <td class="p-3 font-extrabold text-rust-700">dinner</td>
+                <td class="p-3 text-stone-500">lunch</td>
+                <td class="p-3 text-stone-500">breakfast</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold bg-cream-100">Where?</td>
+                <td class="p-3">
+                  At <select id="ar-1" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="home">home</option><option value="work">work</option></select>
+                  or at a <select id="ar-2" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="restaurant">restaurant</option><option value="café">café</option></select>
+                </td>
+                <td class="p-3 text-stone-500">At work</td>
+                <td class="p-3 text-stone-500">Usually at home</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold bg-cream-100">Food</td>
+                <td class="p-3">
+                  <select id="ar-3" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="Meat">Meat</option><option value="Toast">Toast</option></select>
+                  or <select id="ar-4" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="fish">fish</option><option value="fruit">fruit</option></select>
+                  and <select id="ar-5" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="vegetables">vegetables</option><option value="salad">salad</option></select>
+                </td>
+                <td class="p-3 text-stone-500">Different things, with salad</td>
+                <td class="p-3 text-stone-500">Toast and fruit</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold bg-cream-100">Drink</td>
+                <td class="p-3">
+                  A glass of <select id="ar-6" class="px-2 py-1 rounded border border-cream-300 font-bold"><option value="">---</option><option value="wine">wine</option><option value="water">water</option></select>
+                </td>
+                <td class="p-3 text-stone-500">Water and then a coffee</td>
+                <td class="p-3 text-stone-500">Tea or coffee</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="anna-rev-fb" class="mt-3 font-bold text-xs text-center hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: 20 FOOD ITEMS & "FOOD: YOU AND YOUR COUNTRY"      -->
+    <!-- ============================================================ -->
+    <section id="section-4" class="lesson-section hidden animate-pop space-y-6">
+      <!-- Part 5A: 20 Food & Drink Vocabulary Categories -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 5A • 20 FOODS &amp; DRINKS (5A)
+            </span>
+            <h2 class="font-poster text-3xl text-rust-600 uppercase tracking-wide">
+              Sort the 20 Food &amp; Drink Words
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Click a food item below and sort it into the right category: <strong>Fruit, Vegetables, Meat, Drinks,</strong> or <strong>Other</strong>!
+            </p>
+          </div>
+          <button onclick="resetFoodSort()" class="px-4 py-2 rounded-xl bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 font-bold text-xs cursor-pointer">
+            Reset All
+          </button>
+        </div>
+
+        <!-- Food Chips Pool -->
+        <div id="food-pool-box" class="mt-5 flex flex-wrap justify-center gap-2 p-4 rounded-2xl bg-cream-100 border border-cream-300 min-h-[70px]"></div>
+
+        <!-- 5 Category Buckets -->
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="food-buckets-grid"></div>
+      </div>
+
+      <!-- Part 5B: Food: You and Your Country -->
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-rust-100 text-rust-700 mb-2">
+          STEP 5B • SPEAKING &amp; PERSONALIZATION
+        </span>
+        <h3 class="font-poster text-2xl sm:text-3xl text-rust-600 uppercase tracking-wide mb-4">
+          Food: You and Your Country
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+          <!-- You -->
+          <div class="p-5 rounded-2xl bg-cream-100 border border-cream-300 space-y-2.5">
+            <h4 class="font-display font-extrabold text-lg text-rust-700">👤 About You</h4>
+            <div><label class="font-bold">I have breakfast...</label><input type="text" placeholder="(Where? e.g. at home)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">I have ... for breakfast.</label><input type="text" placeholder="(What? e.g. eggs and coffee)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">I have lunch...</label><input type="text" placeholder="(Where?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">I have dinner with...</label><input type="text" placeholder="(Who?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">I love / I don't like...</label><input type="text" placeholder="(What foods?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+          </div>
+
+          <!-- Your Country -->
+          <div class="p-5 rounded-2xl bg-rust-50/70 border border-rust-200 space-y-2.5">
+            <h4 class="font-display font-extrabold text-lg text-rust-700">🇺🇦 Your Country</h4>
+            <div><label class="font-bold">People have ... for breakfast.</label><input type="text" placeholder="(What?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">They have a big...</label><input type="text" placeholder="(lunch / dinner?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">They eat / don't eat a lot of food from other countries.</label><input type="text" placeholder="(Your opinion)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">They eat a lot of...</label><input type="text" placeholder="(What?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+            <div><label class="font-bold">They drink a lot of...</label><input type="text" placeholder="(What?)" class="mt-1 w-full px-3 py-1.5 rounded-lg bg-white border border-cream-300" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: HOMEWORK (MARCO'S BREAKFAST & AND / BUT / OR)     -->
+    <!-- ============================================================ -->
+    <section id="section-5" class="lesson-section hidden animate-pop">
+      <div class="cafe-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-cream-200">
+          <div>
+            <span class="inline-block px-3 py-0.5 rounded-full text-xs font-extrabold bg-butter-400 text-rust-700 mb-2">
+              STEP 6 • HOMEWORK &amp; LINKING WORDS
+            </span>
+            <h2 class="font-poster text-3xl sm:text-4xl text-rust-600 uppercase tracking-wide">
+              Marco's Breakfast &amp; Linking Words
+            </h2>
+            <p class="text-stone-600 text-sm mt-1">
+              Read Marco's comment, complete sentences 1–3 with <strong>and</strong>, <strong>or</strong>, or <strong>but</strong>, and write your own comment!
+            </p>
+          </div>
+          <button onclick="checkHomework()" class="px-4 py-2.5 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer">
+            Check Homework
+          </button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Marco's Comment Card -->
+          <div class="lg:col-span-6 p-5 rounded-2xl bg-cream-100 border-2 border-cream-300 space-y-3 text-xs sm:text-sm leading-relaxed">
+            <div class="flex items-center justify-between border-b border-cream-300 pb-2">
+              <span class="font-extrabold text-rust-700 uppercase tracking-wider">💬 Let's Chat!</span>
+              <span class="px-2 py-0.5 rounded bg-butter-300 text-rust-700 font-bold text-xs">Valencia, Spain</span>
+            </div>
+            <p>
+              <strong>Marco:</strong> Breakfast is very important for me. I have fruit, usually an orange <mark class="bg-butter-300 px-1 rounded font-bold">or</mark> an apple.
+            </p>
+            <p>
+              Then I have bread with butter <mark class="bg-butter-300 px-1 rounded font-bold">and</mark> jam and a cup of coffee.
+            </p>
+            <p>
+              I usually have breakfast at home, <mark class="bg-butter-300 px-1 rounded font-bold">but</mark> at the weekend I have it in a café near my house. I think my breakfast is very healthy.
+            </p>
+          </div>
+
+          <!-- Sentences 1-3 + Writing Box -->
+          <div class="lg:col-span-6 space-y-5">
+            <div class="p-5 rounded-2xl bg-white border border-cream-300 space-y-3 text-xs sm:text-sm">
+              <h3 class="font-display font-extrabold text-base text-rust-700">
+                Complete sentences 1–3 with <em>and</em>, <em>or</em>, or <em>but</em>:
+              </h3>
+              <p>
+                1. I eat fish,
+                <select id="hw-1" class="mx-1 px-2.5 py-1 rounded-lg border border-rust-500 font-extrabold text-rust-700">
+                  <option value="">---</option>
+                  <option value="and">and</option>
+                  <option value="or">or</option>
+                  <option value="but">but</option>
+                </select>
+                I don't eat meat.
+              </p>
+              <p>
+                2. Do you have tea
+                <select id="hw-2" class="mx-1 px-2.5 py-1 rounded-lg border border-rust-500 font-extrabold text-rust-700">
+                  <option value="">---</option>
+                  <option value="and">and</option>
+                  <option value="or">or</option>
+                  <option value="but">but</option>
+                </select>
+                coffee for breakfast?
+              </p>
+              <p>
+                3. I have a brother
+                <select id="hw-3" class="mx-1 px-2.5 py-1 rounded-lg border border-rust-500 font-extrabold text-rust-700">
+                  <option value="">---</option>
+                  <option value="and">and</option>
+                  <option value="or">or</option>
+                  <option value="but">but</option>
+                </select>
+                a sister.
+              </p>
+              <div id="hw-fb" class="font-bold text-xs hidden"></div>
+            </div>
+
+            <!-- Write Comment -->
+            <div class="p-5 rounded-2xl bg-rust-50/70 border border-rust-200">
+              <h3 class="font-display font-extrabold text-base text-rust-700 mb-1">
+                ✍️ Write a comment about your breakfast
+              </h3>
+              <p class="text-xs text-stone-600 mb-2">
+                What do you have? Is it healthy? Use <strong>and</strong>, <strong>but</strong>, and <strong>or</strong> to connect your ideas!
+              </p>
+              <textarea rows="4" placeholder="For breakfast I usually have... and..., but I don't have..."
+                class="w-full p-3 rounded-xl bg-white border border-cream-300 text-xs sm:text-sm focus:outline-none focus:border-rust-600"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="mt-7 flex items-center justify-between gap-4 bg-cream-50/95 px-5 py-3.5 rounded-2xl border-2 border-cream-300 shadow-2xs">
+      <button id="bottom-prev-btn" onclick="prevTab()"
+        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 font-extrabold text-xs sm:text-sm disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>←</span>
+        <span>Previous</span>
+      </button>
+
+      <span id="bottom-step-indicator" class="font-poster text-base sm:text-lg tracking-wide text-rust-700 uppercase">
+        Course 1 of 6
+      </span>
+
+      <button id="bottom-next-btn" onclick="nextTab()"
+        class="flex items-center gap-2 px-5 py-2 rounded-xl bg-rust-600 hover:bg-rust-700 text-white font-extrabold text-xs sm:text-sm disabled:opacity-35 disabled:pointer-events-none transition cursor-pointer">
+        <span>Next</span>
+        <span>→</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /* ------------------------------------------------------------
+       1. SOUND EFFECTS, NAVIGATION & PROGRESS
+    ------------------------------------------------------------ */
+    let soundEnabled = true;
+    let audioCtx = null;
+    const completedSections = new Set();
+    let currentTabIndex = 0;
+    const totalTabs = 6;
+    let globalSpeechRate = 0.95;
+
+    function playTone(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.11, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(175, now + 0.2);
+          gain.gain.setValueAtTime(0.07, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playTone('click');
+    }
+
+    function showToast(icon, text, isError = false) {
+      const banner = document.getElementById('toast-banner');
+      const content = document.getElementById('toast-content');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-text').textContent = text;
+      content.className = `px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2.5 ${
+        isError ? 'bg-rose-700 text-white border-2 border-white' : 'bg-rust-700 text-white border-2 border-butter-400'
+      }`;
+      banner.classList.remove('translate-y-16', 'opacity-0');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => banner.classList.add('translate-y-16', 'opacity-0'), 2600);
+    }
+
+    function setGlobalSpeed(rate) {
+      playTone('click');
+      globalSpeechRate = rate;
+      const isSlow = rate < 0.85;
+      document.getElementById('speed-slow-btn').className = isSlow
+        ? 'px-2 py-0.5 rounded-lg bg-rust-600 text-white transition cursor-pointer'
+        : 'px-2 py-0.5 rounded-lg text-rust-700 hover:bg-white transition cursor-pointer';
+      document.getElementById('speed-norm-btn').className = !isSlow
+        ? 'px-2 py-0.5 rounded-lg bg-rust-600 text-white transition cursor-pointer'
+        : 'px-2 py-0.5 rounded-lg text-rust-700 hover:bg-white transition cursor-pointer';
+      showToast('🎧', isSlow ? 'Speed: 0.75×' : 'Speed: 1.0×');
+    }
+
+    function markSectionComplete(idx) {
+      completedSections.add(idx);
+      const badge = document.getElementById(`badge-${idx}`);
+      if (badge) badge.classList.remove('hidden');
+      const pct = Math.round((completedSections.size / totalTabs) * 100);
+      document.getElementById('global-progress-bar').style.width = `${pct}%`;
+      document.getElementById('global-progress-text').textContent = `${completedSections.size}/${totalTabs}`;
+    }
+
+    function switchTab(index) {
+      if (index < 0 || index >= totalTabs) return;
+      currentTabIndex = index;
+      playTone('click');
+      stopRestaurantAudio(false);
+
+      document.querySelectorAll('.lesson-section').forEach((sec, idx) => {
+        sec.classList.toggle('hidden', idx !== index);
+      });
+
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.className = idx === index
+          ? 'tab-btn bg-rust-600 text-white shadow-2xs flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer'
+          : 'tab-btn bg-cream-100 hover:bg-cream-200 text-rust-700 border border-cream-300 flex items-center justify-center gap-1 px-2 py-1.5 rounded-xl text-xs font-extrabold truncate transition cursor-pointer';
+      });
+
+      document.getElementById('header-step-label').textContent = `${index + 1} / ${totalTabs}`;
+      document.getElementById('bottom-step-indicator').textContent = `Course ${index + 1} of ${totalTabs}`;
+      document.getElementById('header-prev-btn').disabled = index === 0;
+      document.getElementById('bottom-prev-btn').disabled = index === 0;
+      document.getElementById('header-next-btn').disabled = index === totalTabs - 1;
+      document.getElementById('bottom-next-btn').disabled = index === totalTabs - 1;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevTab() { if (currentTabIndex > 0) switchTab(currentTabIndex - 1); }
+    function nextTab() { if (currentTabIndex < totalTabs - 1) switchTab(currentTabIndex + 1); }
+
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'ArrowRight') nextTab();
+      if (e.key === 'ArrowLeft') prevTab();
+    });
+
+    /* ------------------------------------------------------------
+       2. STEP 1: BREAKFAST ANAGRAMS & PLATES A-D
+    ------------------------------------------------------------ */
+    const anagramItems = [
+      { num: 1, scrambled: 'A E T', word: 'TEA', pic: 'E' },
+      { num: 2, scrambled: 'E E S H C E', word: 'CHEESE', pic: 'C' },
+      { num: 3, scrambled: 'O R A N E G   C U I J E', word: 'ORANGE JUICE', pic: 'B' },
+      { num: 4, scrambled: 'W A N D C H I S', word: 'SANDWICH', pic: 'A' },
+      { num: 5, scrambled: 'G E S G', word: 'EGGS', pic: 'D' }
+    ];
+
+    function renderAnagrams() {
+      const list = document.getElementById('anagrams-list');
+      list.innerHTML = '';
+      anagramItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.id = `ana-row-${item.num}`;
+        row.className = 'p-3 rounded-2xl bg-cream-100 border border-cream-300 flex flex-wrap items-center justify-between gap-2';
+        row.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-rust-700 text-sm">${item.num}.</span>
+            <span class="px-2.5 py-1 rounded-lg bg-butter-300/70 font-mono font-extrabold text-xs text-rust-700 tracking-wider">${item.scrambled}</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <input type="text" id="ana-in-${item.num}" placeholder="Type word..."
+              class="w-32 sm:w-36 px-2.5 py-1 rounded-lg bg-white border border-cream-300 font-extrabold text-xs uppercase text-rust-700 focus:outline-none focus:border-rust-600" />
+            <select id="ana-pic-${item.num}" class="px-2 py-1 rounded-lg bg-white border border-cream-300 font-extrabold text-xs text-rust-700 cursor-pointer">
+              <option value="">Pic?</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+            </select>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function checkAnagrams() {
+      let ok = 0;
+      anagramItems.forEach((item) => {
+        const val = document.getElementById(`ana-in-${item.num}`).value.trim().toUpperCase();
+        const pic = document.getElementById(`ana-pic-${item.num}`).value;
+        const row = document.getElementById(`ana-row-${item.num}`);
+        if (val === item.word && pic === item.pic) {
+          ok++;
+          row.className = 'p-3 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex flex-wrap items-center justify-between gap-2';
+        } else {
+          row.className = 'p-3 rounded-2xl bg-rose-50 border-2 border-rose-500 flex flex-wrap items-center justify-between gap-2';
+        }
+      });
+      const fb = document.getElementById('anagrams-fb');
+      fb.classList.remove('hidden');
+      if (ok === 5) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Yummy! All 5 breakfast words and pictures (A–E) are correct!';
+        markSectionComplete(0);
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You got ${ok}/5 right. Check both the spelling and the picture letter!`;
+      }
+    }
+
+    function resetAnagrams() {
+      playTone('click');
+      document.getElementById('anagrams-fb').classList.add('hidden');
+      renderAnagrams();
+    }
+
+    /* Plates A-D */
+    const platesData = [
+      { letter: 'A', emoji: '🥪', desc: 'Grilled sandwich on a plate', ans: 'sandwich' },
+      { letter: 'B', emoji: '🍱', desc: 'Bento bowls with rice, egg, tomato & banana', ans: 'rice & egg' },
+      { letter: 'C', emoji: '🍝', desc: 'Spaghetti with tomato & mushrooms', ans: 'pasta & tomato' },
+      { letter: 'D', emoji: '🍗', desc: 'Roast chicken with potatoes', ans: 'chicken' }
+    ];
+
+    function renderPlatesAD() {
+      const grid = document.getElementById('plates-ad-grid');
+      grid.innerHTML = '';
+      platesData.forEach((p) => {
+        const card = document.createElement('div');
+        card.id = `plate-card-${p.letter}`;
+        card.className = 'p-4 rounded-2xl bg-cream-100 border border-cream-300 text-center space-y-2';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="w-7 h-7 rounded-full bg-rust-600 text-white font-extrabold text-xs flex items-center justify-center">${p.letter}</span>
+            <span class="text-3xl">${p.emoji}</span>
+          </div>
+          <p class="text-xs text-stone-600 font-semibold">${p.desc}</p>
+          <select id="plate-sel-${p.letter}" class="w-full px-2.5 py-1.5 rounded-xl bg-white border border-cream-300 font-extrabold text-xs text-rust-700 cursor-pointer">
+            <option value="">-- Main food --</option>
+            <option value="sandwich">sandwich</option>
+            <option value="rice & egg">rice, egg &amp; banana</option>
+            <option value="pasta & tomato">pasta, mushroom &amp; tomato</option>
+            <option value="chicken">chicken &amp; steak</option>
+          </select>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkPlatesAD() {
+      let ok = 0;
+      platesData.forEach((p) => {
+        const val = document.getElementById(`plate-sel-${p.letter}`).value;
+        const card = document.getElementById(`plate-card-${p.letter}`);
+        if (val === p.ans) {
+          ok++;
+          card.className = 'p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-center space-y-2';
+        } else {
+          card.className = 'p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 text-center space-y-2';
+        }
+      });
+      const fb = document.getElementById('plates-fb');
+      fb.classList.remove('hidden');
+      if (ok === 4) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Great eye! All 4 meal plates identified!';
+        markSectionComplete(0);
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `Got ${ok}/4 right!`;
+      }
+    }
+
+    /* ------------------------------------------------------------
+       3. STEP 2: BREAKFAST ARTICLE & 4 COMMENTS
+    ------------------------------------------------------------ */
+    const readerComments = [
+      {
+        id: 'kuzma',
+        name: 'Kuzma, Poland',
+        flag: '🇵🇱',
+        textBefore: 'I have breakfast in a great café near my office. I have a',
+        gap1Opts: ['croissant', 'steak'],
+        gap1Ans: 'croissant',
+        textMid: 'and coffee — an espresso with hot',
+        gap2Opts: ['milk', 'juice'],
+        gap2Ans: 'milk',
+        textAfter: '. Mmm. I think breakfast is my favourite meal.',
+        impAns: 'yes'
+      },
+      {
+        id: 'pablo',
+        name: 'Pablo, Argentina',
+        flag: '🇦🇷',
+        textBefore: 'I have breakfast at home, but I don’t have a big breakfast. I have',
+        gap1Opts: ['toast', 'chicken'],
+        gap1Ans: 'toast',
+        textMid: 'and',
+        gap2Opts: ['fruit', 'fish'],
+        gap2Ans: 'fruit',
+        textAfter: ', and sometimes cereal. It’s a healthy breakfast. That’s a good thing at the beginning of the day.',
+        impAns: 'yes'
+      },
+      {
+        id: 'rob',
+        name: 'Rob, UK',
+        flag: '🇬🇧',
+        textBefore: 'I don’t eat in the morning — I’m not hungry. I just have a',
+        gap1Opts: ['coffee', 'sandwich'],
+        gap1Ans: 'coffee',
+        textMid: 'at work. But I have',
+        gap2Opts: ['lunch', 'dinner'],
+        gap2Ans: 'lunch',
+        textAfter: 'early at about 11.30.',
+        impAns: 'no'
+      },
+      {
+        id: 'sakura',
+        name: 'Sakura, Japan',
+        flag: '🇯🇵',
+        textBefore: 'I really like breakfast. It’s an important meal for Japanese people. I have breakfast at home with my family. We have a traditional breakfast. It’s not very different from lunch and dinner. We have',
+        gap1Opts: ['rice', 'cheese'],
+        gap1Ans: 'rice',
+        textMid: ',',
+        gap2Opts: ['fish', 'bread'],
+        gap2Ans: 'fish',
+        textAfter: 'and miso soup and we drink green tea. We don’t drink a lot of coffee in my family.',
+        impAns: 'yes'
+      }
+    ];
+
+    function renderBreakfastComments() {
+      const grid = document.getElementById('breakfast-comments-grid');
+      grid.innerHTML = '';
+      readerComments.forEach((c) => {
+        const card = document.createElement('div');
+        card.id = `bf-card-${c.id}`;
+        card.className = 'p-4 rounded-2xl bg-cream-100 border border-cream-300 flex flex-col justify-between gap-3 text-xs sm:text-sm';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-cream-300">
+              <span class="font-extrabold text-rust-700">${c.flag} ${c.name}</span>
+            </div>
+            <p class="leading-relaxed text-stone-800">
+              ${c.textBefore}
+              <select id="bf-${c.id}-1" class="mx-1 px-2 py-0.5 rounded bg-white border border-rust-500 font-extrabold text-rust-700">
+                <option value="">---</option>
+                ${c.gap1Opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+              </select>
+              ${c.textMid}
+              <select id="bf-${c.id}-2" class="mx-1 px-2 py-0.5 rounded bg-white border border-rust-500 font-extrabold text-rust-700">
+                <option value="">---</option>
+                ${c.gap2Opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+              </select>
+              ${c.textAfter}
+            </p>
+          </div>
+          <div class="pt-2 border-t border-cream-300 flex items-center justify-between">
+            <span class="text-xs font-bold text-stone-600">Is breakfast important for ${c.name.split(',')[0]}?</span>
+            <select id="bf-${c.id}-imp" class="px-2.5 py-1 rounded-lg bg-white border border-cream-300 font-extrabold text-xs text-rust-700">
+              <option value="">Choose...</option>
+              <option value="yes">Yes, important</option>
+              <option value="no">No, not important</option>
+            </select>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkBreakfastReading() {
+      let ok = 0;
+      readerComments.forEach((c) => {
+        const g1 = document.getElementById(`bf-${c.id}-1`).value === c.gap1Ans;
+        const g2 = document.getElementById(`bf-${c.id}-2`).value === c.gap2Ans;
+        const imp = document.getElementById(`bf-${c.id}-imp`).value === c.impAns;
+        const card = document.getElementById(`bf-card-${c.id}`);
+        if (g1 && g2 && imp) {
+          ok++;
+          card.className = 'p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex flex-col justify-between gap-3 text-xs sm:text-sm';
+        } else {
+          card.className = 'p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 flex flex-col justify-between gap-3 text-xs sm:text-sm';
+        }
+      });
+      const fb = document.getElementById('reading-bf-fb');
+      fb.classList.remove('hidden');
+      if (ok === 4) {
+        playTone('success');
+        fb.className = 'mt-4 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Brilliant! Kuzma, Pablo & Sakura think breakfast is important — only Rob skips it!';
+        markSectionComplete(1);
+        showToast('🥐', 'Breakfast article completed!');
+      } else {
+        playTone('error');
+        fb.className = 'mt-4 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `You completed ${ok}/4 comments accurately. Fix the red cards!`;
+      }
+    }
+
+    function resetBreakfastReading() {
+      playTone('click');
+      document.getElementById('reading-bf-fb').classList.add('hidden');
+      renderBreakfastComments();
+    }
+
+    /* ------------------------------------------------------------
+       4. STEP 3: ADVERBS OF FREQUENCY SCALE & WORDWALL UNJUMBLE
+    ------------------------------------------------------------ */
+    const scaleItems = [
+      { pct: '0%', num: 1, ans: 'never' },
+      { pct: '40%', num: 2, ans: 'sometimes' },
+      { pct: '60%', num: 3, ans: 'often' },
+      { pct: '80%', num: 4, ans: 'usually', prefilled: true },
+      { pct: '100%', num: 5, ans: 'always' }
+    ];
+
+    function renderFrequencyScale() {
+      const box = document.getElementById('freq-scale-box');
+      box.innerHTML = '';
+      scaleItems.forEach((s) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-3';
+        row.innerHTML = `
+          <span class="w-14 text-right font-poster text-lg text-rust-600">${s.pct}</span>
+          <span class="w-6 h-6 rounded-full bg-butter-400 text-rust-700 font-extrabold text-xs flex items-center justify-center">${s.num}</span>
+          ${
+            s.prefilled
+              ? '<span class="flex-1 px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-900 font-extrabold text-sm">usually (example)</span>'
+              : `<select id="freq-sel-${s.num}" class="flex-1 px-3 py-1.5 rounded-xl bg-cream-100 border border-cream-300 font-extrabold text-sm text-rust-700 cursor-pointer">
+                  <option value="">-- Choose adverb --</option>
+                  <option value="always">always</option>
+                  <option value="often">often</option>
+                  <option value="sometimes">sometimes</option>
+                  <option value="never">never</option>
+                </select>`
+          }
+        `;
+        box.appendChild(row);
+      });
+    }
+
+    function checkFrequencyScale() {
+      let ok = 0;
+      [1, 2, 3, 5].forEach((num) => {
+        const item = scaleItems.find((x) => x.num === num);
+        const sel = document.getElementById(`freq-sel-${num}`);
+        if (sel.value === item.ans) {
+          ok++;
+          sel.className = 'flex-1 px-3 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-500 font-extrabold text-sm text-emerald-900';
+        } else {
+          sel.className = 'flex-1 px-3 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-500 font-extrabold text-sm text-rose-900';
+        }
+      });
+      const fb = document.getElementById('freq-scale-fb');
+      fb.classList.remove('hidden');
+      if (ok === 4) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Spot on! 0% never → 40% sometimes → 60% often → 80% usually → 100% always!';
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = `Got ${ok}/4 right on the scale!`;
+      }
+    }
+
+    /* Wordwall Unjumble Sentences */
+    const unjumbleSentences = [
+      ['I', 'always', 'drink', 'green', 'tea', 'after', 'lunch.'],
+      ['We', 'usually', 'have', 'breakfast', 'at', 'home.'],
+      ['She', 'never', 'eats', 'meat', 'or', 'fish.'],
+      ['They', 'are', 'sometimes', 'late', 'for', 'work.'],
+      ['Do', 'you', 'often', 'eat', 'fruit', 'for', 'breakfast?'],
+      ['He', 'is', 'always', 'hungry', 'in', 'the', 'morning.']
+    ];
+
+    let unjumbleIdx = 0;
+    let unjumbleShuffled = [];
+    let unjumbleBuilt = [];
+
+    function initUnjumbleSentence() {
+      const target = unjumbleSentences[unjumbleIdx];
+      unjumbleShuffled = target.map((w, i) => ({ id: i, word: w })).sort(() => Math.random() - 0.5);
+      unjumbleBuilt = [];
+      document.getElementById('unjumble-progress').textContent = `Sentence ${unjumbleIdx + 1} / ${unjumbleSentences.length}`;
+      document.getElementById('unjumble-fb').classList.add('hidden');
+      renderUnjumble();
+    }
+
+    function renderUnjumble() {
+      const ansBox = document.getElementById('unjumble-answer-box');
+      const tilesBox = document.getElementById('unjumble-tiles-box');
+
+      if (unjumbleBuilt.length === 0) {
+        ansBox.innerHTML = '<span class="text-xs text-stone-400 font-semibold">Click words below to build the sentence...</span>';
+      } else {
+        ansBox.innerHTML = '';
+        unjumbleBuilt.forEach((tile) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = tile.word;
+          b.onclick = () => {
+            playTone('click');
+            unjumbleBuilt = unjumbleBuilt.filter((t) => t.id !== tile.id);
+            renderUnjumble();
+          };
+          b.className = 'px-3 py-1.5 rounded-xl bg-rust-600 text-white font-extrabold text-sm shadow-2xs cursor-pointer';
+          ansBox.appendChild(b);
+        });
+      }
+
+      tilesBox.innerHTML = '';
+      const usedIds = new Set(unjumbleBuilt.map((t) => t.id));
+      unjumbleShuffled.forEach((tile) => {
+        const used = usedIds.has(tile.id);
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.disabled = used;
+        b.textContent = tile.word;
+        b.onclick = () => {
+          playTone('click');
+          unjumbleBuilt.push(tile);
+          renderUnjumble();
+        };
+        b.className = used
+          ? 'px-3.5 py-2 rounded-xl bg-cream-200 text-stone-400 font-bold text-sm opacity-40 cursor-default'
+          : 'px-3.5 py-2 rounded-xl bg-white hover:bg-butter-300 text-rust-700 border-2 border-cream-300 font-extrabold text-sm shadow-2xs transition cursor-pointer';
+        tilesBox.appendChild(b);
+      });
+    }
+
+    function clearUnjumble() {
+      playTone('click');
+      unjumbleBuilt = [];
+      document.getElementById('unjumble-fb').classList.add('hidden');
+      renderUnjumble();
+    }
+
+    function checkUnjumble() {
+      const builtStr = unjumbleBuilt.map((t) => t.word).join(' ');
+      const targetStr = unjumbleSentences[unjumbleIdx].join(' ');
+      const fb = document.getElementById('unjumble-fb');
+      fb.classList.remove('hidden');
+      if (builtStr === targetStr) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-sm text-center text-emerald-700';
+        fb.textContent = '🎉 Perfect word order!';
+        if (unjumbleIdx >= 2) markSectionComplete(2);
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-sm text-center text-rose-600';
+        fb.textContent = 'Not quite! Check the position of the frequency adverb.';
+      }
+    }
+
+    function nextUnjumble() {
+      playTone('click');
+      unjumbleIdx = (unjumbleIdx + 1) % unjumbleSentences.length;
+      initUnjumbleSentence();
+    }
+
+    /* ------------------------------------------------------------
+       5. STEP 4: RESTAURANT DIALOGUE & ANNA'S MEAL
+    ------------------------------------------------------------ */
+    const restAudioLines = [
+      { spk: 'M', pitch: 0.94, text: 'Good evening! Do you have a table for two?' },
+      { spk: 'F', pitch: 1.15, text: 'Please.' },
+      { spk: 'M', pitch: 0.94, text: 'OK. And for three?' },
+      { spk: 'F', pitch: 1.15, text: 'Yes. Would you like a menu in English?' },
+      { spk: 'M', pitch: 0.94, text: 'Please.' },
+      { spk: 'F', pitch: 1.15, text: 'Would you like some drinks?' },
+      { spk: 'M', pitch: 0.94, text: 'Yes. Two orange juices, a Coke and some water.' },
+      { spk: 'F', pitch: 1.15, text: 'Are you ready to order?' },
+      { spk: 'M', pitch: 0.94, text: 'Yes. A kebab with rice for me.' },
+      { spk: 'F', pitch: 1.15, text: 'OK. And for you?' },
+      { spk: 'F2', pitch: 1.22, text: 'Chicken, please.' },
+      { spk: 'F', pitch: 1.15, text: 'With rice or chips?' },
+      { spk: 'F2', pitch: 1.22, text: 'Chips, please.' },
+      { spk: 'F', pitch: 1.15, text: 'And you?' },
+      { spk: 'M', pitch: 0.92, text: 'Prawns with rice.' },
+      { spk: 'F', pitch: 1.15, text: 'Anything else? A salad?' },
+      { spk: 'M', pitch: 0.92, text: 'How much is the tomato salad?' },
+      { spk: 'F', pitch: 1.15, text: 'Fourteen euros.' },
+      { spk: 'M', pitch: 0.88, text: 'Oh, it is expensive. No, thanks.' },
+      { spk: 'F', pitch: 1.15, text: 'So, that is one kebab and rice, one chicken and chips, and one prawns with rice.' }
+    ];
+
+    const annaAudioLines = [
+      { spk: 'F', pitch: 1.15, text: 'Hi, I am Anna! My favourite meal is dinner. I usually eat at home or at a restaurant. I like meat or fish and vegetables, and a glass of wine.' }
+    ];
+
+    let restSpeechToken = 0;
+
+    function playRestaurantAudio(which) {
+      if (!('speechSynthesis' in window)) return;
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        return;
+      }
+      stopRestaurantAudio(false);
+      const token = ++restSpeechToken;
+      const lines = which === 'anna' ? annaAudioLines : restAudioLines;
+      const voices = window.speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().startsWith('en'));
+      const fVoice = voices.find((v) => /female|woman|aria|jenny|samantha|libby/i.test(v.name)) || voices[0] || null;
+      const mVoice = voices.find((v) => v !== fVoice && /male|man|guy|ryan|daniel|george/i.test(v.name)) || voices[1] || fVoice;
+      let i = 0;
+
+      function next() {
+        if (token !== restSpeechToken || i >= lines.length) return;
+        const item = lines[i];
+        const u = new SpeechSynthesisUtterance(item.text);
+        u.voice = item.spk === 'M' ? mVoice : fVoice;
+        u.pitch = item.pitch;
+        u.rate = globalSpeechRate;
+        u.onend = () => {
+          if (token !== restSpeechToken) return;
+          i++;
+          setTimeout(next, 180);
+        };
+        window.speechSynthesis.speak(u);
+      }
+      next();
+    }
+
+    function pauseRestaurantAudio() {
+      if ('speechSynthesis' in window && window.speechSynthesis.speaking) window.speechSynthesis.pause();
+    }
+
+    function stopRestaurantAudio(click = true) {
+      if (click) playTone('click');
+      restSpeechToken++;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    const restGapAnswers = {
+      1: 'two',
+      2: 'English',
+      3: 'three',
+      4: 'water',
+      5: 'me',
+      6: 'you',
+      7: 'rice',
+      8: 'else',
+      9: 'Fourteen',
+      10: 'thanks'
+    };
+
+    function renderRestaurantDialogue() {
+      const box = document.getElementById('restaurant-dialogue-box');
+      const g = (n) => `<input type="text" id="rg-${n}" placeholder="(${n})" class="w-20 px-2 py-0.5 mx-0.5 rounded bg-white border border-rust-500 font-extrabold text-center text-rust-700 text-xs" />`;
+      box.innerHTML = `
+        <p><strong>A:</strong> Do you have a table for ${g(1)}?</p>
+        <p><strong>B:</strong> Yes. Would you like a menu in ${g(2)}?</p>
+        <p><strong>A:</strong> Please. And for ${g(3)}?</p>
+        <p><strong>B:</strong> Would you like some drinks?</p>
+        <p><strong>A:</strong> Yes. Two orange juices, a Coke and some ${g(4)}.</p>
+        <p><strong>B:</strong> Are you ready to order?</p>
+        <p><strong>A:</strong> Yes. A kebab with rice for ${g(5)}.</p>
+        <p><strong>B:</strong> OK. And for ${g(6)}?</p>
+        <p><strong>C:</strong> Chicken, please.</p>
+        <p><strong>B:</strong> With ${g(7)} or chips?</p>
+        <p><strong>C:</strong> Chips, please.</p>
+        <p><strong>B:</strong> And you? — <strong>D:</strong> Prawns with rice.</p>
+        <p><strong>B:</strong> Anything ${g(8)}? A salad?</p>
+        <p><strong>D:</strong> How much is the tomato salad? — <strong>B:</strong> ${g(9)} euros.</p>
+        <p><strong>D:</strong> Oh, it's expensive. No, ${g(10)}.</p>
+      `;
+    }
+
+    function checkRestaurantGaps() {
+      let ok = 0;
+      Object.entries(restGapAnswers).forEach(([num, ans]) => {
+        const el = document.getElementById(`rg-${num}`);
+        if (el.value.trim().toLowerCase() === ans.toLowerCase()) {
+          ok++;
+          el.className = 'w-20 px-2 py-0.5 mx-0.5 rounded bg-emerald-50 border-2 border-emerald-500 font-extrabold text-center text-emerald-900 text-xs';
+        } else {
+          el.className = 'w-20 px-2 py-0.5 mx-0.5 rounded bg-rose-50 border-2 border-rose-500 font-extrabold text-center text-rose-900 text-xs';
+        }
+      });
+      const fb = document.getElementById('rest-gaps-fb');
+      fb.classList.remove('hidden');
+      if (ok === 10) {
+        playTone('success');
+        fb.className = 'font-bold text-xs text-center text-emerald-700';
+        fb.textContent = '🎉 All 10 restaurant gaps are 100% right!';
+        markSectionComplete(3);
+      } else {
+        playTone('error');
+        fb.className = 'font-bold text-xs text-center text-rose-600';
+        fb.textContent = `Got ${ok}/10 right. Play the dialogue again!`;
+      }
+    }
+
+    function checkMoreLessBtn(btn, isCorrect) {
+      if (isCorrect) {
+        playTone('success');
+        btn.className = 'flex-1 py-1 rounded-lg bg-emerald-600 text-white font-extrabold cursor-pointer';
+      } else {
+        playTone('error');
+        btn.className = 'flex-1 py-1 rounded-lg bg-rose-600 text-white font-extrabold cursor-pointer';
+      }
+    }
+
+    function checkAnnaReview() {
+      const ok =
+        document.getElementById('ar-1').value === 'home' &&
+        document.getElementById('ar-2').value === 'restaurant' &&
+        document.getElementById('ar-3').value === 'Meat' &&
+        document.getElementById('ar-4').value === 'fish' &&
+        document.getElementById('ar-5').value === 'vegetables' &&
+        document.getElementById('ar-6').value === 'wine';
+      const fb = document.getElementById('anna-rev-fb');
+      fb.classList.remove('hidden');
+      if (ok) {
+        playTone('success');
+        fb.className = 'mt-3 font-bold text-xs text-center text-emerald-700';
+        fb.textContent = '🍷 Perfect! Anna’s chart is complete!';
+        markSectionComplete(3);
+      } else {
+        playTone('error');
+        fb.className = 'mt-3 font-bold text-xs text-center text-rose-600';
+        fb.textContent = 'Check Anna’s choices and try again!';
+      }
+    }
+
+    /* ------------------------------------------------------------
+       6. STEP 5: 20 FOOD & DRINK ITEMS SORTING
+    ------------------------------------------------------------ */
+    const twentyFoods = [
+      { word: '🍎 apple', cat: 'Fruit' },
+      { word: '🍌 banana', cat: 'Fruit' },
+      { word: '🍊 orange', cat: 'Fruit' },
+      { word: '🥕 carrot', cat: 'Vegetables' },
+      { word: '🍄 mushroom', cat: 'Vegetables' },
+      { word: '🥔 potato', cat: 'Vegetables' },
+      { word: '🍅 tomato', cat: 'Vegetables' },
+      { word: '🥩 steak', cat: 'Meat' },
+      { word: '🐟 fish', cat: 'Meat' },
+      { word: '🍗 chicken', cat: 'Meat' },
+      { word: '🥛 milk', cat: 'Drinks' },
+      { word: '🧃 fruit juice', cat: 'Drinks' },
+      { word: '🍝 pasta', cat: 'Other' },
+      { word: '🍚 rice', cat: 'Other' },
+      { word: '🍞 bread', cat: 'Other' },
+      { word: '🥣 cereal', cat: 'Other' },
+      { word: '🧀 cheese', cat: 'Other' },
+      { word: '🥚 egg', cat: 'Other' },
+      { word: '🍟 chips', cat: 'Other' },
+      { word: '🥪 sandwich', cat: 'Other' }
+    ];
+
+    const foodCategories = ['Fruit', 'Vegetables', 'Meat', 'Drinks', 'Other'];
+    let selectedFoodWord = null;
+    let sortedFoodsMap = {}; // word -> cat
+
+    function renderFoodSort() {
+      const pool = document.getElementById('food-pool-box');
+      const grid = document.getElementById('food-buckets-grid');
+      pool.innerHTML = '';
+      grid.innerHTML = '';
+
+      twentyFoods.forEach((f) => {
+        if (sortedFoodsMap[f.word]) return;
+        const isSel = selectedFoodWord === f.word;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = f.word;
+        btn.onclick = () => {
+          playTone('click');
+          selectedFoodWord = isSel ? null : f.word;
+          renderFoodSort();
+        };
+        btn.className = isSel
+          ? 'px-3 py-1.5 rounded-xl bg-rust-600 text-white font-extrabold text-xs shadow-sm scale-105 cursor-pointer'
+          : 'px-3 py-1.5 rounded-xl bg-white hover:bg-butter-300 text-rust-700 border border-cream-300 font-bold text-xs cursor-pointer';
+        pool.appendChild(btn);
+      });
+
+      if (pool.children.length === 0) {
+        pool.innerHTML = '<span class="font-extrabold text-emerald-700 text-sm">🎉 All 20 food &amp; drink items sorted!</span>';
+        markSectionComplete(4);
+      }
+
+      foodCategories.forEach((cat) => {
+        const bucket = document.createElement('div');
+        bucket.onclick = () => {
+          if (!selectedFoodWord) return;
+          const foodObj = twentyFoods.find((x) => x.word === selectedFoodWord);
+          if (foodObj && foodObj.cat === cat) {
+            playTone('success');
+            sortedFoodsMap[selectedFoodWord] = cat;
+            selectedFoodWord = null;
+            renderFoodSort();
+          } else {
+            playTone('error');
+            showToast('🍽️', `Try another category for ${selectedFoodWord}!`, true);
+          }
+        };
+        const itemsInCat = Object.entries(sortedFoodsMap)
+          .filter(([, c]) => c === cat)
+          .map(([w]) => `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-bold text-[11px]">${w}</span>`)
+          .join('');
+
+        bucket.className = `p-3.5 rounded-2xl border-2 min-h-[140px] transition cursor-pointer ${
+          selectedFoodWord
+            ? 'border-dashed border-rust-600 bg-butter-300/25 hover:bg-butter-300/50'
+            : 'border-cream-300 bg-cream-100'
+        }`;
+        bucket.innerHTML = `
+          <h4 class="font-poster text-lg text-rust-600 uppercase tracking-wide border-b border-cream-300 pb-1 mb-2">${cat}</h4>
+          <div class="flex flex-wrap gap-1">${itemsInCat}</div>
+        `;
+        grid.appendChild(bucket);
+      });
+    }
+
+    function resetFoodSort() {
+      playTone('click');
+      selectedFoodWord = null;
+      sortedFoodsMap = {};
+      renderFoodSort();
+    }
+
+    /* ------------------------------------------------------------
+       7. STEP 6: HOMEWORK (AND / OR / BUT)
+    ------------------------------------------------------------ */
+    function checkHomework() {
+      const a1 = document.getElementById('hw-1').value === 'but';
+      const a2 = document.getElementById('hw-2').value === 'or';
+      const a3 = document.getElementById('hw-3').value === 'and';
+      const fb = document.getElementById('hw-fb');
+      fb.classList.remove('hidden');
+
+      if (a1 && a2 && a3) {
+        playTone('success');
+        fb.className = 'font-bold text-xs text-emerald-700';
+        fb.textContent = '🎉 Spot on! 1. but • 2. or • 3. and';
+        markSectionComplete(5);
+        showToast('🏆', 'Whole Food & Drink lesson completed!');
+      } else {
+        playTone('error');
+        fb.className = 'font-bold text-xs text-rose-600';
+        fb.textContent = 'Check your linking words: contrast = but, choice = or, addition = and!';
+      }
+    }
+
+    /* ------------------------------------------------------------
+       INITIALIZE ALL EXERCISES
+    ------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab(0);
+      renderAnagrams();
+      renderPlatesAD();
+      renderBreakfastComments();
+      renderFrequencyScale();
+      initUnjumbleSentence();
+      renderRestaurantDialogue();
+      renderFoodSort();
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+      }
+    });
+  </script>
+</body>
+</html>

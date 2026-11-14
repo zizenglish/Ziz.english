@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Just a Normal Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one lesson step per screen under a sticky stepper; exercises are plain bordered blocks, answer state shown by colour and a tick/cross. */
+:root{
+  --bg:#FFF4B8;          /* lemon wall */
+  --surface:#FFFBE0;     /* paper */
+  --ink:#14213D;         /* navy ink */
+  --muted:#4A5675;
+  --line:#E3D37A;
+  --accent:#1F5FD1;      /* Malaga sea blue */
+  --accent-ink:#FFFFFF;
+  --hi:#FFD93D;          /* highlighter */
+  --chip:#FFF0A0;
+  --good:#1B7F47;
+  --bad:#B93434;
+  --font-display:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;
+  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1830; --surface:#16244A; --ink:#F6F0D2; --muted:#B3BDD9; --line:#2D3F72;
+    --accent:#86B4FF; --accent-ink:#0E1830; --hi:#6A5A08; --chip:#223669; --good:#74D6A0; --bad:#FF9494;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1830; --surface:#16244A; --ink:#F6F0D2; --muted:#B3BDD9; --line:#2D3F72;
+  --accent:#86B4FF; --accent-ink:#0E1830; --hi:#6A5A08; --chip:#223669; --good:#74D6A0; --bad:#FF9494;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;
+  margin:0;padding-block:0 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:880px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(2.5rem,9vw,4.6rem);line-height:.95;font-weight:800;letter-spacing:-.025em}
+h1 mark{background:linear-gradient(transparent 58%,var(--hi) 58%);color:inherit;padding:0 .08em}
+h2{font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.1;font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.15rem;font-weight:600;margin-bottom:6px}
+.hero{padding-block:30px 14px}
+.hero p{margin:10px 0 0;color:var(--muted);max-width:56ch}
+.stepper{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px 0}
+.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
+.steps button{flex:0 0 auto;font:600 .9rem var(--font-body);color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer}
+.steps button[aria-current="step"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar-wrap{display:flex;align-items:center;gap:10px;padding-bottom:8px;font-size:.85rem;color:var(--muted)}
+.meter{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+section[data-step]{padding-top:22px}
+.lead{color:var(--muted);margin:8px 0 18px;max-width:60ch}
+.block{background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:18px;margin-top:20px}
+.block>h3:first-child{margin-top:0}
+.tag{display:inline-block;font:700 .72rem var(--font-body);letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--bg);border-radius:4px;padding:2px 7px;margin-right:8px;vertical-align:2px}
+.btn{font:700 .95rem var(--font-body);background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:9px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:hover{filter:brightness(1.07)}
+.btn:focus-visible,.mini:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.steps button:focus-visible,.opts button:focus-visible,.chip:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mini{font:700 .8rem var(--font-body);background:var(--chip);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:3px 11px;cursor:pointer;white-space:nowrap}
+.mini.playing{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.ctrl,.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.ctrl label{font-size:.9rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.result{font-weight:700;margin-left:auto}
+select,input[type=text],textarea{font:500 1rem var(--font-body);color:var(--ink);background:var(--bg);border:1.5px solid var(--st,var(--line));border-radius:7px;padding:6px 9px;max-width:100%}
+input[type=text]{width:9.5em}
+textarea{width:100%;min-height:90px;resize:vertical}
+ol.qs{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ol.qs>li{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--bg);box-shadow:inset 4px 0 0 var(--st,transparent)}
+ol.qs>li .n{font:800 1rem var(--font-display);color:var(--muted);min-width:1.3em}
+.q.ok{--st:var(--good)}.q.no{--st:var(--bad)}
+li.q.ok::after,span.q.ok::after{content:" ✓";color:var(--good);font-weight:800}
+li.q.no::after,span.q.no::after{content:" ✗";color:var(--bad);font-weight:800}
+.opts{display:inline-flex;flex-wrap:wrap;gap:6px}
+.opts button,.chip{font:600 .95rem var(--font-body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:7px;padding:4px 11px;cursor:pointer}
+.opts .sel{background:var(--st,var(--accent));color:var(--accent-ink);border-color:var(--st,var(--accent))}
+.chip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.pic{background:var(--bg);border:1.5px dashed var(--line);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start}
+.pic b{font:800 1.5rem/1 var(--font-display);background:var(--ink);color:var(--bg);width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;flex:0 0 auto}
+.pic span{font-size:.95rem}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.bank span{background:var(--hi);border-radius:5px;padding:2px 10px;font-weight:700}
+.blog{background:var(--surface);border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.blog header{background:var(--accent);color:var(--accent-ink);padding:12px 18px;font:800 1.1rem var(--font-display)}
+.blog div{padding:6px 18px 16px;max-width:64ch}
+.note{background:var(--chip);border-radius:8px;padding:10px 14px;font-size:.95rem;margin-top:14px}
+.note b{font-family:var(--font-display)}
+.pairs{display:grid;gap:10px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.word{background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.word.speaking{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent)}
+.word strong{font:800 1.2rem var(--font-display);display:block}
+.word small{color:var(--muted);font-size:.85rem}
+.word .btns{display:flex;flex-direction:column;gap:5px}
+.tx{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.tx[hidden]{display:none!important}
+.tx li{padding:6px 10px;border-radius:7px;background:var(--bg);transition:background .2s}
+.tx li.speaking{background:var(--hi);font-weight:600}
+.tx b{color:var(--accent);margin-right:6px}
+mark.w{background:var(--hi);color:inherit;padding:0 3px;border-radius:3px}
+.sort{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}
+.card-topic{text-align:center;padding:26px 14px}
+.card-topic .cat{font:800 clamp(1.8rem,7vw,3rem) var(--font-display);text-transform:capitalize}
+.card-topic .vs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:12px 0}
+.card-topic .vs span{background:var(--hi);border-radius:999px;padding:4px 16px;font-weight:700}
+.frames{display:grid;gap:8px;max-width:420px;margin:12px auto 0;text-align:left}
+.frames p{margin:0;padding:8px 14px;border-radius:14px;background:var(--bg);border:1.5px solid var(--line)}
+.frames p:nth-child(2){margin-left:36px}
+.frames p:nth-child(3){margin-left:12px}
+.timer{font:800 2rem var(--font-display);font-variant-numeric:tabular-nums}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:30px}
+.warn{background:var(--chip);border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.92rem}
+a{color:var(--accent);font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+audio.rec{width:100%;max-width:420px}
+@media (max-width:480px){.pair{grid-template-columns:1fr}.frames p:nth-child(n){margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+<header class="hero">
+  <h1>Just a <mark>normal</mark> day!</h1>
+  <p>Live, work, study and go. Plus 16 adjectives to describe things around you. Level A1–A2.</p>
+</header>
+
+<div class="stepper">
+  <nav class="steps" id="steps" aria-label="Lesson steps"></nav>
+  <div class="bar-wrap"><div class="meter"><i id="meterFill"></i></div><span id="meterTxt">0 / 0</span></div>
+</div>
+
+<!-- STEP 1 -->
+<section data-step="match" id="s-match">
+  <h2>Who does what?</h2>
+  <p class="lead">Match sentences 1–5 with pictures a–e. Press ▶ to listen and check.</p>
+  <div class="pics">
+    <div class="pic"><b>a</b><span>A couple at home, smiling at the camera.</span></div>
+    <div class="pic"><b>b</b><span>A woman at her desk in an office.</span></div>
+    <div class="pic"><b>c</b><span>A young man with a pile of books.</span></div>
+    <div class="pic"><b>d</b><span>A woman talking. Her speech bubble is in Japanese.</span></div>
+    <div class="pic"><b>e</b><span>A man running on a machine at the gym.</span></div>
+  </div>
+  <div class="block ex" data-id="match">
+    <ol class="qs">
+      <li class="q" data-ans="c"><span class="n">1</span><span><b>I study</b> at university.</span><button class="mini say" data-say="I study at university!" data-pitch="1.12">▶</button><select data-opts="a|b|c|d|e" aria-label="Picture for sentence 1"></select></li>
+      <li class="q" data-ans="b"><span class="n">2</span><span><b>I work</b> in an office.</span><button class="mini say" data-say="I work in an office." data-pitch="1.08">▶</button><select data-opts="a|b|c|d|e" aria-label="Picture for sentence 2"></select></li>
+      <li class="q" data-ans="d"><span class="n">3</span><span><b>I speak</b> Japanese.</span><button class="mini say" data-say="Oh, I speak Japanese!" data-pitch="1.15">▶</button><select data-opts="a|b|c|d|e" aria-label="Picture for sentence 3"></select></li>
+      <li class="q" data-ans="a"><span class="n">4</span><span><b>We live</b> in London.</span><button class="mini say" data-say="We live in London." data-pitch="1.05">▶</button><select data-opts="a|b|c|d|e" aria-label="Picture for sentence 4"></select></li>
+      <li class="q" data-ans="e"><span class="n">5</span><span><b>We go</b> to the gym every day.</span><button class="mini say" data-say="We go to the gym every day!" data-pitch="1.1">▶</button><select data-opts="a|b|c|d|e" aria-label="Picture for sentence 5"></select></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+  <div class="block">
+    <h3>Which sentences are true for you?</h3>
+    <p style="margin:0;color:var(--muted)">Tap the sentences that are true for you. Then tell your partner.</p>
+    <div class="chips" id="trueChips"></div>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section data-step="verbs" id="s-verbs" hidden>
+  <h2>Complete the phrases</h2>
+  <p class="lead">Use the verbs in the box. Each verb is used once.</p>
+  <div class="block ex" data-id="verbs">
+    <div class="bank"><span>live</span><span>work</span><span>study</span><span>speak</span><span>play</span><span>meet</span><span>go</span></div>
+    <ol class="qs">
+      <li class="q" data-ans="work"><span class="n">1</span><input type="text" aria-label="Gap 1" autocomplete="off" spellcheck="false"> <span>in an office / in a bank</span></li>
+      <li class="q" data-ans="play"><span class="n">2</span><input type="text" aria-label="Gap 2" autocomplete="off" spellcheck="false"> <span>football / the guitar</span></li>
+      <li class="q" data-ans="live"><span class="n">3</span><input type="text" aria-label="Gap 3" autocomplete="off" spellcheck="false"> <span>in a flat / in New York</span></li>
+      <li class="q" data-ans="speak"><span class="n">4</span><input type="text" aria-label="Gap 4" autocomplete="off" spellcheck="false"> <span>Spanish, French and Italian</span></li>
+      <li class="q" data-ans="study"><span class="n">5</span><input type="text" aria-label="Gap 5" autocomplete="off" spellcheck="false"> <span>at university</span></li>
+      <li class="q" data-ans="meet"><span class="n">6</span><input type="text" aria-label="Gap 6" autocomplete="off" spellcheck="false"> <span>people / a friend</span></li>
+      <li class="q" data-ans="go"><span class="n">7</span><input type="text" aria-label="Gap 7" autocomplete="off" spellcheck="false"> <span>to the gym / home</span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+  <div class="block">
+    <h3>Make it true for you</h3>
+    <p style="margin:0 0 8px;color:var(--muted)">Choose three phrases and write a sentence for each one. Example: <b>I live in a flat.</b></p>
+    <textarea id="mySent1" aria-label="My sentences" placeholder="I …&#10;I …&#10;I …"></textarea>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section data-step="blog" id="s-blog" hidden>
+  <h2>Lisa's blog</h2>
+  <p class="lead">Read the blog, then do the tasks.</p>
+  <article class="blog">
+    <header>Breakfast in Porto, lunch in Madrid</header>
+    <div>
+      <h3 style="margin-top:14px">I work in Madrid.</h3>
+      <p>Flats in Madrid are very expensive. In Porto, flats are cheap and the beaches are beautiful, but my job is in Madrid. So I live in Porto and I work in Madrid!</p>
+      <p>I fly from Porto to Madrid on Monday morning. I work there for four days and I stay in a small flat with my brother. Then I fly home on Thursday night. On Fridays I work at home.</p>
+      <p>I don't speak Spanish very well, so I study Spanish at a language school on Saturdays. I love Porto. It's an old, beautiful city and it's great to live here!</p>
+    </div>
+  </article>
+  <div class="ctrl">
+    <button class="btn" id="playBlog">▶ Listen to Lisa</button>
+    <button class="btn ghost" id="pauseBlog">⏸ Pause</button>
+    <button class="btn ghost" id="stopBlog">⏹ Stop</button>
+    <label>Speed <select id="blogSpd"><option value="0.72">0.75× Slow</option><option value="0.92" selected>1.0× Normal</option></select></label>
+  </div>
+
+  <div class="block ex" data-id="blogA">
+    <h3><span class="tag">a</span>Which sentence is true?</h3>
+    <div class="q" data-ans="2"><div class="opts" style="flex-direction:column;align-items:flex-start">
+      <button data-v="1">1 · I live in Madrid and I work in Porto.</button>
+      <button data-v="2">2 · I live in Porto and I work in Madrid.</button>
+      <button data-v="3">3 · I speak Spanish very well.</button>
+    </div></div>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+
+  <div class="block ex" data-id="blogB">
+    <h3><span class="tag">b</span>Read again. What does Lisa say about these things?</h3>
+    <ol class="qs">
+      <li class="q" data-ans="cheap"><span class="n">1</span><span>flats in Porto</span><select data-opts="cheap|four days|one day (Friday)|on Saturdays|an old, beautiful city"></select></li>
+      <li class="q" data-ans="four days"><span class="n">2</span><span>days at work in Madrid</span><select data-opts="cheap|four days|one day (Friday)|on Saturdays|an old, beautiful city"></select></li>
+      <li class="q" data-ans="one day (Friday)"><span class="n">3</span><span>days at work at home</span><select data-opts="cheap|four days|one day (Friday)|on Saturdays|an old, beautiful city"></select></li>
+      <li class="q" data-ans="on Saturdays"><span class="n">4</span><span>Spanish classes</span><select data-opts="cheap|four days|one day (Friday)|on Saturdays|an old, beautiful city"></select></li>
+      <li class="q" data-ans="an old, beautiful city"><span class="n">5</span><span>Porto</span><select data-opts="cheap|four days|one day (Friday)|on Saturdays|an old, beautiful city"></select></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">c</span>What do you think of Lisa's life?</h3>
+    <div class="chips"><span class="chip" style="cursor:default">I think it's interesting.</span><span class="chip" style="cursor:default">It's difficult / easy.</span><span class="chip" style="cursor:default">I like / don't like it because …</span></div>
+    <div class="note"><b>Language plus: study</b><br>study <i>at university / at school / at an English language school</i><br>study <i>English / Spanish / Arabic</i> · study <i>a subject (art, maths)</i></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">d</span>Write sentences about you</h3>
+    <textarea id="mySent2" aria-label="Sentences about me" placeholder="I live …&#10;I work / study …&#10;I study English …"></textarea>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section data-step="words" id="s-words" hidden>
+  <h2>Adjectives</h2>
+  <p class="lead">Listen and repeat the words. Opposites are side by side.</p>
+  <div class="ctrl" style="margin-top:0"><button class="btn" id="playAllWords">▶ Listen and repeat</button><button class="btn ghost" id="stopWords">⏹ Stop</button><span style="color:var(--muted);font-size:.9rem">You hear a word, then there is a pause for you to say it.</span></div>
+  <div class="pairs" id="wordPairs" style="margin-top:14px"></div>
+
+  <div class="block ex" data-id="opp">
+    <h3><span class="tag">1</span>Choose the opposite</h3>
+    <ol class="qs" id="oppList"></ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+
+  <div class="block ex" data-id="hear">
+    <h3><span class="tag">2</span>Listen and choose the word</h3>
+    <ol class="qs" id="hearList"></ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+
+  <div class="block ex" data-id="comp">
+    <h3><span class="tag">3</span>Complete the words</h3>
+    <p style="margin:0 0 10px;color:var(--muted)">The first letter is given. The first sentence is an example.</p>
+    <ol class="qs">
+      <li><span class="n">1</span><span>That house is very <b>old</b>.</span></li>
+      <li class="q" data-ans="expensive"><span class="n">2</span><span>Is this bag</span><span>e<input type="text" style="width:8em" aria-label="Word 2" autocomplete="off" spellcheck="false"></span><span>? (It's €900!)</span></li>
+      <li class="q" data-ans="long"><span class="n">3</span><span>This book is very</span><span>l<input type="text" style="width:5em" aria-label="Word 3" autocomplete="off" spellcheck="false"></span><span>. (1,200 pages)</span></li>
+      <li class="q" data-ans="difficult"><span class="n">4</span><span>The English test is</span><span>d<input type="text" style="width:8em" aria-label="Word 4" autocomplete="off" spellcheck="false"></span><span>. (I don't know the answers.)</span></li>
+      <li class="q" data-ans="clean"><span class="n">5</span><span>Oliver's car is very</span><span>c<input type="text" style="width:6em" aria-label="Word 5" autocomplete="off" spellcheck="false"></span><span>. (He washes it every day.)</span></li>
+      <li class="q" data-ans="cheap"><span class="n">6</span><span>Those phones are</span><span>ch<input type="text" style="width:6em" aria-label="Word 6" autocomplete="off" spellcheck="false"></span><span>. (£10 each)</span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section data-step="listening" id="s-listening" hidden>
+  <h2>Listening</h2>
+  <p class="lead">Watch real people speak or listen to the dialogues below. Switch on subtitles only for the last check.</p>
+
+  <div class="block ex" data-id="vidA">
+    <h3><span class="tag">A</span>Video: Where are you from? Where do you live?</h3>
+    <p style="margin:0 0 10px">Four friends in the BBC series Easy English Conversations. Watch the whole video (about two minutes).</p>
+    <div class="row"><a href="https://www.youtube.com/watch?v=31y2Bq1RYQA" target="_blank" rel="noopener">Open “Easy English Conversations: Where are you from?” on YouTube ↗</a></div>
+    <p style="margin:16px 0 6px"><b>1 · Where is each person from?</b></p>
+    <ol class="qs">
+      <li class="q" data-ans="Oxford"><span class="n">1</span><span>Tim is from</span><select data-opts="Oxford|Swansea|Beijing|Petworth" aria-label="Tim is from"></select></li>
+      <li class="q" data-ans="Swansea"><span class="n">2</span><span>Sian is from</span><select data-opts="Oxford|Swansea|Beijing|Petworth" aria-label="Sian is from"></select></li>
+      <li class="q" data-ans="Beijing"><span class="n">3</span><span>Buli is from</span><select data-opts="Oxford|Swansea|Beijing|Petworth" aria-label="Buli is from"></select></li>
+      <li class="q" data-ans="Petworth"><span class="n">4</span><span>Georgie is from</span><select data-opts="Oxford|Swansea|Beijing|Petworth" aria-label="Georgie is from"></select></li>
+    </ol>
+    <p style="margin:16px 0 6px"><b>2 · Where does each person live?</b></p>
+    <ol class="qs">
+      <li class="q" data-ans="a house in London"><span class="n">1</span><span>Tim lives in</span><select data-opts="a house in London|a house in Brighton|a flat in Cambridge|a flat in London" aria-label="Where Tim lives"></select></li>
+      <li class="q" data-ans="a house in Brighton"><span class="n">2</span><span>Sian lives in</span><select data-opts="a house in London|a house in Brighton|a flat in Cambridge|a flat in London" aria-label="Where Sian lives"></select></li>
+      <li class="q" data-ans="a flat in Cambridge"><span class="n">3</span><span>Buli lives in</span><select data-opts="a house in London|a house in Brighton|a flat in Cambridge|a flat in London" aria-label="Where Buli lives"></select></li>
+      <li class="q" data-ans="a flat in London"><span class="n">4</span><span>Georgie lives in</span><select data-opts="a house in London|a house in Brighton|a flat in Cambridge|a flat in London" aria-label="Where Georgie lives"></select></li>
+    </ol>
+    <p style="margin:16px 0 6px"><b>3 · Who does each person live with?</b></p>
+    <ol class="qs">
+      <li class="q" data-ans="housemates"><span class="n">1</span><span>Tim lives with</span><select data-opts="housemates|family|flatmates|nobody (alone)" aria-label="Tim lives with"></select></li>
+      <li class="q" data-ans="family"><span class="n">2</span><span>Sian lives with</span><select data-opts="housemates|family|flatmates|nobody (alone)" aria-label="Sian lives with"></select></li>
+      <li class="q" data-ans="nobody (alone)"><span class="n">3</span><span>Buli lives with</span><select data-opts="housemates|family|flatmates|nobody (alone)" aria-label="Buli lives with"></select></li>
+      <li class="q" data-ans="flatmates"><span class="n">4</span><span>Georgie lives with</span><select data-opts="housemates|family|flatmates|nobody (alone)" aria-label="Georgie lives with"></select></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+    <div class="note"><b>Your turn.</b> Ask your partner: <i>Where are you from? Where do you live? Who do you live with?</i></div>
+  </div>
+
+  <div class="block ex" data-id="vidB">
+    <h3><span class="tag">B</span>Video: Fred's daily routine</h3>
+    <p style="margin:0 0 10px">A British teenager talks about his day. Watch the video once without subtitles, then choose the answers.</p>
+    <div class="row"><a href="https://www.youtube.com/watch?v=RP1AL2DU6vQ" target="_blank" rel="noopener">Open “English – Daily routine (A1–A2, with subtitles)” on YouTube ↗</a></div>
+    <ol class="qs" style="margin-top:14px">
+      <li class="q" data-ans="London"><span class="n">1</span><span>Fred lives in</span><span class="opts"><button data-v="London">London</button><button data-v="Paris">Paris</button></span><span>.</span></li>
+      <li class="q" data-ans="17"><span class="n">2</span><span>He is</span><span class="opts"><button data-v="17">17</button><button data-v="27">27</button></span><span>years old.</span></li>
+      <li class="q" data-ans="7.30"><span class="n">3</span><span>He usually gets out of bed at about</span><span class="opts"><button data-v="7.30">7.30</button><button data-v="8.30">8.30</button></span><span>.</span></li>
+      <li class="q" data-ans="cereal"><span class="n">4</span><span>For breakfast he usually has</span><span class="opts"><button data-v="cereal">cereal</button><button data-v="toast">toast</button></span><span>.</span></li>
+      <li class="q" data-ans="15"><span class="n">5</span><span>He walks to school. It takes</span><span class="opts"><button data-v="15">15</button><button data-v="50">50</button></span><span>minutes.</span></li>
+      <li class="q" data-ans="8.30"><span class="n">6</span><span>School starts at</span><span class="opts"><button data-v="8.30">8.30</button><button data-v="9.30">9.30</button></span><span>.</span></li>
+      <li class="q" data-ans="boys only"><span class="n">7</span><span>His school is for</span><span class="opts"><button data-v="boys only">boys only</button><button data-v="boys and girls">boys and girls</button></span><span>.</span></li>
+      <li class="q" data-ans="isn't very nice"><span class="n">8</span><span>He says British school food</span><span class="opts"><button data-v="is great">is great</button><button data-v="isn't very nice">isn't very nice</button></span><span>.</span></li>
+      <li class="q" data-ans="3.30"><span class="n">9</span><span>School finishes at</span><span class="opts"><button data-v="3.30">3.30</button><button data-v="4.30">4.30</button></span><span>.</span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+    <div class="note">Your turn: write three sentences about <b>your</b> morning. <i>I wake up at … I have breakfast … I go to work / school …</i></div>
+    <textarea id="myMorning" aria-label="My morning" style="margin-top:10px" placeholder="I wake up at …"></textarea>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">C</span>Listen to Hannah and Leo. Who lives in Lyon but works in Geneva?</h3>
+    <div class="player" data-dlg="nadia"></div>
+    <div class="ex" data-id="listA1" style="margin-top:14px">
+      <div class="q" data-ans="Nadia"><div class="opts"><button data-v="Hannah">Hannah</button><button data-v="Nadia">Nadia</button><button data-v="Tomás">Tomás</button></div></div>
+      <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+    </div>
+  </div>
+
+  <div class="block ex" data-id="listA2">
+    <h3><span class="tag">C</span>Listen again. Choose the correct answers.</h3>
+    <ol class="qs">
+      <li class="q" data-ans="Brazilian"><span class="n">1</span><span>Nadia is</span><span class="opts"><button data-v="Brazilian">Brazilian</button><button data-v="Lebanese">Lebanese</button></span><span>.</span></li>
+      <li class="q" data-ans="Lyon"><span class="n">2</span><span>Her home is in</span><span class="opts"><button data-v="Lyon">Lyon</button><button data-v="Geneva">Geneva</button></span><span>.</span></li>
+      <li class="q" data-ans="isn't"><span class="n">3</span><span>Her job</span><span class="opts"><button data-v="is">is</button><button data-v="isn't">isn't</button></span><span>near her home.</span></li>
+      <li class="q" data-ans="isn't"><span class="n">4</span><span>She</span><span class="opts"><button data-v="is">is</button><button data-v="isn't">isn't</button></span><span>married.</span></li>
+      <li class="q" data-ans="Portuguese"><span class="n">5</span><span>Nadia and Tomás speak</span><span class="opts"><button data-v="English">English</button><button data-v="Portuguese">Portuguese</button></span><span>together.</span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+
+  <div class="block ex" data-id="listB">
+    <h3><span class="tag">D</span>Listen to Ana and write the missing words</h3>
+    <div class="player" data-dlg="ana"></div>
+    <ol class="qs" style="margin-top:14px">
+      <li><span>My name's Ana. I <span class="q" data-ans="live"><input type="text" style="width:6em" aria-label="Gap 1" autocomplete="off" spellcheck="false"></span> in a small <span class="q" data-ans="flat"><input type="text" style="width:6em" aria-label="Gap 2" autocomplete="off" spellcheck="false"></span> in Kraków with my sister.</span></li>
+      <li><span>I work in a <span class="q" data-ans="bank"><input type="text" style="width:6em" aria-label="Gap 3" autocomplete="off" spellcheck="false"></span> in the city centre.</span></li>
+      <li><span>I start work at nine and I <span class="q" data-ans="finish"><input type="text" style="width:7em" aria-label="Gap 4" autocomplete="off" spellcheck="false"></span> at five.</span></li>
+      <li><span>In the evening I go to the <span class="q" data-ans="gym"><input type="text" style="width:6em" aria-label="Gap 5" autocomplete="off" spellcheck="false"></span>.</span></li>
+      <li><span>At the weekend I <span class="q" data-ans="study"><input type="text" style="width:6em" aria-label="Gap 6" autocomplete="off" spellcheck="false"></span> Italian at a language school.</span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+</section>
+
+<!-- STEP 6 -->
+<section data-step="cars" id="s-cars" hidden>
+  <h2>Two cars</h2>
+  <p class="lead">Listen to the conversation and read it. Then write the highlighted words under the correct car.</p>
+  <div class="block">
+    <div class="player" data-dlg="cars"></div>
+  </div>
+  <div class="block ex" data-id="cars">
+    <h3>Which car is it?</h3>
+    <div class="sort" id="carSort"></div>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+  <div class="block ex" data-id="cars2">
+    <h3>Understand the story</h3>
+    <ol class="qs">
+      <li class="q" data-ans="Zoe"><span class="n">1</span><span>Who wants the yellow car?</span><span class="opts"><button data-v="Zoe">Zoe</button><button data-v="Dad">Dad</button></span></li>
+      <li class="q" data-ans="No"><span class="n">2</span><span>Is the green car new?</span><span class="opts"><button data-v="Yes">Yes</button><button data-v="No">No</button></span></li>
+      <li class="q" data-ans="Dad"><span class="n">3</span><span>Who says “It's very expensive!”?</span><span class="opts"><button data-v="Zoe">Zoe</button><button data-v="Dad">Dad</button></span></li>
+    </ol>
+    <div class="bar"><button class="btn check">Check</button><button class="btn ghost reveal">Show answers</button><button class="btn ghost reset">Try again</button><span class="result"></span></div>
+  </div>
+  <div class="block"><h3>Role-play</h3><p style="margin:0">Work in groups of three: Salesman, Zoe and Dad. Read the conversation aloud. Then change the cars and the adjectives.</p></div>
+</section>
+
+<!-- STEP 7 -->
+<section data-step="speaking" id="s-speaking" hidden>
+  <h2>Talk about your preferences</h2>
+  <p class="lead">Work with a partner. Press “Next topic”, say which one you prefer, and ask why.</p>
+  <div class="block card-topic" id="topicCard">
+    <div class="cat" id="tCat">cities</div>
+    <div class="vs"><span id="tA">small</span><span id="tB">big</span></div>
+    <div class="frames">
+      <p id="fA">I prefer small cities.</p>
+      <p>Me too.</p>
+      <p id="fB">I prefer big cities.</p>
+    </div>
+    <div class="ctrl" style="justify-content:center;margin-top:18px"><button class="btn" id="nextTopic">Next topic</button><button class="btn ghost" id="swapSide">Swap</button></div>
+  </div>
+  <div class="block">
+    <h3>Ask why</h3>
+    <div class="chips"><span class="chip" style="cursor:default">Why?</span><span class="chip" style="cursor:default">It's …</span><span class="chip" style="cursor:default">They're …</span><span class="chip" style="cursor:default">They aren't very …</span></div>
+    <div class="ctrl"><span class="timer" id="timerTxt">1:00</span><button class="btn ghost" id="timerBtn">Start 1 minute</button></div>
+  </div>
+  <div class="block"><h3>Finished?</h3><p style="margin:0">Tell the class one thing you and your partner both prefer, and one thing you don't.</p></div>
+</section>
+
+<div class="nav"><button class="btn ghost" id="prev">← Back</button><button class="btn" id="next">Next →</button></div>
+</main>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var norm=function(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')};
+
+/* ---------- Steps & hash routing ---------- */
+var STEPS=[["match","1 Who does what"],["verbs","2 Phrases"],["blog","3 Blog"],["words","4 Adjectives"],["listening","5 Listening"],["cars","6 Two cars"],["speaking","7 Speaking"]];
+var stepsNav=$("#steps");
+STEPS.forEach(function(s){
+  var b=document.createElement("button");b.textContent=s[1];b.dataset.go=s[0];stepsNav.appendChild(b);
+});
+var cur=0;
+function show(name,noHash){
+  var i=STEPS.findIndex(function(s){return s[0]===name});if(i<0)i=0;cur=i;
+  $$("section[data-step]").forEach(function(sec){sec.hidden=sec.dataset.step!==STEPS[i][0]});
+  $$("#steps button").forEach(function(b){if(b.dataset.go===STEPS[i][0]){b.setAttribute("aria-current","step");b.scrollIntoView({block:"nearest",inline:"center"})}else b.removeAttribute("aria-current")});
+  $("#prev").style.visibility=i===0?"hidden":"visible";
+  $("#next").style.visibility=i===STEPS.length-1?"hidden":"visible";
+  stopAll();
+  if(!noHash){try{history.replaceState(null,"","#"+STEPS[i][0])}catch(e){}}
+  window.scrollTo(0,0);
+}
+stepsNav.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.go)});
+$("#prev").onclick=function(){show(STEPS[Math.max(0,cur-1)][0])};
+$("#next").onclick=function(){show(STEPS[Math.min(STEPS.length-1,cur+1)][0])};
+window.addEventListener("hashchange",function(){show(location.hash.slice(1),true)});
+
+/* ---------- Progress ---------- */
+var maxes={},scores={};
+function updateProgress(){
+  var m=0,s=0;for(var k in maxes){m+=maxes[k];s+=scores[k]||0}
+  $("#meterFill").style.width=(m?s/m*100:0)+"%";
+  $("#meterTxt").textContent=s+" / "+m;
+}
+
+/* ---------- Expressive Multi-Voice Speech Engine ---------- */
+var TTS=("speechSynthesis" in window)&&("SpeechSynthesisUtterance" in window);
+var voices=[];
+function loadVoices(){
+  if(!TTS)return;
+  var all=speechSynthesis.getVoices().filter(function(v){return /^en/i.test(v.lang)});
+  var rank=function(v){
+    var r=0,n=v.name.toLowerCase();
+    if(/natural|neural|online|premium|enhanced/i.test(n))r-=50;
+    if(/google/i.test(n))r-=30;
+    if(/samantha|daniel|aria|jenny|guy|libby|ryan|victoria|george/i.test(n))r-=20;
+    if(/^en[-_](GB|US)/i.test(v.lang))r-=10;
+    return r;
+  };
+  voices=all.sort(function(a,b){return rank(a)-rank(b)});
+}
+if(TTS){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+
+function getExpressiveVoice(role){
+  if(!voices.length)return null;
+  var isFemale=/^(Hannah|Ana|Zoe|Lisa|F)$/i.test(role);
+  var isMale=/^(Leo|Dad|Salesman|M)$/i.test(role);
+  var fHints=/female|woman|aria|jenny|libby|sonia|samantha|victoria|karen|zira|uk english female/i;
+  var mHints=/male|man|guy|ryan|christopher|eric|daniel|george|david|uk english male/i;
+
+  var fVoice=voices.filter(function(v){return fHints.test(v.name)})[0]||voices[0];
+  var mVoice=voices.filter(function(v){return v!==fVoice&&mHints.test(v.name)})[0]||voices[1]||fVoice;
+
+  if(isFemale)return fVoice;
+  if(isMale)return mVoice;
+  return fVoice;
+}
+
+var runId=0;
+var isPaused=false;
+
+function speakRaw(text,role,rate,pitch,done){
+  if(!TTS){setTimeout(done,50);return}
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="en-GB";
+  var v=getExpressiveVoice(role);
+  if(v){u.voice=v;u.lang=v.lang}
+  u.rate=rate||0.92;
+  u.pitch=pitch||1;
+  var fired=false;var fin=function(){if(fired)return;fired=true;done()};
+  u.onend=fin;u.onerror=fin;
+  speechSynthesis.speak(u);
+}
+
+function stopAll(){
+  runId++;
+  isPaused=false;
+  if(TTS)speechSynthesis.cancel();
+  $$(".speaking").forEach(function(n){n.classList.remove("speaking")});
+  $$(".mini.playing").forEach(function(n){n.classList.remove("playing")});
+  $$(".pause-btn").forEach(function(b){b.textContent="⏸ Pause"});
+}
+
+function togglePause(btn){
+  if(!TTS)return;
+  if(speechSynthesis.speaking&&!speechSynthesis.paused){
+    speechSynthesis.pause();
+    isPaused=true;
+    if(btn)btn.textContent="▶ Resume";
+  }else if(speechSynthesis.paused){
+    speechSynthesis.resume();
+    isPaused=false;
+    if(btn)btn.textContent="⏸ Pause";
+  }
+}
+
+function runSeq(steps){
+  var id=++runId;
+  isPaused=false;
+  if(TTS)speechSynthesis.cancel();
+  var i=0;
+  return new Promise(function(res){
+    var next=function(){
+      if(id!==runId){res(false);return}
+      if(i>=steps.length){res(true);return}
+      var s=steps[i++];
+      if(s.before)s.before();
+      speakRaw(s.text,s.role,s.rate,s.pitch,function(){
+        if(s.after)s.after();
+        setTimeout(next,s.wait==null?240:s.wait);
+      });
+    };
+    next();
+  });
+}
+
+/* say buttons */
+document.addEventListener("click",function(e){
+  var b=e.target.closest(".say");if(!b)return;
+  var slow=b.dataset.slow==="1";
+  var pitch=parseFloat(b.dataset.pitch||"1.08");
+  stopAll();
+  b.classList.add("playing");
+  runSeq([{text:b.dataset.say,role:"F",rate:slow?0.62:0.9,pitch:pitch,after:function(){b.classList.remove("playing")}}]);
+});
+
+/* ---------- Generic exercise logic ---------- */
+function fillSelects(){
+  $$("select[data-opts]").forEach(function(s){
+    if(s.options.length)return;
+    var o=document.createElement("option");o.value="";o.textContent="…";s.appendChild(o);
+    s.dataset.opts.split("|").forEach(function(t){var x=document.createElement("option");x.value=t;x.textContent=t;s.appendChild(x)});
+  });
+}
+function getVal(q){
+  if(q.querySelector(".opts")){var o=q.querySelector(".opts .sel");return o?o.dataset.v:""}
+  var f=q.querySelector("input,select");return f?f.value:"";
+}
+function exQs(ex){return $$(".q",ex).filter(function(q){return !q.parentElement.closest(".q")})}
+function countQs(ex){return exQs(ex).length}
+function checkEx(ex){
+  var n=0,t=0;
+  exQs(ex).forEach(function(q){
+    t++;var v=norm(getVal(q));
+    var ok=q.dataset.ans.split("|").map(norm).indexOf(v)>-1;
+    q.classList.toggle("ok",ok);q.classList.toggle("no",!ok&&v!=="");
+    if(ok)n++;
+  });
+  scores[ex.dataset.id]=n;updateProgress();
+  var r=$(".result",ex);if(r)r.textContent=n+" / "+t+(n===t?" — great!":"");
+}
+function revealEx(ex){
+  exQs(ex).forEach(function(q){
+    var a=q.dataset.ans.split("|")[0];
+    if(q.querySelector(".opts")){
+      $$(".opts button",q).forEach(function(b){b.classList.toggle("sel",norm(b.dataset.v)===norm(a))});
+    }else{var f=q.querySelector("input,select");if(f)f.value=a}
+    q.classList.remove("no");q.classList.add("ok");
+  });
+}
+function resetEx(ex){
+  exQs(ex).forEach(function(q){
+    q.classList.remove("ok","no");
+    $$(".opts button",q).forEach(function(b){b.classList.remove("sel")});
+    var f=q.querySelector("input,select");if(f)f.value="";
+  });
+  scores[ex.dataset.id]=0;updateProgress();
+  var r=$(".result",ex);if(r)r.textContent="";
+}
+document.addEventListener("click",function(e){
+  var t=e.target;
+  var ob=t.closest(".opts button");
+  if(ob){
+    var g=ob.parentElement;
+    $$("button",g).forEach(function(b){b.classList.remove("sel")});
+    ob.classList.add("sel");
+    var q=ob.closest(".q");if(q)q.classList.remove("ok","no");
+    return;
+  }
+  var ex=t.closest(".ex");if(!ex)return;
+  if(t.classList.contains("check"))checkEx(ex);
+  else if(t.classList.contains("reveal"))revealEx(ex);
+  else if(t.classList.contains("reset"))resetEx(ex);
+});
+document.addEventListener("input",function(e){var q=e.target.closest(".q");if(q)q.classList.remove("ok","no")});
+document.addEventListener("change",function(e){var q=e.target.closest(".q");if(q)q.classList.remove("ok","no")});
+
+/* ---------- Step 1: true for you ---------- */
+["I study at university.","I work in an office.","I speak Japanese.","I live in London.","I go to the gym every day.","I study English."].forEach(function(t){
+  var c=document.createElement("button");c.className="chip";c.textContent=t;c.setAttribute("aria-pressed","false");
+  c.onclick=function(){var on=c.classList.toggle("on");c.setAttribute("aria-pressed",on)};
+  $("#trueChips").appendChild(c);
+});
+
+/* ---------- Expressive Dialogues with Emotion & Pitch ---------- */
+var DIALOGS={
+  nadia:{hidden:true,lines:[
+    {spk:"Hannah",pitch:1.18,rateMod:1.03,text:"Hi Leo! Do you know Nadia, from my English class?"},
+    {spk:"Leo",pitch:0.94,rateMod:0.98,text:"Oh, yes, I do! She's from Lebanon, right?"},
+    {spk:"Hannah",pitch:1.15,rateMod:1.0,text:"No, she's from Brazil! But now her home is in Lyon, in France."},
+    {spk:"Leo",pitch:0.96,rateMod:1.02,text:"Oh, nice! Does she work in Lyon too?"},
+    {spk:"Hannah",pitch:1.12,rateMod:0.96,text:"No, she doesn't. She works in Geneva, in Switzerland. It isn't near her home."},
+    {spk:"Leo",pitch:0.92,rateMod:0.98,text:"Really? Is it far?"},
+    {spk:"Hannah",pitch:1.14,rateMod:0.98,text:"About two hours by train! She goes there four days a week."},
+    {spk:"Leo",pitch:0.95,rateMod:1.0,text:"Is she married?"},
+    {spk:"Hannah",pitch:1.18,rateMod:1.04,text:"No, she isn't. But she has a boyfriend! His name's Tomás."},
+    {spk:"Leo",pitch:0.94,rateMod:1.0,text:"Does he speak English?"},
+    {spk:"Hannah",pitch:1.16,rateMod:1.02,text:"A little. He speaks French and Portuguese, so they speak Portuguese together!"}
+  ]},
+  ana:{hidden:true,lines:[
+    {spk:"Ana",pitch:1.18,rateMod:1.02,text:"Hi! My name's Ana."},
+    {spk:"Ana",pitch:1.14,rateMod:0.96,text:"I live in a small flat in Kraków with my sister."},
+    {spk:"Ana",pitch:1.12,rateMod:0.96,text:"I work in a bank in the city centre."},
+    {spk:"Ana",pitch:1.10,rateMod:0.95,text:"I start work at nine and I finish at five."},
+    {spk:"Ana",pitch:1.16,rateMod:1.02,text:"In the evening I go to the gym!"},
+    {spk:"Ana",pitch:1.20,rateMod:1.0,text:"And at the weekend, I study Italian at a language school!"}
+  ]},
+  cars:{hidden:false,lines:[
+    {spk:"Salesman",pitch:0.98,rateMod:1.04,text:"Good morning! Is the car for you, miss?"},
+    {spk:"Zoe",pitch:1.22,rateMod:1.05,text:"Yes, it's for me! It's my first car!"},
+    {spk:"Dad",pitch:0.86,rateMod:0.92,text:"Hmm... Look at this green one, Zoe. It's small, it's clean and it's cheap."},
+    {spk:"Zoe",pitch:1.24,rateMod:1.04,text:"Ugh, but Dad, it's old! And it's very slow!"},
+    {spk:"Salesman",pitch:1.02,rateMod:1.04,text:"Well, madam, this yellow car is new! It's fast and it's beautiful!"},
+    {spk:"Dad",pitch:0.84,rateMod:0.94,text:"Whoa, yes, but it's very expensive!"},
+    {spk:"Zoe",pitch:1.26,rateMod:1.06,text:"Oh, I love the yellow car! It's my money, Dad!"},
+    {spk:"Salesman",pitch:1.0,rateMod:1.0,text:"Wonderful! Come with me, madam."}
+  ]}
+};
+
+var CAR_WORDS=["small","clean","cheap","old","slow","new","fast","beautiful","expensive"];
+function hiText(t,key){
+  if(key!=="cars")return t;
+  var re=new RegExp("\\b("+CAR_WORDS.join("|")+")\\b","gi");
+  return t.replace(re,'<mark class="w">$1</mark>');
+}
+
+function buildPlayer(host){
+  var key=host.dataset.dlg,d=DIALOGS[key];
+  var speakers={};d.lines.forEach(function(l){speakers[l.spk]=1});
+  var multi=Object.keys(speakers).length>1;
+  var html='<div class="ctrl" style="margin-top:0">'+
+    '<button class="btn play">▶ Play</button>'+
+    '<button class="btn ghost pause-btn">⏸ Pause</button>'+
+    '<button class="btn ghost stop">⏹ Stop</button>'+
+    '<label>Speed <select class="spd"><option value="0.72">0.75× Slow</option><option value="0.92" selected>1.0× Normal</option></select></label>'+
+    (d.hidden?'<button class="btn ghost tgl">Show transcript</button>':'')+
+    '</div>';
+  html+='<ol class="tx"'+(d.hidden?' hidden':'')+'>'+d.lines.map(function(l,i){
+    return '<li data-i="'+i+'">'+(multi?'<b>'+l.spk+':</b>':'')+hiText(l.text,key)+'</li>';
+  }).join("")+'</ol>';
+  host.innerHTML=html;
+  var tx=$(".tx",host);
+  var pBtn=$(".pause-btn",host);
+
+  $(".play",host).onclick=function(){
+    if(TTS&&speechSynthesis.paused){
+      speechSynthesis.resume();
+      isPaused=false;
+      pBtn.textContent="⏸ Pause";
+      return;
+    }
+    var baseRate=parseFloat($(".spd",host).value);
+    var items=$$("li",tx);
+    var steps=d.lines.map(function(l,i){return{
+      text:l.text,
+      role:l.spk,
+      rate:baseRate*(l.rateMod||1),
+      pitch:l.pitch||1.05,
+      wait:320,
+      before:function(){items.forEach(function(x){x.classList.remove("speaking")});items[i].classList.add("speaking")},
+      after:function(){items[i].classList.remove("speaking")}
+    }});
+    runSeq(steps);
+  };
+  pBtn.onclick=function(){togglePause(pBtn)};
+  $(".stop",host).onclick=stopAll;
+  var tg=$(".tgl",host);
+  if(tg)tg.onclick=function(){
+    var isHidden=!tx.hidden;
+    tx.hidden=isHidden;
+    tx.style.display=isHidden?"none":"grid";
+    tg.textContent=isHidden?"Show transcript":"Hide transcript";
+  };
+}
+$$(".player").forEach(buildPlayer);
+
+/* Expressive Lisa's Blog Audio */
+var BLOG_LINES=[
+  {text:"Breakfast in Porto, lunch in Madrid. I work in Madrid.",pitch:1.18,rateMod:1.02},
+  {text:"Flats in Madrid are very expensive! In Porto, flats are cheap and the beaches are beautiful, but my job is in Madrid.",pitch:1.14,rateMod:0.98},
+  {text:"So I live in Porto and I work in Madrid!",pitch:1.20,rateMod:1.02},
+  {text:"I fly from Porto to Madrid on Monday morning. I work there for four days and I stay in a small flat with my brother.",pitch:1.13,rateMod:0.96},
+  {text:"Then I fly home on Thursday night. On Fridays I work at home.",pitch:1.15,rateMod:0.98},
+  {text:"I don't speak Spanish very well, so I study Spanish at a language school on Saturdays.",pitch:1.12,rateMod:0.96},
+  {text:"I love Porto! It's an old, beautiful city and it's great to live here!",pitch:1.22,rateMod:1.03}
+];
+var blogPauseBtn=$("#pauseBlog");
+$("#playBlog").onclick=function(){
+  if(TTS&&speechSynthesis.paused){
+    speechSynthesis.resume();
+    isPaused=false;
+    blogPauseBtn.textContent="⏸ Pause";
+    return;
+  }
+  var baseRate=parseFloat($("#blogSpd").value);
+  runSeq(BLOG_LINES.map(function(l){return{
+    text:l.text,role:"Lisa",rate:baseRate*l.rateMod,pitch:l.pitch,wait:260
+  }}));
+};
+blogPauseBtn.onclick=function(){togglePause(blogPauseBtn)};
+$("#stopBlog").onclick=stopAll;
+
+/* ---------- Vocabulary ---------- */
+var WORDS=[
+  ["big","/bɪɡ/","small","/smɔːl/"],
+  ["old","/əʊld/","new","/njuː/"],
+  ["fast","/fɑːst/","slow","/sləʊ/"],
+  ["beautiful","/ˈbjuːtɪfl/","ugly","/ˈʌɡli/"],
+  ["cheap","/tʃiːp/","expensive","/ɪkˈspensɪv/"],
+  ["long","/lɒŋ/","short","/ʃɔːt/"],
+  ["clean","/kliːn/","dirty","/ˈdɜːti/"],
+  ["easy","/ˈiːzi/","difficult","/ˈdɪfɪkəlt/"]
+];
+var wp=$("#wordPairs"),wordEls={};
+WORDS.forEach(function(p){
+  var row=document.createElement("div");row.className="pair";
+  [[p[0],p[1]],[p[2],p[3]]].forEach(function(w){
+    var c=document.createElement("div");c.className="word";
+    c.innerHTML='<div><strong>'+w[0]+'</strong><small>'+w[1]+'</small></div><div class="btns"><button class="mini say" data-say="'+w[0]+'" data-pitch="1.12" aria-label="Listen to '+w[0]+'">▶</button><button class="mini say" data-slow="1" data-say="'+w[0]+'" data-pitch="1.08" aria-label="Listen slowly to '+w[0]+'">slow</button></div>';
+    wordEls[w[0]]=c;row.appendChild(c);
+  });
+  wp.appendChild(row);
+});
+$("#playAllWords").onclick=function(){
+  var all=[];WORDS.forEach(function(p){all.push(p[0],p[2])});
+  runSeq(all.map(function(w){return{text:w,role:"F",rate:0.84,pitch:1.12,wait:1500,
+    before:function(){$$(".word.speaking").forEach(function(x){x.classList.remove("speaking")});wordEls[w].classList.add("speaking");wordEls[w].scrollIntoView({block:"nearest"})},
+    after:function(){}}}));
+};
+$("#stopWords").onclick=stopAll;
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var allWords=[];WORDS.forEach(function(p){allWords.push(p[0],p[2])});
+/* opposites */
+var oppIdx=[[0,"big"],[1,"old"],[2,"fast"],[3,"beautiful"],[4,"cheap"],[5,"long"],[6,"clean"],[7,"easy"]];
+var oppOpts=shuffle(WORDS.map(function(p){return p[2]})).join("|");
+oppIdx.forEach(function(x,i){
+  var li=document.createElement("li");li.className="q";li.dataset.ans=WORDS[x[0]][2];
+  li.innerHTML='<span class="n">'+(i+1)+'</span><span><b>'+x[1]+'</b> ≠</span><select data-opts="'+oppOpts+'" aria-label="Opposite of '+x[1]+'"></select>';
+  $("#oppList").appendChild(li);
+});
+/* listen & choose */
+["expensive","slow","ugly","difficult","dirty","short"].forEach(function(w,i){
+  var partner="";WORDS.forEach(function(p){if(p[0]===w)partner=p[2];if(p[2]===w)partner=p[0]});
+  var others=allWords.filter(function(x){return x!==w&&x!==partner});
+  var opts=shuffle([w,partner].concat(shuffle(others).slice(0,2)));
+  var li=document.createElement("li");li.className="q";li.dataset.ans=w;
+  li.innerHTML='<span class="n">'+(i+1)+'</span><button class="mini say" data-say="'+w+'" data-pitch="1.12" aria-label="Listen">▶</button><span class="opts">'+opts.map(function(o){return '<button data-v="'+o+'">'+o+'</button>'}).join("")+'</span>';
+  $("#hearList").appendChild(li);
+});
+fillSelects();
+
+/* ---------- Cars sorting ---------- */
+var CAR_ANS={small:"Green car",clean:"Green car",cheap:"Green car",old:"Green car",slow:"Green car",new:"Yellow car",fast:"Yellow car",beautiful:"Yellow car",expensive:"Yellow car"};
+var carBox=$("#carSort");
+shuffle(CAR_WORDS).forEach(function(w){
+  var d=document.createElement("div");d.className="q";d.dataset.ans=CAR_ANS[w];
+  d.style.cssText="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-radius:8px;background:var(--bg);box-shadow:inset 4px 0 0 var(--st,transparent)";
+  d.innerHTML='<b style="min-width:6.5em">'+w+'</b><span class="opts"><button data-v="Green car">Green car</button><button data-v="Yellow car">Yellow car</button></span>';
+  carBox.appendChild(d);
+});
+
+/* ---------- Speaking ---------- */
+var TOPICS=[["cities","small","big"],["food","Japanese","Mexican"],["films","British","American"],["restaurants","cheap","expensive"],["houses","old","new"],["books","long","short"],["dogs","big","small"],["photos","black and white","colour"]];
+var tIdx=-1,flip=false;
+function showTopic(){
+  var t=TOPICS[tIdx];var a=flip?t[2]:t[1],b=flip?t[1]:t[2];
+  $("#tCat").textContent=t[0];$("#tA").textContent=a;$("#tB").textContent=b;
+  $("#fA").textContent="I prefer "+a+" "+t[0]+".";
+  $("#fB").textContent="I prefer "+b+" "+t[0]+".";
+}
+$("#nextTopic").onclick=function(){var n;do{n=Math.floor(Math.random()*TOPICS.length)}while(n===tIdx&&TOPICS.length>1);tIdx=n;flip=false;showTopic()};
+$("#swapSide").onclick=function(){flip=!flip;showTopic()};
+$("#nextTopic").click();
+var tmr=null,left=60;
+function drawTimer(){var m=Math.floor(left/60),s=left%60;$("#timerTxt").textContent=m+":"+(s<10?"0":"")+s}
+$("#timerBtn").onclick=function(){
+  if(tmr){clearInterval(tmr);tmr=null;left=60;drawTimer();$("#timerBtn").textContent="Start 1 minute";return}
+  left=60;drawTimer();$("#timerBtn").textContent="Stop";
+  tmr=setInterval(function(){left--;drawTimer();if(left<=0){clearInterval(tmr);tmr=null;left=60;$("#timerBtn").textContent="Start 1 minute";$("#timerTxt").textContent="Time!"}},1000);
+};
+
+/* ---------- Init ---------- */
+$$(".ex[data-id]").forEach(function(ex){maxes[ex.dataset.id]=countQs(ex);scores[ex.dataset.id]=0});
+updateProgress();
+show(location.hash.slice(1)||"match",true);
+})();
+</script>
+
+</body>
+</html>

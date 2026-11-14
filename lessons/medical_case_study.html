@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Doctor's Office — English A1–A2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{
+ --paper:#f5f1e9;--ink:#20251f;--muted:#697168;--blue:#243e78;--blue2:#dce5ed;
+ --red:#d96f59;--redp:#f4dfd7;--green:#748d79;--greenp:#e1e9df;--line:#d9d4c9;
+ --white:#fffdf8;--yellow:#e7c76f;--shadow:0 18px 50px rgba(39,49,44,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(#9a9b8e .7px,transparent .7px);background-size:17px 17px;z-index:-1}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,233,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px clamp(16px,5vw,70px);display:flex;align-items:center;gap:18px}
+.brand{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;white-space:nowrap}
+.brand span{color:var(--red)}
+.progress-wrap{flex:1;height:5px;background:#e1ddd3;border-radius:10px;overflow:hidden}
+.progress{height:100%;width:0;background:var(--red);transition:.3s}
+.progress-label{font:11px 'DM Mono',monospace;color:var(--muted);white-space:nowrap}
+.hero{max-width:1200px;margin:auto;padding:68px 28px 52px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}
+.kicker,.eyebrow{font:500 11px 'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+h1{font:600 clamp(52px,8vw,104px)/.94 'Playfair Display',Georgia,serif;letter-spacing:-.055em;margin:18px 0 24px;max-width:760px}
+h1 em{font-weight:500;color:var(--blue)}
+.hero p{font-size:18px;line-height:1.7;color:#586057;max-width:590px}
+.hero-art{min-height:340px;background:var(--blue);border-radius:48% 48% 12px 12px;position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:var(--shadow)}
+.hero-art:before{content:"";position:absolute;width:270px;height:270px;border:1px solid rgba(255,255,255,.35);border-radius:50%}
+.hero-art:after{content:"";position:absolute;width:210px;height:210px;border:1px solid rgba(255,255,255,.25);border-radius:50%}
+.med-cross{font-size:145px;color:#f7f2e9;font-weight:300;z-index:1;line-height:1}
+.hero-note{position:absolute;bottom:22px;left:24px;color:#f7f2e9;font:11px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;z-index:2}
+.sticker{position:absolute;right:25px;top:24px;background:var(--yellow);color:var(--ink);padding:12px 15px;transform:rotate(7deg);font:12px 'DM Mono',monospace;z-index:3}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.pill{border:1px solid #c9c7bb;border-radius:30px;padding:8px 13px;font:11px 'DM Mono',monospace;color:#62695f}
+main{max-width:1100px;margin:0 auto;padding:0 28px 90px}
+.section{padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:80px}
+.section-head{display:flex;gap:20px;align-items:flex-start;margin-bottom:26px}
+.num{font:500 13px 'DM Mono',monospace;color:var(--red);padding-top:10px}
+h2{font:600 clamp(32px,4vw,48px)/1.05 'Playfair Display',Georgia,serif;margin:0 0 10px;letter-spacing:-.025em}
+.sub{color:var(--muted);line-height:1.65;margin:0;max-width:700px}
+.card{background:var(--white);border:1px solid #e3ded3;border-radius:5px;padding:24px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prompt{font:600 21px 'Playfair Display',Georgia,serif;margin:0 0 12px}
+.small{font-size:13px;color:var(--muted);line-height:1.6}
+.btn{border:0;background:var(--blue);color:white;padding:12px 18px;border-radius:3px;font:600 13px 'DM Sans',sans-serif;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);background:#172c5b}
+.btn.alt{background:var(--red)}
+.btn.ghost{background:transparent;color:var(--blue);border:1px solid #aeb9c7}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;padding:5px 9px;background:var(--blue2);color:var(--blue);font:11px 'DM Mono',monospace;border-radius:2px}
+.word-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.word{padding:15px 13px;background:#f2eee5;border:1px solid #e1dbcf;display:flex;align-items:center;justify-content:space-between;gap:8px;border-radius:4px}
+.word strong{font-size:15px}
+.word button{border:1px solid #c9c7bb;background:transparent;border-radius:50%;width:30px;height:30px;cursor:pointer;color:var(--blue)}
+.match-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.match-item{display:flex;align-items:center;gap:12px;padding:12px;background:#f6f3ec;border:1px solid #e3ded3;border-radius:4px;margin-bottom:9px}
+.match-item .emoji{font-size:24px;width:34px;text-align:center}
+select,input[type=text],textarea{font:14px 'DM Sans',sans-serif;border:1px solid #c9c7bb;border-radius:3px;background:#fffdf8;padding:10px;color:var(--ink);max-width:100%}
+select{min-width:170px}
+.feedback{min-height:24px;margin-top:12px;font-size:13px;font-weight:600}
+.good{color:#3e7652}.bad{color:#b34d3d}
+.callout{background:var(--greenp);border-left:4px solid var(--green);padding:17px 19px;line-height:1.65}
+.dialogue{background:#eef1f5;border-radius:5px;padding:20px;margin:12px 0}
+.bubble{max-width:82%;padding:13px 16px;border-radius:13px;margin:9px 0;line-height:1.55;font-size:14px}
+.doctor{background:white;border:1px solid #d9dfe6;border-bottom-left-radius:2px}
+.patient{background:var(--blue);color:white;margin-left:auto;border-bottom-right-radius:2px}
+.role-card{border:1px solid #d9d4c9;padding:20px;background:#faf8f2}
+.role-card h3{font:600 23px 'Playfair Display',Georgia,serif;margin:0 0 10px}
+.rule{background:var(--blue);color:white;padding:25px;border-radius:4px}
+.rule h3{font:600 29px 'Playfair Display',Georgia,serif;margin:0 0 15px}
+.formula{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:15px 0}
+.formula span{background:#fffdf8;color:var(--blue);padding:10px 13px;border-radius:3px;font-weight:700}
+.example{background:rgba(255,255,255,.12);padding:14px;margin-top:12px;border-radius:3px;line-height:1.6}
+.quizbox{background:var(--white);border:1px solid #e1dbcf;padding:25px;border-radius:5px;box-shadow:var(--shadow)}
+.quiz-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font:11px 'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.qtext{font:600 26px/1.35 'Playfair Display',Georgia,serif;margin:22px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option{padding:14px;text-align:left;background:#f4f1e9;border:1px solid #ded8cb;border-radius:3px;cursor:pointer;font:500 14px 'DM Sans',sans-serif}
+.option:hover{border-color:var(--blue);background:#eaf0f5}
+.option.selected{background:var(--blue);color:white;border-color:var(--blue)}
+.option.correct{background:#e1e9df;border-color:#8ca18f;color:#31563c}
+.option.wrong{background:#f4dfd7;border-color:#d96f59;color:#8f3e30}
+.quiz-controls{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:10px}
+.hidden{display:none!important}
+.reading{font:16px/1.85 'DM Sans',sans-serif;color:#394239}
+.reading p{margin:0 0 14px}
+.reading strong{color:var(--blue)}
+.task-list{counter-reset:task;display:grid;gap:12px}
+.task{padding:16px;border:1px solid #e1dbcf;background:#faf8f2;border-radius:3px}
+.task label{display:block;font-size:14px;line-height:1.55;margin-bottom:9px}
+.task input{margin-right:8px}
+.vocab{font-weight:700;color:var(--blue);background:#e7edf2;padding:1px 4px}
+.speech{background:var(--redp);padding:24px;border-radius:4px}
+.speech h3{font:600 28px 'Playfair Display',Georgia,serif;margin:0 0 8px}
+textarea{width:100%;min-height:90px;resize:vertical;line-height:1.5}
+.footer{padding:35px 0 10px;border-top:1px solid var(--line);color:var(--muted);font:11px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:15px}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:42px}.hero-art{min-height:220px}.med-cross{font-size:100px}.grid2,.grid3,.match-layout{grid-template-columns:1fr}.word-grid{grid-template-columns:1fr 1fr}.options{grid-template-columns:1fr}main{padding:0 17px 60px}.hero{padding-left:17px;padding-right:17px}.section{padding:35px 0}.bubble{max-width:95%}}
+</style>
+
+<style id="medical-case-study-theme">
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900;1000&family=Roboto+Condensed:wght@600;700;800;900&display=swap');
+:root{
+ --paper:#edf5fc;--ink:#172957;--muted:#526987;--blue:#1d3978;--blue2:#d9ebfa;
+ --red:#df7058;--redp:#fbe5dd;--green:#5f9eae;--greenp:#e0f1f2;--line:#c7d9e9;
+ --white:#ffffff;--yellow:#f4c56a;--shadow:0 12px 30px rgba(32,65,111,.12);
+}
+body{background:#eaf3fc;color:var(--ink);font-family:'Nunito Sans',Arial,sans-serif}
+body:before{opacity:.28;background-image:radial-gradient(#83acd1 .8px,transparent .8px);background-size:14px 14px}
+.topbar{background:rgba(239,247,255,.94);border-bottom:2px solid #c9dced}
+.brand{font-family:'Roboto Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:var(--blue)}
+.brand span{color:var(--red)}
+.progress-wrap{background:#d3e4f2}.progress{background:var(--red)}
+.progress-label,.kicker,.eyebrow,.num{font-family:'Roboto Condensed',sans-serif;font-weight:800;letter-spacing:.15em}
+.hero{max-width:1260px;padding-top:48px;padding-bottom:48px;gap:32px}
+.hero>div:first-child{background:#fff;border:2px solid #cbddeb;border-radius:13px;padding:42px 42px 36px;box-shadow:var(--shadow);position:relative}
+.hero>div:first-child:before{content:"";position:absolute;left:25px;right:25px;top:-14px;height:19px;background:radial-gradient(circle at 9px 9px,#203d7d 0 8px,transparent 8.7px);background-size:58px 19px;background-repeat:repeat-x}
+.kicker{color:var(--red)}
+h1{font-family:'Roboto Condensed',Impact,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.035em;line-height:.92;color:#1c2e66}
+h1 em{font-style:normal;color:#1c2e66}
+.hero p{font-size:17px;color:#526987}
+.hero-art{min-height:360px;border-radius:12px;background:linear-gradient(145deg,#b8dcf7,#e2f1fc);border:2px solid #9dc8e8;box-shadow:var(--shadow)}
+.hero-art:before{width:280px;height:280px;border:8px solid rgba(255,255,255,.65)}
+.hero-art:after{width:205px;height:205px;border:3px dashed rgba(29,57,120,.2)}
+.med-cross{font-family:'Nunito Sans',sans-serif;font-size:170px;font-weight:900;color:#24417f;text-shadow:5px 7px 0 rgba(255,255,255,.7)}
+.hero-note{color:#1d3978;font-weight:900}
+.sticker{background:#f5c76b;color:#20396f;font-weight:900;border-radius:3px}
+.pill{background:#e5f1fb;border-color:#bad3e8;color:#24417f;font-weight:800}
+main{max-width:1180px}
+.section{border-top:2px solid #c9dced;padding:42px 0}
+.section-head{align-items:center}
+.num{background:#dcecf9;color:var(--red);padding:9px 11px;border-radius:4px;min-width:95px;text-align:center}
+h2{font-family:'Roboto Condensed',Impact,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;color:#1d3978}
+.sub{color:#526987;font-size:15px}
+.card,.quizbox,.role-card{background:#fff;border:2px solid #d0e0ed;border-radius:8px;box-shadow:var(--shadow)}
+.card{position:relative}
+.card:after,.quizbox:after{content:"";position:absolute;inset:7px;border:1px solid #e5edf4;border-radius:4px;pointer-events:none}
+.prompt{font-family:'Roboto Condensed',sans-serif;font-weight:800;color:#1d3978;text-transform:uppercase;letter-spacing:.015em}
+.small{color:#61758e}
+.btn{background:#213d7c;border-radius:5px;font-weight:800;box-shadow:0 3px 0 #142858}
+.btn:hover{background:#142858}
+.btn.alt{background:var(--red);box-shadow:0 3px 0 #b64e3c}
+.btn.ghost{border:2px solid #9bbbd6;color:#1d3978;box-shadow:none}
+.word{background:#eaf4fc;border:1.5px solid #c9dced;border-radius:7px}
+.word strong{color:#1e3c78;font-weight:800}
+.word button{background:#fff;border:1.5px solid #aac8e2;color:#1d3978;font-weight:900}
+.match-item,.task{background:#f4f8fc;border:1.5px solid #d5e3ef;border-radius:6px}
+select,input[type=text],textarea{border:1.5px solid #b8cfe2;border-radius:5px;background:#fff}
+.callout{background:#e2f1f4;border-left:5px solid #5d9bab;border-radius:4px;color:#254b69}
+.dialogue{background:#e8f2fb;border:1px solid #c8dced}
+.bubble{font-weight:600}
+.doctor{border:1.5px solid #c5d9e9}
+.patient{background:#23417f}
+.rule{background:#1e3978;border:4px solid #8abde2;border-radius:9px}
+.rule .eyebrow{color:#f4c76a!important}
+.rule h3{font-family:'Roboto Condensed',sans-serif;text-transform:uppercase;font-weight:900}
+.formula span{border-radius:5px;font-family:'Roboto Condensed',sans-serif;color:#1d3978}
+.example{border:1px solid rgba(255,255,255,.22)}
+.option{background:#edf5fc;border:1.5px solid #c7d9e9;border-radius:5px;font-weight:700;color:#203b70}
+.option:hover{background:#dcecf9;border-color:#6e9bc2}
+.option.selected{background:#203d7d;color:#fff}
+.option.correct{background:#dcefe7;border-color:#72a88a;color:#285d43}
+.option.wrong{background:#fbe4dc;border-color:#df7058;color:#963f30}
+.role-card{background:#fff}
+.role-card[style*="background:var(--blue2)"]{background:#e4f1fb!important}
+.speech{background:#fbe5dd;border:2px solid #efc7b9;border-radius:8px}
+.speech h3{font-family:'Roboto Condensed',sans-serif;text-transform:uppercase;color:#1d3978}
+.footer{border-top:2px solid #c9dced;color:#60758e}
+@media(max-width:760px){
+ .hero>div:first-child{padding:30px 23px}
+ .hero>div:first-child:before{left:17px;right:17px;background-size:43px 19px}
+ .hero-art{min-height:220px}
+ .med-cross{font-size:115px}
+}
+</style>
+
+</head>
+<body>
+<nav class="topbar">
+ <div class="brand">THE HEALTH <span>FILE</span></div>
+ <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+ <div class="progress-label" id="progressLabel">0 / 7 missions</div>
+</nav>
+
+<header class="hero">
+ <div>
+  <div class="kicker">English in real life · A1—A2</div>
+  <h1>The Doctor's <em>Office.</em></h1>
+  <p>You don't need to be a doctor to talk about your health. Learn how to describe symptoms, ask for help, understand simple advice and feel more confident at the doctor's.</p>
+  <div class="meta"><span class="pill">VOCABULARY</span><span class="pill">SPEAKING</span><span class="pill">ZERO CONDITIONAL</span><span class="pill">REAL-LIFE ENGLISH</span></div>
+ </div>
+ <div class="hero-art"><div class="sticker">TAKE CARE.</div><div class="med-cross">+</div><div class="hero-note">A little English can help a lot.</div></div>
+</header>
+
+<main>
+<section class="section" id="s1">
+ <div class="section-head"><div class="num">01 / MISSION</div><div><h2>At the waiting room</h2><p class="sub">Before we start: how do you feel today? Let's warm up with a few everyday questions.</p></div></div>
+ <div class="grid2">
+  <div class="card">
+   <div class="eyebrow">Talk about it</div><p class="prompt">A quick check-in</p>
+   <ol class="reading">
+    <li>When was the last time you felt ill?</li>
+    <li>What do you usually do when you have a headache?</li>
+    <li>Do you prefer going to the doctor or waiting until you feel better?</li>
+    <li>What makes a good doctor?</li>
+   </ol>
+   <p class="small">Try to answer in 1–3 sentences. Use: <em>I usually… / I sometimes… / I prefer… because…</em></p>
+  </div>
+  <div class="card" style="background:var(--redp);border-color:#ebc9bd">
+   <div class="eyebrow">Useful language</div><p class="prompt">How are you feeling?</p>
+   <div class="reading">
+    <p><strong>I'm fine, thanks.</strong> — У мене все добре.</p>
+    <p><strong>I'm not feeling well.</strong> — Я погано почуваюся.</p>
+    <p><strong>I feel a bit tired.</strong> — Я трохи втомлений/втомлена.</p>
+    <p><strong>I've got a headache.</strong> — У мене болить голова.</p>
+    <p><strong>I think I'm getting a cold.</strong> — Здається, я застуджуюся.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="s2">
+ <div class="section-head"><div class="num">02 / MISSION</div><div><h2>What's wrong?</h2><p class="sub">Learn the words you need to explain what's happening. Tap the speaker icon to hear each word (if your browser supports speech).</p></div></div>
+ <div class="word-grid" id="vocabGrid">
+  <div class="word"><strong>a headache</strong><button onclick="speak('a headache')" aria-label="Hear a headache">▶</button></div>
+  <div class="word"><strong>a stomachache</strong><button onclick="speak('a stomachache')">▶</button></div>
+  <div class="word"><strong>a toothache</strong><button onclick="speak('a toothache')">▶</button></div>
+  <div class="word"><strong>a sore throat</strong><button onclick="speak('a sore throat')">▶</button></div>
+  <div class="word"><strong>a cough</strong><button onclick="speak('a cough')">▶</button></div>
+  <div class="word"><strong>a cold</strong><button onclick="speak('a cold')">▶</button></div>
+  <div class="word"><strong>a temperature</strong><button onclick="speak('a temperature')">▶</button></div>
+  <div class="word"><strong>a runny nose</strong><button onclick="speak('a runny nose')">▶</button></div>
+  <div class="word"><strong>back pain</strong><button onclick="speak('back pain')">▶</button></div>
+ </div>
+ <div class="callout" style="margin-top:18px"><strong>Remember:</strong> We say <em>I've got a headache / a cough / a cold</em>, but <em>I've got back pain</em>. We can also say <em>My back hurts.</em></div>
+ <div class="card" style="margin-top:20px">
+  <div class="eyebrow">Mini challenge · Choose the symptom</div>
+  <p class="prompt">What is the problem?</p>
+  <div class="task-list">
+   <div class="task"><label>1. It hurts when I swallow.</label><select id="v1"><option value="">Choose…</option><option>a headache</option><option>a sore throat</option><option>a runny nose</option></select></div>
+   <div class="task"><label>2. I keep coughing.</label><select id="v2"><option value="">Choose…</option><option>a cough</option><option>a toothache</option><option>back pain</option></select></div>
+   <div class="task"><label>3. My nose is running.</label><select id="v3"><option value="">Choose…</option><option>a temperature</option><option>a stomachache</option><option>a runny nose</option></select></div>
+   <div class="task"><label>4. My stomach hurts.</label><select id="v4"><option value="">Choose…</option><option>a stomachache</option><option>a cold</option><option>a sore throat</option></select></div>
+  </div>
+  <div class="row" style="margin-top:14px"><button class="btn" onclick="checkSymptoms()">Check answers</button><div class="feedback" id="symFeedback"></div></div>
+ </div>
+</section>
+
+<section class="section" id="s3">
+ <div class="section-head"><div class="num">03 / MISSION</div><div><h2>At the pharmacy</h2><p class="sub">You know what's wrong. Now what can you do about it? Match the health problems with possible solutions.</p></div></div>
+ <div class="grid2">
+  <div class="card">
+   <div class="eyebrow">The problem</div>
+   <div class="match-item"><span class="emoji">🤕</span><strong>1. a headache</strong></div>
+   <div class="match-item"><span class="emoji">🤧</span><strong>2. a runny nose</strong></div>
+   <div class="match-item"><span class="emoji">😣</span><strong>3. a sore throat</strong></div>
+   <div class="match-item"><span class="emoji">🦷</span><strong>4. a toothache</strong></div>
+   <div class="match-item"><span class="emoji">😴</span><strong>5. feeling tired</strong></div>
+  </div>
+  <div class="card">
+   <div class="eyebrow">Possible solution</div>
+   <div class="task-list">
+    <div class="task"><label>1. a headache</label><select id="m1"><option value="">Choose a solution…</option><option>take a painkiller</option><option>see a dentist</option><option>get some rest</option></select></div>
+    <div class="task"><label>2. a runny nose</label><select id="m2"><option value="">Choose a solution…</option><option>use tissues</option><option>drink cold coffee</option><option>see a dentist</option></select></div>
+    <div class="task"><label>3. a sore throat</label><select id="m3"><option value="">Choose a solution…</option><option>drink warm tea with honey</option><option>run a marathon</option><option>use a plaster</option></select></div>
+    <div class="task"><label>4. a toothache</label><select id="m4"><option value="">Choose a solution…</option><option>take a nap</option><option>see a dentist</option><option>drink herbal tea</option></select></div>
+    <div class="task"><label>5. feeling tired</label><select id="m5"><option value="">Choose a solution…</option><option>get some rest</option><option>take a painkiller</option><option>use special drops</option></select></div>
+   </div>
+   <div class="row" style="margin-top:14px"><button class="btn" onclick="checkMatching()">Check matches</button><div class="feedback" id="matchFeedback"></div></div>
+  </div>
+ </div>
+ <div class="callout" style="margin-top:18px"><strong>Extra phrases:</strong> take a pill · take a painkiller · drink herbal tea · use tissues · use special drops · get some rest · see a dentist</div>
+</section>
+
+<section class="section" id="s4">
+ <div class="section-head"><div class="num">04 / MISSION</div><div><h2>Doctor, doctor!</h2><p class="sub">Read the conversation. Notice how the patient describes symptoms and how the doctor gives simple advice.</p></div></div>
+ <div class="grid2">
+  <div class="dialogue">
+   <div class="eyebrow">At the doctor's</div>
+   <div class="bubble doctor"><strong>Doctor:</strong> Good morning. What's the problem?</div>
+   <div class="bubble patient"><strong>Patient:</strong> I don't feel well. I've got a sore throat and a cough.</div>
+   <div class="bubble doctor"><strong>Doctor:</strong> Do you have a temperature?</div>
+   <div class="bubble patient"><strong>Patient:</strong> No, I don't. But I'm very tired.</div>
+   <div class="bubble doctor"><strong>Doctor:</strong> I see. Drink plenty of water and get some rest.</div>
+   <div class="bubble patient"><strong>Patient:</strong> Thank you, doctor.</div>
+   <div class="bubble doctor"><strong>Doctor:</strong> You're welcome. I hope you feel better soon.</div>
+  </div>
+  <div class="card">
+   <div class="eyebrow">Useful phrases to remember</div>
+   <p class="prompt">The conversation toolkit</p>
+   <div class="reading">
+    <p><strong>What's the problem?</strong><br><span class="small">Що вас турбує?</span></p>
+    <p><strong>I've got… / I have…</strong><br><span class="small">У мене…</span></p>
+    <p><strong>It hurts here.</strong><br><span class="small">Тут болить.</span></p>
+    <p><strong>Do you have a temperature?</strong><br><span class="small">У вас є температура?</span></p>
+    <p><strong>You should…</strong><br><span class="small">Вам слід…</span></p>
+    <p><strong>Feel better soon!</strong><br><span class="small">Одужуйте!</span></p>
+   </div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <div class="eyebrow">Check your understanding</div><p class="prompt">Choose the correct answer.</p>
+  <div class="task-list">
+   <div class="task"><label>1. What is the patient's problem?</label><label><input type="radio" name="d1" value="a"> A headache and a toothache</label><label><input type="radio" name="d1" value="b"> A sore throat and a cough</label></div>
+   <div class="task"><label>2. Does the patient have a temperature?</label><label><input type="radio" name="d2" value="a"> Yes, they do.</label><label><input type="radio" name="d2" value="b"> No, they don't.</label></div>
+   <div class="task"><label>3. What does the doctor advise?</label><label><input type="radio" name="d3" value="a"> Drink water and get some rest.</label><label><input type="radio" name="d3" value="b"> Go running and drink cold coffee.</label></div>
+  </div>
+  <button class="btn" onclick="checkDialogue()">Check answers</button><div class="feedback" id="dialogFeedback"></div>
+ </div>
+</section>
+
+<section class="section" id="s5">
+ <div class="section-head"><div class="num">05 / MISSION</div><div><h2>Health rules that make sense</h2><p class="sub">Let's look at simple facts and results. This is where the Zero Conditional comes in.</p></div></div>
+ <div class="rule">
+  <div class="eyebrow" style="color:#e7c76f">Grammar focus</div>
+  <h3>Zero Conditional</h3>
+  <p style="color:#e9edf5;line-height:1.6">We use it for facts, general truths and things that usually happen.</p>
+  <div class="formula"><span>If + Present Simple</span><b>→</b><span>Present Simple</span></div>
+  <div class="example"><strong>If you don't sleep enough, you feel tired.</strong><br>If people drink water, they feel better. <br>If I eat too much, I feel sick.</div>
+ </div>
+ <div class="grid2" style="margin-top:18px">
+  <div class="card">
+   <div class="eyebrow">Notice the pattern</div><p class="prompt">Cause → result</p>
+   <p class="reading">If you <strong>feel</strong> ill, you <strong>stay</strong> at home.<br>If she <strong>has</strong> a headache, she <strong>takes</strong> a painkiller.<br>If he <strong>doesn't drink</strong> water, he <strong>gets</strong> thirsty.</p>
+  </div>
+  <div class="card" style="background:var(--greenp)">
+   <div class="eyebrow">Remember</div><p class="prompt">Two important details</p>
+   <p class="reading">1. Use the <strong>Present Simple</strong> in both parts.<br>2. With <strong>he / she / it</strong>, remember -s: <em>feels, takes, gets</em>.</p>
+   <p class="small">The if-clause can come first or second: <em>If I feel ill, I stay home.</em> / <em>I stay home if I feel ill.</em></p>
+  </div>
+ </div>
+ <div class="quizbox" style="margin-top:18px" id="grammarQuiz">
+  <div class="quiz-top"><span>Grammar check · 4 questions</span><span id="gCount">Question 1 / 4</span></div>
+  <div class="qtext" id="gQuestion">If you ______ enough water, you feel thirsty.</div>
+  <div class="options" id="gOptions"></div>
+  <div class="feedback" id="gFeedback"></div>
+  <div class="quiz-controls"><span class="small" id="gScore">Score: 0</span><button class="btn" id="gNext" onclick="nextGrammar()" disabled>Next question →</button></div>
+ </div>
+</section>
+
+<section class="section" id="s6">
+ <div class="section-head"><div class="num">06 / MISSION</div><div><h2>Emergency cases</h2><p class="sub">Four people need your help. Read each situation and choose the most sensible response in English.</p></div></div>
+ <div class="quizbox" id="caseQuiz">
+  <div class="quiz-top"><span>Choose the best advice</span><span id="cCount">Case 1 / 4</span></div>
+  <div class="qtext" id="cQuestion">Mia has a toothache. What should she do?</div>
+  <div class="options" id="cOptions"></div>
+  <div class="feedback" id="cFeedback"></div>
+  <div class="quiz-controls"><span class="small" id="cScore">Correct: 0</span><button class="btn" id="cNext" onclick="nextCase()" disabled>Next case →</button></div>
+ </div>
+ <p class="small" style="margin-top:12px">Language note: These are English-learning situations, not medical instructions. In real life, follow advice from a qualified health professional.</p>
+</section>
+
+<section class="section" id="s7">
+ <div class="section-head"><div class="num">07 / FINAL MISSION</div><div><h2>Your turn: the consultation</h2><p class="sub">Time to speak. Choose a role, prepare your ideas and have a short conversation.</p></div></div>
+ <div class="grid2">
+  <div class="role-card">
+   <div class="eyebrow">Role A · Patient</div><h3>You don't feel well.</h3>
+   <p class="small">Choose a situation. Don't show it to your partner.</p>
+   <ul class="reading">
+    <li>You have a headache and feel tired.</li>
+    <li>You have a cough and a sore throat.</li>
+    <li>You have a stomachache after dinner.</li>
+    <li>You have a toothache and can't sleep.</li>
+   </ul>
+   <p><strong>Your mission:</strong> Explain the problem. Answer the doctor's questions.</p>
+  </div>
+  <div class="role-card" style="background:var(--blue2)">
+   <div class="eyebrow">Role B · Doctor</div><h3>Ask and advise.</h3>
+   <p class="small">Ask at least three questions.</p>
+   <ul class="reading">
+    <li>What's the problem?</li>
+    <li>How long have you felt like this?</li>
+    <li>Do you have a temperature?</li>
+    <li>Does it hurt here?</li>
+   </ul>
+   <p><strong>Your mission:</strong> Give two simple suggestions using <em>should</em>.</p>
+  </div>
+ </div>
+ <div class="speech" style="margin-top:18px">
+  <div class="eyebrow">Make it your own</div><h3>Build your mini-dialogue</h3>
+  <p class="small">Write 6–8 lines. Use at least 4 health words and 2 useful phrases from the lesson.</p>
+  <textarea id="dialogueWrite" placeholder="Doctor: Good morning. What's the problem?&#10;Patient: ..."></textarea>
+  <div class="row" style="justify-content:space-between;margin-top:12px"><span class="small" id="wordCount">0 words</span><button class="btn alt" onclick="countWords()">Count my words</button></div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <div class="eyebrow">Exit ticket</div><p class="prompt">Before you leave the clinic…</p>
+  <p class="small">Complete these sentences aloud or in your notebook:</p>
+  <ol class="reading">
+   <li>Today I learned how to say…</li>
+   <li>If I have a ______, I usually…</li>
+   <li>One useful phrase I want to remember is…</li>
+  </ol>
+ </div>
+</section>
+
+<div class="footer"><span>THE HEALTH FILE · ENGLISH A1—A2</span><span>Take care of yourself. And your English.</span></div>
+</main>
+<script>
+function speak(text){
+ if(!('speechSynthesis' in window)){alert('Speech playback is not available in this browser.');return;}
+ window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.82;window.speechSynthesis.speak(u);
+}
+const sections=[...document.querySelectorAll('.section')];
+const progress=document.getElementById('progress'), progressLabel=document.getElementById('progressLabel');
+function updateProgress(){
+ let seen=sections.filter(s=>s.getBoundingClientRect().top<window.innerHeight*.65).length;
+ progress.style.width=(seen/7*100)+'%';progressLabel.textContent=seen+' / 7 missions';
+}
+window.addEventListener('scroll',updateProgress);updateProgress();
+function result(id,msg,ok){let el=document.getElementById(id);el.textContent=msg;el.className='feedback '+(ok?'good':'bad')}
+function checkSymptoms(){
+ const ans=['a sore throat','a cough','a runny nose','a stomachache'];let n=0;
+ ans.forEach((a,i)=>{if(document.getElementById('v'+(i+1)).value===a)n++});
+ result('symFeedback',n+'/4 correct. '+(n===4?'Excellent!':'Have another look and try again.'),n===4);
+}
+function checkMatching(){
+ const ans=['take a painkiller','use tissues','drink warm tea with honey','see a dentist','get some rest'];let n=0;
+ ans.forEach((a,i)=>{if(document.getElementById('m'+(i+1)).value===a)n++});
+ result('matchFeedback',n+'/5 correct. '+(n===5?'Great matching!':'Check the options again.'),n===5);
+}
+function checkDialogue(){
+ const ans=['b','b','a'];let n=0;
+ ans.forEach((a,i)=>{let v=document.querySelector('input[name="d'+(i+1)+'"]:checked');if(v&&v.value===a)n++});
+ result('dialogFeedback',n+'/3 correct.',n===3);
+}
+const grammar=[
+ {q:'If you ______ enough water, you feel thirsty.',o:['drink','don’t drink','doesn’t drink'],a:1,why:'We say “you don’t drink”. The result is “you feel thirsty”.'},
+ {q:'If Anna ______ a headache, she takes a painkiller.',o:['have','has','haves'],a:1,why:'With he / she / it, use has.'},
+ {q:'If people sleep well, they ______ more energy.',o:['has','have','having'],a:1,why:'“People” is plural, so use have.'},
+ {q:'If he ______ too much coffee, he doesn’t sleep well.',o:['drink','drinks','drinking'],a:1,why:'With he, add -s: drinks.'}
+];
+let gi=0,gs=0,gLocked=false;
+function renderGrammar(){
+ let q=grammar[gi];document.getElementById('gCount').textContent='Question '+(gi+1)+' / '+grammar.length;
+ document.getElementById('gQuestion').textContent=q.q;document.getElementById('gFeedback').textContent='';
+ document.getElementById('gOptions').innerHTML=q.o.map((o,i)=>`<button class="option" onclick="answerGrammar(${i})">${o}</button>`).join('');
+ document.getElementById('gNext').disabled=true;document.getElementById('gNext').textContent=gi===grammar.length-1?'See result':'Next question →';gLocked=false;
+}
+function answerGrammar(i){
+ if(gLocked)return;gLocked=true;let q=grammar[gi];let opts=[...document.querySelectorAll('#gOptions .option')];
+ opts.forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});
+ if(i===q.a)gs++;document.getElementById('gScore').textContent='Score: '+gs;
+ result('gFeedback',(i===q.a?'Correct! ':'Not quite. ')+q.why,i===q.a);document.getElementById('gNext').disabled=false;
+}
+function nextGrammar(){
+ if(gi<grammar.length-1){gi++;renderGrammar()}else{document.getElementById('grammarQuiz').innerHTML=`<div class="eyebrow">Grammar check complete</div><h3 style="font:600 32px 'Playfair Display',serif">You scored ${gs} / 4</h3><p>${gs===4?'Perfect! You know the pattern.':'Good practice. Review the rule and try the quiz again.'}</p><button class="btn" onclick="gi=0;gs=0;renderGrammar();document.getElementById('gScore').textContent='Score: 0'">Try again</button>`}
+}
+renderGrammar();
+const cases=[
+ {q:'Mia has a toothache. What should she do?',o:['She should see a dentist.','She should drink cold coffee.','She should go swimming.'],a:0,why:'A dentist can help with a toothache.'},
+ {q:'Tom has a sore throat. What is a sensible suggestion?',o:['He should shout loudly.','He should drink warm tea with honey.','He should eat ice quickly.'],a:1,why:'Warm tea with honey is a common suggestion in this learning context.'},
+ {q:'Alex feels very tired after a long week.',o:['He should get some rest.','He should work all night.','He should skip sleep.'],a:0,why:'Getting some rest is a sensible suggestion.'},
+ {q:'Sara has a runny nose. What does she need?',o:['A pair of sunglasses.','Some tissues.','A football.'],a:1,why:'Tissues are useful when you have a runny nose.'}
+];
+let ci=0,cs=0,cLocked=false;
+function renderCase(){
+ let q=cases[ci];document.getElementById('cCount').textContent='Case '+(ci+1)+' / '+cases.length;
+ document.getElementById('cQuestion').textContent=q.q;document.getElementById('cFeedback').textContent='';
+ document.getElementById('cOptions').innerHTML=q.o.map((o,i)=>`<button class="option" onclick="answerCase(${i})">${o}</button>`).join('');
+ document.getElementById('cNext').disabled=true;document.getElementById('cNext').textContent=ci===cases.length-1?'See result':'Next case →';cLocked=false;
+}
+function answerCase(i){
+ if(cLocked)return;cLocked=true;let q=cases[ci];let opts=[...document.querySelectorAll('#cOptions .option')];
+ opts.forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});
+ if(i===q.a)cs++;document.getElementById('cScore').textContent='Correct: '+cs;
+ result('cFeedback',(i===q.a?'Good choice! ':'Try to remember: ')+q.why,i===q.a);document.getElementById('cNext').disabled=false;
+}
+function nextCase(){
+ if(ci<cases.length-1){ci++;renderCase()}else{document.getElementById('caseQuiz').innerHTML=`<div class="eyebrow">Cases completed</div><h3 style="font:600 32px 'Playfair Display',serif">You helped ${cs} / 4 people.</h3><p>${cs===4?'Excellent bedside manner!':'Keep practising your health vocabulary.'}</p><button class="btn" onclick="ci=0;cs=0;renderCase();document.getElementById('cScore').textContent='Correct: 0'">Try again</button>`}
+}
+renderCase();
+function countWords(){let t=document.getElementById('dialogueWrite').value.trim();let n=t?t.split(/\s+/).length:0;document.getElementById('wordCount').textContent=n+' words';}
+</script>
+</body>
+</html>
