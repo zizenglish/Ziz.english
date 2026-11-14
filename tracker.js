@@ -1,5 +1,5 @@
 // =========================================================================
-// ziz.english — Homework Activity Tracker + Live Teaching Whiteboard (tracker.js)
+// ziz.english — Homework Activity Tracker + Canva-Style Smooth Teaching Dock
 // =========================================================================
 (function () {
     const params = new URLSearchParams(window.location.search);
@@ -8,7 +8,7 @@
     const isHomeworkMode = Boolean(hwId && studentId);
 
     // =====================================================================
-    // PART 1: HOMEWORK TRACKER (працює тільки коли урок відкрито як ДЗ)
+    // PART 1: HOMEWORK TRACKER (активний тільки коли урок відкрито як ДЗ)
     // =====================================================================
     if (isHomeworkMode) {
         const SUPABASE_URL = 'https://vnvjcgafvfkmqbzeyajo.supabase.co';
@@ -63,7 +63,7 @@
         document.addEventListener('paste', (e) => {
             const target = e.target;
             if (target && (target.tagName === 'TEXTAREA' || (target.tagName === 'INPUT' && ['text', 'search', ''].includes(target.type)) || target.isContentEditable)) {
-                if (target.closest('#ziz-board-layer, #ziz-toolbar')) return;
+                if (target.closest('#ziz-objects-layer, #ziz-dock, #ziz-subdock')) return;
                 const pastedText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
                 if (pastedText.trim().length > 0) {
                     const label = getQuestionContext(target, 0);
@@ -79,7 +79,7 @@
         }, true);
 
         document.addEventListener('click', (e) => {
-            if (e.target.closest('#ziz-toolbar, #ziz-board-layer, #ziz-tracker-badge')) return;
+            if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer, #ziz-tracker-badge')) return;
             const target = e.target.closest('button, label, [role="button"], .option, .choice, .answer, .quiz-option, .word-btn, .chip, .card-item, .match-item, li, input[type="radio"], input[type="checkbox"], [onclick]');
             if (!target) return;
             if ((target.tagName === 'INPUT' && target.type === 'text') || target.tagName === 'TEXTAREA') return;
@@ -114,7 +114,7 @@
 
             const elements = document.querySelectorAll('input, textarea, select');
             elements.forEach((el, idx) => {
-                if (el.closest('#ziz-toolbar, #ziz-board-layer')) return;
+                if (el.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
                 if (el.type === 'hidden' || el.type === 'submit' || el.type === 'button') return;
                 const label = getQuestionContext(el, idx);
 
@@ -136,7 +136,7 @@
 
             const selectedCustom = document.querySelectorAll('.selected, .chosen, .active-option, .is-selected, [aria-checked="true"], [aria-pressed="true"]');
             selectedCustom.forEach((el, idx) => {
-                if (el.closest('#ziz-toolbar, #ziz-board-layer, nav, header')) return;
+                if (el.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer, nav, header')) return;
                 const text = el.innerText?.replace(/\s+/g, ' ').trim();
                 if (text && text.length < 100) {
                     const qLabel = getQuestionContext(el, idx);
@@ -148,13 +148,13 @@
         }
 
         document.addEventListener('input', (e) => {
-            if (e.target.closest('#ziz-toolbar, #ziz-board-layer')) return;
+            if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
             collectAllAnswers();
             scheduleSave(false);
         }, true);
 
         document.addEventListener('change', (e) => {
-            if (e.target.closest('#ziz-toolbar, #ziz-board-layer')) return;
+            if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
             collectAllAnswers();
             scheduleSave(false);
         }, true);
@@ -222,462 +222,729 @@
     }
 
     // =====================================================================
-    // PART 2: LIVE TEACHING WHITEBOARD OVERLAY (пензлик, маркер, текст, стікери)
+    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK (швидкий, плавний, для мишки)
     // =====================================================================
-    function initTeachingBoard() {
-        if (document.getElementById('ziz-toolbar')) return;
+    function initCanvaBoard() {
+        if (document.getElementById('ziz-dock')) return;
 
-        // 1. Стилі для панелі інструментів та стікерів
         const style = document.createElement('style');
         style.textContent = `
-            #ziz-board-layer {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
+            #ziz-viewport-canvas {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
                 z-index: 99990;
                 pointer-events: none;
             }
-            #ziz-canvas {
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: block;
-                pointer-events: none;
-            }
-            #ziz-canvas.drawing-active {
+            #ziz-viewport-canvas.active {
                 pointer-events: auto;
-                cursor: crosshair;
             }
+
             #ziz-objects-layer {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100%;
+                height: 0;
+                z-index: 99992;
                 pointer-events: none;
             }
-            #ziz-toolbar {
+
+            #ziz-dock {
                 position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #1e1e2f;
-                color: #ffffff;
-                padding: 8px 14px;
-                border-radius: 18px;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #ffffff;
+                border-radius: 999px;
+                padding: 8px 6px;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 gap: 6px;
                 z-index: 99999;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.28);
-                font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+                box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.06);
+                border: 1px solid rgba(15, 23, 42, 0.06);
                 user-select: none;
-                border: 1px solid rgba(255,255,255,0.12);
-                flex-wrap: wrap;
-                max-width: 95vw;
+                transition: opacity 0.2s;
             }
-            .ziz-tool-btn {
-                background: transparent;
+
+            #ziz-dock.minimized .ziz-dock-item:not(#zizToggleDockBtn) {
+                display: none;
+            }
+
+            .ziz-dock-btn {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
                 border: none;
-                color: #d1d1e0;
-                padding: 8px 11px;
-                border-radius: 11px;
+                background: transparent;
+                color: #1e293b;
+                display: grid;
+                place-items: center;
                 cursor: pointer;
-                font-size: 13px;
-                font-weight: 600;
-                display: inline-flex;
+                transition: all 0.15s ease;
+                position: relative;
+            }
+
+            .ziz-dock-btn:hover {
+                background: #f1f5f9;
+            }
+
+            .ziz-dock-btn.active {
+                background: #e2e8f0;
+                color: #0f172a;
+            }
+
+            .ziz-dock-btn svg {
+                width: 21px;
+                height: 21px;
+            }
+
+            .ziz-dock-btn::after {
+                content: attr(data-tip);
+                position: absolute;
+                left: 52px;
+                background: #1e293b;
+                color: #fff;
+                font-family: 'Outfit', -apple-system, sans-serif;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 5px 10px;
+                border-radius: 8px;
+                white-space: nowrap;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateX(-4px);
+                transition: all 0.15s ease;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            .ziz-dock-btn:hover::after {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            #ziz-subdock {
+                position: fixed;
+                left: 76px;
+                top: 50%;
+                transform: translateY(-50%) scale(0.95);
+                background: #ffffff;
+                border-radius: 999px;
+                padding: 12px 8px;
+                display: none;
+                flex-direction: column;
                 align-items: center;
-                gap: 5px;
+                gap: 10px;
+                z-index: 99998;
+                box-shadow: 0 10px 32px rgba(15, 23, 42, 0.14), 0 1px 3px rgba(15, 23, 42, 0.06);
+                border: 1px solid rgba(15, 23, 42, 0.06);
+                user-select: none;
+                opacity: 0;
+                transition: opacity 0.15s ease, transform 0.15s ease;
+            }
+
+            #ziz-subdock.open {
+                display: flex;
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
+            }
+
+            .ziz-nib-btn {
+                width: 38px;
+                height: 38px;
+                border-radius: 12px;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                display: grid;
+                place-items: center;
                 transition: all 0.15s;
             }
-            .ziz-tool-btn:hover {
-                background: rgba(255,255,255,0.12);
-                color: #ffffff;
+
+            .ziz-nib-btn:hover {
+                background: #f1f5f9;
             }
-            .ziz-tool-btn.active {
-                background: #ff4757;
-                color: #ffffff;
+
+            .ziz-nib-btn.active {
+                background: #f1f5f9;
+                box-shadow: inset 0 0 0 2px #cbd5e1;
             }
-            .ziz-divider {
-                width: 1px;
-                height: 22px;
-                background: rgba(255,255,255,0.15);
-                margin: 0 4px;
+
+            .ziz-sub-divider {
+                width: 24px;
+                height: 1px;
+                background: #e2e8f0;
             }
-            .ziz-color-dot {
-                width: 20px;
-                height: 20px;
+
+            .ziz-swatch {
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
-                border: 2px solid transparent;
+                border: 2px solid #ffffff;
+                box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
                 cursor: pointer;
-                transition: transform 0.15s;
+                transition: transform 0.12s;
             }
-            .ziz-color-dot:hover {
+
+            .ziz-swatch:hover {
                 transform: scale(1.15);
             }
-            .ziz-color-dot.active {
-                border-color: #ffffff;
-                transform: scale(1.18);
+
+            .ziz-swatch.active {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 2px #0f172a;
             }
-            /* Draggable Text Box & Sticky Note */
-            .ziz-floating-item {
+
+            .ziz-size-btn {
+                width: 32px;
+                height: 26px;
+                border-radius: 8px;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+            }
+
+            .ziz-size-btn:hover, .ziz-size-btn.active {
+                background: #f1f5f9;
+            }
+
+            .ziz-sticky {
                 position: absolute;
                 pointer-events: auto;
-                min-width: 140px;
-                max-width: 340px;
-                z-index: 99995;
-                border-radius: 12px;
+                width: 190px;
+                min-height: 165px;
+                padding: 14px 16px;
+                border-radius: 6px 6px 22px 6px;
+                box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
+                font-family: 'Outfit', -apple-system, sans-serif;
+                display: flex;
+                flex-direction: column;
                 transition: box-shadow 0.15s;
             }
-            .ziz-floating-item.sticky-note {
-                background: #fff3a1;
-                color: #222222;
-                padding: 10px 14px 14px 14px;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.16);
-                border: 1px solid #f0dc65;
+
+            .ziz-sticky:hover {
+                box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
             }
-            .ziz-floating-item.sticky-note.pink {
-                background: #ffd6e0;
-                border-color: #f7b2c4;
-            }
-            .ziz-floating-item.sticky-note.mint {
-                background: #c7f9cc;
-                border-color: #95e89e;
-            }
-            .ziz-floating-item.sticky-note.blue {
-                background: #d0ebff;
-                border-color: #99d1ff;
-            }
-            .ziz-floating-item.text-label {
-                background: rgba(255, 255, 255, 0.94);
-                border: 2px solid #ff4757;
+
+            .ziz-sticky.yellow { background: #fef08a; color: #1e293b; }
+            .ziz-sticky.pink   { background: #fbcfe8; color: #1e293b; }
+            .ziz-sticky.mint   { background: #bbf7d0; color: #1e293b; }
+            .ziz-sticky.blue   { background: #bae6fd; color: #1e293b; }
+
+            .ziz-text-box {
+                position: absolute;
+                pointer-events: auto;
+                min-width: 110px;
+                max-width: 420px;
                 padding: 6px 10px;
-                box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(4px);
+                border: 1.5px solid transparent;
+                font-family: 'Outfit', -apple-system, sans-serif;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 1.35;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.06);
             }
-            .ziz-item-header {
+
+            .ziz-text-box:hover, .ziz-text-box:focus-within {
+                border-color: #9333ea;
+                background: #ffffff;
+            }
+
+            .ziz-item-bar {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 cursor: grab;
-                padding-bottom: 4px;
-                margin-bottom: 4px;
-                border-bottom: 1px dashed rgba(0,0,0,0.15);
-                font-size: 11px;
-                color: rgba(0,0,0,0.5);
-                font-weight: 700;
+                margin-bottom: 6px;
+                opacity: 0.45;
+                transition: opacity 0.15s;
+                height: 16px;
             }
-            .ziz-item-header:active {
+
+            .ziz-sticky:hover .ziz-item-bar,
+            .ziz-text-box:hover .ziz-item-bar,
+            .ziz-text-box:focus-within .ziz-item-bar {
+                opacity: 1;
+            }
+
+            .ziz-item-bar:active {
                 cursor: grabbing;
             }
-            .ziz-item-del {
-                background: none;
-                border: none;
-                color: #ff4757;
-                font-weight: bold;
-                cursor: pointer;
-                font-size: 15px;
-                line-height: 1;
-                padding: 0 2px;
+
+            .ziz-drag-dots {
+                font-size: 12px;
+                letter-spacing: 2px;
+                color: #475569;
             }
-            .ziz-item-content {
+
+            .ziz-del-btn {
+                background: rgba(0,0,0,0.08);
+                border: none;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                font-size: 12px;
+                line-height: 1;
+                cursor: pointer;
+                color: #334155;
+                display: grid;
+                place-items: center;
+            }
+
+            .ziz-del-btn:hover {
+                background: #ef4444;
+                color: #fff;
+            }
+
+            .ziz-editable {
                 outline: none;
-                font-size: 15px;
-                line-height: 1.45;
-                font-family: 'Outfit', sans-serif;
-                min-height: 24px;
+                flex: 1;
                 word-break: break-word;
                 cursor: text;
-            }
-            #ziz-toolbar.collapsed .ziz-collapsible {
-                display: none;
             }
         `;
         document.head.appendChild(style);
 
-        // 2. Створюємо шар дошки поверх усієї сторінки уроку
-        const boardLayer = document.createElement('div');
-        boardLayer.id = 'ziz-board-layer';
-
         const canvas = document.createElement('canvas');
-        canvas.id = 'ziz-canvas';
+        canvas.id = 'ziz-viewport-canvas';
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
 
         const objectsLayer = document.createElement('div');
         objectsLayer.id = 'ziz-objects-layer';
+        document.body.appendChild(objectsLayer);
 
-        boardLayer.appendChild(canvas);
-        boardLayer.appendChild(objectsLayer);
-        document.body.appendChild(boardLayer);
+        const dock = document.createElement('div');
+        dock.id = 'ziz-dock';
+        if (isHomeworkMode) dock.classList.add('minimized');
 
-        const ctx = canvas.getContext('2d');
+        dock.innerHTML = `
+            <button type="button" class="ziz-dock-btn ziz-dock-item active" data-mode="cursor" data-tip="Курсор (взаємодія з уроком)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/>
+                </svg>
+            </button>
 
-        // 3. Панель інструментів знизу по центру
-        const toolbar = document.createElement('div');
-        toolbar.id = 'ziz-toolbar';
-        // Якщо відкрито в режимі ДЗ учнем — згортаємо панель у компактну кнопку, щоб не заважала
-        if (isHomeworkMode) toolbar.classList.add('collapsed');
+            <button type="button" class="ziz-dock-btn ziz-dock-item" data-mode="draw" data-tip="Пензлик і маркер">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 2l4 4L7.5 20.5 2 22l1.5-5.5L18 2z" fill="#ef4444" fill-opacity="0.18" stroke="#ef4444"/>
+                    <path d="M14.5 5.5l4 4" stroke="#ef4444"/>
+                </svg>
+            </button>
 
-        toolbar.innerHTML = `
-            <button type="button" class="ziz-tool-btn active" data-tool="cursor" title="Cursor (interact with lesson)">🖱️ Cursor</button>
-            <div class="ziz-divider ziz-collapsible"></div>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" data-tool="pen" title="Brush / Pen">✏️ Pen</button>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" data-tool="highlighter" title="Highlighter">🖍️ Marker</button>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" data-tool="eraser" title="Eraser">🧹 Eraser</button>
-            <div class="ziz-divider ziz-collapsible"></div>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" id="zizAddText" title="Insert Text Box">🔤 Text</button>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" id="zizAddSticky" title="Add Sticky Note">📝 Sticker</button>
-            <div class="ziz-divider ziz-collapsible"></div>
-            <div class="ziz-color-dot active ziz-collapsible" data-color="#ff4757" style="background: #ff4757;" title="Red"></div>
-            <div class="ziz-color-dot ziz-collapsible" data-color="#1e90ff" style="background: #1e90ff;" title="Blue"></div>
-            <div class="ziz-color-dot ziz-collapsible" data-color="#2ed573" style="background: #2ed573;" title="Green"></div>
-            <div class="ziz-color-dot ziz-collapsible" data-color="#ffa502" style="background: #ffa502;" title="Yellow/Orange"></div>
-            <div class="ziz-color-dot ziz-collapsible" data-color="#1e1e2f" style="background: #1e1e2f;" title="Black"></div>
-            <div class="ziz-divider ziz-collapsible"></div>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" id="zizUndoBtn" title="Undo last stroke">↩️ Undo</button>
-            <button type="button" class="ziz-tool-btn ziz-collapsible" id="zizClearAllBtn" title="Clear board">🗑️ Clear</button>
-            <button type="button" class="ziz-tool-btn" id="zizToggleCollapse" title="Hide/Show toolbar">${isHomeworkMode ? '🎨 Tools' : '▾'}</button>
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnSticky" data-tip="Додати стікер">
+                <svg viewBox="0 0 24 24" fill="#facc15" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/>
+                    <path d="M15 3v6h6" fill="#fef08a"/>
+                </svg>
+            </button>
+
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnText" data-tip="Вставити текст">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 7 4 4 20 4 20 7"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                    <line x1="12" y1="4" x2="12" y2="20"/>
+                </svg>
+            </button>
+
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnUndo" data-tip="Скасувати дію (Ctrl+Z)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 7v6h6"/>
+                    <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+            </button>
+
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnClear" data-tip="Очистити все">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+            </button>
+
+            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizToggleDockBtn" data-tip="Згорнути / Розгорнути">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="5" r="2"/>
+                    <circle cx="12" cy="19" r="2"/>
+                </svg>
+            </button>
         `;
-        document.body.appendChild(toolbar);
+        document.body.appendChild(dock);
 
-        // 4. Логіка розміру полотна на всю висоту сторінки
-        let currentTool = 'cursor';
-        let currentColor = '#ff4757';
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let historyStack = [];
-        let stickyColorIndex = 0;
-        const stickyColors = ['', 'pink', 'mint', 'blue'];
+        const subdock = document.createElement('div');
+        subdock.id = 'ziz-subdock';
+        subdock.innerHTML = `
+            <button type="button" class="ziz-nib-btn active" data-nib="pen" title="Пензлик (тонкий)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                </svg>
+            </button>
 
-        function resizeCanvasPreserve() {
-            const docHeight = Math.max(
-                document.body.scrollHeight,
-                document.documentElement.scrollHeight,
-                window.innerHeight
-            );
-            const docWidth = Math.max(
-                document.body.scrollWidth,
-                document.documentElement.scrollWidth,
-                window.innerWidth
-            );
+            <button type="button" class="ziz-nib-btn" data-nib="highlighter" title="Маркер-виділювач">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 11-6 6v3h9l3-3"/>
+                    <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" fill="#fef08a"/>
+                </svg>
+            </button>
 
-            if (canvas.width === docWidth && canvas.height === docHeight) return;
+            <button type="button" class="ziz-nib-btn" data-nib="eraser" title="Гумка (натисни на штрих щоб стерти)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/>
+                    <path d="M22 21H7"/>
+                    <path d="m5 11 9 9" fill="#ffe4e6"/>
+                </svg>
+            </button>
 
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-            if (canvas.width > 0 && canvas.height > 0) {
-                tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
-            }
+            <div class="ziz-sub-divider"></div>
 
-            boardLayer.style.height = docHeight + 'px';
-            canvas.width = docWidth;
-            canvas.height = docHeight;
+            <div class="ziz-swatch active" data-color="#ef4444" style="background: #ef4444;" title="Червоний"></div>
+            <div class="ziz-swatch" data-color="#facc15" style="background: #facc15;" title="Жовтий"></div>
+            <div class="ziz-swatch" data-color="#3b82f6" style="background: #3b82f6;" title="Синій"></div>
+            <div class="ziz-swatch" data-color="#22c55e" style="background: #22c55e;" title="Зелений"></div>
+            <div class="ziz-swatch" data-color="#1e293b" style="background: #1e293b;" title="Чорний"></div>
 
-            if (tempCanvas.width > 0 && tempCanvas.height > 0) {
-                ctx.drawImage(tempCanvas, 0, 0);
-            }
+            <div class="ziz-sub-divider"></div>
+
+            <button type="button" class="ziz-size-btn active" data-scale="1" title="Тонка лінія">
+                <span style="width: 18px; height: 2px; background: #1e293b; border-radius: 2px; display: block;"></span>
+            </button>
+            <button type="button" class="ziz-size-btn" data-scale="1.8" title="Середня лінія">
+                <span style="width: 18px; height: 5px; background: #1e293b; border-radius: 3px; display: block;"></span>
+            </button>
+            <button type="button" class="ziz-size-btn" data-scale="2.8" title="Товста лінія">
+                <span style="width: 18px; height: 8px; background: #1e293b; border-radius: 4px; display: block;"></span>
+            </button>
+        `;
+        document.body.appendChild(subdock);
+
+        let mode = 'cursor';
+        let nib = 'pen';
+        let color = '#ef4444';
+        let sizeScale = 1;
+
+        let strokes = [];
+        let currentStroke = null;
+        let isPointerDown = false;
+        let stickyIdx = 0;
+        const stickyThemes = ['yellow', 'pink', 'mint', 'blue'];
+
+        function resizeViewportCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            requestRender();
         }
 
-        resizeCanvasPreserve();
-        window.addEventListener('resize', resizeCanvasPreserve);
-        // Якщо в уроці розкриваються спойлери/блоки і висота сторінки збільшується
-        const resizeObserver = new ResizeObserver(() => resizeCanvasPreserve());
-        resizeObserver.observe(document.body);
+        resizeViewportCanvas();
+        window.addEventListener('resize', resizeViewportCanvas);
 
-        function saveSnapshot() {
-            if (historyStack.length > 25) historyStack.shift();
-            historyStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-        }
-
-        // 5. Вибір інструментів
-        toolbar.querySelectorAll('[data-tool]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                toolbar.querySelectorAll('[data-tool]').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentTool = btn.dataset.tool;
-
-                if (currentTool === 'pen' || currentTool === 'highlighter' || currentTool === 'eraser') {
-                    canvas.classList.add('drawing-active');
-                    canvas.style.cursor = currentTool === 'eraser' ? 'cell' : 'crosshair';
-                } else {
-                    canvas.classList.remove('drawing-active');
-                }
+        let renderScheduled = false;
+        function requestRender() {
+            if (renderScheduled) return;
+            renderScheduled = true;
+            requestAnimationFrame(() => {
+                renderScheduled = false;
+                renderAllStrokes();
             });
-        });
-
-        // Вибір кольору
-        toolbar.querySelectorAll('.ziz-color-dot').forEach(dot => {
-            dot.addEventListener('click', () => {
-                toolbar.querySelectorAll('.ziz-color-dot').forEach(d => d.classList.remove('active'));
-                dot.classList.add('active');
-                currentColor = dot.dataset.color;
-                if (currentTool === 'cursor' || currentTool === 'eraser') {
-                    toolbar.querySelector('[data-tool="pen"]').click();
-                }
-            });
-        });
-
-        // Згортання/розгортання панелі
-        document.getElementById('zizToggleCollapse').addEventListener('click', (e) => {
-            toolbar.classList.toggle('collapsed');
-            e.currentTarget.textContent = toolbar.classList.contains('collapsed') ? '🎨 Tools' : '▾';
-        });
-
-        // 6. Малювання пензликом, маркером та гумкою (мишка + тачпад/планшет)
-        function getCoords(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
         }
 
-        function startDraw(e) {
-            if (currentTool === 'cursor') return;
-            e.preventDefault();
-            resizeCanvasPreserve();
-            saveSnapshot();
-            isDrawing = true;
-            const pos = getCoords(e);
-            lastX = pos.x;
-            lastY = pos.y;
-        }
+        window.addEventListener('scroll', requestRender, { passive: true });
 
-        function draw(e) {
-            if (!isDrawing) return;
-            e.preventDefault();
-            const pos = getCoords(e);
+        function renderSingleStroke(s, scrollX, scrollY) {
+            if (!s.points || s.points.length === 0) return;
 
             ctx.save();
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
-            if (currentTool === 'pen') {
-                ctx.globalCompositeOperation = 'source-over';
+            if (s.nib === 'highlighter') {
+                ctx.globalAlpha = 0.35;
+                ctx.strokeStyle = s.color;
+                ctx.fillStyle = s.color;
+                ctx.lineWidth = 18 * s.scale;
+            } else {
                 ctx.globalAlpha = 1.0;
-                ctx.strokeStyle = currentColor;
-                ctx.lineWidth = 3.5;
-            } else if (currentTool === 'highlighter') {
-                ctx.globalCompositeOperation = 'source-over';
-                ctx.globalAlpha = 0.28;
-                ctx.strokeStyle = currentColor;
-                ctx.lineWidth = 22;
-            } else if (currentTool === 'eraser') {
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.globalAlpha = 1.0;
-                ctx.lineWidth = 28;
+                ctx.strokeStyle = s.color;
+                ctx.fillStyle = s.color;
+                ctx.lineWidth = 3 * s.scale;
+            }
+
+            const pts = s.points;
+            if (pts.length === 1) {
+                ctx.beginPath();
+                ctx.arc(pts[0].x - scrollX, pts[0].y - scrollY, ctx.lineWidth / 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                return;
             }
 
             ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(pos.x, pos.y);
+            ctx.moveTo(pts[0].x - scrollX, pts[0].y - scrollY);
+
+            for (let i = 1; i < pts.length - 1; i++) {
+                const midX = (pts[i].x + pts[i + 1].x) / 2 - scrollX;
+                const midY = (pts[i].y + pts[i + 1].y) / 2 - scrollY;
+                ctx.quadraticCurveTo(pts[i].x - scrollX, pts[i].y - scrollY, midX, midY);
+            }
+
+            const last = pts[pts.length - 1];
+            ctx.lineTo(last.x - scrollX, last.y - scrollY);
             ctx.stroke();
             ctx.restore();
-
-            lastX = pos.x;
-            lastY = pos.y;
         }
 
-        function stopDraw() {
-            isDrawing = false;
+        function renderAllStrokes() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            const scrollX = window.scrollX;
+            const scrollY = window.scrollY;
+
+            for (let i = 0; i < strokes.length; i++) {
+                renderSingleStroke(strokes[i], scrollX, scrollY);
+            }
+            if (currentStroke) {
+                renderSingleStroke(currentStroke, scrollX, scrollY);
+            }
         }
 
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', draw);
-        window.addEventListener('mouseup', stopDraw);
+        function eraseAtPoint(pageX, pageY) {
+            const threshold = 16;
+            const beforeCount = strokes.length;
+            strokes = strokes.filter(s => {
+                for (let i = 0; i < s.points.length; i++) {
+                    const dx = s.points[i].x - pageX;
+                    const dy = s.points[i].y - pageY;
+                    if (dx * dx + dy * dy <= threshold * threshold) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            if (strokes.length !== beforeCount) {
+                requestRender();
+            }
+        }
 
-        canvas.addEventListener('touchstart', startDraw, { passive: false });
-        canvas.addEventListener('touchmove', draw, { passive: false });
-        window.addEventListener('touchend', stopDraw);
+        canvas.addEventListener('pointerdown', (e) => {
+            if (mode !== 'draw' || e.button !== 0) return;
+            canvas.setPointerCapture(e.pointerId);
+            isPointerDown = true;
 
-        // Undo & Clear
-        document.getElementById('zizUndoBtn').addEventListener('click', () => {
-            if (historyStack.length > 0) {
-                const prev = historyStack.pop();
-                ctx.putImageData(prev, 0, 0);
+            const pageX = e.clientX + window.scrollX;
+            const pageY = e.clientY + window.scrollY;
+
+            if (nib === 'eraser') {
+                eraseAtPoint(pageX, pageY);
+                return;
+            }
+
+            currentStroke = {
+                nib: nib,
+                color: color,
+                scale: sizeScale,
+                points: [{ x: pageX, y: pageY }]
+            };
+            requestRender();
+        });
+
+        canvas.addEventListener('pointermove', (e) => {
+            if (!isPointerDown || mode !== 'draw') return;
+            const pageX = e.clientX + window.scrollX;
+            const pageY = e.clientY + window.scrollY;
+
+            if (nib === 'eraser') {
+                eraseAtPoint(pageX, pageY);
+                return;
+            }
+
+            if (currentStroke) {
+                const pts = currentStroke.points;
+                const prev = pts[pts.length - 1];
+                if (Math.hypot(pageX - prev.x, pageY - prev.y) >= 2) {
+                    pts.push({ x: pageX, y: pageY });
+                    requestRender();
+                }
             }
         });
 
-        document.getElementById('zizClearAllBtn').addEventListener('click', () => {
-            if (!confirm('Clear all drawings, text boxes, and stickers on this page?')) return;
-            saveSnapshot();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function finishPointer() {
+            if (!isPointerDown) return;
+            isPointerDown = false;
+            if (currentStroke) {
+                strokes.push(currentStroke);
+                currentStroke = null;
+                requestRender();
+            }
+        }
+
+        canvas.addEventListener('pointerup', finishPointer);
+        canvas.addEventListener('pointercancel', finishPointer);
+
+        function setMode(newMode) {
+            mode = newMode;
+            dock.querySelectorAll('[data-mode]').forEach(b => {
+                b.classList.toggle('active', b.dataset.mode === newMode);
+            });
+
+            if (newMode === 'draw') {
+                canvas.classList.add('active');
+                subdock.classList.add('open');
+                updateCursorIcon();
+            } else {
+                canvas.classList.remove('active');
+                subdock.classList.remove('open');
+            }
+        }
+
+        function updateCursorIcon() {
+            canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
+        }
+
+        dock.querySelectorAll('[data-mode]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.mode === 'draw' && mode === 'draw') {
+                    subdock.classList.toggle('open');
+                } else {
+                    setMode(btn.dataset.mode);
+                }
+            });
+        });
+
+        subdock.querySelectorAll('[data-nib]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                subdock.querySelectorAll('[data-nib]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                nib = btn.dataset.nib;
+                updateCursorIcon();
+            });
+        });
+
+        subdock.querySelectorAll('.ziz-swatch').forEach(sw => {
+            sw.addEventListener('click', () => {
+                subdock.querySelectorAll('.ziz-swatch').forEach(s => s.classList.remove('active'));
+                sw.classList.add('active');
+                color = sw.dataset.color;
+                if (nib === 'eraser') {
+                    subdock.querySelector('[data-nib="pen"]').click();
+                }
+            });
+        });
+
+        subdock.querySelectorAll('.ziz-size-btn').forEach(sb => {
+            sb.addEventListener('click', () => {
+                subdock.querySelectorAll('.ziz-size-btn').forEach(s => s.classList.remove('active'));
+                sb.classList.add('active');
+                sizeScale = parseFloat(sb.dataset.scale);
+            });
+        });
+
+        document.getElementById('zizToggleDockBtn').addEventListener('click', () => {
+            dock.classList.toggle('minimized');
+            if (dock.classList.contains('minimized')) {
+                setMode('cursor');
+            }
+        });
+
+        function undoLast() {
+            if (strokes.length > 0) {
+                strokes.pop();
+                requestRender();
+            }
+        }
+
+        document.getElementById('zizBtnUndo').addEventListener('click', undoLast);
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.target.isContentEditable && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                undoLast();
+            }
+        });
+
+        document.getElementById('zizBtnClear').addEventListener('click', () => {
+            if (strokes.length === 0 && objectsLayer.children.length === 0) return;
+            strokes = [];
             objectsLayer.innerHTML = '';
+            requestRender();
         });
 
-        // 7. Додавання перетягуваних текстових полів і стікерів
-        function createFloatingItem(type) {
-            // Перемикаємо на курсор, щоб одразу можна було писати й рухати
-            toolbar.querySelector('[data-tool="cursor"]').click();
+        function spawnDraggableElement(type) {
+            setMode('cursor');
 
-            const item = document.createElement('div');
-            item.className = `ziz-floating-item ${type === 'sticky' ? 'sticky-note ' + stickyColors[stickyColorIndex % stickyColors.length] : 'text-label'}`;
-            if (type === 'sticky') stickyColorIndex++;
-
-            const startTop = window.scrollY + Math.round(window.innerHeight * 0.28);
-            const startLeft = Math.round(window.innerWidth * 0.38) + (Math.random() * 40 - 20);
-            item.style.top = startTop + 'px';
-            item.style.left = Math.max(20, startLeft) + 'px';
-
-            if (type === 'text') {
-                item.style.borderColor = currentColor;
+            const el = document.createElement('div');
+            if (type === 'sticky') {
+                const theme = stickyThemes[stickyIdx % stickyThemes.length];
+                stickyIdx++;
+                el.className = `ziz-sticky ${theme}`;
+            } else {
+                el.className = 'ziz-text-box';
+                el.style.color = color;
             }
 
-            item.innerHTML = `
-                <div class="ziz-item-header">
-                    <span>${type === 'sticky' ? '📌 Note' : '🔤 Text'} (drag)</span>
-                    <button type="button" class="ziz-item-del" title="Remove">&times;</button>
+            const topPos = window.scrollY + Math.round(window.innerHeight * 0.25) + Math.round(Math.random() * 40 - 20);
+            const leftPos = window.scrollX + Math.round(window.innerWidth * 0.35) + Math.round(Math.random() * 40 - 20);
+            el.style.top = topPos + 'px';
+            el.style.left = Math.max(90, leftPos) + 'px';
+
+            el.innerHTML = `
+                <div class="ziz-item-bar" title="Потягни за цю панель, щоб перемістити">
+                    <span class="ziz-drag-dots">⋮⋮</span>
+                    <button type="button" class="ziz-del-btn" title="Видалити">&times;</button>
                 </div>
-                <div class="ziz-item-content" contenteditable="true" style="color: ${type === 'text' ? currentColor : '#1e1e2f'};">${type === 'sticky' ? 'Type note here...' : 'Type text...'}</div>
+                <div class="ziz-editable" contenteditable="true">${type === 'sticky' ? 'Нотатка...' : 'Введіть текст...'}</div>
             `;
 
-            objectsLayer.appendChild(item);
+            objectsLayer.appendChild(el);
 
-            const contentEl = item.querySelector('.ziz-item-content');
-            contentEl.focus();
-            // Виділяємо стартовий текст, щоб можна було одразу друкувати поверх
+            const editable = el.querySelector('.ziz-editable');
+            editable.focus();
             const range = document.createRange();
-            range.selectNodeContents(contentEl);
+            range.selectNodeContents(editable);
             const sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
 
-            item.querySelector('.ziz-item-del').addEventListener('click', () => item.remove());
+            el.querySelector('.ziz-del-btn').addEventListener('click', () => el.remove());
 
-            // Перетягування (Drag & Drop) за верхню шапку
-            const header = item.querySelector('.ziz-item-header');
-            let isDragging = false;
-            let offsetX = 0;
-            let offsetY = 0;
+            const bar = el.querySelector('.ziz-item-bar');
+            let dragging = false;
+            let startX = 0, startY = 0, origLeft = 0, origTop = 0;
 
-            header.addEventListener('mousedown', (e) => {
-                if (e.target.classList.contains('ziz-item-del')) return;
-                isDragging = true;
-                offsetX = e.clientX - item.offsetLeft;
-                offsetY = e.clientY - item.offsetTop;
+            bar.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('.ziz-del-btn')) return;
+                e.preventDefault();
+                bar.setPointerCapture(e.pointerId);
+                dragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                origLeft = parseFloat(el.style.left) || 0;
+                origTop = parseFloat(el.style.top) || 0;
             });
 
-            window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                item.style.left = (e.clientX - offsetX) + 'px';
-                item.style.top = (e.clientY - offsetY) + 'px';
+            bar.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                el.style.left = (origLeft + (e.clientX - startX)) + 'px';
+                el.style.top = (origTop + (e.clientY - startY)) + 'px';
             });
 
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
+            bar.addEventListener('pointerup', () => {
+                dragging = false;
             });
         }
 
-        document.getElementById('zizAddText').addEventListener('click', () => createFloatingItem('text'));
-        document.getElementById('zizAddSticky').addEventListener('click', () => createFloatingItem('sticky'));
+        document.getElementById('zizBtnSticky').addEventListener('click', () => spawnDraggableElement('sticky'));
+        document.getElementById('zizBtnText').addEventListener('click', () => spawnDraggableElement('text'));
     }
 
     if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', initTeachingBoard);
+        window.addEventListener('DOMContentLoaded', initCanvaBoard);
     } else {
-        initTeachingBoard();
+        initCanvaBoard();
     }
 })();
