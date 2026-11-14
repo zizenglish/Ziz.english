@@ -305,4 +305,5 @@ function answerGame(i){let q=questions[qi];let correct=i===q[2];if(correct)score
 function nextGame(){qi++;if(qi>=questions.length){document.getElementById('gameQuestion').textContent='EXPEDITION COMPLETE!';document.getElementById('gameOptions').innerHTML='<button onclick="startGame()">PLAY AGAIN ↻</button>';document.getElementById('gameFeedback').textContent=`Final score: ${score} / 100. ${score>=80?'You are a wildlife expert!':'Good effort. Review your field notes and try again.'}`;return}showQuestion()}
 const missions=[...document.querySelectorAll('.mission')];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){let idx=missions.indexOf(e.target)+1;document.getElementById('progressBar').style.width=(idx/missions.length*100)+'%';document.getElementById('progressLabel').textContent=idx+' / '+missions.length+' missions'}})},{threshold:.35});missions.forEach(m=>observer.observe(m));
 </script>
+  <script src="../tracker.js"></script>
 </body></html>
