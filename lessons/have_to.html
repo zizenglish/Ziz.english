@@ -303,4 +303,6 @@ const dialogue=['Instructor. Hello, can I help you?','Anna. Yes, can I have some
 function speakDialogue(){if(!('speechSynthesis'in window)){document.getElementById('speech-note').textContent='Speech playback is not available in this browser.';return;}speechSynthesis.cancel();dialogue.forEach((line,i)=>{const u=new SpeechSynthesisUtterance(line);u.rate=.88;u.pitch=i%2?1.06:.94;speechSynthesis.speak(u);});document.getElementById('speech-note').textContent='Playing with your browser’s text-to-speech voice…';}
 function stopDialogue(){if('speechSynthesis'in window)speechSynthesis.cancel();document.getElementById('speech-note').textContent='Playback stopped. This is browser text-to-speech, not the original course recording.';}
 window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progress').style.width=(max>0?window.scrollY/max*100:0)+'%';});
-</script></body></html>
+</script>
+<script src="../tracker.js"></script>
+</body></html>
