@@ -650,6 +650,76 @@
             color: #16a34a;
         }
 
+
+        /* --- TRACKING REPORT MODAL / DETAILS --- */
+        .tracking-box {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: #f8f9fd;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            font-size: 13px;
+        }
+        .tracking-stats-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .stat-chip {
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+        }
+        .stat-chip.warn {
+            background: #fff0f3;
+            color: var(--primary);
+            border-color: #ffccd3;
+        }
+        .stat-chip.ok {
+            background: #eafff2;
+            color: #16a34a;
+            border-color: #bbf7d0;
+        }
+        .tracking-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #dcdce6;
+            display: none;
+        }
+        .tracking-details.open {
+            display: block;
+        }
+        .answer-row {
+            padding: 8px 10px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            border: 1px solid #ececf4;
+        }
+        .answer-q {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+        .answer-a {
+            color: var(--text-main);
+            font-weight: 500;
+            word-break: break-word;
+        }
+        .paste-alert-item {
+            background: #fff0f3;
+            color: #c92a3e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
         /* --- MODAL (LOGIN / REGISTER) --- */
         .modal-overlay {
             position: fixed;
@@ -1252,6 +1322,72 @@
             return `<span class="due-badge ${badgeClass}">${label}</span>`;
         }
 
+
+        function formatDuration(sec) {
+            if (!sec || sec < 1) return '0 sec';
+            const mins = Math.floor(sec / 60);
+            const remSec = sec % 60;
+            if (mins === 0) return `${remSec} sec`;
+            return `${mins} min ${remSec} sec`;
+        }
+
+        function toggleTrackingDetails(id) {
+            const el = document.getElementById('track-details-' + id);
+            if (el) el.classList.toggle('open');
+        }
+
+        function renderTeacherTracking(hw) {
+            const td = hw.tracking_data;
+            if (!td) {
+                return `<div class="tracking-box" style="color: var(--text-muted);">⏳ Student hasn't opened the interactive lesson yet.</div>`;
+            }
+
+            const timeSpent = formatDuration(td.active_seconds || 0);
+            const leaves = td.tab_leaves || 0;
+            const pastes = Array.isArray(td.paste_events) ? td.paste_events : [];
+            const answers = td.answers || {};
+            const answerEntries = Object.entries(answers);
+
+            const leavesClass = leaves > 2 ? 'warn' : 'ok';
+            const pasteClass = pastes.length > 0 ? 'warn' : 'ok';
+
+            let pasteHtml = '';
+            if (pastes.length > 0) {
+                pasteHtml = `<div style="margin-bottom: 12px;">
+                    <div style="font-weight: 700; color: var(--primary); margin-bottom: 6px;">📋 Copy-Paste Log (${pastes.length}):</div>
+                    ${pastes.map(p => `<div class="paste-alert-item"><b>[${p.time}]</b> Field: <i>${p.field}</i> — pasted ${p.length} chars: "${p.text_preview}${p.length > 120 ? '...' : ''}"</div>`).join('')}
+                </div>`;
+            }
+
+            let answersHtml = '';
+            if (answerEntries.length > 0) {
+                answersHtml = `<div>
+                    <div style="font-weight: 700; margin-bottom: 6px;">✍️ Student's Answers (${answerEntries.length}):</div>
+                    ${answerEntries.map(([q, a]) => `<div class="answer-row"><div class="answer-q">${q}</div><div class="answer-a">${a}</div></div>`).join('')}
+                </div>`;
+            } else {
+                answersHtml = `<div style="color: var(--text-muted);">No text answers recorded yet.</div>`;
+            }
+
+            return `
+                <div class="tracking-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div class="tracking-stats-row" style="margin-bottom: 0;">
+                            <span class="stat-chip">⏱ Time on lesson: ${timeSpent}</span>
+                            <span class="stat-chip ${leavesClass}">🚪 Left tab: ${leaves} ${leaves === 1 ? 'time' : 'times'}</span>
+                            <span class="stat-chip ${pasteClass}">📋 Pasted text: ${pastes.length} ${pastes.length === 1 ? 'time' : 'times'}</span>
+                            <span class="stat-chip">✍️ Answers: ${answerEntries.length}</span>
+                        </div>
+                        <button type="button" class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="toggleTrackingDetails('${hw.id}')">View Answers & Details ▾</button>
+                    </div>
+                    <div class="tracking-details" id="track-details-${hw.id}">
+                        ${pasteHtml}
+                        ${answersHtml}
+                    </div>
+                </div>
+            `;
+        }
+
         function renderAssignments(list, isTeacher) {
             const hwList = document.getElementById('hwList');
             hwList.innerHTML = '';
@@ -1285,11 +1421,12 @@
                     ${hw.instructions ? `<div class="hw-instructions">${hw.instructions}</div>` : ''}
 
                     <div class="hw-attachments">
-                        ${hw.lesson_file ? `<a href="${hw.lesson_file}" target="_blank" class="btn-primary">📖 Open Interactive Lesson</a>` : ''}
+                        ${hw.lesson_file ? `<a href="${hw.lesson_file}?hw_id=${hw.id}&student_id=${hw.student_id}" target="_blank" class="btn-primary">📖 Open Interactive Lesson</a>` : ''}
                         ${hw.extra_link ? `<a href="${hw.extra_link}" target="_blank" class="btn-outline">🔗 Open Extra Material</a>` : ''}
                     </div>
 
                     ${hw.image_url ? `<img src="${hw.image_url}" alt="Homework attachment" class="hw-image-preview">` : ''}
+                    ${isTeacher ? renderTeacherTracking(hw) : ''}
                 `;
                 hwList.appendChild(card);
             });
