@@ -343,4 +343,5 @@ document.addEventListener('dragover',e=>{if(e.target.classList&&e.target.classLi
 function toggleTranscript(id){document.getElementById(id).classList.toggle('show')}
 function updateProgress(){let done=document.querySelectorAll('.feedback.good').length;document.getElementById('progress').style.width=Math.min(100,done/8*100)+'%';document.getElementById('finalScore').textContent=`You have completed ${done} practice checks. Keep practising!`}
 </script>
+ <script src="../tracker.js"></script>
 </body></html>
