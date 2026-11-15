@@ -51,7 +51,7 @@ const LESSONS = [
         title: "Animals Little Wildlife Club",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/animals_little_wildlife_club_final_fix.html"
     },
@@ -59,7 +59,7 @@ const LESSONS = [
         title: "Just a Normal Day",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/just_a_normal_day.html"
     },
@@ -67,7 +67,7 @@ const LESSONS = [
         title: "The working Life",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/the_working_life_jobs.html"
     },
@@ -75,7 +75,7 @@ const LESSONS = [
         title: "A day in my life",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/a_day_in_my_life_slow_english_podcast.html"
     },
@@ -83,7 +83,7 @@ const LESSONS = [
         title: "City Mouse & Country mouse",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/city_mouse_country_mouse.html"
     },
@@ -91,7 +91,7 @@ const LESSONS = [
         title: "Feelings & Emotions",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/feelings_emotions.html"
     },
@@ -99,7 +99,7 @@ const LESSONS = [
         title: "Food & Drink",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/food_drink.html"
     },
@@ -107,7 +107,7 @@ const LESSONS = [
         title: "Have to",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/have_to.html"
     },
@@ -115,7 +115,7 @@ const LESSONS = [
         title: "Here and there",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/there_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
     },
@@ -123,7 +123,7 @@ const LESSONS = [
         title: "I feel sick",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/medical_case_study.html"
     },
@@ -131,7 +131,7 @@ const LESSONS = [
         title: "Perfect Saturday",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary" "Listening",
+        category: "Vocabulary", "Listening",
         description: "...",
         file: "lessons/perfect_saturday.html"
     },
