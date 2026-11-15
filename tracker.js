@@ -569,9 +569,6 @@
             requestRender();
         }
 
-        resizeViewportCanvas();
-        window.addEventListener('resize', resizeViewportCanvas);
-
         let renderScheduled = false;
         function requestRender() {
             if (renderScheduled) return;
@@ -582,6 +579,8 @@
             });
         }
 
+        resizeViewportCanvas();
+        window.addEventListener('resize', resizeViewportCanvas);
         window.addEventListener('scroll', requestRender, { passive: true });
 
         function renderSingleStroke(s, scrollX, scrollY) {
