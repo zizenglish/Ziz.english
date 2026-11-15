@@ -46,5 +46,13 @@ const LESSONS = [
         category: "Vocabulary",
         description: "Learn how to buy souvenirs when you travel abroad",
         file: "lessons/Souvenir_Hunt.html"
+    },
+      {
+        title: "Great American food",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary",
+        description: "Learn how to buy souvenirs when you travel abroad",
+        file: "lessons/great_american_food_quest.html"
     }
 ];
