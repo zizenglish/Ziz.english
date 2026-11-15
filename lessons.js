@@ -48,11 +48,91 @@ const LESSONS = [
         file: "lessons/Souvenir_Hunt.html"
     },
       {
-        title: "Great American food",
+        title: "Animals Little Wildlife Club",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary",
-        description: "Learn how to buy souvenirs when you travel abroad",
-        file: "lessons/great_american_food_quest.html"
-    }
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/animals_little_wildlife_club_final_fix.html"
+    },
+    {
+        title: "Just a Normal Day",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/just a normal day.html"
+    },
+    {
+        title: "The working Life",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/the_working_life_jobs.html"
+    },
+      {
+        title: "A day in my life",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/a_day_in_my_life_slow_english_podcast.html"
+    },
+      {
+        title: "City Mouse & Country mouse",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/city_mouse_country_mouse.html"
+    },
+      {
+        title: "Feelings & Emotions",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/feelings_emotions.html"
+    },
+      {
+        title: "Food & Drink",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/food_drink.html"
+    },
+      {
+        title: "Have to",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/have_to.html"
+    },
+      {
+        title: "Here and there",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/there_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
+    },
+      {
+        title: "I feel sick",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/medical_case_study.html"
+    },
+      {
+        title: "Perfect Saturday",
+        level: "A1",
+        type: "Lesson plan",
+        category: "Vocabulary" "Listening",
+        description: "...",
+        file: "lessons/perfect_saturday.html"
+    },
 ];
