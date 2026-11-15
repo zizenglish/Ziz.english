@@ -53,7 +53,7 @@ const LESSONS = [
         type: "Vocabulary",
         category: "Daily Life",
         description: "...",
-        file: "lessons/animals_little_wildlife_club_final_fix.html"
+        file: "lessons/Animals_Little_Wildlife_Club.html"
     },
     {
         title: "Just a Normal Day",
