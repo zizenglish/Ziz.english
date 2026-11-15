@@ -69,7 +69,7 @@ const LESSONS = [
         type: "Vocabulary",
         category: "Daily Life",
         description: "...",
-        file: "lessons/the_working_life_jobs.html"
+        file: "lessons/The_Working_Life_Jobs.html"
     },
     {
         title: "A Day in My Life",
