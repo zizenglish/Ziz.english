@@ -61,7 +61,7 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Vocabulary" "Listening",
         description: "...",
-        file: "lessons/just a normal day.html"
+        file: "lessons/just_a_normal_day.html"
     },
     {
         title: "The working Life",
