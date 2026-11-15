@@ -222,7 +222,7 @@
     }
 
     // =====================================================================
-    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK
+    // PART 2: CANVA-STYLE FLOATING VERTICAL DOCK (100% immune to lesson scripts)
     // =====================================================================
     function initCanvaBoard() {
         if (!document.body) {
@@ -276,13 +276,13 @@
             #ziz-dock.minimized .ziz-dock-item:not(#zizToggleDockBtn) {
                 display: none !important;
             }
+            /* Використовуємо div замість button, щоб стилі/скрипти уроку не перебивали кліки */
             .ziz-dock-btn {
                 width: 42px !important;
                 height: 42px !important;
                 min-width: 42px !important;
                 min-height: 42px !important;
                 border-radius: 50% !important;
-                border: none !important;
                 background: transparent !important;
                 color: #1e293b !important;
                 display: flex !important;
@@ -290,13 +290,14 @@
                 justify-content: center !important;
                 cursor: pointer !important;
                 pointer-events: auto !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                transition: background 0.15s ease !important;
+                transition: background 0.15s ease, transform 0.1s ease !important;
                 position: relative !important;
             }
             .ziz-dock-btn:hover {
                 background: #f1f5f9 !important;
+            }
+            .ziz-dock-btn:active {
+                transform: scale(0.92) !important;
             }
             .ziz-dock-btn.active {
                 background: #e2e8f0 !important;
@@ -332,14 +333,12 @@
                 width: 38px !important;
                 height: 38px !important;
                 border-radius: 12px !important;
-                border: none !important;
                 background: transparent !important;
                 cursor: pointer !important;
                 pointer-events: auto !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                padding: 0 !important;
             }
             .ziz-nib-btn:hover {
                 background: #f1f5f9 !important;
@@ -373,14 +372,12 @@
                 width: 32px !important;
                 height: 26px !important;
                 border-radius: 8px !important;
-                border: none !important;
                 background: transparent !important;
                 cursor: pointer !important;
                 pointer-events: auto !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                padding: 0 !important;
             }
             .ziz-size-btn:hover, .ziz-size-btn.active {
                 background: #f1f5f9 !important;
@@ -430,7 +427,6 @@
             }
             .ziz-del-btn {
                 background: rgba(0,0,0,0.1) !important;
-                border: none !important;
                 width: 20px !important;
                 height: 20px !important;
                 border-radius: 50% !important;
@@ -469,73 +465,73 @@
         if (isHomeworkMode) dock.classList.add('minimized');
 
         dock.innerHTML = `
-            <button type="button" class="ziz-dock-btn ziz-dock-item active" data-mode="cursor" title="Курсор">
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item active" data-action="mode-cursor" title="Курсор">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" data-mode="draw" title="Пензлик і маркер">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" data-action="mode-draw" title="Пензлик і маркер">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 2l4 4L7.5 20.5 2 22l1.5-5.5L18 2z" fill="#ef4444" fill-opacity="0.18" stroke="#ef4444"/>
                     <path d="M14.5 5.5l4 4" stroke="#ef4444"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnSticky" title="Додати стікер">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" data-action="add-sticky" title="Додати стікер">
                 <svg viewBox="0 0 24 24" fill="#facc15" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/>
                     <path d="M15 3v6h6" fill="#fef08a"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnText" title="Вставити текст">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" data-action="add-text" title="Вставити текст">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="4 7 4 4 20 4 20 7"/>
                     <line x1="9" y1="20" x2="15" y2="20"/>
                     <line x1="12" y1="4" x2="12" y2="20"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnUndo" title="Скасувати (Ctrl+Z)">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" data-action="undo" title="Скасувати (Ctrl+Z)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 7v6h6"/>
                     <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizBtnClear" title="Очистити все">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" data-action="clear" title="Очистити все">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"/>
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-dock-btn ziz-dock-item" id="zizToggleDockBtn" title="Згорнути / Розгорнути">
+            </div>
+            <div role="button" tabindex="0" class="ziz-dock-btn ziz-dock-item" id="zizToggleDockBtn" data-action="toggle-dock" title="Згорнути / Розгорнути">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="2"/>
                     <circle cx="12" cy="5" r="2"/>
                     <circle cx="12" cy="19" r="2"/>
                 </svg>
-            </button>
+            </div>
         `;
         document.body.appendChild(dock);
 
         const subdock = document.createElement('div');
         subdock.id = 'ziz-subdock';
         subdock.innerHTML = `
-            <button type="button" class="ziz-nib-btn active" data-nib="pen" title="Пензлик">
+            <div role="button" tabindex="0" class="ziz-nib-btn active" data-nib="pen" title="Пензлик">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-nib-btn" data-nib="highlighter" title="Маркер">
+            </div>
+            <div role="button" tabindex="0" class="ziz-nib-btn" data-nib="highlighter" title="Маркер">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 11-6 6v3h9l3-3"/>
                     <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" fill="#fef08a"/>
                 </svg>
-            </button>
-            <button type="button" class="ziz-nib-btn" data-nib="eraser" title="Гумка">
+            </div>
+            <div role="button" tabindex="0" class="ziz-nib-btn" data-nib="eraser" title="Гумка">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/>
                     <path d="M22 21H7"/>
                     <path d="m5 11 9 9" fill="#ffe4e6"/>
                 </svg>
-            </button>
+            </div>
             <div class="ziz-sub-divider"></div>
             <div class="ziz-swatch active" data-color="#ef4444" style="background: #ef4444;"></div>
             <div class="ziz-swatch" data-color="#facc15" style="background: #facc15;"></div>
@@ -543,15 +539,15 @@
             <div class="ziz-swatch" data-color="#22c55e" style="background: #22c55e;"></div>
             <div class="ziz-swatch" data-color="#1e293b" style="background: #1e293b;"></div>
             <div class="ziz-sub-divider"></div>
-            <button type="button" class="ziz-size-btn active" data-scale="1">
+            <div role="button" tabindex="0" class="ziz-size-btn active" data-scale="1">
                 <span style="width: 18px; height: 2px; background: #1e293b; border-radius: 2px; display: block;"></span>
-            </button>
-            <button type="button" class="ziz-size-btn" data-scale="1.8">
+            </div>
+            <div role="button" tabindex="0" class="ziz-size-btn" data-scale="1.8">
                 <span style="width: 18px; height: 5px; background: #1e293b; border-radius: 3px; display: block;"></span>
-            </button>
-            <button type="button" class="ziz-size-btn" data-scale="2.8">
+            </div>
+            <div role="button" tabindex="0" class="ziz-size-btn" data-scale="2.8">
                 <span style="width: 18px; height: 8px; background: #1e293b; border-radius: 4px; display: block;"></span>
-            </button>
+            </div>
         `;
         document.body.appendChild(subdock);
 
@@ -654,54 +650,11 @@
             if (strokes.length !== beforeCount) requestRender();
         }
 
-        canvas.addEventListener('mousedown', (e) => {
-            if (mode !== 'draw' || e.button !== 0) return;
-            e.preventDefault();
-            e.stopPropagation();
-            isDrawingNow = true;
-            const pageX = e.clientX + window.scrollX;
-            const pageY = e.clientY + window.scrollY;
-
-            if (nib === 'eraser') {
-                eraseAtPoint(pageX, pageY);
-                return;
-            }
-            currentStroke = { nib: nib, color: color, scale: sizeScale, points: [{ x: pageX, y: pageY }] };
-            requestRender();
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDrawingNow || mode !== 'draw') return;
-            const pageX = e.clientX + window.scrollX;
-            const pageY = e.clientY + window.scrollY;
-
-            if (nib === 'eraser') {
-                eraseAtPoint(pageX, pageY);
-                return;
-            }
-            if (currentStroke) {
-                const pts = currentStroke.points;
-                const prev = pts[pts.length - 1];
-                if (Math.hypot(pageX - prev.x, pageY - prev.y) >= 2) {
-                    pts.push({ x: pageX, y: pageY });
-                    requestRender();
-                }
-            }
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (!isDrawingNow) return;
-            isDrawingNow = false;
-            if (currentStroke) {
-                strokes.push(currentStroke);
-                currentStroke = null;
-                requestRender();
-            }
-        });
-
         function setMode(newMode) {
             mode = newMode;
-            dock.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === newMode));
+            dock.querySelectorAll('[data-action^="mode-"]').forEach(b => {
+                b.classList.toggle('active', b.dataset.action === `mode-${newMode}`);
+            });
             if (newMode === 'draw') {
                 canvas.classList.add('active');
                 subdock.classList.add('open');
@@ -712,77 +665,12 @@
             }
         }
 
-        dock.querySelectorAll('[data-mode]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (btn.dataset.mode === 'draw' && mode === 'draw') {
-                    subdock.classList.toggle('open');
-                } else {
-                    setMode(btn.dataset.mode);
-                }
-            });
-        });
-
-        subdock.querySelectorAll('[data-nib]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                subdock.querySelectorAll('[data-nib]').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                nib = btn.dataset.nib;
-                canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
-            });
-        });
-
-        subdock.querySelectorAll('.ziz-swatch').forEach(sw => {
-            sw.addEventListener('click', (e) => {
-                e.stopPropagation();
-                subdock.querySelectorAll('.ziz-swatch').forEach(s => s.classList.remove('active'));
-                sw.classList.add('active');
-                color = sw.dataset.color;
-                if (nib === 'eraser') subdock.querySelector('[data-nib="pen"]').click();
-            });
-        });
-
-        subdock.querySelectorAll('.ziz-size-btn').forEach(sb => {
-            sb.addEventListener('click', (e) => {
-                e.stopPropagation();
-                subdock.querySelectorAll('.ziz-size-btn').forEach(s => s.classList.remove('active'));
-                sb.classList.add('active');
-                sizeScale = parseFloat(sb.dataset.scale);
-            });
-        });
-
-        document.getElementById('zizToggleDockBtn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            dock.classList.toggle('minimized');
-            if (dock.classList.contains('minimized')) setMode('cursor');
-        });
-
         function undoLast() {
             if (strokes.length > 0) {
                 strokes.pop();
                 requestRender();
             }
         }
-
-        document.getElementById('zizBtnUndo').addEventListener('click', (e) => {
-            e.stopPropagation();
-            undoLast();
-        });
-
-        window.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.target.isContentEditable && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                undoLast();
-            }
-        });
-
-        document.getElementById('zizBtnClear').addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (strokes.length === 0 && objectsLayer.children.length === 0) return;
-            strokes = [];
-            objectsLayer.innerHTML = '';
-            requestRender();
-        });
 
         function spawnDraggableElement(type) {
             setMode('cursor');
@@ -804,7 +692,7 @@
             el.innerHTML = `
                 <div class="ziz-item-bar" title="Потягни щоб перемістити">
                     <span style="font-size: 13px; letter-spacing: 2px; color: #475569; pointer-events: none;">⋮⋮</span>
-                    <button type="button" class="ziz-del-btn" title="Видалити">&times;</button>
+                    <div class="ziz-del-btn" title="Видалити">&times;</div>
                 </div>
                 <div class="ziz-editable" contenteditable="true">${type === 'sticky' ? 'Нотатка...' : 'Введіть текст...'}</div>
             `;
@@ -817,45 +705,163 @@
             const sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
-
-            el.querySelector('.ziz-del-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                el.remove();
-            });
-
-            const bar = el.querySelector('.ziz-item-bar');
-            let dragging = false;
-            let startX = 0, startY = 0, origLeft = 0, origTop = 0;
-
-            bar.addEventListener('mousedown', (e) => {
-                if (e.target.closest('.ziz-del-btn')) return;
-                e.preventDefault();
-                e.stopPropagation();
-                dragging = true;
-                startX = e.clientX;
-                startY = e.clientY;
-                origLeft = parseFloat(el.style.left) || 0;
-                origTop = parseFloat(el.style.top) || 0;
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (!dragging) return;
-                el.style.left = (origLeft + (e.clientX - startX)) + 'px';
-                el.style.top = (origTop + (e.clientY - startY)) + 'px';
-            });
-
-            window.addEventListener('mouseup', () => {
-                dragging = false;
-            });
         }
 
-        document.getElementById('zizBtnSticky').addEventListener('click', (e) => {
-            e.stopPropagation();
-            spawnDraggableElement('sticky');
-        });
-        document.getElementById('zizBtnText').addEventListener('click', (e) => {
-            e.stopPropagation();
-            spawnDraggableElement('text');
+        // =================================================================
+        // CAPTURE-PHASE MOUSEDOWN HANDLER (перехоплює кліки ДО будь-яких скриптів уроку!)
+        // =================================================================
+        document.addEventListener('mousedown', (e) => {
+            // 1. Клік по головній панелі
+            const dockBtn = e.target.closest('#ziz-dock .ziz-dock-btn');
+            if (dockBtn) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                const action = dockBtn.dataset.action;
+                if (action === 'mode-cursor') {
+                    setMode('cursor');
+                } else if (action === 'mode-draw') {
+                    if (mode === 'draw') {
+                        subdock.classList.toggle('open');
+                    } else {
+                        setMode('draw');
+                    }
+                } else if (action === 'add-sticky') {
+                    spawnDraggableElement('sticky');
+                } else if (action === 'add-text') {
+                    spawnDraggableElement('text');
+                } else if (action === 'undo') {
+                    undoLast();
+                } else if (action === 'clear') {
+                    strokes = [];
+                    objectsLayer.innerHTML = '';
+                    requestRender();
+                } else if (action === 'toggle-dock') {
+                    dock.classList.toggle('minimized');
+                    if (dock.classList.contains('minimized')) setMode('cursor');
+                }
+                return;
+            }
+
+            // 2. Клік по виїжджаючій панелі налаштувань пензля
+            const nibBtn = e.target.closest('#ziz-subdock .ziz-nib-btn');
+            if (nibBtn) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                subdock.querySelectorAll('.ziz-nib-btn').forEach(b => b.classList.remove('active'));
+                nibBtn.classList.add('active');
+                nib = nibBtn.dataset.nib;
+                canvas.style.cursor = nib === 'eraser' ? 'cell' : 'crosshair';
+                return;
+            }
+
+            const swatch = e.target.closest('#ziz-subdock .ziz-swatch');
+            if (swatch) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                subdock.querySelectorAll('.ziz-swatch').forEach(s => s.classList.remove('active'));
+                swatch.classList.add('active');
+                color = swatch.dataset.color;
+                if (nib === 'eraser') {
+                    subdock.querySelectorAll('.ziz-nib-btn').forEach(b => b.classList.remove('active'));
+                    subdock.querySelector('[data-nib="pen"]').classList.add('active');
+                    nib = 'pen';
+                    canvas.style.cursor = 'crosshair';
+                }
+                return;
+            }
+
+            const sizeBtn = e.target.closest('#ziz-subdock .ziz-size-btn');
+            if (sizeBtn) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                subdock.querySelectorAll('.ziz-size-btn').forEach(s => s.classList.remove('active'));
+                sizeBtn.classList.add('active');
+                sizeScale = parseFloat(sizeBtn.dataset.scale);
+                return;
+            }
+
+            // 3. Видалення або перетягування стікера / тексту
+            const delBtn = e.target.closest('#ziz-objects-layer .ziz-del-btn');
+            if (delBtn) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                delBtn.closest('.ziz-sticky, .ziz-text-box')?.remove();
+                return;
+            }
+
+            const itemBar = e.target.closest('#ziz-objects-layer .ziz-item-bar');
+            if (itemBar) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                const box = itemBar.closest('.ziz-sticky, .ziz-text-box');
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const origLeft = parseFloat(box.style.left) || 0;
+                const origTop = parseFloat(box.style.top) || 0;
+
+                function onDragMove(ev) {
+                    box.style.left = (origLeft + (ev.clientX - startX)) + 'px';
+                    box.style.top = (origTop + (ev.clientY - startY)) + 'px';
+                }
+                function onDragUp() {
+                    window.removeEventListener('mousemove', onDragMove, true);
+                    window.removeEventListener('mouseup', onDragUp, true);
+                }
+                window.addEventListener('mousemove', onDragMove, true);
+                window.addEventListener('mouseup', onDragUp, true);
+                return;
+            }
+
+            // 4. Малювання на полотні
+            if (e.target === canvas && mode === 'draw' && e.button === 0) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                isDrawingNow = true;
+                const pageX = e.clientX + window.scrollX;
+                const pageY = e.clientY + window.scrollY;
+
+                if (nib === 'eraser') {
+                    eraseAtPoint(pageX, pageY);
+                } else {
+                    currentStroke = { nib: nib, color: color, scale: sizeScale, points: [{ x: pageX, y: pageY }] };
+                    requestRender();
+                }
+            }
+        }, true);
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDrawingNow || mode !== 'draw') return;
+            const pageX = e.clientX + window.scrollX;
+            const pageY = e.clientY + window.scrollY;
+
+            if (nib === 'eraser') {
+                eraseAtPoint(pageX, pageY);
+                return;
+            }
+            if (currentStroke) {
+                const pts = currentStroke.points;
+                const prev = pts[pts.length - 1];
+                if (Math.hypot(pageX - prev.x, pageY - prev.y) >= 2) {
+                    pts.push({ x: pageX, y: pageY });
+                    requestRender();
+                }
+            }
+        }, true);
+
+        window.addEventListener('mouseup', () => {
+            if (!isDrawingNow) return;
+            isDrawingNow = false;
+            if (currentStroke) {
+                strokes.push(currentStroke);
+                currentStroke = null;
+                requestRender();
+            }
+        }, true);
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.target.isContentEditable && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                undoLast();
+            }
         });
     }
 
