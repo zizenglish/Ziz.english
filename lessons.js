@@ -35,7 +35,7 @@ const LESSONS = [
         title: "Family",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary",
+        category: "Daily Life",
         description: "Basic lesson about family",
         file: "lessons/family.html"
     },
@@ -43,96 +43,88 @@ const LESSONS = [
         title: "Souvenirs",
         level: "A1",
         type: "Lesson plan",
-        category: "Vocabulary",
+        category: "Daily Life",
         description: "Learn how to buy souvenirs when you travel abroad",
         file: "lessons/Souvenir_Hunt.html"
     },
-      {
+    {
         title: "Animals Little Wildlife Club",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Vocabulary",
+        category: "Daily Life",
         description: "...",
         file: "lessons/animals_little_wildlife_club_final_fix.html"
     },
     {
         title: "Just a Normal Day",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Listening",
+        category: "Daily Life",
         description: "...",
         file: "lessons/just_a_normal_day.html"
     },
     {
-        title: "The working Life",
+        title: "The Working Life",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Vocabulary",
+        category: "Daily Life",
         description: "...",
         file: "lessons/the_working_life_jobs.html"
     },
-      {
-        title: "A day in my life",
+    {
+        title: "A Day in My Life",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Listening",
+        category: "Daily Life",
         description: "...",
         file: "lessons/a_day_in_my_life_slow_english_podcast.html"
     },
-      {
-        title: "City Mouse & Country mouse",
+    {
+        title: "City Mouse & Country Mouse",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Listening",
+        category: "Literature",
         description: "...",
         file: "lessons/city_mouse_country_mouse.html"
     },
-      {
+    {
         title: "Feelings & Emotions",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Vocabulary",
+        category: "Daily Life",
         description: "...",
         file: "lessons/feelings_emotions.html"
     },
-      {
+    {
         title: "Food & Drink",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Vocabulary",
+        category: "Daily Life",
         description: "...",
         file: "lessons/food_drink.html"
     },
-      {
+    {
         title: "Have to",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Grammar",
+        category: "Daily Life",
         description: "...",
         file: "lessons/have_to.html"
     },
-      {
-        title: "Here and there",
+    {
+        title: "Here and There",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Grammar",
+        category: "Daily Life",
         description: "...",
         file: "lessons/there_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
     },
-      {
-        title: "I feel sick",
+    {
+        title: "I Feel Sick",
         level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
+        type: "Vocabulary",
+        category: "Daily Life",
         description: "...",
         file: "lessons/medical_case_study.html"
-    },
-      {
-        title: "Perfect Saturday",
-        level: "A1",
-        type: "Lesson plan",
-        category: "Vocabulary", "Listening",
-        description: "...",
-        file: "lessons/perfect_saturday.html"
-    },
+    }
 ];
