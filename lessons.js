@@ -126,8 +126,8 @@ const LESSONS = [
         category: "Health & Wellness",
         description: "Learn common symptoms, illnesses, and how to talk to a doctor.",
         file: "lessons/medical_case_study.html"
-    }
-     {
+    },
+     {{
         title: "Present Perfect vs. Past Simple",
         level: "B1",
         type: "Grammar",
