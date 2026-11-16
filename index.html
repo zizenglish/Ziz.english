@@ -358,11 +358,13 @@
         }
 
         .card-footer {
-            padding: 16px 24px;
+            padding: 16px 20px;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             background: #fafafc;
         }
 
@@ -370,18 +372,32 @@
             background: var(--text-main);
             color: white;
             border: none;
-            padding: 10px 22px;
+            padding: 9px 18px;
             border-radius: 12px;
-            font-weight: 600;
-            font-size: 13px;
+            font-weight: 700;
+            font-size: 12px;
             cursor: pointer;
             text-decoration: none;
             letter-spacing: 0.5px;
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.2s;
+            text-transform: uppercase;
         }
 
         .btn-show:hover {
             background: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .btn-show.secondary {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1.5px solid #dcdce6;
+        }
+
+        .btn-show.secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
         /* --- CLASSROOM VIEW (TEACHER & STUDENT) --- */
@@ -1102,7 +1118,13 @@
                         <p>${lesson.description}</p>
                     </div>
                     <div class="card-footer">
-                        <a href="${lesson.file}" target="_blank" class="btn-show">SHOW</a>
+                        ${lesson.files ? `
+                            ${lesson.files.lesson ? `<a href="${lesson.files.lesson}" target="_blank" class="btn-show">LESSON</a>` : ''}
+                            ${lesson.files.practice ? `<a href="${lesson.files.practice}" target="_blank" class="btn-show secondary">PRACTICE</a>` : ''}
+                            ${lesson.files.homework ? `<a href="${lesson.files.homework}" target="_blank" class="btn-show secondary">HOMEWORK</a>` : ''}
+                        ` : `
+                            <a href="${lesson.file}" target="_blank" class="btn-show">SHOW</a>
+                        `}
                     </div>
                 `;
                 cardsGrid.appendChild(card);
@@ -1167,24 +1189,32 @@
                 }
 
                 matches.forEach(l => {
-                    const item = document.createElement('div');
-                    item.className = 'lesson-dropdown-item';
-                    item.innerHTML = `
-                        <span>${l.title}</span>
-                        <span class="lvl-tag">${l.level}</span>
-                    `;
-                    item.addEventListener('click', () => {
-                        input.value = `[${l.level}] ${l.title}`;
-                        hiddenFile.value = l.file;
-                        clearSelectionBtn.classList.add('visible');
-                        listEl.classList.remove('open');
+                    const optionsToShow = l.files ? [
+                        l.files.homework ? { label: `${l.title} (Homework)`, file: l.files.homework } : null,
+                        l.files.practice ? { label: `${l.title} (Practice)`, file: l.files.practice } : null,
+                        l.files.lesson ? { label: `${l.title} (Lesson)`, file: l.files.lesson } : null,
+                    ].filter(Boolean) : [{ label: l.title, file: l.file }];
 
-                        const titleInput = document.getElementById('hwTitle');
-                        if (!titleInput.value) {
-                            titleInput.value = l.title;
-                        }
+                    optionsToShow.forEach(opt => {
+                        const item = document.createElement('div');
+                        item.className = 'lesson-dropdown-item';
+                        item.innerHTML = `
+                            <span>${opt.label}</span>
+                            <span class="lvl-tag">${l.level}</span>
+                        `;
+                        item.addEventListener('click', () => {
+                            input.value = `[${l.level}] ${opt.label}`;
+                            hiddenFile.value = opt.file;
+                            clearSelectionBtn.classList.add('visible');
+                            listEl.classList.remove('open');
+
+                            const titleInput = document.getElementById('hwTitle');
+                            if (!titleInput.value) {
+                                titleInput.value = opt.label;
+                            }
+                        });
+                        listEl.appendChild(item);
                     });
-                    listEl.appendChild(item);
                 });
             }
 
@@ -1606,16 +1636,24 @@
                 }
 
                 matches.forEach(l => {
-                    const item = document.createElement('div');
-                    item.className = 'lesson-dropdown-item';
-                    item.innerHTML = `<span>${l.title}</span><span class="lvl-tag">${l.level}</span>`;
-                    item.addEventListener('click', () => {
-                        input.value = `[${l.level}] ${l.title}`;
-                        hiddenFile.value = l.file;
-                        clearSelectionBtn.classList.add('visible');
-                        listEl.classList.remove('open');
+                    const optionsToShow = l.files ? [
+                        l.files.homework ? { label: `${l.title} (Homework)`, file: l.files.homework } : null,
+                        l.files.practice ? { label: `${l.title} (Practice)`, file: l.files.practice } : null,
+                        l.files.lesson ? { label: `${l.title} (Lesson)`, file: l.files.lesson } : null,
+                    ].filter(Boolean) : [{ label: l.title, file: l.file }];
+
+                    optionsToShow.forEach(opt => {
+                        const item = document.createElement('div');
+                        item.className = 'lesson-dropdown-item';
+                        item.innerHTML = `<span>${opt.label}</span><span class="lvl-tag">${l.level}</span>`;
+                        item.addEventListener('click', () => {
+                            input.value = `[${l.level}] ${opt.label}`;
+                            hiddenFile.value = opt.file;
+                            clearSelectionBtn.classList.add('visible');
+                            listEl.classList.remove('open');
+                        });
+                        listEl.appendChild(item);
                     });
-                    listEl.appendChild(item);
                 });
             }
 
@@ -1679,8 +1717,20 @@
 
             if (hw.lesson_file) {
                 hiddenLesson.value = hw.lesson_file;
-                const matchedLesson = (typeof LESSONS !== 'undefined' ? LESSONS : []).find(l => l.file === hw.lesson_file);
-                lessonInput.value = matchedLesson ? `[${matchedLesson.level}] ${matchedLesson.title}` : hw.lesson_file;
+                const catalog = typeof LESSONS !== 'undefined' ? LESSONS : [];
+                let matchedLabel = hw.lesson_file;
+                for (const l of catalog) {
+                    if (l.file === hw.lesson_file) {
+                        matchedLabel = `[${l.level}] ${l.title}`;
+                        break;
+                    }
+                    if (l.files) {
+                        if (l.files.homework === hw.lesson_file) { matchedLabel = `[${l.level}] ${l.title} (Homework)`; break; }
+                        if (l.files.practice === hw.lesson_file) { matchedLabel = `[${l.level}] ${l.title} (Practice)`; break; }
+                        if (l.files.lesson === hw.lesson_file) { matchedLabel = `[${l.level}] ${l.title} (Lesson)`; break; }
+                    }
+                }
+                lessonInput.value = matchedLabel;
                 clearBtn.classList.add('visible');
             } else {
                 hiddenLesson.value = '';
