@@ -1,0 +1,769 @@
+homework_html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework: Present Perfect vs. Past Simple | ziz.english</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --primary-light: #fff0f3;
+            --accent-yellow: #fff9db;
+            --yellow-dark: #f59f00;
+            --accent-green: #e6fcf5;
+            --green-dark: #0ca678;
+            --accent-blue: #e7f5ff;
+            --blue-dark: #1c7ed6;
+            --accent-purple: #f3f0ff;
+            --purple-dark: #7048e8;
+            --bg-color: #f7f8fc;
+            --card-bg: #ffffff;
+            --text-main: #1e1e2f;
+            --text-muted: #6c6c80;
+            --border-color: #eaeaf2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        .lesson-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .brand span { color: var(--primary); }
+
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-pill:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #2b2d42 0%, #4a4e69 100%);
+            color: #fff;
+            border-radius: 24px;
+            padding: 36px 40px;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* --- TASK 1: CIRCLE / CLICK CORRECT ADVERB --- */
+        .adverb-item {
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            background: #fafafc;
+            font-size: 15px;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .adv-opt {
+            padding: 3px 11px;
+            border-radius: 16px;
+            border: 1.5px solid #cbd5e1;
+            background: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .adv-opt:hover { border-color: var(--primary); }
+        .adv-opt.selected {
+            background: var(--text-main);
+            color: #fff;
+            border-color: var(--text-main);
+        }
+        .adv-opt.correct {
+            background: var(--green-dark) !important;
+            color: #fff !important;
+            border-color: var(--green-dark) !important;
+        }
+        .adv-opt.wrong {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+        }
+
+        /* --- TASK 2: ABDU SAKALALA EDITING --- */
+        .article-box {
+            background: #fffdf7;
+            border: 1px solid #ffe8a1;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2d3748;
+        }
+
+        .article-box h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e1e2f;
+        }
+
+        .error-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .error-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #fafafc;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .error-row label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        /* --- TASK 3: PERSONAL SENTENCES --- */
+        .personal-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cue-badge {
+            background: var(--accent-purple);
+            color: var(--purple-dark);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            min-width: 195px;
+        }
+
+        /* --- TASK 4: TAYLOR'S WEEK PHOTO STORY --- */
+        .taylor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .taylor-card {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .taylor-card .day-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .taylor-card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* --- TASK 5: SALLY WENT TO TOWN (ELEVENLABS LISTENING) --- */
+        .audio-player-bar {
+            background: var(--accent-yellow);
+            border: 1px solid #ffe066;
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .sally-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 14px;
+        }
+
+        .sally-q {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .sally-q h5 {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .sally-opts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sally-opt-btn {
+            text-align: left;
+            padding: 9px 14px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            background: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .sally-opt-btn.selected {
+            border-color: var(--text-main);
+            background: #eef2ff;
+        }
+        .sally-opt-btn.correct {
+            border-color: var(--green-dark);
+            background: var(--accent-green);
+            color: #087f5b;
+        }
+        .sally-opt-btn.wrong {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: #c92a3e;
+        }
+
+        /* --- VIDEO & EXTRA PRACTICE --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .video-box {
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fafafc;
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 240px;
+            border: none;
+            display: block;
+        }
+
+        .video-caption {
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .text-input, textarea.text-input {
+            padding: 10px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+            background: #fff;
+            width: 100%;
+        }
+
+        .text-input:focus { border-color: var(--primary); }
+        .text-input.correct { border-color: var(--green-dark); background: var(--accent-green); color: #087f5b; }
+        .text-input.wrong { border-color: var(--primary); background: var(--primary-light); color: #c92a3e; }
+
+        .btn-action {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="lesson-header">
+        <div class="brand">ziz<span>.</span>english</div>
+        <nav class="nav-pills">
+            <a href="#task1" class="nav-pill">1. Adverbs</a>
+            <a href="#task2" class="nav-pill">2. Error Correction</a>
+            <a href="#task3" class="nav-pill">3. About You</a>
+            <a href="#task4" class="nav-pill">4. Taylor's Week</a>
+            <a href="#task5" class="nav-pill">5. Sally Listening</a>
+            <a href="#task6" class="nav-pill">6. Videos</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero-banner">
+            <span class="hero-badge">HOMEWORK ASSIGNMENT • A2 / B1</span>
+            <h1>Present Perfect vs. Past Simple</h1>
+            <p>Complete all exercises below. Your answers and progress are automatically saved for your teacher.</p>
+        </div>
+
+        <!-- TASK 1: CIRCLE THE CORRECT ADVERB -->
+        <section class="section-card" id="task1">
+            <span class="section-tag">Task 1 • Grammar Choice</span>
+            <h2 class="section-title">Choose the Correct Adverb to Complete Each Sentence</h2>
+            <p class="section-desc">Click the correct word in each sentence, then click <b>Check Answers</b>.</p>
+
+            <div id="adverbExercise">
+                <div class="adverb-item" data-question="Adv 1: Have you sent Mandy's birthday card..." data-correct="yet">
+                    <span>1. Have you sent Mandy's birthday card</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">just</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">still</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">yet</button>?
+                </div>
+
+                <div class="adverb-item" data-question="Adv 2: I've ... heard of that restaurant." data-correct="never">
+                    <span>2. I've</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">already</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">never</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">ever</button>
+                    <span>heard of that restaurant. Where is it?</span>
+                </div>
+
+                <div class="adverb-item" data-question="Adv 3: Maria has ... finished her math assignment." data-correct="already">
+                    <span>3. Maria has</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">already</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">ever</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">yet</button>
+                    <span>finished her math assignment.</span>
+                </div>
+
+                <div class="adverb-item" data-question="Adv 4: Have you seen any good movies..." data-correct="lately">
+                    <span>4. Have you seen any good movies</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">still</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">already</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">lately</button>?
+                </div>
+
+                <div class="adverb-item" data-question="Adv 5: Hal has ... passed his driving test." data-correct="just">
+                    <span>5. Hal has</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">ever</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">just</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">still</button>
+                    <span>passed his driving test.</span>
+                </div>
+
+                <div class="adverb-item" data-question="Adv 6: I've sent Monica three e-mails but she ... hasn't replied." data-correct="still">
+                    <span>6. I've sent Monica three e-mails but she</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">yet</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">never</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">still</button>
+                    <span>hasn't replied.</span>
+                </div>
+
+                <div class="adverb-item" data-question="Adv 7: We took the exam last week, but we haven't received our results..." data-correct="yet">
+                    <span>7. We took the exam last week, but we haven't received our results</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">never</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">already</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">yet</button>.
+                </div>
+
+                <div class="adverb-item" data-question="Adv 8: I haven't been to the gym..." data-correct="lately">
+                    <span>8. I haven't been to the gym</span>
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">still</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">already</button> /
+                    <button type="button" class="adv-opt" onclick="pickAdv(this)">lately</button>.
+                </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn-action" onclick="checkAdverbs()">Check Answers</button>
+            </div>
+        </section>
+
+        <!-- TASK 2: ABDU SAKALALA ERROR CORRECTION -->
+        <section class="section-card" id="task2">
+            <span class="section-tag">Task 2 • Reading & Editing</span>
+            <h2 class="section-title">Abdu Sakalala: Software Developer</h2>
+            <p class="section-desc">Read the article about a young software developer in Uganda. There is 1 example corrected (<i>has changed → changed</i>). Find and correct <b>6 more errors</b> with the Present Perfect and Past Simple.</p>
+
+            <div class="article-box">
+                <h4>Abdu Sakalala: Software Developer</h4>
+                <p>
+                    Abdu Sakalala is a 22-year-old student in Uganda. His life <s>has changed</s> <b>(changed)</b> when a phone company <b>(1) has run</b> a training course for software developers in Uganda last year. Sakalala attended the course and then he <b>(2) has started</b> creating his own apps (programs) for mobile phones. Since then, Sakalala <b>(3) wrote</b> several successful apps for cell phones. For example, he has produced a dictionary app, a translation app, and a sports app for soccer fans. Some of these apps have received international attention, and Sakalala <b>(4) already made</b> almost $400,000 from his work.<br><br>
+                    But Sakalala is most proud of <i>Uganda Theme</i>. This is an app that changes the display on cell phones with pictures and sounds from his country. When it <b>(5) has appeared</b> on the Internet, it immediately <b>(6) has become</b> one of the most popular downloads in the world that week.
+                </p>
+            </div>
+
+            <div class="error-grid" id="abduCorrections">
+                <div class="error-row">
+                    <label>1. "...when a phone company <u>has run</u> a training course last year."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 1 (has run)" data-answer="ran" placeholder="Write corrected verb...">
+                </div>
+                <div class="error-row">
+                    <label>2. "...and then he <u>has started</u> creating his own apps."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 2 (has started)" data-answer="started" placeholder="Write corrected verb...">
+                </div>
+                <div class="error-row">
+                    <label>3. "Since then, Sakalala <u>wrote</u> several successful apps..."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 3 (wrote)" data-answer="has written|'s written" placeholder="Write corrected verb...">
+                </div>
+                <div class="error-row">
+                    <label>4. "...and Sakalala <u>already made</u> almost $400,000..."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 4 (already made)" data-answer="has already made|'s already made" placeholder="Write corrected phrase...">
+                </div>
+                <div class="error-row">
+                    <label>5. "When it <u>has appeared</u> on the Internet..."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 5 (has appeared)" data-answer="appeared" placeholder="Write corrected verb...">
+                </div>
+                <div class="error-row">
+                    <label>6. "...it immediately <u>has become</u> one of the most popular..."</label>
+                    <input type="text" class="text-input" data-question="Abdu Error 6 (has become)" data-answer="became" placeholder="Write corrected verb...">
+                </div>
+            </div>
+
+            <div style="margin-top: 18px;">
+                <button type="button" class="btn-action" onclick="checkTextInputs('abduCorrections')">Check Corrections</button>
+            </div>
+        </section>
+
+        <!-- TASK 3: TRUE SENTENCES ABOUT YOURSELF -->
+        <section class="section-card" id="task3">
+            <span class="section-tag">Task 3 • Writing Practice</span>
+            <h2 class="section-title">Write True Sentences About Yourself</h2>
+            <p class="section-desc">Use the time expressions in brackets and a verb in the <b>Present Perfect</b> or <b>Past Simple</b>.<br><i>Example: I have lived in Wisconsin (since 2012).</i></p>
+
+            <div class="personal-row">
+                <span class="cue-badge">2. (this month)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (this month)" placeholder="Write a true sentence about this month...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">3. (since the beginning of the year)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (since the beginning of the year)" placeholder="Write a true sentence...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">4. (last year)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (last year)" placeholder="Write a true sentence about last year...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">5. (a few years ago)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (a few years ago)" placeholder="Write a true sentence...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">6. (for the past several weeks)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (for the past several weeks)" placeholder="Write a true sentence...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">7. (for a few months)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (for a few months)" placeholder="Write a true sentence...">
+            </div>
+            <div class="personal-row">
+                <span class="cue-badge">8. (when I was ten years old)</span>
+                <input type="text" class="text-input" data-question="Personal sentence (when I was ten years old)" placeholder="Write a true sentence...">
+            </div>
+        </section>
+
+        <!-- TASK 4: TAYLOR'S LAST WEEK PHOTO STORY -->
+        <section class="section-card" id="task4">
+            <span class="section-tag">Task 4 • Storytelling & Writing</span>
+            <h2 class="section-title">Describe What Taylor Did Last Week</h2>
+            <p class="section-desc">Taylor posted a photo recap: <i>"So, last week was crazy! This is how it went:"</i> Write sentences in the <b>Past Simple</b> describing her week based on the photo prompts, then write 3–4 sentences about how <b>YOU</b> spent last week.</p>
+
+            <div class="taylor-grid">
+                <div class="taylor-card">
+                    <span class="day-tag">📸 Photos 1–3</span>
+                    <p>☕ Coffee & work on laptop • 🥗 Healthy brunch with friends • 🐎 Horseback riding</p>
+                    <textarea class="text-input" rows="2" data-question="Taylor Photos 1-3" placeholder="Write 2-3 Past Simple sentences..."></textarea>
+                </div>
+                <div class="taylor-card">
+                    <span class="day-tag">📸 Photos 4–6</span>
+                    <p>🍷 Evening dinner • 🏃‍♀️ Morning workout on treadmill • 🥐 Croissant & reading a book</p>
+                    <textarea class="text-input" rows="2" data-question="Taylor Photos 4-6" placeholder="Write 2-3 Past Simple sentences..."></textarea>
+                </div>
+                <div class="taylor-card">
+                    <span class="day-tag">📸 Photos 7–9</span>
+                    <p>🥾 Hiking in the mountains • ✈️ Catching a flight • 🍝 Homemade pasta dinner</p>
+                    <textarea class="text-input" rows="2" data-question="Taylor Photos 7-9" placeholder="Write 2-3 Past Simple sentences..."></textarea>
+                </div>
+            </div>
+
+            <div style="background: var(--accent-blue); padding: 18px; border-radius: 16px; border: 1px solid #a5d8ff;">
+                <label style="font-weight: 700; display: block; margin-bottom: 8px;">✍️ Now tell about how YOU spent last week:</label>
+                <textarea class="text-input" rows="3" data-question="How I spent last week" placeholder="Last week was... First, I..."></textarea>
+            </div>
+        </section>
+
+        <!-- TASK 5: LISTENING - SALLY WENT TO TOWN (ELEVENLABS) -->
+        <section class="section-card" id="task5">
+            <span class="section-tag">Task 5 • Listening Comprehension</span>
+            <h2 class="section-title">Sally Went to Town</h2>
+            <p class="section-desc">Listen to the story about Sally's trip to town and choose the correct answer for each question.</p>
+
+            <div class="audio-player-bar">
+                <div style="font-weight: 700; font-size: 15px;">🎧 Audio Track: Sally's Busy Afternoon</div>
+                <audio controls src="../audio/pp_vs_ps_homework/sally_went_to_town.mp3" style="height: 38px;"></audio>
+            </div>
+
+            <div class="sally-grid" id="sallyQuiz">
+                <div class="sally-q" data-question="Sally Q1: How did Sally go to town?" data-correct="A">
+                    <h5>1. How did Sally go to town?</h5>
+                    <div class="sally-opts">
+                        <button type="button" class="sally-opt-btn" data-val="A" onclick="pickSally(this)">A) By bus</button>
+                        <button type="button" class="sally-opt-btn" data-val="B" onclick="pickSally(this)">B) By car</button>
+                        <button type="button" class="sally-opt-btn" data-val="C" onclick="pickSally(this)">C) By bike</button>
+                    </div>
+                </div>
+
+                <div class="sally-q" data-question="Sally Q2: Where did she go first?" data-correct="B">
+                    <h5>2. Where did she go first?</h5>
+                    <div class="sally-opts">
+                        <button type="button" class="sally-opt-btn" data-val="A" onclick="pickSally(this)">A) To the post office</button>
+                        <button type="button" class="sally-opt-btn" data-val="B" onclick="pickSally(this)">B) To the bank</button>
+                        <button type="button" class="sally-opt-btn" data-val="C" onclick="pickSally(this)">C) To the library</button>
+                    </div>
+                </div>
+
+                <div class="sally-q" data-question="Sally Q3: What did she buy at the clothes shop?" data-correct="C">
+                    <h5>3. What has she bought at the clothes shop?</h5>
+                    <div class="sally-opts">
+                        <button type="button" class="sally-opt-btn" data-val="A" onclick="pickSally(this)">A) A warm winter coat</button>
+                        <button type="button" class="sally-opt-btn" data-val="B" onclick="pickSally(this)">B) Running shoes</button>
+                        <button type="button" class="sally-opt-btn" data-val="C" onclick="pickSally(this)">C) A blue dress</button>
+                    </div>
+                </div>
+
+                <div class="sally-q" data-question="Sally Q4: Who did she meet at the café?" data-correct="A">
+                    <h5>4. Who did she meet at the café?</h5>
+                    <div class="sally-opts">
+                        <button type="button" class="sally-opt-btn" data-val="A" onclick="pickSally(this)">A) Her old school friend Emma</button>
+                        <button type="button" class="sally-opt-btn" data-val="B" onclick="pickSally(this)">B) Her cousin Tom</button>
+                        <button type="button" class="sally-opt-btn" data-val="C" onclick="pickSally(this)">C) Her English teacher</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn-action" onclick="checkSally()">Check Listening Answers</button>
+            </div>
+        </section>
+
+        <!-- TASK 6: VIDEO ACTIVITIES -->
+        <section class="section-card" id="task6">
+            <span class="section-tag">Task 6 • Video & Irregular Verbs</span>
+            <h2 class="section-title">Watch & Notice Present Perfect vs. Past Simple</h2>
+            <p class="section-desc">Watch these two short clips and write down 2 examples of Present Perfect and 2 examples of Past Simple you hear.</p>
+
+            <div class="video-grid" style="margin-bottom: 18px;">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/vM513t6G05A" title="BBC Learning English Grammar Gameshow" allowfullscreen></iframe>
+                    <div class="video-caption">🎬 BBC Learning English: The Grammar Gameshow</div>
+                </div>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/c625202535A" title="Jimmy Kimmel Kid Lie Detector" allowfullscreen></iframe>
+                    <div class="video-caption">🎬 Jimmy Kimmel Live: Kid Lie Detector</div>
+                </div>
+            </div>
+
+            <textarea class="text-input" rows="3" data-question="Video examples (Present Perfect & Past Simple)" placeholder="Write 2 Present Perfect sentences and 2 Past Simple sentences from the videos..."></textarea>
+        </section>
+    </div>
+
+    <script>
+        function pickAdv(btn) {
+            const row = btn.closest('.adverb-item');
+            row.querySelectorAll('.adv-opt').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+            btn.classList.add('selected');
+        }
+
+        function checkAdverbs() {
+            document.querySelectorAll('#adverbExercise .adverb-item').forEach(row => {
+                const correctVal = row.dataset.correct;
+                const selected = row.querySelector('.adv-opt.selected');
+                if (!selected) return;
+                if (selected.textContent.trim() === correctVal) {
+                    selected.classList.add('correct');
+                } else {
+                    selected.classList.add('wrong');
+                }
+            });
+        }
+
+        function checkTextInputs(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.text-input').forEach(inp => {
+                const val = inp.value.trim().toLowerCase().replace(/[’']/g, "'");
+                const answers = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+                inp.classList.remove('correct', 'wrong');
+                if (!val) return;
+                if (answers.includes(val)) {
+                    inp.classList.add('correct');
+                } else {
+                    inp.classList.add('wrong');
+                }
+            });
+        }
+
+        function pickSally(btn) {
+            const qBox = btn.closest('.sally-q');
+            qBox.querySelectorAll('.sally-opt-btn').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+            btn.classList.add('selected');
+        }
+
+        function checkSally() {
+            document.querySelectorAll('#sallyQuiz .sally-q').forEach(qBox => {
+                const correct = qBox.dataset.correct;
+                const sel = qBox.querySelector('.sally-opt-btn.selected');
+                if (!sel) return;
+                if (sel.dataset.val === correct) {
+                    sel.classList.add('correct');
+                } else {
+                    sel.classList.add('wrong');
+                }
+            });
+        }
+    </script>
+
+    <script src="../tracker.js"></script>
+</body>
+</html>
+'''
+
+with open("present_perfect_vs_past_simple_homework.html", "w", encoding="utf-8") as f:
+    f.write(homework_html)
+
+print("Homework HTML created successfully")
