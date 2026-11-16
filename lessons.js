@@ -1,11 +1,11 @@
 const LESSONS = [
     {
-        title: "Attention Economy (IELTS)",
+        title: "Writing - Education (IELTS)",
         level: "B2",
         type: "Lesson plan",
-        category: "Culture & Trends",
-        description: "Interactive IELTS lesson exploring the attention economy and modern media habits.",
-        file: "lessons/IELTS_Attention_Economy.html"
+        category: "Education",
+        description: "Interactive IELTS lesson exploring the education, learning how to reach 8.5 in writing task 2.",
+        file: "lessons/IELTS_Writing_Task_2.html"
     },
     {
         title: "Wisdom Temple",
