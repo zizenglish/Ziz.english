@@ -1,0 +1,1007 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Writing Task 2 - Education</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Newsreader, Source Serif 4, Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Newsreader:ital,opsz,wght@0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            headline: ['"Newsreader"', 'Georgia', 'serif'],
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            newsprint: {
+              50: '#FCFBF7',
+              100: '#F6F3EB',
+              200: '#EBE5D8',
+              300: '#D8CFC0',
+            },
+            ink: {
+              900: '#141413',
+              800: '#262523',
+              600: '#52504B',
+              500: '#737069',
+            },
+            crimson: {
+              600: '#9E2A2B',
+              700: '#7D1E1F',
+              50: '#FBF2F2',
+            },
+            slatepaper: {
+              100: '#ECEFEA',
+              700: '#2E403B',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F6F3EB;
+      color: #141413;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .double-rule {
+      border-top: 3px solid #141413;
+      border-bottom: 1px solid #141413;
+      height: 7px;
+    }
+    .editorial-sheet {
+      background-color: #FCFBF7;
+      border: 1px solid #D8CFC0;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-stage {
+      animation: fadeSlide 0.24s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .stage-panel { display: block !important; margin-bottom: 2rem; page-break-inside: avoid; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-crimson-600 selection:text-white">
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="bg-newsprint-50 border-b border-newsprint-300 sticky top-0 z-40 no-print">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-3 pb-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-newsprint-200 text-xs">
+        <div class="flex items-center gap-3 text-ink-600 font-medium">
+          
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="toggleTutorMode()" id="tutor-toggle-btn"
+            class="px-2.5 py-1 border border-newsprint-300 bg-newsprint-100 hover:bg-newsprint-200 text-ink-800 font-semibold text-[11px] uppercase tracking-wider transition cursor-pointer">
+            Teacher Tips: On
+          </button>
+
+          <div class="flex items-center border border-ink-900 bg-white font-mono text-xs">
+            <button type="button" id="top-prev" onclick="prevStage()" class="px-2.5 py-1 hover:bg-newsprint-100 disabled:opacity-30 cursor-pointer">←</button>
+            <span id="top-counter" class="px-2.5 py-1 bg-ink-900 text-newsprint-50 font-bold">01 / 07</span>
+            <button type="button" id="top-next" onclick="nextStage()" class="px-2.5 py-1 hover:bg-newsprint-100 disabled:opacity-30 cursor-pointer">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2.5 flex flex-col md:flex-row md:items-end justify-between gap-3">
+        <div>
+          <h1 class="font-headline font-bold text-2xl sm:text-3xl tracking-tight text-ink-900 leading-none">
+            IELTS Task 2: Education &amp; Schools
+          </h1>
+         
+        </div>
+
+        <nav id="stage-nav" class="flex items-center gap-1 overflow-x-auto pb-0.5" aria-label="Lesson Stages"></nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Inline Toast Banner -->
+  <div id="editorial-toast" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-ink-900 text-newsprint-50 border-l-4 border-crimson-600 px-4 py-3 shadow-xl text-xs sm:text-sm">
+    <p class="font-bold" id="toast-title">Notice</p>
+    <p class="text-newsprint-200 mt-0.5" id="toast-body"></p>
+  </div>
+
+  <!-- ==================== MAIN WORKSPACE ==================== -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-7 sm:py-10">
+
+    <!-- ============================================================ -->
+    <!-- STAGE 1: TASK ANALYSIS & INTRODUCTION FORMULA                -->
+    <!-- ============================================================ -->
+    <section data-stage="0" class="stage-panel animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 1 • Task Analysis &amp; Paraphrasing</span>
+          <span>10 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <!-- Exam Question -->
+        <div class="bg-newsprint-100 border-l-4 border-crimson-600 p-5 sm:p-6 mb-6">
+          <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-crimson-600 block mb-2">
+            Real IELTS Writing Task 2 Prompt
+          </span>
+          <p class="font-serif text-lg sm:text-xl leading-relaxed text-ink-900">
+            Some people think that computers and the Internet are more important for a child's education than going to school. Others believe that schools and teachers are essential for children to learn effectively.
+          </p>
+          <p class="font-sans font-bold text-sm sm:text-base text-ink-900 mt-3">
+            Discuss both views and give your own opinion.
+          </p>
+        </div>
+
+        <div class="tutor-note p-4 bg-slatepaper-100 border-l-2 border-slatepaper-700 text-xs sm:text-sm text-ink-800 mb-6">
+          <strong>CELTA Teacher Focus:</strong> Before writing a single word, students must identify: (1) the essay type (<em>Discussion + Opinion</em>), (2) keywords to paraphrase, and (3) their exact opinion so they don't lose marks in <em>Task Response</em>.
+        </div>
+
+        <!-- Step 1A: Paraphrase Keywords -->
+        <div class="space-y-4">
+          <h2 class="font-headline font-bold text-2xl text-ink-900">
+            1. Paraphrase the Keywords (Don't Copy the Prompt!)
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-600">
+            Match each phrase from the question with a natural IELTS academic synonym:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm" id="paraphrase-grid"></div>
+
+          <div class="flex items-center gap-3 pt-1">
+            <button type="button" onclick="checkParaphrases()"
+              class="px-4 py-2 bg-ink-900 text-newsprint-50 text-xs font-bold uppercase tracking-wider hover:bg-crimson-600 transition cursor-pointer">
+              Check Synonyms
+            </button>
+            <span id="para-fb" class="text-xs font-bold"></span>
+          </div>
+        </div>
+
+        <!-- Step 1B: Build the Introduction using a Clear Formula -->
+        <div class="mt-8 pt-6 border-t border-newsprint-300 space-y-4">
+          <h2 class="font-headline font-bold text-2xl text-ink-900">
+            2. Write a Clear 2-Sentence Introduction
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm bg-white p-4 border border-newsprint-300">
+            <div>
+              <span class="font-mono text-[11px] font-bold uppercase text-crimson-600">Sentence 1: Paraphrase Both Views</span>
+              <p class="font-serif italic text-ink-800 mt-1">
+                "While some argue that digital technology plays a greater role in educating young learners than traditional classrooms, others contend that physical schools and qualified educators remain indispensable."
+              </p>
+            </div>
+            <div>
+              <span class="font-mono text-[11px] font-bold uppercase text-crimson-600">Sentence 2: State Your Clear Thesis</span>
+              <p class="font-serif italic text-ink-800 mt-1">
+                "Although online resources offer valuable flexibility, I firmly believe that school-based learning under a teacher's guidance is far more effective for children's overall development."
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-bold text-xs sm:text-sm text-ink-900 block mb-1.5">Now write your own 2-sentence introduction:</label>
+            <textarea id="student-intro-box" rows="3" placeholder="While some people argue that..., others believe that... In my opinion,..."
+              class="w-full p-3 border border-newsprint-300 bg-white font-serif text-sm sm:text-base focus:outline-none focus:border-ink-900"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 2: PRACTICAL BRAINSTORMING (IDEAS + EXAMPLES)          -->
+    <!-- ============================================================ -->
+    <section data-stage="1" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 2 • Practical Brainstorming (5 Minutes in Exam)</span>
+          <span>15 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-headline font-bold text-2xl sm:text-3xl text-ink-900">
+              How to Generate Ideas + Examples Fast
+            </h2>
+            <p class="text-xs sm:text-sm text-ink-600 mt-1">
+              Every IELTS body paragraph needs: <strong>1. Main Idea → 2. Why it happens → 3. Specific Example</strong>. Fill in the table below.
+            </p>
+          </div>
+          <button type="button" onclick="toggleBox('idea-bank-drawer')"
+            class="px-3.5 py-2 bg-crimson-600 hover:bg-crimson-700 text-white text-xs font-bold uppercase tracking-wider transition cursor-pointer">
+            💡 Need Ideas? Open Idea Bank
+          </button>
+        </div>
+
+        <!-- Collapsible Practical Idea Bank -->
+        <div id="idea-bank-drawer" class="hidden mb-6 p-5 bg-newsprint-100 border border-newsprint-300 grid grid-cols-1 md:grid-cols-2 gap-5 text-xs sm:text-sm">
+          <div class="space-y-2">
+            <h4 class="font-headline font-bold text-base text-crimson-600 border-b border-newsprint-300 pb-1">
+              View 1: Computers &amp; Internet Are More Important
+            </h4>
+            <p><strong>Idea 1 (Unlimited Access):</strong> Students can access global knowledge, video lectures, and interactive apps anytime, regardless of where they live.</p>
+            <p><strong>Example 1:</strong> A teenager in a rural village can learn coding or foreign languages on platforms like Khan Academy or Coursera for free.</p>
+            <p><strong>Idea 2 (Self-Paced Learning):</strong> Every child learns at a different speed; online tools let students pause, replay, and practice weak areas.</p>
+            <p><strong>Example 2:</strong> Language apps adapt difficulty automatically when a student makes grammar mistakes.</p>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="font-headline font-bold text-base text-slatepaper-700 border-b border-newsprint-300 pb-1">
+              View 2: Schools &amp; Teachers Are Essential
+            </h4>
+            <p><strong>Idea 1 (Personalised Feedback &amp; Motivation):</strong> Children lack self-discipline; human teachers spot confusion immediately and keep students motivated.</p>
+            <p><strong>Example 1:</strong> When a primary pupil struggles with fractions, a teacher can explain the concept differently, whereas a computer cannot sense frustration.</p>
+            <p><strong>Idea 2 (Socialisation &amp; Teamwork):</strong> School teaches communication, empathy, and conflict resolution—skills impossible to learn alone behind a screen.</p>
+            <p><strong>Example 2:</strong> Group science projects and school sports teach children how to cooperate with peers.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Brainstorming Matrix for Student -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs sm:text-sm">
+          <!-- Body 1 Plan -->
+          <div class="p-5 bg-white border border-newsprint-300 space-y-3">
+            <div class="border-b-2 border-ink-900 pb-2">
+              <span class="font-mono text-[11px] font-bold uppercase text-ink-500">Body Paragraph 1</span>
+              <h3 class="font-headline font-bold text-xl text-ink-900">View 1: Computers &amp; Internet</h3>
+            </div>
+            <div>
+              <label class="font-bold block mb-1">1. Main Argument (Why are computers useful?):</label>
+              <input type="text" placeholder="e.g., Unlimited access to up-to-date information and flexible pace..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50" />
+            </div>
+            <div>
+              <label class="font-bold block mb-1">2. Explanation (How does this help children?):</label>
+              <textarea rows="2" placeholder="e.g., Unlike printed textbooks, online platforms offer interactive videos..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50"></textarea>
+            </div>
+            <div>
+              <label class="font-bold block mb-1">3. Real-Life Example (For example,...):</label>
+              <textarea rows="2" placeholder="e.g., A student preparing for exams can watch free science tutorials at home..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50"></textarea>
+            </div>
+          </div>
+
+          <!-- Body 2 Plan -->
+          <div class="p-5 bg-white border border-newsprint-300 space-y-3">
+            <div class="border-b-2 border-crimson-600 pb-2">
+              <span class="font-mono text-[11px] font-bold uppercase text-crimson-600">Body Paragraph 2 (Your Opinion)</span>
+              <h3 class="font-headline font-bold text-xl text-ink-900">View 2: Schools &amp; Teachers</h3>
+            </div>
+            <div>
+              <label class="font-bold block mb-1">1. Main Argument (Why are teachers &amp; schools essential?):</label>
+              <input type="text" placeholder="e.g., Human guidance, discipline, and social development..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50" />
+            </div>
+            <div>
+              <label class="font-bold block mb-1">2. Explanation (Why can't computers replace this?):</label>
+              <textarea rows="2" placeholder="e.g., Young learners easily get distracted online and need emotional support..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50"></textarea>
+            </div>
+            <div>
+              <label class="font-bold block mb-1">3. Real-Life Example (For instance,...):</label>
+              <textarea rows="2" placeholder="e.g., Classroom group discussions teach children how to listen and collaborate..." class="w-full p-2 border border-newsprint-300 bg-newsprint-50"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 3: TOPIC SENTENCES WORKSHOP                            -->
+    <!-- ============================================================ -->
+    <section data-stage="2" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 3 • Coherence &amp; Cohesion</span>
+          <span>12 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <h2 class="font-headline font-bold text-2xl sm:text-3xl text-ink-900 mb-2">
+          Mastering Topic Sentences
+        </h2>
+        <p class="text-xs sm:text-sm text-ink-600 mb-5">
+          A <strong>Topic Sentence</strong> is the first sentence of a body paragraph. An IELTS examiner reads it to immediately see what the whole paragraph is about. It must state the <strong>side</strong> + the <strong>main reason</strong> (never an example!).
+        </p>
+
+        <!-- Formula Banner -->
+        <div class="p-4 bg-ink-900 text-newsprint-50 mb-6 font-mono text-xs sm:text-sm">
+          <span class="text-crimson-600 bg-newsprint-50 px-2 py-0.5 font-bold mr-2">FORMULA</span>
+          [Linker] + [Whose view it is] + [Clear main idea/reason]
+        </div>
+
+        <!-- Exercise: Choose the Best Topic Sentence -->
+        <div class="space-y-4 mb-7">
+          <h3 class="font-headline font-bold text-xl text-ink-900">
+            1. Spot the Strong Topic Sentence (Click the best option)
+          </h3>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-2.5 text-xs sm:text-sm">
+            <p class="font-bold text-ink-900">Body Paragraph 1 (Discussing the value of computers &amp; the Internet):</p>
+            <button type="button" onclick="checkTopicChoice(this, false, 'ts-fb-1', 'Too specific! This is an example, not a topic sentence.')"
+              class="ts-btn-1 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>A.</strong> For example, students can watch YouTube videos and use Google to do their homework at home.
+            </button>
+            <button type="button" onclick="checkTopicChoice(this, true, 'ts-fb-1', 'Correct! It introduces the view clearly and states the main reason (flexibility and access to resources).')"
+              class="ts-btn-1 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>B.</strong> On the one hand, proponents of digital education argue that the Internet provides unmatched flexibility and access to global learning resources.
+            </button>
+            <button type="button" onclick="checkTopicChoice(this, false, 'ts-fb-1', 'Too vague! It does not tell the examiner WHY computers are important.')"
+              class="ts-btn-1 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>C.</strong> Computers are very important for children today because everyone uses technology.
+            </button>
+            <p id="ts-fb-1" class="text-xs font-bold pt-1 hidden"></p>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-2.5 text-xs sm:text-sm">
+            <p class="font-bold text-ink-900">Body Paragraph 2 (Discussing why schools &amp; teachers are essential):</p>
+            <button type="button" onclick="checkTopicChoice(this, false, 'ts-fb-2', 'Too informal and lacks a clear academic argument.')"
+              class="ts-btn-2 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>A.</strong> Secondly, going to school is good and teachers help kids a lot.
+            </button>
+            <button type="button" onclick="checkTopicChoice(this, false, 'ts-fb-2', 'This is a concluding sentence, not an opening topic sentence.')"
+              class="ts-btn-2 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>B.</strong> Therefore, governments should spend more money on building modern schools.
+            </button>
+            <button type="button" onclick="checkTopicChoice(this, true, 'ts-fb-2', 'Correct! Smooth transition + clear focus on human guidance and social skills.')"
+              class="ts-btn-2 w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 hover:border-ink-900 transition cursor-pointer">
+              <strong>C.</strong> On the other hand, I believe that physical schools and teachers remain irreplaceable because children require structured guidance and social interaction.
+            </button>
+            <p id="ts-fb-2" class="text-xs font-bold pt-1 hidden"></p>
+          </div>
+        </div>
+
+        <!-- Student Practice: Write 2 Topic Sentences -->
+        <div class="pt-5 border-t border-newsprint-300 space-y-3 text-xs sm:text-sm">
+          <h3 class="font-headline font-bold text-xl text-ink-900">
+            2. Write Your Own Two Topic Sentences
+          </h3>
+          <div>
+            <label class="font-bold block mb-1">Topic Sentence 1 (Computers &amp; Internet):</label>
+            <input type="text" placeholder="On the one hand, supporters of online learning point out that..." class="w-full p-2.5 border border-newsprint-300 bg-white font-serif text-sm" />
+          </div>
+          <div>
+            <label class="font-bold block mb-1">Topic Sentence 2 (Schools &amp; Teachers):</label>
+            <input type="text" placeholder="On the other hand, I contend that traditional schools are essential because..." class="w-full p-2.5 border border-newsprint-300 bg-white font-serif text-sm" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 4: IELTS CONNECTORS & TEMPLATE PHRASES BANK            -->
+    <!-- ============================================================ -->
+    <section data-stage="3" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 4 • IELTS Linking Phrases &amp; Essay Templates</span>
+          <span>12 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <h2 class="font-headline font-bold text-2xl sm:text-3xl text-ink-900 mb-2">
+          IELTS Writing Task 2 Phrasebook (Ready-to-Use Templates)
+        </h2>
+        <p class="text-xs sm:text-sm text-ink-600 mb-6">
+          Keep this functional toolkit for your exam. Use natural, reliable academic frames rather than overly memorized clichés.
+        </p>
+
+        <!-- 6 Functional Phrase Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-xs sm:text-sm">
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">01 • Introducing Views</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>While some people argue that…, others believe that…</em></li>
+              <li>• <em>Proponents of [X] contend that…</em></li>
+              <li>• <em>There is an ongoing debate regarding whether…</em></li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">02 • Stating Your Opinion</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>In my view / From my perspective,…</em></li>
+              <li>• <em>I firmly believe that…</em></li>
+              <li>• <em>Although [View A] has merits, I am convinced that…</em></li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">03 • Explaining Reasons</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>This is primarily because…</em></li>
+              <li>• <em>The main reason for this is that…</em></li>
+              <li>• <em>As a result / Consequently,…</em></li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">04 • Giving Examples</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>For instance, / For example,…</em></li>
+              <li>• <em>A clear illustration of this is…</em></li>
+              <li>• <em>To illustrate this point,…</em></li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">05 • Adding &amp; Contrasting</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>Furthermore, / In addition,…</em></li>
+              <li>• <em>On the other hand, / Conversely,…</em></li>
+              <li>• <em>Nevertheless, / Despite this,…</em></li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white border border-newsprint-300 space-y-1.5">
+            <span class="font-mono text-[10px] font-bold uppercase text-crimson-600">06 • Concluding</span>
+            <ul class="space-y-1 text-ink-800 font-serif">
+              <li>• <em>In conclusion, while…, I believe that…</em></li>
+              <li>• <em>To summarise, although…, it is clear that…</em></li>
+              <li>• <em>Ultimately, a balanced approach…</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Gap-Fill Practice with Connectors -->
+        <div class="p-5 bg-newsprint-100 border border-newsprint-300 space-y-3 text-xs sm:text-sm">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline font-bold text-lg text-ink-900">
+              Practice: Complete the Paragraph with the Right Connectors
+            </h3>
+            <button type="button" onclick="checkConnectorsDrill()"
+              class="px-4 py-1.5 bg-ink-900 text-newsprint-50 text-xs font-bold uppercase tracking-wider hover:bg-crimson-600 transition cursor-pointer">
+              Check Connectors
+            </button>
+          </div>
+
+          <p class="font-serif text-base leading-relaxed bg-white p-4 border border-newsprint-300 text-ink-900">
+            <select id="conn-1" class="mx-1 px-2 py-0.5 border border-ink-900 font-sans font-bold text-xs bg-newsprint-50">
+              <option value="">(1) ---</option>
+              <option value="On the one hand">On the one hand</option>
+              <option value="In conclusion">In conclusion</option>
+            </select>,
+            digital platforms have transformed how children access information.
+            <select id="conn-2" class="mx-1 px-2 py-0.5 border border-ink-900 font-sans font-bold text-xs bg-newsprint-50">
+              <option value="">(2) ---</option>
+              <option value="This is primarily because">This is primarily because</option>
+              <option value="Despite this">Despite this</option>
+            </select>
+            the Internet hosts millions of interactive lessons that allow pupils to study at their own pace.
+            <select id="conn-3" class="mx-1 px-2 py-0.5 border border-ink-900 font-sans font-bold text-xs bg-newsprint-50">
+              <option value="">(3) ---</option>
+              <option value="For instance">For instance</option>
+              <option value="Conversely">Conversely</option>
+            </select>,
+            a student struggling with mathematics can replay step-by-step video explanations until they master the topic.
+            <select id="conn-4" class="mx-1 px-2 py-0.5 border border-ink-900 font-sans font-bold text-xs bg-newsprint-50">
+              <option value="">(4) ---</option>
+              <option value="Consequently">Consequently</option>
+              <option value="On the other hand">On the other hand</option>
+            </select>,
+            technology can bridge educational gaps for learners who live far from good schools.
+          </p>
+          <p id="conn-fb" class="text-xs font-bold hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 5: EDUCATION TOPIC VOCABULARY                          -->
+    <!-- ============================================================ -->
+    <section data-stage="4" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 5 • Lexical Resource (Education &amp; Tech)</span>
+          <span>12 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <h2 class="font-headline font-bold text-2xl sm:text-3xl text-ink-900 mb-2">
+          10 High-Scoring Collocations for Education Essays
+        </h2>
+        <p class="text-xs sm:text-sm text-ink-600 mb-5">
+          Learn these natural word combinations so you don't repeat <em>"good for students"</em> or <em>"learn at school"</em>.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7 text-xs sm:text-sm" id="edu-vocab-grid"></div>
+
+        <!-- Quick Collocation Quiz -->
+        <div class="p-5 bg-newsprint-100 border border-newsprint-300 space-y-3 text-xs sm:text-sm">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline font-bold text-lg text-ink-900">Quick Vocabulary Check</h3>
+            <button type="button" onclick="checkEduVocabQuiz()"
+              class="px-4 py-1.5 bg-crimson-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-crimson-700 transition cursor-pointer">
+              Check Answers
+            </button>
+          </div>
+          <div class="space-y-2.5" id="edu-vocab-quiz"></div>
+          <p id="edu-vocab-fb" class="text-xs font-bold hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 6: REAL BAND 8.5 MODEL ESSAY & ANATOMY                 -->
+    <!-- ============================================================ -->
+    <section data-stage="5" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 6 • Authentic Band 8.5 Model Script</span>
+          <span>12 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-headline font-bold text-2xl sm:text-3xl text-ink-900">
+              Model Essay Analysis (Band 8.5 • 274 Words)
+            </h2>
+            <p class="text-xs sm:text-sm text-ink-600 mt-1">
+              Click the buttons to highlight the <strong>Topic Sentences</strong>, <strong>Connectors</strong>, and <strong>Specific Examples</strong> in a real high-level IELTS essay.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+            <button type="button" onclick="toggleModelHighlight('none')" id="mhl-none" class="px-2.5 py-1.5 bg-ink-900 text-newsprint-50 cursor-pointer">Plain</button>
+            <button type="button" onclick="toggleModelHighlight('ts')" id="mhl-ts" class="px-2.5 py-1.5 bg-newsprint-100 border border-newsprint-300 text-ink-800 cursor-pointer">Topic Sentences</button>
+            <button type="button" onclick="toggleModelHighlight('conn')" id="mhl-conn" class="px-2.5 py-1.5 bg-newsprint-100 border border-newsprint-300 text-ink-800 cursor-pointer">Connectors</button>
+            <button type="button" onclick="toggleModelHighlight('ex')" id="mhl-ex" class="px-2.5 py-1.5 bg-newsprint-100 border border-newsprint-300 text-ink-800 cursor-pointer">Examples</button>
+          </div>
+        </div>
+
+        <!-- Full 4-Paragraph Model Essay -->
+        <article class="bg-white border-2 border-ink-900 p-6 sm:p-8 font-serif text-base sm:text-[17px] leading-relaxed text-ink-900 space-y-4">
+          <p>
+            <span class="m-conn">While</span> some people argue that computers and the Internet play a greater role in a child's education than attending school, others contend that physical classrooms and teachers remain indispensable. <span class="m-conn">Although</span> digital tools offer valuable flexibility, I firmly believe that school-based learning under a teacher's guidance is far more effective for children's overall development.
+          </p>
+          <p>
+            <span class="m-ts"><span class="m-conn">On the one hand</span>, proponents of online learning point out that the Internet provides unmatched access to educational resources.</span> Unlike traditional textbooks, digital platforms offer interactive simulations, video tutorials, and self-paced courses that allow children to explore subjects in depth. <span class="m-ex"><span class="m-conn">For instance</span>, a teenager living in a remote area with limited school facilities can learn computer programming or foreign languages online free of charge.</span> <span class="m-conn">Consequently</span>, technology can democratise knowledge and support independent study outside classroom hours.
+          </p>
+          <p>
+            <span class="m-ts"><span class="m-conn">On the other hand</span>, I am convinced that schools and qualified teachers are irreplaceable because young learners require structured guidance and socialisation.</span> Children often lack the self-discipline to study effectively alone behind a screen, whereas an attentive teacher can immediately identify confusion and adapt their explanations. <span class="m-ex"><span class="m-conn">A clear illustration of this is</span> when a primary school pupil struggles with basic mathematics; a teacher can offer tailored encouragement, which an automated programme cannot replicate.</span> <span class="m-conn">Furthermore</span>, attending school teaches vital interpersonal skills—such as teamwork, empathy, and conflict resolution—through daily face-to-face interaction with peers.
+          </p>
+          <p>
+            <span class="m-conn">In conclusion</span>, while computers and the Internet are powerful supplementary tools, they cannot replace the human mentorship and social environment of a traditional school.
+          </p>
+        </article>
+
+        <!-- Band 6.0 vs Band 8.5 Quick Comparison -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 bg-crimson-50 border border-crimson-600/40">
+            <span class="font-mono text-[11px] font-bold uppercase text-crimson-600">❌ Weak Band 6.0 Paragraph</span>
+            <p class="font-serif italic text-ink-800 mt-1">
+              "Teachers are very important for kids. At school kids have friends and teachers explain everything. If a kid studies only on a computer, they will play games and be lazy. So schools are better than the Internet."
+            </p>
+            <p class="text-xs text-ink-600 mt-2"><strong>Why Band 6.0:</strong> Informal word <em>"kids"</em>, unsupported generalisation (<em>"will play games"</em>), no specific example.</p>
+          </div>
+          <div class="p-4 bg-slatepaper-100 border border-slatepaper-700/40">
+            <span class="font-mono text-[11px] font-bold uppercase text-slatepaper-700">✓ Why the Model Above Scores Band 8.5</span>
+            <ul class="text-xs text-ink-800 mt-1 space-y-1">
+              <li>• <strong>Clear 4-paragraph structure:</strong> Intro → View 1 → View 2 (Writer's Opinion) → Conclusion.</li>
+              <li>• <strong>Natural linkers:</strong> <em>On the one hand, For instance, Consequently, Whereas, Furthermore</em>.</li>
+              <li>• <strong>Specific examples:</strong> Remote teenager learning coding; primary pupil struggling with maths.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STAGE 7: GUIDED WRITING & EXAM TIMER                         -->
+    <!-- ============================================================ -->
+    <section data-stage="6" class="stage-panel hidden animate-stage space-y-6">
+      <div class="editorial-sheet p-6 sm:p-9">
+        <div class="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-ink-500 mb-3">
+          <span>Stage 7 • Your Writing Practice</span>
+          <span>20–40 Minutes</span>
+        </div>
+        <div class="double-rule mb-6"></div>
+
+        <!-- Timer Strip -->
+        <div class="flex flex-wrap items-center justify-between gap-4 p-4 bg-ink-900 text-newsprint-50 mb-6">
+          <div>
+            <span class="font-mono text-[11px] uppercase tracking-widest text-newsprint-300 block">IELTS Writing Task 2 Clock</span>
+            <p class="font-headline font-bold text-lg sm:text-xl">
+              Write Your Full Essay (Target: 250–280 words)
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="exam-clock" class="font-mono text-2xl sm:text-3xl font-bold tracking-wider text-white">40:00</span>
+            <div class="flex gap-1.5 text-xs font-bold">
+              <button type="button" onclick="setExamMinutes(20)" class="px-2.5 py-1.5 bg-ink-800 hover:bg-ink-600 text-newsprint-100 cursor-pointer">20m</button>
+              <button type="button" onclick="setExamMinutes(40)" class="px-2.5 py-1.5 bg-ink-800 hover:bg-ink-600 text-newsprint-100 cursor-pointer">40m</button>
+              <button type="button" onclick="startExamTimer()" class="px-3 py-1.5 bg-crimson-600 hover:bg-crimson-700 text-white uppercase cursor-pointer">Start</button>
+              <button type="button" onclick="pauseExamTimer()" class="px-3 py-1.5 bg-ink-800 hover:bg-ink-600 text-newsprint-100 uppercase cursor-pointer">Pause</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Paragraph Guided Writing Boxes -->
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1">
+              <span>1. Introduction (Paraphrase + Thesis • ~45–55 words)</span>
+              <span id="wc-1" class="font-mono text-ink-600">0 words</span>
+            </div>
+            <textarea id="essay-p1" rows="3" placeholder="While some argue that..., others believe that... In my opinion,..."
+              class="essay-box w-full p-3 border border-newsprint-300 bg-white font-serif text-base focus:outline-none focus:border-ink-900"></textarea>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1">
+              <span>2. Body Paragraph 1 (View 1: Computers &amp; Internet • ~90–100 words)</span>
+              <span id="wc-2" class="font-mono text-ink-600">0 words</span>
+            </div>
+            <textarea id="essay-p2" rows="5" placeholder="On the one hand, supporters of online education argue that... This is because... For instance,..."
+              class="essay-box w-full p-3 border border-newsprint-300 bg-white font-serif text-base focus:outline-none focus:border-ink-900"></textarea>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1">
+              <span>3. Body Paragraph 2 (View 2: Schools &amp; Teachers + Your Opinion • ~90–100 words)</span>
+              <span id="wc-3" class="font-mono text-ink-600">0 words</span>
+            </div>
+            <textarea id="essay-p3" rows="5" placeholder="On the other hand, I firmly believe that schools and teachers are essential because... For example,..."
+              class="essay-box w-full p-3 border border-newsprint-300 bg-white font-serif text-base focus:outline-none focus:border-ink-900"></textarea>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-bold mb-1">
+              <span>4. Conclusion (Summary + Final Verdict • ~35–45 words)</span>
+              <span id="wc-4" class="font-mono text-ink-600">0 words</span>
+            </div>
+            <textarea id="essay-p4" rows="2" placeholder="In conclusion, although..., I believe that..."
+              class="essay-box w-full p-3 border border-newsprint-300 bg-white font-serif text-base focus:outline-none focus:border-ink-900"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between p-3.5 bg-newsprint-100 border border-newsprint-300 font-mono text-xs sm:text-sm font-bold">
+            <span>Total Essay Word Count (IELTS Minimum: 250 words):</span>
+            <span id="wc-total" class="text-crimson-600 text-base">0 words</span>
+          </div>
+        </div>
+
+        <!-- Student Self-Check Rubric -->
+        <div class="mt-6 pt-5 border-t border-newsprint-300 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <label class="flex items-start gap-2 p-2.5 bg-white border border-newsprint-200 cursor-pointer">
+            <input type="checkbox" class="mt-0.5 accent-crimson-600" />
+            <span><strong>Task Response:</strong> Did I discuss BOTH views and state my own opinion clearly?</span>
+          </label>
+          <label class="flex items-start gap-2 p-2.5 bg-white border border-newsprint-200 cursor-pointer">
+            <input type="checkbox" class="mt-0.5 accent-crimson-600" />
+            <span><strong>Coherence:</strong> Does every body paragraph start with a clear Topic Sentence?</span>
+          </label>
+          <label class="flex items-start gap-2 p-2.5 bg-white border border-newsprint-200 cursor-pointer">
+            <input type="checkbox" class="mt-0.5 accent-crimson-600" />
+            <span><strong>Lexical Resource:</strong> Did I use topic collocations instead of repeating "kids" or "good"?</span>
+          </label>
+          <label class="flex items-start gap-2 p-2.5 bg-white border border-newsprint-200 cursor-pointer">
+            <input type="checkbox" class="mt-0.5 accent-crimson-600" />
+            <span><strong>Word Count:</strong> Is my total essay at least 250 words?</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Sequential Navigation Bar -->
+    <div class="mt-6 flex items-center justify-between border-t-2 border-b border-ink-900 py-3 px-2 bg-newsprint-50 text-xs font-bold uppercase tracking-wider no-print">
+      <button type="button" id="bot-prev" onclick="prevStage()" class="px-3 py-1.5 hover:text-crimson-600 disabled:opacity-30 cursor-pointer">
+        ← Previous Step
+      </button>
+      <span id="bot-label" class="font-mono text-ink-600">Step 1 of 7</span>
+      <button type="button" id="bot-next" onclick="nextStage()" class="px-4 py-1.5 bg-ink-900 text-newsprint-50 hover:bg-crimson-600 disabled:opacity-30 transition cursor-pointer">
+        Next Step →
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    const stageTitles = [
+      '1. Task & Intro',
+      '2. Brainstorming',
+      '3. Topic Sentences',
+      '4. Connectors',
+      '5. Vocabulary',
+      '6. Band 8.5 Model',
+      '7. Write Essay'
+    ];
+    let currentStage = 0;
+    let tutorModeOn = true;
+
+    function renderStageNav() {
+      const nav = document.getElementById('stage-nav');
+      nav.innerHTML = '';
+      stageTitles.forEach((title, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = title;
+        btn.onclick = () => goToStage(idx);
+        btn.className = idx === currentStage
+          ? 'px-2.5 py-1 bg-ink-900 text-newsprint-50 font-bold text-xs whitespace-nowrap transition cursor-pointer'
+          : 'px-2.5 py-1 bg-newsprint-100 hover:bg-newsprint-200 text-ink-800 border border-newsprint-300 font-semibold text-xs whitespace-nowrap transition cursor-pointer';
+        nav.appendChild(btn);
+      });
+    }
+
+    function goToStage(idx) {
+      if (idx < 0 || idx >= stageTitles.length) return;
+      currentStage = idx;
+      document.querySelectorAll('.stage-panel').forEach((panel) => {
+        panel.classList.toggle('hidden', Number(panel.dataset.stage) !== idx);
+      });
+      renderStageNav();
+      document.getElementById('top-counter').textContent = `0${idx + 1} / 0${stageTitles.length}`;
+      document.getElementById('bot-label').textContent = `Step ${idx + 1} of ${stageTitles.length}`;
+      document.getElementById('top-prev').disabled = idx === 0;
+      document.getElementById('bot-prev').disabled = idx === 0;
+      document.getElementById('top-next').disabled = idx === stageTitles.length - 1;
+      document.getElementById('bot-next').disabled = idx === stageTitles.length - 1;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevStage() { goToStage(currentStage - 1); }
+    function nextStage() { goToStage(currentStage + 1); }
+
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'ArrowRight') nextStage();
+      if (e.key === 'ArrowLeft') prevStage();
+    });
+
+    function toggleTutorMode() {
+      tutorModeOn = !tutorModeOn;
+      document.querySelectorAll('.tutor-note').forEach((el) => el.classList.toggle('hidden', !tutorModeOn));
+      document.getElementById('tutor-toggle-btn').textContent = tutorModeOn ? 'Teacher Tips: On' : 'Teacher Tips: Off';
+    }
+
+    function toggleBox(id) {
+      document.getElementById(id).classList.toggle('hidden');
+    }
+
+    function showToast(title, body) {
+      const box = document.getElementById('editorial-toast');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-body').textContent = body;
+      box.classList.remove('hidden');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => box.classList.add('hidden'), 3500);
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 1: PARAPHRASING
+    ------------------------------------------------------------ */
+    const paraphraseItems = [
+      { prompt: 'computers and the Internet', opts: ['digital technology and online resources', 'expensive machines'], ans: 'digital technology and online resources' },
+      { prompt: "a child's education", opts: ['educating young learners', 'university degrees'], ans: 'educating young learners' },
+      { prompt: 'going to school', opts: ['attending traditional classrooms', 'playing with friends'], ans: 'attending traditional classrooms' },
+      { prompt: 'teachers are essential', opts: ['educators remain indispensable', 'teachers are very nice'], ans: 'educators remain indispensable' }
+    ];
+
+    function renderParaphrases() {
+      const grid = document.getElementById('paraphrase-grid');
+      paraphraseItems.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'p-3.5 bg-white border border-newsprint-300 flex flex-col gap-1.5';
+        div.innerHTML = `
+          <span class="font-bold text-ink-900">“${p.prompt}”</span>
+          <select id="para-sel-${i}" class="p-1.5 border border-newsprint-300 bg-newsprint-50 font-semibold text-xs">
+            <option value="">Choose IELTS paraphrase...</option>
+            ${p.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkParaphrases() {
+      let ok = 0;
+      paraphraseItems.forEach((p, i) => {
+        const el = document.getElementById(`para-sel-${i}`);
+        if (el.value === p.ans) {
+          ok++;
+          el.className = 'p-1.5 border-2 border-slatepaper-700 bg-slatepaper-100 font-bold text-xs text-slatepaper-700';
+        } else {
+          el.className = 'p-1.5 border-2 border-crimson-600 bg-crimson-50 font-bold text-xs text-crimson-700';
+        }
+      });
+      const fb = document.getElementById('para-fb');
+      fb.className = ok === 4 ? 'text-xs font-bold text-slatepaper-700' : 'text-xs font-bold text-crimson-600';
+      fb.textContent = ok === 4 ? '✓ All 4 paraphrases matched!' : `Matched ${ok}/4.`;
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 3: TOPIC SENTENCES
+    ------------------------------------------------------------ */
+    function checkTopicChoice(btn, isCorrect, fbId, msg) {
+      const groupClass = btn.classList.contains('ts-btn-1') ? '.ts-btn-1' : '.ts-btn-2';
+      document.querySelectorAll(groupClass).forEach((b) => {
+        b.className = `${groupClass.slice(1)} w-full text-left p-3 border border-newsprint-300 bg-newsprint-50 opacity-70 transition cursor-pointer`;
+      });
+      const fb = document.getElementById(fbId);
+      fb.classList.remove('hidden');
+      if (isCorrect) {
+        btn.className = `${groupClass.slice(1)} w-full text-left p-3 border-2 border-slatepaper-700 bg-slatepaper-100 font-semibold transition cursor-pointer`;
+        fb.className = 'text-xs font-bold pt-1 text-slatepaper-700';
+        fb.textContent = '✓ ' + msg;
+      } else {
+        btn.className = `${groupClass.slice(1)} w-full text-left p-3 border-2 border-crimson-600 bg-crimson-50 transition cursor-pointer`;
+        fb.className = 'text-xs font-bold pt-1 text-crimson-600';
+        fb.textContent = '✗ ' + msg;
+      }
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 4: CONNECTORS DRILL
+    ------------------------------------------------------------ */
+    function checkConnectorsDrill() {
+      const ans = { 'conn-1': 'On the one hand', 'conn-2': 'This is primarily because', 'conn-3': 'For instance', 'conn-4': 'Consequently' };
+      let ok = 0;
+      Object.entries(ans).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el.value === val) {
+          ok++;
+          el.className = 'mx-1 px-2 py-0.5 border-2 border-slatepaper-700 bg-slatepaper-100 font-sans font-bold text-xs text-slatepaper-700';
+        } else {
+          el.className = 'mx-1 px-2 py-0.5 border-2 border-crimson-600 bg-crimson-50 font-sans font-bold text-xs text-crimson-700';
+        }
+      });
+      const fb = document.getElementById('conn-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 4 ? 'text-xs font-bold text-slatepaper-700' : 'text-xs font-bold text-crimson-600';
+      fb.textContent = ok === 4 ? '✓ Perfect! Notice how each connector signals the exact logical step.' : `Got ${ok}/4 right.`;
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 5: TOPIC VOCABULARY
+    ------------------------------------------------------------ */
+    const eduVocab = [
+      ['face-to-face interaction', 'direct in-person communication with teachers and peers'],
+      ['self-paced learning', 'studying at one’s own speed without rushing'],
+      ['digital literacy', 'the ability to find, evaluate, and use online information safely'],
+      ['socialisation skills', 'learning how to cooperate, share, and communicate in society'],
+      ['supplementary tool', 'something that supports (rather than replaces) the main method'],
+      ['structured guidance', 'organised step-by-step direction from a qualified teacher'],
+      ['democratise knowledge', 'make education accessible to everyone regardless of wealth or location'],
+      ['attention span', 'the length of time a child can concentrate on one task'],
+      ['curriculum', 'the subjects and content taught in a school'],
+      ['interpersonal skills', 'abilities used when interacting and working with other people']
+    ];
+
+    function renderEduVocab() {
+      const grid = document.getElementById('edu-vocab-grid');
+      eduVocab.forEach(([term, def]) => {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 bg-white border border-newsprint-300';
+        card.innerHTML = `<strong class="font-headline text-base text-ink-900">${term}</strong><p class="text-xs text-ink-600 mt-0.5">${def}</p>`;
+        grid.appendChild(card);
+      });
+
+      const quizItems = [
+        { q: '1. Online apps are a useful ________, but they cannot replace human teachers.', opts: ['supplementary tool', 'curriculum'], ans: 'supplementary tool' },
+        { q: '2. Working in school groups builds strong ________.', opts: ['interpersonal skills', 'attention span'], ans: 'interpersonal skills' },
+        { q: '3. Free online courses help ________ for students in remote villages.', opts: ['democratise knowledge', 'face-to-face interaction'], ans: 'democratise knowledge' }
+      ];
+      const qBox = document.getElementById('edu-vocab-quiz');
+      quizItems.forEach((item, i) => {
+        const row = document.createElement('div');
+        row.className = 'p-3 bg-white border border-newsprint-300 flex flex-wrap items-center justify-between gap-2';
+        row.innerHTML = `
+          <span>${item.q}</span>
+          <select id="evq-${i}" data-ans="${item.ans}" class="px-2.5 py-1 border border-newsprint-300 bg-newsprint-50 font-bold text-xs">
+            <option value="">Choose...</option>
+            ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        `;
+        qBox.appendChild(row);
+      });
+    }
+
+    function checkEduVocabQuiz() {
+      let ok = 0;
+      [0, 1, 2].forEach((i) => {
+        const el = document.getElementById(`evq-${i}`);
+        if (el.value === el.dataset.ans) {
+          ok++;
+          el.className = 'px-2.5 py-1 border-2 border-slatepaper-700 bg-slatepaper-100 font-bold text-xs text-slatepaper-700';
+        } else {
+          el.className = 'px-2.5 py-1 border-2 border-crimson-600 bg-crimson-50 font-bold text-xs text-crimson-700';
+        }
+      });
+      const fb = document.getElementById('edu-vocab-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 3 ? 'text-xs font-bold text-slatepaper-700' : 'text-xs font-bold text-crimson-600';
+      fb.textContent = ok === 3 ? '✓ All 3 collocations used accurately!' : `Got ${ok}/3 right.`;
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 6: MODEL ESSAY HIGHLIGHTER
+    ------------------------------------------------------------ */
+    function toggleModelHighlight(type) {
+      ['none', 'ts', 'conn', 'ex'].forEach((t) => {
+        document.getElementById(`mhl-${t}`).className = t === type
+          ? 'px-2.5 py-1.5 bg-ink-900 text-newsprint-50 cursor-pointer'
+          : 'px-2.5 py-1.5 bg-newsprint-100 border border-newsprint-300 text-ink-800 cursor-pointer';
+      });
+      document.querySelectorAll('.m-ts, .m-conn, .m-ex').forEach((el) => {
+        el.className = el.className.replace(/bg-\S+|border-\S+|px-1/g, '').trim();
+      });
+      if (type === 'ts') {
+        document.querySelectorAll('.m-ts').forEach((el) => el.classList.add('bg-crimson-50', 'border-b-2', 'border-crimson-600', 'px-1'));
+      } else if (type === 'conn') {
+        document.querySelectorAll('.m-conn').forEach((el) => el.classList.add('bg-slatepaper-100', 'border-b-2', 'border-slatepaper-700', 'px-1'));
+      } else if (type === 'ex') {
+        document.querySelectorAll('.m-ex').forEach((el) => el.classList.add('bg-newsprint-200', 'border-b-2', 'border-ink-900', 'px-1'));
+      }
+    }
+
+    /* ------------------------------------------------------------
+       STAGE 7: WORD COUNTERS & EXAM CLOCK
+    ------------------------------------------------------------ */
+    function initEssayCounters() {
+      const count = (s) => (s.trim() ? s.trim().split(/\s+/).length : 0);
+      const updateAll = () => {
+        let total = 0;
+        [1, 2, 3, 4].forEach((n) => {
+          const w = count(document.getElementById(`essay-p${n}`).value);
+          document.getElementById(`wc-${n}`).textContent = `${w} words`;
+          total += w;
+        });
+        const totalEl = document.getElementById('wc-total');
+        totalEl.textContent = `${total} words`;
+        totalEl.className = total >= 250 ? 'text-slatepaper-700 text-base' : 'text-crimson-600 text-base';
+      };
+      document.querySelectorAll('.essay-box').forEach((box) => box.addEventListener('input', updateAll));
+    }
+
+    let examSec = 2400;
+    let examIv = null;
+
+    function renderClock() {
+      const m = String(Math.floor(examSec / 60)).padStart(2, '0');
+      const s = String(examSec % 60).padStart(2, '0');
+      document.getElementById('exam-clock').textContent = `${m}:${s}`;
+    }
+
+    function setExamMinutes(mins) {
+      pauseExamTimer();
+      examSec = mins * 60;
+      renderClock();
+    }
+
+    function startExamTimer() {
+      if (examIv) return;
+      examIv = setInterval(() => {
+        if (examSec > 0) {
+          examSec--;
+          renderClock();
+        } else {
+          pauseExamTimer();
+          showToast('Time Up', 'Check your word count (250+ words) and review your Topic Sentences!');
+        }
+      }, 1000);
+    }
+
+    function pauseExamTimer() {
+      clearInterval(examIv);
+      examIv = null;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      goToStage(0);
+      renderParaphrases();
+      renderEduVocab();
+      initEssayCounters();
+    });
+  </script>
+</body>
+</html>
