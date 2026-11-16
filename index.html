@@ -855,8 +855,6 @@
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Culture & Trends"> Culture & Trends</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Entertainment"> Entertainment</label>
             <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Literature"> Literature</label>
-              <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Literature"> Food</label>
-              <label class="filter-label"><input type="checkbox" class="filter-checkbox" data-filter="category" value="Literature"> Family</label>
         </div>
 
         <button class="btn-clear" id="clearFilters">Clear all filters</button>
@@ -956,6 +954,75 @@
         </div>
     </main>
 
+
+    <!-- EDIT HOMEWORK MODAL -->
+    <div class="modal-overlay" id="editHwModal">
+        <div class="modal-box" style="max-width: 560px;">
+            <button class="modal-close" onclick="closeEditHwModal()">&times;</button>
+            <h3>✏️ Edit Homework</h3>
+            <p>Update title, instructions, deadline, lesson, or extra link.</p>
+
+            <form id="editHwForm">
+                <input type="hidden" id="editHwId">
+
+                <div class="form-grid" style="margin-bottom: 14px;">
+                    <div class="form-group">
+                        <label>Student *</label>
+                        <select id="editStudentSelect" class="form-control" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Due Date / Deadline</label>
+                        <input type="date" id="editHwDueDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Attached Lesson from Catalog</label>
+                    <div class="lesson-picker-wrapper" id="editLessonPickerWrapper">
+                        <div class="lesson-search-input-wrap">
+                            <input type="text" id="editLessonSearchInput" class="form-control" placeholder="🔍 Search lesson or leave empty..." autocomplete="off">
+                            <button type="button" class="lesson-clear-selection" id="editClearLessonBtn" title="Clear lesson">&times;</button>
+                        </div>
+                        <input type="hidden" id="editSelectedLessonFile" value="">
+                        <div class="lesson-dropdown-list" id="editLessonDropdownList"></div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Homework Title *</label>
+                    <input type="text" id="editHwTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Instructions / Notes</label>
+                    <textarea id="editHwInstructions" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Extra Link (YouTube, Quizlet, Miro, etc.)</label>
+                    <input type="url" id="editHwLink" class="form-control" placeholder="https://...">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Replace / Add Image (optional)</label>
+                    <input type="file" id="editHwImage" class="form-control" accept="image/*">
+                    <div id="editCurrentImageWrap" style="margin-top: 8px; display: none; align-items: center; gap: 10px;">
+                        <span style="font-size: 12px; color: var(--text-muted);">Current image attached</span>
+                        <label style="font-size: 12px; color: var(--primary); cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                            <input type="checkbox" id="editRemoveImage"> Remove image
+                        </label>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-outline" onclick="closeEditHwModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="editHwSubmitBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- AUTH MODAL -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-box">
@@ -1002,6 +1069,8 @@
         let currentUser = null;
         let currentProfile = null;
         let authMode = 'login';
+        let loadedAssignments = [];
+        let cachedStudents = [];
 
         // --- 2. CATALOG LOGIC ---
         const cardsGrid = document.getElementById('cardsGrid');
@@ -1290,23 +1359,23 @@
                     .eq('role', 'student')
                     .order('full_name');
 
+                cachedStudents = students || [];
                 const studentSelect = document.getElementById('studentSelect');
                 studentSelect.innerHTML = '<option value="">-- Choose a student --</option>';
-                if (students) {
-                    students.forEach(s => {
-                        const opt = document.createElement('option');
-                        opt.value = s.id;
-                        opt.textContent = `${s.full_name} (${s.email})`;
-                        studentSelect.appendChild(opt);
-                    });
-                }
+                cachedStudents.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s.id;
+                    opt.textContent = `${s.full_name} (${s.email})`;
+                    studentSelect.appendChild(opt);
+                });
 
                 const { data: assignments } = await supabaseClient
                     .from('assignments')
                     .select('*, profiles(full_name, email)')
                     .order('created_at', { ascending: false });
 
-                renderAssignments(assignments || [], true);
+                loadedAssignments = assignments || [];
+                renderAssignments(loadedAssignments, true);
             } else {
                 const { data: assignments } = await supabaseClient
                     .from('assignments')
@@ -1421,7 +1490,7 @@
                             <button class="status-pill ${hw.is_completed ? 'done' : 'pending'}" onclick="toggleComplete('${hw.id}', ${hw.is_completed})">
                                 ${hw.is_completed ? '✓ Completed' : '○ Mark as Done'}
                             </button>
-                            ${isTeacher ? `<button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="deleteAssignment('${hw.id}')">Delete</button>` : ''}
+                            ${isTeacher ? `<button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="openEditHwModal('${hw.id}')">✏️ Edit</button><button class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="deleteAssignment('${hw.id}')">Delete</button>` : ''}
                         </div>
                     </div>
 
@@ -1510,9 +1579,190 @@
             loadClassroomData();
         }
 
+
+        // --- EDIT HOMEWORK LOGIC ---
+        function initEditLessonPicker() {
+            const input = document.getElementById('editLessonSearchInput');
+            const listEl = document.getElementById('editLessonDropdownList');
+            const hiddenFile = document.getElementById('editSelectedLessonFile');
+            const clearSelectionBtn = document.getElementById('editClearLessonBtn');
+            const wrapper = document.getElementById('editLessonPickerWrapper');
+
+            function renderDropdown(query = '') {
+                listEl.innerHTML = '';
+                const catalog = typeof LESSONS !== 'undefined' ? LESSONS : [];
+                const q = query.toLowerCase().trim();
+
+                const matches = catalog.filter(l =>
+                    l.title.toLowerCase().includes(q) ||
+                    l.level.toLowerCase().includes(q) ||
+                    (l.category && l.category.toLowerCase().includes(q)) ||
+                    (l.type && l.type.toLowerCase().includes(q))
+                );
+
+                if (matches.length === 0) {
+                    listEl.innerHTML = '<div class="lesson-dropdown-empty">No lessons found.</div>';
+                    return;
+                }
+
+                matches.forEach(l => {
+                    const item = document.createElement('div');
+                    item.className = 'lesson-dropdown-item';
+                    item.innerHTML = `<span>${l.title}</span><span class="lvl-tag">${l.level}</span>`;
+                    item.addEventListener('click', () => {
+                        input.value = `[${l.level}] ${l.title}`;
+                        hiddenFile.value = l.file;
+                        clearSelectionBtn.classList.add('visible');
+                        listEl.classList.remove('open');
+                    });
+                    listEl.appendChild(item);
+                });
+            }
+
+            input.addEventListener('focus', () => {
+                renderDropdown(hiddenFile.value ? '' : input.value);
+                listEl.classList.add('open');
+            });
+
+            input.addEventListener('input', (e) => {
+                hiddenFile.value = '';
+                clearSelectionBtn.classList.toggle('visible', e.target.value.length > 0);
+                renderDropdown(e.target.value);
+                listEl.classList.add('open');
+            });
+
+            clearSelectionBtn.addEventListener('click', () => {
+                input.value = '';
+                hiddenFile.value = '';
+                clearSelectionBtn.classList.remove('visible');
+                renderDropdown('');
+                input.focus();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!wrapper.contains(e.target)) {
+                    listEl.classList.remove('open');
+                }
+            });
+        }
+
+        function openEditHwModal(id) {
+            const hw = loadedAssignments.find(item => item.id === id);
+            if (!hw) return;
+
+            document.getElementById('editHwId').value = hw.id;
+            document.getElementById('editHwTitle').value = hw.title || '';
+            document.getElementById('editHwDueDate').value = hw.due_date || '';
+            document.getElementById('editHwInstructions').value = hw.instructions || '';
+            document.getElementById('editHwLink').value = hw.extra_link || '';
+            document.getElementById('editHwImage').value = '';
+            document.getElementById('editRemoveImage').checked = false;
+
+            const currentImgWrap = document.getElementById('editCurrentImageWrap');
+            currentImgWrap.style.display = hw.image_url ? 'flex' : 'none';
+
+            // Заповнюємо список учнів
+            const editStudentSelect = document.getElementById('editStudentSelect');
+            editStudentSelect.innerHTML = '';
+            cachedStudents.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = `${s.full_name} (${s.email})`;
+                if (s.id === hw.student_id) opt.selected = true;
+                editStudentSelect.appendChild(opt);
+            });
+
+            // Заповнюємо прикріплений урок
+            const lessonInput = document.getElementById('editLessonSearchInput');
+            const hiddenLesson = document.getElementById('editSelectedLessonFile');
+            const clearBtn = document.getElementById('editClearLessonBtn');
+
+            if (hw.lesson_file) {
+                hiddenLesson.value = hw.lesson_file;
+                const matchedLesson = (typeof LESSONS !== 'undefined' ? LESSONS : []).find(l => l.file === hw.lesson_file);
+                lessonInput.value = matchedLesson ? `[${matchedLesson.level}] ${matchedLesson.title}` : hw.lesson_file;
+                clearBtn.classList.add('visible');
+            } else {
+                hiddenLesson.value = '';
+                lessonInput.value = '';
+                clearBtn.classList.remove('visible');
+            }
+
+            document.getElementById('editHwModal').classList.add('open');
+        }
+
+        function closeEditHwModal() {
+            document.getElementById('editHwModal').classList.remove('open');
+        }
+
+        document.getElementById('editHwForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('editHwSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            const id = document.getElementById('editHwId').value;
+            const existingHw = loadedAssignments.find(item => item.id === id);
+
+            const studentId = document.getElementById('editStudentSelect').value;
+            const dueDate = document.getElementById('editHwDueDate').value || null;
+            const lessonFile = document.getElementById('editSelectedLessonFile').value || null;
+            const title = document.getElementById('editHwTitle').value.trim();
+            const instructions = document.getElementById('editHwInstructions').value.trim();
+            const extraLink = document.getElementById('editHwLink').value.trim() || null;
+            const newImageFile = document.getElementById('editHwImage').files[0];
+            const removeImage = document.getElementById('editRemoveImage').checked;
+
+            let imageUrl = existingHw ? existingHw.image_url : null;
+            if (removeImage) {
+                imageUrl = null;
+            }
+
+            if (newImageFile) {
+                const fileExt = newImageFile.name.split('.').pop();
+                const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('homework-images')
+                    .upload(fileName, newImageFile);
+
+                if (!uploadError) {
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from('homework-images')
+                        .getPublicUrl(fileName);
+                    imageUrl = publicUrlData.publicUrl;
+                } else {
+                    alert('Image upload error: ' + uploadError.message);
+                }
+            }
+
+            const { error } = await supabaseClient
+                .from('assignments')
+                .update({
+                    student_id: studentId,
+                    due_date: dueDate,
+                    lesson_file: lessonFile,
+                    title: title,
+                    instructions: instructions,
+                    extra_link: extraLink,
+                    image_url: imageUrl
+                })
+                .eq('id', id);
+
+            btn.disabled = false;
+            btn.textContent = 'Save Changes';
+
+            if (error) {
+                alert('Error updating homework: ' + error.message);
+            } else {
+                closeEditHwModal();
+                loadClassroomData();
+            }
+        });
+
         // --- INITIALIZE APP ---
         filterLessons();
         initSearchableLessonPicker();
+        initEditLessonPicker();
         checkSession();
     </script>
 
