@@ -847,8 +847,7 @@
             const player = document.getElementById('lessonAudioPlayer');
             player.src = src;
             player.play().catch(() => {
-                alert('Audio file not found yet: ' + src + '
-Generate it with your ElevenLabs script first!');
+                alert('Audio file not found yet: ' + src + '\nGenerate it with your ElevenLabs script first!');
             });
         }
 
