@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice: Present Perfect & Past Simple | ziz.english</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --primary-light: #fff0f3;
+            --accent-yellow: #fff9db;
+            --yellow-dark: #f59f00;
+            --accent-green: #e6fcf5;
+            --green-dark: #0ca678;
+            --accent-blue: #e7f5ff;
+            --blue-dark: #1c7ed6;
+            --accent-purple: #f3f0ff;
+            --purple-dark: #7048e8;
+            --bg-color: #f7f8fc;
+            --card-bg: #ffffff;
+            --text-main: #1e1e2f;
+            --text-muted: #6c6c80;
+            --border-color: #eaeaf2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        .lesson-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .brand span { color: var(--primary); }
+
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-pill:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #0ca678 0%, #099268 100%);
+            color: #fff;
+            border-radius: 24px;
+            padding: 36px 40px;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            color: #e6fcf5;
+            font-size: 15px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: var(--accent-green);
+            color: var(--green-dark);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* --- WEEKEND & PAST VERBS --- */
+        .weekend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .wk-chip {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .verb-match-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .verb-item {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .verb-base {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* --- THEN AND NOW ARTICLE --- */
+        .then-now-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 24px;
+            font-size: 15px;
+            line-height: 2.1;
+            color: #1e293b;
+        }
+
+        .inline-gap {
+            padding: 4px 10px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            width: 145px;
+            outline: none;
+            background: #fff;
+            margin: 0 3px;
+        }
+
+        .inline-gap:focus { border-color: var(--primary); }
+        .inline-gap.correct { border-color: var(--green-dark); background: var(--accent-green); color: #087f5b; }
+        .inline-gap.wrong { border-color: var(--primary); background: var(--primary-light); color: #c92a3e; }
+
+        /* --- MAX'S ROOM & YOUR BEDROOM --- */
+        .room-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .room-box {
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid var(--border-color);
+            background: var(--accent-yellow);
+        }
+
+        .room-box.blue {
+            background: var(--accent-blue);
+            border-color: #a5d8ff;
+        }
+
+        .checklist-item {
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* --- DETECTIVE CAKE MYSTERY --- */
+        .detective-card {
+            background: linear-gradient(135deg, #1e1e2f 0%, #343a40 100%);
+            color: #fff;
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .alibi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .alibi-slot {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .alibi-slot label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffd43b;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* --- MARTA'S STORY (ELEVENLABS) --- */
+        .audio-bar {
+            background: var(--accent-purple);
+            border: 1px solid #d0bfff;
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .q-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
+        .q-item {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+
+        .q-item label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* --- PICTURE PROMPTS & FINAL EXERCISES --- */
+        .prompt-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .p-card {
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .p-card span {
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .text-input, textarea.text-input {
+            padding: 9px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #fff;
+            width: 100%;
+        }
+
+        .text-input:focus { border-color: var(--primary); }
+
+        .btn-action {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .room-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="lesson-header">
+        <div class="brand">ziz<span>.</span>english</div>
+        <nav class="nav-pills">
+            <a href="#sec1" class="nav-pill">1. Weekend & Verbs</a>
+            <a href="#sec2" class="nav-pill">2. Then & Now</a>
+            <a href="#sec3" class="nav-pill">3. Already & Yet</a>
+            <a href="#sec4" class="nav-pill">4. Cake Detective</a>
+            <a href="#sec5" class="nav-pill">5. Marta's Story</a>
+            <a href="#sec6" class="nav-pill">6. Final Practice</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero-banner">
+            <span class="hero-badge">CONSOLIDATION PRACTICE • A2 / B1</span>
+            <h1>Present Perfect and Past Simple Practice</h1>
+            <p>Extra interactive speaking, reading, listening, and grammar activities to master both tenses.</p>
+        </div>
+
+        <!-- SECTION 1: LAST WEEKEND & PAST VERB MATCHING -->
+        <section class="section-card" id="sec1">
+            <span class="section-tag">Activity 1 • Vocabulary & Speaking</span>
+            <h2 class="section-title">What Did You Do Last Weekend? + Past Verb Forms</h2>
+            <p class="section-desc">First, discuss what you did last weekend using the ideas below. Then write the <b>Past Simple</b> form of each verb.</p>
+
+            <div class="weekend-grid">
+                <div class="wk-chip">🍳 cooked a meal</div>
+                <div class="wk-chip">🛒 went grocery shopping</div>
+                <div class="wk-chip">🏊‍♂️ swam in a pool</div>
+                <div class="wk-chip">🍽️ ate out at a café</div>
+                <div class="wk-chip">👯‍♀️ hung out with friends</div>
+                <div class="wk-chip">🚤 took a boat trip</div>
+                <div class="wk-chip">🎨 drew / painted</div>
+                <div class="wk-chip">📚 studied / read a book</div>
+            </div>
+
+            <h4 style="font-size: 17px; margin-bottom: 12px;">Write the Past Simple form of these verbs:</h4>
+            <div class="verb-match-grid" id="verbMatchBox">
+                <div class="verb-item"><span class="verb-base">think →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="thought" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">sleep →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="slept" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">draw →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="drew" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">swim →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="swam" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">hang out →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="hung out" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">drive →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="drove" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">eat out →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="ate out" placeholder="V2..."></div>
+                <div class="verb-item"><span class="verb-base">take →</span><input type="text" class="inline-gap" style="width: 110px;" data-answer="took" placeholder="V2..."></div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn-action" onclick="checkInlineGaps('verbMatchBox')">Check Verbs</button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THEN AND NOW TEXT -->
+        <section class="section-card" id="sec2">
+            <span class="section-tag">Activity 2 • Reading in Context</span>
+            <h2 class="section-title">Then and Now: How Technology Changed Daily Life</h2>
+            <p class="section-desc">Read the text and put the verbs in brackets into the <b>Past Simple</b> or <b>Present Perfect</b>.</p>
+
+            <div class="then-now-box" id="thenAndNowBox">
+                Thirty years ago, very few people <b>(1)</b>
+                <input type="text" class="inline-gap" data-answer="realized|realised" placeholder="(realize)">
+                how greatly technology was about to transform everyone's daily lives. These last few decades <b>(2)</b>
+                <input type="text" class="inline-gap" data-answer="have seen|'ve seen" placeholder="(see)">
+                enormous changes in how people live, study, and work. Trips to the supermarket, which once <b>(3)</b>
+                <input type="text" class="inline-gap" data-answer="took" placeholder="(take)">
+                half the weekend, have been replaced with online ordering. Music lovers who once <b>(4)</b>
+                <input type="text" class="inline-gap" data-answer="spent" placeholder="(spend)">
+                hours wandering around shops simply download the tracks they want to hear. Information which <b>(5)</b>
+                <input type="text" class="inline-gap" data-answer="required" placeholder="(require)">
+                hours of research in a library <b>(6)</b>
+                <input type="text" class="inline-gap" data-answer="has become|'s become" placeholder="(become)">
+                available to anybody in a few clicks on the keyboard. The spread of laptops and Wi-Fi <b>(7)</b>
+                <input type="text" class="inline-gap" data-answer="has enabled|'s enabled" placeholder="(enable)">
+                students and business people to work almost anywhere at any time, and mobile phones <b>(8)</b>
+                <input type="text" class="inline-gap" data-answer="have transformed|'ve transformed" placeholder="(transform)">
+                the way people organize their lives. However, some people question how much our lives <b>(9)</b>
+                <input type="text" class="inline-gap" data-answer="have improved|'ve improved" placeholder="(improve)">
+                over these years, especially when online banking and shopping <b>(10)</b>
+                <input type="text" class="inline-gap" data-answer="have brought|'ve brought" placeholder="(bring)">
+                so many new security problems.
+            </div>
+
+            <div style="margin-top: 18px; display: flex; gap: 12px;">
+                <button type="button" class="btn-action" onclick="checkInlineGaps('thenAndNowBox')">Check Text</button>
+                <button type="button" class="btn-secondary" onclick="resetInlineGaps('thenAndNowBox')">Reset</button>
+            </div>
+        </section>
+
+        <!-- SECTION 3: MAX'S MORNING & YOUR BEDROOM (ALREADY / YET) -->
+        <section class="section-card" id="sec3">
+            <span class="section-tag">Activity 3 • Already vs. Yet</span>
+            <h2 class="section-title">Max's Morning Routine & Your Bedroom</h2>
+            <p class="section-desc">Look at Max's morning checklist and write sentences using <b>already</b> (✓ done) or <b>yet</b> (✗ not done).</p>
+
+            <div class="room-grid">
+                <div class="room-box">
+                    <h4 style="font-size: 18px; margin-bottom: 12px;">🏠 Max's Morning Checklist</h4>
+                    <div class="checklist-item">
+                        <span>✓ make the bed</span>
+                        <i>He's already made the bed.</i>
+                    </div>
+                    <div class="checklist-item">
+                        <span>✗ tidy his desk</span>
+                        <input type="text" class="text-input" style="max-width: 240px;" data-question="Max: tidy desk" placeholder="He hasn't...">
+                    </div>
+                    <div class="checklist-item">
+                        <span>✓ take the dog for a walk</span>
+                        <input type="text" class="text-input" style="max-width: 240px;" data-question="Max: walk dog" placeholder="He's already...">
+                    </div>
+                    <div class="checklist-item">
+                        <span>✗ have breakfast</span>
+                        <input type="text" class="text-input" style="max-width: 240px;" data-question="Max: breakfast" placeholder="He hasn't...">
+                    </div>
+                    <div class="checklist-item">
+                        <span>✗ put away his clothes</span>
+                        <input type="text" class="text-input" style="max-width: 240px;" data-question="Max: clothes" placeholder="He hasn't...">
+                    </div>
+                    <div class="checklist-item">
+                        <span>✓ have a shower</span>
+                        <input type="text" class="text-input" style="max-width: 240px;" data-question="Max: shower" placeholder="He's already...">
+                    </div>
+                </div>
+
+                <div class="room-box blue">
+                    <h4 style="font-size: 18px; margin-bottom: 12px;">🛏️ Look at Your Bedroom Today!</h4>
+                    <p style="font-size: 14px; color: #334155; margin-bottom: 14px;">What have you <b>already done</b> today and what haven't you done <b>yet</b>? Write 4 true sentences:</p>
+                    <textarea class="text-input" rows="8" data-question="My bedroom already/yet" placeholder="1. I've already...&#10;2. I haven't... yet.&#10;3. ...&#10;4. ..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DETECTIVE ROLEPLAY -->
+        <section class="section-card" id="sec4">
+            <span class="section-tag">Activity 4 • Speaking Roleplay</span>
+            <h2 class="section-title">🕵️‍♂️ Who Ate the Cake in the Refrigerator?</h2>
+            <p class="section-desc">Imagine that last night someone ate all the cake in the refrigerator! You are the main suspect. Come up with an alibi for each hour of yesterday using the <b>Past Simple</b>.</p>
+
+            <div class="detective-card">
+                <p style="font-size: 15px; color: #e2e8f0;"><i>Example: "At 6 PM I walked the dog. At 8 PM I listened to music, and at 10 PM I was already asleep."</i></p>
+                <div class="alibi-grid">
+                    <div class="alibi-slot">
+                        <label>🕕 6:00 PM</label>
+                        <input type="text" class="text-input" data-question="Alibi 6 PM" placeholder="At 6 PM I...">
+                    </div>
+                    <div class="alibi-slot">
+                        <label>🕗 8:00 PM</label>
+                        <input type="text" class="text-input" data-question="Alibi 8 PM" placeholder="At 8 PM I...">
+                    </div>
+                    <div class="alibi-slot">
+                        <label>🕙 10:00 PM</label>
+                        <input type="text" class="text-input" data-question="Alibi 10 PM" placeholder="At 10 PM I...">
+                    </div>
+                    <div class="alibi-slot">
+                        <label>🕛 12:00 AM (Midnight)</label>
+                        <input type="text" class="text-input" data-question="Alibi Midnight" placeholder="At midnight I...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: MARTA'S STORY (ELEVENLABS LISTENING) -->
+        <section class="section-card" id="sec5">
+            <span class="section-tag">Activity 5 • Listening Comprehension</span>
+            <h2 class="section-title">🎧 Listen to Marta's Travel Story</h2>
+            <p class="section-desc">Listen to Marta's story sent to a travel website. What did Marta lose? Did she find it? Listen again and answer the 7 questions below.</p>
+
+            <div class="audio-bar">
+                <div style="font-weight: 700; font-size: 15px;">🎙️ Marta's Story: Trip to Brussels</div>
+                <audio controls src="../audio/pp_vs_ps_practice/marta_story.mp3" style="height: 38px;"></audio>
+            </div>
+
+            <div class="q-list">
+                <div class="q-item">
+                    <label>1. When did it happen?</label>
+                    <input type="text" class="text-input" data-question="Marta Q1: When?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item">
+                    <label>2. Where did Marta want to go on holiday? Why?</label>
+                    <input type="text" class="text-input" data-question="Marta Q2: Where & why?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item">
+                    <label>3. Why did she fly to Brussels?</label>
+                    <input type="text" class="text-input" data-question="Marta Q3: Why Brussels?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item">
+                    <label>4. What happened at the gate in Brussels airport?</label>
+                    <input type="text" class="text-input" data-question="Marta Q4: What happened at the gate?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item">
+                    <label>5. How did she feel?</label>
+                    <input type="text" class="text-input" data-question="Marta Q5: How did she feel?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item">
+                    <label>6. What did the policeman say?</label>
+                    <input type="text" class="text-input" data-question="Marta Q6: Policeman?" placeholder="Write your answer...">
+                </div>
+                <div class="q-item" style="grid-column: 1 / -1;">
+                    <label>7. Where did she fly to in the end? What happened there?</label>
+                    <input type="text" class="text-input" data-question="Marta Q7: Ending?" placeholder="Write your answer...">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: PICTURE SENTENCES & TIME EXPRESSIONS -->
+        <section class="section-card" id="sec6">
+            <span class="section-tag">Activity 6 • Final Consolidation</span>
+            <h2 class="section-title">Write True Sentences About Yourself</h2>
+            <p class="section-desc">Use the prompts below to write true sentences in the <b>Present Perfect</b> or <b>Past Simple</b>.</p>
+
+            <div class="prompt-cards">
+                <div class="p-card">
+                    <span>🚗 do / driving test</span>
+                    <input type="text" class="text-input" data-question="Prompt: driving test" placeholder="I've already... / I haven't...">
+                </div>
+                <div class="p-card">
+                    <span>🍜 eat / noodles</span>
+                    <input type="text" class="text-input" data-question="Prompt: eat noodles" placeholder="I ate... / I've never eaten...">
+                </div>
+                <div class="p-card">
+                    <span>🏍️ ride / motorbike</span>
+                    <input type="text" class="text-input" data-question="Prompt: ride motorbike" placeholder="Write a true sentence...">
+                </div>
+                <div class="p-card">
+                    <span>⛳ play / golf</span>
+                    <input type="text" class="text-input" data-question="Prompt: play golf" placeholder="Write a true sentence...">
+                </div>
+                <div class="p-card">
+                    <span>📝 pass / exam</span>
+                    <input type="text" class="text-input" data-question="Prompt: pass exam" placeholder="Write a true sentence...">
+                </div>
+                <div class="p-card">
+                    <span>🇬🇧 study / English</span>
+                    <input type="text" class="text-input" data-question="Prompt: study English" placeholder="I've studied English for/since...">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function checkInlineGaps(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.inline-gap').forEach(inp => {
+                const userVal = inp.value.trim().toLowerCase().replace(/[’']/g, "'");
+                const answers = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+                inp.classList.remove('correct', 'wrong');
+                if (!userVal) return;
+                if (answers.includes(userVal)) {
+                    inp.classList.add('correct');
+                } else {
+                    inp.classList.add('wrong');
+                }
+            });
+        }
+
+        function resetInlineGaps(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.inline-gap').forEach(inp => {
+                inp.value = '';
+                inp.classList.remove('correct', 'wrong');
+            });
+        }
+    </script>
+
+    <script src="../tracker.js"></script>
+</body>
+</html>
