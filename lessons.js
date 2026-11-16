@@ -20,7 +20,7 @@ const LESSONS = [
         level: "B1",
         type: "Vocabulary",
         category: "Daily Life",
-        description: "A fun culinary journey exploring iconic American dishes and food vocabulary.",
+        description: "A fun culinary journey exploring iconic American dishes and food vocabulary. Start the missions - collect your stamps",
         file: "lessons/great_american_food_quest.html"
     },
     {
@@ -36,47 +36,47 @@ const LESSONS = [
         level: "A1",
         type: "Lesson plan",
         category: "Daily Life",
-        description: "Basic lesson about family",
+        description: "Learn essential family member vocabulary and talk about your relatives.",
         file: "lessons/family.html"
     },
     {
         title: "Souvenirs",
         level: "A1",
         type: "Lesson plan",
-        category: "Daily Life",
-        description: "Learn how to buy souvenirs when you travel abroad",
+        category: "Travel & Places",
+        description: "Learn useful phrases and vocabulary to buy souvenirs when traveling abroad.",
         file: "lessons/Souvenir_Hunt.html"
     },
     {
         title: "Animals Little Wildlife Club",
         level: "A1",
         type: "Vocabulary",
-        category: "Daily Life",
-        description: "...",
-        file: "lessons/Animals_Little_Wildlife_Club.html"
+        category: "Nature & Animals",
+        description: "Discover wild animals, their habitats, and fun facts in an interactive wildlife club.",
+        file: "lessons/animals_little_wildlife_club_final_fix.html"
     },
     {
         title: "Just a Normal Day",
         level: "A1",
         type: "Listening",
         category: "Daily Life",
-        description: "...",
+        description: "Practice listening comprehension with everyday routines, telling the time, and daily habits.",
         file: "lessons/just_a_normal_day.html"
     },
     {
         title: "The Working Life",
         level: "A1",
         type: "Vocabulary",
-        category: "Daily Life",
-        description: "...",
-        file: "lessons/The_Working_Life_Jobs.html"
+        category: "Work & Study",
+        description: "Explore common jobs, workplaces, and basic phrases to describe what people do.",
+        file: "lessons/the_working_life_jobs.html"
     },
     {
         title: "A Day in My Life",
         level: "A1",
         type: "Listening",
         category: "Daily Life",
-        description: "...",
+        description: "Slow English podcast lesson to practice listening to daily schedules and simple activities.",
         file: "lessons/a_day_in_my_life_slow_english_podcast.html"
     },
     {
@@ -84,15 +84,15 @@ const LESSONS = [
         level: "A1",
         type: "Listening",
         category: "Literature",
-        description: "...",
+        description: "Discover a classic story comparing bustling city life and quiet countryside living through listening and reading tasks. Dive directly into the book!",
         file: "lessons/city_mouse_country_mouse.html"
     },
     {
         title: "Feelings & Emotions",
         level: "A1",
         type: "Vocabulary",
-        category: "Daily Life",
-        description: "...",
+        category: "Health & Wellness",
+        description: "Learn how to express moods, feelings, and emotions in everyday conversations.",
         file: "lessons/feelings_emotions.html"
     },
     {
@@ -100,7 +100,7 @@ const LESSONS = [
         level: "A1",
         type: "Vocabulary",
         category: "Daily Life",
-        description: "...",
+        description: "Essential vocabulary for meals, groceries, drinks, and practise with listening and reading activities",
         file: "lessons/food_drink.html"
     },
     {
@@ -108,7 +108,7 @@ const LESSONS = [
         level: "A1",
         type: "Grammar",
         category: "Daily Life",
-        description: "...",
+        description: "Practice using 'have to' and 'don't have to', 'must' and 'mustn't' to talk about rules, obligations, and chores + revise usage of 'can'.",
         file: "lessons/have_to.html"
     },
     {
@@ -116,15 +116,15 @@ const LESSONS = [
         level: "A1",
         type: "Grammar",
         category: "Daily Life",
-        description: "...",
-        file: "lessons/here_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
+        description: "Interactive practice contrasting Present Simple for routines and Present Continuous for actions happening now.",
+        file: "lessons/there_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
     },
     {
         title: "I Feel Sick",
         level: "A1",
         type: "Vocabulary",
-        category: "Daily Life",
-        description: "...",
+        category: "Health & Wellness",
+        description: "Learn common symptoms, illnesses, and how to talk to a doctor.",
         file: "lessons/medical_case_study.html"
     }
 ];
