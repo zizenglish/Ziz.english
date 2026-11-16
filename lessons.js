@@ -127,4 +127,16 @@ const LESSONS = [
         description: "Learn common symptoms, illnesses, and how to talk to a doctor.",
         file: "lessons/medical_case_study.html"
     }
+     {
+        title: "Present Perfect vs. Past Simple",
+        level: "B1",
+        type: "Grammar",
+        category: "Daily Life",
+        description: "Master finished past events and life experiences with interactive dialogues, listening dictation, and practice.",
+        files: {
+            lesson: "lessons/present_perfect_vs_past_simple_lesson.html",
+            practice: "lessons/present_perfect_vs_past_simple_practice.html",
+            homework: "lessons/present_perfect_vs_past_simple_homework.html"
+        }
+    },
 ];
