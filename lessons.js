@@ -117,7 +117,7 @@ const LESSONS = [
         type: "Grammar",
         category: "Daily Life",
         description: "Interactive practice contrasting Present Simple for routines and Present Continuous for actions happening now.",
-        file: "lessons/there_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
+        file: "lessons/here_and_there_present_simple_vs_present_continuous_interactive_lesson.html"
     },
     {
         title: "I Feel Sick",
