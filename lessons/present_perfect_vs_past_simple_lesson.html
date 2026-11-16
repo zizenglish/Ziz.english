@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Perfect vs. Past Simple | ziz.english</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --primary-light: #fff0f3;
+            --accent-yellow: #fff9db;
+            --yellow-dark: #f59f00;
+            --accent-green: #e6fcf5;
+            --green-dark: #0ca678;
+            --accent-blue: #e7f5ff;
+            --blue-dark: #1c7ed6;
+            --accent-purple: #f3f0ff;
+            --purple-dark: #7048e8;
+            --bg-color: #f7f8fc;
+            --card-bg: #ffffff;
+            --text-main: #1e1e2f;
+            --text-muted: #6c6c80;
+            --border-color: #eaeaf2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        /* --- TOP NAVIGATION --- */
+        .lesson-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .brand span { color: var(--primary); }
+
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-pill:hover, .nav-pill.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2f2f46 100%);
+            color: #fff;
+            border-radius: 24px;
+            padding: 36px 40px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-banner h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        /* --- SECTIONS --- */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* --- WARM-UP CARDS --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .prompt-box {
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid var(--border-color);
+            background: #fafafc;
+        }
+
+        .prompt-box.green { background: var(--accent-green); border-color: #96f2d7; }
+        .prompt-box.yellow { background: var(--accent-yellow); border-color: #ffec99; }
+        .prompt-box.blue { background: var(--accent-blue); border-color: #a5d8ff; }
+
+        .prompt-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: #1e1e2f;
+            color: #fff;
+            font-weight: 800;
+            display: inline-grid;
+            place-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .prompt-box h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .prompt-box ul {
+            padding-left: 18px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        /* --- HAVE YOU EVER FLIP CARDS --- */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .ever-card {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .ever-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .ever-card.answered {
+            border-color: var(--green-dark);
+            background: var(--accent-green);
+        }
+
+        .ever-emoji {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .ever-text {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        .ever-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .choice-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .choice-pill.selected {
+            background: var(--text-main);
+            color: #fff;
+            border-color: var(--text-main);
+        }
+
+        /* --- GRAMMAR COMPARISON TABLE --- */
+        .grammar-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .grammar-col {
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .grammar-col.past {
+            background: #fff9db;
+            border-color: #ffe066;
+        }
+
+        .grammar-col.perfect {
+            background: #f3f0ff;
+            border-color: #d0bfff;
+        }
+
+        .grammar-col h3 {
+            font-size: 20px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-item {
+            background: rgba(255,255,255,0.85);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .rule-item b { color: var(--primary); }
+
+        .signal-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .signal-chip {
+            background: #1e1e2f;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        /* --- GONE VS BEEN --- */
+        .gone-been-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .gb-card {
+            background: var(--accent-blue);
+            border: 1px solid #a5d8ff;
+            border-radius: 16px;
+            padding: 18px 20px;
+        }
+
+        /* --- AUDIO DICTATION (ELEVENLABS) --- */
+        .audio-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            background: #fafafc;
+            flex-wrap: wrap;
+        }
+
+        .play-audio-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .play-audio-btn:hover { opacity: 0.9; }
+
+        .gap-input {
+            padding: 8px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            min-width: 170px;
+            background: #fff;
+        }
+
+        .gap-input:focus { border-color: var(--primary); }
+        .gap-input.correct { border-color: var(--green-dark); background: var(--accent-green); color: #087f5b; }
+        .gap-input.wrong { border-color: var(--primary); background: var(--primary-light); color: #c92a3e; }
+
+        /* --- COMIC DIALOGUE CARDS (8 ITEMS) --- */
+        .comic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .comic-card {
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px;
+            background: #fafafc;
+        }
+
+        .comic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .comic-num {
+            background: var(--text-main);
+            color: #fff;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .comic-line {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        /* --- SPEAKING WHEEL --- */
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 28px;
+            background: linear-gradient(135deg, #1e1e2f 0%, #312e81 100%);
+            border-radius: 22px;
+            color: #fff;
+        }
+
+        .wheel-display {
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 18px;
+            padding: 24px 32px;
+            margin: 20px 0;
+            min-height: 100px;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            font-weight: 700;
+            max-width: 650px;
+            width: 100%;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .btn-action:hover { transform: scale(1.03); }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .grammar-compare, .gone-been-grid { grid-template-columns: 1fr; }
+            .lesson-header { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="lesson-header">
+        <div class="brand">ziz<span>.</span>english</div>
+        <nav class="nav-pills">
+            <a href="#warmup" class="nav-pill">1. Warm-up</a>
+            <a href="#grammar" class="nav-pill">2. Grammar Rules</a>
+            <a href="#listening" class="nav-pill">3. Listening</a>
+            <a href="#practice" class="nav-pill">4. Picture Dialogues</a>
+            <a href="#speaking" class="nav-pill">5. Speaking Wheel</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero-banner">
+            <div>
+                <div class="hero-badges">
+                    <span class="hero-badge">LEVEL A2 / B1</span>
+                    <span class="hero-badge">GRAMMAR & SPEAKING</span>
+                </div>
+                <h1>Present Perfect vs. Past Simple</h1>
+                <p>Master the difference between finished past events and life experiences with interactive dialogues & audio.</p>
+            </div>
+        </div>
+
+        <!-- SECTION 1: WARM-UP -->
+        <section class="section-card" id="warmup">
+            <span class="section-tag">Step 1 • Warm-up</span>
+            <h2 class="section-title">Make Questions & Give Answers!</h2>
+            <p class="section-desc">Choose one card below, form full Past Simple questions using the prompts, and ask your partner or teacher.</p>
+
+            <div class="grid-3" style="margin-bottom: 32px;">
+                <div class="prompt-box green">
+                    <div class="prompt-num">1</div>
+                    <h4>Last New Year 🎆</h4>
+                    <ul>
+                        <li>where / celebrate?</li>
+                        <li>what / eat and drink?</li>
+                        <li>what presents / get?</li>
+                        <li>who / cook?</li>
+                        <li>when / go to sleep?</li>
+                        <li>fireworks / see?</li>
+                        <li>resolution / make?</li>
+                    </ul>
+                </div>
+
+                <div class="prompt-box yellow">
+                    <div class="prompt-num">2</div>
+                    <h4>Last Holiday Abroad ✈️</h4>
+                    <ul>
+                        <li>what country / visit?</li>
+                        <li>what weather / like?</li>
+                        <li>where / stay?</li>
+                        <li>how long / stay?</li>
+                        <li>how / get there?</li>
+                        <li>what sights / see?</li>
+                        <li>what / like and dislike?</li>
+                    </ul>
+                </div>
+
+                <div class="prompt-box blue">
+                    <div class="prompt-num">3</div>
+                    <h4>Last Time You Had a Barbecue 🍔</h4>
+                    <ul>
+                        <li>where / go?</li>
+                        <li>what meat / salads / have?</li>
+                        <li>what / drink?</li>
+                        <li>who / cook?</li>
+                        <li>how / weather?</li>
+                        <li>what / bring?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">"Have you ever...?" Experience Cards</h3>
+            <p class="section-desc">Click your answer. If you say <b>Yes, I have</b>, add details in the <b>Past Simple</b> (when, where, why)!</p>
+
+            <div class="flip-grid">
+                <div class="ever-card" data-question="Have you ever pretended to laugh at a joke you didn't understand?">
+                    <span class="ever-emoji">😅</span>
+                    <div class="ever-text">...pretended to laugh at a joke you didn't understand?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+
+                <div class="ever-card" data-question="Have you ever checked the fridge 5 times hoping new food appeared?">
+                    <span class="ever-emoji">🧊</span>
+                    <div class="ever-text">...checked the fridge 5 times hoping new food appeared?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+
+                <div class="ever-card" data-question="Have you ever sung in the shower like a rockstar?">
+                    <span class="ever-emoji">🎤</span>
+                    <div class="ever-text">...sung in the shower like a rockstar?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+
+                <div class="ever-card" data-question="Have you ever tried to take a quick nap that lasted 4 hours?">
+                    <span class="ever-emoji">😴</span>
+                    <div class="ever-text">...tried to take a "quick nap" that lasted 4 hours?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+
+                <div class="ever-card" data-question="Have you ever seen a wild animal up close?">
+                    <span class="ever-emoji">🦊</span>
+                    <div class="ever-text">...seen a wild animal up close?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+
+                <div class="ever-card" data-question="Have you ever met someone famous?">
+                    <span class="ever-emoji">🌟</span>
+                    <div class="ever-text">...met someone famous?</div>
+                    <div class="ever-actions">
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">Yes, I have</button>
+                        <button type="button" class="choice-pill" onclick="selectEver(this)">No, never</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: GRAMMAR RULES -->
+        <section class="section-card" id="grammar">
+            <span class="section-tag">Step 2 • Grammar Focus</span>
+            <h2 class="section-title">Past Simple vs. Present Perfect</h2>
+            <p class="section-desc">Compare when and how we use both tenses.</p>
+
+            <div class="grammar-compare">
+                <div class="grammar-col past">
+                    <h3>🕒 Past Simple</h3>
+                    <div class="rule-item">
+                        <b>Form:</b> V2 / V-ed &nbsp;|&nbsp; <b>Negative:</b> didn't + V1 &nbsp;|&nbsp; <b>Question:</b> Did + S + V1?
+                    </div>
+                    <div class="rule-item">
+                        <b>Finished time:</b> We lived in Japan from 1995–1998.
+                    </div>
+                    <div class="rule-item">
+                        <b>Definite time:</b> I saw the Eiffel Tower in 2007.
+                    </div>
+                    <div class="rule-item">
+                        <b>Series of finished actions:</b> First, he read the book and then he watched the movie.
+                    </div>
+                    <div class="rule-item">
+                        <b>Time Phrases:</b>
+                        <div class="signal-chips">
+                            <span class="signal-chip">yesterday</span>
+                            <span class="signal-chip">... ago</span>
+                            <span class="signal-chip">last week/year</span>
+                            <span class="signal-chip">in 1994</span>
+                            <span class="signal-chip">when I was...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-col perfect">
+                    <h3>✨ Present Perfect</h3>
+                    <div class="rule-item">
+                        <b>Form:</b> have / has + V3 (past participle) &nbsp;|&nbsp; <b>Neg:</b> haven't / hasn't + V3
+                    </div>
+                    <div class="rule-item">
+                        <b>Unfinished time:</b> I've worked as a teacher since 2011.
+                    </div>
+                    <div class="rule-item">
+                        <b>Indefinite time / Experience:</b> Have you ever seen this movie?
+                    </div>
+                    <div class="rule-item">
+                        <b>Result:</b> She has already watched this movie 3 times.
+                    </div>
+                    <div class="rule-item">
+                        <b>Time Phrases:</b>
+                        <div class="signal-chips">
+                            <span class="signal-chip">already</span>
+                            <span class="signal-chip">just</span>
+                            <span class="signal-chip">yet</span>
+                            <span class="signal-chip">ever / never</span>
+                            <span class="signal-chip">for / since</span>
+                            <span class="signal-chip">today / this week</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 18px; border: 1px solid var(--border-color);">
+                <h4 style="font-size: 17px; margin-bottom: 6px;">📍 Gone vs. Been</h4>
+                <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Notice the difference between going somewhere and returning!</p>
+                <div class="gone-been-grid">
+                    <div class="gb-card">
+                        <b>She's gone to Florida.</b><br>
+                        <span style="font-size: 13px; color: #334155;">She went to Florida and she is <b>still there now</b>.</span>
+                    </div>
+                    <div class="gb-card">
+                        <b>She's been to Florida.</b><br>
+                        <span style="font-size: 13px; color: #334155;">She went to Florida in the past and <b>has already come back</b>.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LISTENING (ELEVENLABS AUDIO) -->
+        <section class="section-card" id="listening">
+            <span class="section-tag">Step 3 • Listening Dictation</span>
+            <h2 class="section-title">Listen and Write the Words You Hear</h2>
+            <p class="section-desc">Click Play to listen to the audio track and type the missing Past Simple or Present Perfect phrase.</p>
+
+            <div id="listeningList">
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/01.mp3')">▶ 1</button>
+                    <input type="text" class="gap-input" data-answer="they've bought|they have bought" placeholder="Type what you hear...">
+                    <span>a new apartment.</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/02.mp3')">▶ 2</button>
+                    <input type="text" class="gap-input" data-answer="she changed|she's changed" placeholder="Type what you hear...">
+                    <span>jobs.</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/03.mp3')">▶ 3</button>
+                    <input type="text" class="gap-input" data-answer="we've eaten|we have eaten" placeholder="Type what you hear...">
+                    <span>at that restaurant a few times.</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/04.mp3')">▶ 4</button>
+                    <input type="text" class="gap-input" data-answer="it's rained|it has rained" placeholder="Type what you hear...">
+                    <span>all week!</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/05.mp3')">▶ 5</button>
+                    <input type="text" class="gap-input" data-answer="he hasn't finished|he has not finished" placeholder="Type what you hear...">
+                    <span>the assignment.</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/06.mp3')">▶ 6</button>
+                    <input type="text" class="gap-input" data-answer="have you ever been" placeholder="Type what you hear...">
+                    <span>to Alaska?</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/07.mp3')">▶ 7</button>
+                    <input type="text" class="gap-input" data-answer="we flew" placeholder="Type what you hear...">
+                    <span>in a helicopter.</span>
+                </div>
+
+                <div class="audio-row">
+                    <button type="button" class="play-audio-btn" onclick="playTrack('../audio/pp_vs_ps_lesson1/08.mp3')">▶ 8</button>
+                    <input type="text" class="gap-input" data-answer="they've sold|they have sold" placeholder="Type what you hear...">
+                    <span>their house.</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 18px; display: flex; gap: 12px;">
+                <button type="button" class="btn-action" onclick="checkInputs('listeningList')">Check Listening Answers</button>
+                <button type="button" class="btn-secondary" onclick="resetInputs('listeningList')">Reset</button>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PICTURE DIALOGUES -->
+        <section class="section-card" id="practice">
+            <span class="section-tag">Step 4 • Grammar Practice</span>
+            <h2 class="section-title">Complete the Dialogues (Past Simple or Present Perfect)</h2>
+            <p class="section-desc">Use the verbs from the box in the correct form: <b>start, be, hurt, happen, lose, leave, invite, not send, not arrive, do, see, not see, do, play, visit, go</b>.</p>
+
+            <div class="comic-grid" id="comicPractice">
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">1 • Broken Arm 🤕</span></div>
+                    <div class="comic-line">A: I <input type="text" class="gap-input" style="width: 125px;" data-answer="have hurt|'ve hurt" placeholder="(hurt)"> my arm.</div>
+                    <div class="comic-line">B: How <input type="text" class="gap-input" style="width: 85px;" data-answer="did" placeholder="(aux)"> it <input type="text" class="gap-input" style="width: 105px;" data-answer="happen" placeholder="(happen)">?</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">2 • School Days 🎒</span></div>
+                    <div class="comic-line">A: When <input type="text" class="gap-input" style="width: 85px;" data-answer="did" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 105px;" data-answer="start" placeholder="(start)"> school?</div>
+                    <div class="comic-line">B: When I <input type="text" class="gap-input" style="width: 95px;" data-answer="was" placeholder="(be)"> six.</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">3 • Football Match ⚽</span></div>
+                    <div class="comic-line">A: What <input type="text" class="gap-input" style="width: 85px;" data-answer="did" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 95px;" data-answer="do" placeholder="(do)"> yesterday?</div>
+                    <div class="comic-line">B: I <input type="text" class="gap-input" style="width: 110px;" data-answer="played" placeholder="(play)"> football with Sam.</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">4 • Supermarket 🛒</span></div>
+                    <div class="comic-line">A: I <input type="text" class="gap-input" style="width: 105px;" data-answer="saw" placeholder="(see)"> Mrs Robinson in the supermarket yesterday.</div>
+                    <div class="comic-line">B: Mrs Robinson? I <input type="text" class="gap-input" style="width: 135px;" data-answer="haven't seen|have not seen" placeholder="(not see)"> her for a long time.</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">5 • Lost Book 📕</span></div>
+                    <div class="comic-line">A: I <input type="text" class="gap-input" style="width: 125px;" data-answer="have lost|'ve lost" placeholder="(lose)"> my book.</div>
+                    <div class="comic-line">B: Where <input type="text" class="gap-input" style="width: 85px;" data-answer="did" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 105px;" data-answer="leave" placeholder="(leave)"> it?</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">6 • Exam Results 📄</span></div>
+                    <div class="comic-line">A: My exam results <input type="text" class="gap-input" style="width: 145px;" data-answer="haven't arrived|have not arrived" placeholder="(not arrive)"> yet.</div>
+                    <div class="comic-line">B: When <input type="text" class="gap-input" style="width: 85px;" data-answer="did" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 95px;" data-answer="do" placeholder="(do)"> the exam?</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">7 • Paris Trip 🗼</span></div>
+                    <div class="comic-line">A: <input type="text" class="gap-input" style="width: 85px;" data-answer="Did" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 105px;" data-answer="visit" placeholder="(visit)"> Paris when you were in France?</div>
+                    <div class="comic-line">B: No, but I <input type="text" class="gap-input" style="width: 125px;" data-answer="have been|'ve been" placeholder="(go/be)"> there before.</div>
+                </div>
+
+                <div class="comic-card">
+                    <div class="comic-header"><span class="comic-num">8 • Party Invitations 🎉</span></div>
+                    <div class="comic-line">A: <input type="text" class="gap-input" style="width: 85px;" data-answer="Have" placeholder="(aux)"> you <input type="text" class="gap-input" style="width: 110px;" data-answer="invited" placeholder="(invite)"> Jenny and Jess to your party?</div>
+                    <div class="comic-line">B: I <input type="text" class="gap-input" style="width: 135px;" data-answer="haven't sent|have not sent" placeholder="(not send)"> any invitations yet.</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; gap: 12px;">
+                <button type="button" class="btn-action" onclick="checkInputs('comicPractice')">Check All Dialogues</button>
+                <button type="button" class="btn-secondary" onclick="resetInputs('comicPractice')">Reset</button>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SPEAKING WHEEL -->
+        <section class="section-card" id="speaking">
+            <span class="section-tag">Step 5 • Speaking Challenge</span>
+            <h2 class="section-title">Spin the Wheel: Talk for 1 Minute!</h2>
+            <p class="section-desc">Click Spin to get a random Past Simple or Present Perfect speaking prompt. Answer the question and add 2–3 follow-up details.</p>
+
+            <div class="wheel-container">
+                <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #a5b4fc; font-weight: 700;">Speaking Prompt</div>
+                <div class="wheel-display" id="wheelPrompt">Click "Spin the Wheel" to start! 🎡</div>
+                <button type="button" class="btn-action" onclick="spinWheel()">🎡 Spin the Wheel</button>
+            </div>
+        </section>
+    </div>
+
+    <audio id="lessonAudioPlayer"></audio>
+
+    <script>
+        function selectEver(btn) {
+            const card = btn.closest('.ever-card');
+            card.querySelectorAll('.choice-pill').forEach(p => p.classList.remove('selected'));
+            btn.classList.add('selected');
+            card.classList.add('answered');
+        }
+
+        function playTrack(src) {
+            const player = document.getElementById('lessonAudioPlayer');
+            player.src = src;
+            player.play().catch(() => {
+                alert('Audio file not found yet: ' + src + '
+Generate it with your ElevenLabs script first!');
+            });
+        }
+
+        function checkInputs(containerId) {
+            const container = document.getElementById(containerId);
+            const inputs = container.querySelectorAll('.gap-input');
+            inputs.forEach(inp => {
+                const userVal = inp.value.trim().toLowerCase().replace(/[’']/g, "'");
+                const validAnswers = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+                inp.classList.remove('correct', 'wrong');
+                if (!userVal) return;
+                if (validAnswers.includes(userVal)) {
+                    inp.classList.add('correct');
+                } else {
+                    inp.classList.add('wrong');
+                }
+            });
+        }
+
+        function resetInputs(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.gap-input').forEach(inp => {
+                inp.value = '';
+                inp.classList.remove('correct', 'wrong');
+            });
+        }
+
+        const wheelQuestions = [
+            "Have you ever travelled to another country? Where did you go and what did you like best?",
+            "What is the best movie you have seen recently? When did you watch it?",
+            "Have you ever tried extreme sports or unusual food? Tell the story!",
+            "What did you do last weekend? Did you meet any friends?",
+            "Have you ever lost something important? How did it happen?",
+            "What have you already accomplished this year that makes you proud?",
+            "Have you ever met a celebrity or someone inspiring?",
+            "What did you eat for breakfast today, and have you drunk any coffee yet?"
+        ];
+
+        function spinWheel() {
+            const box = document.getElementById('wheelPrompt');
+            let count = 0;
+            const interval = setInterval(() => {
+                box.textContent = wheelQuestions[Math.floor(Math.random() * wheelQuestions.length)];
+                count++;
+                if (count > 10) clearInterval(interval);
+            }, 65);
+        }
+    </script>
+
+    <script src="../tracker.js"></script>
+</body>
+</html>
