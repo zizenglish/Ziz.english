@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relationships &amp; Question Forms — Interactive Course</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Oswald (Poster Condensed) & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Oswald"', 'sans-serif'],
+          },
+          colors: {
+            skyice: {
+              50: '#FAF7E8',
+              100: '#F3EED4',
+              200: '#E2D8B5',
+              300: '#C8B98E',
+            },
+            navyink: {
+              900: '#35482B',
+              800: '#455D39',
+              700: '#58704A',
+            },
+            coralpop: {
+              500: '#A84638',
+              600: '#8F382B',
+              50: '#FBF1EE',
+            },
+            tealcalm: {
+              600: '#4A6B3B',
+              50: '#EFF5EC',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Warm Pastel Cream Vertical-Striped Wallpaper (matching reference slides) */
+    body {
+      background-color: #F8F3D8;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #F8F3D8 0px,
+        #F8F3D8 26px,
+        #EFE8C4 26px,
+        #EFE8C4 52px
+      );
+      min-height: 100vh;
+      color: #35482B;
+    }
+
+    /* Cozy Framed Content Card (White cutout with inner dashed vintage border) */
+    .lesson-card {
+      background: #FFFDF7;
+      border: 2px solid #D5C8A3;
+      box-shadow: 0 14px 32px -12px rgba(53, 72, 43, 0.14);
+      position: relative;
+    }
+    .lesson-card::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border: 1.5px dashed #C7B992;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .soft-box {
+      background: #FAF6E6;
+      border: 1px solid #DDD2AE;
+    }
+
+    @keyframes fadeInStep {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-step {
+      animation: fadeInStep 0.25s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-coralpop-500 selection:text-white">
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-[#FFFDF6]/95 backdrop-blur-md border-b-2 border-[#D5C8A3] shadow-2xs">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <!-- Title -->
+        <div class="flex items-center gap-3">
+          <span class="px-3 py-1 rounded-full bg-coralpop-500 text-white font-bold text-xs uppercase tracking-wider shadow-2xs">
+            A2+ / B1
+          </span>
+          <h1 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 uppercase tracking-wide">
+            Relationships &amp; Question Forms
+          </h1>
+        </div>
+
+        <!-- Mode Switcher: 1. Lesson (Photo 1) vs 2. Homework (Photo 2) -->
+        <div class="flex items-center bg-skyice-100 p-1 rounded-full border border-skyice-300">
+          <button type="button" onclick="switchMode(0)" id="mode-btn-0"
+            class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer bg-navyink-900 text-white shadow-2xs">
+            1. Lesson (Classwork)
+          </button>
+          <button type="button" onclick="switchMode(1)" id="mode-btn-1"
+            class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer text-navyink-700 hover:text-navyink-900">
+            2. Homework
+          </button>
+        </div>
+
+        <!-- Audio Speed & Step Arrows -->
+        <div class="flex items-center gap-2">
+          <div class="hidden sm:flex items-center bg-skyice-100 p-0.5 rounded-full border border-skyice-300 text-[11px] font-bold">
+            <button type="button" onclick="setVoiceSpeed(0.75)" id="vspd-slow" class="px-2.5 py-0.5 rounded-full text-navyink-700 cursor-pointer">0.75×</button>
+            <button type="button" onclick="setVoiceSpeed(0.95)" id="vspd-norm" class="px-2.5 py-0.5 rounded-full bg-navyink-900 text-white cursor-pointer">1.0×</button>
+          </div>
+
+          <div class="flex items-center border-2 border-navyink-900 rounded-full overflow-hidden bg-white text-xs font-bold">
+            <button type="button" id="top-prev" onclick="prevStep()" class="px-3 py-1 hover:bg-skyice-100 disabled:opacity-30 cursor-pointer">←</button>
+            <span id="top-counter" class="px-2.5 py-1 bg-navyink-900 text-white">1 / 6</span>
+            <button type="button" id="top-next" onclick="nextStep()" class="px-3 py-1 hover:bg-skyice-100 disabled:opacity-30 cursor-pointer">→</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-navigation Tabs -->
+      <nav id="sub-tabs" class="flex items-center gap-1.5 overflow-x-auto pt-2.5 pb-0.5"></nav>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-navyink-900 text-white border-l-4 border-coralpop-500 px-4 py-3 rounded-xl shadow-xl text-xs sm:text-sm">
+    <p class="font-bold" id="toast-title">Info</p>
+    <p class="text-skyice-200 mt-0.5" id="toast-msg"></p>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ================================================================ -->
+    <!-- MODE 0: LESSON (PHOTO 1 — 6 CELTA STAGES)                        -->
+    <!-- ================================================================ -->
+    <div id="mode-0" class="mode-wrap space-y-6">
+
+      <!-- STEP 0.0: LEAD-IN & RELATIONSHIP VOCABULARY (1–9) -->
+      <section data-mode="0" data-step="0" class="step-panel animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 1 • Lead-in &amp; Vocabulary</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Relationships: Blind Dates, Ghosting &amp; People in Our Lives
+              </h2>
+            </div>
+            <button type="button" onclick="checkRelVocab()" class="px-4 py-2 rounded-xl bg-navyink-900 hover:bg-coralpop-500 text-white font-bold text-xs uppercase tracking-wider transition cursor-pointer">
+              Check Matches (1–9)
+            </button>
+          </div>
+
+          <!-- Warm-up Discussion Box -->
+          <div class="mt-5 p-4 rounded-xl soft-box grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div>
+              <h3 class="font-bold text-navyink-900 mb-1">💬 Warm-up Discussion: Blind Dates</h3>
+              <ul class="space-y-1 text-navyink-700">
+                <li>• Have you ever been on a blind date? If yes, how was it? If no, would you like to?</li>
+                <li>• What does <strong>"to ghost someone"</strong> mean? <em>(To suddenly cut off all communication without explanation.)</em></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-navyink-900 mb-1">🗣️ Personalisation (Speaking)</h3>
+              <ul class="space-y-1 text-navyink-700">
+                <li>• How long did it take before you and your best friend really <strong>got to know each other</strong>?</li>
+                <li>• Is there anyone at work or in your family that you don't <strong>get on with</strong>?</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Match Sentences 1-9 with People (a-i) -->
+          <div class="mt-6">
+            <p class="text-xs sm:text-sm text-navyink-700 mb-3">
+              Read sentences <strong>1–9</strong> and match the phrases in <strong>bold</strong> with the people they describe (<strong>a–i</strong>):
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+              <div class="lg:col-span-8 space-y-2.5 text-xs sm:text-sm" id="rel-vocab-list"></div>
+              <div class="lg:col-span-4 p-4 rounded-xl soft-box space-y-1.5 text-xs sm:text-sm">
+                <h4 class="font-bold text-navyink-900 border-b border-skyice-200 pb-1.5 mb-2">People Reference Box (a–i)</h4>
+                <p><strong>a.</strong> my ex-wife</p>
+                <p><strong>b.</strong> a colleague</p>
+                <p><strong>c.</strong> my father-in-law</p>
+                <p><strong>d.</strong> my flatmates</p>
+                <p><strong>e.</strong> my niece</p>
+                <p><strong>f.</strong> an old school friend</p>
+                <p><strong>g.</strong> a neighbour</p>
+                <p><strong>h.</strong> a couple</p>
+                <p><strong>i.</strong> my little sister</p>
+              </div>
+            </div>
+            <div id="rel-vocab-fb" class="mt-4 font-bold text-sm text-center hidden"></div>
+          </div>
+
+          <!-- Reference Table: Relationship Phrases Explained -->
+          <div class="mt-7 pt-6 border-t border-skyice-200">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Vocabulary Reference Table</span>
+                <h3 class="font-serif font-bold text-xl text-navyink-900">Relationship Phrases: Meaning &amp; Grammar Notes</h3>
+              </div>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-skyice-300">
+              <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-navyink-900 text-white font-bold">
+                    <th class="p-3">Phrase</th>
+                    <th class="p-3">Clear Explanation</th>
+                    <th class="p-3">Grammar &amp; Usage Note</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-skyice-200 bg-white">
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">get to know (someone)</td>
+                    <td class="p-3">Spend time with someone so you gradually become friends.</td>
+                    <td class="p-3 text-navyink-700">Past: <em>got to know each other</em> (process, not a single moment).</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">work closely together</td>
+                    <td class="p-3">Collaborate a lot on the same tasks or projects at work.</td>
+                    <td class="p-3 text-navyink-700">Adverb <em>closely</em> goes after the verb <em>work</em>.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">have a baby</td>
+                    <td class="p-3">Become parents / give birth to a child.</td>
+                    <td class="p-3 text-navyink-700">Use <em>have</em> (not <em>do/make</em>): <em>They recently had a baby.</em></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">get divorced</td>
+                    <td class="p-3">Legally end a marriage.</td>
+                    <td class="p-3 text-navyink-700"><em>get divorced (from someone)</em>; state: <em>be divorced</em>.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">get on (well) with</td>
+                    <td class="p-3">Have a friendly, comfortable relationship with someone.</td>
+                    <td class="p-3 text-navyink-700">Requires preposition <strong>with</strong> before a person: <em>get on with my boss</em>.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">move in (next door / with)</td>
+                    <td class="p-3">Start living in a new house, flat, or with a partner.</td>
+                    <td class="p-3 text-navyink-700">Opposite: <em>move out</em> (leave a home).</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">share an apartment / flat</td>
+                    <td class="p-3">Live in the same flat with flatmates and split the rent.</td>
+                    <td class="p-3 text-navyink-700"><em>share a flat <strong>with</strong> someone</em>.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">a big age gap / be close</td>
+                    <td class="p-3">A large difference in years; <em>close</em> = having a strong emotional bond.</td>
+                    <td class="p-3 text-navyink-700"><em>There is a 10-year age gap between us.</em></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold text-coralpop-600">be dating (for a while)</td>
+                    <td class="p-3">Have a romantic relationship before marriage.</td>
+                    <td class="p-3 text-navyink-700">Often used in Continuous: <em>They've been dating for a year.</em></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Exercise 1B: Contextual Gap-Fill & Personal Sentences -->
+          <div class="mt-7 pt-6 border-t border-skyice-200 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Exercise 1B • Vocabulary in Context</span>
+                <h3 class="font-serif font-bold text-xl text-navyink-900">Complete the Mini-Dialogues with the Right Phrase</h3>
+              </div>
+              <button type="button" onclick="checkRelContext1B()" class="px-4 py-1.5 rounded-xl bg-tealcalm-600 text-white font-bold text-xs uppercase cursor-pointer">
+                Check 1B
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm" id="rel-context-1b-grid"></div>
+            <p id="rel-context-1b-fb" class="font-bold text-xs text-center hidden"></p>
+
+            <div class="p-4 rounded-xl soft-box space-y-2 text-xs sm:text-sm">
+              <label class="font-bold text-navyink-900 block">✍️ Speaking / Writing Task: Write 4–6 sentences about your friends and family using the phrases in bold:</label>
+              <textarea rows="3" placeholder="e.g., My sister and I are very close, even though there is a 7-year age gap between us. I get on really well with my colleagues..."
+                class="w-full p-2.5 rounded-lg bg-white border border-skyice-300 focus:outline-none focus:border-coralpop-500"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 0.1: READING — MAGDA FISHER'S POST ("TEN THINGS ABOUT ME") -->
+      <section data-mode="0" data-step="1" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 2 • Reading &amp; Question Exposure</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Magda Fisher: "Ten Things About Me"
+              </h2>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="playMagdaAudio()" class="px-3.5 py-2 rounded-xl bg-tealcalm-600 text-white font-bold text-xs cursor-pointer">▶ Listen to Magda</button>
+              <button type="button" onclick="pauseVoice()" class="px-2.5 py-2 rounded-xl soft-box font-bold text-xs cursor-pointer">⏸</button>
+              <button type="button" onclick="stopVoice()" class="px-2.5 py-2 rounded-xl soft-box font-bold text-xs cursor-pointer">⏹</button>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Magda's Social Post -->
+            <article class="lg:col-span-7 p-5 rounded-2xl bg-skyice-50 border-2 border-skyice-200 space-y-2.5 text-xs sm:text-sm leading-relaxed">
+              <div class="flex items-center gap-3 pb-2 border-b border-skyice-200">
+                <div class="w-10 h-10 rounded-full bg-navyink-900 text-white font-serif font-bold flex items-center justify-center">MF</div>
+                <div>
+                  <p class="font-bold text-navyink-900">Magda Fisher</p>
+                  <p class="text-[11px] text-navyink-700">Yesterday at 21:03 • Ten things about me</p>
+                </div>
+              </div>
+              <p><strong>1. Where do you like to relax?</strong> At the beach. I love the sound of the sea.</p>
+              <p><strong>2. How do you travel to work or college/school?</strong> I walk.</p>
+              <p><strong>3. How long does your journey to work take?</strong> About 20 seconds — from my bedroom to my home office.</p>
+              <p><strong>4. What's your favourite drink?</strong> Coffee. I have five or six cups a day. Shh, don't tell anyone!</p>
+              <p><strong>5. Whose name is first in your phone contacts?</strong> Alba — she's my sister's best friend. <strong>Do you know the person well?</strong> Actually, I've only met her once!</p>
+              <p><strong>6. When are you happiest?</strong> When I'm visiting somewhere new. <strong>Why?</strong> Because new places are exciting.</p>
+              <p><strong>7. What kind of music do you like?</strong> 1970s rock music. Thanks a lot Dad!</p>
+              <p><strong>8. Which animals do you like?</strong> Cats, especially my cat Ziggy.</p>
+              <p><strong>9. How many pairs of shoes do you own?</strong> I've got over 50. I only wear one old pair of trainers. My family and friends don't know about all my shoes — but that's only because I keep them in boxes!</p>
+              <p><strong>10. Who is your best friend?</strong> Nina. We have so much fun together. <strong>Are you a good friend to him or her?</strong> I think so...</p>
+            </article>
+
+            <!-- Comprehension Check -->
+            <div class="lg:col-span-5 space-y-3 text-xs sm:text-sm">
+              <h3 class="font-serif font-bold text-lg text-navyink-900">Comprehension Questions</h3>
+              <div class="p-3.5 rounded-xl soft-box space-y-1.5">
+                <p class="font-bold">1. Where does Magda work?</p>
+                <select id="magda-q1" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                  <option value="">Choose answer...</option>
+                  <option value="home">At home (in her home office)</option>
+                  <option value="cafe">In a beach café</option>
+                </select>
+              </div>
+              <div class="p-3.5 rounded-xl soft-box space-y-1.5">
+                <p class="font-bold">2. Who is Magda's best friend?</p>
+                <select id="magda-q2" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                  <option value="">Choose answer...</option>
+                  <option value="Alba">Alba (her sister's friend)</option>
+                  <option value="Nina">Nina</option>
+                </select>
+              </div>
+              <div class="p-3.5 rounded-xl soft-box space-y-1.5">
+                <p class="font-bold">3. What do Magda's family and friends NOT know about her?</p>
+                <select id="magda-q3" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                  <option value="">Choose answer...</option>
+                  <option value="shoes">She owns over 50 pairs of shoes (kept in boxes)</option>
+                  <option value="coffee">She hates coffee</option>
+                </select>
+              </div>
+              <button type="button" onclick="checkMagdaReading()" class="w-full py-2.5 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+                Check Reading
+              </button>
+              <p id="magda-fb" class="font-bold text-xs text-center hidden"></p>
+
+              <!-- Exercise 2B: Reconstruct Magda's Questions -->
+              <div class="pt-4 mt-4 border-t border-skyice-200 space-y-2.5">
+                <h4 class="font-serif font-bold text-base text-navyink-900">2B. Complete the Questions to Magda</h4>
+                <div class="p-3 rounded-xl soft-box space-y-2">
+                  <p>1. <input type="text" id="mq-build-1" placeholder="Where / she / like..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> to relax? → <em>At the beach.</em></p>
+                  <p>2. <input type="text" id="mq-build-2" placeholder="How long / her journey..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> take? → <em>About 20 seconds.</em></p>
+                  <p>3. <input type="text" id="mq-build-3" placeholder="How many / shoes..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> she own? → <em>Over 50 pairs.</em></p>
+                </div>
+                <button type="button" onclick="checkMagdaQBuild()" class="w-full py-2 rounded-xl bg-tealcalm-600 text-white font-bold text-xs uppercase cursor-pointer">
+                  Check Questions
+                </button>
+                <p id="mq-build-fb" class="font-bold text-xs text-center hidden"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 0.2: GRAMMAR CLARIFICATION — WORD ORDER IN QUESTIONS -->
+      <section data-mode="0" data-step="2" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 3A • Grammar Clarification</span>
+          <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5 mb-4">
+            Word Order in Questions (QUASI / ASI Formula)
+          </h2>
+
+          <!-- Formula Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-navyink-900 text-white space-y-1.5">
+              <span class="text-[11px] font-bold uppercase text-coralpop-500">1. Main Verbs (Present / Past / Continuous / Perfect)</span>
+              <p class="font-bold text-base">(Question word +) Auxiliary + Subject + Verb</p>
+              <p class="text-skyice-200 italic">• How do you travel to work?</p>
+              <p class="text-skyice-200 italic">• Do you know the person well?</p>
+            </div>
+            <div class="p-4 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 space-y-1.5">
+              <span class="text-[11px] font-bold uppercase text-tealcalm-600">2. Questions with "be" (No do/does/did!)</span>
+              <p class="font-bold text-base text-navyink-900">(Question word +) am / is / are / was / were + Subject</p>
+              <p class="text-navyink-700 italic">• What is your favourite drink?</p>
+              <p class="text-navyink-700 italic">• Are you a good friend to her?</p>
+            </div>
+          </div>
+
+          <!-- Full Tense Table from Photo 1 -->
+          <div class="overflow-x-auto rounded-xl border border-skyice-200">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-skyice-100 text-navyink-900 font-bold">
+                  <th class="p-3 border-b border-skyice-200">Tense</th>
+                  <th class="p-3 border-b border-skyice-200">(Question word)</th>
+                  <th class="p-3 border-b border-skyice-200 text-coralpop-600">Auxiliary</th>
+                  <th class="p-3 border-b border-skyice-200">Subject</th>
+                  <th class="p-3 border-b border-skyice-200 text-tealcalm-600">Verb</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-skyice-200 bg-white">
+                <tr><td class="p-3 font-bold">Present simple</td><td class="p-3">— / — / What</td><td class="p-3 font-bold text-coralpop-600">Do / Do / does</td><td class="p-3">you / they / he</td><td class="p-3 font-bold text-tealcalm-600">work? / live near here? / do?</td></tr>
+                <tr><td class="p-3 font-bold">Past simple</td><td class="p-3">— / — / Why</td><td class="p-3 font-bold text-coralpop-600">Did / Did / did</td><td class="p-3">you / they / he</td><td class="p-3 font-bold text-tealcalm-600">get home OK? / speak to you? / go there?</td></tr>
+                <tr><td class="p-3 font-bold">Present continuous</td><td class="p-3">— / — / Where</td><td class="p-3 font-bold text-coralpop-600">Is / Are / are</td><td class="p-3">she / they / you</td><td class="p-3 font-bold text-tealcalm-600">visiting? / driving here? / staying?</td></tr>
+                <tr><td class="p-3 font-bold">Present perfect</td><td class="p-3">— / — / How long</td><td class="p-3 font-bold text-coralpop-600">Has / Have / have</td><td class="p-3">she / they / you</td><td class="p-3 font-bold text-tealcalm-600">decided? / arrived? / lived here?</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Detailed Grammar Explanation & Common Mistakes Table -->
+          <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs sm:text-sm">
+            <div class="overflow-x-auto rounded-xl border border-skyice-300">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-navyink-900 text-white font-bold">
+                    <th class="p-3" colspan="2">How QUASI Works (Step-by-Step Breakdown)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-skyice-200 bg-white">
+                  <tr>
+                    <td class="p-2.5 font-extrabold text-coralpop-600 w-36">1. Question word</td>
+                    <td class="p-2.5">Optional for Yes/No questions. Always first in Wh-questions (<em>Where, Why, How long</em>).</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-extrabold text-coralpop-600">2. Auxiliary verb</td>
+                    <td class="p-2.5">Helper verb showing tense: <strong>do/does</strong> (Present), <strong>did</strong> (Past), <strong>am/is/are</strong> (Continuous), <strong>have/has</strong> (Perfect), <strong>can/will/should</strong> (Modals).</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-extrabold text-coralpop-600">3. Subject</td>
+                    <td class="p-2.5">The person or thing doing the action (<em>you, she, the train, your parents</em>). Always goes <strong>after</strong> the auxiliary!</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-extrabold text-tealcalm-600">4. Infinitive / Main verb</td>
+                    <td class="p-2.5">After <em>do/does/did/can</em>, always use the <strong>base form (V1)</strong> without <em>-s</em> or <em>-ed</em>!</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-skyice-300">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-coralpop-500 text-white font-bold">
+                    <th class="p-3">❌ Common Student Mistake</th>
+                    <th class="p-3">✅ Correct Form &amp; Rule</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-skyice-200 bg-white">
+                  <tr>
+                    <td class="p-2.5 text-coralpop-600 line-through">Where you live?</td>
+                    <td class="p-2.5"><strong>Where do you live?</strong> (Missing auxiliary <em>do</em>)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 text-coralpop-600 line-through">What does she wants?</td>
+                    <td class="p-2.5"><strong>What does she want?</strong> (No <em>-s</em> after <em>does</em>)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 text-coralpop-600 line-through">Did you saw him?</td>
+                    <td class="p-2.5"><strong>Did you see him?</strong> (Use V1 <em>see</em> after <em>did</em>)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 text-coralpop-600 line-through">Do you are tired?</td>
+                    <td class="p-2.5"><strong>Are you tired?</strong> (Never use <em>do</em> with <em>be</em>!)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Exercise 3A-2: Spot & Correct Word Order Mistakes -->
+          <div class="mt-7 pt-6 border-t border-skyice-200 space-y-3 text-xs sm:text-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Exercise 3A-2 • Error Correction</span>
+                <h3 class="font-serif font-bold text-xl text-navyink-900">Fix the Word Order Mistakes in These 6 Questions</h3>
+              </div>
+              <button type="button" onclick="checkWordOrderFix()" class="px-4 py-1.5 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+                Check Fixes
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="wo-fix-grid"></div>
+            <p id="wo-fix-fb" class="font-bold text-xs text-center hidden"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 0.3: QUESTION WORDS (WHAT VS WHICH) & 10-GAP PRACTICE -->
+      <section data-mode="0" data-step="3" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 3B • Question Words Practice</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Complete the Questions (1–10) &amp; What vs. Which
+              </h2>
+            </div>
+            <button type="button" onclick="checkQuestionWords10()" class="px-4 py-2 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+              Check 1–10
+            </button>
+          </div>
+
+          <!-- What vs Which Rule Box -->
+          <div class="mt-5 p-4 rounded-xl bg-tealcalm-50 border border-tealcalm-600/40 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div>
+              <span class="px-2 py-0.5 rounded bg-navyink-900 text-white font-bold text-[11px]">WHAT (General / Unlimited)</span>
+              <p class="mt-1.5 font-semibold"><strong>What</strong> is the tallest building in the world? <em>(There are many buildings.)</em></p>
+            </div>
+            <div>
+              <span class="px-2 py-0.5 rounded bg-coralpop-500 text-white font-bold text-[11px]">WHICH (Limited Choice: 2 or a few)</span>
+              <p class="mt-1.5 font-semibold"><strong>Which</strong> building is taller, Big Ben or the Eiffel Tower?</p>
+            </div>
+          </div>
+
+          <!-- Complete Question Words Reference Table -->
+          <div class="mt-5 overflow-x-auto rounded-xl border border-skyice-300 text-xs sm:text-sm">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-navyink-900 text-white font-bold">
+                  <th class="p-3">Question Word</th>
+                  <th class="p-3">What It Asks About</th>
+                  <th class="p-3">Example Question &amp; Answer</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-skyice-200 bg-white">
+                <tr>
+                  <td class="p-2.5 font-extrabold text-coralpop-600">What / What kind of</td>
+                  <td class="p-2.5">Things, ideas, jobs / specific type or category</td>
+                  <td class="p-2.5"><em>What kind of music do you like? — Rock music.</em></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-extrabold text-coralpop-600">Which</td>
+                  <td class="p-2.5">Choice between a small, limited number of options</td>
+                  <td class="p-2.5"><em>Which tea do you prefer, green or black?</em></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-extrabold text-coralpop-600">Who / Whose</td>
+                  <td class="p-2.5">Person / Possession (owner — careful: <em>Whose</em> ≠ <em>Who's</em>!)</td>
+                  <td class="p-2.5"><em>Whose phone is this? — It's Magda's.</em></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-extrabold text-coralpop-600">How long / How far</td>
+                  <td class="p-2.5">Duration of time / Physical distance</td>
+                  <td class="p-2.5"><em>How long does it take? — 20 minutes. / How far is it? — 5 km.</em></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-extrabold text-coralpop-600">How much / How many</td>
+                  <td class="p-2.5">Uncountable nouns (time, money) / Plural countable nouns</td>
+                  <td class="p-2.5"><em>How much time do you spend online? / How many shoes do you own?</em></td>
+                </tr>
+                <tr class="bg-skyice-50">
+                  <td class="p-2.5 font-extrabold text-tealcalm-600">Prepositions at the end!</td>
+                  <td class="p-2.5">In English, prepositions (<em>to, with, for, about, from</em>) stay at the <strong>end</strong> of the question.</td>
+                  <td class="p-2.5"><em>Who do you live <strong>with</strong>? / Where are you <strong>from</strong>?</em> (Not: <s>With who do you live?</s>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Word Box -->
+          <div class="mt-4 p-3 rounded-xl soft-box text-xs font-bold flex flex-wrap gap-2">
+            <span class="text-coralpop-600 uppercase">Word Box:</span>
+            <span>Do</span> • <span>How</span> • <span>How much</span> • <span class="line-through opacity-50">What</span> • <span>What kind</span> • <span>When</span> • <span>Where</span> • <span>Which</span> • <span>Who</span> • <span>Why</span>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm" id="qw-10-grid"></div>
+          <p id="qw-10-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+
+          <!-- Exercise 3B-2: What vs Which & How-combinations -->
+          <div class="mt-7 pt-6 border-t border-skyice-200 space-y-3 text-xs sm:text-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Exercise 3B-2 • Precision Drill</span>
+                <h3 class="font-serif font-bold text-xl text-navyink-900">What vs. Which &amp; Question Combinations (6 items)</h3>
+              </div>
+              <button type="button" onclick="checkWhatWhichDrill()" class="px-4 py-1.5 rounded-xl bg-tealcalm-600 text-white font-bold text-xs uppercase cursor-pointer">
+                Check Drill
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="what-which-grid"></div>
+            <p id="what-which-fb" class="font-bold text-xs text-center hidden"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 0.4: OBJECT QUESTIONS VS. SUBJECT QUESTIONS -->
+      <section data-mode="0" data-step="4" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 4 • Core Grammar Focus</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Object Questions vs. Subject Questions
+              </h2>
+            </div>
+            <button type="button" onclick="checkSubjObjQuiz()" class="px-4 py-2 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+              Check Quiz
+            </button>
+          </div>
+
+          <!-- Side-by-Side Open Book Comparison -->
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5 text-xs sm:text-sm">
+            <div class="p-5 rounded-2xl bg-skyice-50 border-2 border-navyink-800 space-y-2">
+              <h3 class="font-serif font-bold text-xl text-navyink-900">1. Object Questions (Use do / does / did)</h3>
+              <p class="p-2.5 rounded-lg bg-white border font-semibold">
+                <span class="text-coralpop-600 font-extrabold">Who</span> <span class="underline">did</span> <strong>you</strong> have lunch with? → I had lunch with <span class="text-coralpop-600 font-extrabold">my boss</span>.
+              </p>
+              <p class="text-navyink-700">The question word asks about the <strong>OBJECT</strong> (the receiver of the action). Normal question word order applies: <strong>Qw + do/does/did + Subject + V1</strong>.</p>
+              <p class="text-tealcalm-600 font-bold">✓ What did you see? &nbsp;|&nbsp; ✗ <span class="line-through text-coralpop-600">What saw you?</span></p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-coralpop-50 border-2 border-coralpop-500 space-y-2">
+              <h3 class="font-serif font-bold text-xl text-coralpop-600">2. Subject Questions (NO do / does / did!)</h3>
+              <p class="p-2.5 rounded-lg bg-white border font-semibold">
+                <span class="text-coralpop-600 font-extrabold">Who</span> <strong>called</strong> the bank? → <span class="text-coralpop-600 font-extrabold">Ben</span> called the bank.
+              </p>
+              <p class="text-navyink-700">When <strong>Who / What / Which</strong> IS the subject (the person/thing doing the action), do <strong>NOT</strong> use <em>do, does,</em> or <em>did</em>. Keep positive statement word order!</p>
+              <p class="text-tealcalm-600 font-bold">✓ Who called the bank? &nbsp;|&nbsp; ✗ <span class="line-through text-coralpop-600">Who did call the bank?</span></p>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Decision Table: Subject vs Object Questions -->
+          <div class="mt-5 overflow-x-auto rounded-xl border border-skyice-300 text-xs sm:text-sm">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-navyink-900 text-white font-bold">
+                  <th class="p-3">Feature</th>
+                  <th class="p-3 bg-navyink-800">Object Question</th>
+                  <th class="p-3 bg-coralpop-600">Subject Question</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-skyice-200 bg-white">
+                <tr>
+                  <td class="p-2.5 font-bold">What is unknown?</td>
+                  <td class="p-2.5">The <strong>object</strong> (we already know WHO did the action).</td>
+                  <td class="p-2.5">The <strong>subject / doer</strong> (we don't know WHO/WHAT did it).</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold">Formula</td>
+                  <td class="p-2.5 font-mono text-xs font-bold text-navyink-900">Who / What + do / does / did + Subject + V1?</td>
+                  <td class="p-2.5 font-mono text-xs font-bold text-coralpop-600">Who / What + Verb (V1+s / V2 / has V3)?</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold">Direct Contrast Pair 1</td>
+                  <td class="p-2.5"><em>Who <strong>did</strong> Romeo love?</em> (We know Romeo loved someone → Juliet)</td>
+                  <td class="p-2.5"><em>Who <strong>loved</strong> Juliet?</em> (We want to know who did the loving → Romeo)</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold">Direct Contrast Pair 2</td>
+                  <td class="p-2.5"><em>What <strong>did</strong> you break?</em> (You broke something → a glass)</td>
+                  <td class="p-2.5"><em>What <strong>broke</strong> the window?</em> (Something broke it → the ball)</td>
+                </tr>
+                <tr class="bg-skyice-50">
+                  <td class="p-2.5 font-bold text-tealcalm-600">Quick Exam Trick</td>
+                  <td class="p-2.5" colspan="2">Replace <strong>Who/What</strong> with <strong>"Someone/Something"</strong>. If the sentence still makes sense in normal order (<em>"<strong>Someone</strong> called the bank"</em>), it is a <strong>Subject Question</strong> → NO <em>do/does/did</em>!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Kahoot-style Subject vs Object Practice (10 items) -->
+          <div class="mt-6 space-y-2.5 text-xs sm:text-sm" id="subj-obj-quiz-list"></div>
+          <p id="subj-obj-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+
+          <!-- Exercise 4B: Write Subject or Object Questions for the Bold Words -->
+          <div class="mt-7 pt-6 border-t border-skyice-200 space-y-3 text-xs sm:text-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Exercise 4B • Active Production</span>
+                <h3 class="font-serif font-bold text-xl text-navyink-900">Write a Question Asking About the <u>Underlined</u> Part</h3>
+                <p class="text-xs text-navyink-700">Decide first: is the underlined word the <strong>Subject</strong> (no <em>did/does</em>) or the <strong>Object</strong> (use <em>did/does</em>)?</p>
+              </div>
+              <button type="button" onclick="checkWriteSubjObj()" class="px-4 py-1.5 rounded-xl bg-coralpop-500 text-white font-bold text-xs uppercase cursor-pointer">
+                Check My Questions
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="write-so-grid"></div>
+            <p id="write-so-fb" class="font-bold text-xs text-center hidden"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 0.5: JEOPARDY GAME & SPEAKING INTERVIEW -->
+      <section data-mode="0" data-step="5" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 5 • Freer Practice &amp; Review Game</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Questions &amp; Relationships Jeopardy Board
+              </h2>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="px-3.5 py-1.5 rounded-xl bg-navyink-900 text-white font-bold text-xs">Score: <span id="jeop-score">0</span> pts</span>
+              <button type="button" onclick="initJeopardy()" class="px-3.5 py-1.5 rounded-xl soft-box font-bold text-xs cursor-pointer">Reset Board</button>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-3 gap-3 text-center" id="jeopardy-board"></div>
+
+          <!-- Pop-up Question Card -->
+          <div id="jeop-modal" class="hidden mt-5 p-5 rounded-2xl bg-navyink-900 text-white border-2 border-coralpop-500 space-y-3">
+            <div class="flex justify-between items-center text-xs font-bold text-coralpop-500">
+              <span id="jeop-cat-label">CATEGORY • 100 PTS</span>
+              <button type="button" onclick="document.getElementById('jeop-modal').classList.add('hidden')" class="text-white cursor-pointer">✕ Close</button>
+            </div>
+            <p class="font-serif text-lg sm:text-xl font-bold" id="jeop-q-text"></p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="jeop-opts"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- MODE 1: HOMEWORK (PHOTO 2 — 4 STRUCTURED TASKS)                  -->
+    <!-- ================================================================ -->
+    <div id="mode-1" class="mode-wrap hidden space-y-6">
+
+      <!-- HW 1.0: Match Question Words with Answers (1–11) -->
+      <section data-mode="1" data-step="0" class="step-panel animate-step">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Homework • Task 1</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Match the Question Words (1–11) with the Answers (a–k)
+              </h2>
+            </div>
+            <button type="button" onclick="checkHwQwMatch()" class="px-4 py-2 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+              Check 1–11
+            </button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm" id="hw-qw-grid"></div>
+          <p id="hw-qw-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+        </div>
+      </section>
+
+      <!-- HW 1.1: Reading "Are we really so different?" + Ex 5A & 5B -->
+      <section data-mode="1" data-step="1" class="step-panel hidden animate-step space-y-6">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Homework • Task 2 (Reading &amp; Vocabulary 5A / 5B)</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Are We Really So Different?
+              </h2>
+            </div>
+            <button type="button" onclick="checkHwArticleAll()" class="px-4 py-2 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+              Check 5A &amp; 5B
+            </button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Article -->
+            <article class="lg:col-span-5 p-5 rounded-2xl soft-box space-y-3 text-xs sm:text-sm leading-relaxed">
+              <p>
+                Do you ever look at people around you and say to yourself, 'Wow, we're all so different!'? Well, recently I had the opposite idea. I think that in many ways we're all the same. We like, feel and do many of the same things.
+              </p>
+              <p>
+                What kind of things do we all do at home? We all dance in the kitchen to our favourite music and we look in the fridge for no reason. We <strong>hide</strong> things. For example, we put a key behind a book on a shelf so that no one else can find it. We <strong>wake up</strong> early at weekends when we don't have college or work. We look at our phone in bed, just before we <strong>go to sleep</strong>.
+              </p>
+              <p>
+                What about outside the home? Nobody likes <strong>waiting</strong>, so it's not surprising that we all hate traffic and queues. In the cinema we all <strong>cry</strong> at the sad part of the film. We <strong>miss</strong> our friends when they go away. We <strong>join</strong> gyms and pay a lot of money to be a member, and then we never go.
+              </p>
+              <p>
+                Do you buy things and use them only once? Do you <strong>pack</strong> extra clothes in your suitcase when you go on holiday? Of course you do. We all do.
+              </p>
+            </article>
+
+            <!-- 5A & 5B Exercises -->
+            <div class="lg:col-span-7 space-y-5 text-xs sm:text-sm">
+              <div class="p-4 rounded-xl bg-skyice-50 border border-skyice-200 space-y-2">
+                <h3 class="font-bold text-navyink-900">5A. Match the words in bold with meanings 1–8:</h3>
+                <div id="hw-5a-list" class="space-y-1.5"></div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-tealcalm-50 border border-tealcalm-600/30 space-y-2">
+                <h3 class="font-bold text-navyink-900">5B. Complete questions 1–7 with the bold words:</h3>
+                <div id="hw-5b-list" class="space-y-1.5"></div>
+              </div>
+            </div>
+          </div>
+          <p id="hw-art-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+        </div>
+      </section>
+
+      <!-- HW 1.2: Relationship Phrases Gap-Fill (1–9) -->
+      <section data-mode="1" data-step="2" class="step-panel hidden animate-step">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Homework • Task 3 (Grammar + Lexis Consolidation)</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Complete Sentences 1–9 Using the Correct Form of the Phrases
+              </h2>
+              <p class="text-xs text-navyink-700 mt-1">
+                Pay attention to verb tenses! (e.g., <em>had, got to know, dating, share an apartment, get divorced, moved in, work closely together</em>)
+              </p>
+            </div>
+            <button type="button" onclick="checkHwRelSentences()" class="px-4 py-2 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
+              Check 1–9
+            </button>
+          </div>
+
+          <div class="mt-4 p-3 rounded-xl soft-box text-xs font-bold flex flex-wrap gap-2">
+            <span>get to know each other</span> • <span>work closely together</span> • <span>have a baby</span> • <span>get divorced</span> • <span>get on with</span> • <span>move in</span> • <span>share an apartment</span> • <span>big age gap</span> • <span>dating</span>
+          </div>
+
+          <div class="mt-5 space-y-2.5 text-xs sm:text-sm" id="hw-rel-9-list"></div>
+          <p id="hw-rel-9-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+        </div>
+      </section>
+
+      <!-- HW 1.3: Subject & Object Questions Gameshow Quiz -->
+      <section data-mode="1" data-step="3" class="step-panel hidden animate-step">
+        <div class="lesson-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-tealcalm-600">Homework • Task 4 (Gameshow Quiz)</span>
+              <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
+                Subject &amp; Object Questions — Final Mastery Check
+              </h2>
+            </div>
+            <button type="button" onclick="checkHwGameshow()" class="px-4 py-2 rounded-xl bg-coralpop-500 hover:bg-coralpop-600 text-white font-bold text-xs uppercase cursor-pointer">
+              Submit Final Quiz
+            </button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm" id="hw-gameshow-grid"></div>
+          <p id="hw-gs-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="mt-7 flex items-center justify-between bg-white px-5 py-3.5 rounded-xl border border-skyice-200 shadow-2xs">
+      <button type="button" id="bot-prev" onclick="prevStep()" class="px-4 py-2 rounded-lg soft-box hover:bg-skyice-100 font-bold text-xs sm:text-sm disabled:opacity-30 cursor-pointer">
+        ← Previous
+      </button>
+      <span id="bot-label" class="font-serif font-bold text-sm sm:text-base text-navyink-900">
+        Lesson • Step 1 of 6
+      </span>
+      <button type="button" id="bot-next" onclick="nextStep()" class="px-5 py-2 rounded-lg bg-navyink-900 hover:bg-coralpop-500 text-white font-bold text-xs sm:text-sm disabled:opacity-30 transition cursor-pointer">
+        Next →
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    const modesConfig = [
+      {
+        title: 'Lesson',
+        steps: ['1. Relationships', '2. Magda’s Post', '3. Word Order', '4. Question Words', '5. Object vs Subject', '6. Jeopardy']
+      },
+      {
+        title: 'Homework',
+        steps: ['HW 1. Match Q-Words', 'HW 2. Reading & 5A/5B', 'HW 3. Gap-Fill (1–9)', 'HW 4. Gameshow Quiz']
+      }
+    ];
+
+    let curMode = 0;
+    let curStep = 0;
+    let voiceRate = 0.95;
+
+    function showToast(title, msg) {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-msg').textContent = msg;
+      box.classList.remove('hidden');
+      clearTimeout(window.tTimer);
+      window.tTimer = setTimeout(() => box.classList.add('hidden'), 3000);
+    }
+
+    function setVoiceSpeed(r) {
+      voiceRate = r;
+      document.getElementById('vspd-slow').className = r < 0.85 ? 'px-2 py-0.5 rounded bg-navyink-900 text-white cursor-pointer' : 'px-2 py-0.5 rounded text-navyink-700 cursor-pointer';
+      document.getElementById('vspd-norm').className = r >= 0.85 ? 'px-2 py-0.5 rounded bg-navyink-900 text-white cursor-pointer' : 'px-2 py-0.5 rounded text-navyink-700 cursor-pointer';
+      showToast('Audio Speed', r < 0.85 ? 'Set to 0.75× (Slow)' : 'Set to 1.0× (Normal)');
+    }
+
+    function switchMode(m) {
+      curMode = m;
+      curStep = 0;
+      stopVoice();
+      [0, 1].forEach((i) => {
+        document.getElementById(`mode-${i}`).classList.toggle('hidden', i !== m);
+        document.getElementById(`mode-btn-${i}`).className = i === m
+          ? 'px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer bg-navyink-900 text-white shadow-2xs'
+          : 'px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer text-navyink-700 hover:text-navyink-900';
+      });
+      renderSubTabs();
+      goToStep(0);
+    }
+
+    function renderSubTabs() {
+      const nav = document.getElementById('sub-tabs');
+      nav.innerHTML = '';
+      modesConfig[curMode].steps.forEach((lbl, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = lbl;
+        b.onclick = () => goToStep(idx);
+        b.className = idx === curStep
+          ? 'px-3.5 py-1.5 rounded-full bg-coralpop-500 text-white font-bold text-xs whitespace-nowrap cursor-pointer shadow-2xs'
+          : 'px-3.5 py-1.5 rounded-full soft-box hover:bg-skyice-200 text-navyink-800 font-semibold text-xs whitespace-nowrap cursor-pointer';
+        nav.appendChild(b);
+      });
+    }
+
+    function goToStep(s) {
+      const max = modesConfig[curMode].steps.length;
+      if (s < 0 || s >= max) return;
+      curStep = s;
+      stopVoice();
+      document.querySelectorAll(`.step-panel[data-mode="${curMode}"]`).forEach((el) => {
+        el.classList.toggle('hidden', Number(el.dataset.step) !== s);
+      });
+      renderSubTabs();
+      document.getElementById('top-counter').textContent = `${s + 1} / ${max}`;
+      document.getElementById('bot-label').textContent = `${modesConfig[curMode].title} • Step ${s + 1} of ${max}`;
+      document.getElementById('top-prev').disabled = s === 0;
+      document.getElementById('bot-prev').disabled = s === 0;
+      document.getElementById('top-next').disabled = s === max - 1;
+      document.getElementById('bot-next').disabled = s === max - 1;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevStep() { goToStep(curStep - 1); }
+    function nextStep() { goToStep(curStep + 1); }
+
+    /* Audio Helpers */
+    function playMagdaAudio() {
+      if (!('speechSynthesis' in window)) return;
+      if (window.speechSynthesis.paused) { window.speechSynthesis.resume(); return; }
+      stopVoice();
+      const text = "Ten things about me, by Magda Fisher. One: Where do you like to relax? At the beach. I love the sound of the sea. Two: How do you travel to work? I walk. Three: How long does your journey take? About twenty seconds, from my bedroom to my home office! Four: What is your favourite drink? Coffee. I have five or six cups a day. Five: Whose name is first in your phone contacts? Alba, she is my sister's best friend. Six: When are you happiest? When I am visiting somewhere new. Seven: What kind of music do you like? Nineteen-seventies rock music. Eight: Which animals do you like? Cats, especially my cat Ziggy. Nine: How many pairs of shoes do you own? Over fifty, but I keep them in boxes! Ten: Who is your best friend? Nina. We have so much fun together.";
+      const u = new SpeechSynthesisUtterance(text);
+      const voices = window.speechSynthesis.getVoices().filter((v) => /^en/i.test(v.lang));
+      const f = voices.find((v) => /female|aria|jenny|samantha|libby/i.test(v.name)) || voices[0];
+      if (f) u.voice = f;
+      u.rate = voiceRate;
+      u.pitch = 1.1;
+      window.speechSynthesis.speak(u);
+    }
+
+    function pauseVoice() { if ('speechSynthesis' in window && window.speechSynthesis.speaking) window.speechSynthesis.pause(); }
+    function stopVoice() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+
+    /* ------------------------------------------------------------
+       LESSON STEP 1: RELATIONSHIP VOCABULARY (1-9)
+    ------------------------------------------------------------ */
+    const relVocabItems = [
+      { n: 1, text: 'We <strong>got to know each other</strong> first because we sat next to each other in history class.', ans: 'f' },
+      { n: 2, text: "We <strong>work quite closely together</strong>, but to be honest I haven't got to know him outside work.", ans: 'b' },
+      { n: 3, text: 'My brother and his wife have recently <strong>had a baby</strong> girl.', ans: 'e' },
+      { n: 4, text: 'She kept the flat when we <strong>got divorced</strong>.', ans: 'a' },
+      { n: 5, text: "He doesn't think I'm good enough for his daughter, so I <strong>don't really get on with him</strong>.", ans: 'c' },
+      { n: 6, text: 'She <strong>moved in</strong> next door to us last year and we got on immediately.', ans: 'g' },
+      { n: 7, text: 'They were both looking for someone to <strong>share an apartment</strong> with too.', ans: 'd' },
+      { n: 8, text: "There's a <strong>big age gap</strong> between us, but we're <strong>very close</strong> because I often picked her up from school.", ans: 'i' },
+      { n: 9, text: "They've been <strong>dating for a while</strong> now, but I don't know if they have plans to get married.", ans: 'h' }
+    ];
+
+    function renderRelVocab() {
+      const list = document.getElementById('rel-vocab-list');
+      relVocabItems.forEach((item) => {
+        const row = document.createElement('div');
+        row.id = `rv-row-${item.n}`;
+        row.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-3';
+        row.innerHTML = `
+          <span><strong>${item.n}.</strong> ${item.text}</span>
+          <select id="rv-sel-${item.n}" class="shrink-0 px-2.5 py-1 rounded-lg border border-skyice-300 bg-white font-bold text-xs">
+            <option value="">a–i?</option>
+            ${['a','b','c','d','e','f','g','h','i'].map((l) => `<option value="${l}">${l}</option>`).join('')}
+          </select>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function checkRelVocab() {
+      let ok = 0;
+      relVocabItems.forEach((item) => {
+        const val = document.getElementById(`rv-sel-${item.n}`).value;
+        const row = document.getElementById(`rv-row-${item.n}`);
+        if (val === item.ans) {
+          ok++;
+          row.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex items-center justify-between gap-3';
+        } else {
+          row.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex items-center justify-between gap-3';
+        }
+      });
+      const fb = document.getElementById('rel-vocab-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 9 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 9 ? '🎉 Brilliant! All 9 relationship phrases matched!' : `Matched ${ok}/9 correctly.`;
+    }
+
+    function checkMagdaReading() {
+      const ok = document.getElementById('magda-q1').value === 'home' && document.getElementById('magda-q2').value === 'Nina' && document.getElementById('magda-q3').value === 'shoes';
+      const fb = document.getElementById('magda-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
+      fb.textContent = ok ? '✓ All 3 reading answers are correct!' : 'Check Magda’s post again and retry.';
+    }
+
+    /* Exercise 1B: Relationship Mini-Dialogues */
+    const relContext1BData = [
+      { pre: 'A: Are Mark and Lisa still married? — B: No, they', post: 'two years ago.', opts: ['got divorced', 'moved in', 'shared an apartment'], ans: 'got divorced' },
+      { pre: 'A: Rent is so expensive! — B: Why don’t you', post: 'with a friend?', opts: ['share an apartment', 'have a baby', 'get divorced'], ans: 'share an apartment' },
+      { pre: 'A: Do you like your new manager? — B: Yes, we', post: 'really well!', opts: ['get on', 'ghost', 'age gap'], ans: 'get on' },
+      { pre: 'A: How long have Tim and Maya been together? — B: They’ve been', post: 'for six months.', opts: ['dating', 'divorced', 'colleagues'], ans: 'dating' },
+      { pre: 'A: Your husband is 42 and you’re 26! — B: Yes, there’s a', post: ', but we’re very happy.', opts: ['big age gap', 'close friend', 'father-in-law'], ans: 'big age gap' },
+      { pre: 'A: Who lives in apartment 4B? — B: A young couple', post: 'last weekend.', opts: ['moved in', 'got divorced', 'worked closely'], ans: 'moved in' }
+    ];
+
+    function renderRelContext1B() {
+      const grid = document.getElementById('rel-context-1b-grid');
+      relContext1BData.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.id = `rc1b-card-${i}`;
+        div.className = 'p-3 rounded-xl soft-box space-y-1.5';
+        div.innerHTML = `
+          <p>${item.pre}
+            <select id="rc1b-sel-${i}" class="mx-1 px-2 py-0.5 rounded border border-navyink-800 bg-white font-bold text-xs">
+              <option value="">---</option>
+              ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+            </select>
+            ${item.post}
+          </p>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkRelContext1B() {
+      let ok = 0;
+      relContext1BData.forEach((item, i) => {
+        const val = document.getElementById(`rc1b-sel-${i}`).value;
+        const card = document.getElementById(`rc1b-card-${i}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 space-y-1.5';
+        } else {
+          card.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 space-y-1.5';
+        }
+      });
+      const fb = document.getElementById('rel-context-1b-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 6 ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
+      fb.textContent = ok === 6 ? '✓ All 6 mini-dialogues completed!' : `Got ${ok}/6 right.`;
+    }
+
+    /* Exercise 2B: Reconstruct Questions to Magda */
+    function checkMagdaQBuild() {
+      const norm = (s) => s.trim().toLowerCase().replace(/[?.!]/g, '').replace(/\s+/g, ' ');
+      const ok1 = norm(document.getElementById('mq-build-1').value) === 'where does she like';
+      const ok2 = norm(document.getElementById('mq-build-2').value) === 'how long does her journey';
+      const ok3 = norm(document.getElementById('mq-build-3').value) === 'how many pairs of shoes does' || norm(document.getElementById('mq-build-3').value) === 'how many shoes does';
+      const fb = document.getElementById('mq-build-fb');
+      fb.classList.remove('hidden');
+      if (ok1 && ok2 && ok3) {
+        fb.className = 'font-bold text-xs text-center text-tealcalm-600';
+        fb.textContent = '✓ Spot on! 1. Where does she like  2. How long does her journey  3. How many pairs of shoes does';
+      } else {
+        fb.className = 'font-bold text-xs text-center text-coralpop-600';
+        fb.textContent = 'Check auxiliary "does" + infinitive (like / take / own)!';
+      }
+    }
+
+    /* Exercise 3A-2: Fix Word Order Mistakes */
+    const woFixItems = [
+      { wrong: '1. Where you live?', ans: 'where do you live' },
+      { wrong: '2. Why she is crying?', ans: 'why is she crying' },
+      { wrong: '3. Did you went to the party?', ans: 'did you go to the party' },
+      { wrong: '4. How long you have known Alex?', ans: 'how long have you known alex' },
+      { wrong: '5. What time does the train leaves?', ans: 'what time does the train leave' },
+      { wrong: '6. Are you a good friend to him?', ans: 'are you a good friend to him' }
+    ];
+
+    function renderWordOrderFix() {
+      const grid = document.getElementById('wo-fix-grid');
+      woFixItems.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.id = `wofix-card-${i}`;
+        div.className = 'p-3 rounded-xl soft-box space-y-1.5';
+        div.innerHTML = `
+          <p class="font-bold text-coralpop-600">${item.wrong} <span class="text-[11px] font-normal text-navyink-700">(No. 6 may be correct!)</span></p>
+          <input type="text" id="wofix-in-${i}" placeholder="Type correct question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkWordOrderFix() {
+      let ok = 0;
+      const norm = (s) => s.trim().toLowerCase().replace(/[?.!]/g, '').replace(/\s+/g, ' ');
+      woFixItems.forEach((item, i) => {
+        const val = norm(document.getElementById(`wofix-in-${i}`).value);
+        const card = document.getElementById(`wofix-card-${i}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 space-y-1.5';
+        } else {
+          card.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 space-y-1.5';
+        }
+      });
+      const fb = document.getElementById('wo-fix-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 6 ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
+      fb.textContent = ok === 6 ? '🎉 All 6 questions fixed accurately!' : `Got ${ok}/6 right.`;
+    }
+
+    /* Exercise 3B-2: What vs Which & Combinations */
+    const whatWhichItems = [
+      { q: '1. _______ hand do you write with — your left or your right?', opts: ['Which', 'What'], ans: 'Which' },
+      { q: '2. _______ is the capital of Australia?', opts: ['What', 'Which'], ans: 'What' },
+      { q: '3. _______ bag is this on the chair? Is it Sarah’s?', opts: ['Whose', "Who's"], ans: 'Whose' },
+      { q: '4. _______ does it take to fly from London to Rome?', opts: ['How long', 'How many'], ans: 'How long' },
+      { q: '5. _______ films do you usually watch — comedies or thrillers?', opts: ['What kind of', 'How much'], ans: 'What kind of' },
+      { q: '6. _______ platform does our train leave from — Platform 3 or 4?', opts: ['Which', 'What'], ans: 'Which' }
+    ];
+
+    function renderWhatWhichDrill() {
+      const grid = document.getElementById('what-which-grid');
+      whatWhichItems.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.id = `ww-card-${i}`;
+        div.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-2';
+        div.innerHTML = `
+          <span>${item.q}</span>
+          <select id="ww-sel-${i}" class="px-2.5 py-1 rounded-lg border bg-white font-bold text-xs shrink-0">
+            <option value="">---</option>
+            ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkWhatWhichDrill() {
+      let ok = 0;
+      whatWhichItems.forEach((item, i) => {
+        const val = document.getElementById(`ww-sel-${i}`).value;
+        const card = document.getElementById(`ww-card-${i}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex items-center justify-between gap-2';
+        } else {
+          card.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex items-center justify-between gap-2';
+        }
+      });
+      const fb = document.getElementById('what-which-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 6 ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
+      fb.textContent = ok === 6 ? '🎉 All 6 precision choices are right!' : `Got ${ok}/6 right.`;
+    }
+
+    /* ------------------------------------------------------------
+       LESSON STEP 4: COMPLETE QUESTIONS 1–10
+    ------------------------------------------------------------ */
+    const qw10Items = [
+      { n: 1, text: '<strong>What</strong> do you do? (example)', prefilled: true },
+      { n: 2, rest: 'you like your job or studies?', ans: 'Do' },
+      { n: 3, rest: 'far is your home from here?', ans: 'How' },
+      { n: 4, rest: 'of things do you do in the evening?', ans: 'What kind' },
+      { n: 5, rest: 'did you last go to a party?', ans: 'When' },
+      { n: 6, rest: 'season do you like the most?', ans: 'Which' },
+      { n: 7, rest: 'is your favourite actor?', ans: 'Who' },
+      { n: 8, rest: 'are you going to have dinner tonight, at home or somewhere else?', ans: 'Where' },
+      { n: 9, rest: 'time do you spend online (not for work)?', ans: 'How much' },
+      { n: 10, rest: 'do you want to learn English?', ans: 'Why' }
+    ];
+    const qwBoxOpts = ['Do', 'How', 'How much', 'What kind', 'When', 'Where', 'Which', 'Who', 'Why'];
+
+    function renderQw10() {
+      const grid = document.getElementById('qw-10-grid');
+      qw10Items.forEach((q) => {
+        const div = document.createElement('div');
+        div.id = `qw10-row-${q.n}`;
+        div.className = 'p-3 rounded-xl soft-box flex flex-wrap items-center gap-1.5';
+        if (q.prefilled) {
+          div.innerHTML = `<span><strong>1.</strong> ${q.text}</span>`;
+        } else {
+          div.innerHTML = `
+            <strong>${q.n}.</strong>
+            <select id="qw10-sel-${q.n}" class="px-2 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
+              <option value="">---</option>
+              ${qwBoxOpts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+            </select>
+            <span>${q.rest}</span>
+          `;
+        }
+        grid.appendChild(div);
+      });
+    }
+
+    function checkQuestionWords10() {
+      let ok = 0;
+      qw10Items.filter((q) => !q.prefilled).forEach((q) => {
+        const val = document.getElementById(`qw10-sel-${q.n}`).value;
+        const row = document.getElementById(`qw10-row-${q.n}`);
+        if (val === q.ans) {
+          ok++;
+          row.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex flex-wrap items-center gap-1.5';
+        } else {
+          row.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex flex-wrap items-center gap-1.5';
+        }
+      });
+      const fb = document.getElementById('qw-10-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 9 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 9 ? '🎉 All 9 question words are correct!' : `Got ${ok}/9 right.`;
+    }
+
+    /* ------------------------------------------------------------
+       LESSON STEP 5: SUBJECT VS OBJECT QUESTIONS QUIZ
+    ------------------------------------------------------------ */
+    const subjObjItems = [
+      { q: '1. _______ broke the kitchen window?', opts: ['Who', 'Who did'], ans: 'Who' },
+      { q: '2. _______ you invite to your birthday party?', opts: ['Who did', 'Who'], ans: 'Who did' },
+      { q: '3. _______ happened at the meeting yesterday?', opts: ['What', 'What did'], ans: 'What' },
+      { q: '4. _______ she say when you told her the news?', opts: ['What did', 'What'], ans: 'What did' },
+      { q: '5. _______ lives in that big house on the corner?', opts: ['Who', 'Who does'], ans: 'Who' },
+      { q: '6. _______ car is parked outside — yours or Mike’s?', opts: ['Which', 'What'], ans: 'Which' },
+      { q: '7. _______ taught you how to drive?', opts: ['Who', 'Who did'], ans: 'Who' },
+      { q: '8. _______ language do people speak in Brazil?', opts: ['What', 'What does'], ans: 'What' },
+      { q: '9. _______ made you so angry this morning?', opts: ['What', 'What did'], ans: 'What' },
+      { q: '10. _______ did you meet at the airport?', opts: ['Who', 'Who did'], ans: 'Who' }
+    ];
+
+    function renderSubjObjQuiz() {
+      const list = document.getElementById('subj-obj-quiz-list');
+      subjObjItems.forEach((item, i) => {
+        const row = document.createElement('div');
+        row.id = `so-row-${i}`;
+        row.className = 'p-3.5 rounded-xl soft-box flex flex-wrap items-center justify-between gap-2';
+        row.innerHTML = `
+          <span class="font-semibold">${item.q}</span>
+          <select id="so-sel-${i}" class="px-3 py-1.5 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
+            <option value="">Choose...</option>
+            ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function checkSubjObjQuiz() {
+      let ok = 0;
+      subjObjItems.forEach((item, i) => {
+        const val = document.getElementById(`so-sel-${i}`).value;
+        const row = document.getElementById(`so-row-${i}`);
+        if (val === item.ans) {
+          ok++;
+          row.className = 'p-3.5 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex flex-wrap items-center justify-between gap-2';
+        } else {
+          row.className = 'p-3.5 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex flex-wrap items-center justify-between gap-2';
+        }
+      });
+      const fb = document.getElementById('subj-obj-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 10 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 10 ? '🎉 Perfect mastery of Subject vs. Object questions!' : `Got ${ok}/10 right!`;
+    }
+
+    /* Exercise 4B: Write Subject or Object Question */
+    const writeSubjObjItems = [
+      { stmt: '1. <u class="font-bold text-coralpop-600">Emma</u> sent the email.', ans: 'who sent the email' },
+      { stmt: '2. Emma sent <u class="font-bold text-tealcalm-600">the email</u>.', ans: 'what did emma send' },
+      { stmt: '3. <u class="font-bold text-coralpop-600">A loud noise</u> woke me up.', ans: 'what woke you up' },
+      { stmt: '4. Tom met <u class="font-bold text-tealcalm-600">his ex-wife</u> at the café.', ans: 'who did tom meet at the cafe' }
+    ];
+
+    function renderWriteSubjObj() {
+      const grid = document.getElementById('write-so-grid');
+      writeSubjObjItems.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.id = `wso-card-${i}`;
+        div.className = 'p-3 rounded-xl soft-box space-y-1.5';
+        div.innerHTML = `
+          <p>${item.stmt}</p>
+          <input type="text" id="wso-in-${i}" placeholder="Write Who / What question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkWriteSubjObj() {
+      let ok = 0;
+      const norm = (s) => s.trim().toLowerCase().replace(/[?.!]/g, '').replace('é', 'e').replace(/\s+/g, ' ');
+      writeSubjObjItems.forEach((item, i) => {
+        const val = norm(document.getElementById(`wso-in-${i}`).value);
+        const card = document.getElementById(`wso-card-${i}`);
+        const alt4 = i === 3 && (val === 'who did tom meet' || val === 'whom did tom meet');
+        if (val === item.ans || alt4) {
+          ok++;
+          card.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 space-y-1.5';
+        } else {
+          card.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 space-y-1.5';
+        }
+      });
+      const fb = document.getElementById('write-so-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 4 ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
+      fb.textContent = ok === 4 ? '🎉 All 4 Subject/Object questions written accurately!' : `Got ${ok}/4 right. Check: 1. Who sent the email? 2. What did Emma send? 3. What woke you up? 4. Who did Tom meet?`;
+    }
+
+    /* ------------------------------------------------------------
+       LESSON STEP 6: JEOPARDY BOARD (9 TILES)
+    ------------------------------------------------------------ */
+    const jeopData = [
+      { cat: 'Relationships', pts: 100, q: 'When two people end their marriage, they ______.', opts: ['get divorced', 'move in'], ans: 'get divorced' },
+      { cat: 'Word Order', pts: 100, q: 'Fix the question: "Where you are going?"', opts: ['Where are you going?', 'Where do you going?'], ans: 'Where are you going?' },
+      { cat: 'Subject/Object', pts: 100, q: 'Subject question: "______ wrote Hamlet?"', opts: ['Who wrote Hamlet?', 'Who did write Hamlet?'], ans: 'Who wrote Hamlet?' },
+      { cat: 'Relationships', pts: 200, q: 'If you have a good relationship with someone, you ______ them.', opts: ['get on well with', 'ghost'], ans: 'get on well with' },
+      { cat: 'Word Order', pts: 200, q: 'Choose: "______ coffee do you drink every day?"', opts: ['How much', 'How many'], ans: 'How much' },
+      { cat: 'Subject/Object', pts: 200, q: 'Object question: "______ did you call last night?"', opts: ['Who', 'Whose'], ans: 'Who' },
+      { cat: 'Relationships', pts: 300, q: 'To suddenly stop replying to someone’s messages is to ______ them.', opts: ['ghost', 'get to know'], ans: 'ghost' },
+      { cat: 'Word Order', pts: 300, q: 'Choose: "______ building is taller, Big Ben or the Eiffel Tower?"', opts: ['Which', 'What'], ans: 'Which' },
+      { cat: 'Subject/Object', pts: 300, q: 'Subject question: "______ happened after the meeting?"', opts: ['What happened', 'What did happen'], ans: 'What happened' }
+    ];
+    let jeopScore = 0;
+
+    function initJeopardy() {
+      jeopScore = 0;
+      document.getElementById('jeop-score').textContent = '0';
+      document.getElementById('jeop-modal').classList.add('hidden');
+      const board = document.getElementById('jeopardy-board');
+      board.innerHTML = '';
+      jeopData.forEach((item, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `jeop-tile-${idx}`;
+        btn.onclick = () => openJeopTile(idx);
+        btn.className = 'p-5 rounded-xl bg-navyink-900 hover:bg-coralpop-500 text-white transition cursor-pointer flex flex-col items-center justify-center gap-1 shadow-sm';
+        btn.innerHTML = `<span class="text-[11px] uppercase tracking-wider text-skyice-200">${item.cat}</span><span class="font-serif font-bold text-2xl">${item.pts}</span>`;
+        board.appendChild(btn);
+      });
+    }
+
+    function openJeopTile(idx) {
+      const item = jeopData[idx];
+      const tile = document.getElementById(`jeop-tile-${idx}`);
+      if (tile.disabled) return;
+      tile.disabled = true;
+      tile.className = 'p-5 rounded-xl bg-skyice-200 text-navyink-700 opacity-50 flex flex-col items-center justify-center';
+
+      const modal = document.getElementById('jeop-modal');
+      modal.classList.remove('hidden');
+      document.getElementById('jeop-cat-label').textContent = `${item.cat.toUpperCase()} • ${item.pts} PTS`;
+      document.getElementById('jeop-q-text').textContent = item.q;
+      const optsBox = document.getElementById('jeop-opts');
+      optsBox.innerHTML = '';
+      item.opts.forEach((o) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = o;
+        b.onclick = () => {
+          if (o === item.ans) {
+            jeopScore += item.pts;
+            document.getElementById('jeop-score').textContent = String(jeopScore);
+            showToast('🏆', `+${item.pts} points!`);
+          } else {
+            showToast('Oops!', `Correct answer: ${item.ans}`);
+          }
+          modal.classList.add('hidden');
+        };
+        b.className = 'p-3 rounded-xl bg-navyink-800 hover:bg-tealcalm-600 text-white font-bold text-sm cursor-pointer';
+        optsBox.appendChild(b);
+      });
+    }
+
+    /* ------------------------------------------------------------
+       HOMEWORK LOGIC (MODE 1)
+    ------------------------------------------------------------ */
+    const hwQwPairs = [
+      { n: 1, q: 'How', ans: 'g', label: 'g) by train' },
+      { n: 2, q: 'How long', ans: 'd', label: 'd) two hours' },
+      { n: 3, q: 'How many', ans: 'e', label: 'e) five' },
+      { n: 4, q: 'What', ans: 'b', label: 'b) a phone' },
+      { n: 5, q: 'What kind of', ans: 'c', label: 'c) I like Italian food' },
+      { n: 6, q: 'When', ans: 'a', label: 'a) tomorrow' },
+      { n: 7, q: 'Where', ans: 'i', label: 'i) in Los Angeles' },
+      { n: 8, q: 'Which', ans: 'f', label: 'f) that one' },
+      { n: 9, q: 'Who', ans: 'k', label: 'k) John' },
+      { n: 10, q: 'Whose', ans: 'h', label: "h) It's his" },
+      { n: 11, q: 'Why', ans: 'j', label: "j) because I'm tired" }
+    ];
+
+    function renderHwQw() {
+      const grid = document.getElementById('hw-qw-grid');
+      const allOpts = hwQwPairs.map((x) => ({ val: x.ans, txt: x.label })).sort((a, b) => a.val.localeCompare(b.val));
+      hwQwPairs.forEach((item) => {
+        const div = document.createElement('div');
+        div.id = `hwqw-card-${item.n}`;
+        div.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-2';
+        div.innerHTML = `
+          <span class="font-bold"><strong>${item.n}.</strong> ${item.q}</span>
+          <select id="hwqw-sel-${item.n}" class="px-2 py-1 rounded border bg-white font-semibold text-xs max-w-[165px]">
+            <option value="">Answer...</option>
+            ${allOpts.map((o) => `<option value="${o.val}">${o.txt}</option>`).join('')}
+          </select>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function checkHwQwMatch() {
+      let ok = 0;
+      hwQwPairs.forEach((item) => {
+        const val = document.getElementById(`hwqw-sel-${item.n}`).value;
+        const card = document.getElementById(`hwqw-card-${item.n}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex items-center justify-between gap-2';
+        } else {
+          card.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex items-center justify-between gap-2';
+        }
+      });
+      const fb = document.getElementById('hw-qw-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 11 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 11 ? '🎉 All 11 question words matched!' : `Got ${ok}/11 right.`;
+    }
+
+    /* Homework 5A & 5B */
+    const hw5aItems = [
+      { n: 1, def: 'You close your eyes and start sleeping.', ans: 'go to sleep', prefilled: true },
+      { n: 2, def: 'You finish sleeping.', ans: 'wake up' },
+      { n: 3, def: "You put something in a place where people can't see it.", ans: 'hide' },
+      { n: 4, def: 'You become a member of something, e.g. a group or club.', ans: 'join' },
+      { n: 5, def: 'You put things into a suitcase before you travel.', ans: 'pack' },
+      { n: 6, def: "You want to be with someone, but they're not with you.", ans: 'miss' },
+      { n: 7, def: 'You feel sad and water comes out of your eyes.', ans: 'cry' },
+      { n: 8, def: 'You stay in one place because something is going to happen.', ans: 'wait' }
+    ];
+    const boldPool5 = ['cry', 'hide', 'join', 'miss', 'pack', 'wait', 'wake up'];
+
+    const hw5bItems = [
+      { n: 1, pre: 'Do you ever', post: "because you're happy or only because you're sad?", ans: 'cry' },
+      { n: 2, pre: 'How many suitcases do you', post: 'for a two-week holiday?', ans: 'pack' },
+      { n: 3, pre: "What do you do when you're", post: 'in a long queue?', ans: 'waiting' },
+      { n: 4, pre: 'What time do you usually', post: ', and what time do you go to sleep?', ans: 'wake up' },
+      { n: 5, pre: 'Do you ever', post: 'groups or clubs?', ans: 'join' },
+      { n: 6, pre: 'Do you usually', post: 'your keys?', ans: 'hide' },
+      { n: 7, pre: 'When you travel, what do you', post: 'the most about home?', ans: 'miss' }
+    ];
+
+    function renderHwArticleTasks() {
+      const box5a = document.getElementById('hw-5a-list');
+      hw5aItems.forEach((item) => {
+        const div = document.createElement('div');
+        if (item.prefilled) {
+          div.innerHTML = `<strong>1.</strong> ${item.def} → <span class="font-bold text-tealcalm-600">go to sleep</span>`;
+        } else {
+          div.innerHTML = `
+            <strong>${item.n}.</strong> ${item.def} →
+            <select id="hw5a-${item.n}" class="px-2 py-0.5 rounded border bg-white font-bold text-xs">
+              <option value="">---</option>
+              ${boldPool5.map((w) => `<option value="${w}">${w}</option>`).join('')}
+            </select>
+          `;
+        }
+        box5a.appendChild(div);
+      });
+
+      const box5b = document.getElementById('hw-5b-list');
+      hw5bItems.forEach((item) => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <strong>${item.n}.</strong> ${item.pre}
+          <select id="hw5b-${item.n}" class="mx-1 px-2 py-0.5 rounded border bg-white font-bold text-xs">
+            <option value="">---</option>
+            ${['cry', 'hide', 'join', 'miss', 'pack', 'waiting', 'wake up'].map((w) => `<option value="${w}">${w}</option>`).join('')}
+          </select>
+          ${item.post}
+        `;
+        box5b.appendChild(div);
+      });
+    }
+
+    function checkHwArticleAll() {
+      const okA = hw5aItems.filter((i) => !i.prefilled).every((i) => document.getElementById(`hw5a-${i.n}`).value === i.ans);
+      const okB = hw5bItems.every((i) => document.getElementById(`hw5b-${i.n}`).value === i.ans);
+      const fb = document.getElementById('hw-art-fb');
+      fb.classList.remove('hidden');
+      fb.className = (okA && okB) ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = (okA && okB) ? '🎉 Both 5A and 5B are 100% correct!' : 'Check your word choices in 5A or 5B and try again!';
+    }
+
+    /* Homework Task 3: Relationship Phrases 1–9 */
+    const hwRel9Data = [
+      { n: 1, pre: 'My sister and her husband are so happy; they just', post: 'a healthy boy last night!', ans: 'had a baby' },
+      { n: 2, pre: "I don't really", post: 'my boss; he is very strict and never listens to my ideas.', ans: 'get on with' },
+      { n: 3, pre: 'Even though there is a', post: 'of fifteen years between us, my brother is my best friend.', ans: 'big age gap' },
+      { n: 4, pre: 'We first', post: 'when we were assigned to the same project at university.', ans: 'got to know each other' },
+      { n: 5, pre: 'They have been', post: 'for three years, but they still live in separate houses.', ans: 'dating' },
+      { n: 6, pre: "Living in the city is expensive, so I'm looking for someone to", post: 'with to save on rent.', ans: 'share an apartment' },
+      { n: 7, pre: 'After ten years of marriage, they decided to', post: ', but they are still friends.', ans: 'get divorced' },
+      { n: 8, pre: 'My new neighbor', post: 'last week, and she seems very friendly.', ans: 'moved in' },
+      { n: 9, pre: 'In my job, I have to', post: 'with the marketing team every day to plan new ads.', ans: 'work closely together' }
+    ];
+
+    function renderHwRel9() {
+      const list = document.getElementById('hw-rel-9-list');
+      hwRel9Data.forEach((item) => {
+        const row = document.createElement('div');
+        row.id = `hwr9-row-${item.n}`;
+        row.className = 'p-3 rounded-xl soft-box flex flex-wrap items-center gap-1.5';
+        row.innerHTML = `
+          <strong>${item.n}.</strong>
+          <span>${item.pre}</span>
+          <input type="text" id="hwr9-in-${item.n}" placeholder="type correct form..." class="w-44 px-2.5 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs" />
+          <span>${item.post}</span>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function checkHwRelSentences() {
+      let ok = 0;
+      hwRel9Data.forEach((item) => {
+        const val = document.getElementById(`hwr9-in-${item.n}`).value.trim().toLowerCase().replace(/\s+/g, ' ');
+        const row = document.getElementById(`hwr9-row-${item.n}`);
+        if (val === item.ans) {
+          ok++;
+          row.className = 'p-3 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 flex flex-wrap items-center gap-1.5';
+        } else {
+          row.className = 'p-3 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 flex flex-wrap items-center gap-1.5';
+        }
+      });
+      const fb = document.getElementById('hw-rel-9-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 9 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 9 ? '🎉 All 9 sentences with correct verb forms!' : `Got ${ok}/9 right. Check past forms (had, got, moved)!`;
+    }
+
+    /* Homework Task 4: Gameshow Quiz */
+    const hwGameshowItems = [
+      { q: '1. Subject question: "_____ gave you that ring?"', opts: ['Who', 'Who did'], ans: 'Who' },
+      { q: '2. Object question: "_____ did you give the package to?"', opts: ['Whom / Who', 'Whose'], ans: 'Whom / Who' },
+      { q: '3. "_____ cat is this sleeping on our sofa?"', opts: ['Whose', "Who's"], ans: 'Whose' },
+      { q: '4. "_____ car is yours, the blue one or the red one?"', opts: ['Which', 'What'], ans: 'Which' },
+      { q: '5. "How busy _____ she at work this week?"', opts: ['is', 'does'], ans: 'is' },
+      { q: '6. "_____ made this delicious cake?"', opts: ['Who', 'Who did'], ans: 'Who' }
+    ];
+
+    function renderHwGameshow() {
+      const grid = document.getElementById('hw-gameshow-grid');
+      hwGameshowItems.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.id = `hwgs-card-${i}`;
+        card.className = 'p-4 rounded-xl soft-box space-y-2';
+        card.innerHTML = `
+          <p class="font-bold">${item.q}</p>
+          <select id="hwgs-sel-${i}" class="w-full p-2 rounded-lg border bg-white font-bold text-xs">
+            <option value="">Select answer...</option>
+            ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkHwGameshow() {
+      let ok = 0;
+      hwGameshowItems.forEach((item, i) => {
+        const val = document.getElementById(`hwgs-sel-${i}`).value;
+        const card = document.getElementById(`hwgs-card-${i}`);
+        if (val === item.ans) {
+          ok++;
+          card.className = 'p-4 rounded-xl bg-tealcalm-50 border-2 border-tealcalm-600 space-y-2';
+        } else {
+          card.className = 'p-4 rounded-xl bg-coralpop-50 border-2 border-coralpop-500 space-y-2';
+        }
+      });
+      const fb = document.getElementById('hw-gs-fb');
+      fb.classList.remove('hidden');
+      fb.className = ok === 6 ? 'mt-4 font-bold text-sm text-center text-tealcalm-600' : 'mt-4 font-bold text-sm text-center text-coralpop-600';
+      fb.textContent = ok === 6 ? '🏆 Homework completed with 100% score!' : `You scored ${ok}/6!`;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      switchMode(0);
+      renderRelVocab();
+      renderRelContext1B();
+      renderWordOrderFix();
+      renderQw10();
+      renderWhatWhichDrill();
+      renderSubjObjQuiz();
+      renderWriteSubjObj();
+      initJeopardy();
+      renderHwQw();
+      renderHwArticleTasks();
+      renderHwRel9();
+      renderHwGameshow();
+      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+    });
+  </script>
+ <script src="../tracker.js"></script>
+</body>
+</html>
