@@ -24,6 +24,20 @@
             last_updated: new Date().toISOString()
         };
 
+        // Запам'ятовуємо початкові (дефолтні) значення полів при завантаженні сторінки,
+        // щоб не рахувати їх як відповіді учня!
+        const initialValues = new WeakMap();
+        const userInteractedElements = new WeakSet();
+
+        function captureInitialValues() {
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
+                if (!initialValues.has(el)) {
+                    initialValues.set(el, el.type === 'checkbox' || el.type === 'radio' ? el.checked : (el.value || ''));
+                }
+            });
+        }
+
         let isTabVisible = !document.hidden;
         let saveTimeout = null;
 
@@ -46,14 +60,14 @@
         });
 
         function getQuestionContext(el, index) {
-            const container = el.closest('.question, .task, .exercise, .card, .item, li, tr, .quiz-item, .mcq-item, div');
+            if (el.getAttribute('data-question')) return el.getAttribute('data-question');
+            const container = el.closest('.question, .task, .exercise, .card, .item, li, tr, .quiz-item, .mcq-item, .q, .vocab-row, .sentence-row, .match-row, div');
             if (container) {
                 const heading = container.querySelector('h1, h2, h3, h4, h5, p, .q-text, .question-text, strong, b');
                 if (heading && heading.innerText.trim().length > 2 && heading.innerText.trim() !== el.innerText?.trim()) {
                     return heading.innerText.replace(/\s+/g, ' ').trim().slice(0, 75);
                 }
             }
-            if (el.getAttribute('data-question')) return el.getAttribute('data-question');
             if (el.name) return `Choice (${el.name})`;
             if (el.id) return el.id;
             if (el.placeholder) return el.placeholder.slice(0, 50);
@@ -64,6 +78,7 @@
             const target = e.target;
             if (target && (target.tagName === 'TEXTAREA' || (target.tagName === 'INPUT' && ['text', 'search', ''].includes(target.type)) || target.isContentEditable)) {
                 if (target.closest('#ziz-objects-layer, #ziz-dock, #ziz-subdock')) return;
+                userInteractedElements.add(target);
                 const pastedText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
                 if (pastedText.trim().length > 0) {
                     const label = getQuestionContext(target, 0);
@@ -80,19 +95,28 @@
 
         document.addEventListener('click', (e) => {
             if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer, #ziz-tracker-badge')) return;
-            const target = e.target.closest('button, label, [role="button"], .option, .choice, .answer, .quiz-option, .word-btn, .chip, .card-item, .match-item, li, input[type="radio"], input[type="checkbox"], [onclick]');
+            const target = e.target.closest('button, label, [role="button"], .option, .choice, .answer, .quiz-option, .word-btn, .chip, .card-item, .match-item, .opt-btn, .adv-opt, .choice-pill, .sally-opt-btn, input[type="radio"], input[type="checkbox"], [onclick]');
             if (!target) return;
-            if ((target.tagName === 'INPUT' && target.type === 'text') || target.tagName === 'TEXTAREA') return;
+            if ((target.tagName === 'INPUT' && target.type === 'text') || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT') return;
+
+            userInteractedElements.add(target);
 
             let clickedText = (target.innerText || target.value || target.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim();
             if (!clickedText || clickedText.length > 100) return;
 
+            // Ігноруємо навігаційні та службові кнопки
+            if (/^(check|submit|reset|next|prev|previous|show|stop|play|retry|try again|перевір|назад|далі|←|→|▶|⏸|⏹|✕|close)/i.test(clickedText)) {
+                setTimeout(() => {
+                    collectAllAnswers();
+                    scheduleSave(true);
+                }, 250);
+                return;
+            }
+
             const context = getQuestionContext(target, state.clicked_actions.length);
             const timeStr = new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-            if (target.tagName !== 'BUTTON' || !/check|submit|reset|next|show|перевір/i.test(clickedText)) {
-                state.answers[`🖱️ ${context}`] = clickedText;
-            }
+            state.answers[`🖱️ ${context}`] = clickedText;
 
             const lastClick = state.clicked_actions[state.clicked_actions.length - 1];
             if (!lastClick || lastClick.choice !== clickedText || lastClick.context !== context) {
@@ -108,6 +132,7 @@
 
         function collectAllAnswers() {
             const collected = {};
+            // Зберігаємо тільки реальні кліки по варіантах відповідей
             Object.entries(state.answers).forEach(([k, v]) => {
                 if (k.startsWith('🖱️ ')) collected[k] = v;
             });
@@ -116,27 +141,37 @@
             elements.forEach((el, idx) => {
                 if (el.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
                 if (el.type === 'hidden' || el.type === 'submit' || el.type === 'button') return;
+
+                const initVal = initialValues.get(el);
+                const isChangedByUser = userInteractedElements.has(el);
                 const label = getQuestionContext(el, idx);
 
                 if (el.type === 'checkbox' || el.type === 'radio') {
-                    if (el.checked) {
+                    // Рахуємо чекбокс/радіо тільки якщо учень його сам натиснув і він відрізняється від початкового
+                    if (el.checked && (isChangedByUser || initVal === false)) {
                         const optionText = el.closest('label')?.innerText?.trim() || el.parentElement?.innerText?.trim() || el.value || 'Selected';
                         collected[label] = optionText.replace(/\s+/g, ' ').slice(0, 80);
                     }
                 } else if (el.tagName === 'SELECT') {
-                    if (el.value) {
-                        const selectedText = el.options[el.selectedIndex]?.text || el.value;
+                    const currentVal = el.value || '';
+                    // Рахуємо select тільки якщо вибрано непорожнє значення І воно змінене учнем (або не дорівнює дефолтному при завантаженні)
+                    if (currentVal !== '' && (isChangedByUser || currentVal !== initVal)) {
+                        const selectedText = el.options[el.selectedIndex]?.text || currentVal;
                         collected[label] = selectedText;
                     }
                 } else {
-                    const val = el.value?.trim();
-                    if (val) collected[`✍️ ${label}`] = val;
+                    const val = (el.value || '').trim();
+                    // Рахуємо текстове поле тільки якщо воно не порожнє І не є передзаповненим прикладом
+                    if (val !== '' && (isChangedByUser || val !== (initVal || '').trim())) {
+                        collected[`✍️ ${label}`] = val;
+                    }
                 }
             });
 
             const selectedCustom = document.querySelectorAll('.selected, .chosen, .active-option, .is-selected, [aria-checked="true"], [aria-pressed="true"]');
             selectedCustom.forEach((el, idx) => {
                 if (el.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer, nav, header')) return;
+                if (!userInteractedElements.has(el) && !el.closest('[data-user-touched]')) return;
                 const text = el.innerText?.replace(/\s+/g, ' ').trim();
                 if (text && text.length < 100) {
                     const qLabel = getQuestionContext(el, idx);
@@ -149,12 +184,14 @@
 
         document.addEventListener('input', (e) => {
             if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
+            userInteractedElements.add(e.target);
             collectAllAnswers();
             scheduleSave(false);
         }, true);
 
         document.addEventListener('change', (e) => {
             if (e.target.closest('#ziz-dock, #ziz-subdock, #ziz-objects-layer')) return;
+            userInteractedElements.add(e.target);
             collectAllAnswers();
             scheduleSave(false);
         }, true);
@@ -166,7 +203,7 @@
                 return;
             }
             clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(() => syncToSupabase(), 1800);
+            saveTimeout = setTimeout(() => syncToSupabase(), 1500);
         }
 
         async function syncToSupabase() {
@@ -193,6 +230,12 @@
 
         function initTrackerBadge() {
             if (!document.body || document.getElementById('ziz-tracker-badge')) return;
+            // Захоплюємо початкові значення через 400мс після рендеру скриптів уроку
+            setTimeout(() => {
+                captureInitialValues();
+                syncToSupabase();
+            }, 400);
+
             const badge = document.createElement('div');
             badge.id = 'ziz-tracker-badge';
             badge.innerHTML = '🟢 ziz.english • Progress auto-saved';
@@ -211,7 +254,6 @@
                 pointerEvents: 'none'
             });
             document.body.appendChild(badge);
-            syncToSupabase();
         }
 
         if (document.readyState === 'loading') {
@@ -276,7 +318,6 @@
             #ziz-dock.minimized .ziz-dock-item:not(#zizToggleDockBtn) {
                 display: none !important;
             }
-            /* Використовуємо div замість button, щоб стилі/скрипти уроку не перебивали кліки */
             .ziz-dock-btn {
                 width: 42px !important;
                 height: 42px !important;
@@ -706,11 +747,7 @@
             sel.addRange(range);
         }
 
-        // =================================================================
-        // CAPTURE-PHASE MOUSEDOWN HANDLER (перехоплює кліки ДО будь-яких скриптів уроку!)
-        // =================================================================
         document.addEventListener('mousedown', (e) => {
-            // 1. Клік по головній панелі
             const dockBtn = e.target.closest('#ziz-dock .ziz-dock-btn');
             if (dockBtn) {
                 e.preventDefault();
@@ -741,7 +778,6 @@
                 return;
             }
 
-            // 2. Клік по виїжджаючій панелі налаштувань пензля
             const nibBtn = e.target.closest('#ziz-subdock .ziz-nib-btn');
             if (nibBtn) {
                 e.preventDefault();
@@ -779,7 +815,6 @@
                 return;
             }
 
-            // 3. Видалення або перетягування стікера / тексту
             const delBtn = e.target.closest('#ziz-objects-layer .ziz-del-btn');
             if (delBtn) {
                 e.preventDefault();
@@ -811,7 +846,6 @@
                 return;
             }
 
-            // 4. Малювання на полотні
             if (e.target === canvas && mode === 'draw' && e.button === 0) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
