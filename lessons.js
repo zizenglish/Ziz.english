@@ -150,4 +150,12 @@ const LESSONS = [
             homework: "lessons/relationship_homework.html"
 }
     },
+    {
+        title: "5 Days in Paris",
+        level: "B1",
+        type: "Lesson plan",
+        category: "Travel & Places",
+        description: "Explore a 5-day Paris itinerary, practise collocations with GO, role-play a tourist and blogger, and complete interactive reading tasks.",
+        file: "lessons/five_days_in_paris.html"
+    },
 ];
