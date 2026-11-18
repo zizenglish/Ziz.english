@@ -638,13 +638,107 @@
             margin-bottom: 16px;
         }
 
+        .hw-image-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: zoom-in;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hw-image-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
         .hw-image-preview {
             max-width: 100%;
             max-height: 320px;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            margin-top: 10px;
             display: block;
+        }
+
+        .hw-image-zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(30, 30, 47, 0.85);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        /* Lightbox Overlay */
+        .img-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 15, 25, 0.88);
+            backdrop-filter: blur(6px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .img-lightbox.open {
+            display: flex;
+        }
+
+        .img-lightbox-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            background: rgba(255, 255, 255, 0.14);
+            padding: 8px 16px;
+            border-radius: 999px;
+            z-index: 2002;
+        }
+
+        .lb-btn {
+            background: #ffffff;
+            color: var(--text-main);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+
+        .lb-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .img-lightbox-viewport {
+            max-width: 95vw;
+            max-height: 82vh;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .img-lightbox-viewport img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease;
+            transform-origin: center center;
+            cursor: zoom-in;
         }
 
         .status-pill {
@@ -1531,7 +1625,12 @@
                         ${hw.extra_link ? `<a href="${hw.extra_link}" target="_blank" class="btn-outline">🔗 Open Extra Material</a>` : ''}
                     </div>
 
-                    ${hw.image_url ? `<img src="${hw.image_url}" alt="Homework attachment" class="hw-image-preview">` : ''}
+                    ${hw.image_url ? `
+                        <div class="hw-image-wrapper" onclick="openImageLightbox('${hw.image_url}')" title="Click to zoom">
+                            <img src="${hw.image_url}" alt="Homework attachment" class="hw-image-preview">
+                            <span class="hw-image-zoom-hint">🔍 Click to zoom</span>
+                        </div>
+                    ` : ''}
                     ${isTeacher ? renderTeacherTracking(hw) : ''}
                 `;
                 hwList.appendChild(card);
@@ -1816,5 +1915,48 @@
         checkSession();
     </script>
 
+    <!-- IMAGE LIGHTBOX MODAL -->
+    <div class="img-lightbox" id="imgLightbox" onclick="if(event.target===this) closeImageLightbox()">
+        <div class="img-lightbox-toolbar">
+            <button type="button" class="lb-btn" onclick="zoomLightbox(-0.25)">➖ Zoom Out</button>
+            <button type="button" class="lb-btn" onclick="resetLightboxZoom()">100%</button>
+            <button type="button" class="lb-btn" onclick="zoomLightbox(0.25)">➕ Zoom In</button>
+            <a id="lbOpenNewTab" href="#" target="_blank" class="lb-btn">↗ Open Original</a>
+            <button type="button" class="lb-btn" style="background: var(--primary); color: #fff;" onclick="closeImageLightbox()">✕ Close</button>
+        </div>
+        <div class="img-lightbox-viewport">
+            <img id="lbImage" src="" alt="Full size homework" onclick="zoomLightbox(0.35)">
+        </div>
+    </div>
+
+    <script>
+        let lbScale = 1;
+        function openImageLightbox(url) {
+            const lb = document.getElementById('imgLightbox');
+            const img = document.getElementById('lbImage');
+            const link = document.getElementById('lbOpenNewTab');
+            lbScale = 1;
+            img.style.transform = 'scale(1)';
+            img.src = url;
+            link.href = url;
+            lb.classList.add('open');
+        }
+        function closeImageLightbox() {
+            document.getElementById('imgLightbox').classList.remove('open');
+        }
+        function zoomLightbox(delta) {
+            lbScale = Math.min(3, Math.max(0.5, lbScale + delta));
+            const img = document.getElementById('lbImage');
+            img.style.transform = `scale(${lbScale})`;
+            img.style.cursor = lbScale > 1 ? 'zoom-out' : 'zoom-in';
+        }
+        function resetLightboxZoom() {
+            lbScale = 1;
+            document.getElementById('lbImage').style.transform = 'scale(1)';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeImageLightbox();
+        });
+    </script>
 </body>
 </html>
