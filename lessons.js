@@ -53,7 +53,7 @@ const LESSONS = [
         type: "Vocabulary",
         category: "Nature & Animals",
         description: "Discover wild animals, their habitats, and fun facts in an interactive wildlife club.",
-        file: "lessons/animals_little_wildlife_club_final_fix.html"
+        file: "lessons/Animals_Little_Wildlife_Club.html"
     },
     {
         title: "Just a Normal Day",
