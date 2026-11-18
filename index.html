@@ -761,6 +761,135 @@
         }
 
 
+        /* --- STUDENT SUBMISSIONS & VOICE RECORDER --- */
+        .submissions-box {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: #f4f6fb;
+            border: 1px solid #dfe4f0;
+            border-radius: 16px;
+        }
+
+        .submissions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .submissions-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .submission-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-sub-tool {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1.5px solid #d5d8e6;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn-sub-tool:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-sub-tool.recording {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            animation: pulseRec 1.2s infinite;
+        }
+
+        @keyframes pulseRec {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.72; }
+        }
+
+        .voice-preview-bar {
+            display: none;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+        }
+
+        .voice-preview-bar.open {
+            display: flex;
+        }
+
+        .submission-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sub-item {
+            background: #ffffff;
+            border: 1px solid #e4e6f0;
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sub-item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .sub-thumb {
+            width: 54px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            cursor: zoom-in;
+        }
+
+        .sub-del-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .sub-del-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
         /* --- TRACKING REPORT MODAL / DETAILS --- */
         .tracking-box {
             margin-top: 16px;
@@ -1507,7 +1636,8 @@
                     .eq('student_id', currentProfile.id)
                     .order('created_at', { ascending: false });
 
-                renderAssignments(assignments || [], false);
+                loadedAssignments = assignments || [];
+                renderAssignments(loadedAssignments, false);
             }
         }
 
@@ -1631,6 +1761,7 @@
                             <span class="hw-image-zoom-hint">🔍 Click to zoom</span>
                         </div>
                     ` : ''}
+                    ${renderSubmissionsSection(hw, isTeacher)}
                     ${isTeacher ? renderTeacherTracking(hw) : ''}
                 `;
                 hwList.appendChild(card);
@@ -1907,6 +2038,329 @@
                 loadClassroomData();
             }
         });
+
+
+        // --- STUDENT SUBMISSIONS (COMPRESSED IMAGES + VOICE RECORDER) ---
+        let activeRecorder = null;
+        let activeRecordingHwId = null;
+        let recordedChunks = [];
+        let pendingAudioBlobs = {}; // hwId -> Blob
+        let recordingTimerInterval = null;
+        let recordingSeconds = 0;
+
+        function renderSubmissionsSection(hw, isTeacher) {
+            const subs = Array.isArray(hw.student_submissions) ? hw.student_submissions : [];
+
+            let itemsHtml = '';
+            if (subs.length > 0) {
+                itemsHtml = `<div class="submission-items">
+                    ${subs.map((item, idx) => {
+                        const timeLabel = item.created_at ? new Date(item.created_at).toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+                        if (item.type === 'audio') {
+                            return `
+                                <div class="sub-item">
+                                    <div class="sub-item-info">
+                                        <span style="font-size: 18px;">🎙️</span>
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 700;">Voice Answer ${timeLabel ? `(${timeLabel})` : ''}</div>
+                                            <audio controls src="${item.url}" style="height: 34px; margin-top: 4px; max-width: 260px;"></audio>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="sub-del-btn" onclick="deleteSubmissionItem('${hw.id}', ${idx})" title="Delete">🗑️</button>
+                                </div>
+                            `;
+                        } else if (item.type === 'image') {
+                            return `
+                                <div class="sub-item">
+                                    <div class="sub-item-info">
+                                        <img src="${item.url}" class="sub-thumb" onclick="openImageLightbox('${item.url}')" title="Click to zoom">
+                                        <div>
+                                            <div style="font-size: 13px; font-weight: 700; cursor: pointer; color: var(--primary);" onclick="openImageLightbox('${item.url}')">🖼️ ${item.name || 'Photo'} (Click to zoom)</div>
+                                            <div style="font-size: 11px; color: var(--text-muted);">${timeLabel}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="sub-del-btn" onclick="deleteSubmissionItem('${hw.id}', ${idx})" title="Delete">🗑️</button>
+                                </div>
+                            `;
+                        } else {
+                            return `
+                                <div class="sub-item">
+                                    <div class="sub-item-info">
+                                        <span style="font-size: 18px;">📄</span>
+                                        <div>
+                                            <a href="${item.url}" target="_blank" style="font-size: 13px; font-weight: 700; color: var(--text-main); text-decoration: underline;">${item.name || 'Attached file'}</a>
+                                            <div style="font-size: 11px; color: var(--text-muted);">${timeLabel}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="sub-del-btn" onclick="deleteSubmissionItem('${hw.id}', ${idx})" title="Delete">🗑️</button>
+                                </div>
+                            `;
+                        }
+                    }).join('')}
+                </div>`;
+            } else if (isTeacher) {
+                return ''; // Якщо учень ще нічого не прикріпив, вчителю не показуємо порожній блок
+            }
+
+            if (isTeacher) {
+                return `
+                    <div class="submissions-box">
+                        <div class="submissions-header">
+                            <span class="submissions-title">📥 Student's Submitted Files & Voice (${subs.length})</span>
+                        </div>
+                        ${itemsHtml}
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="submissions-box">
+                    <div class="submissions-header">
+                        <span class="submissions-title">📤 Submit Your Work (Photo, File or Voice)</span>
+                        <div class="submission-actions">
+                            <input type="file" id="sub-file-${hw.id}" accept="image/*,.pdf,.doc,.docx,.txt" style="display:none;" onchange="handleStudentFileUpload('${hw.id}', this)">
+                            <button type="button" class="btn-sub-tool" id="btn-upload-${hw.id}" onclick="document.getElementById('sub-file-${hw.id}').click()">📎 Attach Photo / File</button>
+                            <button type="button" class="btn-sub-tool" id="btn-rec-${hw.id}" onclick="toggleVoiceRecord('${hw.id}')">🎙️ Record Voice</button>
+                        </div>
+                    </div>
+
+                    <div class="voice-preview-bar" id="voice-preview-${hw.id}">
+                        <audio controls id="voice-audio-${hw.id}" style="height: 34px; max-width: 240px;"></audio>
+                        <button type="button" class="btn-primary" style="padding: 6px 14px; font-size: 12px;" id="btn-send-voice-${hw.id}" onclick="sendRecordedVoice('${hw.id}')">✓ Send Voice</button>
+                        <button type="button" class="btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="discardRecordedVoice('${hw.id}')">✕ Cancel</button>
+                    </div>
+
+                    ${itemsHtml || '<div style="font-size: 12px; color: var(--text-muted);">No files or voice notes attached yet.</div>'}
+                </div>
+            `;
+        }
+
+        // Автоматичне стиснення зображень у браузері до ~1400px (економить 90% місця в Supabase)
+        function compressImageFile(file, maxWidth = 1400, quality = 0.78) {
+            return new Promise((resolve) => {
+                if (!file.type.startsWith('image/') || file.type === 'image/gif') {
+                    resolve(file);
+                    return;
+                }
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => {
+                    URL.revokeObjectURL(url);
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > maxWidth) {
+                        h = Math.round((h * maxWidth) / w);
+                        w = maxWidth;
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    canvas.toBlob((blob) => {
+                        if (blob && blob.size < file.size) {
+                            resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+                        } else {
+                            resolve(file);
+                        }
+                    }, 'image/jpeg', quality);
+                };
+                img.onerror = () => {
+                    URL.revokeObjectURL(url);
+                    resolve(file);
+                };
+                img.src = url;
+            });
+        }
+
+        async function handleStudentFileUpload(hwId, inputEl) {
+            const rawFile = inputEl.files[0];
+            if (!rawFile) return;
+
+            if (rawFile.size > 15 * 1024 * 1024) {
+                alert('File is too large (max 15 MB).');
+                inputEl.value = '';
+                return;
+            }
+
+            const btn = document.getElementById(`btn-upload-${hwId}`);
+            btn.disabled = true;
+            btn.textContent = '⏳ Uploading...';
+
+            try {
+                const fileToUpload = await compressImageFile(rawFile);
+                const ext = fileToUpload.name.split('.').pop();
+                const path = `submissions/${hwId}/${Date.now()}_${Math.random().toString(36).substring(2)}.${ext}`;
+
+                const { error: upErr } = await supabaseClient.storage
+                    .from('homework-images')
+                    .upload(path, fileToUpload);
+
+                if (upErr) throw upErr;
+
+                const { data: pubData } = supabaseClient.storage
+                    .from('homework-images')
+                    .getPublicUrl(path);
+
+                const hw = loadedAssignments.find(a => a.id === hwId);
+                const currentSubs = Array.isArray(hw?.student_submissions) ? [...hw.student_submissions] : [];
+                currentSubs.push({
+                    type: fileToUpload.type.startsWith('image/') ? 'image' : 'file',
+                    name: rawFile.name,
+                    url: pubData.publicUrl,
+                    path: path,
+                    created_at: new Date().toISOString()
+                });
+
+                const { error: dbErr } = await supabaseClient
+                    .from('assignments')
+                    .update({ student_submissions: currentSubs })
+                    .eq('id', hwId);
+
+                if (dbErr) throw dbErr;
+                loadClassroomData();
+            } catch (err) {
+                alert('Upload error: ' + err.message);
+                btn.disabled = false;
+                btn.textContent = '📎 Attach Photo / File';
+            }
+            inputEl.value = '';
+        }
+
+        async function toggleVoiceRecord(hwId) {
+            const btn = document.getElementById(`btn-rec-${hwId}`);
+
+            // Якщо вже йде запис — зупиняємо
+            if (activeRecorder && activeRecorder.state === 'recording') {
+                activeRecorder.stop();
+                return;
+            }
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recordedChunks = [];
+                activeRecordingHwId = hwId;
+
+                const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+                    ? 'audio/webm;codecs=opus'
+                    : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
+
+                activeRecorder = mimeType
+                    ? new MediaRecorder(stream, { mimeType, audioBitsPerSecond: 32000 })
+                    : new MediaRecorder(stream);
+
+                activeRecorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+                };
+
+                activeRecorder.onstop = () => {
+                    clearInterval(recordingTimerInterval);
+                    stream.getTracks().forEach(t => t.stop());
+                    btn.classList.remove('recording');
+                    btn.textContent = '🎙️ Record Voice';
+
+                    const blobType = activeRecorder.mimeType || 'audio/webm';
+                    const audioBlob = new Blob(recordedChunks, { type: blobType });
+                    pendingAudioBlobs[hwId] = audioBlob;
+
+                    const previewBar = document.getElementById(`voice-preview-${hwId}`);
+                    const audioEl = document.getElementById(`voice-audio-${hwId}`);
+                    audioEl.src = URL.createObjectURL(audioBlob);
+                    previewBar.classList.add('open');
+                };
+
+                activeRecorder.start();
+                recordingSeconds = 0;
+                btn.classList.add('recording');
+                btn.textContent = '⏹ Stop (0:00)';
+
+                recordingTimerInterval = setInterval(() => {
+                    recordingSeconds++;
+                    const m = Math.floor(recordingSeconds / 60);
+                    const s = String(recordingSeconds % 60).padStart(2, '0');
+                    btn.textContent = `⏹ Stop (${m}:${s})`;
+                    if (recordingSeconds >= 180 && activeRecorder?.state === 'recording') {
+                        activeRecorder.stop(); // Автостоп на 3 хвилинах для економії місця
+                    }
+                }, 1000);
+            } catch (err) {
+                alert('Microphone access denied or unavailable: ' + err.message);
+            }
+        }
+
+        function discardRecordedVoice(hwId) {
+            delete pendingAudioBlobs[hwId];
+            const previewBar = document.getElementById(`voice-preview-${hwId}`);
+            if (previewBar) previewBar.classList.remove('open');
+        }
+
+        async function sendRecordedVoice(hwId) {
+            const blob = pendingAudioBlobs[hwId];
+            if (!blob) return;
+
+            const sendBtn = document.getElementById(`btn-send-voice-${hwId}`);
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳ Sending...';
+
+            try {
+                const ext = blob.type.includes('mp4') ? 'm4a' : 'webm';
+                const path = `submissions/${hwId}/voice_${Date.now()}.${ext}`;
+
+                const { error: upErr } = await supabaseClient.storage
+                    .from('homework-images')
+                    .upload(path, blob, { contentType: blob.type });
+
+                if (upErr) throw upErr;
+
+                const { data: pubData } = supabaseClient.storage
+                    .from('homework-images')
+                    .getPublicUrl(path);
+
+                const hw = loadedAssignments.find(a => a.id === hwId);
+                const currentSubs = Array.isArray(hw?.student_submissions) ? [...hw.student_submissions] : [];
+                currentSubs.push({
+                    type: 'audio',
+                    name: 'Voice recording',
+                    url: pubData.publicUrl,
+                    path: path,
+                    created_at: new Date().toISOString()
+                });
+
+                const { error: dbErr } = await supabaseClient
+                    .from('assignments')
+                    .update({ student_submissions: currentSubs })
+                    .eq('id', hwId);
+
+                if (dbErr) throw dbErr;
+                delete pendingAudioBlobs[hwId];
+                loadClassroomData();
+            } catch (err) {
+                alert('Voice upload error: ' + err.message);
+                sendBtn.disabled = false;
+                sendBtn.textContent = '✓ Send Voice';
+            }
+        }
+
+        async function deleteSubmissionItem(hwId, itemIndex) {
+            if (!confirm('Remove this attached file / voice message?')) return;
+            const hw = loadedAssignments.find(a => a.id === hwId);
+            if (!hw || !Array.isArray(hw.student_submissions)) return;
+
+            const targetItem = hw.student_submissions[itemIndex];
+            const updatedSubs = hw.student_submissions.filter((_, i) => i !== itemIndex);
+
+            // Видаляємо сам файл із Storage, щоб не займав місце
+            if (targetItem?.path) {
+                await supabaseClient.storage.from('homework-images').remove([targetItem.path]);
+            }
+
+            await supabaseClient
+                .from('assignments')
+                .update({ student_submissions: updatedSubs })
+                .eq('id', hwId);
+
+            loadClassroomData();
+        }
 
         // --- INITIALIZE APP ---
         filterLessons();
