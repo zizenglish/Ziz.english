@@ -400,6 +400,47 @@
             background: var(--primary-light);
         }
 
+        /* --- PAGINATION STYLES --- */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.25);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
         /* --- CLASSROOM VIEW (TEACHER & STUDENT) --- */
         .classroom-section {
             display: none;
@@ -759,7 +800,6 @@
             background: var(--success-light);
             color: #16a34a;
         }
-
 
         /* --- STUDENT SUBMISSIONS & VOICE RECORDER --- */
         .submissions-box {
@@ -1124,6 +1164,9 @@
             <input type="text" id="searchInput" class="search-bar" placeholder="Search lessons by title or keyword...">
 
             <div class="cards-grid" id="cardsGrid"></div>
+
+            <!-- PAGINATION CONTROLS -->
+            <div class="pagination-container" id="paginationContainer"></div>
         </div>
 
         <!-- VIEW 2: CLASSROOM (TEACHER & STUDENT DASHBOARD) -->
@@ -1310,6 +1353,8 @@
         let authMode = 'login';
         let loadedAssignments = [];
         let cachedStudents = [];
+        let currentPage = 1;
+        const itemsPerPage = 6;
 
         // --- 2. CATALOG LOGIC ---
         const cardsGrid = document.getElementById('cardsGrid');
@@ -1324,10 +1369,18 @@
 
             if (data.length === 0) {
                 cardsGrid.innerHTML = '<div class="empty-state">No lessons found matching your criteria.</div>';
+                document.getElementById('paginationContainer').innerHTML = '';
                 return;
             }
 
-            data.forEach(lesson => {
+            const totalPages = Math.ceil(data.length / itemsPerPage);
+            if (currentPage > totalPages) currentPage = 1;
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedData = data.slice(start, end);
+
+            paginatedData.forEach(lesson => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -1352,6 +1405,53 @@
                 `;
                 cardsGrid.appendChild(card);
             });
+
+            renderPagination(data.length, totalPages);
+        }
+
+        function renderPagination(totalItems, totalPages) {
+            const container = document.getElementById('paginationContainer');
+            container.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.textContent = '← Prev';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    filterLessons();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            container.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pBtn = document.createElement('button');
+                pBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pBtn.textContent = i;
+                pBtn.onclick = () => {
+                    currentPage = i;
+                    filterLessons();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                container.appendChild(pBtn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.textContent = 'Next →';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    filterLessons();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            container.appendChild(nextBtn);
         }
 
         function filterLessons() {
@@ -1378,11 +1478,12 @@
             renderCards(filtered);
         }
 
-        searchInput.addEventListener('input', filterLessons);
-        checkboxes.forEach(cb => cb.addEventListener('change', filterLessons));
+        searchInput.addEventListener('input', () => { currentPage = 1; filterLessons(); });
+        checkboxes.forEach(cb => cb.addEventListener('change', () => { currentPage = 1; filterLessons(); }));
         clearBtn.addEventListener('click', () => {
             searchInput.value = '';
             checkboxes.forEach(cb => cb.checked = false);
+            currentPage = 1;
             filterLessons();
         });
 
@@ -1652,7 +1753,6 @@
             return `<span class="due-badge ${badgeClass}">${label}</span>`;
         }
 
-
         function formatDuration(sec) {
             if (!sec || sec < 1) return '0 sec';
             const mins = Math.floor(sec / 60);
@@ -1839,7 +1939,6 @@
             loadClassroomData();
         }
 
-
         // --- EDIT HOMEWORK LOGIC ---
         function initEditLessonPicker() {
             const input = document.getElementById('editLessonSearchInput');
@@ -1929,7 +2028,6 @@
             const currentImgWrap = document.getElementById('editCurrentImageWrap');
             currentImgWrap.style.display = hw.image_url ? 'flex' : 'none';
 
-            // Заповнюємо список учнів
             const editStudentSelect = document.getElementById('editStudentSelect');
             editStudentSelect.innerHTML = '';
             cachedStudents.forEach(s => {
@@ -1940,7 +2038,6 @@
                 editStudentSelect.appendChild(opt);
             });
 
-            // Заповнюємо прикріплений урок
             const lessonInput = document.getElementById('editLessonSearchInput');
             const hiddenLesson = document.getElementById('editSelectedLessonFile');
             const clearBtn = document.getElementById('editClearLessonBtn');
@@ -2039,12 +2136,11 @@
             }
         });
 
-
         // --- STUDENT SUBMISSIONS (COMPRESSED IMAGES + VOICE RECORDER) ---
         let activeRecorder = null;
         let activeRecordingHwId = null;
         let recordedChunks = [];
-        let pendingAudioBlobs = {}; // hwId -> Blob
+        let pendingAudioBlobs = {};
         let recordingTimerInterval = null;
         let recordingSeconds = 0;
 
@@ -2099,7 +2195,7 @@
                     }).join('')}
                 </div>`;
             } else if (isTeacher) {
-                return ''; // Якщо учень ще нічого не прикріпив, вчителю не показуємо порожній блок
+                return '';
             }
 
             if (isTeacher) {
@@ -2135,7 +2231,6 @@
             `;
         }
 
-        // Автоматичне стиснення зображень у браузері до ~1400px (економить 90% місця в Supabase)
         function compressImageFile(file, maxWidth = 1400, quality = 0.78) {
             return new Promise((resolve) => {
                 if (!file.type.startsWith('image/') || file.type === 'image/gif') {
@@ -2230,7 +2325,6 @@
         async function toggleVoiceRecord(hwId) {
             const btn = document.getElementById(`btn-rec-${hwId}`);
 
-            // Якщо вже йде запис — зупиняємо
             if (activeRecorder && activeRecorder.state === 'recording') {
                 activeRecorder.stop();
                 return;
@@ -2280,7 +2374,7 @@
                     const s = String(recordingSeconds % 60).padStart(2, '0');
                     btn.textContent = `⏹ Stop (${m}:${s})`;
                     if (recordingSeconds >= 180 && activeRecorder?.state === 'recording') {
-                        activeRecorder.stop(); // Автостоп на 3 хвилинах для економії місця
+                        activeRecorder.stop();
                     }
                 }, 1000);
             } catch (err) {
@@ -2349,7 +2443,6 @@
             const targetItem = hw.student_submissions[itemIndex];
             const updatedSubs = hw.student_submissions.filter((_, i) => i !== itemIndex);
 
-            // Видаляємо сам файл із Storage, щоб не займав місце
             if (targetItem?.path) {
                 await supabaseClient.storage.from('homework-images').remove([targetItem.path]);
             }
