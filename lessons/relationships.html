@@ -105,23 +105,23 @@
           </h1>
         </div>
 
-        <!-- Mode Switcher: 1. Lesson (Photo 1) vs 2. Homework (Photo 2) -->
+        <!-- Mode Switcher: 1. Lesson vs 2. Homework -->
         <div class="flex items-center bg-skyice-100 p-1 rounded-full border border-skyice-300">
           <button type="button" onclick="switchMode(0)" id="mode-btn-0"
             class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer bg-navyink-900 text-white shadow-2xs">
-            1. Lesson (Classwork)
+1. Lesson (Classwork)
           </button>
           <button type="button" onclick="switchMode(1)" id="mode-btn-1"
             class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition cursor-pointer text-navyink-700 hover:text-navyink-900">
-            2. Homework
+2. Homework
           </button>
         </div>
 
         <!-- Audio Speed & Step Arrows -->
         <div class="flex items-center gap-2">
           <div class="hidden sm:flex items-center bg-skyice-100 p-0.5 rounded-full border border-skyice-300 text-[11px] font-bold">
-            <button type="button" onclick="setVoiceSpeed(0.75)" id="vspd-slow" class="px-2.5 py-0.5 rounded-full text-navyink-700 cursor-pointer">0.75×</button>
-            <button type="button" onclick="setVoiceSpeed(0.95)" id="vspd-norm" class="px-2.5 py-0.5 rounded-full bg-navyink-900 text-white cursor-pointer">1.0×</button>
+            <button type="button" onclick="setAudioSpeed(0.75)" id="vspd-slow" class="px-2.5 py-0.5 rounded-full text-navyink-700 cursor-pointer">0.75×</button>
+            <button type="button" onclick="setAudioSpeed(1.0)" id="vspd-norm" class="px-2.5 py-0.5 rounded-full bg-navyink-900 text-white cursor-pointer">1.0×</button>
           </div>
 
           <div class="flex items-center border-2 border-navyink-900 rounded-full overflow-hidden bg-white text-xs font-bold">
@@ -147,7 +147,7 @@
   <main class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
 
     <!-- ================================================================ -->
-    <!-- MODE 0: LESSON (PHOTO 1 — 6 CELTA STAGES)                        -->
+    <!-- MODE 0: LESSON (6 CELTA STAGES)                                  -->
     <!-- ================================================================ -->
     <div id="mode-0" class="mode-wrap space-y-6">
 
@@ -291,58 +291,95 @@
 
             <div class="p-4 rounded-xl soft-box space-y-2 text-xs sm:text-sm">
               <label class="font-bold text-navyink-900 block">✍️ Speaking / Writing Task: Write 4–6 sentences about your friends and family using the phrases in bold:</label>
-              <textarea rows="3" placeholder="e.g., My sister and I are very close, even though there is a 7-year age gap between us. I get on really well with my colleagues..."
+              <textarea rows="3" data-question="Stage 1 Personal Sentences (Relationships)" placeholder="e.g., My sister and I are very close, even though there is a 7-year age gap between us. I get on really well with my colleagues..."
                 class="w-full p-2.5 rounded-lg bg-white border border-skyice-300 focus:outline-none focus:border-coralpop-500"></textarea>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- STEP 0.1: READING — MAGDA FISHER'S POST ("TEN THINGS ABOUT ME") -->
+      <!-- STEP 0.1: LISTENING — MAGDA FISHER ("TEN THINGS ABOUT ME") WITH ELEVENLABS AUDIO & COLLAPSIBLE TRANSCRIPT -->
       <section data-mode="0" data-step="1" class="step-panel hidden animate-step space-y-6">
         <div class="lesson-card rounded-2xl p-6 sm:p-8">
           <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-skyice-200">
             <div>
-              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 2 • Reading &amp; Question Exposure</span>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-coralpop-600">Stage 2 • Listening &amp; Question Exposure</span>
               <h2 class="font-serif font-bold text-2xl sm:text-3xl text-navyink-900 mt-0.5">
                 Magda Fisher: "Ten Things About Me"
               </h2>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <button type="button" onclick="playMagdaAudio()" class="px-3.5 py-2 rounded-xl bg-tealcalm-600 text-white font-bold text-xs cursor-pointer">▶ Listen to Magda</button>
-              <button type="button" onclick="pauseVoice()" class="px-2.5 py-2 rounded-xl soft-box font-bold text-xs cursor-pointer">⏸</button>
-              <button type="button" onclick="stopVoice()" class="px-2.5 py-2 rounded-xl soft-box font-bold text-xs cursor-pointer">⏹</button>
+              <p class="text-xs sm:text-sm text-navyink-700 mt-1">
+                Listen carefully to the interview first without reading! You can reveal the full transcript afterwards to check your understanding.
+              </p>
             </div>
           </div>
 
-          <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <!-- Magda's Social Post -->
-            <article class="lg:col-span-7 p-5 rounded-2xl bg-skyice-50 border-2 border-skyice-200 space-y-2.5 text-xs sm:text-sm leading-relaxed">
-              <div class="flex items-center gap-3 pb-2 border-b border-skyice-200">
-                <div class="w-10 h-10 rounded-full bg-navyink-900 text-white font-serif font-bold flex items-center justify-center">MF</div>
-                <div>
-                  <p class="font-bold text-navyink-900">Magda Fisher</p>
-                  <p class="text-[11px] text-navyink-700">Yesterday at 21:03 • Ten things about me</p>
-                </div>
+          <!-- ElevenLabs Studio Audio Player Bar -->
+          <div class="mt-5 p-4 rounded-2xl bg-tealcalm-50 border-2 border-tealcalm-600/40 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-navyink-900 text-white font-serif font-bold flex items-center justify-center text-sm shrink-0">MF</div>
+              <div>
+                <p class="font-bold text-navyink-900 text-sm">🎧 Interview with Magda Fisher</p>
+                <p class="text-xs text-navyink-700">10 questions &amp; answers • Natural studio recording</p>
               </div>
-              <p><strong>1. Where do you like to relax?</strong> At the beach. I love the sound of the sea.</p>
-              <p><strong>2. How do you travel to work or college/school?</strong> I walk.</p>
-              <p><strong>3. How long does your journey to work take?</strong> About 20 seconds — from my bedroom to my home office.</p>
-              <p><strong>4. What's your favourite drink?</strong> Coffee. I have five or six cups a day. Shh, don't tell anyone!</p>
-              <p><strong>5. Whose name is first in your phone contacts?</strong> Alba — she's my sister's best friend. <strong>Do you know the person well?</strong> Actually, I've only met her once!</p>
-              <p><strong>6. When are you happiest?</strong> When I'm visiting somewhere new. <strong>Why?</strong> Because new places are exciting.</p>
-              <p><strong>7. What kind of music do you like?</strong> 1970s rock music. Thanks a lot Dad!</p>
-              <p><strong>8. Which animals do you like?</strong> Cats, especially my cat Ziggy.</p>
-              <p><strong>9. How many pairs of shoes do you own?</strong> I've got over 50. I only wear one old pair of trainers. My family and friends don't know about all my shoes — but that's only because I keep them in boxes!</p>
-              <p><strong>10. Who is your best friend?</strong> Nina. We have so much fun together. <strong>Are you a good friend to him or her?</strong> I think so...</p>
-            </article>
+            </div>
+            <audio id="magda-audio-player" controls preload="metadata" src="../audio/magda_fisher/magda_fisher_full.mp3" class="h-10 flex-1 min-w-[240px] max-w-md">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
 
-            <!-- Comprehension Check -->
+          <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Left Column: Hidden / Collapsible Transcript -->
+            <div class="lg:col-span-7 space-y-3">
+              <div class="p-5 rounded-2xl bg-skyice-50 border-2 border-skyice-200">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider text-coralpop-600">Listening Mode</span>
+                    <h3 class="font-serif font-bold text-lg text-navyink-900">Interview Transcript</h3>
+                  </div>
+                  <button type="button" id="toggle-transcript-btn" onclick="toggleMagdaTranscript()"
+                    class="px-4 py-2 rounded-xl bg-navyink-900 hover:bg-coralpop-500 text-white font-bold text-xs uppercase tracking-wider transition cursor-pointer">
+                    👁️ Show Full Transcript
+                  </button>
+                </div>
+
+                <!-- Placeholder when transcript is hidden -->
+                <div id="magda-transcript-placeholder" class="mt-4 p-6 rounded-xl soft-box text-center space-y-2 border border-dashed border-skyice-300">
+                  <div class="text-3xl">🎧</div>
+                  <p class="font-bold text-navyink-900 text-sm">Transcript is hidden for listening practice</p>
+                  <p class="text-xs text-navyink-700 max-w-md mx-auto">
+                    Press <strong>Play</strong> above and answer the comprehension questions on the right. Click <strong>"Show Full Transcript"</strong> whenever you want to read along or check details.
+                  </p>
+                </div>
+
+                <!-- Actual Transcript (Hidden by default) -->
+                <article id="magda-transcript-content" class="hidden mt-4 pt-4 border-t border-skyice-200 space-y-2.5 text-xs sm:text-sm leading-relaxed">
+                  <div class="flex items-center gap-3 pb-2 border-b border-skyice-200">
+                    <div class="w-9 h-9 rounded-full bg-navyink-900 text-white font-serif font-bold flex items-center justify-center text-xs">MF</div>
+                    <div>
+                      <p class="font-bold text-navyink-900">Magda Fisher</p>
+                      <p class="text-[11px] text-navyink-700">Yesterday at 21:03 • Ten things about me</p>
+                    </div>
+                  </div>
+                  <p><strong>1. Where do you like to relax?</strong> At the beach. I love the sound of the sea.</p>
+                  <p><strong>2. How do you travel to work or college/school?</strong> I walk.</p>
+                  <p><strong>3. How long does your journey to work take?</strong> About 20 seconds — from my bedroom to my home office.</p>
+                  <p><strong>4. What's your favourite drink?</strong> Coffee. I have five or six cups a day. Shh, don't tell anyone!</p>
+                  <p><strong>5. Whose name is first in your phone contacts?</strong> Alba — she's my sister's best friend. <strong>Do you know the person well?</strong> Actually, I've only met her once!</p>
+                  <p><strong>6. When are you happiest?</strong> When I'm visiting somewhere new. <strong>Why?</strong> Because new places are exciting.</p>
+                  <p><strong>7. What kind of music do you like?</strong> 1970s rock music. Thanks a lot Dad!</p>
+                  <p><strong>8. Which animals do you like?</strong> Cats, especially my cat Ziggy.</p>
+                  <p><strong>9. How many pairs of shoes do you own?</strong> I've got over 50. I only wear one old pair of trainers. My family and friends don't know about all my shoes — but that's only because I keep them in boxes!</p>
+                  <p><strong>10. Who is your best friend?</strong> Nina. We have so much fun together. <strong>Are you a good friend to him or her?</strong> I think so...</p>
+                </article>
+              </div>
+            </div>
+
+            <!-- Right Column: Listening Comprehension Check + 2B -->
             <div class="lg:col-span-5 space-y-3 text-xs sm:text-sm">
-              <h3 class="font-serif font-bold text-lg text-navyink-900">Comprehension Questions</h3>
+              <h3 class="font-serif font-bold text-lg text-navyink-900">Listening Comprehension Questions</h3>
               <div class="p-3.5 rounded-xl soft-box space-y-1.5">
                 <p class="font-bold">1. Where does Magda work?</p>
-                <select id="magda-q1" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                <select id="magda-q1" data-question="Magda Listening Q1: Where does she work?" class="w-full p-2 rounded-lg border bg-white font-semibold">
                   <option value="">Choose answer...</option>
                   <option value="home">At home (in her home office)</option>
                   <option value="cafe">In a beach café</option>
@@ -350,7 +387,7 @@
               </div>
               <div class="p-3.5 rounded-xl soft-box space-y-1.5">
                 <p class="font-bold">2. Who is Magda's best friend?</p>
-                <select id="magda-q2" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                <select id="magda-q2" data-question="Magda Listening Q2: Best friend?" class="w-full p-2 rounded-lg border bg-white font-semibold">
                   <option value="">Choose answer...</option>
                   <option value="Alba">Alba (her sister's friend)</option>
                   <option value="Nina">Nina</option>
@@ -358,14 +395,22 @@
               </div>
               <div class="p-3.5 rounded-xl soft-box space-y-1.5">
                 <p class="font-bold">3. What do Magda's family and friends NOT know about her?</p>
-                <select id="magda-q3" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                <select id="magda-q3" data-question="Magda Listening Q3: Secret?" class="w-full p-2 rounded-lg border bg-white font-semibold">
                   <option value="">Choose answer...</option>
                   <option value="shoes">She owns over 50 pairs of shoes (kept in boxes)</option>
                   <option value="coffee">She hates coffee</option>
                 </select>
               </div>
+              <div class="p-3.5 rounded-xl soft-box space-y-1.5">
+                <p class="font-bold">4. How many cups of coffee does she have a day?</p>
+                <select id="magda-q4" data-question="Magda Listening Q4: Cups of coffee?" class="w-full p-2 rounded-lg border bg-white font-semibold">
+                  <option value="">Choose answer...</option>
+                  <option value="2">One or two cups</option>
+                  <option value="5-6">Five or six cups a day</option>
+                </select>
+              </div>
               <button type="button" onclick="checkMagdaReading()" class="w-full py-2.5 rounded-xl bg-navyink-900 text-white font-bold text-xs uppercase cursor-pointer">
-                Check Reading
+                Check Listening Answers
               </button>
               <p id="magda-fb" class="font-bold text-xs text-center hidden"></p>
 
@@ -373,9 +418,9 @@
               <div class="pt-4 mt-4 border-t border-skyice-200 space-y-2.5">
                 <h4 class="font-serif font-bold text-base text-navyink-900">2B. Complete the Questions to Magda</h4>
                 <div class="p-3 rounded-xl soft-box space-y-2">
-                  <p>1. <input type="text" id="mq-build-1" placeholder="Where / she / like..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> to relax? → <em>At the beach.</em></p>
-                  <p>2. <input type="text" id="mq-build-2" placeholder="How long / her journey..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> take? → <em>About 20 seconds.</em></p>
-                  <p>3. <input type="text" id="mq-build-3" placeholder="How many / shoes..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> she own? → <em>Over 50 pairs.</em></p>
+                  <p>1. <input type="text" id="mq-build-1" data-question="Magda Q-Build 1" placeholder="Where / she / like..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> to relax? → <em>At the beach.</em></p>
+                  <p>2. <input type="text" id="mq-build-2" data-question="Magda Q-Build 2" placeholder="How long / her journey..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> take? → <em>About 20 seconds.</em></p>
+                  <p>3. <input type="text" id="mq-build-3" data-question="Magda Q-Build 3" placeholder="How many / shoes..." class="w-44 px-2 py-0.5 rounded border bg-white font-bold" /> she own? → <em>Over 50 pairs.</em></p>
                 </div>
                 <button type="button" onclick="checkMagdaQBuild()" class="w-full py-2 rounded-xl bg-tealcalm-600 text-white font-bold text-xs uppercase cursor-pointer">
                   Check Questions
@@ -411,7 +456,7 @@
             </div>
           </div>
 
-          <!-- Full Tense Table from Photo 1 -->
+          <!-- Full Tense Table -->
           <div class="overflow-x-auto rounded-xl border border-skyice-200">
             <table class="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
@@ -682,11 +727,11 @@
             </table>
           </div>
 
-          <!-- Kahoot-style Subject vs Object Practice (10 items) -->
+          <!-- Subject vs Object Practice (10 items) -->
           <div class="mt-6 space-y-2.5 text-xs sm:text-sm" id="subj-obj-quiz-list"></div>
           <p id="subj-obj-fb" class="mt-4 font-bold text-sm text-center hidden"></p>
 
-          <!-- Exercise 4B: Write Subject or Object Questions for the Bold Words -->
+          <!-- Exercise 4B: Write Subject or Object Questions for the Underlined Words -->
           <div class="mt-7 pt-6 border-t border-skyice-200 space-y-3 text-xs sm:text-sm">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div>
@@ -736,7 +781,7 @@
     </div>
 
     <!-- ================================================================ -->
-    <!-- MODE 1: HOMEWORK (PHOTO 2 — 4 STRUCTURED TASKS)                  -->
+    <!-- MODE 1: HOMEWORK (4 STRUCTURED TASKS)                            -->
     <!-- ================================================================ -->
     <div id="mode-1" class="mode-wrap hidden space-y-6">
 
@@ -876,7 +921,7 @@
     const modesConfig = [
       {
         title: 'Lesson',
-        steps: ['1. Relationships', '2. Magda’s Post', '3. Word Order', '4. Question Words', '5. Object vs Subject', '6. Jeopardy']
+        steps: ['1. Relationships', '2. Magda’s Listening', '3. Word Order', '4. Question Words', '5. Object vs Subject', '6. Jeopardy']
       },
       {
         title: 'Homework',
@@ -886,7 +931,7 @@
 
     let curMode = 0;
     let curStep = 0;
-    let voiceRate = 0.95;
+    let transcriptVisible = false;
 
     function showToast(title, msg) {
       const box = document.getElementById('toast-box');
@@ -897,17 +942,42 @@
       window.tTimer = setTimeout(() => box.classList.add('hidden'), 3000);
     }
 
-    function setVoiceSpeed(r) {
-      voiceRate = r;
-      document.getElementById('vspd-slow').className = r < 0.85 ? 'px-2 py-0.5 rounded bg-navyink-900 text-white cursor-pointer' : 'px-2 py-0.5 rounded text-navyink-700 cursor-pointer';
-      document.getElementById('vspd-norm').className = r >= 0.85 ? 'px-2 py-0.5 rounded bg-navyink-900 text-white cursor-pointer' : 'px-2 py-0.5 rounded text-navyink-700 cursor-pointer';
+    function setAudioSpeed(r) {
+      const player = document.getElementById('magda-audio-player');
+      if (player) player.playbackRate = r;
+      document.getElementById('vspd-slow').className = r < 0.85 ? 'px-2.5 py-0.5 rounded-full bg-navyink-900 text-white cursor-pointer' : 'px-2.5 py-0.5 rounded-full text-navyink-700 cursor-pointer';
+      document.getElementById('vspd-norm').className = r >= 0.85 ? 'px-2.5 py-0.5 rounded-full bg-navyink-900 text-white cursor-pointer' : 'px-2.5 py-0.5 rounded-full text-navyink-700 cursor-pointer';
       showToast('Audio Speed', r < 0.85 ? 'Set to 0.75× (Slow)' : 'Set to 1.0× (Normal)');
+    }
+
+    function stopMagdaAudio() {
+      const player = document.getElementById('magda-audio-player');
+      if (player && !player.paused) {
+        player.pause();
+      }
+    }
+
+    function toggleMagdaTranscript() {
+      transcriptVisible = !transcriptVisible;
+      const content = document.getElementById('magda-transcript-content');
+      const placeholder = document.getElementById('magda-transcript-placeholder');
+      const btn = document.getElementById('toggle-transcript-btn');
+
+      if (transcriptVisible) {
+        content.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        btn.textContent = '🙈 Hide Transcript';
+      } else {
+        content.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+        btn.textContent = '👁️ Show Full Transcript';
+      }
     }
 
     function switchMode(m) {
       curMode = m;
       curStep = 0;
-      stopVoice();
+      stopMagdaAudio();
       [0, 1].forEach((i) => {
         document.getElementById(`mode-${i}`).classList.toggle('hidden', i !== m);
         document.getElementById(`mode-btn-${i}`).className = i === m
@@ -937,7 +1007,7 @@
       const max = modesConfig[curMode].steps.length;
       if (s < 0 || s >= max) return;
       curStep = s;
-      stopVoice();
+      stopMagdaAudio();
       document.querySelectorAll(`.step-panel[data-mode="${curMode}"]`).forEach((el) => {
         el.classList.toggle('hidden', Number(el.dataset.step) !== s);
       });
@@ -953,24 +1023,6 @@
 
     function prevStep() { goToStep(curStep - 1); }
     function nextStep() { goToStep(curStep + 1); }
-
-    /* Audio Helpers */
-    function playMagdaAudio() {
-      if (!('speechSynthesis' in window)) return;
-      if (window.speechSynthesis.paused) { window.speechSynthesis.resume(); return; }
-      stopVoice();
-      const text = "Ten things about me, by Magda Fisher. One: Where do you like to relax? At the beach. I love the sound of the sea. Two: How do you travel to work? I walk. Three: How long does your journey take? About twenty seconds, from my bedroom to my home office! Four: What is your favourite drink? Coffee. I have five or six cups a day. Five: Whose name is first in your phone contacts? Alba, she is my sister's best friend. Six: When are you happiest? When I am visiting somewhere new. Seven: What kind of music do you like? Nineteen-seventies rock music. Eight: Which animals do you like? Cats, especially my cat Ziggy. Nine: How many pairs of shoes do you own? Over fifty, but I keep them in boxes! Ten: Who is your best friend? Nina. We have so much fun together.";
-      const u = new SpeechSynthesisUtterance(text);
-      const voices = window.speechSynthesis.getVoices().filter((v) => /^en/i.test(v.lang));
-      const f = voices.find((v) => /female|aria|jenny|samantha|libby/i.test(v.name)) || voices[0];
-      if (f) u.voice = f;
-      u.rate = voiceRate;
-      u.pitch = 1.1;
-      window.speechSynthesis.speak(u);
-    }
-
-    function pauseVoice() { if ('speechSynthesis' in window && window.speechSynthesis.speaking) window.speechSynthesis.pause(); }
-    function stopVoice() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
 
     /* ------------------------------------------------------------
        LESSON STEP 1: RELATIONSHIP VOCABULARY (1-9)
@@ -995,7 +1047,7 @@
         row.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-3';
         row.innerHTML = `
           <span><strong>${item.n}.</strong> ${item.text}</span>
-          <select id="rv-sel-${item.n}" class="shrink-0 px-2.5 py-1 rounded-lg border border-skyice-300 bg-white font-bold text-xs">
+          <select id="rv-sel-${item.n}" data-question="Stage 1 Match ${item.n}" class="shrink-0 px-2.5 py-1 rounded-lg border border-skyice-300 bg-white font-bold text-xs">
             <option value="">a–i?</option>
             ${['a','b','c','d','e','f','g','h','i'].map((l) => `<option value="${l}">${l}</option>`).join('')}
           </select>
@@ -1023,11 +1075,15 @@
     }
 
     function checkMagdaReading() {
-      const ok = document.getElementById('magda-q1').value === 'home' && document.getElementById('magda-q2').value === 'Nina' && document.getElementById('magda-q3').value === 'shoes';
+      const ok =
+        document.getElementById('magda-q1').value === 'home' &&
+        document.getElementById('magda-q2').value === 'Nina' &&
+        document.getElementById('magda-q3').value === 'shoes' &&
+        document.getElementById('magda-q4').value === '5-6';
       const fb = document.getElementById('magda-fb');
       fb.classList.remove('hidden');
       fb.className = ok ? 'font-bold text-xs text-center text-tealcalm-600' : 'font-bold text-xs text-center text-coralpop-600';
-      fb.textContent = ok ? '✓ All 3 reading answers are correct!' : 'Check Magda’s post again and retry.';
+      fb.textContent = ok ? '✓ All 4 listening comprehension answers are correct!' : 'Listen again (or check the transcript) and retry.';
     }
 
     /* Exercise 1B: Relationship Mini-Dialogues */
@@ -1048,7 +1104,7 @@
         div.className = 'p-3 rounded-xl soft-box space-y-1.5';
         div.innerHTML = `
           <p>${item.pre}
-            <select id="rc1b-sel-${i}" class="mx-1 px-2 py-0.5 rounded border border-navyink-800 bg-white font-bold text-xs">
+            <select id="rc1b-sel-${i}" data-question="Exercise 1B.${i+1}" class="mx-1 px-2 py-0.5 rounded border border-navyink-800 bg-white font-bold text-xs">
               <option value="">---</option>
               ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
             </select>
@@ -1112,7 +1168,7 @@
         div.className = 'p-3 rounded-xl soft-box space-y-1.5';
         div.innerHTML = `
           <p class="font-bold text-coralpop-600">${item.wrong} <span class="text-[11px] font-normal text-navyink-700">(No. 6 may be correct!)</span></p>
-          <input type="text" id="wofix-in-${i}" placeholder="Type correct question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
+          <input type="text" id="wofix-in-${i}" data-question="Word Order Fix ${i+1}" placeholder="Type correct question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
         `;
         grid.appendChild(div);
       });
@@ -1155,7 +1211,7 @@
         div.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-2';
         div.innerHTML = `
           <span>${item.q}</span>
-          <select id="ww-sel-${i}" class="px-2.5 py-1 rounded-lg border bg-white font-bold text-xs shrink-0">
+          <select id="ww-sel-${i}" data-question="What/Which Drill ${i+1}" class="px-2.5 py-1 rounded-lg border bg-white font-bold text-xs shrink-0">
             <option value="">---</option>
             ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
           </select>
@@ -1210,7 +1266,7 @@
         } else {
           div.innerHTML = `
             <strong>${q.n}.</strong>
-            <select id="qw10-sel-${q.n}" class="px-2 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
+            <select id="qw10-sel-${q.n}" data-question="Q-Words 10.${q.n}" class="px-2 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
               <option value="">---</option>
               ${qwBoxOpts.map((o) => `<option value="${o}">${o}</option>`).join('')}
             </select>
@@ -1263,7 +1319,7 @@
         row.className = 'p-3.5 rounded-xl soft-box flex flex-wrap items-center justify-between gap-2';
         row.innerHTML = `
           <span class="font-semibold">${item.q}</span>
-          <select id="so-sel-${i}" class="px-3 py-1.5 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
+          <select id="so-sel-${i}" data-question="Subj/Obj 10.${i+1}" class="px-3 py-1.5 rounded-lg border border-navyink-800 bg-white font-bold text-xs">
             <option value="">Choose...</option>
             ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
           </select>
@@ -1306,7 +1362,7 @@
         div.className = 'p-3 rounded-xl soft-box space-y-1.5';
         div.innerHTML = `
           <p>${item.stmt}</p>
-          <input type="text" id="wso-in-${i}" placeholder="Write Who / What question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
+          <input type="text" id="wso-in-${i}" data-question="Write Subj/Obj ${i+1}" placeholder="Write Who / What question..." class="w-full px-2.5 py-1 rounded-lg border bg-white font-semibold text-xs" />
         `;
         grid.appendChild(div);
       });
@@ -1423,7 +1479,7 @@
         div.className = 'p-3 rounded-xl soft-box flex items-center justify-between gap-2';
         div.innerHTML = `
           <span class="font-bold"><strong>${item.n}.</strong> ${item.q}</span>
-          <select id="hwqw-sel-${item.n}" class="px-2 py-1 rounded border bg-white font-semibold text-xs max-w-[165px]">
+          <select id="hwqw-sel-${item.n}" data-question="HW1 Q-Word ${item.n}" class="px-2 py-1 rounded border bg-white font-semibold text-xs max-w-[165px]">
             <option value="">Answer...</option>
             ${allOpts.map((o) => `<option value="${o.val}">${o.txt}</option>`).join('')}
           </select>
@@ -1482,7 +1538,7 @@
         } else {
           div.innerHTML = `
             <strong>${item.n}.</strong> ${item.def} →
-            <select id="hw5a-${item.n}" class="px-2 py-0.5 rounded border bg-white font-bold text-xs">
+            <select id="hw5a-${item.n}" data-question="HW 5A.${item.n}" class="px-2 py-0.5 rounded border bg-white font-bold text-xs">
               <option value="">---</option>
               ${boldPool5.map((w) => `<option value="${w}">${w}</option>`).join('')}
             </select>
@@ -1496,7 +1552,7 @@
         const div = document.createElement('div');
         div.innerHTML = `
           <strong>${item.n}.</strong> ${item.pre}
-          <select id="hw5b-${item.n}" class="mx-1 px-2 py-0.5 rounded border bg-white font-bold text-xs">
+          <select id="hw5b-${item.n}" data-question="HW 5B.${item.n}" class="mx-1 px-2 py-0.5 rounded border bg-white font-bold text-xs">
             <option value="">---</option>
             ${['cry', 'hide', 'join', 'miss', 'pack', 'waiting', 'wake up'].map((w) => `<option value="${w}">${w}</option>`).join('')}
           </select>
@@ -1537,7 +1593,7 @@
         row.innerHTML = `
           <strong>${item.n}.</strong>
           <span>${item.pre}</span>
-          <input type="text" id="hwr9-in-${item.n}" placeholder="type correct form..." class="w-44 px-2.5 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs" />
+          <input type="text" id="hwr9-in-${item.n}" data-question="HW3 Rel ${item.n}" placeholder="type correct form..." class="w-44 px-2.5 py-1 rounded-lg border border-navyink-800 bg-white font-bold text-xs" />
           <span>${item.post}</span>
         `;
         list.appendChild(row);
@@ -1580,7 +1636,7 @@
         card.className = 'p-4 rounded-xl soft-box space-y-2';
         card.innerHTML = `
           <p class="font-bold">${item.q}</p>
-          <select id="hwgs-sel-${i}" class="w-full p-2 rounded-lg border bg-white font-bold text-xs">
+          <select id="hwgs-sel-${i}" data-question="HW4 Gameshow ${i+1}" class="w-full p-2 rounded-lg border bg-white font-bold text-xs">
             <option value="">Select answer...</option>
             ${item.opts.map((o) => `<option value="${o}">${o}</option>`).join('')}
           </select>
@@ -1621,7 +1677,6 @@
       renderHwArticleTasks();
       renderHwRel9();
       renderHwGameshow();
-      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
     });
   </script>
  <script src="../tracker.js"></script>
