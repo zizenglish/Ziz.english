@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Days in Paris — Travel, Collocations with GO &amp; Reading | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #faf6ef;
+      --paper: #ffffff;
+      --ink: #1e2433;
+      --muted: #646b7d;
+      --paris-red: #d94e4e;
+      --paris-red-soft: #fdf0f0;
+      --paris-navy: #24344d;
+      --paris-navy-soft: #eef2f7;
+      --paris-gold: #c99a45;
+      --paris-gold-soft: #fbf5e8;
+      --paris-sage: #2e7d63;
+      --paris-sage-soft: #eaf6f1;
+      --border: #e5dec9;
+      --shadow: 0 10px 28px rgba(30, 36, 51, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(#dfd5c0 0.8px, transparent 0.8px);
+      background-size: 20px 20px;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* HEADER & MODE SWITCHER */
+    .topbar {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1.5px solid var(--border);
+      padding: 14px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--paris-navy);
+      letter-spacing: -0.5px;
+    }
+    .brand span { color: var(--paris-red); }
+
+    .mode-tabs {
+      display: flex;
+      background: var(--bg-cream);
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      gap: 6px;
+    }
+
+    .mode-tab {
+      padding: 9px 22px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-tab.active {
+      background: var(--paris-navy);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(36, 52, 77, 0.22);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 28px auto;
+      padding: 0 22px;
+    }
+
+    .panel { display: none; animation: fadeUp 0.25s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #24344d 0%, #384e70 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #1c293d;
+    }
+    .hero.hw-hero {
+      background: linear-gradient(135deg, #7c3636 0%, #a84848 100%);
+      border-color: #632828;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      max-width: 680px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      padding: 4px 12px;
+      border-radius: 10px;
+      background: var(--paris-red-soft);
+      color: var(--paris-red);
+      margin-bottom: 8px;
+    }
+    .step-tag.navy { background: var(--paris-navy-soft); color: var(--paris-navy); }
+    .step-tag.gold { background: var(--paris-gold-soft); color: #9c7224; }
+    .step-tag.sage { background: var(--paris-sage-soft); color: var(--paris-sage); }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--paris-navy);
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* 5 DAYS ITINERARY MAP CARDS */
+    .itinerary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .day-card {
+      background: var(--bg-cream);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .day-card .day-num {
+      display: inline-block;
+      background: var(--paris-red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+    .day-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--paris-navy);
+      margin-bottom: 8px;
+    }
+    .day-card ul {
+      padding-left: 16px;
+      font-size: 13px;
+      color: #3a4152;
+      line-height: 1.65;
+    }
+
+    .warmup-box {
+      background: var(--paris-gold-soft);
+      border: 1.5px solid #ead7b0;
+      border-radius: 16px;
+      padding: 18px 22px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+    }
+    .warmup-box h4 {
+      font-size: 15px;
+      color: var(--paris-navy);
+      margin-bottom: 8px;
+    }
+    .warmup-box ol {
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .grammar-reminder {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid #ead7b0;
+      font-size: 13.5px;
+    }
+
+    /* VOCABULARY MATCHING */
+    .vocab-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .vocab-subbox {
+      background: #fcfaf6;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .vocab-subbox h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      margin-bottom: 12px;
+      color: var(--paris-navy);
+    }
+    .match-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* COLLOCATIONS WITH GO */
+    .go-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .go-chip {
+      background: var(--paris-navy);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    .go-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .gap-line {
+      padding: 11px 14px;
+      background: #fcfaf6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 9px;
+      font-size: 14.5px;
+    }
+
+    /* ROLE PLAY CARDS */
+    .roleplay-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .rp-card {
+      border-radius: 18px;
+      padding: 24px;
+      border: 2px solid var(--border);
+      background: var(--paris-navy-soft);
+    }
+    .rp-card.blogger {
+      background: var(--paris-red-soft);
+      border-color: #f2c6c6;
+    }
+    .rp-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      margin-bottom: 6px;
+    }
+    .rp-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 15px;
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+    .rp-section b {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--paris-red);
+      margin-bottom: 4px;
+    }
+    .rp-section ul { padding-left: 16px; line-height: 1.6; }
+
+    /* REDDIT POST STYLE */
+    .reddit-card {
+      background: #ffffff;
+      border: 1.5px solid #d7dfe8;
+      border-radius: 16px;
+      padding: 22px 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .reddit-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: #576f76;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .reddit-sub-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ff4500;
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .reddit-sub-name {
+      font-weight: 800;
+      color: #0f1a1c;
+    }
+    .reddit-flair {
+      display: inline-block;
+      background: #e9f5fd;
+      color: #0066b2;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .reddit-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      color: #0f1a1c;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+    .reddit-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #1c272b;
+    }
+    .reddit-body p { margin-bottom: 13px; }
+    .reddit-body mark {
+      background: #fff0eb;
+      color: #c93800;
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+    .reddit-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #eef1f3;
+      flex-wrap: wrap;
+    }
+    .reddit-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f2f4f5;
+      color: #0f1a1c;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .reddit-pill:hover { background: #e5e9ec; }
+    .reddit-pill.upvoted { background: #ff4500; color: #fff; }
+
+    /* BLOG READING */
+    .audio-bar {
+      background: var(--paris-sage-soft);
+      border: 1.5px solid #b6dfd0;
+      border-radius: 16px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .blog-post {
+      background: #fffdf9;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 30px;
+      margin-bottom: 24px;
+      font-size: 15.5px;
+      line-height: 1.8;
+    }
+    .blog-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--paris-red);
+      color: #fff;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    .blog-post p { margin-bottom: 14px; }
+    .blog-post mark {
+      background: #fde8e8;
+      color: #9e2a2a;
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    /* INPUTS, SELECTS & BUTTONS */
+    select.ui-select, input.ui-input, textarea.ui-textarea {
+      padding: 8px 12px;
+      border: 1.5px solid #cbd2df;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+    select.ui-select:focus, input.ui-input:focus, textarea.ui-textarea:focus {
+      border-color: var(--paris-navy);
+    }
+    input.ui-input { width: 150px; }
+    textarea.ui-textarea { width: 100%; resize: vertical; }
+
+    .ok-field { border-color: var(--paris-sage) !important; background: var(--paris-sage-soft) !important; color: #1b5e48 !important; }
+    .no-field { border-color: var(--paris-red) !important; background: var(--paris-red-soft) !important; color: #a62c2c !important; }
+
+    .btn {
+      background: var(--paris-navy);
+      color: #fff;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--paris-red); }
+    .btn.secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+
+    .score-pill {
+      display: inline-block;
+      margin-left: 12px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .tf-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 15px;
+      background: #fcfaf6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      flex-wrap: wrap;
+    }
+
+    .hw-vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 800px) {
+      .warmup-box, .vocab-split, .go-grid-2, .roleplay-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 12px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">ziz<span>.</span>english</div>
+    <div class="mode-tabs">
+      <button type="button" class="mode-tab active" data-panel="lesson" onclick="switchPanel('lesson')">🗼 Lesson: 5 Days in Paris</button>
+      <button type="button" class="mode-tab" data-panel="homework" onclick="switchPanel('homework')">📝 Homework</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- =================================================================== -->
+    <!-- PANEL 1: CLASSWORK LESSON                                           -->
+    <!-- =================================================================== -->
+    <div id="panel-lesson" class="panel active">
+      <div class="hero">
+        <span class="hero-badge">LEVEL A2+ / B1 • TRAVEL &amp; CITY BREAKS</span>
+        <h1>5 Days in Paris: The Perfect Itinerary</h1>
+        <p>Explore Paris landmarks, master collocations with <b>go</b>, role-play a tourist and a travel blogger, and read a surprising travel story.</p>
+      </div>
+
+      <!-- STEP 1: 5 DAYS IN PARIS ITINERARY & WARM-UP -->
+      <section class="card">
+        <span class="step-tag">Step 1 • Lead-in &amp; Map Itinerary</span>
+        <h2>5 Days in Paris — Explore the Itinerary</h2>
+        <p class="card-desc">Look at the 5-day Paris travel plan below, then discuss the warm-up questions using <b>There is / There are</b>.</p>
+
+        <div class="itinerary-grid">
+          <div class="day-card">
+            <span class="day-num">DAY 1</span>
+            <h4>Classic Paris</h4>
+            <ul>
+              <li>Louvre Museum</li>
+              <li>Tuileries Garden</li>
+              <li>Place de la Concorde</li>
+              <li>Champs-Élysées</li>
+              <li>Arc de Triomphe</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <span class="day-num">DAY 2</span>
+            <h4>Seine &amp; Icons</h4>
+            <ul>
+              <li>Eiffel Tower</li>
+              <li>Champ de Mars</li>
+              <li>Pont Alexandre III</li>
+              <li>Seine River Cruise</li>
+              <li>Trocadéro</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <span class="day-num">DAY 3</span>
+            <h4>Montmartre</h4>
+            <ul>
+              <li>Sacré-Cœur Basilica</li>
+              <li>Place du Tertre</li>
+              <li>Moulin Rouge</li>
+              <li>Montmartre Streets</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <span class="day-num">DAY 4</span>
+            <h4>Latin Quarter</h4>
+            <ul>
+              <li>Notre-Dame Cathedral</li>
+              <li>Shakespeare &amp; Co.</li>
+              <li>Panthéon</li>
+              <li>Luxembourg Gardens</li>
+            </ul>
+          </div>
+          <div class="day-card">
+            <span class="day-num">DAY 5</span>
+            <h4>Le Marais &amp; Beyond</h4>
+            <ul>
+              <li>Place des Vosges</li>
+              <li>Le Marais Cafés</li>
+              <li>Centre Pompidou</li>
+              <li>Palace of Versailles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="warmup-box">
+          <div>
+            <h4>💬 Discussion Questions</h4>
+            <ol>
+              <li>Do you like Paris? Why / Why not?</li>
+              <li>What places can you see on the itinerary?</li>
+              <li>Which place on the map looks the most interesting?</li>
+              <li>Have you ever been to France?</li>
+            </ol>
+          </div>
+          <div class="grammar-reminder">
+            <b style="color: var(--paris-navy); display: block; margin-bottom: 6px;">📌 Useful Structure: There is / There are</b>
+            <p style="margin-bottom: 6px;">• <b>There is</b> a famous museum (the Louvre) on Day 1.</p>
+            <p>• <b>There are</b> many cosy cafés and old streets in Montmartre.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: CITY LANDMARKS & TOURIST ACTIVITIES -->
+      <section class="card">
+        <span class="step-tag navy">Step 2 • Travel Vocabulary</span>
+        <h2>City Places &amp; Tourist Activities</h2>
+        <p class="card-desc">Match the Paris landmarks (1–7) and holiday activities (1–6) with their descriptions.</p>
+
+        <div class="vocab-split">
+          <!-- 2A: 7 City Places -->
+          <div class="vocab-subbox" id="placesMatchBox">
+            <h3>🏛️ Part A: City Landmarks (1–7)</h3>
+            <div class="match-line">
+              <span>1. garden (Tuileries)</span>
+              <select class="ui-select" data-question="Paris Place 1: garden" data-answer="a green park with flowers and trees">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>2. bridge (Pont Alexandre III)</span>
+              <select class="ui-select" data-question="Paris Place 2: bridge" data-answer="a structure built over a river">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>3. tower (Eiffel Tower)</span>
+              <select class="ui-select" data-question="Paris Place 3: tower" data-answer="a tall metal structure with a view">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>4. cathedral (Notre-Dame)</span>
+              <select class="ui-select" data-question="Paris Place 4: cathedral" data-answer="a large historic church">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>5. square (Place des Vosges)</span>
+              <select class="ui-select" data-question="Paris Place 5: square" data-answer="an open public area in a city">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>6. river (The Seine)</span>
+              <select class="ui-select" data-question="Paris Place 6: river" data-answer="water flowing through the city (the Seine)">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>7. streets (Montmartre)</span>
+              <select class="ui-select" data-question="Paris Place 7: streets" data-answer="narrow roads with cafés and shops">
+                <option value="">Choose...</option>
+                <option value="a tall metal structure with a view">a tall metal structure with a view</option>
+                <option value="a green park with flowers and trees">a green park with flowers and trees</option>
+                <option value="a structure built over a river">a structure built over a river</option>
+                <option value="a large historic church">a large historic church</option>
+                <option value="an open public area in a city">an open public area in a city</option>
+                <option value="water flowing through the city (the Seine)">water flowing through the city (the Seine)</option>
+                <option value="narrow roads with cafés and shops">narrow roads with cafés and shops</option>
+              </select>
+            </div>
+            <div style="margin-top: 12px;">
+              <button type="button" class="btn" onclick="checkSection('placesMatchBox', 'placesScore')">Check Part A</button>
+              <span class="score-pill" id="placesScore"></span>
+            </div>
+          </div>
+
+          <!-- 2B: 6 Tourist Activities -->
+          <div class="vocab-subbox" id="activitiesMatchBox">
+            <h3>📸 Part B: Tourist Activities (1–6)</h3>
+            <div class="match-line">
+              <span>1. try local food</span>
+              <select class="ui-select" data-question="Activity 1: try local food" data-answer="eat croissants, cheese, and French dishes">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>2. go sightseeing</span>
+              <select class="ui-select" data-question="Activity 2: go sightseeing" data-answer="walk around and see famous places">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>3. sit by the river</span>
+              <select class="ui-select" data-question="Activity 3: sit by the river" data-answer="relax on the bank of the Seine">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>4. take a boat tour</span>
+              <select class="ui-select" data-question="Activity 4: take a boat tour" data-answer="travel along the river on a cruise">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>5. visit a famous attraction</span>
+              <select class="ui-select" data-question="Activity 5: visit attraction" data-answer="go inside the Louvre or Eiffel Tower">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span>6. take pictures of landmarks</span>
+              <select class="ui-select" data-question="Activity 6: take pictures" data-answer="take photos of iconic monuments">
+                <option value="">Choose...</option>
+                <option value="walk around and see famous places">walk around and see famous places</option>
+                <option value="eat croissants, cheese, and French dishes">eat croissants, cheese, and French dishes</option>
+                <option value="relax on the bank of the Seine">relax on the bank of the Seine</option>
+                <option value="travel along the river on a cruise">travel along the river on a cruise</option>
+                <option value="go inside the Louvre or Eiffel Tower">go inside the Louvre or Eiffel Tower</option>
+                <option value="take photos of iconic monuments">take photos of iconic monuments</option>
+              </select>
+            </div>
+            <div style="margin-top: 12px;">
+              <button type="button" class="btn" onclick="checkSection('activitiesMatchBox', 'actScore')">Check Part B</button>
+              <span class="score-pill" id="actScore"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: COLLOCATIONS WITH GO -->
+      <section class="card">
+        <span class="step-tag gold">Step 3 • Grammar &amp; Collocations</span>
+        <h2>Collocations with GO: go / go for / go on / go to / go to a / go to the</h2>
+        <p class="card-desc">Study the 6 patterns with <b>go</b>, then match the meanings and fill in the gaps.</p>
+
+        <div class="go-chips">
+          <span class="go-chip">GO + -ing (go shopping, go sightseeing)</span>
+          <span class="go-chip">GO FOR + a + noun (go for a walk, go for a coffee)</span>
+          <span class="go-chip">GO ON + trip/tour (go on a cruise, go on holiday)</span>
+          <span class="go-chip">GO TO + place/routine (go to school, go to work, go to Paris)</span>
+          <span class="go-chip">GO TO A + event/place (go to a party, go to a café)</span>
+          <span class="go-chip">GO TO THE + specific place (go to the hospital, go to the beach)</span>
+        </div>
+
+        <div class="go-grid-2">
+          <!-- 3A: Match GO patterns with meanings -->
+          <div class="vocab-subbox" id="goMeaningsBox">
+            <h3>1. Match the Pattern with Its Meaning</h3>
+            <div class="match-line">
+              <span><b>go</b> (shopping / swimming)</span>
+              <select class="ui-select" data-question="GO Meaning 1" data-answer="do a leisure activity (-ing)">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span><b>go for</b> (a walk / a run)</span>
+              <select class="ui-select" data-question="GO Meaning 2" data-answer="take a short break/activity">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span><b>go on</b> (a cruise / a tour)</span>
+              <select class="ui-select" data-question="GO Meaning 3" data-answer="travel or take a trip/journey">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span><b>go to</b> (school / bed / France)</span>
+              <select class="ui-select" data-question="GO Meaning 4" data-answer="go to a regular place (no article)">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span><b>go to a</b> (party / restaurant)</span>
+              <select class="ui-select" data-question="GO Meaning 5" data-answer="go to an event or non-specific place">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div class="match-line">
+              <span><b>go to the</b> (hospital / cinema)</span>
+              <select class="ui-select" data-question="GO Meaning 6" data-answer="go to a specific public place">
+                <option value="">Choose...</option>
+                <option value="do a leisure activity (-ing)">do a leisure activity (-ing)</option>
+                <option value="take a short break/activity">take a short break/activity</option>
+                <option value="travel or take a trip/journey">travel or take a trip/journey</option>
+                <option value="go to a regular place (no article)">go to a regular place (no article)</option>
+                <option value="go to an event or non-specific place">go to an event or non-specific place</option>
+                <option value="go to a specific public place">go to a specific public place</option>
+              </select>
+            </div>
+            <div style="margin-top: 12px;">
+              <button type="button" class="btn" onclick="checkSection('goMeaningsBox', 'goMeanScore')">Check Meanings</button>
+              <span class="score-pill" id="goMeanScore"></span>
+            </div>
+          </div>
+
+          <!-- 3B: Fill in the gaps (6 sentences from slide) -->
+          <div class="vocab-subbox" id="goGapsBox">
+            <h3>2. Fill in the Gaps (Correct Form of GO)</h3>
+            <div class="gap-line">1. I usually <input type="text" class="ui-input" data-question="GO Gap 1" data-answer="go" placeholder="go..."> shopping on weekends.</div>
+            <div class="gap-line">2. Let's <input type="text" class="ui-input" data-question="GO Gap 2" data-answer="go for" placeholder="go..."> a walk in the park.</div>
+            <div class="gap-line">3. They went <input type="text" class="ui-input" data-question="GO Gap 3" data-answer="on" placeholder="preposition..."> a cruise this summer.</div>
+            <div class="gap-line">4. She <input type="text" class="ui-input" data-question="GO Gap 4" data-answer="goes to" placeholder="go..."> school every day.</div>
+            <div class="gap-line">5. We are going <input type="text" class="ui-input" data-question="GO Gap 5" data-answer="to a" placeholder="prep + article..."> party tonight.</div>
+            <div class="gap-line">6. He needs to <input type="text" class="ui-input" data-question="GO Gap 6" data-answer="go to the" placeholder="go..."> hospital.</div>
+            <div style="margin-top: 12px;">
+              <button type="button" class="btn" onclick="checkSection('goGapsBox', 'goGapScore')">Check Gaps</button>
+              <span class="score-pill" id="goGapScore"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: ROLE PLAY: PARIS TRIP -->
+      <section class="card">
+        <span class="step-tag">Step 4 • Speaking Role Play</span>
+        <h2>Role Play: Paris Trip (Tourist vs. Travel Blogger)</h2>
+        <p class="card-desc">Work in pairs or with your teacher. Read your role card, use the phrases below, and plan the ultimate Paris trip!</p>
+
+        <div class="roleplay-grid">
+          <div class="rp-card">
+            <span style="font-size: 11px; font-weight: 800; color: var(--paris-navy);">CARD 1 • TOURIST</span>
+            <h3>You are a tourist in Paris 🎒</h3>
+            <div class="rp-section">
+              <b>Your Goals</b>
+              <ul>
+                <li>You want to have a fun and relaxing trip.</li>
+                <li>You like cafés, photos, and cool places.</li>
+                <li>You don't like long museums or too much walking.</li>
+              </ul>
+            </div>
+            <div class="rp-section">
+              <b>You Must</b>
+              <ul>
+                <li>Ask questions about where to go.</li>
+                <li>Choose activities using <i>go / go for / go on / go to</i>.</li>
+              </ul>
+            </div>
+            <div class="rp-section">
+              <b>Useful Phrases</b>
+              <p>• "I want to go..." &nbsp;• "Can we go...?"<br>• "I don't want to..." &nbsp;• "Is it interesting / expensive / crowded?"</p>
+            </div>
+          </div>
+
+          <div class="rp-card blogger">
+            <span style="font-size: 11px; font-weight: 800; color: var(--paris-red);">CARD 2 • TRAVEL BLOGGER</span>
+            <h3>You are a travel blogger 📸</h3>
+            <div class="rp-section">
+              <b>Your Goals</b>
+              <ul>
+                <li>Create a COOL itinerary for the tourist.</li>
+                <li>Show interesting and aesthetic places.</li>
+                <li>Make it "Instagram-worthy".</li>
+              </ul>
+            </div>
+            <div class="rp-section">
+              <b>You Must</b>
+              <ul>
+                <li>Suggest places around Paris.</li>
+                <li>Add emotions and vivid descriptions.</li>
+              </ul>
+            </div>
+            <div class="rp-section">
+              <b>Useful Phrases</b>
+              <p>• "It's amazing / beautiful / famous!"<br>• "You can take great pictures here."<br>• "It's perfect for photos." &nbsp;• "I recommend..."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5: READING — REAL REDDIT TRAVEL POST -->
+      <section class="card">
+        <span class="step-tag sage">Step 5 • Reading</span>
+        <h2>Read the Travel Post from Reddit</h2>
+        <p class="card-desc">Read the post below from <b>r/travel</b> and complete Tasks 1–3.</p>
+
+        <article class="reddit-card">
+          <div class="reddit-meta">
+            <div class="reddit-sub-icon">r/</div>
+            <div>
+              <span class="reddit-sub-name">r/travel</span> • Posted by <b>u/wandering_claire</b> • 6 hr. ago
+            </div>
+          </div>
+          <span class="reddit-flair">Trip Report 🇫🇷</span>
+          <h3 class="reddit-title">Unpopular opinion? Paris turned out to be the complete opposite of my expectations!</h3>
+          <div class="reddit-body">
+            <p>
+              Before visiting Paris last month, my <mark>expectations</mark> were honestly pretty low. Half the internet told me the city was dirty, unfriendly, and stressful, so I wasn't sure what to expect. However, my 5-day trip <mark>turned out</mark> to be <mark>completely</mark> the <mark>opposite</mark> of what I had imagined!
+            </p>
+            <p>
+              First of all, the city was so much more <mark>friendly</mark> and <mark>clean</mark> than I thought it would be. Every café waiter we met was polite when we started with a simple <i>"Bonjour!"</i> Instead of spending all day inside museums, we went on an evening <mark>cruise</mark> <mark>along</mark> the River Seine and took the <mark>metro</mark> everywhere — super fast and easy. One morning, we even went <mark>cycling</mark> near the gardens!
+            </p>
+            <p style="margin-bottom: 0;">
+              Walking through neighbourhoods like Le Marais and Montmartre, I noticed how <mark>fashion-conscious</mark> and <mark>stylish</mark> local people are. Everything around looked so <mark>attractive</mark> — from little corner bakeries to historic bridges — and the whole vibe felt <mark>relaxed</mark> and welcoming. Honestly, I can't wait to go back!
+            </p>
+          </div>
+          <div class="reddit-actions">
+            <button type="button" class="reddit-pill" id="redditUpvoteBtn" onclick="toggleRedditUpvote(this)">⬆ <span id="redditVoteCount">428</span></button>
+            <span class="reddit-pill" style="cursor: default;">💬 94 Comments</span>
+            <span class="reddit-pill" style="cursor: default;">↗ Share</span>
+          </div>
+        </article>
+
+        <!-- 5A: Main Idea -->
+        <div class="vocab-subbox" style="margin-bottom: 18px;" id="blogMainBox">
+          <h3>Task 1. What is the text mostly about?</h3>
+          <div class="match-line">
+            <span>Choose the best summary:</span>
+            <select class="ui-select" data-question="Blog Task 1: Main Idea" data-answer="B">
+              <option value="">Choose A, B or C...</option>
+              <option value="A">A. Problems in Paris</option>
+              <option value="B">B. A surprising travel experience</option>
+              <option value="C">C. A guide to museums</option>
+            </select>
+          </div>
+          <button type="button" class="btn" onclick="checkSection('blogMainBox', 'blogMainScore')">Check Task 1</button>
+          <span class="score-pill" id="blogMainScore"></span>
+        </div>
+
+        <!-- 5B: True / False -->
+        <div class="vocab-subbox" style="margin-bottom: 18px;" id="blogTfBox">
+          <h3>Task 2. True or False?</h3>
+          <div class="tf-row">
+            <span>1. The writer expected Paris to be clean and friendly.</span>
+            <select class="ui-select" data-question="Blog TF 1" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select>
+          </div>
+          <div class="tf-row">
+            <span>2. The city was cleaner than expected.</span>
+            <select class="ui-select" data-question="Blog TF 2" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select>
+          </div>
+          <div class="tf-row">
+            <span>3. The writer visited only museums.</span>
+            <select class="ui-select" data-question="Blog TF 3" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select>
+          </div>
+          <div class="tf-row">
+            <span>4. People in Paris are described as stylish.</span>
+            <select class="ui-select" data-question="Blog TF 4" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select>
+          </div>
+          <div class="tf-row">
+            <span>5. Everyone spoke English.</span>
+            <select class="ui-select" data-question="Blog TF 5" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select>
+          </div>
+          <button type="button" class="btn" onclick="checkSection('blogTfBox', 'blogTfScore')">Check Task 2</button>
+          <span class="score-pill" id="blogTfScore"></span>
+        </div>
+
+        <!-- 5C: Open Questions -->
+        <div class="vocab-subbox">
+          <h3>Task 3. Answer the Questions About Yourself</h3>
+          <div style="margin-bottom: 12px;">
+            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">1. Have you ever visited a place that surprised you?</label>
+            <textarea class="ui-textarea" rows="2" data-question="Blog Open Q1: Place that surprised you" placeholder="Write 2-3 sentences..."></textarea>
+          </div>
+          <div>
+            <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">2. Did it turn out better or worse than you expected?</label>
+            <textarea class="ui-textarea" rows="2" data-question="Blog Open Q2: Better or worse than expected" placeholder="It turned out... because..."></textarea>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PANEL 2: HOMEWORK                                                   -->
+    <!-- =================================================================== -->
+    <div id="panel-homework" class="panel">
+      <div class="hero hw-hero">
+        <span class="hero-badge">HOMEWORK ASSIGNMENT • PARIS &amp; TRAVEL</span>
+        <h1>Homework: Paris Vocabulary &amp; City Facts</h1>
+        <p>Complete all homework tasks below. Your answers and progress are automatically saved for your teacher.</p>
+      </div>
+
+      <!-- HW PART 1: MATCH WORDS WITH DEFINITIONS (14 WORDS FROM SLIDE) -->
+      <section class="card">
+        <span class="step-tag">Homework 1 • Blog Vocabulary</span>
+        <h2>Match the Words from the Text with Their Meanings</h2>
+        <p class="card-desc">Choose the correct definition for each of the 14 highlighted words from the Paris blog post.</p>
+
+        <div class="hw-vocab-grid" id="hwVocab14Box"></div>
+
+        <div style="margin-top: 18px;">
+          <button type="button" class="btn" onclick="checkSection('hwVocab14Box', 'hwVocab14Score')">Check Vocabulary</button>
+          <span class="score-pill" id="hwVocab14Score"></span>
+        </div>
+      </section>
+
+      <!-- HW PART 2: READING ARTICLE "PARIS" + TASKS 1, 2, 3 -->
+      <section class="card">
+        <span class="step-tag navy">Homework 2 • Reading &amp; Comprehension</span>
+        <h2>Read the Text "Paris" and Complete Tasks 1–3</h2>
+        <p class="card-desc">Read the encyclopaedic text about Paris carefully, then complete all 3 tasks below.</p>
+
+        <article class="blog-post">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--paris-navy); margin-bottom: 12px;">Paris — The City of Light</h3>
+          <p>
+            Paris is the <b>capital</b> of France and one of the most famous cities in the world. It is located in the north-central part of the country along the <b>river</b> Seine, which divides the city into two main parts: the Left Bank and the Right Bank. Paris is divided into twenty administrative districts, or <b>neighbourhoods</b>, each with its own unique character and history.
+          </p>
+          <p>
+            Millions of tourists visit Paris every year to see its world-famous landmarks. The Eiffel Tower, built in 1889 as a temporary entrance arch for the World's Fair, has become the most iconic <b>monument</b> in France. Nearby stands the Louvre, the largest art <b>museum</b> on Earth and home to Leonardo da Vinci's masterpiece, the <i>Mona Lisa</i>. Another historic treasure is Notre-Dame Cathedral, which was badly damaged by a fire in April 2019 and carefully restored.
+          </p>
+          <p style="margin-bottom: 0;">
+            Getting around Paris is easy thanks to its fast <b>underground</b> railway system, the Métro, which opened in 1900. Just outside the city lies Disneyland Paris, which opened in 1992 — the park even has a secret network of underground tunnels so staff can move quickly between themed lands without spoiling the magic for guests!
+          </p>
+        </article>
+
+        <!-- HW TASK 1: MATCH 6 WORDS WITH DEFINITIONS -->
+        <div class="vocab-subbox" style="margin-bottom: 22px;" id="hwParisDefBox">
+          <h3>Task 1. Match the Words (1–6) with Definitions (a–f)</h3>
+          <div class="match-line">
+            <span>1. capital</span>
+            <select class="ui-select" data-question="HW Paris Def 1: capital" data-answer="a city where the government is">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div class="match-line">
+            <span>2. river</span>
+            <select class="ui-select" data-question="HW Paris Def 2: river" data-answer="water that flows through land">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div class="match-line">
+            <span>3. neighbourhood</span>
+            <select class="ui-select" data-question="HW Paris Def 3: neighbourhood" data-answer="a place where people live in a city">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div class="match-line">
+            <span>4. museum</span>
+            <select class="ui-select" data-question="HW Paris Def 4: museum" data-answer="a place with old and famous objects">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div class="match-line">
+            <span>5. monument</span>
+            <select class="ui-select" data-question="HW Paris Def 5: monument" data-answer="a building with important history">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div class="match-line">
+            <span>6. underground</span>
+            <select class="ui-select" data-question="HW Paris Def 6: underground" data-answer="under the ground">
+              <option value="">Choose...</option>
+              <option value="a place where people live in a city">a place where people live in a city</option>
+              <option value="a building with important history">a building with important history</option>
+              <option value="a city where the government is">a city where the government is</option>
+              <option value="a place with old and famous objects">a place with old and famous objects</option>
+              <option value="water that flows through land">water that flows through land</option>
+              <option value="under the ground">under the ground</option>
+            </select>
+          </div>
+          <div style="margin-top: 12px;">
+            <button type="button" class="btn" onclick="checkSection('hwParisDefBox', 'hwDefScore')">Check Task 1</button>
+            <span class="score-pill" id="hwDefScore"></span>
+          </div>
+        </div>
+
+        <!-- HW TASK 2: TRUE / FALSE (7 ITEMS) -->
+        <div class="vocab-subbox" style="margin-bottom: 22px;" id="hwParisTfBox">
+          <h3>Task 2. True or False?</h3>
+          <div class="tf-row"><span>1. Paris is in the south of France.</span><select class="ui-select" data-question="HW Paris TF 1" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>2. The Seine divides the city into two parts.</span><select class="ui-select" data-question="HW Paris TF 2" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>3. Paris has 10 neighbourhoods.</span><select class="ui-select" data-question="HW Paris TF 3" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>4. The Eiffel Tower was built as a permanent structure.</span><select class="ui-select" data-question="HW Paris TF 4" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>5. The Louvre is a very large museum.</span><select class="ui-select" data-question="HW Paris TF 5" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>6. Notre-Dame was damaged by fire.</span><select class="ui-select" data-question="HW Paris TF 6" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>7. Disneyland Paris opened in 2002.</span><select class="ui-select" data-question="HW Paris TF 7" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div style="margin-top: 12px;">
+            <button type="button" class="btn" onclick="checkSection('hwParisTfBox', 'hwTfScore')">Check Task 2</button>
+            <span class="score-pill" id="hwTfScore"></span>
+          </div>
+        </div>
+
+        <!-- HW TASK 3: ANSWER THE QUESTIONS (6 OPEN QUESTIONS) -->
+        <div class="vocab-subbox">
+          <h3>Task 3. Answer the Questions in Full Sentences</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px;">
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">1. Where is Paris located?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q1: Location" placeholder="Paris is located in..." />
+            </div>
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">2. What does the Seine do in the city?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q2: Seine" placeholder="It divides..." />
+            </div>
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">3. Why was the Eiffel Tower built?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q3: Eiffel Tower" placeholder="It was built as..." />
+            </div>
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">4. What famous painting is in the Louvre?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q4: Painting" placeholder="The..." />
+            </div>
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">5. When did the fire happen in Notre-Dame?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q5: Notre-Dame fire" placeholder="In..." />
+            </div>
+            <div>
+              <label style="font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 5px;">6. Why do staff use tunnels in Disneyland?</label>
+              <input type="text" class="ui-input" style="width: 100%;" data-question="HW Paris Q6: Disneyland tunnels" placeholder="So they can..." />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleRedditUpvote(btn) {
+      const countEl = document.getElementById('redditVoteCount');
+      const isUpvoted = btn.classList.toggle('upvoted');
+      countEl.textContent = isUpvoted ? '429' : '428';
+    }
+
+    function switchPanel(name) {
+      document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.panel === name));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function checkSection(containerId, scoreId) {
+      const box = document.getElementById(containerId);
+      const fields = box.querySelectorAll('[data-answer]');
+      let total = 0;
+      let correct = 0;
+
+      fields.forEach(el => {
+        total++;
+        const userVal = (el.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = el.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        el.classList.remove('ok-field', 'no-field');
+        if (!userVal) return;
+
+        if (valid.includes(userVal)) {
+          el.classList.add('ok-field');
+          correct++;
+        } else {
+          el.classList.add('no-field');
+        }
+      });
+
+      if (scoreId) {
+        const sEl = document.getElementById(scoreId);
+        sEl.textContent = `${correct} / ${total} correct`;
+        sEl.style.color = correct === total ? '#2e7d63' : '#d94e4e';
+      }
+    }
+
+    // Populate HW Part 1 (14 vocabulary items from slide)
+    const hw14Data = [
+      { word: 'expectations', def: 'what you think will happen in the future' },
+      { word: 'turn out', def: 'happen in the end / have a result' },
+      { word: 'completely', def: 'completely, 100%' },
+      { word: 'opposite', def: 'very different, not the same' },
+      { word: 'friendly', def: 'nice and kind' },
+      { word: 'clean', def: 'without dirt; tidy and fresh' },
+      { word: 'cruise', def: 'a trip on a boat' },
+      { word: 'along', def: 'next to or following something (like a river)' },
+      { word: 'metro', def: 'public transport under the ground' },
+      { word: 'cycling', def: 'moving from one place to another on a bike' },
+      { word: 'fashion-conscious', def: 'interested in modern clothes and trends' },
+      { word: 'stylish', def: 'fashionable and wearing nice clothes' },
+      { word: 'attractive', def: 'good-looking / pleasant to see' },
+      { word: 'relaxed', def: 'calm and not stressed' }
+    ];
+
+    (function renderHw14() {
+      const box = document.getElementById('hwVocab14Box');
+      const allDefs = hw14Data.map(x => x.def).sort();
+      hw14Data.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'match-line';
+        row.innerHTML = `
+          <span>${idx + 1}. ${item.word}</span>
+          <select class="ui-select" style="max-width: 220px;" data-question="HW1 Vocab: ${item.word}" data-answer="${item.def}">
+            <option value="">Choose meaning...</option>
+            ${allDefs.map(d => `<option value="${d}">${d}</option>`).join('')}
+          </select>
+        `;
+        box.appendChild(row);
+      });
+    })();
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
