@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework: Question Words, Subject/Object Questions & Reading | ziz.english</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --primary-light: #fff0f3;
+            --accent-yellow: #fff9db;
+            --yellow-dark: #f59f00;
+            --accent-green: #e6fcf5;
+            --green-dark: #0ca678;
+            --accent-blue: #e7f5ff;
+            --blue-dark: #1c7ed6;
+            --accent-purple: #f3f0ff;
+            --purple-dark: #7048e8;
+            --bg-color: #f7f8fc;
+            --card-bg: #ffffff;
+            --text-main: #1e1e2f;
+            --text-muted: #6c6c80;
+            --border-color: #eaeaf2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        .lesson-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .brand span { color: var(--primary); }
+
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-pill:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #2b2d42 0%, #4a4e69 100%);
+            color: #fff;
+            border-radius: 24px;
+            padding: 34px 40px;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner h1 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        /* --- TASK 1: QUESTION WORDS MATCHING --- */
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 12px;
+        }
+
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            background: #fafafc;
+        }
+
+        .match-label {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* --- TASK 2: SUBJECT & OBJECT QUESTIONS QUIZ --- */
+        .quiz-item {
+            padding: 16px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            background: #fafafc;
+        }
+
+        .quiz-item p {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-opts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .opt-btn {
+            padding: 8px 15px;
+            border-radius: 12px;
+            border: 1.5px solid #cbd5e1;
+            background: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .opt-btn:hover { border-color: var(--primary); }
+        .opt-btn.selected {
+            background: var(--text-main);
+            color: #fff;
+            border-color: var(--text-main);
+        }
+        .opt-btn.correct {
+            background: var(--green-dark) !important;
+            color: #fff !important;
+            border-color: var(--green-dark) !important;
+        }
+        .opt-btn.wrong {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+        }
+
+        /* --- TASK 3: READING ARTICLE --- */
+        .article-card {
+            background: #f4f7fb;
+            border: 1px solid #d9e2ec;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            line-height: 1.8;
+            font-size: 15.5px;
+            color: #1e293b;
+        }
+
+        .article-card h3 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #102a43;
+        }
+
+        .article-card p {
+            margin-bottom: 14px;
+        }
+
+        .article-card b {
+            color: var(--primary);
+            background: rgba(255, 71, 87, 0.08);
+            padding: 1px 6px;
+            border-radius: 6px;
+        }
+
+        /* --- TASK 4: VOCABULARY 5A & 5B --- */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .vocab-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 16px;
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            flex-wrap: wrap;
+        }
+
+        .sentence-row {
+            padding: 13px 16px;
+            background: #fafafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* --- TASK 5: RELATIONSHIPS & LIFE PHRASES --- */
+        .wordbank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: var(--accent-purple);
+            border: 1px solid #d0bfff;
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .wb-chip {
+            background: #fff;
+            color: var(--purple-dark);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: 10px;
+            border: 1px solid #e5dbff;
+        }
+
+        /* --- INPUTS & BUTTONS --- */
+        select.hw-select, input.hw-input {
+            padding: 8px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            background: #fff;
+            color: var(--text-main);
+        }
+
+        input.hw-input { min-width: 165px; }
+        select.hw-select { min-width: 175px; }
+
+        select.hw-select:focus, input.hw-input:focus { border-color: var(--primary); }
+        .correct-field { border-color: var(--green-dark) !important; background: var(--accent-green) !important; color: #087f5b !important; }
+        .wrong-field { border-color: var(--primary) !important; background: var(--primary-light) !important; color: #c92a3e !important; }
+
+        .btn-action {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .score-msg {
+            display: inline-block;
+            margin-left: 12px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header { padding: 14px 20px; }
+            .section-card { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="lesson-header">
+        <div class="brand">ziz<span>.</span>english</div>
+        <nav class="nav-pills">
+            <a href="#task1" class="nav-pill">1. Question Words</a>
+            <a href="#task2" class="nav-pill">2. Subject & Object Qs</a>
+            <a href="#task3" class="nav-pill">3. Reading</a>
+            <a href="#task4" class="nav-pill">4. Vocabulary (5A & 5B)</a>
+            <a href="#task5" class="nav-pill">5. Life Phrases</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero-banner">
+            <span class="hero-badge">HOMEWORK ASSIGNMENT • A2 / B1</span>
+            <h1>Questions, Everyday Habits & Relationships</h1>
+            <p>Complete all exercises below. Your answers and progress are automatically saved for your teacher.</p>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- TASK 1: MATCH QUESTION WORDS WITH ANSWERS                       -->
+        <!-- =============================================================== -->
+        <section class="section-card" id="task1">
+            <span class="section-tag">Task 1 • Question Words</span>
+            <h2 class="section-title">Match the Question Words with the Answers</h2>
+            <p class="section-desc">Choose the matching answer for each question word (1–11).</p>
+
+            <div class="match-grid" id="qwMatchBox">
+                <div class="match-row">
+                    <span class="match-label">1. How</span>
+                    <select class="hw-select" data-question="QW 1: How" data-answer="by train">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">2. How long</span>
+                    <select class="hw-select" data-question="QW 2: How long" data-answer="two hours">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">3. How many</span>
+                    <select class="hw-select" data-question="QW 3: How many" data-answer="five">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">4. What</span>
+                    <select class="hw-select" data-question="QW 4: What" data-answer="a phone">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">5. What kind of</span>
+                    <select class="hw-select" data-question="QW 5: What kind of" data-answer="I like Italian food">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">6. When</span>
+                    <select class="hw-select" data-question="QW 6: When" data-answer="tomorrow">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">7. Where</span>
+                    <select class="hw-select" data-question="QW 7: Where" data-answer="in Los Angeles">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">8. Which</span>
+                    <select class="hw-select" data-question="QW 8: Which" data-answer="that one">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">9. Who</span>
+                    <select class="hw-select" data-question="QW 9: Who" data-answer="John">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">10. Whose</span>
+                    <select class="hw-select" data-question="QW 10: Whose" data-answer="It's his">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+
+                <div class="match-row">
+                    <span class="match-label">11. Why</span>
+                    <select class="hw-select" data-question="QW 11: Why" data-answer="because I'm tired">
+                        <option value="">Choose answer...</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="a phone">a phone</option>
+                        <option value="I like Italian food">I like Italian food</option>
+                        <option value="two hours">two hours</option>
+                        <option value="five">five</option>
+                        <option value="that one">that one</option>
+                        <option value="by train">by train</option>
+                        <option value="It's his">It's his</option>
+                        <option value="in Los Angeles">in Los Angeles</option>
+                        <option value="because I'm tired">because I'm tired</option>
+                        <option value="John">John</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top: 18px;">
+                <button type="button" class="btn-action" onclick="checkFields('qwMatchBox', 'qwScore')">Check Answers</button>
+                <span class="score-msg" id="qwScore"></span>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TASK 2: SUBJECT AND OBJECT QUESTIONS QUIZ                       -->
+        <!-- =============================================================== -->
+        <section class="section-card" id="task2">
+            <span class="section-tag">Task 2 • Grammar Quiz</span>
+            <h2 class="section-title">Subject and Object Questions Quiz</h2>
+            <p class="section-desc">Choose the correct question for each situation. Remember: <b>Subject questions</b> do NOT use <i>do / does / did</i>.</p>
+
+            <div id="subjObjQuiz">
+                <div class="quiz-item" data-question="Subj/Obj Q1: Someone called Sarah" data-correct="A">
+                    <p>1. Answer: "<u>Mark</u> called Sarah yesterday." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">Who called Sarah yesterday?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">Who did call Sarah yesterday?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">Who Sarah called yesterday?</button>
+                    </div>
+                </div>
+
+                <div class="quiz-item" data-question="Subj/Obj Q2: Sarah called someone" data-correct="B">
+                    <p>2. Answer: "Sarah called <u>her brother</u> yesterday." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">Who called Sarah yesterday?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">Who did Sarah call yesterday?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">Who Sarah did call yesterday?</button>
+                    </div>
+                </div>
+
+                <div class="quiz-item" data-question="Subj/Obj Q3: Something happened" data-correct="A">
+                    <p>3. Answer: "<u>An accident</u> happened near the station." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">What happened near the station?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">What did happen near the station?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">What was happen near the station?</button>
+                    </div>
+                </div>
+
+                <div class="quiz-item" data-question="Subj/Obj Q4: Anna bought something" data-correct="C">
+                    <p>4. Answer: "Anna bought <u>a new laptop</u>." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">What bought Anna?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">What Anna bought?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">What did Anna buy?</button>
+                    </div>
+                </div>
+
+                <div class="quiz-item" data-question="Subj/Obj Q5: Someone teaches English" data-correct="A">
+                    <p>5. Answer: "<u>Ms Brown</u> teaches English in our school." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">Who teaches English in your school?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">Who does teach English in your school?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">Who do teach English in your school?</button>
+                    </div>
+                </div>
+
+                <div class="quiz-item" data-question="Subj/Obj Q6: They invited someone" data-correct="B">
+                    <p>6. Answer: "They invited <u>all their neighbours</u> to the party." → What is the correct question?</p>
+                    <div class="quiz-opts">
+                        <button type="button" class="opt-btn" data-val="A" onclick="pickOpt(this)">Who invited they to the party?</button>
+                        <button type="button" class="opt-btn" data-val="B" onclick="pickOpt(this)">Who did they invite to the party?</button>
+                        <button type="button" class="opt-btn" data-val="C" onclick="pickOpt(this)">Who invited them to the party?</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn-action" onclick="checkQuiz('subjObjQuiz', 'quizScore')">Check Quiz</button>
+                <span class="score-msg" id="quizScore"></span>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TASK 3: READING TEXT "ARE WE REALLY SO DIFFERENT?"              -->
+        <!-- =============================================================== -->
+        <section class="section-card" id="task3">
+            <span class="section-tag">Task 3 • Reading</span>
+            <h2 class="section-title">Read the Blog Post: "Are We Really So Different?"</h2>
+            <p class="section-desc">Read the text carefully and pay attention to the words and phrases in <b>bold</b> — you will use them in Task 4.</p>
+
+            <div class="article-card">
+                <h3>Are we really so different?</h3>
+                <p>Do you ever look at people around you and say to yourself, 'Wow, we're all so different!'? Well, recently I had the opposite idea. I think that in many ways we're all the same. We like, feel and do many of the same things.</p>
+                <p>What kind of things do we all do at home? We all dance in the kitchen to our favourite music and we look in the fridge for no reason. We <b>hide</b> things. For example, we put a key behind a book on a shelf or in a small box next to the computer, so that no one else can find it. Then we forget where it is. We <b>wake up</b> early at weekends when we don't have college or work. We keep clothes that we never wear. We look at our phone in bed, just before we <b>go to sleep</b>. And yes, sometimes we talk to ourselves, or to our pets.</p>
+                <p>What about outside the home? Well, how do you feel about sitting in your car at a red light? Nobody likes <b>waiting</b>, so it's not surprising that we all hate traffic and queues. In the cinema we all <b>cry</b> at the sad part of the film. We <b>miss</b> our friends when they go away and we want to be with them now. We <b>join</b> gyms and pay a lot of money to be a member, and then we never go. We take a book to a café or the beach and never read it.</p>
+                <p>Do you look everywhere for your phone and then find it's in your pocket? Do you buy things (usually for exercise or for cooking) and use them only once, and then never again? Do you <b>pack</b> extra clothes in your suitcase when you go on holiday? Do you only wear some of them, but not all of them? Of course you do. We all do. And which day of the week is your favourite? Don't tell me. I know the answer.</p>
+                <p style="margin-bottom: 0;">Finally, we all have good days and bad days. We want people to like us. And we love being right.</p>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TASK 4: VOCABULARY 5A & 5B                                      -->
+        <!-- =============================================================== -->
+        <section class="section-card" id="task4">
+            <span class="section-tag">Task 4 • Vocabulary from Reading</span>
+            <h2 class="section-title">5A. Match the Words in Bold with Their Meanings</h2>
+            <p class="section-desc">Choose the correct word from the post for each definition (1 is done as an example).</p>
+
+            <div class="vocab-grid" id="vocab5A">
+                <div class="vocab-row">
+                    <span>1. You close your eyes and start sleeping.</span>
+                    <b style="color: var(--green-dark);">✓ go to sleep</b>
+                </div>
+
+                <div class="vocab-row">
+                    <span>2. You finish sleeping.</span>
+                    <select class="hw-select" data-question="5A.2: finish sleeping" data-answer="wake up">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>3. You put something in a place where people can't see it.</span>
+                    <select class="hw-select" data-question="5A.3: put where people can't see" data-answer="hide">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>4. You become a member of something, for example, a group or club.</span>
+                    <select class="hw-select" data-question="5A.4: become a member" data-answer="join">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>5. You put things into a suitcase before you travel.</span>
+                    <select class="hw-select" data-question="5A.5: put into suitcase" data-answer="pack">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>6. You want to be with someone, but they're not with you.</span>
+                    <select class="hw-select" data-question="5A.6: want to be with someone" data-answer="miss">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>7. You feel sad and water comes out of your eyes.</span>
+                    <select class="hw-select" data-question="5A.7: water comes out of eyes" data-answer="cry">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+
+                <div class="vocab-row">
+                    <span>8. You stay in one place because something is going to happen.</span>
+                    <select class="hw-select" data-question="5A.8: stay in one place" data-answer="wait">
+                        <option value="">Choose word...</option>
+                        <option value="hide">hide</option>
+                        <option value="wake up">wake up</option>
+                        <option value="wait">wait</option>
+                        <option value="cry">cry</option>
+                        <option value="miss">miss</option>
+                        <option value="join">join</option>
+                        <option value="pack">pack</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 32px;">
+                <button type="button" class="btn-action" onclick="checkFields('vocab5A', 'score5A')">Check 5A</button>
+                <span class="score-msg" id="score5A"></span>
+            </div>
+
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">5B. Complete the Sentences with the Words and Phrases in Bold</h3>
+            <p class="section-desc">Use: <b>hide, wake up, go to sleep, wait / waiting, cry, miss, join, pack</b>.</p>
+
+            <div id="vocab5B">
+                <div class="sentence-row">
+                    1. Do you ever <input type="text" class="hw-input" data-question="5B.1" data-answer="cry" placeholder="verb..."> because you're happy or only because you're sad?
+                </div>
+                <div class="sentence-row">
+                    2. How many suitcases do you <input type="text" class="hw-input" data-question="5B.2" data-answer="pack" placeholder="verb..."> for a two-week holiday?
+                </div>
+                <div class="sentence-row">
+                    3. What do you do when you're <input type="text" class="hw-input" data-question="5B.3" data-answer="waiting" placeholder="verb-ing..."> in a long queue?
+                </div>
+                <div class="sentence-row">
+                    4. What time do you usually <input type="text" class="hw-input" data-question="5B.4a" data-answer="wake up" placeholder="phrase...">, and what time do you <input type="text" class="hw-input" data-question="5B.4b" data-answer="go to sleep" placeholder="phrase...">?
+                </div>
+                <div class="sentence-row">
+                    5. Do you ever <input type="text" class="hw-input" data-question="5B.5" data-answer="join" placeholder="verb..."> groups or clubs?
+                </div>
+                <div class="sentence-row">
+                    6. Do you usually <input type="text" class="hw-input" data-question="5B.6" data-answer="hide" placeholder="verb..."> your keys?
+                </div>
+                <div class="sentence-row">
+                    7. When you travel, what do you <input type="text" class="hw-input" data-question="5B.7" data-answer="miss" placeholder="verb..."> the most about home?
+                </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <button type="button" class="btn-action" onclick="checkFields('vocab5B', 'score5B')">Check 5B</button>
+                <span class="score-msg" id="score5B"></span>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TASK 5: RELATIONSHIPS & EVERYDAY PHRASES                         -->
+        <!-- =============================================================== -->
+        <section class="section-card" id="task5">
+            <span class="section-tag">Task 5 • Vocabulary in Context</span>
+            <h2 class="section-title">Complete the Sentences Using the Correct Form of the Phrases</h2>
+            <p class="section-desc">Put the verbs into the right tense or form (e.g. Past Simple, infinitive after <i>to</i>, or <i>-ing</i>).</p>
+
+            <div class="wordbank">
+                <span class="wb-chip">get to know each other</span>
+                <span class="wb-chip">work closely together</span>
+                <span class="wb-chip">have a baby</span>
+                <span class="wb-chip">get divorced</span>
+                <span class="wb-chip">get on with</span>
+                <span class="wb-chip">move in</span>
+                <span class="wb-chip">share an apartment</span>
+                <span class="wb-chip">big age gap</span>
+                <span class="wb-chip">dating</span>
+                <span class="wb-chip">look at / look like</span>
+                <span class="wb-chip">look / looks</span>
+            </div>
+
+            <div id="lifePhrasesBox">
+                <div class="sentence-row">
+                    1. My sister and her husband are so happy; they just <input type="text" class="hw-input" data-question="Life 1" data-answer="had a baby" placeholder="phrase..."> a healthy boy last night!
+                </div>
+                <div class="sentence-row">
+                    2. I don't really <input type="text" class="hw-input" data-question="Life 2" data-answer="get on with" placeholder="phrase..."> my boss; he is very strict and never listens to my ideas.
+                </div>
+                <div class="sentence-row">
+                    3. Even though there is a <input type="text" class="hw-input" data-question="Life 3" data-answer="big age gap" placeholder="phrase..."> of fifteen years between us, my brother is my best friend.
+                </div>
+                <div class="sentence-row">
+                    4. We first <input type="text" class="hw-input" data-question="Life 4" data-answer="got to know each other" placeholder="phrase..."> when we were assigned to the same project at university.
+                </div>
+                <div class="sentence-row">
+                    5. They have been <input type="text" class="hw-input" data-question="Life 5" data-answer="dating" placeholder="phrase..."> for three years, but they still live in separate houses.
+                </div>
+                <div class="sentence-row">
+                    6. Living in the city is expensive, so I'm looking for someone to <input type="text" class="hw-input" data-question="Life 6" data-answer="share an apartment" placeholder="phrase..."> with to save on rent.
+                </div>
+                <div class="sentence-row">
+                    7. After ten years of marriage, they decided to <input type="text" class="hw-input" data-question="Life 7" data-answer="get divorced" placeholder="phrase...">, but they are still friends.
+                </div>
+                <div class="sentence-row">
+                    8. My new neighbor <input type="text" class="hw-input" data-question="Life 8" data-answer="moved in" placeholder="phrase..."> last week, and she seems very friendly.
+                </div>
+                <div class="sentence-row">
+                    9. In my job, I have to <input type="text" class="hw-input" data-question="Life 9" data-answer="work closely together" placeholder="phrase..."> with the marketing team every day to plan new ads.
+                </div>
+            </div>
+
+            <div style="margin-top: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <button type="button" class="btn-action" onclick="checkFields('lifePhrasesBox', 'scoreLife')">Check Phrases</button>
+                <button type="button" class="btn-secondary" onclick="resetFields('lifePhrasesBox', 'scoreLife')">Reset</button>
+                <span class="score-msg" id="scoreLife"></span>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function checkFields(containerId, scoreId) {
+            const container = document.getElementById(containerId);
+            const fields = container.querySelectorAll('[data-answer]');
+            let total = 0;
+            let correct = 0;
+
+            fields.forEach(el => {
+                total++;
+                const userVal = (el.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+                const validAnswers = el.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+                el.classList.remove('correct-field', 'wrong-field');
+
+                if (!userVal) return;
+
+                if (validAnswers.includes(userVal)) {
+                    el.classList.add('correct-field');
+                    correct++;
+                } else {
+                    el.classList.add('wrong-field');
+                }
+            });
+
+            if (scoreId) {
+                const scoreEl = document.getElementById(scoreId);
+                scoreEl.textContent = `${correct} / ${total} correct`;
+                scoreEl.style.color = correct === total ? '#0ca678' : '#ff4757';
+            }
+        }
+
+        function resetFields(containerId, scoreId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('[data-answer]').forEach(el => {
+                el.value = '';
+                el.classList.remove('correct-field', 'wrong-field');
+            });
+            if (scoreId) {
+                document.getElementById(scoreId).textContent = '';
+            }
+        }
+
+        function pickOpt(btn) {
+            const item = btn.closest('.quiz-item');
+            item.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+            btn.classList.add('selected');
+        }
+
+        function checkQuiz(containerId, scoreId) {
+            const items = document.querySelectorAll(`#${containerId} .quiz-item`);
+            let total = items.length;
+            let correct = 0;
+
+            items.forEach(item => {
+                const expected = item.dataset.correct;
+                const sel = item.querySelector('.opt-btn.selected');
+                if (!sel) return;
+                if (sel.dataset.val === expected) {
+                    sel.classList.add('correct');
+                    correct++;
+                } else {
+                    sel.classList.add('wrong');
+                }
+            });
+
+            if (scoreId) {
+                const scoreEl = document.getElementById(scoreId);
+                scoreEl.textContent = `${correct} / ${total} correct`;
+                scoreEl.style.color = correct === total ? '#0ca678' : '#ff4757';
+            }
+        }
+    </script>
+
+    <script src="../tracker.js"></script>
+</body>
+</html>
