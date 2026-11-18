@@ -147,7 +147,7 @@ const LESSONS = [
         description: "Learn common phrasal verbs related to the relationship. Learn about question words and sunject/object questions.",
         files: {
          lesson:   "lessons/relationships.html",
-            homework: "lessons/relationships_homework.html"
+            homework: "lessons/relationship_homework.html"
 }
     },
 ];
