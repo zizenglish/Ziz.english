@@ -426,5 +426,6 @@ function reportText(){
 }
 function downloadReport(){buildReport();let blob=new Blob([reportText()],{type:'text/plain'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='AHS_English_Mock_Exam_Report.txt';a.click();URL.revokeObjectURL(url)}
 renderListening();renderLanguage();buildReport();
-</script>
+ 
+</script>   <script src="../tracker.js"></script>
 </body></html>
