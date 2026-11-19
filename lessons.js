@@ -158,4 +158,12 @@ const LESSONS = [
         description: "Explore a 5-day Paris itinerary, practise collocations with GO, role-play a tourist and blogger, and complete interactive reading tasks.",
         file: "lessons/five_days_in_paris.html"
     },
+     {
+        title: "AHS English B2 Interactive Mock Exam",
+        level: "B1","B2",
+        type: "Lesson plan",
+        category: "Work & Study",
+        description: "Practice taking the B2-level test as in the real environment.",
+        file: " lessons/AHS_English_B2_Interactive_Mock_Exam.html"
+    },
 ];
