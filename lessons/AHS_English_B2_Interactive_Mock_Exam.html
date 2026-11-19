@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHS English B2 | Interactive Mock Examination</title>
+<style>
+:root{
+ --navy:#17283f;--blue:#315a78;--red:#b84b45;--gold:#d5a84f;--cream:#f6f1e7;
+ --paper:#fffdf8;--ink:#263342;--muted:#687584;--line:#e5dfd3;--green:#3e7962;
+ --shadow:0 12px 35px rgba(29,43,58,.09)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+button,textarea,input,select{font:inherit}
+button{cursor:pointer}
+.hero{background:linear-gradient(125deg,#14243a 0%,#274761 68%,#8b5549 100%);color:white;padding:38px 22px 32px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(255,255,255,.16);border-radius:50%;right:-90px;top:-130px;box-shadow:0 0 0 28px rgba(255,255,255,.035),0 0 0 58px rgba(255,255,255,.025)}
+.hero-inner{max-width:1120px;margin:auto;position:relative;z-index:1}
+.kicker{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:#f0cf87;font-weight:800}
+h1{font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.6rem);line-height:1.05;margin:12px 0}
+.hero p{max-width:690px;color:#e4eaf0;margin:10px 0 0}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill{border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:6px 12px;font-size:.82rem;color:#f7f1e7}
+.shell{max-width:1120px;margin:24px auto;padding:0 18px 50px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px}
+.sidebar{align-self:start;position:sticky;top:14px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.progress-head{display:flex;justify-content:space-between;font-size:.82rem;font-weight:700}
+.progress{height:8px;background:#ece7dc;border-radius:20px;overflow:hidden;margin:10px 0 18px}
+.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red));transition:width .25s}
+.nav-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800;margin:18px 0 8px}
+.navbtn{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;border:0;background:transparent;border-radius:10px;padding:10px 11px;color:var(--ink);font-weight:650;margin:2px 0}
+.navbtn:hover,.navbtn.active{background:#f1eadc;color:var(--navy)}
+.navbtn small{color:var(--muted);font-weight:500}
+main{min-width:0}
+.panel{display:none;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,32px);box-shadow:var(--shadow);margin-bottom:18px}
+.panel.active{display:block}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:850}
+h2{font-family:Georgia,serif;color:var(--navy);font-size:clamp(1.7rem,3vw,2.35rem);margin:6px 0 12px;line-height:1.12}
+h3{color:var(--navy);margin:22px 0 8px;font-size:1.08rem}
+.lead{font-size:1.04rem;color:#526171;max-width:780px}
+.callout{background:#f5efe3;border-left:4px solid var(--gold);padding:14px 16px;border-radius:8px;margin:16px 0}
+.notice{background:#eef3f5;border:1px solid #d9e4e9;border-radius:12px;padding:13px 15px;color:#38566a;font-size:.92rem}
+.task{border:1px solid var(--line);border-radius:13px;padding:17px;margin:15px 0;background:#fffefa}
+.task h3{margin:0 0 10px}
+.q{padding:12px 0;border-top:1px solid #eee9df}
+.q:first-of-type{border-top:0}
+.q p{margin:0 0 8px}
+.options{display:grid;gap:7px}
+.option{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border:1px solid #e8e2d7;border-radius:9px;background:#fff;cursor:pointer}
+.option:hover{border-color:#c7a65f;background:#fffcf5}
+.option input{margin-top:4px;accent-color:var(--blue)}
+.text-answer{width:100%;border:1px solid #d8d2c8;border-radius:9px;padding:10px 12px;background:#fffefa;min-height:42px}
+textarea{width:100%;min-height:150px;border:1px solid #d8d2c8;border-radius:10px;padding:12px;background:#fffefa;resize:vertical}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:9px;padding:10px 15px;font-weight:750;background:var(--navy);color:white}
+.btn:hover{filter:brightness(1.12)}
+.btn.secondary{background:#eee8dc;color:var(--navy)}
+.btn.gold{background:var(--gold);color:#2d2a22}
+.btn.red{background:var(--red);color:white}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.feedback{margin-top:12px;padding:12px;border-radius:9px;display:none}
+.feedback.show{display:block}
+.feedback.good{background:#eaf4ee;color:#285c43}
+.feedback.bad{background:#faece9;color:#843d36}
+.timerbar{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f1eadc;padding:11px 14px;border-radius:11px;margin:15px 0}
+.time{font-variant-numeric:tabular-nums;font-size:1.2rem;font-weight:850;color:var(--navy)}
+.article{font-family:Georgia,serif;font-size:1.04rem;line-height:1.78;color:#343c43}
+.article p{margin:0 0 14px}
+.tag{display:inline-block;background:#e8edf0;color:#34536b;padding:3px 8px;border-radius:5px;font-size:.75rem;font-weight:750}
+.wordcount{font-size:.84rem;color:var(--muted);display:flex;justify-content:space-between;margin:6px 0}
+.resultbox{background:#f4efe5;border-radius:14px;padding:18px;margin:12px 0}
+.score{font-size:2.4rem;font-family:Georgia,serif;color:var(--navy);font-weight:800}
+.hidden{display:none!important}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+footer{text-align:center;color:#77818b;font-size:.78rem;padding:20px}
+@media(max-width:800px){.shell{grid-template-columns:1fr}.sidebar{position:static}.navlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}.nav-title{margin-top:12px}}
+@media(max-width:480px){.navlist{grid-template-columns:1fr 1fr}.hero{padding-top:28px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner">
+<div class="kicker">Austrian AHS · English examination practice</div>
+<h1>The B2 Mock<br>Examination</h1>
+<p>A complete practice experience across Reading, Listening, Sprachverwendung im Kontext, Writing and Speaking. Work independently, keep to the time limits and review your performance at the end.</p>
+<div class="hero-meta"><span class="pill">B1–B2 diagnostic level</span><span class="pill">4 written papers + speaking</span><span class="pill">Interactive answer checking</span></div>
+</div></header>
+<div class="shell">
+<aside class="sidebar">
+<div class="progress-head"><span>Exam progress</span><span id="progressText">0%</span></div>
+<div class="progress"><span id="progressFill"></span></div>
+<div class="nav-title">Start here</div>
+<div class="navlist">
+<button class="navbtn active" data-panel="welcome">Exam briefing <small>01</small></button>
+</div>
+<div class="nav-title">Written examination</div>
+<div class="navlist">
+<button class="navbtn" data-panel="reading">Reading <small>60 min</small></button>
+<button class="navbtn" data-panel="listening">Listening <small>45 min</small></button>
+<button class="navbtn" data-panel="language">Language in context <small>45 min</small></button>
+<button class="navbtn" data-panel="writing">Writing <small>120 min</small></button>
+</div>
+<div class="nav-title">Oral practice</div>
+<div class="navlist">
+<button class="navbtn" data-panel="speaking">Speaking <small>practice</small></button>
+</div>
+<div class="nav-title">Your results</div>
+<div class="navlist">
+<button class="navbtn" data-panel="results">Score report <small>final</small></button>
+</div>
+</aside>
+<main>
+<section class="panel active" id="welcome">
+<div class="eyebrow">Candidate information</div><h2>Welcome to your AHS English mock exam.</h2>
+<p class="lead">This is a practice examination designed to help you identify what you can already do at B2 level and what you still need to work on.</p>
+<div class="callout"><strong>Your mission:</strong> complete each section under exam-like conditions. Do not use a dictionary, translator or grammar checker. Your goal is not to be perfect — it is to show what you can do independently.</div>
+<h3>Before you begin</h3>
+<ul>
+<li>Allow yourself the full time for each written paper.</li>
+<li>Complete the sections in order if you want an exam-like experience.</li>
+<li>In Listening, play each recording twice. The transcript stays hidden until you finish.</li>
+<li>For Writing, type your answers directly into the exam and check the word count.</li>
+<li>Speaking is a separate practice section. You can use a teacher or partner as your interlocutor.</li>
+</ul>
+<div class="notice"><strong>Important:</strong> This is an original practice resource inspired by the broad AHS examination structure. It is not an official Austrian Ministry examination paper, and its score is a diagnostic estimate rather than an official Matura result. The exact target level and requirements depend on the student's course of study.</div>
+<h3>Candidate details</h3>
+<label>Candidate name (optional)<input class="text-answer" id="candidate" placeholder="Enter your name"></label>
+<div class="timerbar"><span>Suggested order: Reading → Listening → Language in Context → Writing</span><span class="tag">Start when ready</span></div>
+<button class="btn gold" onclick="showPanel('reading')">Start Reading →</button>
+</section>
+
+<section class="panel" id="reading">
+<div class="eyebrow">Paper 1 · 25%</div><h2>Reading</h2>
+<p class="lead">You have 60 minutes. Read all four texts carefully. Choose or write your answers in the spaces provided.</p>
+<div class="timerbar"><span><strong>Time allowed</strong></span><span class="time" id="readingClock">60:00</span><div><button class="btn secondary" onclick="startTimer('reading',60)">Start timer</button> <button class="btn secondary" onclick="pauseTimer('reading')">Pause</button></div></div>
+
+<div class="task">
+<h3>Reading Task 1 · Multiple choice</h3><span class="tag">Questions 1–5</span>
+<div class="article">
+<p><strong>Learning beyond the classroom</strong></p>
+<p>When people talk about education, they often imagine a classroom, a teacher standing in front of a board and students taking notes. Yet learning does not stop when the school bell rings. More and more schools are encouraging students to take part in projects outside the traditional classroom, from volunteering in local communities to working with scientists or businesses.</p>
+<p>Supporters of this approach argue that practical experiences help young people understand why school subjects matter. A student who has studied biology may find it easier to understand an ecosystem after helping to restore a local pond. Someone learning mathematics might discover its value while planning the budget for a school event. These activities can also develop skills that are difficult to practise through written exercises alone, such as teamwork, communication and problem-solving.</p>
+<p>However, learning outside school is not automatically successful. A poorly organised project can become little more than an enjoyable day away from lessons. Students need clear goals, preparation and time to reflect on what they have learned. Teachers also need to make sure that every student can participate, regardless of their family income or personal circumstances.</p>
+<p>There is another question: should practical projects replace traditional lessons? Most educators say no. A strong education needs both knowledge and experience. Students need facts and theories before they can use them effectively in real situations. The challenge is to connect the two, rather than treating them as competing approaches.</p>
+</div>
+<div id="read1"></div>
+</div>
+<div class="task">
+<h3>Reading Task 2 · Matching people to opinions</h3><span class="tag">Questions 6–10</span>
+<p>Read the four short comments. Match each statement to the person who expresses that opinion. One person may be used more than once.</p>
+<div class="article">
+<p><strong>A — Lena:</strong> “I started volunteering at an animal shelter last year. It can be tiring, but I have become much more confident speaking to people I don't know. I also understand responsibility in a completely different way now.”</p>
+<p><strong>B — Mark:</strong> “Our school introduced a project week, but I don't think it was planned very well. We spent most of the time waiting for instructions. I would rather have normal lessons unless the projects have a clear purpose.”</p>
+<p><strong>C — Sofia:</strong> “I love learning outside school because I can see how different subjects connect. During a city-planning project, I used geography, maths and English without even noticing it.”</p>
+<p><strong>D — David:</strong> “These opportunities are great, but they should be available to everyone. Some activities cost money or require parents to drive students somewhere. Schools need to think about that.”</p>
+</div>
+<div id="read2"></div>
+</div>
+<div class="task">
+<h3>Reading Task 3 · Short answers</h3><span class="tag">Questions 11–15</span>
+<p>Read the text and answer each question in no more than FIVE words.</p>
+<div class="article">
+<p><strong>The quiet rise of repair cafés</strong></p>
+<p>In many towns, people are beginning to question the habit of throwing away broken objects. Repair cafés offer a simple alternative. Visitors bring items such as lamps, bicycles, toys or small electrical devices, and volunteers help them repair what they can. The idea is not to provide a free professional service. Instead, it is to share practical knowledge and encourage people to understand how everyday objects work.</p>
+<p>The movement has social benefits too. People who might never normally meet sit together, exchange skills and talk. Older visitors may share experience with younger people, while students often bring digital knowledge that older volunteers find useful. Organisers say that the atmosphere is as important as the repairs themselves.</p>
+<p>Of course, not everything can be fixed. Some devices are designed in ways that make repair difficult, and certain electrical problems require qualified professionals. Repair cafés therefore focus on safe, manageable repairs and explain when an expert is needed. Their wider message is that buying something new should not always be the first solution.</p>
+</div>
+<div id="read3"></div>
+</div>
+<div class="task">
+<h3>Reading Task 4 · True or false? Give evidence.</h3><span class="tag">Questions 16–20</span>
+<p>Read the text. Decide whether each statement is true or false according to the text. Then give a short quotation or paraphrase as evidence.</p>
+<div class="article">
+<p><strong>Why urban green spaces matter</strong></p>
+<p>City parks are sometimes described as attractive extras, but research and everyday experience suggest that they perform several important functions. Trees provide shade, plants can help absorb rainwater, and green areas offer habitats for birds and insects. During hot periods, neighbourhoods with more vegetation may feel cooler than areas dominated by concrete and traffic.</p>
+<p>Green spaces can also support people's well-being. A short walk in a park may offer a break from noise and screens, while shared gardens can bring neighbours together. Nevertheless, access is not equal in every city. Some districts have large parks nearby, while others have very few public green areas. This has led to calls for urban planning that considers environmental quality alongside housing and transport.</p>
+<p>Creating a park is only the beginning. Green spaces need regular care, suitable facilities and safe paths. Local residents should ideally be involved in decisions about how these places are designed, because different communities may have different needs.</p>
+</div>
+<div id="read4"></div>
+</div>
+<div class="btnrow"><button class="btn" onclick="checkReading()">Check Reading answers</button><button class="btn secondary" onclick="showPanel('listening')">Continue to Listening →</button></div>
+<div class="feedback" id="readingFeedback"></div>
+</section>
+
+<section class="panel" id="listening">
+<div class="eyebrow">Paper 2 · 25%</div><h2>Listening</h2>
+<p class="lead">You have up to 45 minutes. Each recording can be played twice. Listen for the main point, specific details, attitude and intention.</p>
+<div class="notice">The recordings are generated using your browser's text-to-speech voice. If audio playback is unavailable, ask your teacher to read the scripts aloud twice. Do not open the transcripts until you have answered the questions.</div>
+<div class="timerbar"><span><strong>Time allowed</strong></span><span class="time" id="listeningClock">45:00</span><div><button class="btn secondary" onclick="startTimer('listening',45)">Start timer</button> <button class="btn secondary" onclick="pauseTimer('listening')">Pause</button></div></div>
+<div id="listenTasks"></div>
+<div class="btnrow"><button class="btn" onclick="checkListening()">Check Listening answers</button><button class="btn secondary" onclick="showPanel('language')">Continue to Language in Context →</button></div>
+<div class="feedback" id="listeningFeedback"></div>
+</section>
+
+<section class="panel" id="language">
+<div class="eyebrow">Paper 3 · 25%</div><h2>Sprachverwendung im Kontext</h2>
+<p class="lead">You have 45 minutes. Complete all four tasks. Pay attention to grammar, vocabulary, collocations and the meaning of the whole text.</p>
+<div class="timerbar"><span><strong>Time allowed</strong></span><span class="time" id="languageClock">45:00</span><div><button class="btn secondary" onclick="startTimer('language',45)">Start timer</button> <button class="btn secondary" onclick="pauseTimer('language')">Pause</button></div></div>
+<div id="languageTasks"></div>
+<div class="btnrow"><button class="btn" onclick="checkLanguage()">Check Language in Context answers</button><button class="btn secondary" onclick="showPanel('writing')">Continue to Writing →</button></div>
+<div class="feedback" id="languageFeedback"></div>
+</section>
+
+<section class="panel" id="writing">
+<div class="eyebrow">Paper 4 · 25%</div><h2>Writing</h2>
+<p class="lead">You have 120 minutes for both tasks. Plan your ideas, organise your paragraphs and leave time to check your work.</p>
+<div class="timerbar"><span><strong>Time allowed</strong></span><span class="time" id="writingClock">120:00</span><div><button class="btn secondary" onclick="startTimer('writing',120)">Start timer</button> <button class="btn secondary" onclick="pauseTimer('writing')">Pause</button></div></div>
+<div class="task">
+<h3>Writing Task 1 · Opinion essay</h3><span class="tag">Suggested length: 250–300 words</span>
+<p><strong>Some people believe that schools should focus more on practical life skills, such as managing money, communication and first aid, than on traditional academic subjects.</strong></p>
+<p>Write an essay in which you discuss the statement, consider different points of view and give your own opinion. Support your ideas with reasons and examples.</p>
+<textarea id="essay" placeholder="Write your essay here..." oninput="updateCount('essay','essayCount')"></textarea>
+<div class="wordcount"><span>Word count</span><strong id="essayCount">0 words</strong></div>
+</div>
+<div class="task">
+<h3>Writing Task 2 · Article</h3><span class="tag">Suggested length: 200–250 words</span>
+<p>You are writing for your school's English-language website. The editor has asked students to contribute an article on this topic:</p>
+<p><strong>“Is it better for teenagers to spend their free time developing one skill in depth or trying lots of different activities?”</strong></p>
+<p>Write an engaging article for other students. Explain both possibilities, include examples and make your own recommendation. Give your article an appropriate title.</p>
+<textarea id="articleWrite" placeholder="Add a title and write your article here..." oninput="updateCount('articleWrite','articleCount')"></textarea>
+<div class="wordcount"><span>Word count</span><strong id="articleCount">0 words</strong></div>
+</div>
+<div class="callout"><strong>Self-check before submitting:</strong> Have you answered every part of the task? Is your register appropriate? Are your paragraphs logically organised? Have you used a range of vocabulary and sentence structures? Have you checked verb forms, articles, prepositions and punctuation?</div>
+<div class="btnrow"><button class="btn gold" onclick="saveWriting()">Save writing for your report</button><button class="btn secondary" onclick="showPanel('speaking')">Continue to Speaking →</button></div>
+<div class="feedback" id="writingFeedback"></div>
+</section>
+
+<section class="panel" id="speaking">
+<div class="eyebrow">Additional oral practice</div><h2>Speaking examination</h2>
+<p class="lead">This section is a separate oral practice simulation. Speak aloud, not just in your head. A teacher or partner can act as the examiner.</p>
+<div class="notice">The tasks below are practice prompts, not a claim that every AHS school uses this exact oral examination format. Focus on clear communication, fluency, relevant vocabulary and interaction.</div>
+<div class="task">
+<h3>Speaking Task 1 · Individual response</h3><span class="tag">2–3 minutes</span>
+<p><strong>Topic: Learning and the future</strong></p>
+<p>“What makes a good education?” Talk about the role of teachers, technology, practical experience and independent learning. Give examples from your own experience.</p>
+<div class="btnrow"><button class="btn secondary" onclick="prepTimer(60,'prep1')">Start 1-minute preparation</button><span class="time" id="prep1">01:00</span></div>
+</div>
+<div class="task">
+<h3>Speaking Task 2 · Comparing pictures</h3><span class="tag">2–3 minutes</span>
+<p>Imagine two photographs: one shows teenagers studying together in a modern library; the other shows a teenager learning a practical skill outdoors with an instructor.</p>
+<p>Compare the situations. Say what the young people might be learning, how the experiences may be different and which type of learning you would prefer. Explain why.</p>
+<div class="callout">Useful language: <em>Both pictures show… / Whereas… / It seems as though… / They might be… / One possible advantage is… / Personally, I would prefer…</em></div>
+</div>
+<div class="task">
+<h3>Speaking Task 3 · Collaborative decision</h3><span class="tag">4–5 minutes</span>
+<p>Your school has received a small grant and must choose ONE activity for a student development week:</p>
+<ul><li>a volunteering project in the local community;</li><li>a digital skills workshop;</li><li>a sports and well-being programme;</li><li>a career and entrepreneurship day;</li><li>a creative arts festival.</li></ul>
+<p>Discuss the advantages and disadvantages of the options with your partner. Decide which activity would benefit the greatest number of students.</p>
+</div>
+<div class="task">
+<h3>Speaking reflection</h3>
+<p>After speaking, assess yourself honestly.</p>
+<div id="speakingChecks"></div>
+</div>
+<div class="btnrow"><button class="btn gold" onclick="saveSpeaking()">Save speaking reflection</button><button class="btn secondary" onclick="showPanel('results')">Go to final report →</button></div>
+<div class="feedback" id="speakingFeedback"></div>
+</section>
+
+<section class="panel" id="results">
+<div class="eyebrow">Your examination report</div><h2>Performance overview</h2>
+<p class="lead">Your automatically checked answers are summarised below. Writing and Speaking require human assessment for a reliable result.</p>
+<div class="resultbox"><div class="score" id="totalScore">—</div><strong>Automatically checked points</strong><p id="scoreSub">Complete and check the objective sections to see your score.</p></div>
+<div id="breakdown"></div>
+<h3>Writing assessment rubric</h3>
+<p>Ask your teacher to rate each criterion from 0 (not yet demonstrated) to 5 (strong B2 performance) for each writing task.</p>
+<div id="writingRubric"></div>
+<h3>Speaking assessment rubric</h3>
+<div id="speakingRubric"></div>
+<h3>Reflection and next steps</h3>
+<textarea id="teacherNotes" placeholder="Teacher's notes: strengths, recurring errors, target areas and homework..."></textarea>
+<div class="btnrow"><button class="btn gold" onclick="buildReport()">Update report</button><button class="btn" onclick="downloadReport()">Download report (.txt)</button></div>
+<div class="notice" style="margin-top:18px">Interpretation: this practice score is not an official Matura grade. Use it to identify patterns and plan targeted preparation. The official assessment uses the applicable task-specific marking scheme and level requirements.</div>
+</section>
+</main></div>
+<footer>Original practice material · Austrian AHS English examination preparation · B1–B2 diagnostic</footer>
+<script>
+const panels=['welcome','reading','listening','language','writing','speaking','results'];
+let timers={}, scores={reading:null,listening:null,language:null}, writingSaved=false, speakingSaved=false;
+function showPanel(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.panel===id));
+ window.scrollTo({top:0,behavior:'smooth'}); updateProgress();
+}
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.panel)));
+function updateProgress(){
+ let done=(scores.reading!==null?1:0)+(scores.listening!==null?1:0)+(scores.language!==null?1:0)+(writingSaved?1:0)+(speakingSaved?1:0);
+ let pct=Math.round(done/5*100);document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressFill').style.width=pct+'%';
+}
+function startTimer(key,mins){
+ if(timers[key]?.interval)return;
+ if(!timers[key])timers[key]={seconds:mins*60};
+ timers[key].interval=setInterval(()=>{timers[key].seconds--;let el=document.getElementById(key+'Clock');if(el)el.textContent=fmt(timers[key].seconds);if(timers[key].seconds<=0){clearInterval(timers[key].interval);timers[key].interval=null;alert(key.toUpperCase()+' time is up.');}},1000);
+}
+function pauseTimer(key){if(timers[key]?.interval){clearInterval(timers[key].interval);timers[key].interval=null;}}
+function fmt(s){s=Math.max(0,s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function prepTimer(sec,id){let left=sec,el=document.getElementById(id);el.textContent=fmt(left);let t=setInterval(()=>{left--;el.textContent=fmt(left);if(left<=0)clearInterval(t)},1000)}
+function updateCount(id,out){let n=(document.getElementById(id).value.trim().match(/\b[\w’'-]+\b/g)||[]).length;document.getElementById(out).textContent=n+' words'}
+function radioGroup(name,opts){return '<div class="options">'+opts.map((o,i)=>`<label class="option"><input type="radio" name="${name}" value="${i}"><span>${o}</span></label>`).join('')+'</div>'}
+function inputQ(id,ph='Your answer'){return `<input class="text-answer" id="${id}" placeholder="${ph}">`}
+const r1=[
+['The main purpose of the text is to…',['argue that classroom lessons are no longer useful.','explain the benefits and limitations of learning through practical experiences.','show that volunteering should become compulsory.','compare different school subjects.'],1],
+['According to the text, practical projects can help students…',['avoid studying theory.','get better exam results immediately.','see how school knowledge is used in real situations.','replace teachers with professionals.'],2],
+['The writer suggests that projects are successful when they…',['are enjoyable and take place outside school.','have clear aims and include time for reflection.','are organised by businesses.','last for several weeks.'],1],
+['What concern does the writer mention?',['Some students may not have equal access to activities.','Teachers do not know enough about science.','Students prefer written exercises.','Schools spend too much time on sport.'],0],
+['The writer’s attitude towards practical learning is…',['completely negative.','strongly enthusiastic without reservations.','balanced and supportive, but realistic.','uncertain and uninterested.'],2]
+];
+document.getElementById('read1').innerHTML=r1.map((q,i)=>`<div class="q"><p><strong>${i+1}. ${q[0]}</strong></p>${radioGroup('r1_'+i,q[1])}</div>`).join('');
+const r2=[
+['Who says practical projects have helped connect different school subjects?',['A','B','C','D'],2],
+['Who thinks projects need better organisation?',['A','B','C','D'],1],
+['Who mentions becoming more confident?',['A','B','C','D'],0],
+['Who is concerned about equal access?',['A','B','C','D'],3],
+['Who would prefer ordinary lessons if projects are not purposeful?',['A','B','C','D'],1]
+];
+document.getElementById('read2').innerHTML=r2.map((q,i)=>`<div class="q"><p><strong>${i+6}. ${q[0]}</strong></p>${radioGroup('r2_'+i,q[1])}</div>`).join('');
+const r3=[
+['What do visitors bring to a repair café?','broken objects'],
+['Who helps visitors repair their items?','volunteers'],
+['What do people exchange besides practical skills?','conversation|ideas|knowledge'],
+['What may some electrical problems require?','qualified professionals'],
+['What should not always be the first solution?','buying something new']
+];
+document.getElementById('read3').innerHTML=r3.map((q,i)=>`<div class="q"><p><strong>${i+11}. ${q[0]}</strong></p>${inputQ('r3_'+i,'No more than five words')}</div>`).join('');
+const r4=[
+['Trees and plants can help manage rainwater.','T'],
+['All city districts have equal access to parks.','F'],
+['Green areas may help people take a break from screens and noise.','T'],
+['The text says parks do not need regular maintenance.','F'],
+['Local residents should have a voice in park design.','T']
+];
+document.getElementById('read4').innerHTML=r4.map((q,i)=>`<div class="q"><p><strong>${i+16}. ${q[0]}</strong></p>${radioGroup('r4_'+i,['True','False'])}<p class="muted">Evidence (a short phrase or paraphrase):</p>${inputQ('r4e_'+i,'Evidence from the text')}</div>`).join('');
+function norm(s){return (s||'').toLowerCase().trim().replace(/[.,!?;:'"“”]/g,'').replace(/\s+/g,' ')}
+function selected(name){let x=document.querySelector(`input[name="${name}"]:checked`);return x?Number(x.value):null}
+function checkReading(){
+ let got=0,total=20,details=[];
+ r1.forEach((q,i)=>{let v=selected('r1_'+i),ok=v===q[2];if(ok)got++;details.push(`Q${i+1}: ${ok?'correct':'answer: '+q[1][q[2]]}`)});
+ r2.forEach((q,i)=>{let v=selected('r2_'+i),ok=v===q[2];if(ok)got++;details.push(`Q${i+6}: ${ok?'correct':'answer: '+q[1][q[2]]}`)});
+ r3.forEach((q,i)=>{let v=norm(document.getElementById('r3_'+i).value),ok=q[1].split('|').some(a=>v===norm(a));if(ok)got++;details.push(`Q${i+11}: ${ok?'correct':'suggested answer: '+q[1].split('|')[0]}`)});
+ r4.forEach((q,i)=>{let v=selected('r4_'+i),ok=(v===0&&q[1]==='T')||(v===1&&q[1]==='F');if(ok)got++;details.push(`Q${i+16}: ${ok?'correct':'answer: '+(q[1]==='T'?'True':'False')}`)});
+ scores.reading={got,total};showFeedback('readingFeedback',`You scored ${got}/${total} automatically checked points. Review the answer notes below. Evidence responses should also be checked by your teacher.`,details);updateProgress();
+}
+function showFeedback(id,msg,details){let el=document.getElementById(id);el.className='feedback show '+(msg.includes('scored')?'good':'');el.innerHTML='<strong>'+msg+'</strong><ul>'+details.map(x=>'<li>'+x+'</li>').join('')+'</ul>'}
+const listenData=[
+{title:'Task 1 · Short statements',intro:'Four students talk about how they travel to school. Match each speaker to the main point.',script:'Speaker one: I used to ask my parents to drive me every morning. Then I started cycling. It takes a little longer, but I feel more awake when I arrive, and I do not have to wait in traffic. Speaker two: The bus is the only realistic option for me. I live outside town, and cycling would be unsafe on the main road. I wish the service ran more often in the evening. Speaker three: I walk whenever I can. It is free, and it gives me time to think before the school day begins. The problem is that it is difficult when the weather is bad. Speaker four: My school is quite far away, so I share a car with two classmates. It is cheaper than travelling alone, and we can take turns deciding who brings the music.',qs:[
+['Speaker 1',['Cycling helps them avoid traffic.','Public transport is too expensive.','Walking is their only choice.','They share a car.'],0],
+['Speaker 2',['They enjoy travelling with friends.','Their route makes cycling difficult.','They prefer walking in winter.','The bus is always on time.'],1],
+['Speaker 3',['They use walking as quiet personal time.','They dislike being outdoors.','They walk because the bus is expensive.','They live far from school.'],0],
+['Speaker 4',['They travel alone.','They share a journey with classmates.','They cycle when the weather is good.','They work at the school.'],1]]},
+{title:'Task 2 · Interview',intro:'Listen to an interview with a young entrepreneur who started a second-hand clothing project.',script:'Interviewer: Your project has become quite popular. How did it begin? Guest: It started as a small school event. We wanted to raise money, but we also noticed how many clothes people no longer wore. We invited students to bring clean items they wanted to exchange or sell cheaply. Interviewer: Was it easy to organise? Guest: Not at first. We had to think about space, sorting and making sure the clothes were in good condition. A local shop gave us some rails and hangers, which helped a lot. Interviewer: What surprised you most? Guest: The conversations. People came to find a jacket, but they stayed to talk about style, waste and how their families used to repair clothes. Interviewer: What is your next step? Guest: We want to run workshops on repairing and adapting clothes. We are not trying to tell people never to buy anything new. We simply want them to think before they throw something away.',qs:[
+['How did the project originally begin?',['As a professional business','As a school event','As an online shop','As a fashion competition'],1],
+['What was one early organisational difficulty?',['Finding models','Arranging the space and sorting clothes','Getting permission to travel','Designing a website'],1],
+['What surprised the guest?',['How expensive the clothes were','How many people wanted new items','The conversations that developed','How quickly the event ended'],2],
+['What does the project plan to do next?',['Open a clothing factory','Offer repair and adaptation workshops','Stop people buying new clothes','Sell clothes internationally'],1]]},
+{title:'Task 3 · Radio report',intro:'Listen to a short radio report about community gardens. Complete the notes with a word or short phrase.',script:'Community gardens are becoming more common in cities. They are often created on unused pieces of land and managed by local residents. People grow vegetables, herbs and flowers, but the benefits go beyond food. For some residents, the garden is a place to meet neighbours they might otherwise never speak to. Schools sometimes use gardens to teach children where food comes from and why soil quality matters. However, organisers face challenges. Water can be expensive, and volunteers may not always have enough time. Successful projects often work with local councils or charities to find support. Experts also warn that gardens should not be seen as a replacement for larger environmental policies. They are one useful part of a wider approach to greener cities.',qs:[
+['Gardens are sometimes created on unused pieces of ______.','land'],
+['Residents grow vegetables, herbs and ______.','flowers'],
+['Schools use gardens to teach children where ______ comes from.','food'],
+['One challenge mentioned is the cost of ______.','water'],
+['Gardens are not a replacement for larger environmental ______.','policies']
+]},
+{title:'Task 4 · Conversation',intro:'Listen to two friends discussing whether their school should introduce a later start time.',script:'Mia: I read that some schools are starting later in the morning. I think ours should try it. I am barely awake in the first lesson. Tom: I understand that, but changing the timetable would affect after-school activities. Some students have training or jobs. Mia: That is true, but perhaps activities could finish a little later. Research suggests teenagers often need more sleep than adults. Tom: I would like to see how strong that evidence is. We should not change the whole timetable just because students find mornings difficult. Mia: Fair point. We could start with a trial for one term and collect feedback from students and teachers. Tom: A trial sounds more reasonable. We would also need to ask parents, especially those who organise transport. Mia: So we agree that the school should investigate it, but not make a permanent change immediately. Tom: Exactly. We need evidence and a plan for the practical problems.',qs:[
+['What is Mia’s main reason for supporting a later start?',['She wants longer lunch breaks.','She struggles to feel awake early.','She wants to avoid after-school activities.','Her parents requested it.'],1],
+['What practical concern does Tom mention first?',['School transport costs','Teachers’ holidays','After-school activities','The lunch menu'],2],
+['What does Tom want before a timetable change?',['More evidence','A new school building','Fewer lessons','A student election'],0],
+['What solution do they finally support?',['An immediate permanent change','A one-term trial and consultation','Cancelling after-school activities','Keeping the current timetable forever'],1]
+]}
+];
+function renderListening(){
+ document.getElementById('listenTasks').innerHTML=listenData.map((t,ti)=>`<div class="task"><h3>${t.title}</h3><p>${t.intro}</p><div class="btnrow"><button class="btn gold" onclick="playAudio(${ti})">▶ Play recording</button><button class="btn secondary" onclick="playAudio(${ti})">↻ Play again</button><span class="tag" id="plays${ti}">0 / 2 plays</span></div><div class="q"><strong>Questions</strong>${t.qs.map((q,qi)=>`<div class="q"><p>${ti===0?'Speaker '+(qi+1):'Question '+(ti===1?qi+6:ti===2?qi+10:qi+15)}. ${q[0]}</p>${Array.isArray(q[1])?radioGroup('l_'+ti+'_'+qi,q[1]):inputQ('l_'+ti+'_'+qi,'One word or short phrase')}</div>`).join('')}</div><button class="btn secondary" onclick="toggleTranscript(${ti})">Show / hide transcript</button><div id="transcript${ti}" class="callout hidden">${t.script}</div></div>`).join('');
+}
+let playCounts=[0,0,0,0];
+function playAudio(i){
+ if(playCounts[i]>=2){alert('You have used both plays. Use the transcript only after answering.');return}
+ if(!('speechSynthesis' in window)){alert('Text-to-speech is not available. Ask your teacher to read the recording script aloud twice.');return}
+ speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(listenData[i].script);u.lang='en-GB';u.rate=.91;u.onend=()=>{};speechSynthesis.speak(u);playCounts[i]++;document.getElementById('plays'+i).textContent=playCounts[i]+' / 2 plays';
+}
+function toggleTranscript(i){document.getElementById('transcript'+i).classList.toggle('hidden')}
+function checkListening(){
+ let got=0,total=17,details=[],n=0;
+ listenData.forEach((t,ti)=>t.qs.forEach((q,qi)=>{let id='l_'+ti+'_'+qi,v;if(Array.isArray(q[1]))v=selected(id);else v=norm(document.getElementById(id).value);let ok=Array.isArray(q[1])?v===q[2]:v===norm(q[1]);if(ok)got++;details.push(`Task ${ti+1}, item ${qi+1}: ${ok?'correct':'review the transcript for the answer'}`);n++}));
+ scores.listening={got,total:n};showFeedback('listeningFeedback',`You scored ${got}/${n} automatically checked points.`,details);updateProgress();
+}
+const langTasks=[
+{title:'Task 1 · Multiple-choice cloze',intro:'Choose the word or phrase that best fits each gap.',text:'Many people assume that creativity is something you are either born with or not. In fact, research suggests that creative thinking can be developed. One useful method is to expose yourself (1) ___ different experiences. When you learn about unfamiliar subjects, you may begin to make connections that you would not otherwise (2) ___. It is also important not to give up too quickly. An idea that seems unsuccessful at first may become useful after you have (3) ___ it further. Of course, creativity does not happen in isolation. Discussing ideas with others can help you see a problem from a different (4) ___. The key is to remain curious and be willing to experiment.',qs:[
+['(1)',['for','to','with','at'],1],['(2)',['notice','do','make','take'],2],['(3)',['explored','exploring','explore','explores'],0],['(4)',['view','sight','look','vision'],0]]},
+{title:'Task 2 · Word formation',intro:'Use the word in CAPITALS to form a word that fits the gap.',text:'A growing number of young people are interested in environmental (1) ______. They want to make a positive (2) ______ to their communities. However, it is important to be (3) ______ about what one person can achieve. Even small actions can have a (4) ______ effect when many people take part. Schools can play an important role by raising (5) ______ and encouraging students to think critically.',qs:[
+['(1) RESPONSIBLE','responsibility'],['(2) CONTRIBUTE','contribution'],['(3) REALITY','realistic'],['(4) SIGNIFY','significant'],['(5) AWARE','awareness']]},
+{title:'Task 3 · Open cloze',intro:'Write ONE word in each gap.',text:'Although online learning has become more common, it is not suitable (1) ______ every student. Some learners enjoy studying independently, while others benefit (2) ______ regular contact with teachers and classmates. A successful online course needs to be carefully planned, otherwise students may lose motivation. It is also important to provide feedback, so that learners know what they are doing well and what they need to work (3) ______. Technology can support education, but it cannot automatically take the place (4) ______ good teaching. The best results are often achieved when digital tools are combined (5) ______ face-to-face interaction.',qs:[['(1)','for'],['(2)','from'],['(3)','on'],['(4)','of'],['(5)','with']]},
+{title:'Task 4 · Collocations and grammar',intro:'Choose the best option to complete each sentence.',text:'Select the most natural and grammatically correct option.',qs:[
+['If I ______ more time, I would join the school debate club.',['have','had','will have','would have'],1],
+['The new sports centre ______ next September.',['will open','is opened','is opening','has been open'],2],
+['She suggested ______ the problem with the head teacher.',['to discuss','discuss','discussing','discussed'],2],
+['Despite ______ tired, he finished the project.',['be','being','was','to be'],1],
+['The article was interesting, ______ some of its conclusions were questionable.',['although','because','despite','however'],0]
+]}
+];
+function renderLanguage(){
+ document.getElementById('languageTasks').innerHTML=langTasks.map((t,ti)=>`<div class="task"><h3>${t.title}</h3><p>${t.intro}</p><div class="article">${t.text}</div>${t.qs.map((q,qi)=>`<div class="q"><p><strong>${qi+1}.</strong> ${q[0]}</p>${Array.isArray(q[1])?radioGroup('g_'+ti+'_'+qi,q[1]):inputQ('g_'+ti+'_'+qi,'One word') }</div>`).join('')}</div>`).join('');
+}
+function checkLanguage(){
+ let got=0,total=0,details=[];
+ langTasks.forEach((t,ti)=>t.qs.forEach((q,qi)=>{total++;let id='g_'+ti+'_'+qi,v=Array.isArray(q[1])?selected(id):norm(document.getElementById(id).value),ok=Array.isArray(q[1])?v===q[2]:v===norm(q[1]);if(ok)got++;let ans=Array.isArray(q[1])?q[1][q[2]]:q[1];details.push(`Task ${ti+1}, item ${qi+1}: ${ok?'correct':'answer: '+ans}`)}));
+ scores.language={got,total};showFeedback('languageFeedback',`You scored ${got}/${total} automatically checked points.`,details);updateProgress();
+}
+function saveWriting(){writingSaved=true;let a=document.getElementById('essay').value,b=document.getElementById('articleWrite').value;document.getElementById('writingFeedback').className='feedback show good';document.getElementById('writingFeedback').textContent=`Writing saved in this page. Essay: ${wordCount(a)} words. Article: ${wordCount(b)} words. A teacher should assess both texts using the rubric in the report.`;updateProgress()}
+function wordCount(s){return (s.trim().match(/\b[\w’'-]+\b/g)||[]).length}
+const selfItems=['I answered the question directly and developed my ideas.','I used linking expressions to connect my points.','I paraphrased instead of repeating the same words.','I spoke fluently and corrected myself when necessary.','I reacted to my partner and helped move the discussion forward.'];
+document.getElementById('speakingChecks').innerHTML=selfItems.map((x,i)=>`<label class="option"><input type="checkbox" id="sp${i}"><span>${x}</span></label>`).join('');
+function saveSpeaking(){speakingSaved=true;let n=selfItems.filter((x,i)=>document.getElementById('sp'+i).checked).length;document.getElementById('speakingFeedback').className='feedback show good';document.getElementById('speakingFeedback').textContent=`Reflection saved: ${n}/5 statements selected. Ask your teacher to add an assessment of fluency, range, accuracy, pronunciation and interaction.`;updateProgress()}
+const criteria=['Task achievement','Organisation and layout','Lexical range','Grammatical range and accuracy'];
+function rubric(id,prefix){document.getElementById(id).innerHTML=criteria.map((c,i)=>`<div class="q"><label><strong>${c}</strong><select class="text-answer" id="${prefix}${i}"><option value="">Not assessed</option>${[0,1,2,3,4,5].map(n=>`<option value="${n}">${n} / 5</option>`).join('')}</select></label></div>`).join('')}
+rubric('writingRubric','wr');rubric('speakingRubric','sr');
+function buildReport(){
+ let entries=Object.entries(scores).filter(([k,v])=>v),got=entries.reduce((a,[k,v])=>a+v.got,0),total=entries.reduce((a,[k,v])=>a+v.total,0);
+ document.getElementById('totalScore').textContent=total?got+' / '+total:'Not checked yet';
+ document.getElementById('scoreSub').textContent=total?Math.round(got/total*100)+'% across automatically checked Reading, Listening and Language in Context items. Writing and Speaking are assessed separately.':'Complete and check the objective sections to see your score.';
+ document.getElementById('breakdown').innerHTML=['reading','listening','language'].map(k=>`<div class="resultbox"><strong>${k==='language'?'Language in Context':k[0].toUpperCase()+k.slice(1)}</strong><div>${scores[k]?scores[k].got+' / '+scores[k].total+' ('+Math.round(scores[k].got/scores[k].total*100)+'%)':'Not checked'}</div></div>`).join('');
+}
+function reportText(){
+ let name=document.getElementById('candidate').value||'Candidate';let out=`AHS ENGLISH MOCK EXAM — PRACTICE REPORT\nCandidate: ${name}\n\n`;
+ ['reading','listening','language'].forEach(k=>out+=`${k.toUpperCase()}: ${scores[k]?scores[k].got+'/'+scores[k].total:'not checked'}\n`);
+ out+=`\nWRITING WORD COUNTS\nEssay: ${wordCount(document.getElementById('essay').value)}\nArticle: ${wordCount(document.getElementById('articleWrite').value)}\n\nWRITING RUBRIC\n`;
+ criteria.forEach((c,i)=>out+=`${c}: ${document.getElementById('wr'+i).value||'not assessed'}/5\n`);
+ out+='\nSPEAKING RUBRIC\n';criteria.forEach((c,i)=>out+=`${c}: ${document.getElementById('sr'+i).value||'not assessed'}/5\n`);
+ out+='\nTEACHER NOTES\n'+document.getElementById('teacherNotes').value+'\n\nThis is a practice diagnostic, not an official Matura result.';
+ return out;
+}
+function downloadReport(){buildReport();let blob=new Blob([reportText()],{type:'text/plain'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='AHS_English_Mock_Exam_Report.txt';a.click();URL.revokeObjectURL(url)}
+renderListening();renderLanguage();buildReport();
+</script>
+</body></html>
