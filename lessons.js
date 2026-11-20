@@ -160,7 +160,7 @@ const LESSONS = [
     },
      {
         title: "AHS English B2 Interactive Mock Exam",
-        level: "B1" "B2",
+        level: "B2",
         type: "Lesson plan",
         category: "Work & Study",
         description: "Practice taking the B2-level test as in the real environment.",
