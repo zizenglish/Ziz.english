@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main Character Energy: Used to, Would, Be Used To &amp; Get Used To | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream: #fbf8f3;
+      --paper: #fffdf9;
+      --blush-card: #f8eff1;
+      --cocoa: #262024;
+      --muted: #6e6368;
+      --rose: #c86d7d;
+      --rose-dark: #a95262;
+      --rose-soft: #fbeef0;
+      --sage: #4a7c6f;
+      --sage-soft: #e9f3f0;
+      --gold: #c89b54;
+      --gold-soft: #fbf3e4;
+      --plum: #594666;
+      --plum-soft: #f1edf5;
+      --navy: #334b66;
+      --navy-soft: #ecf1f6;
+      --border: #e6dccf;
+      --shadow-card: 0 12px 32px rgba(38, 32, 36, 0.055);
+      --shadow-polaroid: 0 8px 20px rgba(38, 32, 36, 0.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(#e0d5c5 0.85px, transparent 0.85px),
+        linear-gradient(180deg, rgba(255,253,249,0.7) 0%, rgba(246,238,228,0.45) 100%);
+      background-size: 22px 22px, 100% 100%;
+      color: var(--cocoa);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      line-height: 1.65;
+      padding-bottom: 90px;
+    }
+
+    /* --- TOP STICKY NAVIGATION --- */
+    .topbar {
+      background: rgba(255, 253, 249, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1.5px solid var(--border);
+      padding: 13px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 4px 18px rgba(38, 32, 36, 0.04);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--cocoa);
+      letter-spacing: -0.4px;
+    }
+    .brand span { color: var(--rose); }
+
+    .scrapbook-note {
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      color: var(--rose);
+      transform: rotate(-2deg);
+    }
+
+    .mode-tabs {
+      display: flex;
+      background: var(--blush-card);
+      padding: 5px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      gap: 6px;
+    }
+
+    .mode-tab {
+      padding: 8px 22px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-tab.active {
+      background: var(--rose);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(200, 109, 125, 0.3);
+    }
+
+    .progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3.5px;
+      background: #efe7dc;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rose), var(--sage));
+      transition: width 0.2s ease;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 28px auto;
+      padding: 0 20px;
+    }
+
+    .panel { display: none; animation: fadeIn 0.28s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HERO SCRAPBOOK HEADER --- */
+    .hero {
+      background: linear-gradient(135deg, #fffdf9 0%, #f9eef1 100%);
+      border: 2px solid var(--border);
+      border-radius: 28px;
+      padding: 36px 40px;
+      margin-bottom: 30px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1.5px dashed #e2cfd4;
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .level-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--rose-soft);
+      color: var(--rose-dark);
+      border: 1px solid #ecc6ce;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(29px, 4.3vw, 44px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--cocoa);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 em {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 15.5px;
+      max-width: 610px;
+    }
+
+    .polaroid-stamp {
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      transform: rotate(2deg);
+      box-shadow: var(--shadow-polaroid);
+      position: relative;
+    }
+
+    .washi-tape {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 84px;
+      height: 22px;
+      background: rgba(200, 109, 125, 0.24);
+      border-left: 1px dashed rgba(200, 109, 125, 0.48);
+      border-right: 1px dashed rgba(200, 109, 125, 0.48);
+    }
+
+    /* --- SECTION CARDS --- */
+    .card {
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 26px;
+      padding: 32px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .stage-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      padding: 4px 13px;
+      border-radius: 999px;
+      background: var(--rose-soft);
+      color: var(--rose-dark);
+      margin-bottom: 8px;
+    }
+    .stage-badge.sage { background: var(--sage-soft); color: var(--sage); }
+    .stage-badge.gold { background: var(--gold-soft); color: #8c6525; }
+    .stage-badge.plum { background: var(--plum-soft); color: var(--plum); }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.2vw, 32px);
+      font-weight: 700;
+      color: var(--cocoa);
+      margin-bottom: 6px;
+      line-height: 1.18;
+    }
+
+    .card-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* --- STAGE 1: MOODBOARD SELECTOR --- */
+    .moodboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .mood-card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 12px 12px 16px;
+      box-shadow: var(--shadow-polaroid);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .mood-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--rose);
+    }
+
+    .mood-card.chosen {
+      border-color: var(--rose);
+      background: var(--rose-soft);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 26px rgba(200, 109, 125, 0.2);
+    }
+
+    .mood-img {
+      width: 100%;
+      height: 165px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: #efe7dc;
+    }
+
+    .mood-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mood-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--cocoa);
+      margin-bottom: 4px;
+    }
+
+    .mood-tags {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .speaking-prompts-box {
+      background: var(--gold-soft);
+      border: 1.5px solid #e6d3b1;
+      border-radius: 18px;
+      padding: 20px 24px;
+    }
+
+    .speaking-prompts-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--cocoa);
+    }
+
+    .speaking-prompts-box ol {
+      padding-left: 20px;
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+
+    .video-explainer-box {
+      background: var(--plum-soft);
+      border: 1.5px solid #d9cfe2;
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin-top: 20px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .video-frame-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #ffffff;
+      box-shadow: var(--shadow-polaroid);
+      background: #262024;
+    }
+
+    .video-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-gist-card {
+      background: #ffffff;
+      border: 1px solid #d9cfe2;
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: 14px;
+    }
+
+    .reveal-answer {
+      display: none;
+      margin-top: 8px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--sage-soft);
+      color: var(--sage);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .reveal-answer.shown { display: block; }
+
+    /* --- STAGE 2: MPF VOCABULARY + MATCHING --- */
+    .vocab-bank {
+      background: var(--blush-card);
+      border: 1.5px dashed #d5bcc2;
+      border-radius: 18px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .word-chip {
+      background: #ffffff;
+      border: 1.5px solid var(--cocoa);
+      color: var(--cocoa);
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: grab;
+      user-select: none;
+      transition: all 0.15s ease;
+      box-shadow: 0 3px 8px rgba(38, 32, 36, 0.07);
+    }
+
+    .word-chip:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      transform: translateY(-2px);
+    }
+
+    .word-chip.selected-chip {
+      background: var(--rose);
+      color: #ffffff;
+      border-color: var(--rose);
+      transform: scale(1.05);
+    }
+
+    .word-chip.used-chip {
+      opacity: 0.35;
+      pointer-events: none;
+      text-decoration: line-through;
+    }
+
+    .mpf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .mpf-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      transition: all 0.18s ease;
+    }
+
+    .mpf-card:hover { border-color: var(--rose); }
+
+    .mpf-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pos-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: var(--plum-soft);
+      color: var(--plum);
+      padding: 3px 9px;
+      border-radius: 8px;
+    }
+
+    .ipa-text {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-family: monospace;
+    }
+
+    .audio-mini-btn {
+      background: var(--rose-soft);
+      border: 1px solid #ecc6ce;
+      color: var(--rose-dark);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .audio-mini-btn:hover { background: var(--rose); color: #fff; }
+
+    .mpf-def {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cocoa);
+    }
+
+    .mpf-ccq {
+      font-size: 12.5px;
+      color: var(--muted);
+      background: #faf6f0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border-left: 3px solid var(--sage);
+    }
+
+    .drop-zone {
+      min-height: 38px;
+      border: 1.5px dashed #bfb2a3;
+      border-radius: 10px;
+      background: #fbf8f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 5px 10px;
+      transition: all 0.15s;
+    }
+
+    .drop-zone.filled {
+      background: var(--plum-soft);
+      border: 1.5px solid var(--plum);
+      color: var(--plum);
+    }
+
+    .drop-zone.is-correct {
+      background: var(--sage-soft) !important;
+      border: 1.5px solid var(--sage) !important;
+      color: var(--sage) !important;
+    }
+
+    .drop-zone.is-wrong {
+      background: var(--rose-soft) !important;
+      border: 1.5px solid var(--rose) !important;
+      color: var(--rose-dark) !important;
+    }
+
+    /* --- STAGE 3: TEEN DIGITAL MAGAZINE READING --- */
+    .gist-timer-bar {
+      background: var(--sage-soft);
+      border: 1.5px solid #bfd8d0;
+      border-radius: 16px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .magazine-article {
+      background: #ffffff;
+      border: 1.5px solid #e2d7ca;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(38, 32, 36, 0.04);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0e8de;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--rose);
+      color: #fff;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .magazine-article h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--cocoa);
+      margin-bottom: 14px;
+      line-height: 1.28;
+    }
+
+    .magazine-article p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: #332c30;
+      margin-bottom: 14px;
+    }
+
+    .sub-box {
+      background: #fcf9f4;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+
+    .sub-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--cocoa);
+    }
+
+    .tf-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 15px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      flex-wrap: wrap;
+    }
+
+    /* --- STAGE 4: 4-WAY GRAMMAR CLARIFICATION (USED TO / WOULD / BE USED TO / GET USED TO) --- */
+    .context-extracts {
+      background: var(--plum-soft);
+      border: 1.5px solid #d9cfe2;
+      border-radius: 18px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .extract-quote {
+      background: #ffffff;
+      border-left: 4px solid var(--plum);
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-top: 9px;
+      font-size: 14.5px;
+    }
+
+    .four-grammar-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 22px 0 24px;
+    }
+
+    .gram-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-top: 5px solid var(--rose);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: 0 6px 18px rgba(38, 32, 36, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .gram-card.would-card { border-top-color: var(--plum); }
+    .gram-card.be-used-card { border-top-color: var(--sage); }
+    .gram-card.get-used-card { border-top-color: var(--gold); }
+
+    .gram-formula {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--rose-soft);
+      color: var(--rose-dark);
+      margin-bottom: 6px;
+    }
+    .gram-card.would-card .gram-formula { background: var(--plum-soft); color: var(--plum); }
+    .gram-card.be-used-card .gram-formula { background: var(--sage-soft); color: var(--sage); }
+    .gram-card.get-used-card .gram-formula { background: var(--gold-soft); color: #8c6525; }
+
+    .gram-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--cocoa);
+      margin-bottom: 4px;
+    }
+
+    .gram-meaning {
+      font-size: 14px;
+      color: var(--cocoa);
+      font-weight: 500;
+    }
+
+    .gram-examples {
+      background: #faf6f0;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    .gram-warning {
+      font-size: 12.5px;
+      padding: 8px 11px;
+      border-radius: 10px;
+      background: #fff6f7;
+      border: 1px dashed #e2bcc3;
+      color: #7d3643;
+    }
+
+    .golden-rule-banner {
+      background: linear-gradient(135deg, #262024 0%, #3d3339 100%);
+      color: #fffdf9;
+      border-radius: 18px;
+      padding: 18px 24px;
+      margin-bottom: 24px;
+      border: 1.5px solid var(--gold);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .golden-pill {
+      background: rgba(255,255,255,0.08);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13.5px;
+    }
+
+    /* --- STAGE 5: CONTROLLED PRACTICE --- */
+    .gap-row {
+      padding: 13px 16px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+
+    .item-feedback-hint {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* --- STAGE 6: FREER SPEAKING & DILEMMA SPINNER --- */
+    .glowup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .glowup-card {
+      background: var(--blush-card);
+      border: 1.5px solid #e6cfd4;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .glowup-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--rose-dark);
+      margin-bottom: 6px;
+    }
+
+    .dilemma-box {
+      background: linear-gradient(135deg, #262024 0%, #3d3339 100%);
+      color: #fffdf9;
+      border-radius: 22px;
+      padding: 26px 30px;
+      border: 2px solid var(--rose);
+    }
+
+    .dilemma-screen {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1.5px dashed rgba(200, 109, 125, 0.7);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* --- INPUTS & BUTTONS --- */
+    .btn-rose {
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-rose:hover { background: var(--rose-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: #fffdf9;
+      color: var(--cocoa);
+      border: 1.5px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+
+    select.ui-select, input.ui-input, textarea.ui-textarea {
+      padding: 8px 12px;
+      border: 1.5px solid #d5c8bc;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      background: #fffdf9;
+      color: var(--cocoa);
+      outline: none;
+    }
+    select.ui-select:focus, input.ui-input:focus, textarea.ui-textarea:focus {
+      border-color: var(--rose);
+      background: #fff;
+    }
+    input.ui-input { width: 195px; }
+    textarea.ui-textarea { width: 100%; resize: vertical; }
+
+    .ok-field { border-color: var(--sage) !important; background: var(--sage-soft) !important; color: var(--sage) !important; }
+    .no-field { border-color: var(--rose) !important; background: var(--rose-soft) !important; color: var(--rose-dark) !important; }
+
+    .score-pill {
+      display: inline-block;
+      margin-left: 12px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .hero, .four-grammar-grid, .golden-rule-banner, .video-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 12px 18px; }
+      .hero { padding: 26px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand">ziz<span>.</span>english</div>
+      <span class="scrapbook-note">Teen Scrapbook • B1 ✨</span>
+    </div>
+
+    <div class="mode-tabs">
+      <button type="button" class="mode-tab active" data-panel="lesson" onclick="switchPanel('lesson')">✨ Lesson</button>
+      <button type="button" class="mode-tab" data-panel="homework" onclick="switchPanel('homework')">📝 Homework</button>
+    </div>
+
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <div class="container">
+
+    <!-- =================================================================== -->
+    <!-- PANEL 1: INTERACTIVE LESSON                                         -->
+    <!-- =================================================================== -->
+    <div id="panel-lesson" class="panel active">
+
+      <!-- HERO POSTCARD -->
+      <div class="hero">
+        <div>
+          <span class="level-pill">LEVEL B1 • SOCIAL MEDIA, HABITS &amp; ADAPTING</span>
+          <h1>Main Character Energy: <em>Aesthetic Trends &amp; Defining Moments</em></h1>
+          <p>Explore online aesthetics, learn natural expressions teens use for authenticity and burnout, and master the difference between <b>used to</b>, <b>would</b>, <b>be used to</b>, and <b>get used to</b>.</p>
+        </div>
+        <div class="polaroid-stamp">
+          <div class="washi-tape"></div>
+          <div style="font-family: 'Caveat', cursive; font-size: 28px; color: var(--rose); font-weight: 700;">“Real life &gt; perfect filters”</div>
+          <div style="font-size: 12.5px; color: var(--muted); margin-top: 6px;">Vocabulary • Reading • Used to / Would / Be &amp; Get Used To</div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 1: LEAD-IN — WHAT'S YOUR AESTHETIC?                         -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge">Stage 1 • Warm-Up &amp; Moodboard</span>
+        <h2>What's Your Aesthetic?</h2>
+        <p class="card-subtitle">Tap a moodboard card below — your <b>personalized speaking questions</b> will appear right underneath based on the aesthetic you choose!</p>
+
+        <div class="moodboard-grid" id="moodboardGrid">
+          <button type="button" class="mood-card" data-question="Stage 1 Aesthetic Choice" data-key="bookworm" data-choice="Cozy Bookworm & Dark Academia" onclick="selectMoodboard(this)">
+            <div class="mood-img">
+              <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" alt="Cozy Bookworm & Dark Academia" />
+            </div>
+            <div>
+              <div class="mood-title">📚 Cozy Bookworm &amp; Dark Academia</div>
+              <div class="mood-tags">Rainy afternoons • Vintage libraries • Iced latte &amp; journaling</div>
+            </div>
+          </button>
+
+          <button type="button" class="mood-card" data-question="Stage 1 Aesthetic Choice" data-key="cleangirl" data-choice="Clean Girl & Minimalist Wellness" onclick="selectMoodboard(this)">
+            <div class="mood-img">
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Clean Girl & Minimalist Wellness" />
+            </div>
+            <div>
+              <div class="mood-title">🍵 Clean Girl &amp; Minimalist Wellness</div>
+              <div class="mood-tags">Matcha mornings • Skincare routines • Tidy desk &amp; calm playlists</div>
+            </div>
+          </button>
+
+          <button type="button" class="mood-card" data-question="Stage 1 Aesthetic Choice" data-key="y2k" data-choice="Y2K Vintage & Thrift Queen" onclick="selectMoodboard(this)">
+            <div class="mood-img">
+              <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80" alt="Y2K Vintage & Thrift Queen" />
+            </div>
+            <div>
+              <div class="mood-title">💿 Y2K Vintage &amp; Thrift Queen</div>
+              <div class="mood-tags">Retro digital cameras • Second-hand finds • Wired headphones</div>
+            </div>
+          </button>
+
+          <button type="button" class="mood-card" data-question="Stage 1 Aesthetic Choice" data-key="cottagecore" data-choice="Cottagecore & Indie Art" onclick="selectMoodboard(this)">
+            <div class="mood-img">
+              <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=600&q=80" alt="Cottagecore & Indie Art" />
+            </div>
+            <div>
+              <div class="mood-title">🌷 Cottagecore &amp; Indie Art</div>
+              <div class="mood-tags">Wildflowers • Sketchbooks &amp; watercolours • Golden-hour picnics</div>
+            </div>
+          </button>
+        </div>
+
+        <div id="moodChoiceFeedback" style="font-size: 14px; font-weight: 700; color: var(--rose-dark); margin-bottom: 14px;"></div>
+
+        <!-- Dynamic Personalized Questions Box -->
+        <div class="speaking-prompts-box" id="dynamicWarmupBox">
+          <h3 id="warmupBoxTitle">💬 Personalized Speaking Questions (Tap a Moodboard Above!)</h3>
+          <ol id="warmupQuestionsList">
+            <li>Which of the four moodboards above feels closest to your personality right now, and why?</li>
+            <li>Why do you think aesthetic trends on TikTok and Pinterest are so popular with teenagers?</li>
+            <li>Do online aesthetics inspire people to be creative, or do they create pressure to look “perfect”?</li>
+          </ol>
+          <div style="margin-top: 14px;">
+            <label style="font-size: 13px; font-weight: 700; color: var(--cocoa); display: block; margin-bottom: 5px;">✍️ Quick Note (Jot down 1–2 ideas before speaking):</label>
+            <textarea class="ui-textarea" rows="2" data-question="Stage 1 Warmup Note" placeholder="I picked this aesthetic because..."></textarea>
+          </div>
+        </div>
+
+        <!-- Video Explainer Box: What Is Main Character Energy? -->
+        <div class="video-explainer-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.9px; color: var(--plum);">🎬 Trend Explainer • Watch &amp; Discuss</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 21px; color: var(--cocoa); margin-top: 2px;">What Is “Main Character Energy”?</h3>
+            </div>
+            <a href="https://www.youtube.com/watch?v=YPyot7bL_WM" target="_blank" rel="noopener" class="btn-outline" style="text-decoration: none; padding: 7px 14px; font-size: 12.5px;">Watch on YouTube ↗</a>
+          </div>
+
+          <div class="video-grid">
+            <div class="video-frame-wrap">
+              <iframe src="https://www.youtube.com/embed/YPyot7bL_WM" title="What is main character energy?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+
+            <div class="video-gist-card">
+              <b style="color: var(--plum); display: block; margin-bottom: 8px;">🎧 While You Watch (2 Quick Gist Questions):</b>
+              <ol style="padding-left: 18px; line-height: 1.7; margin-bottom: 12px;">
+                <li>Where and when did the phrase <i>“main character energy”</i> explode online?</li>
+                <li>What is the difference between healthy confidence and <i>“main character syndrome”</i>?</li>
+              </ol>
+              <button type="button" class="btn-rose" style="background: var(--plum); padding: 7px 14px; font-size: 12.5px;" onclick="document.getElementById('videoKeyAnswers').classList.toggle('shown')">Show / Hide Key Ideas</button>
+              <div class="reveal-answer" id="videoKeyAnswers">
+                <b>1.</b> It went viral on TikTok around 2020 (inspired by movie soundtracks &amp; everyday moments).<br>
+                <b>2.</b> <i>Main character energy</i> = romanticizing your life &amp; building self-confidence; <i>main character syndrome</i> = acting selfishly as if other people don't matter.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 2: VOCABULARY — MEANING, PRONUNCIATION & FORM               -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge sage">Stage 2 • Key Vocabulary (MPF)</span>
+        <h2>Social Media &amp; Mindset Words</h2>
+        <p class="card-subtitle">Click <b>🔊 Listen</b> to hear the pronunciation, read the quick check question, and drag (or tap) each word onto its matching definition.</p>
+
+        <div class="vocab-bank" id="vocabBankStage2">
+          <span style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--muted);">Word Bank:</span>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="curate">curate</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="romanticize">romanticize</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="overrated">overrated</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="authentic">authentic</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="peer pressure">peer pressure</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="keep up with">keep up with</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="burnout">burnout</div>
+          <div class="word-chip" draggable="true" data-group="s2vocab" data-word="vibe">vibe</div>
+        </div>
+
+        <div class="mpf-grid" id="mpfGridStage2">
+          <div class="mpf-card" data-group="s2vocab" data-answer="curate">
+            <div class="mpf-top">
+              <div><span class="pos-tag">verb</span> <span class="ipa-text">/kjʊəˈreɪt/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('curate')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">To carefully choose and organize photos, music, or posts so everything looks great together.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: If you curate your feed, do you post random blurry photos or carefully chosen ones?</i></div>
+            <div class="drop-zone" data-question="Vocab Match 1 (curate)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="romanticize">
+            <div class="mpf-top">
+              <div><span class="pos-tag">verb</span> <span class="ipa-text">/rəʊˈmæntɪsaɪz/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('romanticize')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">To make an ordinary moment (like studying or walking in the rain) look like a dreamy movie scene.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: Does romanticizing your life mean lighting a candle while doing homework? (Yes!)</i></div>
+            <div class="drop-zone" data-question="Vocab Match 2 (romanticize)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="overrated">
+            <div class="mpf-top">
+              <div><span class="pos-tag">adjective</span> <span class="ipa-text">/ˌəʊvəˈreɪtɪd/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('overrated')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">Considered by many people to be much better or more important than it really is.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: If a viral café has terrible coffee, is it overrated? (Yes!)</i></div>
+            <div class="drop-zone" data-question="Vocab Match 3 (overrated)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="authentic">
+            <div class="mpf-top">
+              <div><span class="pos-tag">adjective</span> <span class="ipa-text">/ɔːˈθentɪk/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('authentic')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">Real, honest, and true to your own personality — not fake or copied from trends.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: Is an authentic person pretending to be someone else? (No!)</i></div>
+            <div class="drop-zone" data-question="Vocab Match 4 (authentic)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="peer pressure">
+            <div class="mpf-top">
+              <div><span class="pos-tag">noun</span> <span class="ipa-text">/ˈpɪə ˌpreʃə/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('peer pressure')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">The strong feeling that you must act, dress, or buy things like people your own age to fit in.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: Does peer pressure come from teachers or from friends/classmates?</i></div>
+            <div class="drop-zone" data-question="Vocab Match 5 (peer pressure)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="keep up with">
+            <div class="mpf-top">
+              <div><span class="pos-tag">phrasal verb</span> <span class="ipa-text">/kiːp ˈʌp wɪð/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('keep up with')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">To stay informed about or move at the same speed as fast-changing trends or news.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: Is it easy or exhausting to keep up with every new TikTok trend?</i></div>
+            <div class="drop-zone" data-question="Vocab Match 6 (keep up with)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="burnout">
+            <div class="mpf-top">
+              <div><span class="pos-tag">noun</span> <span class="ipa-text">/ˈbɜːnaʊt/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('burnout')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">Extreme physical and mental exhaustion caused by working too hard or trying to do too much.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: When you experience burnout, do you feel energetic or completely drained?</i></div>
+            <div class="drop-zone" data-question="Vocab Match 7 (burnout)">Drop word here</div>
+          </div>
+
+          <div class="mpf-card" data-group="s2vocab" data-answer="vibe">
+            <div class="mpf-top">
+              <div><span class="pos-tag">noun</span> <span class="ipa-text">/vaɪb/</span></div>
+              <button type="button" class="audio-mini-btn" onclick="speakWord('vibe')">🔊 Listen</button>
+            </div>
+            <div class="mpf-def">The mood, energy, or atmosphere that a person, room, or song gives you.</div>
+            <div class="mpf-ccq">💡 <i>Quick check: Can a cosy café with fairy lights have a warm vibe? (Yes!)</i></div>
+            <div class="drop-zone" data-question="Vocab Match 8 (vibe)">Drop word here</div>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="btn-rose" onclick="checkMpfCards()">Check Vocabulary</button>
+          <button type="button" class="btn-outline" onclick="resetMpfCards()">Reset</button>
+          <span class="score-pill" id="mpfScore"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 3: READING FOR GIST & SPECIFIC INFORMATION                  -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge gold">Stage 3 • Reading Magazine Feature</span>
+        <h2>“Why I Stopped Trying to ‘Romanticize’ Every Second of My Life”</h2>
+        <p class="card-subtitle">First, skim the article quickly (try the 60-second challenge!) to get the main idea, then read closely for details.</p>
+
+        <div class="gist-timer-bar">
+          <div>
+            <b style="color: var(--sage); font-size: 14px;">⏱️ Task 3A • Quick Skim Challenge:</b>
+            <span style="font-size: 13.5px; color: var(--cocoa);">Read quickly to catch the main message before checking details.</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="gistTimerDisplay" style="font-weight: 800; font-size: 15px; color: var(--cocoa); background: #fff; padding: 5px 12px; border-radius: 999px; border: 1px solid #bfd8d0;">01:00</span>
+            <button type="button" class="btn-rose" style="background: var(--sage); padding: 7px 14px; font-size: 12.5px;" onclick="startGistTimer()">Start 60s Timer</button>
+          </div>
+        </div>
+
+        <!-- Teen Digital Magazine Article featuring all 4 grammar structures naturally -->
+        <article class="magazine-article">
+          <div class="article-meta">
+            <div class="author-avatar">M</div>
+            <div>
+              <div style="font-weight: 800; font-size: 14.5px;">Written by Maya Lin, 16 • Teen Culture &amp; Wellness Column</div>
+              <div style="font-size: 12px; color: var(--muted);">Published in <i>The Sunday Scrapbook</i> • 3 min read</div>
+            </div>
+          </div>
+
+          <h3>Why I Stopped Trying to “Romanticize” Every Second of My Life</h3>
+
+          <p>
+            Last year, my camera roll looked like a Pinterest board, even though my real life felt exhausting. I used to be obsessed with looking aesthetic online, and every weekend my best friend and I would spend two hours editing photos of our morning matcha just to curate the perfect feed. Whenever a new trend appeared, I felt huge peer pressure to buy the right notebook, wear the right oversized sweater, and keep up with every viral video. Looking good online started to feel like an unpaid full-time job.
+          </p>
+          <p>
+            The turning point happened in November during exam week. I was filming a “study with me” clip at midnight when I accidentally knocked my iced matcha all over my chemistry notes—and burst into tears from pure burnout. That night, I realized that chasing a flawless online image was completely overrated. I was so busy trying to romanticize my routine for strangers that I wasn't actually enjoying my real friendships.
+          </p>
+          <p style="margin-bottom: 0;">
+            After that night, I deleted three editing apps and decided to take a break from posting. At first, it felt strange—I wasn't used to having quiet, phone-free weekends, and I kept reaching for my camera out of habit. However, after a couple of weeks, I slowly got used to living in the moment without filming everything. Now I am completely used to spending Sunday afternoons with a real book and zero notifications. My style isn't one trendy label anymore—it's just authentic to me, and that feels like real main character energy.
+          </p>
+        </article>
+
+        <!-- Gist Question -->
+        <div class="sub-box" id="gistBox">
+          <h4>Task 3A. What is the main message of Maya's article?</h4>
+          <div class="tf-row">
+            <span>Choose the best summary (A, B, or C):</span>
+            <select class="ui-select" data-question="Reading Task 3A: Main Idea" data-answer="B">
+              <option value="">Choose A, B or C...</option>
+              <option value="A">A. How to edit matcha photos to get more followers on Pinterest.</option>
+              <option value="B">B. Letting go of online perfection helped Maya adapt to a calmer, more authentic life.</option>
+              <option value="C">C. Why teenagers should stop studying at midnight during exam week.</option>
+            </select>
+          </div>
+          <button type="button" class="btn-rose" onclick="checkSelectGroup('gistBox', 'gistScore')">Check Main Idea</button>
+          <span class="score-pill" id="gistScore"></span>
+        </div>
+
+        <!-- Task 3B: Specific Information (True / False / Doesn't Say) -->
+        <div class="sub-box" id="detailTfBox">
+          <h4>Task 3B. Read Again: True, False, or Doesn't Say?</h4>
+          <div class="tf-row">
+            <span>1. Last year, Maya and her best friend edited photos every morning before school.</span>
+            <select class="ui-select" data-question="Reading Detail 1" data-answer="False">
+              <option value="">Choose...</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+              <option value="Doesn't Say">Doesn't Say</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>2. Maya bought expensive clothes because her best friend told her to.</span>
+            <select class="ui-select" data-question="Reading Detail 2" data-answer="Doesn't Say">
+              <option value="">Choose...</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+              <option value="Doesn't Say">Doesn't Say</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>3. Spilling her drink during exam week made Maya realize she was experiencing burnout.</span>
+            <select class="ui-select" data-question="Reading Detail 3" data-answer="True">
+              <option value="">Choose...</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+              <option value="Doesn't Say">Doesn't Say</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>4. Right after deleting her editing apps, Maya immediately felt comfortable without her phone.</span>
+            <select class="ui-select" data-question="Reading Detail 4" data-answer="False">
+              <option value="">Choose...</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+              <option value="Doesn't Say">Doesn't Say</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>5. Now, spending Sunday afternoons without notifications feels completely normal to Maya.</span>
+            <select class="ui-select" data-question="Reading Detail 5" data-answer="True">
+              <option value="">Choose...</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+              <option value="Doesn't Say">Doesn't Say</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-rose" onclick="checkSelectGroup('detailTfBox', 'detailTfScore')">Check Details</button>
+          <span class="score-pill" id="detailTfScore"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 4: CELTA GUIDED DISCOVERY & CLARIFICATION (ALL 4 FORMS)     -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge plum">Stage 4 • CELTA Guided Discovery &amp; Clarification</span>
+        <h2>Mastering Past Habits &amp; New Routines: <em>used to</em> vs. <em>would</em> vs. <em>be used to</em> vs. <em>get used to</em></h2>
+        <p class="card-subtitle">First analyze the 4 sentences from Maya's article, then study the visual comparison guide and check your understanding.</p>
+
+        <!-- PART A: GUIDED DISCOVERY FROM THE TEXT -->
+        <div class="context-extracts">
+          <b style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--plum);">Part A • Notice the 4 Sentences from Maya's Article:</b>
+          <div class="extract-quote"><b>1.</b> “I <b>used to be</b> obsessed with looking aesthetic online.”</div>
+          <div class="extract-quote"><b>2.</b> “Every weekend my best friend and I <b>would spend</b> two hours editing photos.”</div>
+          <div class="extract-quote"><b>3.</b> “I slowly <b>got used to living</b> in the moment without filming everything.”</div>
+          <div class="extract-quote"><b>4.</b> “Now I <b>am</b> completely <b>used to spending</b> Sunday afternoons with a real book.”</div>
+        </div>
+
+        <div class="sub-box" id="guidedDiscoveryBox">
+          <h4>Step 1: Deduce the Rules from the Examples Above</h4>
+          <div class="tf-row">
+            <span>1. What verb form comes after <b>used to</b> and <b>would</b> (Sentences 1 &amp; 2)?</span>
+            <select class="ui-select" data-question="Discovery 1: Form after used to / would" data-answer="base verb (infinitive: be, spend)">
+              <option value="">Choose form...</option>
+              <option value="base verb (infinitive: be, spend)">base verb (infinitive: be, spend)</option>
+              <option value="verb + -ing (living, spending)">verb + -ing (living, spending)</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>2. What verb form comes after <b>be used to</b> and <b>get used to</b> (Sentences 3 &amp; 4)?</span>
+            <select class="ui-select" data-question="Discovery 2: Form after be/get used to" data-answer="verb + -ing (or a noun)">
+              <option value="">Choose form...</option>
+              <option value="base verb (infinitive)">base verb (infinitive)</option>
+              <option value="verb + -ing (or a noun)">verb + -ing (or a noun)</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>3. Which sentence describes the <b>process of adapting</b> to something new (changing from strange to normal)?</span>
+            <select class="ui-select" data-question="Discovery 3: Process of adapting" data-answer="Sentence 3 (got used to living)">
+              <option value="">Choose sentence...</option>
+              <option value="Sentence 1 (used to be)">Sentence 1 (used to be)</option>
+              <option value="Sentence 3 (got used to living)">Sentence 3 (got used to living)</option>
+              <option value="Sentence 4 (am used to spending)">Sentence 4 (am used to spending)</option>
+            </select>
+          </div>
+          <div class="tf-row" style="margin-bottom: 12px;">
+            <span>4. Which sentence describes being <b>already comfortable and familiar</b> with something now?</span>
+            <select class="ui-select" data-question="Discovery 4: Already familiar" data-answer="Sentence 4 (am used to spending)">
+              <option value="">Choose sentence...</option>
+              <option value="Sentence 2 (would spend)">Sentence 2 (would spend)</option>
+              <option value="Sentence 3 (got used to living)">Sentence 3 (got used to living)</option>
+              <option value="Sentence 4 (am used to spending)">Sentence 4 (am used to spending)</option>
+            </select>
+          </div>
+          <button type="button" class="btn-rose" onclick="checkSelectGroup('guidedDiscoveryBox', 'discoveryScore')">Check Guided Discovery</button>
+          <span class="score-pill" id="discoveryScore"></span>
+        </div>
+
+        <!-- PART B: CRYSTAL-CLEAR VISUAL COMPARISON CARDS (4 STRUCTURES) -->
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 26px 0 6px; color: var(--cocoa);">Part B • Visual Scrapbook Cheat Sheet (All 4 Structures)</h3>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 14px;">Notice the crucial difference: the top two talk about the <b>PAST ONLY</b> (+ base verb), while the bottom two talk about <b>FAMILIARITY / ADAPTING</b> (+ -ing / noun) in any tense!</p>
+
+        <div class="four-grammar-grid">
+          <!-- CARD 1: USED TO -->
+          <div class="gram-card">
+            <div>
+              <span class="gram-formula">used to + V1 (base verb)</span>
+              <h4>1. used to (Past Habits &amp; States)</h4>
+              <p class="gram-meaning">Talks about repeated actions <b>AND</b> states/feelings in the past that are <b>no longer true today</b>.</p>
+            </div>
+            <div class="gram-examples">
+              <b>(+)</b> I <b>used to watch</b> beauty vlogs every night.<br>
+              <b>(+)</b> She <b>used to have</b> long pink hair. <i>(past state)</i><br>
+              <b>(−)</b> I <b>didn't use to like</b> thrift shops. <i>(no -d!)</i><br>
+              <b>(?)</b> <b>Did</b> you <b>use to collect</b> stickers?
+            </div>
+            <div class="gram-warning">
+              ✨ <b>Works with BOTH:</b> Action verbs (<i>play, go, edit</i>) <b>AND</b> State verbs (<i>be, have, live, love, believe</i>).
+            </div>
+          </div>
+
+          <!-- CARD 2: WOULD -->
+          <div class="gram-card would-card">
+            <div>
+              <span class="gram-formula">would + V1 (base verb)</span>
+              <h4>2. would (Nostalgic Past Actions Only)</h4>
+              <p class="gram-meaning">Talks about <b>repeated actions</b> and nostalgic routines in the past (often with a past time frame like <i>“When I was 12...”</i>).</p>
+            </div>
+            <div class="gram-examples">
+              <b>✅</b> Every summer, we <b>would stay</b> up until 2 AM talking.<br>
+              <b>✅</b> She <b>would always take</b> polaroids at parties.<br>
+              <b>❌</b> <s>I <b>would have</b> a pink bedroom.</s> → Use <b>used to have</b>!<br>
+              <b>❌</b> <s>He <b>would be</b> very shy.</s> → Use <b>used to be</b>!
+            </div>
+            <div class="gram-warning">
+              ⚠️ <b>Golden Rule:</b> NEVER use <b>would</b> with state verbs (<i>be, have, like, know, live</i>) for past states!
+            </div>
+          </div>
+
+          <!-- CARD 3: BE USED TO -->
+          <div class="gram-card be-used-card">
+            <div>
+              <span class="gram-formula">am / is / are / was + used to + V-ing / noun</span>
+              <h4>3. be used to (“It's Normal For Me”)</h4>
+              <p class="gram-meaning">Means something is <b>already familiar, easy, and normal</b> for you because you have done it many times. Here, <b>to</b> is a preposition!</p>
+            </div>
+            <div class="gram-examples">
+              <b>Present:</b> I <b>am used to waking</b> up at 6:30 AM.<br>
+              <b>Negative:</b> She <b>isn't used to</b> cold weather yet.<br>
+              <b>Past:</b> At first, I <b>wasn't used to living</b> in a big city.<br>
+              <b>With noun:</b> We <b>are used to the noise</b> now.
+            </div>
+            <div class="gram-warning">
+              💡 <b>Why -ing?</b> Because <b>used</b> is an adjective here, and <b>to</b> is a preposition (just like <i>good at swimming</i>).
+            </div>
+          </div>
+
+          <!-- CARD 4: GET USED TO -->
+          <div class="gram-card get-used-card">
+            <div>
+              <span class="gram-formula">get / getting / got + used to + V-ing / noun</span>
+              <h4>4. get used to (“Becoming Normal”)</h4>
+              <p class="gram-meaning">Focuses on the <b>process of adapting</b> — something was strange or difficult at first, and you are slowly learning to feel comfortable with it.</p>
+            </div>
+            <div class="gram-examples">
+              <b>Present Cont.:</b> I <b>am getting used to studying</b> in English.<br>
+              <b>Past Simple:</b> It took a week, but I <b>got used to</b> my new school.<br>
+              <b>Future:</b> Don't worry, you <b>will get used to it</b> soon!<br>
+              <b>Negative:</b> I can't <b>get used to wearing</b> contact lenses.
+            </div>
+            <div class="gram-warning">
+              🔄 <b>Compare:</b> <i>I'm <b>getting</b> used to it</i> (in progress) → <i>I <b>am</b> used to it</i> (100% normal now!).
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Visual Memory Trick -->
+        <div class="golden-rule-banner">
+          <div class="golden-pill">
+            <b style="color: #f3c4cd; display: block; margin-bottom: 4px;">🕰️ Group 1: Past Habits &amp; States (+ Base Verb V1)</b>
+            <span><b>used to + V1</b> (actions &amp; states)<br><b>would + V1</b> (repeated actions ONLY — no state verbs!)</span>
+          </div>
+          <div class="golden-pill">
+            <b style="color: #b7ded2; display: block; margin-bottom: 4px;">🌱 Group 2: Familiarity &amp; Adapting (+ V-ing / Noun)</b>
+            <span><b>be used to + V-ing</b> (state: it is already normal)<br><b>get used to + V-ing</b> (process: it is becoming normal)</span>
+          </div>
+        </div>
+
+        <!-- PART C: INTERACTIVE CCQ MINI-CHECK -->
+        <div class="sub-box" id="ccqMiniCheckBox" style="margin-bottom: 0;">
+          <h4>Part C • Quick Concept Check Questions (CCQs)</h4>
+          <div class="tf-row">
+            <span>1. <i>“Clara is used to speaking English every day.”</i> — Is speaking English still difficult for Clara, or is it normal for her now?</span>
+            <select class="ui-select" data-question="CCQ Check 1" data-answer="It is already normal and comfortable for her">
+              <option value="">Choose meaning...</option>
+              <option value="She is still struggling to adapt">She is still struggling to adapt</option>
+              <option value="It is already normal and comfortable for her">It is already normal and comfortable for her</option>
+              <option value="She spoke English in the past, but stopped">She spoke English in the past, but stopped</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>2. Which sentence is <b>INCORRECT</b> because of a state verb?</span>
+            <select class="ui-select" data-question="CCQ Check 2" data-answer="I would live in Lviv when I was seven.">
+              <option value="">Choose sentence...</option>
+              <option value="I used to live in Lviv when I was seven.">I used to live in Lviv when I was seven.</option>
+              <option value="I would live in Lviv when I was seven.">I would live in Lviv when I was seven.</option>
+              <option value="We would walk to the park every Sunday.">We would walk to the park every Sunday.</option>
+            </select>
+          </div>
+          <div class="tf-row">
+            <span>3. <i>“I'm still getting used to my new glasses.”</i> — Has the speaker completely adapted yet?</span>
+            <select class="ui-select" data-question="CCQ Check 3" data-answer="No, the process of adapting is still happening">
+              <option value="">Choose answer...</option>
+              <option value="Yes, it feels 100% normal">Yes, it feels 100% normal</option>
+              <option value="No, the process of adapting is still happening">No, the process of adapting is still happening</option>
+            </select>
+          </div>
+          <div class="tf-row" style="margin-bottom: 12px;">
+            <span>4. Look at the form: <i>“After a month in London, Mia got used to _____ on the left.”</i></span>
+            <select class="ui-select" data-question="CCQ Check 4" data-answer="driving">
+              <option value="">Choose form...</option>
+              <option value="drive">drive (V1)</option>
+              <option value="driving">driving (V-ing)</option>
+            </select>
+          </div>
+          <button type="button" class="btn-rose" onclick="checkSelectGroup('ccqMiniCheckBox', 'ccqScore')">Check CCQs</button>
+          <span class="score-pill" id="ccqScore"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 5: CONTROLLED PRACTICE (ALL 4 STRUCTURES MIXED)             -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge sage">Stage 5 • Controlled Practice</span>
+        <h2>Choose or Complete the Correct Structure</h2>
+        <p class="card-subtitle">Read each sentence carefully. Check whether it is a <b>past habit/state</b> (+ V1) or <b>familiarity/adapting</b> (+ V-ing / noun)!</p>
+
+        <div id="controlledPracticeBox">
+          <div class="gap-row" data-explanation="Past state ('be') → only 'used to be' works (not 'would be').">
+            1. When I was 11, I
+            <select class="ui-select" data-question="Controlled Mix 1" data-answer="used to be">
+              <option value="">Choose...</option>
+              <option value="used to be">used to be</option>
+              <option value="would be">would be</option>
+              <option value="am used to being">am used to being</option>
+            </select>
+            afraid of speaking in front of the class, but now I love drama club!
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="'be used to' + V-ing ('waking') shows it is already normal for her.">
+            2. Sofia has been on the swim team for five years, so she is used to
+            <input type="text" class="ui-input" style="width: 130px;" data-question="Controlled Mix 2" data-answer="waking" placeholder="wake..." />
+            (wake) up at 5:30 AM.
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="Nostalgic repeated past action ('bake') → 'would bake' works naturally here!">
+            3. Every Sunday when we visited our grandma, she
+            <select class="ui-select" data-question="Controlled Mix 3" data-answer="would bake">
+              <option value="">Choose...</option>
+              <option value="would bake">would bake</option>
+              <option value="got used to bake">got used to bake</option>
+              <option value="is used to baking">is used to baking</option>
+            </select>
+            warm cinnamon rolls for breakfast.
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="Process of adapting ('getting used to') + V-ing ('living').">
+            4. Moving to a new high school felt overwhelming on Day 1, but I am slowly
+            <input type="text" class="ui-input" style="width: 210px;" data-question="Controlled Mix 4" data-answer="getting used to living" placeholder="get used to + live..." />
+            (get used to / live) with a much bigger schedule.
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="Negative of 'used to' is 'didn't use to' (without -d) + base verb 'drink'.">
+            5. Two years ago, I
+            <input type="text" class="ui-input" style="width: 195px;" data-question="Controlled Mix 5" data-answer="didn't use to drink|did not use to drink" placeholder="not / use to / drink" />
+            (not / use to / drink) matcha, because I thought it tasted like grass!
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="Future process of adapting ('will get used to') + V-ing ('wearing').">
+            6. Your new braces feel tight right now, but don't worry — you
+            <select class="ui-select" data-question="Controlled Mix 6" data-answer="will get used to wearing">
+              <option value="">Choose...</option>
+              <option value="used to wear">used to wear</option>
+              <option value="will get used to wearing">will get used to wearing</option>
+              <option value="would wear">would wear</option>
+            </select>
+            them in a few days.
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="'have' is a state verb here (possessing a phone), so only 'didn't use to have' is possible.">
+            7. Teens in the 1990s
+            <select class="ui-select" data-question="Controlled Mix 7" data-answer="didn't use to have">
+              <option value="">Choose...</option>
+              <option value="didn't use to have">didn't use to have</option>
+              <option value="wouldn't have">wouldn't have</option>
+              <option value="weren't used to have">weren't used to have</option>
+            </select>
+            smartphones, so they called each other on landline phones.
+            <span class="item-feedback-hint"></span>
+          </div>
+
+          <div class="gap-row" data-explanation="'wasn't used to' + V-ing ('studying') = it wasn't normal for him yet.">
+            8. At first, Leo struggled in France because he wasn't used to
+            <input type="text" class="ui-input" style="width: 145px;" data-question="Controlled Mix 8" data-answer="studying" placeholder="study..." />
+            (study) all his school subjects in French.
+            <span class="item-feedback-hint"></span>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <button type="button" class="btn-rose" onclick="checkControlledWithHints()">Check Answers &amp; Explanations</button>
+          <span class="score-pill" id="controlledScore"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 6: FREER SPEAKING & ROLE-PLAY                               -->
+      <!-- ================================================================= -->
+      <section class="card">
+        <span class="stage-badge">Stage 6 • Speaking &amp; Role-Play</span>
+        <h2>Glow-Up, Nostalgia &amp; Adapting Speaking Board</h2>
+        <p class="card-subtitle">Discuss the 4 prompts using <b>used to</b>, <b>would</b>, <b>be used to</b>, and <b>get used to</b>, then spin a real-life teen dilemma!</p>
+
+        <div class="glowup-grid">
+          <div class="glowup-card">
+            <h4>👗 Style &amp; Aesthetic</h4>
+            <p style="font-size: 13.5px;">What clothes or colours <b>did you use to love</b> when you were 11? What routines <b>would you do</b> before school?</p>
+          </div>
+          <div class="glowup-card">
+            <h4>📱 Screen Time &amp; Habits</h4>
+            <p style="font-size: 13.5px;">Are you <b>used to</b> putting your phone away while studying, or is it hard to <b>get used to</b> offline time?</p>
+          </div>
+          <div class="glowup-card">
+            <h4>🌍 New Places &amp; Routines</h4>
+            <p style="font-size: 13.5px;">Think about a time you changed schools, teachers, or hobbies. How long did it take to <b>get used to</b> it?</p>
+          </div>
+          <div class="glowup-card">
+            <h4>✨ Weekend Nostalgia</h4>
+            <p style="font-size: 13.5px;">What <b>would you and your friends do</b> on weekends a few years ago that you <b>didn't use to</b> get tired of?</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 22px;">
+          <label style="font-weight: 700; font-size: 14px; display: block; margin-bottom: 6px;">🗒️ Speaking Notes (Prepare 2–3 sentences using the target grammar):</label>
+          <textarea class="ui-textarea" rows="2" data-question="Stage 6 Speaking Notes" placeholder="When I was younger, I used to... Every weekend we would... Now I'm getting used to..."></textarea>
+        </div>
+
+        <!-- Role-Play Dilemma Spinner -->
+        <div class="dilemma-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 1px; color: #f2b5c0; text-transform: uppercase;">🎭 Role-Play Challenge • Best Friend Advice</span>
+              <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-top: 2px;">Social Media &amp; Change Dilemma Spinner</h3>
+            </div>
+            <button type="button" class="btn-rose" onclick="spinTeenDilemma()">🎲 Spin a Friend Dilemma</button>
+          </div>
+          <div class="dilemma-screen" id="dilemmaScreen">
+            Click <b>"Spin a Friend Dilemma"</b> to get a realistic scenario. Give your friend advice using today's vocabulary and <i>used to / would / be used to / get used to</i>!
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PANEL 2: HOMEWORK                                                   -->
+    <!-- =================================================================== -->
+    <div id="panel-homework" class="panel">
+
+      <div class="hero" style="background: linear-gradient(135deg, #f8eff1 0%, #efe6da 100%);">
+        <div>
+          <span class="level-pill">HOMEWORK • B1 SCRAPBOOK</span>
+          <h1>Homework: <em>Real Vibes, Past Habits &amp; Adapting</em></h1>
+          <p>Complete all 4 homework parts below. Your answers and progress are saved automatically for your teacher.</p>
+        </div>
+        <div class="polaroid-stamp">
+          <div class="washi-tape"></div>
+          <div style="font-family: 'Caveat', cursive; font-size: 26px; color: var(--sage); font-weight: 700;">“Your story, your rules ✨”</div>
+          <div style="font-size: 12.5px; color: var(--muted); margin-top: 6px;">Vocabulary • 4-Way Grammar • Reading • Writing</div>
+        </div>
+      </div>
+
+      <!-- HW PART 1: VOCABULARY IN CONTEXT (8 GAP-FILLS) -->
+      <section class="card">
+        <span class="stage-badge sage">Homework Part 1 • Vocabulary in Context</span>
+        <h2>Complete the Sentences with the Target Words</h2>
+        <p class="card-subtitle">Use the 8 words from the lesson: <b>curate • romanticize • overrated • authentic • peer pressure • keep up with • burnout • vibe</b>.</p>
+
+        <div id="hwVocabBox">
+          <div class="gap-row">1. That café has a super cosy <input type="text" class="ui-input" data-question="HW1 Vocab 1" data-answer="vibe" placeholder="word..." /> with soft jazz music and vintage lamps.</div>
+          <div class="gap-row">2. Honestly, paying €12 for a tiny iced coffee is completely <input type="text" class="ui-input" data-question="HW1 Vocab 2" data-answer="overrated" placeholder="word..." />.</div>
+          <div class="gap-row">3. She loves to <input type="text" class="ui-input" data-question="HW1 Vocab 3" data-answer="curate" placeholder="word..." /> her playlists so every song matches the mood of the season.</div>
+          <div class="gap-row">4. Don't let <input type="text" class="ui-input" data-question="HW1 Vocab 4" data-answer="peer pressure" placeholder="word..." /> force you to buy clothes you don't even like.</div>
+          <div class="gap-row">5. Studying for six hours without a break is the fastest way to get <input type="text" class="ui-input" data-question="HW1 Vocab 5" data-answer="burnout" placeholder="word..." />.</div>
+          <div class="gap-row">6. Micro-trends change every week, so it's impossible to <input type="text" class="ui-input" data-question="HW1 Vocab 6" data-answer="keep up with" placeholder="word..." /> all of them.</div>
+          <div class="gap-row">7. I love creators who stay <input type="text" class="ui-input" data-question="HW1 Vocab 7" data-answer="authentic" placeholder="word..." /> and show their real personality instead of copying others.</div>
+          <div class="gap-row">8. Walking to school with headphones on helps me <input type="text" class="ui-input" data-question="HW1 Vocab 8" data-answer="romanticize" placeholder="word..." /> an ordinary Monday morning.</div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <button type="button" class="btn-rose" onclick="checkInputGroup('hwVocabBox', 'hwVocabScore')">Check Part 1</button>
+          <span class="score-pill" id="hwVocabScore"></span>
+        </div>
+      </section>
+
+      <!-- HW PART 2: ALL 4 GRAMMAR STRUCTURES MASTERY (8 ITEMS) -->
+      <section class="card">
+        <span class="stage-badge plum">Homework Part 2 • Grammar Mastery (All 4 Forms)</span>
+        <h2><em>used to</em> vs. <em>would</em> vs. <em>be used to</em> vs. <em>get used to</em></h2>
+        <p class="card-subtitle">Complete each sentence with the right structure and correct verb form (V1 or V-ing).</p>
+
+        <div id="hwGrammarBox">
+          <div class="gap-row">1. In primary school, I <input type="text" class="ui-input" style="width: 185px;" data-question="HW2 Grammar 1" data-answer="used to watch" placeholder="used to + verb" /> (watch) cartoons every Saturday morning.</div>
+          <div class="gap-row">2. I <input type="text" class="ui-input" style="width: 195px;" data-question="HW2 Grammar 2" data-answer="didn't use to be|did not use to be" placeholder="not / use to / be" /> (not / use to / be) interested in vintage fashion two years ago. <i>(state verb!)</i></div>
+          <div class="gap-row">3. Every summer at the lake, my cousins and I <input type="text" class="ui-input" style="width: 185px;" data-question="HW2 Grammar 3" data-answer="would swim|used to swim" placeholder="would / used to + swim" /> (swim) until sunset.</div>
+          <div class="gap-row">4. Clara moved to London last week, so she is still <input type="text" class="ui-input" style="width: 225px;" data-question="HW2 Grammar 4" data-answer="getting used to taking" placeholder="get used to + take..." /> (get used to / take) the Tube everywhere.</div>
+          <div class="gap-row">5. Don't worry about waking up early for your new dance class — you will soon <input type="text" class="ui-input" style="width: 205px;" data-question="HW2 Grammar 5" data-answer="get used to setting" placeholder="get used to + set..." /> (get used to / set) your alarm for 6 AM.</div>
+          <div class="gap-row">6. My mum is a nurse, so she is completely <input type="text" class="ui-input" style="width: 195px;" data-question="HW2 Grammar 6" data-answer="used to working" placeholder="used to + work..." /> (used to / work) night shifts.</div>
+          <div class="gap-row">7. Fix the mistake: <i>“When I was little, I <s>would have</s> a yellow bicycle.”</i> → <input type="text" class="ui-input" style="width: 185px;" data-question="HW2 Grammar 7" data-answer="used to have" placeholder="correct form..." /></div>
+          <div class="gap-row">8. Fix the mistake: <i>“At first, I wasn't used to <s>eat</s> dinner at 9 PM in Spain.”</i> → <input type="text" class="ui-input" style="width: 160px;" data-question="HW2 Grammar 8" data-answer="eating" placeholder="correct word..." /></div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <button type="button" class="btn-rose" onclick="checkInputGroup('hwGrammarBox', 'hwGrammarScore')">Check Part 2</button>
+          <span class="score-pill" id="hwGrammarScore"></span>
+        </div>
+      </section>
+
+      <!-- HW PART 3: READING & WRITING MINI-PROJECT -->
+      <section class="card">
+        <span class="stage-badge gold">Homework Part 3 • Reading &amp; Mini Writing Project</span>
+        <h2>“The 30-Day Thrift Challenge” + Your Real Aesthetic Post</h2>
+        <p class="card-subtitle">Read Sofia's short blog post, answer 4 comprehension questions, and write your own 80–100 word scrapbook post.</p>
+
+        <article class="magazine-article" style="background: #fffdf9;">
+          <h3>How a 30-Day Thrift Challenge Changed My Style</h3>
+          <p style="margin-bottom: 0;">
+            Six months ago, I used to order fast-fashion clothes online every month because I wanted to keep up with viral haul videos. Every weekend I would scroll through shopping apps for hours, yet half of those outfits were poor quality and I only wore them once! In April, my cousin challenged me to avoid new stores for 30 days and only shop second-hand. At first, I wasn't used to searching through crowded thrift racks, and it felt a bit overwhelming. However, after two visits I got used to spotting hidden vintage gems—and I even found a classic denim jacket for €10. Now I'm completely used to styling second-hand pieces, and my wardrobe feels way more authentic than copying a trend.
+          </p>
+        </article>
+
+        <div class="sub-box" id="hwReadingBox">
+          <h4>Comprehension Check</h4>
+          <div class="tf-row"><span>1. Why did Sofia use to buy fast fashion every month?</span><select class="ui-select" data-question="HW3 Reading 1" data-answer="To keep up with viral haul videos"><option value="">Choose...</option><option value="Because thrift shops were closed">Because thrift shops were closed</option><option value="To keep up with viral haul videos">To keep up with viral haul videos</option><option value="Because her cousin asked her to">Because her cousin asked her to</option></select></div>
+          <div class="tf-row"><span>2. Sofia wore most of her fast-fashion outfits many times.</span><select class="ui-select" data-question="HW3 Reading 2" data-answer="False"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+          <div class="tf-row"><span>3. How did Sofia feel about thrift shopping at the very beginning?</span><select class="ui-select" data-question="HW3 Reading 3" data-answer="She wasn't used to it and found it overwhelming"><option value="">Choose...</option><option value="She was already used to it">She was already used to it</option><option value="She wasn't used to it and found it overwhelming">She wasn't used to it and found it overwhelming</option><option value="She thought it was too expensive">She thought it was too expensive</option></select></div>
+          <div class="tf-row"><span>4. Now, styling second-hand outfits feels normal and authentic to Sofia.</span><select class="ui-select" data-question="HW3 Reading 4" data-answer="True"><option value="">Choose...</option><option value="True">True</option><option value="False">False</option></select></div>
+
+          <button type="button" class="btn-rose" onclick="checkSelectGroup('hwReadingBox', 'hwReadingScore')">Check Reading</button>
+          <span class="score-pill" id="hwReadingScore"></span>
+        </div>
+
+        <!-- Guided Writing Project -->
+        <div class="sub-box" style="background: var(--blush-card); border-color: #e4cdd2;">
+          <h4>✍️ Mini-Project: Write Your “Then, Adapting &amp; Now” Scrapbook Post (80–100 words)</h4>
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 10px;">
+            Write a short lifestyle post about how your style, school routine, or hobbies have changed — and something new you had to get used to!
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--cocoa);">
+            <span id="chkUsedTo">⬜ Use <i>used to / would</i></span>
+            <span id="chkBeGetUsed">⬜ Use <i>be used to / get used to + -ing</i></span>
+            <span id="chkVocab">⬜ Use at least 2 target words</span>
+            <span id="chkWords">⬜ Word count: <b id="wordCounter">0</b> / 80–100 words</span>
+          </div>
+
+          <textarea id="hwWritingArea" class="ui-textarea" rows="5" data-question="HW3 Writing Mini-Project" oninput="updateWritingChecklist()" placeholder="Two years ago, I used to... Every weekend my friends and I would... At first, I wasn't used to..., so I had to get used to... Now my vibe is much more authentic!"></textarea>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+    /* --- 1. PANEL SWITCHER & SCROLL PROGRESS --- */
+    function switchPanel(name) {
+      document.querySelectorAll('.mode-tab').forEach(b => b.classList.toggle('active', b.dataset.panel === name));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+    });
+
+    /* --- 2. STAGE 1 MOODBOARD SELECTOR --- */
+    const aestheticWarmupBank = {
+      bookworm: {
+        title: "📚 Cozy Bookworm & Dark Academia — Your Questions",
+        questions: [
+          "Which book, series, or fictional world makes you feel like the main character when you read?",
+          "What is your ideal rainy-day “romanticizing life” ritual (tea, playlist, corner café, or journaling)?",
+          "Do you think BookTok encourages genuine reading or mostly aesthetic book-buying?"
+        ]
+      },
+      cleangirl: {
+        title: "🍵 Clean Girl & Minimalist Wellness — Your Questions",
+        questions: [
+          "Do you enjoy morning routines and journaling, or do they sometimes feel like pressure to look “put together”?",
+          "Why do minimalist routines (matcha, tidy desks, Pilates) go viral so fast on TikTok?",
+          "What is one small daily habit that genuinely improves your mood even when nobody sees it?"
+        ]
+      },
+      y2k: {
+        title: "💿 Y2K Vintage & Thrift Queen — Your Questions",
+        questions: [
+          "Why do you think Gen Z loves 2000s fashion, wired headphones, and digital cameras more than modern tech?",
+          "Have you ever found an amazing thrifted or vintage piece with a cool story behind it?",
+          "Does Y2K style feel more playful and authentic than minimalist trends?"
+        ]
+      },
+      cottagecore: {
+        title: "🌷 Cottagecore & Indie Art — Your Questions",
+        questions: [
+          "If you could spend a whole weekend baking, painting, or walking in nature with zero Wi-Fi, how would you spend it?",
+          "Why do teens living in busy cities love romanticizing slow countryside life online?",
+          "What creative offline hobby helps you recharge when social media feels overwhelming?"
+        ]
+      }
+    };
+
+    function selectMoodboard(btn) {
+      document.querySelectorAll('#moodboardGrid .mood-card').forEach(c => c.classList.remove('chosen'));
+      btn.classList.add('chosen');
+      const choice = btn.dataset.choice;
+      const key = btn.dataset.key;
+      document.getElementById('moodChoiceFeedback').textContent = `✨ Selected aesthetic: ${choice}`;
+
+      const pack = aestheticWarmupBank[key];
+      if (pack) {
+        document.getElementById('warmupBoxTitle').textContent = pack.title;
+        const listEl = document.getElementById('warmupQuestionsList');
+        listEl.innerHTML = pack.questions.map(q => `<li>${q}</li>`).join('');
+      }
+    }
+
+    /* --- 3. WEB SPEECH API PRONUNCIATION --- */
+    function speakWord(word) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(word);
+      u.lang = 'en-GB';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    }
+
+    /* --- 4. DRAG & TAP VOCABULARY MATCHING (STAGE 2) --- */
+    let activeChip = null;
+
+    document.addEventListener('click', (e) => {
+      const chip = e.target.closest('.word-chip');
+      if (chip && !chip.classList.contains('used-chip')) {
+        if (activeChip === chip) {
+          chip.classList.remove('selected-chip');
+          activeChip = null;
+        } else {
+          document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected-chip'));
+          chip.classList.add('selected-chip');
+          activeChip = chip;
+        }
+        return;
+      }
+
+      const card = e.target.closest('.mpf-card');
+      if (card) {
+        const zone = card.querySelector('.drop-zone');
+        if (activeChip) {
+          placeChipInZone(activeChip, zone);
+        } else if (zone.dataset.placed) {
+          removeChipFromZone(zone);
+        }
+      }
+    });
+
+    document.addEventListener('dragstart', (e) => {
+      const chip = e.target.closest('.word-chip');
+      if (!chip || chip.classList.contains('used-chip')) return;
+      activeChip = chip;
+      e.dataTransfer.setData('text/plain', chip.dataset.word);
+    });
+
+    document.addEventListener('dragover', (e) => {
+      if (e.target.closest('.mpf-card')) e.preventDefault();
+    });
+
+    document.addEventListener('drop', (e) => {
+      const card = e.target.closest('.mpf-card');
+      if (!card || !activeChip) return;
+      e.preventDefault();
+      placeChipInZone(activeChip, card.querySelector('.drop-zone'));
+    });
+
+    function placeChipInZone(chip, zone) {
+      if (zone.dataset.placed) removeChipFromZone(zone);
+      const word = chip.dataset.word;
+      zone.textContent = word;
+      zone.dataset.placed = word;
+      zone.classList.add('filled');
+      zone.classList.remove('is-correct', 'is-wrong');
+      chip.classList.remove('selected-chip');
+      chip.classList.add('used-chip');
+      activeChip = null;
+    }
+
+    function removeChipFromZone(zone) {
+      const prev = zone.dataset.placed;
+      if (!prev) return;
+      const chip = document.querySelector(`.word-chip[data-word="${CSS.escape(prev)}"]`);
+      if (chip) chip.classList.remove('used-chip');
+      zone.textContent = 'Drop word here';
+      delete zone.dataset.placed;
+      zone.classList.remove('filled', 'is-correct', 'is-wrong');
+    }
+
+    function checkMpfCards() {
+      const cards = document.querySelectorAll('#mpfGridStage2 .mpf-card');
+      let correct = 0;
+      cards.forEach(c => {
+        const expected = c.dataset.answer.toLowerCase();
+        const zone = c.querySelector('.drop-zone');
+        const actual = (zone.dataset.placed || '').toLowerCase();
+        zone.classList.remove('is-correct', 'is-wrong');
+        if (!actual) return;
+        if (actual === expected) {
+          zone.classList.add('is-correct');
+          correct++;
+        } else {
+          zone.classList.add('is-wrong');
+        }
+      });
+      const el = document.getElementById('mpfScore');
+      el.textContent = `${correct} / ${cards.length} correct`;
+      el.style.color = correct === cards.length ? '#4a7c6f' : '#a95262';
+    }
+
+    function resetMpfCards() {
+      document.querySelectorAll('#mpfGridStage2 .drop-zone').forEach(z => {
+        z.textContent = 'Drop word here';
+        delete z.dataset.placed;
+        z.classList.remove('filled', 'is-correct', 'is-wrong');
+      });
+      document.querySelectorAll('#vocabBankStage2 .word-chip').forEach(c => c.classList.remove('used-chip', 'selected-chip'));
+      document.getElementById('mpfScore').textContent = '';
+    }
+
+    /* --- 5. STAGE 3 GIST 60-SECOND TIMER --- */
+    let gistInterval = null;
+    function startGistTimer() {
+      clearInterval(gistInterval);
+      let secs = 60;
+      const display = document.getElementById('gistTimerDisplay');
+      display.style.color = '#262024';
+      gistInterval = setInterval(() => {
+        secs--;
+        const m = String(Math.floor(secs / 60)).padStart(2, '0');
+        const s = String(secs % 60).padStart(2, '0');
+        display.textContent = `${m}:${s}`;
+        if (secs <= 10) display.style.color = '#c86d7d';
+        if (secs <= 0) {
+          clearInterval(gistInterval);
+          display.textContent = "Time's up!";
+        }
+      }, 1000);
+    }
+
+    /* --- 6. SELECT & INPUT AUTO-GRADERS --- */
+    function checkSelectGroup(containerId, scoreId) {
+      const box = document.getElementById(containerId);
+      const selects = box.querySelectorAll('select[data-answer]');
+      let total = 0, correct = 0;
+      selects.forEach(sel => {
+        total++;
+        const val = (sel.value || '').trim().toLowerCase();
+        const ans = sel.dataset.answer.toLowerCase();
+        sel.classList.remove('ok-field', 'no-field');
+        if (!val) return;
+        if (val === ans) {
+          sel.classList.add('ok-field');
+          correct++;
+        } else {
+          sel.classList.add('no-field');
+        }
+      });
+      const el = document.getElementById(scoreId);
+      el.textContent = `${correct} / ${total} correct`;
+      el.style.color = correct === total ? '#4a7c6f' : '#a95262';
+    }
+
+    function checkControlledWithHints() {
+      const rows = document.querySelectorAll('#controlledPracticeBox .gap-row');
+      let total = 0, correct = 0;
+      rows.forEach(row => {
+        const field = row.querySelector('[data-answer]');
+        const hintEl = row.querySelector('.item-feedback-hint');
+        if (!field) return;
+        total++;
+        const val = (field.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = field.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        field.classList.remove('ok-field', 'no-field');
+        if (!val) {
+          if (hintEl) hintEl.textContent = '';
+          return;
+        }
+        if (valid.includes(val)) {
+          field.classList.add('ok-field');
+          correct++;
+          if (hintEl) {
+            hintEl.style.color = '#4a7c6f';
+            hintEl.textContent = '✓ ' + (row.dataset.explanation || 'Great job!');
+          }
+        } else {
+          field.classList.add('no-field');
+          if (hintEl) {
+            hintEl.style.color = '#a95262';
+            hintEl.textContent = '✗ Hint: ' + (row.dataset.explanation || 'Check V1 vs. V-ing!');
+          }
+        }
+      });
+      const el = document.getElementById('controlledScore');
+      el.textContent = `${correct} / ${total} correct`;
+      el.style.color = correct === total ? '#4a7c6f' : '#a95262';
+    }
+
+    function checkInputGroup(containerId, scoreId) {
+      const box = document.getElementById(containerId);
+      const inputs = box.querySelectorAll('input[data-answer]');
+      let total = 0, correct = 0;
+      inputs.forEach(inp => {
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('ok-field', 'no-field');
+        if (!val) return;
+        if (valid.includes(val)) {
+          inp.classList.add('ok-field');
+          correct++;
+        } else {
+          inp.classList.add('no-field');
+        }
+      });
+      const el = document.getElementById(scoreId);
+      el.textContent = `${correct} / ${total} correct`;
+      el.style.color = correct === total ? '#4a7c6f' : '#a95262';
+    }
+
+    /* --- 7. STAGE 6 DILEMMA SPINNER --- */
+    const teenDilemmas = [
+      "🛍️ <b>The Viral Bag Dilemma:</b> Everyone in your class is buying an expensive €90 tote bag that's trending on TikTok. Your friend feels huge <i>peer pressure</i> to spend all their birthday money on it even though they don't really like the style. What advice do you give?",
+      "🏫 <b>The New School Adaptation Dilemma:</b> Your friend just transferred to a new school where classes start at 7:45 AM. They aren't <i>used to waking</i> up so early and miss their old classmates. Help them <i>get used to</i> the new routine!",
+      "📚 <b>The Aesthetic Study Burnout:</b> Your friend spends more time making colour-coded notes and filming study reels than actually sleeping, and now they're heading toward total <i>burnout</i>. Talk them through a healthier routine!",
+      "🎨 <b>The Identity Shift Dilemma:</b> Your friend <i>used to dress</i> in bright sporty clothes, now wants to try a cozy vintage aesthetic, and is nervous about what people at school will say. Encourage them!"
+    ];
+
+    function spinTeenDilemma() {
+      const screen = document.getElementById('dilemmaScreen');
+      const pick = teenDilemmas[Math.floor(Math.random() * teenDilemmas.length)];
+      screen.innerHTML = `
+        <div style="margin-bottom: 8px;">${pick}</div>
+        <div style="font-size: 13px; color: #f2b5c0;">💬 <b>Role-Play Prompt:</b> Use at least two target forms (<i>used to / would / be used to / get used to</i>) in your advice!</div>
+      `;
+    }
+
+    /* --- 8. HOMEWORK LIVE WRITING CHECKLIST --- */
+    function updateWritingChecklist() {
+      const text = document.getElementById('hwWritingArea').value;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('wordCounter').textContent = words;
+
+      const hasUsedToWould = /(used to|use to|would)/i.test(text);
+      const hasBeGetUsed = /(am used to|is used to|are used to|was used to|weren't used to|wasn't used to|get used to|getting used to|got used to)/i.test(text);
+      const hasVocab = /(curate|romanticize|overrated|authentic|peer pressure|keep up with|burnout|vibe)/i.test(text);
+
+      document.getElementById('chkUsedTo').innerHTML = `${hasUsedToWould ? '✅' : '⬜'} Use <i>used to / would</i>`;
+      document.getElementById('chkBeGetUsed').innerHTML = `${hasBeGetUsed ? '✅' : '⬜'} Use <i>be used to / get used to + -ing</i>`;
+      document.getElementById('chkVocab').innerHTML = `${hasVocab ? '✅' : '⬜'} Use at least 2 target words`;
+      document.getElementById('chkWords').innerHTML = `${words >= 75 ? '✅' : '⬜'} Word count: <b>${words}</b> / 80–100 words`;
+    }
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
