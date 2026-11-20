@@ -167,7 +167,7 @@ const LESSONS = [
         file: "lessons/AHS_English_B2_Interactive_Mock_Exam.html"
     },
     {
-        title: "Making character energy",
+        title: "Main character energy",
         level: "B1",
         type: "Lesson plan",
         category: "Daily Life",
