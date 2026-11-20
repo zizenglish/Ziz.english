@@ -166,4 +166,13 @@ const LESSONS = [
         description: "Practice taking the B2-level test as in the real environment.",
         file: "lessons/AHS_English_B2_Interactive_Mock_Exam.html"
     },
+    {
+        title: "Making character energy",
+        level: "B1",
+        type: "Lesson plan",
+        category: "Daily Life",
+        description: "Explore aesthetic trends and social media culture at B1. Discover used to, would, be used to, and get used to.",
+        file: "lessons/main_character_energy.html"
+    },
+    
 ];
