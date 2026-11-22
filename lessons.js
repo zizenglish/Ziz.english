@@ -180,7 +180,7 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Daily Life",
         description: "....",
-        file: "ielts_listening.html"
+        file: "lessons/ielts_listening.html"
     },
     
 ];
