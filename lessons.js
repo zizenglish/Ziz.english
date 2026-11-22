@@ -174,5 +174,13 @@ const LESSONS = [
         description: "Explore aesthetic trends and social media culture at B1. Discover used to, would, be used to, and get used to.",
         file: "lessons/main_character_energy.html"
     },
+      {
+        title: "IELTS Listening & Grammar",
+        level: "B2",
+        type: "Lesson plan",
+        category: "Daily Life",
+        description: "....",
+        file: "ielts_listening.html"
+    },
     
 ];
