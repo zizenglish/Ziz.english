@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signal vs. Noise: IELTS Listening Distractors, Future in the Past &amp; Contrast | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Atmospheric Dark-Vermilion, Warm Parchment & Brass Palette */
+      --bg-vermilion: #5c1f1a;
+      --bg-vermilion-deep: #431410;
+      --bg-vermilion-elevated: #6e2721;
+      --parchment: #f4ebd9;
+      --parchment-soft: #ebdEc5;
+      --parchment-bright: #faf4e8;
+      --brass: #d9a75a;
+      --brass-bright: #ecc17a;
+      --brass-dim: rgba(217, 167, 90, 0.36);
+      --ink-dark: #261411;
+      --ink-muted: #5c4640;
+      --ink-on-dark: #f5ece0;
+      --ink-on-dark-muted: #d6c2b5;
+
+      /* Semantic Signal States */
+      --signal-ok: #78b897;
+      --signal-ok-bg: #e2f2e9;
+      --signal-ok-dark: #1d4d35;
+      --noise-trap: #cf5343;
+      --noise-trap-bg: #fae4df;
+      --noise-trap-dark: #7a1f14;
+      --border-brass: 1px solid rgba(217, 167, 90, 0.42);
+      --border-ink: 1px solid rgba(38, 20, 17, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-vermilion);
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(236, 193, 122, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 85% 78%, rgba(25, 8, 6, 0.38) 0%, transparent 50%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 240, 220, 0.015) 0px,
+          rgba(255, 240, 220, 0.015) 1px,
+          transparent 1px,
+          transparent 28px
+        );
+      color: var(--ink-on-dark);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+      padding-bottom: 96px;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP CHAPTER NAVIGATION BAR --- */
+    .chapter-header {
+      position: sticky;
+      top: 0;
+      z-index: 950;
+      background: rgba(67, 20, 16, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: var(--border-brass);
+      padding: 10px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand-mark {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--parchment-bright);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark span {
+      color: var(--brass-bright);
+      font-style: italic;
+    }
+
+    .chapter-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .chapter-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-on-dark-muted);
+      text-decoration: none;
+      padding: 5px 9px;
+      border-radius: 4px;
+      transition: color 0.16s, background 0.16s;
+      white-space: nowrap;
+    }
+
+    .chapter-link:hover {
+      color: var(--brass-bright);
+      background: rgba(217, 167, 90, 0.12);
+    }
+
+    .mode-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-vermilion-deep);
+      padding: 4px;
+      border: var(--border-brass);
+      border-radius: 6px;
+    }
+
+    .mode-tab-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 6px 13px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-on-dark-muted);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .mode-tab-btn.active {
+      background: var(--parchment);
+      color: var(--ink-dark);
+      border-color: var(--brass-bright);
+    }
+
+    .reading-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background: rgba(217, 167, 90, 0.18);
+    }
+
+    .reading-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brass), var(--brass-bright));
+      transition: width 0.16s linear;
+    }
+
+    /* --- MAIN LAYOUT CONTAINER --- */
+    .page-shell {
+      max-width: 1040px;
+      margin: 34px auto 0;
+      padding: 0 22px;
+    }
+
+    .view-panel {
+      display: none;
+      animation: panelReveal 0.25s ease;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    @keyframes panelReveal {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HERO ESSAY BANNER --- */
+    .essay-hero {
+      background: linear-gradient(155deg, rgba(110, 39, 33, 0.85) 0%, rgba(62, 18, 14, 0.94) 100%);
+      border: var(--border-brass);
+      border-radius: 10px;
+      padding: 36px 38px;
+      margin-bottom: 30px;
+      position: relative;
+      box-shadow: 0 18px 40px rgba(24, 7, 5, 0.32);
+    }
+
+    .hero-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass-bright);
+      margin-bottom: 10px;
+    }
+
+    .essay-hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.06;
+      color: var(--parchment-bright);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .essay-hero h1 em {
+      color: var(--brass-bright);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: var(--ink-on-dark-muted);
+      max-width: 720px;
+      margin-bottom: 22px;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(217, 167, 90, 0.35);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--parchment);
+    }
+
+    .meta-chip {
+      background: rgba(38, 20, 17, 0.52);
+      border: 1px solid rgba(217, 167, 90, 0.32);
+      padding: 5px 12px;
+      border-radius: 4px;
+    }
+
+    /* --- WARM PARCHMENT LESSON SHEETS --- */
+    .parchment-sheet {
+      background: var(--parchment);
+      color: var(--ink-dark);
+      border: 1.5px solid #d7c3a1;
+      outline: 3px solid rgba(217, 167, 90, 0.25);
+      outline-offset: -7px;
+      border-radius: 8px;
+      padding: 34px 36px;
+      margin-bottom: 30px;
+      box-shadow: 0 16px 36px rgba(24, 7, 5, 0.34);
+    }
+
+    .sheet-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px dashed rgba(38, 20, 17, 0.25);
+    }
+
+    .stage-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg-vermilion);
+    }
+
+    .duration-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      background: var(--bg-vermilion);
+      color: var(--brass-bright);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .parchment-sheet h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(28px, 3.8vw, 38px);
+      font-weight: 700;
+      color: var(--ink-dark);
+      line-height: 1.12;
+      margin-bottom: 8px;
+    }
+
+    .sheet-lead {
+      font-size: 15px;
+      color: var(--ink-muted);
+      margin-bottom: 22px;
+    }
+
+    /* --- BRASS & VERMILION LISTENING CONSOLE --- */
+    .signal-console {
+      background: var(--bg-vermilion-deep);
+      color: var(--parchment-bright);
+      border: var(--border-brass);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+    }
+
+    .console-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .console-status {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--brass-bright);
+      margin-top: 10px;
+    }
+
+    .transcript-sheet {
+      display: none;
+      margin-top: 14px;
+      padding: 18px 20px;
+      background: var(--parchment-bright);
+      color: var(--ink-dark);
+      border: 1px solid #c9b28b;
+      border-radius: 6px;
+      font-size: 14.5px;
+      line-height: 1.78;
+    }
+
+    .transcript-sheet.open {
+      display: block;
+    }
+
+    .tag-trap {
+      background: var(--noise-trap-bg);
+      color: var(--noise-trap-dark);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      border-bottom: 1.5px solid var(--noise-trap);
+    }
+
+    .tag-truth {
+      background: var(--signal-ok-bg);
+      color: var(--signal-ok-dark);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      border-bottom: 1.5px solid var(--signal-ok);
+    }
+
+    /* --- STAGE 1: WARM-UP & MICRO-CLIPS --- */
+    .warmup-note-box {
+      background: var(--parchment-soft);
+      border: 1px solid #cdb690;
+      border-left: 4px solid var(--bg-vermilion);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 14.5px;
+    }
+
+    .micro-clip-card {
+      background: var(--parchment-bright);
+      border: var(--border-ink);
+      border-radius: 6px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+
+    .micro-choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .micro-btn {
+      background: var(--parchment);
+      color: var(--ink-dark);
+      border: 1.5px solid rgba(38, 20, 17, 0.26);
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .micro-btn:hover {
+      border-color: var(--bg-vermilion);
+      background: var(--parchment-soft);
+    }
+
+    .micro-btn.trap-picked {
+      background: var(--noise-trap-bg);
+      border-color: var(--noise-trap);
+      color: var(--noise-trap-dark);
+    }
+
+    .micro-btn.truth-picked {
+      background: var(--signal-ok-bg);
+      border-color: var(--signal-ok);
+      color: var(--signal-ok-dark);
+    }
+
+    /* --- STAGE 2: TWO-PILLAR GRAMMAR ARCHITECTURE --- */
+    .grammar-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .arch-box {
+      background: var(--parchment-bright);
+      border: 1.5px solid #cbb48d;
+      border-top: 4px solid var(--bg-vermilion);
+      border-radius: 6px;
+      padding: 20px 22px;
+    }
+
+    .arch-box.contrast-arch {
+      border-top-color: #2f6951;
+    }
+
+    .arch-box h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: 6px;
+    }
+
+    .rule-card {
+      background: var(--parchment);
+      border: 1px solid #d9c6a6;
+      border-radius: 5px;
+      padding: 11px 14px;
+      margin-top: 11px;
+      font-size: 13.8px;
+    }
+
+    .mono-formula {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--bg-vermilion);
+      color: var(--brass-bright);
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+    }
+
+    .contrast-arch .mono-formula {
+      background: #2f6951;
+      color: #f4fbf7;
+    }
+
+    /* --- SUB-EXERCISES & DIAGNOSTIC FEEDBACK --- */
+    .exercise-frame {
+      background: var(--parchment-soft);
+      border: 1px solid #cbb48d;
+      border-radius: 6px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+    }
+
+    .exercise-frame h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: 12px;
+    }
+
+    .row-card {
+      background: var(--parchment-bright);
+      border: 1px solid #d4c09e;
+      border-radius: 5px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 14.5px;
+    }
+
+    .row-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .diagnostic-box {
+      display: none;
+      margin-top: 9px;
+      padding: 9px 13px;
+      border-radius: 4px;
+      background: #f5e6c8;
+      border-left: 3.5px solid #b57d24;
+      font-size: 13px;
+      color: var(--ink-dark);
+    }
+
+    .diagnostic-box.open {
+      display: block;
+    }
+
+    /* --- STAGE 4: SIGNAL DECODER TABLE --- */
+    .signal-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--parchment-bright);
+      border: 1px solid #c9b28b;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .signal-table th {
+      background: var(--bg-vermilion-deep);
+      color: var(--brass-bright);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: left;
+      padding: 12px 14px;
+    }
+
+    .signal-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #dfd0b4;
+      vertical-align: middle;
+      font-size: 14px;
+    }
+
+    /* --- IELTS MCQ & MATCHING --- */
+    .ielts-mcq-card {
+      background: var(--parchment-bright);
+      border: 1px solid #d4c09e;
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .ielts-q-stem {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink-dark);
+      margin-bottom: 10px;
+    }
+
+    .ielts-opt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .ielts-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border-radius: 5px;
+      border: 1px solid #cbb590;
+      background: var(--parchment);
+      color: var(--ink-dark);
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.14s ease;
+    }
+
+    .ielts-opt:hover {
+      background: var(--parchment-soft);
+      border-color: var(--bg-vermilion);
+    }
+
+    .ielts-opt.selected {
+      background: #e6d3b3;
+      border: 1.5px solid var(--bg-vermilion);
+      font-weight: 700;
+    }
+
+    .ielts-opt.opt-right {
+      background: var(--signal-ok-bg) !important;
+      border: 1.5px solid #2f6951 !important;
+      color: var(--signal-ok-dark) !important;
+      font-weight: 700;
+    }
+
+    .ielts-opt.opt-wrong {
+      background: var(--noise-trap-bg) !important;
+      border: 1.5px solid var(--noise-trap) !important;
+      color: var(--noise-trap-dark) !important;
+    }
+
+    .letter-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: var(--bg-vermilion);
+      color: var(--brass-bright);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .key-legend {
+      background: var(--parchment-bright);
+      border: 1px solid #cbb48d;
+      border-radius: 5px;
+      padding: 13px 16px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 6px 14px;
+      font-size: 13.5px;
+    }
+
+    /* --- STAGE 7: SPEAKING CUE CARD & TIMERS --- */
+    .speaking-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 20px;
+    }
+
+    .brass-cue-card {
+      background: var(--parchment-bright);
+      border: 2px solid var(--bg-vermilion);
+      border-radius: 6px;
+      padding: 22px 24px;
+    }
+
+    .clock-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(38, 20, 17, 0.25);
+    }
+
+    .digital-clock {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      background: var(--bg-vermilion-deep);
+      color: var(--brass-bright);
+      padding: 6px 13px;
+      border-radius: 5px;
+    }
+
+    /* --- BUTTONS & FORM CONTROLS --- */
+    .btn-brass {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: var(--bg-vermilion);
+      color: var(--parchment-bright);
+      border: 1px solid var(--brass);
+      padding: 9px 17px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-brass:hover {
+      background: var(--bg-vermilion-elevated);
+      transform: translateY(-1px);
+    }
+
+    .btn-forest {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: #2f6951;
+      color: #f4fbf7;
+      border: 1px solid #224d3b;
+      padding: 9px 17px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-forest:hover {
+      background: #255440;
+    }
+
+    .btn-parchment {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--parchment);
+      color: var(--ink-dark);
+      border: 1px solid rgba(38, 20, 17, 0.28);
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-parchment:hover {
+      background: var(--parchment-soft);
+      border-color: var(--bg-vermilion);
+    }
+
+    select.ink-select,
+    input.ink-input,
+    textarea.ink-textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border: 1.5px solid rgba(38, 20, 17, 0.28);
+      border-radius: 5px;
+      background: #ffffff;
+      color: var(--ink-dark);
+      outline: none;
+    }
+
+    select.ink-select:focus,
+    input.ink-input:focus,
+    textarea.ink-textarea:focus {
+      border-color: var(--bg-vermilion);
+      box-shadow: 0 0 0 3px rgba(92, 31, 26, 0.14);
+    }
+
+    input.ink-input {
+      width: 220px;
+    }
+
+    textarea.ink-textarea {
+      width: 100%;
+      resize: vertical;
+    }
+
+    .field-right {
+      border-color: #2f6951 !important;
+      background: var(--signal-ok-bg) !important;
+      color: var(--signal-ok-dark) !important;
+      font-weight: 700 !important;
+    }
+
+    .field-wrong {
+      border-color: var(--noise-trap) !important;
+      background: var(--noise-trap-bg) !important;
+      color: var(--noise-trap-dark) !important;
+    }
+
+    .score-readout {
+      display: inline-block;
+      margin-left: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 820px) {
+      .hero-top-grid,
+      .grammar-columns,
+      .micro-choices,
+      .speaking-layout {
+        grid-template-columns: 1fr;
+      }
+      .parchment-sheet {
+        padding: 24px 18px;
+      }
+      .essay-hero {
+        padding: 26px 20px;
+      }
+      .chapter-header {
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP CHAPTER NAVIGATION & MODE SWITCHER -->
+  <header class="chapter-header">
+    <div class="brand-mark">ziz<span>.</span>english</div>
+
+    <nav class="chapter-strip" aria-label="Lesson stages">
+      <a href="#stage1" class="chapter-link">I · Traps</a>
+      <a href="#stage2" class="chapter-link">II · Grammar</a>
+      <a href="#stage3" class="chapter-link">III · Paraphrase</a>
+      <a href="#stage4" class="chapter-link">IV · Decoder</a>
+      <a href="#stage5" class="chapter-link">V · Part 2</a>
+      <a href="#stage6" class="chapter-link">VI · Part 3</a>
+      <a href="#stage7" class="chapter-link">VII · Speaking</a>
+    </nav>
+
+    <div class="mode-switcher">
+      <button type="button" class="mode-tab-btn active" data-panel="lesson" onclick="switchViewMode('lesson')">I · Signal Lab (90-Min Lesson)</button>
+      <button type="button" class="mode-tab-btn" data-panel="homework" onclick="switchViewMode('homework')">II · Field Homework</button>
+    </div>
+
+    <div class="reading-progress-bar">
+      <div class="reading-progress-fill" id="progressBarFill"></div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+
+    <!-- =================================================================== -->
+    <!-- VIEW I: SIGNAL LAB (90-MINUTE INTERACTIVE LESSON)                   -->
+    <!-- =================================================================== -->
+    <div id="panel-lesson" class="view-panel active">
+
+      <section class="essay-hero">
+        <div class="hero-kicker">IELTS Listening B1 → B2 · Part 2 &amp; Part 3 Field Guide</div>
+        <h1>Signal vs. Noise: <em>Distractors, Future in the Past &amp; Contrast</em></h1>
+        <p class="hero-subtitle">In IELTS Listening, the earliest detail you hear is often an abandoned plan or a contrasting counter-point. Learn to track <b>was/were going to</b>, <b>was/were supposed to</b>, and <b>was/were meant to</b> alongside <b>although</b>, <b>despite</b>, and <b>whereas</b> so you never get caught by exam distractors.</p>
+        <div class="hero-meta-strip">
+          <span class="meta-chip">⏱ 90 MINUTES TOTAL</span>
+          <span class="meta-chip">🎧 PART 2 &amp; PART 3 SIMULATIONS</span>
+          <span class="meta-chip">🧭 CEFR B1 → B2</span>
+          <span class="meta-chip">🎙️ MULTI-VOICE WEB AUDIO</span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 1 (10 MIN): LEAD-IN & MICRO-LISTENING TRAPS                 -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage1">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter I · Lead-in &amp; Micro-Listening Traps</span>
+          <span class="duration-badge">10 MIN</span>
+        </div>
+        <h2>Separating the Abandoned Plan from the Real Outcome</h2>
+        <p class="sheet-lead">Listen to three short campus &amp; travel announcements. Each clip introduces an earlier plan first, then shifts to what actually happens.</p>
+
+        <div class="warmup-note-box">
+          <b>Opening Discussion Prompts:</b>
+          <ol style="padding-left: 20px; margin-top: 6px; line-height: 1.75;">
+            <li>Think of a recent occasion when a plan, booking, or class schedule changed at the last minute. What happened?</li>
+            <li>Why do IELTS speakers frequently state an initial plan before revealing the final arrangement?</li>
+            <li>Which transition words tell you to hold your answer and listen for a change of direction?</li>
+          </ol>
+        </div>
+
+        <!-- Micro-Clip 1 -->
+        <div class="micro-clip-card" id="microClip1">
+          <div class="row-flex">
+            <b>Clip 01 · Morning Briefing Location</b>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" class="btn-brass" style="padding: 6px 12px; font-size: 11.5px;" onclick="playSingleUtterance('We were supposed to meet at the main gate this morning, though it is currently being repaired, so please gather by the glasshouse instead.', 1.0)">▶ 1.0x</button>
+              <button type="button" class="btn-parchment" style="padding: 6px 10px; font-size: 11.5px;" onclick="playSingleUtterance('We were supposed to meet at the main gate this morning, though it is currently being repaired, so please gather by the glasshouse instead.', 0.84)">0.84x</button>
+            </div>
+          </div>
+          <div style="font-size: 14px; color: var(--ink-muted); margin-top: 4px;">Where are participants meeting now?</div>
+          <div class="micro-choices">
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 1" onclick="selectMicroTrap('microClip1', this, false)">A. At the main gate</button>
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 1" onclick="selectMicroTrap('microClip1', this, true)">B. By the glasshouse</button>
+          </div>
+          <div class="diagnostic-box"><b>Signal Note:</b> <span class="tag-trap">“were supposed to meet at the main gate”</span> is the cancelled plan (Trap A). <span class="tag-truth">“...though it is currently being repaired, so please gather by the glasshouse instead.”</span> gives the real answer (B).</div>
+        </div>
+
+        <!-- Micro-Clip 2 -->
+        <div class="micro-clip-card" id="microClip2">
+          <div class="row-flex">
+            <b>Clip 02 · Seminar Room Change</b>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" class="btn-brass" style="padding: 6px 12px; font-size: 11.5px;" onclick="playSingleUtterance('The afternoon talk was meant to take place in Room 204, despite the projector being ready, yet over ninety students signed up, so we moved it to the Main Hall.', 1.0)">▶ 1.0x</button>
+              <button type="button" class="btn-parchment" style="padding: 6px 10px; font-size: 11.5px;" onclick="playSingleUtterance('The afternoon talk was meant to take place in Room 204, despite the projector being ready, yet over ninety students signed up, so we moved it to the Main Hall.', 0.84)">0.84x</button>
+            </div>
+          </div>
+          <div style="font-size: 14px; color: var(--ink-muted); margin-top: 4px;">Where is the afternoon talk being held?</div>
+          <div class="micro-choices">
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 2" onclick="selectMicroTrap('microClip2', this, false)">A. In Room 204</button>
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 2" onclick="selectMicroTrap('microClip2', this, true)">B. In the Main Hall</button>
+          </div>
+          <div class="diagnostic-box"><b>Signal Note:</b> <span class="tag-trap">“was meant to take place in Room 204”</span> is the original plan (Trap A). <span class="tag-truth">“...so we moved it to the Main Hall.”</span> confirms the actual venue (B).</div>
+        </div>
+
+        <!-- Micro-Clip 3 -->
+        <div class="micro-clip-card" id="microClip3" style="margin-bottom: 0;">
+          <div class="row-flex">
+            <b>Clip 03 · Survey Format Decision</b>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" class="btn-brass" style="padding: 6px 12px; font-size: 11.5px;" onclick="playSingleUtterance('We were going to distribute paper forms in the foyer, whereas our supervisor suggested an online questionnaire instead.', 1.0)">▶ 1.0x</button>
+              <button type="button" class="btn-parchment" style="padding: 6px 10px; font-size: 11.5px;" onclick="playSingleUtterance('We were going to distribute paper forms in the foyer, whereas our supervisor suggested an online questionnaire instead.', 0.84)">0.84x</button>
+            </div>
+          </div>
+          <div style="font-size: 14px; color: var(--ink-muted); margin-top: 4px;">What format did the researchers choose?</div>
+          <div class="micro-choices">
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 3" onclick="selectMicroTrap('microClip3', this, false)">A. Paper forms</button>
+            <button type="button" class="micro-btn" data-question="Stage 1 Clip 3" onclick="selectMicroTrap('microClip3', this, true)">B. An online questionnaire</button>
+          </div>
+          <div class="diagnostic-box"><b>Signal Note:</b> <span class="tag-trap">“were going to distribute paper forms”</span> is the dropped plan (Trap A). <span class="tag-truth">“whereas our supervisor suggested an online questionnaire instead.”</span> gives the final choice (B).</div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 2 (15 MIN): GRAMMAR ARCHITECTURE & CLINIC                  -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage2">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter II · Grammar Architecture &amp; Clinic</span>
+          <span class="duration-badge">15 MIN</span>
+        </div>
+        <h2>Future in the Past + Contrast Linkers</h2>
+        <p class="sheet-lead">Study how past-plan forms and contrast linkers work together on the IELTS exam, then complete the 10-item Grammar Clinic.</p>
+
+        <div class="grammar-columns">
+          <!-- Pillar A: Future in the Past -->
+          <div class="arch-box">
+            <h3>Future in the Past (Plan Signals)</h3>
+            <p style="font-size: 13.5px; color: var(--ink-muted);">Used when a speaker describes an earlier intention, schedule, or design that changed or did not happen as expected:</p>
+
+            <div class="rule-card">
+              <span class="mono-formula">was / were going to + V1</span><br>
+              <b>Personal intention or decision</b> prior to a change.<br>
+              <i>“We <b>were going to</b> cycle along the canal, but it rained.”</i>
+            </div>
+
+            <div class="rule-card">
+              <span class="mono-formula">was / were supposed to + V1</span><br>
+              <b>Scheduled time, rule, or arrangement</b> that shifted.<br>
+              <i>“The coach <b>was supposed to</b> leave at nine.”</i>
+            </div>
+
+            <div class="rule-card">
+              <span class="mono-formula">was / were meant to + V1</span><br>
+              <b>Intended purpose or original design</b> (common in Part 2 talks).<br>
+              <i>“The old annex <b>was meant to</b> be a café.”</i>
+            </div>
+          </div>
+
+          <!-- Pillar B: Contrast Linkers -->
+          <div class="arch-box contrast-arch">
+            <h3>Contrast Linkers (Pivot Signals)</h3>
+            <p style="font-size: 13.5px; color: var(--ink-muted);">Used to contrast conditions, concede a point, or compare two different facts in Part 2 and Part 3:</p>
+
+            <div class="rule-card">
+              <span class="mono-formula">although / though + Subject + Verb</span><br>
+              Followed by a <b>full clause</b>. <i>Though</i> can also sit at the end of a sentence.<br>
+              <i>“<b>Although</b> tickets were limited, we got two seats.”</i>
+            </div>
+
+            <div class="rule-card">
+              <span class="mono-formula">despite / in spite of + Noun / V-ing</span><br>
+              Followed by a <b>noun phrase</b> or <b>-ing form</b> (never <i>despite of</i>; never direct <i>S + V</i> clause).<br>
+              <i>“<b>Despite</b> the fog, the ferry sailed on schedule.”</i>
+            </div>
+
+            <div class="rule-card">
+              <span class="mono-formula">whereas + Subject + Verb</span><br>
+              Contrasts <b>two distinct facts or viewpoints</b> side by side.<br>
+              <i>“Liam prefers lab work, <b>whereas</b> Chloe likes field notes.”</i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clinic Part A: 6 Gap-Fills -->
+        <div class="exercise-frame" id="clinicPartA">
+          <h3>Clinic Part A · Precision Gap-Fill (6 Items)</h3>
+          <div class="row-card row-flex">
+            <span>1. _____ the heavy traffic on the bridge, the tour bus arrived before ten.</span>
+            <select class="ink-select" data-question="Stage 2A Q1" data-answer="Despite">
+              <option value="">Select linker...</option>
+              <option value="Although">Although</option>
+              <option value="Despite">Despite</option>
+              <option value="Whereas">Whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>2. The welcome session _____ begin at 10:00, though a technical delay pushed it back.</span>
+            <select class="ink-select" data-question="Stage 2A Q2" data-answer="was supposed to">
+              <option value="">Select phrase...</option>
+              <option value="was supposed to">was supposed to</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>3. Morning seminars focus on theory, _____ afternoon labs focus on practical skills.</span>
+            <select class="ink-select" data-question="Stage 2A Q3" data-answer="whereas">
+              <option value="">Select linker...</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+              <option value="meant to">meant to</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>4. In spite of _____ early, they had to wait outside the exhibition hall.</span>
+            <select class="ink-select" data-question="Stage 2A Q4" data-answer="arriving">
+              <option value="">Select form...</option>
+              <option value="they arrived">they arrived</option>
+              <option value="arrive">arrive</option>
+              <option value="arriving">arriving</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>5. We _____ reserve the river boat, but it was fully booked for the afternoon.</span>
+            <select class="ink-select" data-question="Stage 2A Q5" data-answer="were going to">
+              <option value="">Select phrase...</option>
+              <option value="were going to">were going to</option>
+              <option value="although">although</option>
+              <option value="in spite of">in spite of</option>
+            </select>
+          </div>
+          <div class="row-card row-flex" style="margin-bottom: 14px;">
+            <span>6. _____ the museum entry is free, guided tours require an advance pass.</span>
+            <select class="ink-select" data-question="Stage 2A Q6" data-answer="Although">
+              <option value="">Select linker...</option>
+              <option value="Despite">Despite</option>
+              <option value="Although">Although</option>
+              <option value="In spite of">In spite of</option>
+            </select>
+          </div>
+          <button type="button" class="btn-brass" onclick="checkSelectGroup('clinicPartA', 'clinicScoreA')">Verify Part A</button>
+          <span class="score-readout" id="clinicScoreA"></span>
+        </div>
+
+        <!-- Clinic Part B: 4 B1->B2 Transformations -->
+        <div class="exercise-frame" id="clinicPartB" style="margin-bottom: 0;">
+          <h3>Clinic Part B · B1 → B2 Sentence Transformations (4 Items)</h3>
+          <p style="font-size: 13.5px; color: var(--ink-muted); margin-bottom: 12px;">Rewrite the target chunk using the cue word in <b>BOLD</b>.</p>
+
+          <div class="row-card" data-diag="Use 'Despite' + noun/gerund phrase ('a tight budget' or 'having a tight budget'), not a full clause.">
+            <div>1. Although the team had a tight budget, they completed the survey on time. <b>(DESPITE)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ink-input" style="width: 240px;" data-question="Stage 2B T1" data-answer="Despite a tight budget|Despite having a tight budget" placeholder="Despite..." /> , they completed the survey on time.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+
+          <div class="row-card" data-diag="Use 'was supposed to' + base verb ('start').">
+            <div>2. The field briefing was scheduled to start at 8:30, but the bus ran late. <b>(SUPPOSED)</b></div>
+            <div style="margin-top: 6px;">→ The field briefing <input type="text" class="ink-input" style="width: 215px;" data-question="Stage 2B T2" data-answer="was supposed to start" placeholder="was..." /> at 8:30, but the bus ran late.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+
+          <div class="row-card" data-diag="Use 'whereas' to contrast the two sentences smoothly.">
+            <div>3. Surveys give broad data. Interviews give deeper personal context. <b>(WHEREAS)</b></div>
+            <div style="margin-top: 6px;">→ Surveys give broad data, <input type="text" class="ink-input" style="width: 250px;" data-question="Stage 2B T3" data-answer="whereas interviews give" placeholder="whereas..." /> deeper personal context.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+
+          <div class="row-card" data-diag="Use 'was meant to' + base verb ('be')." style="margin-bottom: 14px;">
+            <div>4. Planners originally intended the West Wing to be a reading room. <b>(MEANT)</b></div>
+            <div style="margin-top: 6px;">→ The West Wing <input type="text" class="ink-input" style="width: 200px;" data-question="Stage 2B T4" data-answer="was meant to be" placeholder="was..." /> a reading room.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+
+          <button type="button" class="btn-brass" onclick="checkTransformGroup('clinicPartB', 'clinicScoreB')">Verify Part B</button>
+          <span class="score-readout" id="clinicScoreB"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 3 (12 MIN): PARAPHRASE & TRAP RADAR                         -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage3">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter III · Paraphrase &amp; Trap Radar</span>
+          <span class="duration-badge">12 MIN</span>
+        </div>
+        <h2>Matching Question Phrasing to Spoken Paraphrases</h2>
+        <p class="sheet-lead">Match the <b>8 IELTS question phrases</b> on the left with their <b>spoken equivalents</b> on the right.</p>
+
+        <div class="exercise-frame" id="paraphraseStageBox" style="margin-bottom: 0;">
+          <div class="row-card row-flex">
+            <span>1. <b>postponed</b> until next month</span>
+            <select class="ink-select" data-question="Paraphrase 1" data-answer="put off until a later date">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>2. <b>relocated</b> to another venue</span>
+            <select class="ink-select" data-question="Paraphrase 2" data-answer="moved to a different room">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>3. <b>undergoing renovation</b></span>
+            <select class="ink-select" data-question="Paraphrase 3" data-answer="currently being repaired and upgraded">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>4. <b>fully booked</b> in advance</span>
+            <select class="ink-select" data-question="Paraphrase 4" data-answer="all places already taken">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>5. <b>compulsory</b> briefing</span>
+            <select class="ink-select" data-question="Paraphrase 5" data-answer="required for everyone attending">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>6. <b>pull out of</b> the study</span>
+            <select class="ink-select" data-question="Paraphrase 6" data-answer="quit the project early">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex">
+            <span>7. <b>originally meant to be</b></span>
+            <select class="ink-select" data-question="Paraphrase 7" data-answer="initially planned for">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <div class="row-card row-flex" style="margin-bottom: 14px;">
+            <span>8. <b>chief limitation</b></span>
+            <select class="ink-select" data-question="Paraphrase 8" data-answer="main weak point of the idea">
+              <option value="">Choose match...</option>
+              <option value="moved to a different room">moved to a different room</option>
+              <option value="put off until a later date">put off until a later date</option>
+              <option value="currently being repaired and upgraded">currently being repaired and upgraded</option>
+              <option value="all places already taken">all places already taken</option>
+              <option value="required for everyone attending">required for everyone attending</option>
+              <option value="quit the project early">quit the project early</option>
+              <option value="initially planned for">initially planned for</option>
+              <option value="main weak point of the idea">main weak point of the idea</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-brass" onclick="checkSelectGroup('paraphraseStageBox', 'scoreStage3')">Check Paraphrases</button>
+          <span class="score-readout" id="scoreStage3"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 4 (15 MIN): LIVE AUDIO DECODER                              -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage4">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter IV · Live Audio Decoder</span>
+          <span class="duration-badge">15 MIN</span>
+        </div>
+        <h2>Filtering Noise: Abandoned Plan vs. Confirmed Reality</h2>
+        <p class="sheet-lead">Listen to each of the 5 clips and log both the <b>Abandoned Plan (Trap)</b> and the <b>Confirmed Reality (Answer)</b>.</p>
+
+        <div style="overflow-x: auto;">
+          <table class="signal-table" id="liveDecoderTable">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Signal</th>
+                <th style="width: 41%;">Abandoned Plan (Trap)</th>
+                <th style="width: 41%;">Confirmed Reality (Answer)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <b class="mono">SIGNAL 01</b><br>
+                  <button type="button" class="btn-brass" style="padding: 5px 10px; font-size: 11px; margin-top: 6px;" onclick="playSingleUtterance('The harbour ferry was supposed to sail at 8:30, although dense fog pushed departure back to 10:15.', 0.96)">▶ Play</button>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 1 Abandoned" data-answer="8:30 departure">
+                    <option value="">Select trap...</option>
+                    <option value="8:30 departure">8:30 departure</option>
+                    <option value="10:15 departure">10:15 departure</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 1 Reality" data-answer="10:15 departure">
+                    <option value="">Select reality...</option>
+                    <option value="8:30 departure">8:30 departure</option>
+                    <option value="10:15 departure">10:15 departure</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <b class="mono">SIGNAL 02</b><br>
+                  <button type="button" class="btn-brass" style="padding: 5px 10px; font-size: 11px; margin-top: 6px;" onclick="playSingleUtterance('We were going to rent bicycles for the cliff path, despite the shop running out of helmets, so we took the minibus instead.', 0.96)">▶ Play</button>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 2 Abandoned" data-answer="Renting bicycles">
+                    <option value="">Select trap...</option>
+                    <option value="Renting bicycles">Renting bicycles</option>
+                    <option value="Taking the minibus">Taking the minibus</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 2 Reality" data-answer="Taking the minibus">
+                    <option value="">Select reality...</option>
+                    <option value="Renting bicycles">Renting bicycles</option>
+                    <option value="Taking the minibus">Taking the minibus</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <b class="mono">SIGNAL 03</b><br>
+                  <button type="button" class="btn-brass" style="padding: 5px 10px; font-size: 11px; margin-top: 6px;" onclick="playSingleUtterance('The ground floor was meant to become a coffee bar, whereas students voted to make it a quiet reading room.', 0.96)">▶ Play</button>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 3 Abandoned" data-answer="Coffee bar">
+                    <option value="">Select trap...</option>
+                    <option value="Coffee bar">Coffee bar</option>
+                    <option value="Quiet reading room">Quiet reading room</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 3 Reality" data-answer="Quiet reading room">
+                    <option value="">Select reality...</option>
+                    <option value="Coffee bar">Coffee bar</option>
+                    <option value="Quiet reading room">Quiet reading room</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <b class="mono">SIGNAL 04</b><br>
+                  <button type="button" class="btn-brass" style="padding: 5px 10px; font-size: 11px; margin-top: 6px;" onclick="playSingleUtterance('Entry was supposed to cost twenty pounds, yet student card holders get in free of charge today.', 0.96)">▶ Play</button>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 4 Abandoned" data-answer="£20 entry fee">
+                    <option value="">Select trap...</option>
+                    <option value="£20 entry fee">£20 entry fee</option>
+                    <option value="Free entry with student card">Free entry with student card</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 4 Reality" data-answer="Free entry with student card">
+                    <option value="">Select reality...</option>
+                    <option value="£20 entry fee">£20 entry fee</option>
+                    <option value="Free entry with student card">Free entry with student card</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <b class="mono">SIGNAL 05</b><br>
+                  <button type="button" class="btn-brass" style="padding: 5px 10px; font-size: 11px; margin-top: 6px;" onclick="playSingleUtterance('Dr. Patel was going to run the coastal seminar, although a flight delay meant Dr. Collins led the group.', 0.96)">▶ Play</button>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 5 Abandoned" data-answer="Dr. Patel">
+                    <option value="">Select trap...</option>
+                    <option value="Dr. Patel">Dr. Patel</option>
+                    <option value="Dr. Collins">Dr. Collins</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="ink-select" style="width: 100%;" data-question="Decoder 5 Reality" data-answer="Dr. Collins">
+                    <option value="">Select reality...</option>
+                    <option value="Dr. Patel">Dr. Patel</option>
+                    <option value="Dr. Collins">Dr. Collins</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button type="button" class="btn-brass" onclick="checkSelectGroup('liveDecoderTable', 'scoreStage4')">Check Decoder Log</button>
+        <span class="score-readout" id="scoreStage4"></span>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 5 (18 MIN): FULL IELTS LISTENING PART 2 SIMULATION          -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage5">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter V · IELTS Listening Part 2 Simulation</span>
+          <span class="duration-badge">18 MIN</span>
+        </div>
+        <h2>Part 2: Ashbourne Botanical Park &amp; Visitor Briefing (Q1–Q10)</h2>
+        <p class="sheet-lead">Listen to the park ranger's briefing and answer Questions 1–5 (Multiple Choice) and Questions 6–10 (Facility Matching).</p>
+
+        <div class="signal-console">
+          <div class="console-buttons">
+            <button type="button" class="btn-brass" onclick="playPart2Monologue(1.0)">▶ Play Part 2 (1.0x)</button>
+            <button type="button" class="btn-parchment" onclick="playPart2Monologue(0.84)">🐢 Slow (0.84x)</button>
+            <button type="button" class="btn-parchment" onclick="pauseLessonAudio()">Ⅱ Pause</button>
+            <button type="button" class="btn-parchment" onclick="stopLessonAudio()">■ Stop</button>
+            <button type="button" class="btn-parchment" onclick="document.getElementById('part2TranscriptBox').classList.toggle('open')">Transcript</button>
+          </div>
+          <div class="console-status" id="part2AudioReadout">SIGNAL STANDBY // Part 2 Monologue (Q1–Q10)</div>
+
+          <div class="transcript-sheet" id="part2TranscriptBox">
+            <p style="margin-bottom: 10px;">“Good morning, everyone, and welcome to Ashbourne Botanical Park! Before we set off, here are a few important updates. <span class="tag-trap">We were supposed to meet at the Main Gate at ten o'clock</span>, <span class="tag-truth">although drainage repairs have closed that entrance this week, so we are gathering beside the Conservatory instead</span>.</p>
+            <p style="margin-bottom: 10px;">Many visitors asked about hiring electric park scooters today. <span class="tag-trap">The park was going to introduce thirty electric scooters this spring</span>, <span class="tag-truth">despite battery delivery delays. Whereas electric scooters arrive next month, standard push-bikes are available to rent right now</span> at the cycle kiosk.</p>
+            <p style="margin-bottom: 10px;">Also, the afternoon tree-identification walk has moved. <span class="tag-trap">It was meant to begin in the Oak Glade</span>, <span class="tag-truth">yet over eighty guests joined, so we shifted it to the wider Meadow Trail</span>. And if you want a printed park guide, <span class="tag-trap">we were going to hand them out free at the ticket booth</span>, <span class="tag-truth">though printing costs meant they are now two pounds at the gift shop</span>.</p>
+            <p style="margin-bottom: 10px;">For buses returning to the town centre, <span class="tag-trap">route 14 was supposed to run every fifteen minutes all afternoon</span>, <span class="tag-truth">whereas roadwork on Mill Lane means buses run every thirty minutes from the South Stop</span>.</p>
+            <p style="margin-bottom: 0;">Finally, let's check five park areas on your map. <span class="tag-trap">The Palm House was meant to close at four o'clock</span>, <span class="tag-truth">although summer hours keep it open until seven</span>. <span class="tag-trap">The Alpine House was going to hold a seed exhibition</span>, <span class="tag-truth">whereas it is currently undergoing glass restoration</span>. Near the lake, <span class="tag-truth">despite narrow paths, volunteers lead morning bird-watching walks</span>. <span class="tag-trap">The Lakeside Café was supposed to serve hot meals all day</span>, <span class="tag-truth">yet today it offers cold wraps and drinks only</span>. And in the Orchard Yard, <span class="tag-trap">which was meant to be a parking bay</span>, <span class="tag-truth">we now host outdoor sculpture displays</span>.”</p>
+          </div>
+        </div>
+
+        <!-- Q1-Q5 Multiple Choice -->
+        <div class="exercise-frame" id="p2McqGroup">
+          <h3>Questions 1–5 · Multiple Choice (A, B, or C)</h3>
+
+          <div class="ielts-mcq-card" data-question="Part 2 Q1" data-answer="C">
+            <div class="ielts-q-stem">1. Where are visitors meeting for the briefing?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> At the Main Gate</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> At the ticket booth</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Beside the Conservatory</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> <span class="tag-trap">“were supposed to meet at the Main Gate”</span> is cancelled due to drainage repairs; the real meeting point is <span class="tag-truth">beside the Conservatory</span> (C).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 2 Q2" data-answer="B">
+            <div class="ielts-q-stem">2. What can visitors rent at the cycle kiosk today?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Electric park scooters</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Standard push-bikes</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Tandem bikes for four people</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> Electric scooters are delayed until next month; <span class="tag-truth">standard push-bikes</span> are available now (B).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 2 Q3" data-answer="A">
+            <div class="ielts-q-stem">3. Why was the tree-identification walk moved to the Meadow Trail?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> More than eighty visitors joined the group.</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Tree branches fell across the Oak Glade.</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> The walk was rescheduled for tomorrow.</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> <span class="tag-trap">“was meant to begin in the Oak Glade”</span> changed because <span class="tag-truth">over eighty guests joined</span> (A).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 2 Q4" data-answer="B">
+            <div class="ielts-q-stem">4. How much does a printed park guide cost at the gift shop?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Free of charge</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> £2</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> £5</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> They <span class="tag-trap">were going to be free</span> at the ticket booth, but are now <span class="tag-truth">£2</span> at the gift shop (B).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 2 Q5" data-answer="C" style="margin-bottom: 0;">
+            <div class="ielts-q-stem">5. How often do route 14 buses leave the South Stop this afternoon?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Every 15 minutes</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Every 20 minutes</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Every 30 minutes</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> <span class="tag-trap">Every 15 minutes</span> was the old schedule; <span class="tag-truth">whereas</span> roadworks mean buses run <span class="tag-truth">every 30 minutes</span> (C).</div>
+          </div>
+        </div>
+
+        <!-- Q6-Q10 Facility Matching -->
+        <div class="exercise-frame" id="p2MatchGroup" style="margin-bottom: 14px;">
+          <h3>Questions 6–10 · Matching Park Areas (A–G)</h3>
+          <div class="key-legend">
+            <div><b>A.</b> Closed for glass restoration</div>
+            <div><b>B.</b> Serving cold wraps and drinks only</div>
+            <div><b>C.</b> Displaying outdoor sculptures</div>
+            <div><b>D.</b> Open until seven o'clock</div>
+            <div><b>E.</b> Used as a car park</div>
+            <div><b>F.</b> Starting point for bird-watching walks</div>
+            <div><b>G.</b> Hosting a seed exhibition</div>
+          </div>
+
+          <div class="row-card row-flex">
+            <span><b>6.</b> Palm House</span>
+            <select class="ink-select" data-question="Part 2 Q6" data-answer="D">
+              <option value="">Select A–G...</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span><b>7.</b> Alpine House</span>
+            <select class="ink-select" data-question="Part 2 Q7" data-answer="A">
+              <option value="">Select A–G...</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span><b>8.</b> Area near the lake</span>
+            <select class="ink-select" data-question="Part 2 Q8" data-answer="F">
+              <option value="">Select A–G...</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span><b>9.</b> Lakeside Café</span>
+            <select class="ink-select" data-question="Part 2 Q9" data-answer="B">
+              <option value="">Select A–G...</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </div>
+          <div class="row-card row-flex" style="margin-bottom: 0;">
+            <span><b>10.</b> Orchard Yard</span>
+            <select class="ink-select" data-question="Part 2 Q10" data-answer="C">
+              <option value="">Select A–G...</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" class="btn-forest" onclick="scorePart2Section()">Score Part 2 (Q1–10) &amp; Reveal Notes</button>
+        <span class="score-readout" id="scorePart2"></span>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 6 (12 MIN): FULL IELTS LISTENING PART 3 SIMULATION          -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage6">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter VI · IELTS Listening Part 3 Simulation</span>
+          <span class="duration-badge">12 MIN</span>
+        </div>
+        <h2>Part 3: Urban Commuting Research Tutorial (Q11–Q18)</h2>
+        <p class="sheet-lead">Listen to three voices — <b>Sarah</b>, <b>Leo</b>, and <b>Dr. Evans</b> — planning a study on city commuting habits. Answer Questions 11–18.</p>
+
+        <div class="signal-console">
+          <div class="console-buttons">
+            <button type="button" class="btn-brass" onclick="playPart3Dialogue(1.0)">▶ Play Part 3 (1.0x)</button>
+            <button type="button" class="btn-parchment" onclick="playPart3Dialogue(0.84)">🐢 Slow (0.84x)</button>
+            <button type="button" class="btn-parchment" onclick="pauseLessonAudio()">Ⅱ Pause</button>
+            <button type="button" class="btn-parchment" onclick="stopLessonAudio()">■ Stop</button>
+            <button type="button" class="btn-parchment" onclick="document.getElementById('part3TranscriptBox').classList.toggle('open')">Transcript</button>
+          </div>
+          <div class="console-status" id="part3AudioReadout">SIGNAL STANDBY // Three-Speaker Academic Discussion (Q11–Q18)</div>
+
+          <div class="transcript-sheet" id="part3TranscriptBox">
+            <p style="margin-bottom: 8px;"><b>Dr. Evans:</b> Good afternoon, Sarah and Leo. Tell me how your urban commuting project is shaping up.</p>
+            <p style="margin-bottom: 8px;"><b>Sarah:</b> Afternoon, Dr. Evans. <span class="tag-trap">We were going to focus on electric scooters</span>, <span class="tag-truth">although we found out another group is already surveying scooter riders, so we switched to commuter rail delays instead</span>.</p>
+            <p style="margin-bottom: 8px;"><b>Dr. Evans:</b> Smart move. How will you gather responses?</p>
+            <p style="margin-bottom: 8px;"><b>Leo:</b> <span class="tag-truth">I prefer short platform interviews, whereas Sarah wants to run a digital poll</span> so we can reach more commuters quickly.</p>
+            <p style="margin-bottom: 8px;"><b>Dr. Evans:</b> Both can work if your sample is realistic. <span class="tag-trap">You were supposed to collect 250 responses by Friday</span>, <span class="tag-truth">though with only four days left, aiming for 75 commuters is much more realistic</span>.</p>
+            <p style="margin-bottom: 8px;"><b>Sarah:</b> Agreed. Yesterday we tested a draft questionnaire. <span class="tag-trap">It was meant to take four minutes</span>, <span class="tag-truth">whereas participants averaged nine minutes because the wording was too long</span>.</p>
+            <p style="margin-bottom: 0;"><b>Leo:</b> <span class="tag-truth">Despite the extra editing work, we will cut the survey to eight short questions</span> before sending it out, and <span class="tag-truth">we will present our results as a slide deck rather than a printed booklet</span>.</p>
+          </div>
+        </div>
+
+        <!-- Q11-Q14 Multiple Choice -->
+        <div class="exercise-frame" id="p3McqGroup">
+          <h3>Questions 11–14 · Multiple Choice (A, B, or C)</h3>
+
+          <div class="ielts-mcq-card" data-question="Part 3 Q11" data-answer="B">
+            <div class="ielts-q-stem">11. Why did Sarah and Leo change their research topic?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Commuter rail services were on strike.</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Another group was already studying electric scooters.</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Dr. Evans asked them to stop all fieldwork.</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> <span class="tag-trap">Electric scooters</span> was the initial idea, but another group already took it; they switched to <span class="tag-truth">commuter rail delays</span> (B).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 3 Q12" data-answer="C">
+            <div class="ielts-q-stem">12. How do Leo and Sarah's initial research preferences contrast?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Leo wanted a digital poll, whereas Sarah wanted paper forms.</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Sarah wanted phone calls, whereas Leo wanted email surveys.</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Leo favoured platform interviews, whereas Sarah wanted a digital poll.</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> Leo liked <span class="tag-truth">platform interviews</span>, <span class="tag-truth">whereas</span> Sarah preferred a <span class="tag-truth">digital poll</span> (C).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 3 Q13" data-answer="A">
+            <div class="ielts-q-stem">13. Why did the draft questionnaire take longer than expected?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> The wording of the questions was too long.</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> The survey website crashed on mobile phones.</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Participants could not read the small print.</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> <span class="tag-trap">“was meant to take four minutes”</span>; it took nine because <span class="tag-truth">the wording was too long</span> (A).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="Part 3 Q14" data-answer="B" style="margin-bottom: 0;">
+            <div class="ielts-q-stem">14. How will they present their final results?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> As a printed booklet</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> As a slide deck</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> As a radio documentary</div>
+            </div>
+            <div class="diagnostic-box"><b>Trap vs. Truth:</b> They will use a <span class="tag-truth">slide deck</span> rather than a printed booklet (B).</div>
+          </div>
+        </div>
+
+        <!-- Q15-Q18 Summary Completion -->
+        <div class="exercise-frame" id="p3GapGroup" style="margin-bottom: 14px;">
+          <h3>Questions 15–18 · Summary Completion (NO MORE THAN TWO WORDS AND/OR A NUMBER)</h3>
+          <div class="row-card">15. Updated research topic: <input type="text" class="ink-input" style="width: 215px;" data-question="Part 3 Q15" data-answer="commuter rail delays" placeholder="up to 2 words..." /></div>
+          <div class="row-card">16. Realistic target number of participants: <input type="text" class="ink-input" style="width: 140px;" data-question="Part 3 Q16" data-answer="75|seventy-five|seventy five" placeholder="number..." /></div>
+          <div class="row-card">17. Average completion time in pilot test: <input type="text" class="ink-input" style="width: 170px;" data-question="Part 3 Q17" data-answer="nine minutes|9 minutes" placeholder="time..." /></div>
+          <div class="row-card" style="margin-bottom: 0;">18. Revised number of survey questions: <input type="text" class="ink-input" style="width: 150px;" data-question="Part 3 Q18" data-answer="eight|8" placeholder="number..." /></div>
+        </div>
+
+        <button type="button" class="btn-forest" onclick="scorePart3Section()">Score Part 3 (Q11–18) &amp; Reveal Notes</button>
+        <span class="score-readout" id="scorePart3"></span>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 7 (8 MIN): SPEAKING TRANSFER                                 -->
+      <!-- ================================================================= -->
+      <section class="parchment-sheet" id="stage7">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Chapter VII · IELTS Speaking Part 2 &amp; Part 3 Transfer</span>
+          <span class="duration-badge">08 MIN</span>
+        </div>
+        <h2>Speaking Production: Narrating a Changed Plan</h2>
+        <p class="sheet-lead">Use the cue card below with the 60-second preparation clock and 120-second speaking clock, then answer the Part 3 follow-ups.</p>
+
+        <div class="speaking-layout">
+          <div class="brass-cue-card">
+            <span class="mono-formula">IELTS SPEAKING PART 2</span>
+            <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 25px; color: var(--ink-dark); margin: 4px 0 10px;">Describe a time when your original plan changed unexpectedly.</h3>
+            <p style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">You should say:</p>
+            <ul style="padding-left: 20px; font-size: 14px; line-height: 1.75;">
+              <li>what you <b>were going to do</b> or <b>were supposed to do</b></li>
+              <li>what happened to disrupt the plan (<b>although / despite</b>)</li>
+              <li>how the new plan compared with the old one (<b>whereas</b>)</li>
+              <li>and how you felt about the result.</li>
+            </ul>
+
+            <div class="clock-controls">
+              <span class="digital-clock" id="speakingClockDisplay">01:00</span>
+              <button type="button" class="btn-parchment" onclick="runSpeakingClock(60)">⏱ 60s Prep</button>
+              <button type="button" class="btn-brass" onclick="runSpeakingClock(120)">🎙️ 120s Speak</button>
+              <button type="button" class="btn-parchment" onclick="resetSpeakingClock()">Reset</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="exercise-frame" style="margin-bottom: 14px;">
+              <h3>Part 3 Follow-Up Questions</h3>
+              <ol style="padding-left: 18px; font-size: 14px; line-height: 1.75;">
+                <li>Why do some people stay calm when schedules shift, <b>whereas</b> others feel frustrated?</li>
+                <li>Do apps and digital alerts prevent travel surprises, <b>despite</b> sudden delays?</li>
+                <li>When working in a team, is flexibility more valuable than a rigid timetable?</li>
+              </ol>
+            </div>
+
+            <label style="font-size: 13.5px; font-weight: 700; display: block; margin-bottom: 6px;">Key Outline Notes:</label>
+            <textarea class="ink-textarea" rows="4" data-question="Stage 7 Speaking Outline" placeholder="• Initial plan: We were supposed to...&#10;• Disruption: Although... / Despite...&#10;• Contrast &amp; outcome: Whereas..."></textarea>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- VIEW II: FIELD HOMEWORK (4 STRUCTURED CONSOLIDATION TASKS)          -->
+    <!-- =================================================================== -->
+    <div id="panel-homework" class="view-panel">
+
+      <section class="essay-hero">
+        <div class="hero-kicker">Chapter II · Self-Study Field Assignment</div>
+        <h1>Field Homework: <em>Trap Elimination, Contrast &amp; Part 2</em></h1>
+        <p class="hero-subtitle">Complete all four tasks below. Every response is tracked automatically for your teacher via <b>tracker.js</b>.</p>
+        <div class="hero-meta-strip">
+          <span class="meta-chip">✎ TASK 1: LINKER &amp; PARAPHRASE GAP-FILL</span>
+          <span class="meta-chip">🔄 TASK 2: FUTURE IN THE PAST TRANSFORMATIONS</span>
+          <span class="meta-chip">🎧 TASK 3: MINI-LISTENING DISTRACTOR CHECK</span>
+          <span class="meta-chip">📝 TASK 4: IELTS RESPONSE</span>
+        </div>
+      </section>
+
+      <!-- HW TASK 1 -->
+      <section class="parchment-sheet">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Homework Task 01 · Contrast Linkers &amp; Paraphrase Gap-Fills</span>
+          <span class="duration-badge">8 ITEMS</span>
+        </div>
+        <h2>Complete Each Sentence Accurately</h2>
+        <p class="sheet-lead">Select the option that fits both the meaning and the grammar after the gap.</p>
+
+        <div class="exercise-frame" id="hwTask1Group" style="margin-bottom: 0;">
+          <div class="row-card row-flex">
+            <span>1. _____ the heavy rain on the coast, the ferry departed on time.</span>
+            <select class="ink-select" data-question="HW1 Q1" data-answer="Despite">
+              <option value="">Choose...</option>
+              <option value="Although">Although</option>
+              <option value="Despite">Despite</option>
+              <option value="Whereas">Whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>2. The lecture _____ start at ten, though a train delay pushed it back.</span>
+            <select class="ink-select" data-question="HW1 Q2" data-answer="was supposed to">
+              <option value="">Choose...</option>
+              <option value="was supposed to">was supposed to</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>3. Morning sessions are quiet, _____ afternoon workshops are very interactive.</span>
+            <select class="ink-select" data-question="HW1 Q3" data-answer="whereas">
+              <option value="">Choose...</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+              <option value="meant to">meant to</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>4. In spite of _____ a map, we missed the side entrance.</span>
+            <select class="ink-select" data-question="HW1 Q4" data-answer="having">
+              <option value="">Choose...</option>
+              <option value="we had">we had</option>
+              <option value="having">having</option>
+              <option value="have">have</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>5. _____ the museum was crowded, the exhibition felt well organized.</span>
+            <select class="ink-select" data-question="HW1 Q5" data-answer="Although">
+              <option value="">Choose...</option>
+              <option value="Although">Although</option>
+              <option value="Despite">Despite</option>
+              <option value="In spite of">In spite of</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>6. They _____ film outdoors, but strong wind moved the shoot inside.</span>
+            <select class="ink-select" data-question="HW1 Q6" data-answer="were going to">
+              <option value="">Choose...</option>
+              <option value="were going to">were going to</option>
+              <option value="although">although</option>
+              <option value="whereas">whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex">
+            <span>7. The north hall was _____ be a café, yet it opened as a gallery.</span>
+            <select class="ink-select" data-question="HW1 Q7" data-answer="meant to">
+              <option value="">Choose...</option>
+              <option value="meant to">meant to</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+            </select>
+          </div>
+          <div class="row-card row-flex" style="margin-bottom: 14px;">
+            <span>8. The café was noisy; the coffee was worth the visit, _____.</span>
+            <select class="ink-select" data-question="HW1 Q8" data-answer="though">
+              <option value="">Choose...</option>
+              <option value="despite">despite</option>
+              <option value="whereas">whereas</option>
+              <option value="though">though</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-brass" onclick="checkSelectGroup('hwTask1Group', 'hwScore1')">Check Task 1</button>
+          <span class="score-readout" id="hwScore1"></span>
+        </div>
+      </section>
+
+      <!-- HW TASK 2 -->
+      <section class="parchment-sheet">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Homework Task 02 · Future in the Past Transformations</span>
+          <span class="duration-badge">6 ITEMS</span>
+        </div>
+        <h2>Rewrite Using Future in the Past or Contrast</h2>
+        <p class="sheet-lead">Type the exact missing words in each transformation.</p>
+
+        <div class="exercise-frame" id="hwTask2Group" style="margin-bottom: 0;">
+          <div class="row-card" data-diag="Use 'was supposed to' + base verb ('arrive').">
+            <div>1. The bus was scheduled to arrive at 8:45, but traffic slowed it down. <b>(SUPPOSED)</b></div>
+            <div style="margin-top: 6px;">→ The bus <input type="text" class="ink-input" data-question="HW2 T1" data-answer="was supposed to arrive" placeholder="was..." /> at 8:45.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+          <div class="row-card" data-diag="Use 'Despite' + noun phrase ('the delay').">
+            <div>2. Although there was a delay, everyone stayed for the talk. <b>(DESPITE)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ink-input" data-question="HW2 T2" data-answer="Despite the delay" placeholder="Despite..." /> , everyone stayed for the talk.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+          <div class="row-card" data-diag="Use 'were going to' + base verb ('visit').">
+            <div>3. We intended to visit the observatory, but it was closed. <b>(GOING TO)</b></div>
+            <div style="margin-top: 6px;">→ We <input type="text" class="ink-input" data-question="HW2 T3" data-answer="were going to visit" placeholder="were..." /> the observatory.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+          <div class="row-card" data-diag="Use 'was meant to' + base verb ('be').">
+            <div>4. Planners originally intended the room to be a studio. <b>(MEANT)</b></div>
+            <div style="margin-top: 6px;">→ The room <input type="text" class="ink-input" data-question="HW2 T4" data-answer="was meant to be" placeholder="was..." /> a studio.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+          <div class="row-card" data-diag="Use 'whereas' to connect the two contrasting clauses.">
+            <div>5. Group A uses surveys. Group B uses interviews. <b>(WHEREAS)</b></div>
+            <div style="margin-top: 6px;">→ Group A uses surveys, <input type="text" class="ink-input" data-question="HW2 T5" data-answer="whereas group b uses" placeholder="whereas..." /> interviews.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+          <div class="row-card" data-diag="Use 'Although' before a full subject + verb clause." style="margin-bottom: 14px;">
+            <div>6. Despite feeling tired, Maya finished her notes. <b>(ALTHOUGH)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ink-input" style="width: 240px;" data-question="HW2 T6" data-answer="Although she felt tired" placeholder="Although..." /> , Maya finished her notes.</div>
+            <div class="diagnostic-box"></div>
+          </div>
+
+          <button type="button" class="btn-brass" onclick="checkTransformGroup('hwTask2Group', 'hwScore2')">Check Task 2</button>
+          <span class="score-readout" id="hwScore2"></span>
+        </div>
+      </section>
+
+      <!-- HW TASK 3 -->
+      <section class="parchment-sheet">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Homework Task 03 · Mini-Listening Distractor Check</span>
+          <span class="duration-badge">4 ITEMS</span>
+        </div>
+        <h2>Harbour Heritage Centre Update</h2>
+        <p class="sheet-lead">Listen to the short audio notice and select the confirmed answer for each question.</p>
+
+        <div class="signal-console">
+          <div class="console-buttons">
+            <button type="button" class="btn-brass" onclick="playHwNoticeAudio(1.0)">▶ Play Notice (1.0x)</button>
+            <button type="button" class="btn-parchment" onclick="playHwNoticeAudio(0.84)">🐢 Slow (0.84x)</button>
+            <button type="button" class="btn-parchment" onclick="pauseLessonAudio()">Ⅱ Pause</button>
+            <button type="button" class="btn-parchment" onclick="stopLessonAudio()">■ Stop</button>
+            <button type="button" class="btn-parchment" onclick="document.getElementById('hwNoticeTranscript').classList.toggle('open')">Transcript</button>
+          </div>
+          <div class="console-status" id="hwNoticeStatus">SIGNAL STANDBY // Harbour Heritage Centre Notice</div>
+          <div class="transcript-sheet" id="hwNoticeTranscript">
+            <p style="margin-bottom: 0;">“Good afternoon. <span class="tag-trap">The boat trip was supposed to leave at three o'clock</span>, <span class="tag-truth">although strong breeze moved departure to four o'clock</span>. <span class="tag-trap">We were going to hold the talk in the courtyard</span>, <span class="tag-truth">whereas the forecast of rain moved it to the Boathouse</span>. <span class="tag-truth">Despite the dock repair</span>, visitors can board from the east steps, and <span class="tag-truth">printed maps are free today, whereas audio headsets cost three pounds</span>.”</p>
+          </div>
+        </div>
+
+        <div class="exercise-frame" id="hwTask3Group" style="margin-bottom: 14px;">
+          <div class="ielts-mcq-card" data-question="HW3 Q1" data-answer="B">
+            <div class="ielts-q-stem">1. What time does the boat trip leave now?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Three o'clock</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Four o'clock</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Five o'clock</div>
+            </div>
+            <div class="diagnostic-box"><b>Signal Note:</b> <span class="tag-trap">Three o'clock</span> was the original time; <span class="tag-truth">four o'clock</span> is the updated departure time (B).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="HW3 Q2" data-answer="C">
+            <div class="ielts-q-stem">2. Where will the talk take place?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> In the courtyard</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> On the west pier</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> In the Boathouse</div>
+            </div>
+            <div class="diagnostic-box"><b>Signal Note:</b> Rain shifted the talk from the courtyard to <span class="tag-truth">the Boathouse</span> (C).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="HW3 Q3" data-answer="A">
+            <div class="ielts-q-stem">3. Where can visitors board the boat?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> From the east steps</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> From the main dock</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> From the lighthouse pier</div>
+            </div>
+            <div class="diagnostic-box"><b>Signal Note:</b> Despite dock repairs, boarding is from <span class="tag-truth">the east steps</span> (A).</div>
+          </div>
+
+          <div class="ielts-mcq-card" data-question="HW3 Q4" data-answer="B" style="margin-bottom: 0;">
+            <div class="ielts-q-stem">4. How much do audio headsets cost?</div>
+            <div class="ielts-opt-list">
+              <div class="ielts-opt" data-val="A" onclick="pickIeltsOpt(this)"><span class="letter-badge">A</span> Free</div>
+              <div class="ielts-opt" data-val="B" onclick="pickIeltsOpt(this)"><span class="letter-badge">B</span> Three pounds</div>
+              <div class="ielts-opt" data-val="C" onclick="pickIeltsOpt(this)"><span class="letter-badge">C</span> Five pounds</div>
+            </div>
+            <div class="diagnostic-box"><b>Signal Note:</b> Printed maps are free, <span class="tag-truth">whereas</span> audio headsets cost <span class="tag-truth">three pounds</span> (B).</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-forest" onclick="scoreHwMiniListening()">Check Task 3 &amp; Reveal Notes</button>
+        <span class="score-readout" id="hwScore3"></span>
+      </section>
+
+      <!-- HW TASK 4 -->
+      <section class="parchment-sheet">
+        <div class="sheet-top-bar">
+          <span class="stage-label">Homework Task 04 · IELTS-Style Written Response</span>
+          <span class="duration-badge">100–130 WORDS</span>
+        </div>
+        <h2>Write About a Plan That Changed</h2>
+        <p class="sheet-lead">Write a short response describing a plan that changed and what happened instead. Try to include at least one Future in the Past form and one contrast linker (<i>although, despite, whereas</i>).</p>
+
+        <div class="exercise-frame" style="margin-bottom: 0;">
+          <textarea id="hwFinalResponse" class="ink-textarea" rows="5" data-question="HW4 IELTS Response" placeholder="We were going to visit the science museum on Saturday, although the train line was closed for maintenance..."></textarea>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+    /* --- 1. VIEW MODE SWITCHING & SCROLL PROGRESS --- */
+    function switchViewMode(mode) {
+      stopLessonAudio();
+      document.querySelectorAll('.mode-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.panel === mode);
+      });
+      document.querySelectorAll('.view-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + mode);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      document.getElementById('progressBarFill').style.width = pct + '%';
+    });
+
+    /* --- 2. WEB SPEECH API AUDIO SYNTHESIS --- */
+    let activeTurnQueue = [];
+    let turnQueueRunning = false;
+
+    function fetchEnglishVoices() {
+      if (!('speechSynthesis' in window)) return [];
+      return window.speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => fetchEnglishVoices();
+    }
+
+    function stopLessonAudio() {
+      turnQueueRunning = false;
+      activeTurnQueue = [];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function pauseLessonAudio() {
+      if (!('speechSynthesis' in window)) return;
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      } else {
+        window.speechSynthesis.pause();
+      }
+    }
+
+    function playSingleUtterance(text, rate = 1.0, statusElementId = null) {
+      stopLessonAudio();
+      if (!('speechSynthesis' in window)) {
+        if (statusElementId) {
+          document.getElementById(statusElementId).textContent = 'AUDIO UNAVAILABLE // Open Transcript to read the script.';
+        }
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-GB';
+      utterance.rate = rate;
+      const voices = fetchEnglishVoices();
+      const preferred = voices.find(v => /en-GB/i.test(v.lang)) || voices[0];
+      if (preferred) utterance.voice = preferred;
+
+      if (statusElementId) {
+        document.getElementById(statusElementId).textContent = `PLAYING // ${rate}x speed`;
+        utterance.onend = () => {
+          document.getElementById(statusElementId).textContent = 'FINISHED // Replay or submit your answers.';
+        };
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function playSpeakerTurns(turns, rate, statusElementId) {
+      stopLessonAudio();
+      if (!('speechSynthesis' in window)) {
+        document.getElementById(statusElementId).textContent = 'AUDIO UNAVAILABLE // Open Transcript to read the script.';
+        return;
+      }
+      activeTurnQueue = turns.slice();
+      turnQueueRunning = true;
+      const voices = fetchEnglishVoices();
+      const femaleVoice = voices.find(v => /female|samantha|victoria|zira|hazel|serena|aria|jenny|libby/i.test(v.name)) || voices[0];
+      const maleVoice = voices.find(v => /male|daniel|david|george|mark|ryan|guy|tom|alex/i.test(v.name)) || voices[Math.min(1, voices.length - 1)];
+
+      function stepTurn() {
+        if (!turnQueueRunning || activeTurnQueue.length === 0) {
+          turnQueueRunning = false;
+          document.getElementById(statusElementId).textContent = 'FINISHED // Dialogue complete.';
+          return;
+        }
+        const [speaker, line] = activeTurnQueue.shift();
+        document.getElementById(statusElementId).textContent = `SPEAKING // ${speaker} (${rate}x)`;
+        const u = new SpeechSynthesisUtterance(line);
+        u.lang = 'en-GB';
+        u.rate = rate;
+        if (speaker === 'Sarah') {
+          if (femaleVoice) u.voice = femaleVoice;
+          u.pitch = 1.13;
+        } else if (speaker === 'Leo') {
+          if (maleVoice) u.voice = maleVoice;
+          u.pitch = 1.02;
+        } else {
+          if (maleVoice) u.voice = maleVoice;
+          u.pitch = 0.85;
+        }
+        u.onend = () => setTimeout(stepTurn, 160);
+        u.onerror = () => stepTurn();
+        window.speechSynthesis.speak(u);
+      }
+      stepTurn();
+    }
+
+    const part2MonologueScript = "Good morning, everyone, and welcome to Ashbourne Botanical Park! Before we set off, here are a few important updates. We were supposed to meet at the Main Gate at ten o'clock, although drainage repairs have closed that entrance this week, so we are gathering beside the Conservatory instead. Many visitors asked about hiring electric park scooters today. The park was going to introduce thirty electric scooters this spring, despite battery delivery delays. Whereas electric scooters arrive next month, standard push-bikes are available to rent right now at the cycle kiosk. Also, the afternoon tree-identification walk has moved. It was meant to begin in the Oak Glade, yet over eighty guests joined, so we shifted it to the wider Meadow Trail. And if you want a printed park guide, we were going to hand them out free at the ticket booth, though printing costs meant they are now two pounds at the gift shop. For buses returning to the town centre, route 14 was supposed to run every fifteen minutes all afternoon, whereas roadwork on Mill Lane means buses run every thirty minutes from the South Stop. Finally, let's check five park areas on your map. The Palm House was meant to close at four o'clock, although summer hours keep it open until seven. The Alpine House was going to hold a seed exhibition, whereas it is currently undergoing glass restoration. Near the lake, despite narrow paths, volunteers lead morning bird-watching walks. The Lakeside Café was supposed to serve hot meals all day, yet today it offers cold wraps and drinks only. And in the Orchard Yard, which was meant to be a parking bay, we now host outdoor sculpture displays.";
+
+    function playPart2Monologue(rate) {
+      playSingleUtterance(part2MonologueScript, rate, 'part2AudioReadout');
+    }
+
+    const part3DialogueScript = [
+      ['Dr. Evans', 'Good afternoon, Sarah and Leo. Tell me how your urban commuting project is shaping up.'],
+      ['Sarah', 'Afternoon, Dr. Evans. We were going to focus on electric scooters, although we found out another group is already surveying scooter riders, so we switched to commuter rail delays instead.'],
+      ['Dr. Evans', 'Smart move. How will you gather responses?'],
+      ['Leo', 'I prefer short platform interviews, whereas Sarah wants to run a digital poll so we can reach more commuters quickly.'],
+      ['Dr. Evans', 'Both can work if your sample is realistic. You were supposed to collect 250 responses by Friday, though with only four days left, aiming for 75 commuters is much more realistic.'],
+      ['Sarah', 'Agreed. Yesterday we tested a draft questionnaire. It was meant to take four minutes, whereas participants averaged nine minutes because the wording was too long.'],
+      ['Leo', 'Despite the extra editing work, we will cut the survey to eight short questions before sending it out, and we will present our results as a slide deck rather than a printed booklet.']
+    ];
+
+    function playPart3Dialogue(rate) {
+      playSpeakerTurns(part3DialogueScript, rate, 'part3AudioReadout');
+    }
+
+    const hwNoticeScript = "Good afternoon. The boat trip was supposed to leave at three o'clock, although strong breeze moved departure to four o'clock. We were going to hold the talk in the courtyard, whereas the forecast of rain moved it to the Boathouse. Despite the dock repair, visitors can board from the east steps, and printed maps are free today, whereas audio headsets cost three pounds.";
+
+    function playHwNoticeAudio(rate) {
+      playSingleUtterance(hwNoticeScript, rate, 'hwNoticeStatus');
+    }
+
+    /* --- 3. STAGE 1 MICRO-TRAP SELECTION --- */
+    function selectMicroTrap(cardId, btn, isConfirmedTruth) {
+      const card = document.getElementById(cardId);
+      card.querySelectorAll('.micro-btn').forEach(b => b.classList.remove('trap-picked', 'truth-picked'));
+      btn.classList.add(isConfirmedTruth ? 'truth-picked' : 'trap-picked');
+      card.querySelector('.diagnostic-box').classList.add('open');
+    }
+
+    /* --- 4. AUTO-GRADING HELPERS --- */
+    function checkSelectGroup(containerId, scoreId) {
+      const container = document.getElementById(containerId);
+      const selects = container.querySelectorAll('select[data-answer]');
+      let total = 0;
+      let right = 0;
+      selects.forEach(sel => {
+        total++;
+        const val = (sel.value || '').trim().toLowerCase();
+        const ans = sel.dataset.answer.toLowerCase();
+        sel.classList.remove('field-right', 'field-wrong');
+        if (!val) return;
+        if (val === ans) {
+          sel.classList.add('field-right');
+          right++;
+        } else {
+          sel.classList.add('field-wrong');
+        }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${right} / ${total} RIGHT`;
+      out.style.color = right === total ? '#2f6951' : '#cf5343';
+    }
+
+    function checkTransformGroup(containerId, scoreId) {
+      const container = document.getElementById(containerId);
+      const rows = container.querySelectorAll('.row-card');
+      let total = 0;
+      let right = 0;
+      rows.forEach(row => {
+        const input = row.querySelector('input[data-answer]');
+        const diag = row.querySelector('.diagnostic-box');
+        if (!input) return;
+        total++;
+        const cleanVal = (input.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const accepted = input.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        input.classList.remove('field-right', 'field-wrong');
+        if (diag) diag.classList.add('open');
+
+        if (cleanVal && accepted.includes(cleanVal)) {
+          input.classList.add('field-right');
+          right++;
+          if (diag) diag.innerHTML = `✓ <b>Accurate:</b> ${row.dataset.diag || 'Good structure.'}`;
+        } else {
+          input.classList.add('field-wrong');
+          if (diag) diag.innerHTML = `✗ <b>Expected:</b> <i>${input.dataset.answer.split('|')[0]}</i> — ${row.dataset.diag || ''}`;
+        }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${right} / ${total} RIGHT`;
+      out.style.color = right === total ? '#2f6951' : '#cf5343';
+    }
+
+    /* --- 5. IELTS MCQ & SIMULATION SCORING --- */
+    function pickIeltsOpt(optElement) {
+      const card = optElement.closest('.ielts-mcq-card');
+      card.querySelectorAll('.ielts-opt').forEach(el => el.classList.remove('selected'));
+      optElement.classList.add('selected');
+      card.dataset.userAns = optElement.dataset.val;
+    }
+
+    function evaluateMcqList(listId) {
+      const cards = document.querySelectorAll(`#${listId} .ielts-mcq-card`);
+      let total = 0;
+      let right = 0;
+      cards.forEach(card => {
+        total++;
+        const correctLetter = card.dataset.answer;
+        const chosenLetter = card.dataset.userAns || '';
+        card.querySelectorAll('.ielts-opt').forEach(opt => {
+          opt.classList.remove('opt-right', 'opt-wrong');
+          if (opt.dataset.val === correctLetter) {
+            opt.classList.add('opt-right');
+          } else if (opt.dataset.val === chosenLetter && chosenLetter !== correctLetter) {
+            opt.classList.add('opt-wrong');
+          }
+        });
+        if (chosenLetter === correctLetter) right++;
+        const note = card.querySelector('.diagnostic-box');
+        if (note) note.classList.add('open');
+      });
+      return { total, right };
+    }
+
+    function scorePart2Section() {
+      const mcq = evaluateMcqList('p2McqGroup');
+      const matchSelects = document.querySelectorAll('#p2MatchGroup select[data-answer]');
+      let mTotal = 0;
+      let mRight = 0;
+      matchSelects.forEach(sel => {
+        mTotal++;
+        sel.classList.remove('field-right', 'field-wrong');
+        if (sel.value === sel.dataset.answer) {
+          sel.classList.add('field-right');
+          mRight++;
+        } else {
+          sel.classList.add('field-wrong');
+        }
+      });
+      const total = mcq.total + mTotal;
+      const right = mcq.right + mRight;
+      const badge = document.getElementById('scorePart2');
+      badge.textContent = `PART 2 SCORE: ${right} / ${total}`;
+      badge.style.color = right >= 7 ? '#2f6951' : '#cf5343';
+    }
+
+    function scorePart3Section() {
+      const mcq = evaluateMcqList('p3McqGroup');
+      const gapInputs = document.querySelectorAll('#p3GapGroup input[data-answer]');
+      let gTotal = 0;
+      let gRight = 0;
+      gapInputs.forEach(inp => {
+        gTotal++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('field-right', 'field-wrong');
+        if (val && valid.includes(val)) {
+          inp.classList.add('field-right');
+          gRight++;
+        } else {
+          inp.classList.add('field-wrong');
+        }
+      });
+      const total = mcq.total + gTotal;
+      const right = mcq.right + gRight;
+      const badge = document.getElementById('scorePart3');
+      badge.textContent = `PART 3 SCORE: ${right} / ${total}`;
+      badge.style.color = right >= 6 ? '#2f6951' : '#cf5343';
+    }
+
+    function scoreHwMiniListening() {
+      const mcq = evaluateMcqList('hwTask3Group');
+      const badge = document.getElementById('hwScore3');
+      badge.textContent = `SCORE: ${mcq.right} / ${mcq.total}`;
+      badge.style.color = mcq.right >= 3 ? '#2f6951' : '#cf5343';
+    }
+
+    /* --- 6. SPEAKING CLOCK --- */
+    let speakingClockHandle = null;
+
+    function runSpeakingClock(durationSec) {
+      clearInterval(speakingClockHandle);
+      let remaining = durationSec;
+      const readout = document.getElementById('speakingClockDisplay');
+      readout.style.color = '#ecc17a';
+
+      function paintClock() {
+        const mins = String(Math.floor(remaining / 60)).padStart(2, '0');
+        const secs = String(remaining % 60).padStart(2, '0');
+        readout.textContent = `${mins}:${secs}`;
+      }
+
+      paintClock();
+      speakingClockHandle = setInterval(() => {
+        remaining--;
+        paintClock();
+        if (remaining <= 10) readout.style.color = '#f59e8b';
+        if (remaining <= 0) {
+          clearInterval(speakingClockHandle);
+          readout.textContent = '00:00';
+        }
+      }, 1000);
+    }
+
+    function resetSpeakingClock() {
+      clearInterval(speakingClockHandle);
+      const readout = document.getElementById('speakingClockDisplay');
+      readout.textContent = '01:00';
+      readout.style.color = '#ecc17a';
+    }
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
