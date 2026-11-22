@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thrift &amp; Second-Hand Finds: Hidden Gems, Upcycling &amp; Smart Shopping | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Botanical Zine & Ceramic Studio Palette */
+      --oatmeal: #f4efe6;
+      --oatmeal-deep: #eae1d0;
+      --linen-card: #fffdf9;
+      --ceramic-warm: #fbf6ec;
+      --terracotta: #c85a32;
+      --terracotta-dark: #a64420;
+      --terracotta-soft: #fceee8;
+      --sage: #4f6d4e;
+      --sage-dark: #385137;
+      --sage-soft: #eaf2ea;
+      --ochre: #c6933a;
+      --ochre-soft: #fbf3e1;
+      --espresso: #1f2421;
+      --ink-muted: #5c635e;
+      --border-clay: 1.5px solid #dfd3bf;
+      --shadow-zine: 0 12px 30px rgba(31, 36, 33, 0.065);
+      --shadow-sticker: 3px 4px 0px #1f2421;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--oatmeal);
+      background-image:
+        radial-gradient(circle at 15% 12%, rgba(200, 90, 50, 0.07) 0%, transparent 42%),
+        radial-gradient(circle at 86% 76%, rgba(79, 109, 78, 0.08) 0%, transparent 45%),
+        radial-gradient(#d8ccb8 0.8px, transparent 0.8px);
+      background-size: 100% 100%, 100% 100%, 24px 24px;
+      color: var(--espresso);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+      padding-bottom: 96px;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP ZINE HEADER --- */
+    .zine-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 950;
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: var(--border-clay);
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 18px rgba(31, 36, 33, 0.04);
+    }
+
+    .brand-lockup { display: flex; align-items: center; gap: 10px; }
+    .brand-logo {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--espresso);
+      letter-spacing: -0.02em;
+    }
+    .brand-logo span { color: var(--terracotta); }
+
+    .level-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--sage-soft);
+      color: var(--sage-dark);
+      border: 1px solid #bfd3c5;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .mode-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--oatmeal-deep);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1.5px solid #d5c8b2;
+    }
+
+    .mode-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--terracotta);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(200, 90, 50, 0.28);
+    }
+
+    .tracker-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(31, 36, 33, 0.08);
+    }
+    .tracker-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--terracotta), var(--sage));
+      transition: width 0.16s ease;
+    }
+
+    /* --- CONTAINER & PANELS --- */
+    .zine-container { max-width: 1080px; margin: 28px auto 0; padding: 0 20px; }
+    .view-panel { display: none; animation: fadeUp 0.25s ease; }
+    .view-panel.active { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HERO ISSUE CARD --- */
+    .issue-hero {
+      background: linear-gradient(135deg, #fffdf9 0%, #f9efe2 100%);
+      border: 2px solid var(--espresso);
+      border-radius: 26px;
+      padding: 34px 36px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sticker);
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .issue-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta-dark);
+      background: var(--terracotta-soft);
+      border: 1px solid #ecc6b8;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .issue-hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 4.3vw, 44px);
+      font-weight: 800;
+      line-height: 1.08;
+      color: var(--espresso);
+      margin-bottom: 10px;
+    }
+    .issue-hero h1 em { color: var(--terracotta); font-style: italic; }
+    .issue-hero p { font-size: 15px; color: var(--ink-muted); margin-bottom: 16px; }
+
+    .issue-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .issue-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--linen-card);
+      color: var(--espresso);
+      border: 1.5px solid #d4c6b0;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .ceramic-badge-box {
+      background: var(--sage-soft);
+      border: 2px solid var(--sage-dark);
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-zine);
+    }
+
+    /* --- STAGE JUMP STRIP --- */
+    .stage-nav-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 24px;
+    }
+    .stage-jump-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--espresso);
+      background: var(--linen-card);
+      border: 1.5px solid #d5c7b2;
+      padding: 7px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .stage-jump-link:hover {
+      background: var(--terracotta);
+      color: #ffffff;
+      border-color: var(--terracotta);
+    }
+
+    /* --- ZINE SECTION CARDS --- */
+    .zine-card {
+      background: var(--linen-card);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 24px;
+      padding: 32px 34px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-zine);
+    }
+
+    .zine-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px dashed #e2d6c3;
+    }
+
+    .stage-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--terracotta-soft);
+      color: var(--terracotta-dark);
+      border: 1px solid #ecc6b8;
+    }
+    .stage-badge.sage { background: var(--sage-soft); color: var(--sage-dark); border-color: #bfd3c5; }
+    .stage-badge.ochre { background: var(--ochre-soft); color: #875e18; border-color: #e6cf9e; }
+
+    .focus-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--oatmeal-deep);
+      color: var(--espresso);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .zine-card h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(24px, 3.3vw, 33px);
+      font-weight: 800;
+      color: var(--espresso);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .zine-lead { font-size: 15px; color: var(--ink-muted); margin-bottom: 22px; }
+
+    /* --- STAGE 1: 4-ITEM POLL --- */
+    .poll-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .find-poll-card {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 20px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 6px 18px rgba(31, 36, 33, 0.04);
+    }
+
+    .find-art-frame {
+      background: #ffffff;
+      border: 1.5px solid #e4d8c5;
+      border-radius: 14px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .find-poll-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 4px;
+    }
+
+    .find-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--terracotta-dark);
+      background: var(--terracotta-soft);
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+
+    .poll-actions { display: flex; gap: 8px; }
+    .poll-btn {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid #cbbda7;
+      background: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--espresso);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .poll-btn:hover { border-color: var(--terracotta); }
+    .poll-btn.picked-buy { background: var(--sage); border-color: var(--sage-dark); color: #ffffff; }
+    .poll-btn.picked-pass { background: var(--terracotta); border-color: var(--terracotta-dark); color: #ffffff; }
+
+    .poll-note {
+      font-size: 12.5px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid #e2d7c5;
+      color: var(--ink-muted);
+      display: none;
+    }
+    .poll-note.shown { display: block; }
+
+    .speaking-prompts-panel {
+      background: var(--ochre-soft);
+      border: 1.5px solid #e3cb9b;
+      border-radius: 18px;
+      padding: 20px 24px;
+    }
+    .speaking-prompts-panel h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      color: var(--espresso);
+      margin-bottom: 8px;
+    }
+
+    /* --- STAGE 2: VOCABULARY MPF & WORD BANK --- */
+    .mpf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .mpf-card {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .mpf-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .mpf-word {
+      font-family: 'Fraunces', serif;
+      font-size: 18.5px;
+      font-weight: 800;
+      color: var(--espresso);
+    }
+
+    .speak-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--sage-soft);
+      color: var(--sage-dark);
+      border: 1px solid #b7cebe;
+      padding: 4px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .speak-btn:hover { background: var(--sage); color: #ffffff; }
+
+    .mpf-ipa { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted); }
+    .mpf-def { font-size: 13.5px; color: var(--espresso); }
+    .mpf-ex {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--ink-muted);
+      background: #ffffff;
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid #e6dccb;
+    }
+
+    .clickable-word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: var(--linen-card);
+      border: 1.5px dashed #cbbda7;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .bank-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+      background: var(--ceramic-warm);
+      color: var(--espresso);
+      border: 1.5px solid #cbbda7;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .bank-chip:hover {
+      background: var(--terracotta);
+      color: #ffffff;
+      border-color: var(--terracotta);
+      transform: translateY(-1px);
+    }
+
+    .match-panel, .sub-exercise {
+      background: var(--oatmeal-deep);
+      border: 1.5px solid #d5c7b2;
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+    }
+
+    .match-panel h3, .sub-exercise h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      color: var(--espresso);
+      margin-bottom: 12px;
+    }
+
+    .match-row {
+      background: var(--linen-card);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 13px;
+      padding: 11px 15px;
+      margin-bottom: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    /* --- STAGE 3: READING FEATURE --- */
+    .feature-story {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 20px;
+      padding: 26px 28px;
+      margin-bottom: 22px;
+    }
+
+    .feature-story h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--espresso);
+      margin-bottom: 6px;
+    }
+
+    .feature-byline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--terracotta-dark);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-story p { font-size: 15px; line-height: 1.78; margin-bottom: 12px; color: var(--espresso); }
+
+    /* --- STAGE 4: TOO VS. ENOUGH GRAMMAR LAB --- */
+    .discovery-strip {
+      background: var(--terracotta-soft);
+      border: 1.5px solid #ecc6b8;
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+
+    .quote-line {
+      background: #ffffff;
+      border-left: 4px solid var(--terracotta);
+      padding: 8px 13px;
+      border-radius: 9px;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .grammar-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .grammar-rule-card {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-top: 4px solid var(--terracotta);
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+    .grammar-rule-card.enough-card { border-top-color: var(--sage); }
+
+    .grammar-rule-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      color: var(--espresso);
+      margin-bottom: 6px;
+    }
+
+    .pattern-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--terracotta);
+      color: #ffffff;
+      padding: 2px 9px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .enough-card .pattern-pill { background: var(--sage); }
+
+    .ccq-box {
+      background: var(--sage-soft);
+      border: 1.5px solid #bfd3c5;
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .ccq-box h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 19px;
+      color: var(--sage-dark);
+      margin-bottom: 10px;
+    }
+
+    .gap-item {
+      background: var(--linen-card);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 13px;
+      padding: 12px 15px;
+      margin-bottom: 9px;
+      font-size: 14.5px;
+      line-height: 1.75;
+    }
+
+    .inline-explanation {
+      display: none;
+      margin-top: 6px;
+      padding: 7px 11px;
+      border-radius: 8px;
+      background: var(--ochre-soft);
+      color: var(--espresso);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .inline-explanation.shown { display: block; }
+
+    /* --- STAGE 5: LISTENING & ROLE-PLAY --- */
+    .audio-studio {
+      background: var(--sage-soft);
+      border: 2px solid var(--sage-dark);
+      border-radius: 20px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+
+    .audio-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    .audio-status-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sage-dark);
+      margin-top: 10px;
+    }
+
+    .transcript-box {
+      display: none;
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: #ffffff;
+      border: 1.5px dashed var(--sage);
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .transcript-box.open { display: block; }
+
+    /* ElevenLabs Live Generator Drawer inside Stage 5 */
+    .eleven-api-drawer {
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: #ffffff;
+      border: 1.5px solid #b7cebe;
+      border-radius: 14px;
+      font-size: 13.5px;
+    }
+    .eleven-api-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .eleven-key-input {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      padding: 7px 11px;
+      border: 1.5px solid #c7b8a1;
+      border-radius: 9px;
+      background: var(--ceramic-warm);
+      color: var(--espresso);
+      min-width: 240px;
+      flex: 1;
+    }
+
+    .mcq-card {
+      background: var(--linen-card);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .mcq-title { font-weight: 700; font-size: 14.5px; margin-bottom: 8px; color: var(--espresso); }
+    .mcq-opts { display: flex; flex-direction: column; gap: 6px; }
+    .mcq-opt {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1.5px solid #dfd3bf;
+      background: var(--ceramic-warm);
+      cursor: pointer;
+      font-size: 13.8px;
+      transition: all 0.14s ease;
+    }
+    .mcq-opt:hover { border-color: var(--sage); background: #ffffff; }
+    .mcq-opt.selected { border-color: var(--espresso); background: var(--oatmeal-deep); font-weight: 700; }
+    .mcq-opt.ans-ok { border-color: var(--sage-dark) !important; background: var(--sage-soft) !important; color: var(--sage-dark) !important; font-weight: 700; }
+    .mcq-opt.ans-bad { border-color: var(--terracotta-dark) !important; background: var(--terracotta-soft) !important; color: var(--terracotta-dark) !important; }
+
+    .opt-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--espresso);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .roleplay-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
+    .role-card {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+    .role-card h4 { font-family: 'Fraunces', serif; font-size: 20px; color: var(--terracotta-dark); margin-bottom: 8px; }
+
+    /* --- STAGE 6: CAPSULE BUILDER (€40 BUDGET) & SPEAKING TIMER --- */
+    .budget-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .capsule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .capsule-item {
+      background: var(--ceramic-warm);
+      border: 1.5px solid #dfd3bf;
+      border-radius: 16px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+    .capsule-item:hover { border-color: var(--sage); }
+    .capsule-item.selected-piece { background: var(--sage-soft); border: 2px solid var(--sage-dark); }
+
+    .timer-widget {
+      background: var(--ochre-soft);
+      border: 1.5px solid var(--ochre);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .clock-readout {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      background: var(--espresso);
+      color: var(--ochre-soft);
+      padding: 6px 14px;
+      border-radius: 10px;
+    }
+
+    /* --- BUTTONS & FORM CONTROLS --- */
+    .btn-terracotta, .btn-sage, .btn-light-outline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-terracotta { background: var(--terracotta); color: #ffffff; border: none; }
+    .btn-terracotta:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+    .btn-sage { background: var(--sage); color: #ffffff; border: none; }
+    .btn-sage:hover { background: var(--sage-dark); }
+    .btn-light-outline { background: #ffffff; color: var(--espresso); border: 1.5px solid #cbbda7; padding: 8px 14px; font-size: 13px; }
+    .btn-light-outline:hover { border-color: var(--terracotta); color: var(--terracotta-dark); }
+
+    select.zine-select, input.zine-input, textarea.zine-textarea {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border: 1.5px solid #c7b8a1;
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--espresso);
+      outline: none;
+    }
+    select.zine-select:focus, input.zine-input:focus, textarea.zine-textarea:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.16);
+    }
+    input.zine-input { width: 195px; }
+    textarea.zine-textarea { width: 100%; resize: vertical; }
+
+    .ok-state { border-color: var(--sage-dark) !important; background: var(--sage-soft) !important; color: var(--sage-dark) !important; font-weight: 700 !important; }
+    .bad-state { border-color: var(--terracotta-dark) !important; background: var(--terracotta-soft) !important; color: var(--terracotta-dark) !important; }
+
+    .score-label {
+      display: inline-block;
+      margin-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .issue-hero, .poll-grid, .grammar-cards-row, .roleplay-pair, .capsule-grid { grid-template-columns: 1fr; }
+      .zine-card { padding: 24px 18px; }
+      .issue-hero { padding: 24px 20px; }
+      .zine-topbar { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="zine-topbar">
+    <div class="brand-lockup">
+      <div class="brand-logo">ziz<span>.</span>english</div>
+      <span class="level-pill">A2–B1 • 60-Min Lesson</span>
+    </div>
+
+    <div class="mode-switcher">
+      <button type="button" class="mode-btn active" data-panel="lesson" onclick="switchMode('lesson')">🛍️ 60-Min Lesson</button>
+      <button type="button" class="mode-btn" data-panel="homework" onclick="switchMode('homework')">📝 Homework</button>
+    </div>
+
+    <div class="tracker-progress-bar">
+      <div class="tracker-progress-fill" id="progressFill"></div>
+    </div>
+  </header>
+
+  <div class="zine-container">
+
+    <!-- =================================================================== -->
+    <!-- PANEL 1: FULL 60-MINUTE INTERACTIVE LESSON                          -->
+    <!-- =================================================================== -->
+    <div id="panel-lesson" class="view-panel active">
+
+      <!-- HERO ZINE BANNER -->
+      <section class="issue-hero">
+        <div>
+          <span class="issue-kicker">BOTANICAL ZINE • LEVEL A2–B1 • 60 MINUTES</span>
+          <h1>Thrift &amp; Second-Hand Finds: <em>Hidden Gems, Upcycling &amp; Smart Shopping</em></h1>
+          <p>A complete 1-hour interactive lesson: evaluate real market finds, master 10 shopping &amp; upcycling terms, read a weekend market feature, practise <b>too</b> vs. <b>enough</b>, and bargain in a two-speaker listening &amp; role-play studio.</p>
+          <div class="issue-chips">
+            <span class="issue-chip">⏱ 60 Minutes</span>
+            <span class="issue-chip">🏷️ 10 MPF Terms</span>
+            <span class="issue-chip">✂️ Too vs. Enough</span>
+            <span class="issue-chip">🎧 Two-Speaker Audio</span>
+          </div>
+        </div>
+
+        <div class="ceramic-badge-box">
+          <svg viewBox="0 0 220 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="143" rx="16" fill="#fffdf9" stroke="#385137" stroke-width="1.8" stroke-dasharray="5 4"/>
+            <path d="M 62 36 L 106 36 L 126 56 L 106 76 L 62 76 Z" fill="#fceee8" stroke="#c85a32" stroke-width="2.2"/>
+            <circle cx="75" cy="56" r="4.5" fill="#1f2421"/>
+            <text x="95" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#a64420">GEM</text>
+            <path d="M 144 112 C 144 82, 165 56, 182 40" fill="none" stroke="#4f6d4e" stroke-width="2.5" stroke-linecap="round"/>
+            <ellipse cx="144" cy="78" rx="12" ry="6" transform="rotate(-35 144 78)" fill="#eaf2ea" stroke="#4f6d4e" stroke-width="1.8"/>
+            <ellipse cx="166" cy="64" rx="12" ry="6" transform="rotate(-25 166 64)" fill="#eaf2ea" stroke="#4f6d4e" stroke-width="1.8"/>
+            <ellipse cx="152" cy="96" rx="11" ry="5.5" transform="rotate(28 152 96)" fill="#eaf2ea" stroke="#4f6d4e" stroke-width="1.8"/>
+            <text x="110" y="132" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#1f2421">Pre-Loved • Thoughtful • Bold</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- QUICK STAGE JUMP BAR -->
+      <nav class="stage-nav-strip" aria-label="Lesson stages">
+        <a href="#stage1" class="stage-jump-link">01 · Poll (8m)</a>
+        <a href="#stage2" class="stage-jump-link">02 · Vocabulary (12m)</a>
+        <a href="#stage3" class="stage-jump-link">03 · Reading (12m)</a>
+        <a href="#stage4" class="stage-jump-link">04 · Too / Enough (12m)</a>
+        <a href="#stage5" class="stage-jump-link">05 · Listening &amp; Role-Play (10m)</a>
+        <a href="#stage6" class="stage-jump-link">06 · Capsule &amp; Speaking (6m)</a>
+      </nav>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 1 (8 MIN): WARM-UP "WOULD YOU BUY IT?" 4-ITEM POLL          -->
+      <!-- ================================================================= -->
+      <section class="zine-card" id="stage1">
+        <div class="zine-card-top">
+          <span class="stage-badge">Stage 1 • Warm-Up &amp; Market Poll</span>
+          <span class="focus-tag">8 MIN • SPEAKING</span>
+        </div>
+        <h2>Would You Buy It? Weekend Thrift Poll</h2>
+        <p class="zine-lead">Inspect four second-hand items below. Tap <b>Buy It</b> or <b>Pass</b> for each one, read the rationale, and discuss the 4 warm-up questions.</p>
+
+        <div class="poll-grid">
+          <!-- Poll Item 1 -->
+          <div class="find-poll-card" id="pollCard1">
+            <div>
+              <div class="find-art-frame">
+                <svg viewBox="0 0 180 85" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="180" height="85" rx="10" fill="#fbf6ec"/>
+                  <path d="M 60 18 L 120 18 L 136 38 L 122 46 L 114 34 L 114 72 L 66 72 L 66 34 L 58 46 L 44 38 Z" fill="#c85a32" stroke="#1f2421" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="96" cy="58" r="4" fill="#fceee8" stroke="#1f2421" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div class="find-price" style="margin-top: 8px;">€18 • Tiny Sleeve Stain</div>
+              <h3>1. Vintage Leather Jacket</h3>
+              <p style="font-size: 13px; color: var(--ink-muted);">Soft real leather from the 1990s, with one small ink dot near the cuff.</p>
+            </div>
+            <div>
+              <div class="poll-actions">
+                <button type="button" class="poll-btn" data-question="Poll 1: Leather Jacket" onclick="pickPoll('pollCard1', this, 'Buy It', 'Great eye! Real leather lasts for decades, and a tiny cuff mark is barely noticeable.')">✓ Buy It</button>
+                <button type="button" class="poll-btn" data-question="Poll 1: Leather Jacket" onclick="pickPoll('pollCard1', this, 'Pass', 'Fair call — ink stains on leather can be tricky to remove cleanly.')">✕ Pass</button>
+              </div>
+              <div class="poll-note"></div>
+            </div>
+          </div>
+
+          <!-- Poll Item 2 -->
+          <div class="find-poll-card" id="pollCard2">
+            <div>
+              <div class="find-art-frame">
+                <svg viewBox="0 0 180 85" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="180" height="85" rx="10" fill="#eaf2ea"/>
+                  <rect x="44" y="24" width="92" height="44" rx="9" fill="#fffdf9" stroke="#1f2421" stroke-width="2"/>
+                  <rect x="62" y="16" width="24" height="8" rx="3" fill="#c6933a" stroke="#1f2421" stroke-width="1.8"/>
+                  <circle cx="94" cy="46" r="15" fill="#4f6d4e" stroke="#1f2421" stroke-width="2"/>
+                  <circle cx="94" cy="46" r="6" fill="#fffdf9" stroke="#1f2421" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="find-price" style="margin-top: 8px;">€25 • Untested Film Camera</div>
+              <h3>2. Retro 35mm Camera</h3>
+              <p style="font-size: 13px; color: var(--ink-muted);">Gorgeous retro body, though the seller doesn't know if the shutter works.</p>
+            </div>
+            <div>
+              <div class="poll-actions">
+                <button type="button" class="poll-btn" data-question="Poll 2: Retro Camera" onclick="pickPoll('pollCard2', this, 'Buy It', 'Even as room decor or a repair project, €25 for a classic metal body is tempting!')">✓ Buy It</button>
+                <button type="button" class="poll-btn" data-question="Poll 2: Retro Camera" onclick="pickPoll('pollCard2', this, 'Pass', 'Smart move — untested cameras without a receipt can be an expensive gamble.')">✕ Pass</button>
+              </div>
+              <div class="poll-note"></div>
+            </div>
+          </div>
+
+          <!-- Poll Item 3 -->
+          <div class="find-poll-card" id="pollCard3">
+            <div>
+              <div class="find-art-frame">
+                <svg viewBox="0 0 180 85" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="180" height="85" rx="10" fill="#fbf3e1"/>
+                  <path d="M 52 20 L 128 20 L 142 38 L 126 46 L 118 36 L 118 70 L 62 70 L 62 36 L 54 46 L 38 38 Z" fill="#c6933a" stroke="#1f2421" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M 74 34 H 106 M 74 46 H 106 M 74 58 H 106" stroke="#fffdf9" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="find-price" style="margin-top: 8px;">€6 • Two Sizes Too Big</div>
+              <h3>3. Oversized Wool Sweater</h3>
+              <p style="font-size: 13px; color: var(--ink-muted);">100% warm lambswool, too big right now — ideal for cropping or upcycling.</p>
+            </div>
+            <div>
+              <div class="poll-actions">
+                <button type="button" class="poll-btn" data-question="Poll 3: Wool Sweater" onclick="pickPoll('pollCard3', this, 'Buy It', 'At €6 for pure lambswool, upcycling it into a cropped cardigan is a huge win!')">✓ Buy It</button>
+                <button type="button" class="poll-btn" data-question="Poll 3: Wool Sweater" onclick="pickPoll('pollCard3', this, 'Pass', 'If you prefer clothes that fit right away without sewing, passing is wise.')">✕ Pass</button>
+              </div>
+              <div class="poll-note"></div>
+            </div>
+          </div>
+
+          <!-- Poll Item 4 -->
+          <div class="find-poll-card" id="pollCard4">
+            <div>
+              <div class="find-art-frame">
+                <svg viewBox="0 0 180 85" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="180" height="85" rx="10" fill="#fceee8"/>
+                  <ellipse cx="90" cy="48" rx="44" ry="20" fill="#fffdf9" stroke="#1f2421" stroke-width="2"/>
+                  <path d="M 46 48 Q 90 78 134 48" fill="#c85a32" stroke="#1f2421" stroke-width="2"/>
+                  <path d="M 114 34 L 122 42" stroke="#a64420" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="find-price" style="margin-top: 8px;">€4 • Small Rim Chip</div>
+              <h3>4. Hand-Painted Ceramic Bowl</h3>
+              <p style="font-size: 13px; color: var(--ink-muted);">Beautiful botanical glaze, slightly flawed with a tiny chip on the top edge.</p>
+            </div>
+            <div>
+              <div class="poll-actions">
+                <button type="button" class="poll-btn" data-question="Poll 4: Ceramic Bowl" onclick="pickPoll('pollCard4', this, 'Buy It', 'For €4, it makes a lovely planter or jewellery dish even if you don’t eat from it!')">✓ Buy It</button>
+                <button type="button" class="poll-btn" data-question="Poll 4: Ceramic Bowl" onclick="pickPoll('pollCard4', this, 'Pass', 'Chipped ceramics aren’t ideal for hot food, so passing makes sense.')">✕ Pass</button>
+              </div>
+              <div class="poll-note"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="speaking-prompts-panel">
+          <h4>💬 Pair / Teacher Discussion Questions</h4>
+          <ol style="padding-left: 20px; font-size: 14.5px; line-height: 1.8; margin-bottom: 12px;">
+            <li>Have you ever found a brilliant second-hand item at a very low price? What was it?</li>
+            <li>Which items are fine to buy pre-loved, and which things do you always buy brand-new?</li>
+            <li>When a second-hand item is slightly flawed, do you prefer to fix it or keep looking?</li>
+            <li>Why do you think thrift stores and flea markets are becoming more popular than fast-fashion malls?</li>
+          </ol>
+          <textarea class="zine-textarea" rows="2" data-question="Stage 1 Discussion Notes" placeholder="Jot down 1–2 quick ideas before speaking..."></textarea>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 2 (12 MIN): EXPANDED 10-ITEM VOCABULARY DECK + 2 TASKS      -->
+      <!-- ================================================================= -->
+      <section class="zine-card" id="stage2">
+        <div class="zine-card-top">
+          <span class="stage-badge sage">Stage 2 • Vocabulary Deck (10 MPF Items)</span>
+          <span class="focus-tag">12 MIN • MEANING • PRONUNCIATION • FORM</span>
+        </div>
+        <h2>Smart Shopping &amp; Upcycling Vocabulary</h2>
+        <p class="zine-lead">Listen to all <b>10 key terms</b>, then complete <b>Task 2A</b> (10-item Definition Matching) and <b>Task 2B</b> (8-item Context Gap-Fill).</p>
+
+        <div class="mpf-grid">
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">1. bargain</span><button type="button" class="speak-btn" onclick="sayTerm('bargain')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˈbɑː.ɡɪn/ • noun</div>
+            <div class="mpf-def" style="margin-top: 6px;">Something bought for much less than its usual price; a great deal.</div></div>
+            <div class="mpf-ex">“This €5 wool coat was the bargain of the year.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">2. thrift store / charity shop</span><button type="button" class="speak-btn" onclick="sayTerm('thrift store, charity shop')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˈθrɪft stɔː/ • noun</div>
+            <div class="mpf-def" style="margin-top: 6px;">A shop selling donated or second-hand goods at low prices.</div></div>
+            <div class="mpf-ex">“We always check the local charity shop on Saturdays.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">3. brand-new</span><button type="button" class="speak-btn" onclick="sayTerm('brand new')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˌbrændˈnjuː/ • adjective</div>
+            <div class="mpf-def" style="margin-top: 6px;">Completely new and never worn or used before.</div></div>
+            <div class="mpf-ex">“The tags are still attached — it’s brand-new!”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">4. pre-loved</span><button type="button" class="speak-btn" onclick="sayTerm('pre-loved')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˌpriːˈlʌvd/ • adjective</div>
+            <div class="mpf-def" style="margin-top: 6px;">Previously owned and cared for by someone else (second-hand).</div></div>
+            <div class="mpf-ex">“My bookshelf is full of pre-loved art books.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">5. vintage</span><button type="button" class="speak-btn" onclick="sayTerm('vintage')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˈvɪn.tɪdʒ/ • adj./noun</div>
+            <div class="mpf-def" style="margin-top: 6px;">From an earlier decade (20+ years old) and valued for classic quality.</div></div>
+            <div class="mpf-ex">“She collects vintage 1980s silk scarves.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">6. receipt</span><button type="button" class="speak-btn" onclick="sayTerm('receipt')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/rɪˈsiːt/ • noun</div>
+            <div class="mpf-def" style="margin-top: 6px;">Paper or digital proof showing what you bought and paid.</div></div>
+            <div class="mpf-ex">“Keep your receipt in case you want a refund.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">7. fit</span><button type="button" class="speak-btn" onclick="sayTerm('fit')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/fɪt/ • verb</div>
+            <div class="mpf-def" style="margin-top: 6px;">To be the right size and shape for a person or space.</div></div>
+            <div class="mpf-ex">“The boots were cheap, but they didn’t fit me.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">8. upcycle</span><button type="button" class="speak-btn" onclick="sayTerm('upcycle')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˈʌpˌsaɪ.kəl/ • verb</div>
+            <div class="mpf-def" style="margin-top: 6px;">To creatively transform an old item into something fresher or more useful.</div></div>
+            <div class="mpf-ex">“He upcycled old wooden crates into plant stands.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">9. flawed</span><button type="button" class="speak-btn" onclick="sayTerm('flawed')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/flɔːd/ • adjective</div>
+            <div class="mpf-def" style="margin-top: 6px;">Having a small mark, scratch, or imperfection; not 100% perfect.</div></div>
+            <div class="mpf-ex">“The vase is slightly flawed, so it’s half price.”</div>
+          </div>
+
+          <div class="mpf-card">
+            <div><div class="mpf-header"><span class="mpf-word">10. rummage</span><button type="button" class="speak-btn" onclick="sayTerm('rummage')">🔊 Listen</button></div>
+            <div class="mpf-ipa">/ˈrʌm.ɪdʒ/ • verb</div>
+            <div class="mpf-def" style="margin-top: 6px;">To search enthusiastically through a pile or box of things to find a gem.</div></div>
+            <div class="mpf-ex">“We love to rummage through boxes of old postcards.”</div>
+          </div>
+        </div>
+
+        <!-- TASK 2A: 10-ITEM DEFINITION MATCHING -->
+        <div class="match-panel" id="vocabMatchBox2A">
+          <h3>Task 2A · Match All 10 Words to Their Definitions</h3>
+          <div id="vocab10Rows"></div>
+          <div style="margin-top: 12px;">
+            <button type="button" class="btn-terracotta" onclick="gradeSelectGroup('vocabMatchBox2A', 'vocabScore2A')">Check Task 2A</button>
+            <span class="score-label" id="vocabScore2A"></span>
+          </div>
+        </div>
+
+        <!-- TASK 2B: 8-ITEM VOCABULARY IN CONTEXT GAP-FILL WITH CLICKABLE WORD BANK -->
+        <div class="sub-exercise" id="vocabContextBox2B" style="margin-bottom: 0;">
+          <h4>Task 2B · Vocabulary-in-Context Gap-Fill (Click a word chip to fill the active box!)</h4>
+          <div class="clickable-word-bank" id="s2WordBank">
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'rummage')">rummage</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'bargain')">bargain</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'flawed')">flawed</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'upcycle')">upcycle</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'receipt')">receipt</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'fit')">fit</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'vintage')">vintage</button>
+            <button type="button" class="bank-chip" onclick="insertBankWord('s2WordBank', 'brand-new')">brand-new</button>
+          </div>
+
+          <div class="gap-item">1. At flea markets, you often have to <input type="text" class="zine-input" data-question="S2B Gap 1" data-answer="rummage" placeholder="click or type..." /> through big baskets to spot hidden treasures.</div>
+          <div class="gap-item">2. Paying €7 for a pure silk scarf was an unbelievable <input type="text" class="zine-input" data-question="S2B Gap 2" data-answer="bargain" placeholder="click or type..." />!</div>
+          <div class="gap-item">3. Always try coats on before paying to make sure the shoulders <input type="text" class="zine-input" data-question="S2B Gap 3" data-answer="fit" placeholder="click or type..." /> comfortably.</div>
+          <div class="gap-item">4. This ceramic plate is slightly <input type="text" class="zine-input" data-question="S2B Gap 4" data-answer="flawed" placeholder="click or type..." /> — there’s a tiny scratch on the back, so it’s 50% off.</div>
+          <div class="gap-item">5. Instead of throwing away old denim jeans, you can <input type="text" class="zine-input" data-question="S2B Gap 5" data-answer="upcycle" placeholder="click or type..." /> them into a patchwork bag.</div>
+          <div class="gap-item">6. Even though this jacket looks <input type="text" class="zine-input" data-question="S2B Gap 6" data-answer="brand-new" placeholder="click or type..." /> , I actually bought it at a charity shop!</div>
+          <div class="gap-item">7. Ask the cashier for a <input type="text" class="zine-input" data-question="S2B Gap 7" data-answer="receipt" placeholder="click or type..." /> in case you need to exchange the item later.</div>
+          <div class="gap-item" style="margin-bottom: 14px;">8. My aunt gave me a <input type="text" class="zine-input" data-question="S2B Gap 8" data-answer="vintage" placeholder="click or type..." /> 1970s Polaroid camera that still takes sharp photos.</div>
+
+          <button type="button" class="btn-sage" onclick="gradeInputGroup('vocabContextBox2B', 'vocabScore2B')">Check Task 2B</button>
+          <span class="score-label" id="vocabScore2B"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 3 (12 MIN): READING + 3 COMPREHENSION TASKS (3A, 3B, 3C)    -->
+      <!-- ================================================================= -->
+      <section class="zine-card" id="stage3">
+        <div class="zine-card-top">
+          <span class="stage-badge ochre">Stage 3 • Reading Feature (3 Tasks)</span>
+          <span class="focus-tag">12 MIN • GIST • T/F/NG • CHARACTER MATCH</span>
+        </div>
+        <h2>Three Treasures from Weekend Markets</h2>
+        <p class="zine-lead">Read the story about <b>Maya</b>, <b>Leo</b>, and <b>Clara</b>, then complete Tasks 3A, 3B, and 3C.</p>
+
+        <article class="feature-story">
+          <span class="feature-byline">WEEKEND MARKET DISPATCH • BY HANNAH PARK</span>
+          <h3>Three Treasures from Weekend Markets</h3>
+          <p>
+            Every Saturday morning, three friends from our art collective — <b>Maya</b>, <b>Leo</b>, and <b>Clara</b> — arrive at the Old Mill Flea Market at 8:30 AM, before the aisles become too crowded to move. Instead of buying brand-new items at chain stores, they love to rummage through stalls for pre-loved pieces with personality.
+          </p>
+          <p>
+            <b>1. Maya’s Brass Desk Lamp (€12):</b> Maya spotted an adjustable brass lamp tucked behind vintage vinyl records. The power cord was too short to reach her wall socket easily, and the metal shade was slightly flawed with two tiny dents, yet the switch still clicked smoothly. After buying a longer plug-in cord at a local hardware shop, she placed it on her study desk—and now has enough warm light for evening sketching without paying €85 for a new designer lamp.
+          </p>
+          <p>
+            <b>2. Leo’s Cropped Denim Jacket (€9):</b> Leo found a heavy blue jacket at a charity stall. The sleeves were slightly too long for his arms and two buttons were missing, so he hesitated at first. However, the seller gave him a €2 discount and a handwritten receipt. Later that weekend, Leo trimmed the cuffs, sewed on mismatched vintage buttons, and upcycled it into his favourite everyday jacket.
+          </p>
+          <p style="margin-bottom: 0;">
+            <b>3. Clara’s Stoneware Mixing Bowl (€7):</b> Clara picked up a hand-thrown ceramic bowl from a crate of kitchenware. The stallholder didn't have enough change for Clara's €20 note, so she bought a €2 iced coffee at the bakery stall next door to get smaller coins. Back home, she realized there were too many knife scratches inside the bowl for mixing bread dough, so she now uses it as a colourful fruit bowl on her kitchen island.
+          </p>
+        </article>
+
+        <!-- TASK 3A: MAIN IDEA GIST CHECK -->
+        <div class="sub-exercise" id="readingGist3A">
+          <h4>Task 3A · Main Idea (Gist Check)</h4>
+          <div class="match-row" style="margin-bottom: 12px;">
+            <span>What is the best overall summary of the article?</span>
+            <select class="zine-select" data-question="Reading 3A Gist" data-answer="B">
+              <option value="">Choose A, B, or C...</option>
+              <option value="A">A. Why second-hand market items are usually too broken to repair.</option>
+              <option value="B">B. How three creative friends adapt slightly imperfect market finds on a small budget.</option>
+              <option value="C">C. How to open your own vintage clothing stall on weekends.</option>
+            </select>
+          </div>
+          <button type="button" class="btn-sage" onclick="gradeSelectGroup('readingGist3A', 'readingScore3A')">Check Task 3A</button>
+          <span class="score-label" id="readingScore3A"></span>
+        </div>
+
+        <!-- TASK 3B: 6 TRUE / FALSE / NOT GIVEN ITEMS -->
+        <div class="sub-exercise" id="readingTf3B">
+          <h4>Task 3B · True, False, or Not Given (6 Items)</h4>
+
+          <div class="match-row">
+            <span>1. The three friends arrive at the market early to avoid heavy crowds.</span>
+            <select class="zine-select" data-question="Reading 3B Q1" data-answer="True">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>2. Maya paid €85 for her brass desk lamp at the flea market.</span>
+            <select class="zine-select" data-question="Reading 3B Q2" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>3. Leo paid €7 in the end after receiving a discount from the seller.</span>
+            <select class="zine-select" data-question="Reading 3B Q3" data-answer="True">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>4. Leo learned how to sew buttons from his grandmother.</span>
+            <select class="zine-select" data-question="Reading 3B Q4" data-answer="Not Given">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>5. Clara bought an iced coffee so she could pay with smaller coins.</span>
+            <select class="zine-select" data-question="Reading 3B Q5" data-answer="True">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <div class="match-row" style="margin-bottom: 12px;">
+            <span>6. Clara uses her stoneware bowl to mix bread dough every Sunday.</span>
+            <select class="zine-select" data-question="Reading 3B Q6" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-terracotta" onclick="gradeSelectGroup('readingTf3B', 'readingScore3B')">Check Task 3B</button>
+          <span class="score-label" id="readingScore3B"></span>
+        </div>
+
+        <!-- TASK 3C: 5 "WHO SAID / DID WHAT?" CHARACTER MATCHING -->
+        <div class="sub-exercise" id="readingChar3C" style="margin-bottom: 0;">
+          <h4>Task 3C · Who Said / Did What? (Maya, Leo, or Clara)</h4>
+
+          <div class="match-row">
+            <span>1. Replaced a short electrical part after visiting a hardware shop</span>
+            <select class="zine-select" data-question="Reading 3C Q1" data-answer="Maya">
+              <option value="">Choose person...</option><option value="Maya">Maya</option><option value="Leo">Leo</option><option value="Clara">Clara</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>2. Changed the original purpose of an item at home because of scratches</span>
+            <select class="zine-select" data-question="Reading 3C Q2" data-answer="Clara">
+              <option value="">Choose person...</option><option value="Maya">Maya</option><option value="Leo">Leo</option><option value="Clara">Clara</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>3. Upcycled a piece of clothing by shortening the sleeves</span>
+            <select class="zine-select" data-question="Reading 3C Q3" data-answer="Leo">
+              <option value="">Choose person...</option><option value="Maya">Maya</option><option value="Leo">Leo</option><option value="Clara">Clara</option>
+            </select>
+          </div>
+
+          <div class="match-row">
+            <span>4. Found an item hidden behind old music records</span>
+            <select class="zine-select" data-question="Reading 3C Q4" data-answer="Maya">
+              <option value="">Choose person...</option><option value="Maya">Maya</option><option value="Leo">Leo</option><option value="Clara">Clara</option>
+            </select>
+          </div>
+
+          <div class="match-row" style="margin-bottom: 12px;">
+            <span>5. Negotiated a €2 price reduction and received a handwritten receipt</span>
+            <select class="zine-select" data-question="Reading 3C Q5" data-answer="Leo">
+              <option value="">Choose person...</option><option value="Maya">Maya</option><option value="Leo">Leo</option><option value="Clara">Clara</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-sage" onclick="gradeSelectGroup('readingChar3C', 'readingScore3C')">Check Task 3C</button>
+          <span class="score-label" id="readingScore3C"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 4 (12 MIN): TOO VS. ENOUGH + 2 CONTROLLED DRILLS (4A & 4B)  -->
+      <!-- ================================================================= -->
+      <section class="zine-card" id="stage4">
+        <div class="zine-card-top">
+          <span class="stage-badge">Stage 4 • Grammar Lab: Too vs. Enough</span>
+          <span class="focus-tag">12 MIN • DISCOVERY &amp; 2 DRILLS</span>
+        </div>
+        <h2>Grammar Lab: <em>too</em> vs. <em>enough</em> (+ <em>too much / too many</em>)</h2>
+        <p class="zine-lead">Study the patterns from the story, answer 3 quick CCQs, and complete both controlled drills (4A &amp; 4B).</p>
+
+        <div class="discovery-strip">
+          <b style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terracotta-dark);">Examples from the Market Story:</b>
+          <div class="quote-line">• “The power cord was <b>too short</b> to reach her wall socket...” <i>(too + adjective)</i></div>
+          <div class="quote-line">• “...now has <b>enough warm light</b> for evening sketching...” <i>(enough + noun)</i></div>
+          <div class="quote-line">• “...there were <b>too many knife scratches</b> inside...” <i>(too many + plural countable noun)</i></div>
+        </div>
+
+        <div class="grammar-cards-row">
+          <div class="grammar-rule-card">
+            <span class="pattern-pill">TOO = MORE THAN NEEDED / PROBLEM</span>
+            <h4>Using <em>too</em></h4>
+            <ul style="padding-left: 18px; font-size: 13.5px; line-height: 1.75;">
+              <li><b>too + adjective / adverb:</b> <i>too expensive, too tight, too fast</i></li>
+              <li><b>too much + uncountable noun:</b> <i>too much clutter, too much cash</i></li>
+              <li><b>too many + plural countable noun:</b> <i>too many stains, too many crowds</i></li>
+            </ul>
+          </div>
+
+          <div class="grammar-rule-card enough-card">
+            <span class="pattern-pill">ENOUGH = SUFFICIENT / RIGHT AMOUNT</span>
+            <h4>Using <em>enough</em></h4>
+            <ul style="padding-left: 18px; font-size: 13.5px; line-height: 1.75;">
+              <li><b>adjective / adverb + enough:</b> <i>warm enough, big enough, early enough</i></li>
+              <li><b>enough + noun:</b> <i>enough change, enough pockets, enough time</i></li>
+              <li><b>not + adj + enough:</b> <i>The cord wasn't long enough.</i></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3 CCQs -->
+        <div class="ccq-box" id="tooEnoughCcqBox">
+          <h4>Quick Concept Check Questions (3 CCQs)</h4>
+          <div class="match-row">
+            <span>1. Where does <b>enough</b> go when used with an adjective like <i>warm</i>?</span>
+            <select class="zine-select" data-question="CCQ 1" data-answer="After the adjective (warm enough)">
+              <option value="">Choose...</option>
+              <option value="Before the adjective (enough warm)">Before the adjective (enough warm)</option>
+              <option value="After the adjective (warm enough)">After the adjective (warm enough)</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>2. Which phrase is right for <b>clutter</b> (uncountable noun)?</span>
+            <select class="zine-select" data-question="CCQ 2" data-answer="too much clutter">
+              <option value="">Choose...</option>
+              <option value="too much clutter">too much clutter</option>
+              <option value="too many clutter">too many clutter</option>
+            </select>
+          </div>
+          <div class="match-row" style="margin-bottom: 12px;">
+            <span>3. If a jacket is <b>too loose</b>, does it fit properly?</span>
+            <select class="zine-select" data-question="CCQ 3" data-answer="No — it is bigger than needed">
+              <option value="">Choose...</option>
+              <option value="Yes — it fits perfectly">Yes — it fits perfectly</option>
+              <option value="No — it is bigger than needed">No — it is bigger than needed</option>
+            </select>
+          </div>
+          <button type="button" class="btn-sage" onclick="gradeSelectGroup('tooEnoughCcqBox', 'ccqScore')">Check CCQs</button>
+          <span class="score-label" id="ccqScore"></span>
+        </div>
+
+        <!-- DRILL 4A: 8-ITEM GAP-FILL -->
+        <div class="sub-exercise" id="drill4ABox">
+          <h4>Task 4A · Gap-Fill: <em>too / too much / too many / enough</em> (8 Items)</h4>
+
+          <div class="gap-item" data-explain="Adjective 'big' comes BEFORE 'enough' → big enough.">
+            1. Is this canvas tote bag <input type="text" class="zine-input" style="width: 150px;" data-question="4A Item 1" data-answer="big enough" placeholder="big / enough" /> for your textbooks?
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="'money' is uncountable → too much money.">
+            2. I never spend <input type="text" class="zine-input" style="width: 165px;" data-question="4A Item 2" data-answer="too much money" placeholder="too... money" /> on brand-new clothes.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="'enough' goes BEFORE the noun 'coins' → enough coins.">
+            3. She didn't have <input type="text" class="zine-input" style="width: 155px;" data-question="4A Item 3" data-answer="enough coins" placeholder="enough / coins" /> to pay for the €7 bowl.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="'scratches' is plural countable → too many scratches.">
+            4. There were <input type="text" class="zine-input" style="width: 175px;" data-question="4A Item 4" data-answer="too many scratches" placeholder="too... scratches" /> on the table to use it without a cloth.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="too + adjective ('short').">
+            5. The lamp cord was <input type="text" class="zine-input" style="width: 145px;" data-question="4A Item 5" data-answer="too short" placeholder="too / short" /> to reach the desk plug.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="Adjective 'early' + enough → early enough.">
+            6. We woke up <input type="text" class="zine-input" style="width: 155px;" data-question="4A Item 6" data-answer="early enough" placeholder="early / enough" /> to catch the 8:00 AM bus to the market.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" data-explain="too + adjective ('crowded').">
+            7. By 1:00 PM, the narrow aisles were <input type="text" class="zine-input" style="width: 155px;" data-question="4A Item 7" data-answer="too crowded" placeholder="too / crowded" /> to browse comfortably.
+            <div class="inline-explanation"></div>
+          </div>
+          <div class="gap-item" style="margin-bottom: 12px;" data-explain="'noise' is uncountable → too much noise.">
+            8. There was <input type="text" class="zine-input" style="width: 160px;" data-question="4A Item 8" data-answer="too much noise" placeholder="too... noise" /> near the street band to hear the seller.
+            <div class="inline-explanation"></div>
+          </div>
+
+          <button type="button" class="btn-terracotta" onclick="checkExplainedInputs('drill4ABox', 'score4A')">Check Task 4A</button>
+          <span class="score-label" id="score4A"></span>
+        </div>
+
+        <!-- DRILL 4B: 5-ITEM SENTENCE REWRITING / ERROR CORRECTION -->
+        <div class="sub-exercise" id="drill4BBox" style="margin-bottom: 0;">
+          <h4>Task 4B · Make It Mean the Same Using <em>too</em> or <em>enough</em> (5 Items)</h4>
+          <p style="font-size: 13.5px; color: var(--ink-muted); margin-bottom: 12px;">Complete the second sentence so it has the <b>same meaning</b> as the first sentence.</p>
+
+          <div class="gap-item" data-explain="'too expensive' = 'not cheap enough'.">
+            <div>1. The vintage leather jacket was too expensive for my budget.</div>
+            <div style="margin-top: 4px;">→ The vintage leather jacket wasn't <input type="text" class="zine-input" style="width: 160px;" data-question="4B Rewrite 1" data-answer="cheap enough" placeholder="adj + enough" /> for my budget.</div>
+            <div class="inline-explanation"></div>
+          </div>
+
+          <div class="gap-item" data-explain="'not tall enough' = 'too short'.">
+            <div>2. This bookshelf isn't tall enough for my large art albums.</div>
+            <div style="margin-top: 4px;">→ This bookshelf is <input type="text" class="zine-input" style="width: 145px;" data-question="4B Rewrite 2" data-answer="too short" placeholder="too + adj" /> for my large art albums.</div>
+            <div class="inline-explanation"></div>
+          </div>
+
+          <div class="gap-item" data-explain="'too small' = 'not big enough' / 'not large enough'.">
+            <div>3. The sleeves on this denim jacket are too small for my arms.</div>
+            <div style="margin-top: 4px;">→ The sleeves on this denim jacket aren't <input type="text" class="zine-input" style="width: 155px;" data-question="4B Rewrite 3" data-answer="big enough|large enough" placeholder="adj + enough" /> for my arms.</div>
+            <div class="inline-explanation"></div>
+          </div>
+
+          <div class="gap-item" data-explain="'not warm enough' = 'too cold' / 'too thin'.">
+            <div>4. This cotton shirt isn't warm enough for snowy weather.</div>
+            <div style="margin-top: 4px;">→ This cotton shirt is <input type="text" class="zine-input" style="width: 145px;" data-question="4B Rewrite 4" data-answer="too cold|too thin" placeholder="too + adj" /> for snowy weather.</div>
+            <div class="inline-explanation"></div>
+          </div>
+
+          <div class="gap-item" style="margin-bottom: 12px;" data-explain="'too far' = 'not close enough' / 'not near enough'.">
+            <div>5. The charity shop is too far to walk in the rain.</div>
+            <div style="margin-top: 4px;">→ The charity shop isn't <input type="text" class="zine-input" style="width: 155px;" data-question="4B Rewrite 5" data-answer="close enough|near enough" placeholder="adj + enough" /> to walk in the rain.</div>
+            <div class="inline-explanation"></div>
+        <!-- Hybrid Audio Studio: Local ElevenLabs MP3 + Live ElevenLabs API Generator + Web Speech Fallback -->
+        <div class="audio-studio">
+          <audio id="elevenLabsPlayer" src="../audio/thrift_market_listening.mp3" preload="metadata"></audio>
+          <div class="audio-controls">
+            <button type="button" class="btn-sage" onclick="playMarketAudio(1.0)">▶ Play Dialogue (1.0x)</button>
+            <button type="button" class="btn-light-outline" onclick="playMarketAudio(0.84)">🐢 Slow (0.84x)</button>
+            <button type="button" class="btn-light-outline" onclick="pauseMarketAudio()">Ⅱ Pause</button>
+            <button type="button" class="btn-light-outline" onclick="stopMarketAudio()">■ Stop</button>
+            <button type="button" class="btn-terracotta" onclick="document.getElementById('marketScriptDrawer').classList.toggle('open')">📄 Show / Hide Transcript</button>
+            <button type="button" class="btn-light-outline" onclick="toggleElevenLabsDrawer()">🎙️ ElevenLabs Studio</button>
+          </div>
+          <div class="audio-status-line" id="marketAudioStatus">AUDIO READY // Local MP3 check, Live ElevenLabs API, or Web Speech</div>
+
+          <!-- Interactive ElevenLabs API Generator Panel -->
+          <div class="eleven-api-drawer" id="elevenLabsDrawer" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <b style="color: var(--sage-dark); font-family: 'Fraunces', serif; font-size: 16px;">🎙️ ElevenLabs Two-Speaker Generator (Maya &amp; Leo)</b>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-muted);">Model: eleven_multilingual_v2</span>
+            </div>
+            <p style="font-size: 12.5px; color: var(--ink-muted); margin-top: 4px;">
+              Generate fresh studio audio directly via ElevenLabs API (auto-picks female &amp; male voices from your account) and download <code>thrift_market_listening.mp3</code> for <code>../audio/</code>.
+            </p>
+            <div class="eleven-api-row">
+              <input type="password" id="elevenApiKeyField" class="eleven-key-input" value="sk_c2b675fe4b5a88b0a604efe3fd61231620dc91d4109dadc2" placeholder="ElevenLabs API Key (sk_...)" />
+              <button type="button" class="btn-sage" id="btnGenerateElevenLabs" onclick="generateElevenLabsDialogue()">⚡ Generate via ElevenLabs</button>
+              <a id="downloadGeneratedMp3Link" href="#" download="thrift_market_listening.mp3" class="btn-light-outline" style="display: none; text-decoration: none;">⬇ Download MP3</a>
+            </div>
+            <div id="elevenGeneratorLog" style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--espresso); margin-top: 8px;"></div>
+          </div>
+
+          <div class="transcript-box" id="marketScriptDrawer">
+            <p style="margin-bottom: 6px;"><b>Maya:</b> Look at this pre-loved corduroy jacket, Leo! The olive colour is gorgeous, and the pockets are big enough for my sketchbook.</p>
+            <p style="margin-bottom: 6px;"><b>Leo:</b> Let me check the price tag... Hmm, it’s twenty-eight euros. Isn’t that a bit too expensive for a flea market find?</p>
+            <p style="margin-bottom: 6px;"><b>Maya:</b> True, and look at the sleeve — it’s slightly flawed because the bottom button is missing. Maybe I can ask the stallholder for a discount.</p>
+            <p style="margin-bottom: 6px;"><b>Leo:</b> Good idea! Offer twenty euros. If he agrees, it’s a real bargain, and you can easily upcycle it with vintage brass buttons from home.</p>
+            <p style="margin-bottom: 6px;"><b>Maya:</b> Do you have enough cash on you? I only have a ten-euro note in my wallet.</p>
+            <p style="margin-bottom: 0;"><b>Leo:</b> Don’t worry, I’ve got fifteen euros in coins and notes — just make sure you ask for a receipt!</p>
+          </div>
+        </div>
+
+        <!-- TASK 5A: 5 COMPREHENSION QUESTIONS -->
+        <div class="sub-exercise" id="listeningMcq5A">
+          <h4>Task 5A · Comprehension Check (5 Items)</h4>
+
+          <div class="mcq-card" data-question="Listening 5A Q1" data-answer="B">
+            <div class="mcq-title">1. Why does Maya like the size of the jacket's pockets?</div>
+            <div class="mcq-opts">
+              <div class="mcq-opt" data-val="A" onclick="pickMcqOpt(this)"><span class="opt-pill">A</span> They have shiny brass zippers.</div>
+              <div class="mcq-opt" data-val="B" onclick="pickMcqOpt(this)"><span class="opt-pill">B</span> They are big enough for her sketchbook.</div>
+              <div class="mcq-opt" data-val="C" onclick="pickMcqOpt(this)"><span class="opt-pill">C</span> They hold her vintage camera lens.</div>
+            </div>
+          </div>
+
+          <div class="mcq-card" data-question="Listening 5A Q2" data-answer="C">
+            <div class="mcq-title">2. What is the original price on the tag?</div>
+            <div class="mcq-opts">
+              <div class="mcq-opt" data-val="A" onclick="pickMcqOpt(this)"><span class="opt-pill">A</span> €15</div>
+              <div class="mcq-opt" data-val="B" onclick="pickMcqOpt(this)"><span class="opt-pill">B</span> €20</div>
+              <div class="mcq-opt" data-val="C" onclick="pickMcqOpt(this)"><span class="opt-pill">C</span> €28</div>
+            </div>
+          </div>
+
+          <div class="mcq-card" data-question="Listening 5A Q3" data-answer="A">
+            <div class="mcq-title">3. Why is the jacket slightly flawed?</div>
+            <div class="mcq-opts">
+              <div class="mcq-opt" data-val="A" onclick="pickMcqOpt(this)"><span class="opt-pill">A</span> The bottom button on the sleeve is missing.</div>
+              <div class="mcq-opt" data-val="B" onclick="pickMcqOpt(this)"><span class="opt-pill">B</span> There is a coffee stain on the collar.</div>
+              <div class="mcq-opt" data-val="C" onclick="pickMcqOpt(this)"><span class="opt-pill">C</span> The lining inside is torn.</div>
+            </div>
+          </div>
+
+          <div class="mcq-card" data-question="Listening 5A Q4" data-answer="B">
+            <div class="mcq-title">4. How does Leo suggest upcycling the jacket?</div>
+            <div class="mcq-opts">
+              <div class="mcq-opt" data-val="A" onclick="pickMcqOpt(this)"><span class="opt-pill">A</span> Dyeing the fabric dark green</div>
+              <div class="mcq-opt" data-val="B" onclick="pickMcqOpt(this)"><span class="opt-pill">B</span> Adding vintage brass buttons from home</div>
+              <div class="mcq-opt" data-val="C" onclick="pickMcqOpt(this)"><span class="opt-pill">C</span> Cropping the jacket shorter</div>
+            </div>
+          </div>
+
+          <div class="mcq-card" data-question="Listening 5A Q5" data-answer="C" style="margin-bottom: 12px;">
+            <div class="mcq-title">5. How much cash do Maya and Leo have altogether?</div>
+            <div class="mcq-opts">
+              <div class="mcq-opt" data-val="A" onclick="pickMcqOpt(this)"><span class="opt-pill">A</span> €10</div>
+              <div class="mcq-opt" data-val="B" onclick="pickMcqOpt(this)"><span class="opt-pill">B</span> €15</div>
+              <div class="mcq-opt" data-val="C" onclick="pickMcqOpt(this)"><span class="opt-pill">C</span> €25 (€10 + €15)</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-sage" onclick="scoreMcqBox('listeningMcq5A', 'score5A')">Check Task 5A</button>
+          <span class="score-label" id="score5A"></span>
+        </div>
+
+        <!-- TASK 5B: 4 LISTENING GAP-FILL LINES -->
+        <div class="sub-exercise" id="listeningGap5B">
+          <h4>Task 5B · Listen Again &amp; Complete the Exact Phrases (4 Items)</h4>
+          <div class="gap-item">1. “The olive colour is gorgeous, and the pockets are <input type="text" class="zine-input" style="width: 150px;" data-question="5B Gap 1" data-answer="big enough" placeholder="2 words..." /> for my sketchbook.”</div>
+          <div class="gap-item">2. “Isn’t that a bit <input type="text" class="zine-input" style="width: 165px;" data-question="5B Gap 2" data-answer="too expensive" placeholder="2 words..." /> for a flea market find?”</div>
+          <div class="gap-item">3. “If he agrees, it’s a real <input type="text" class="zine-input" style="width: 140px;" data-question="5B Gap 3" data-answer="bargain" placeholder="1 word..." /> , and you can easily upcycle it.”</div>
+          <div class="gap-item" style="margin-bottom: 12px;">4. “Do you have <input type="text" class="zine-input" style="width: 155px;" data-question="5B Gap 4" data-answer="enough cash" placeholder="2 words..." /> on you?”</div>
+
+          <button type="button" class="btn-terracotta" onclick="gradeInputGroup('listeningGap5B', 'score5B')">Check Task 5B</button>
+          <span class="score-label" id="score5B"></span>
+        </div>
+
+        <!-- BUYER VS. STALLHOLDER ROLE-PLAY -->
+        <div class="roleplay-pair">
+          <div class="role-card">
+            <h4>🛍️ Role A · Smart Buyer</h4>
+            <p style="font-size: 13.5px; margin-bottom: 8px;">You want a pre-loved jacket or lamp, and you have €20 in cash.</p>
+            <ul style="padding-left: 18px; font-size: 13.5px; line-height: 1.7; margin-bottom: 10px;">
+              <li>Ask about the price and check if it fits or works.</li>
+              <li>Point out a small flaw politely using <i>too</i> or <i>not ... enough</i>.</li>
+              <li>Negotiate a fair price and ask for a receipt.</li>
+            </ul>
+            <div style="background: #ffffff; padding: 9px 12px; border-radius: 10px; font-size: 12.5px; border: 1px solid #e2d7c5;">
+              <b>Useful Phrases:</b><br>
+              • <i>“How much is this pre-loved...?”</i><br>
+              • <i>“€28 is a bit too expensive because it’s slightly flawed.”</i><br>
+              • <i>“Would you take €20? Could I get a receipt?”</i>
+            </div>
+          </div>
+
+          <div class="role-card">
+            <h4>🏷️ Role B · Market Stallholder</h4>
+            <p style="font-size: 13.5px; margin-bottom: 8px;">You want a fair price for your vintage stock and happy regulars.</p>
+            <ul style="padding-left: 18px; font-size: 13.5px; line-height: 1.7; margin-bottom: 10px;">
+              <li>Highlight quality, style, and upcycling potential.</li>
+              <li>Acknowledge any small flaw honestly.</li>
+              <li>Make a counter-offer and agree on a deal.</li>
+            </ul>
+            <div style="background: #ffffff; padding: 9px 12px; border-radius: 10px; font-size: 12.5px; border: 1px solid #e2d7c5;">
+              <b>Useful Phrases:</b><br>
+              • <i>“It’s genuine vintage quality — a real bargain!”</i><br>
+              • <i>“Since a button is missing, I can do €22.”</i><br>
+              • <i>“Deal! Let me write you a quick receipt.”</i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 6 (6 MIN): FREER PRODUCTION — €40 CAPSULE BUILDER & TIMER   -->
+      <!-- ================================================================= -->
+      <section class="zine-card" id="stage6" style="margin-bottom: 0;">
+        <div class="zine-card-top">
+          <span class="stage-badge ochre">Stage 6 • Freer Production (€40 Budget Challenge)</span>
+          <span class="focus-tag">6 MIN • CAPSULE BUILDER &amp; SPEAKING</span>
+        </div>
+        <h2>Build a 3-Piece Second-Hand Capsule Within €40</h2>
+        <p class="zine-lead">Select <b>3 pre-loved items</b> below without going over your <b>€40 budget</b>, then speak for 60–90 seconds explaining your choices using <i>too</i>, <i>enough</i>, and lesson vocabulary.</p>
+
+        <div class="budget-bar">
+          <span id="capsuleCountLabel">Selected: 0 / 3 items</span>
+          <span id="capsuleBudgetLabel" style="color: var(--sage-dark);">Total Spent: €0 / €40 Budget (€40 left)</span>
+        </div>
+
+        <div class="capsule-grid" id="capsuleGrid">
+          <button type="button" class="capsule-item" data-question="Capsule Pick 1" data-price="16" data-item="Vintage Trench Coat (€16)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">🧥 Vintage Trench Coat (€16)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Classic cut, warm enough for spring</span>
+          </button>
+          <button type="button" class="capsule-item" data-question="Capsule Pick 2" data-price="7" data-item="Upcycled Canvas Tote (€7)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">👜 Upcycled Canvas Tote (€7)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Big enough for books &amp; laptop</span>
+          </button>
+          <button type="button" class="capsule-item" data-question="Capsule Pick 3" data-price="14" data-item="Pre-Loved Leather Loafers (€14)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">👞 Pre-Loved Loafers (€14)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Comfy fit, barely worn</span>
+          </button>
+          <button type="button" class="capsule-item" data-question="Capsule Pick 4" data-price="26" data-item="Designer Silk Blazer (€26)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">✨ Designer Silk Blazer (€26)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Gorgeous, but eats up most of the budget!</span>
+          </button>
+          <button type="button" class="capsule-item" data-question="Capsule Pick 5" data-price="6" data-item="Flawed Ceramic Mug Set (€6)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">🍵 Ceramic Mug Pair (€6)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Tiny glaze spot, total bargain</span>
+          </button>
+          <button type="button" class="capsule-item" data-question="Capsule Pick 6" data-price="9" data-item="1990s Denim Overshirt (€9)" onclick="toggleCapsuleItem(this)">
+            <b style="display: block; font-size: 14px;">👕 1990s Denim Overshirt (€9)</b>
+            <span style="font-size: 12px; color: var(--ink-muted);">Easy to layer or upcycle</span>
+          </button>
+        </div>
+
+        <textarea class="zine-textarea" rows="3" data-question="Stage 6 Capsule Justification" placeholder="I chose these 3 items because the designer blazer was too expensive, whereas the trench coat and tote bag gave me enough money left over for..."></textarea>
+
+        <div class="timer-widget">
+          <div>
+            <b style="font-size: 14px;">⏱️ Speaking Clock:</b>
+            <span style="font-size: 13px; color: var(--ink-muted);">Present your €40 capsule in 60s or 90s!</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span class="clock-readout" id="capsuleClock">01:00</span>
+            <button type="button" class="btn-terracotta" onclick="startCapsuleClock(60)">▶ 60s</button>
+            <button type="button" class="btn-sage" onclick="startCapsuleClock(90)">▶ 90s</button>
+            <button type="button" class="btn-light-outline" onclick="resetCapsuleClock()">Reset</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PANEL 2: COMPREHENSIVE 30-MINUTE HOMEWORK SUITE                     -->
+    <!-- =================================================================== -->
+    <div id="panel-homework" class="view-panel">
+
+      <section class="issue-hero">
+        <div>
+          <span class="issue-kicker">HOMEWORK SUITE • 30 MINUTES • A2–B1</span>
+          <h1>Homework: <em>Circular Fashion, Vocabulary &amp; Grammar</em></h1>
+          <p>Complete all 4 homework parts below (HW1–HW4). Every answer is saved automatically for your teacher via <b>tracker.js</b>.</p>
+        </div>
+        <div class="ceramic-badge-box">
+          <div style="font-family: 'Fraunces', serif; font-size: 20px; font-weight: 800; color: var(--sage-dark);">4 Self-Study Parts</div>
+          <div style="font-size: 12.5px; color: var(--ink-muted); margin-top: 4px;">Collocations • Grammar • Circular Fashion Reading • 90–110w Writing</div>
+        </div>
+      </section>
+
+      <!-- HW1: 8-ITEM VOCABULARY COLLOCATIONS & GAP-FILL -->
+      <section class="zine-card">
+        <div class="zine-card-top">
+          <span class="stage-badge sage">Homework 1 • Vocabulary Collocations &amp; Gap-Fill</span>
+          <span class="focus-tag">8 ITEMS</span>
+        </div>
+        <h2>Complete the Sentences with the Right Word</h2>
+        <p class="zine-lead">Use: <b>bargain • thrift store • brand-new • pre-loved • vintage • receipt • fit • upcycle • flawed • rummage</b>.</p>
+
+        <div class="sub-exercise" id="hw1Box" style="margin-bottom: 0;">
+          <div class="gap-item">1. I love to <input type="text" class="zine-input" style="width: 155px;" data-question="HW1 Item 1" data-answer="rummage" placeholder="verb..." /> through boxes of old vinyl records at Sunday markets.</div>
+          <div class="gap-item">2. Getting a pure wool coat for €12 was the best <input type="text" class="zine-input" style="width: 155px;" data-question="HW1 Item 2" data-answer="bargain" placeholder="noun..." /> I found all year.</div>
+          <div class="gap-item">3. Always keep your <input type="text" class="zine-input" style="width: 155px;" data-question="HW1 Item 3" data-answer="receipt" placeholder="noun..." /> in case you need to return an item.</div>
+          <div class="gap-item">4. This ceramic vase is slightly <input type="text" class="zine-input" style="width: 155px;" data-question="HW1 Item 4" data-answer="flawed" placeholder="adj..." /> — there’s a tiny chip near the base.</div>
+          <div class="gap-item">5. She decided to <input type="text" class="zine-input" style="width: 155px;" data-question="HW1 Item 5" data-answer="upcycle" placeholder="verb..." /> an old wooden ladder into a bathroom towel rack.</div>
+          <div class="gap-item">6. Even though these trainers were donated to a <input type="text" class="zine-input" style="width: 170px;" data-question="HW1 Item 6" data-answer="thrift store|charity shop" placeholder="2 words..." /> , they look <input type="text" class="zine-input" style="width: 145px;" data-question="HW1 Item 6b" data-answer="brand-new|brand new" placeholder="adj..." />!</div>
+          <div class="gap-item">7. I tried on three pairs of <input type="text" class="zine-input" style="width: 145px;" data-question="HW1 Item 7" data-answer="vintage" placeholder="adj..." /> 1980s jeans, and the last pair <input type="text" class="zine-input" style="width: 120px;" data-question="HW1 Item 7b" data-answer="fit" placeholder="verb..." /> perfectly.</div>
+          <div class="gap-item" style="margin-bottom: 14px;">8. Buying <input type="text" class="zine-input" style="width: 145px;" data-question="HW1 Item 8" data-answer="pre-loved" placeholder="adj..." /> furniture gives your apartment unique character while saving money.</div>
+
+          <button type="button" class="btn-terracotta" onclick="gradeInputGroup('hw1Box', 'hw1Score')">Check Homework 1</button>
+          <span class="score-label" id="hw1Score"></span>
+        </div>
+      </section>
+
+      <!-- HW2: 8-ITEM MIXED GRAMMAR (TOO / TOO MUCH / TOO MANY / ENOUGH) -->
+      <section class="zine-card">
+        <div class="zine-card-top">
+          <span class="stage-badge">Homework 2 • Mixed Grammar: Too vs. Enough</span>
+          <span class="focus-tag">8 ITEMS</span>
+        </div>
+        <h2>Choose or Write the Correct Form</h2>
+
+        <div class="sub-exercise" id="hw2Box" style="margin-bottom: 0;">
+          <div class="match-row">
+            <span>1. This armchair is _____ to fit through our narrow apartment door.</span>
+            <select class="zine-select" data-question="HW2 Item 1" data-answer="too wide">
+              <option value="">Choose...</option>
+              <option value="too wide">too wide</option>
+              <option value="wide enough">wide enough</option>
+              <option value="too many wide">too many wide</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>2. Are there _____ chairs around the table for six guests?</span>
+            <select class="zine-select" data-question="HW2 Item 2" data-answer="enough">
+              <option value="">Choose...</option>
+              <option value="too">too</option>
+              <option value="enough">enough</option>
+              <option value="too much">too much</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>3. Don't put _____ books on that thin shelf or it might bend.</span>
+            <select class="zine-select" data-question="HW2 Item 3" data-answer="too many">
+              <option value="">Choose...</option>
+              <option value="too much">too much</option>
+              <option value="too many">too many</option>
+              <option value="enough">enough</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>4. The tea wasn't _____ yet, so I waited two more minutes.</span>
+            <select class="zine-select" data-question="HW2 Item 4" data-answer="cool enough">
+              <option value="">Choose...</option>
+              <option value="enough cool">enough cool</option>
+              <option value="cool enough">cool enough</option>
+              <option value="too much cool">too much cool</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>5. We spent _____ time talking at the café and missed the last bus.</span>
+            <select class="zine-select" data-question="HW2 Item 5" data-answer="too much">
+              <option value="">Choose...</option>
+              <option value="too many">too many</option>
+              <option value="too much">too much</option>
+              <option value="enough">enough</option>
+            </select>
+          </div>
+          <div class="match-row">
+            <span>6. Rewrite: <i>“The box is too heavy for one person to carry.”</i> → The box isn't</span>
+            <input type="text" class="zine-input" style="width: 165px;" data-question="HW2 Item 6" data-answer="light enough" placeholder="adj + enough" />
+          </div>
+          <div class="match-row">
+            <span>7. Fix the mistake: <i>“I don't have <s>money enough</s> for a taxi.”</i> →</span>
+            <input type="text" class="zine-input" style="width: 165px;" data-question="HW2 Item 7" data-answer="enough money" placeholder="correct order..." />
+          </div>
+          <div class="match-row" style="margin-bottom: 14px;">
+            <span>8. Fix the mistake: <i>“There are <s>too much</s> plastic bags in the drawer.”</i> →</span>
+            <input type="text" class="zine-input" style="width: 165px;" data-question="HW2 Item 8" data-answer="too many" placeholder="correct form..." />
+          </div>
+
+          <button type="button" class="btn-sage" onclick="gradeMixedHw2()">Check Homework 2</button>
+          <span class="score-label" id="hw2Score"></span>
+        </div>
+      </section>
+
+      <!-- HW3: SECOND READING ("WHY GEN Z LOVES CIRCULAR FASHION") -->
+      <section class="zine-card">
+        <div class="zine-card-top">
+          <span class="stage-badge ochre">Homework 3 • Reading Comprehension</span>
+          <span class="focus-tag">5 QUESTIONS</span>
+        </div>
+        <h2>Why Gen Z Loves Circular Fashion</h2>
+
+        <article class="feature-story" style="margin-bottom: 18px;">
+          <span class="feature-byline">SUSTAINABLE STYLE REPORT • 2 MIN READ</span>
+          <h3>Why Gen Z Loves Circular Fashion</h3>
+          <p>
+            Over the past five years, second-hand shopping has moved from dusty back-street basements to the centre of youth culture. Instead of buying brand-new outfits every weekend, millions of students now use resale apps, weekend swap meets, and neighbourhood charity shops to build a wardrobe that feels genuinely individual.
+          </p>
+          <p>
+            One major reason is cost. Rising living expenses mean many young shoppers feel that high-street prices are simply too high for clothes that lose their shape after three washes. In contrast, a vintage wool coat or heavy cotton shirt from the 1990s is often durable enough to last another ten years—and usually costs half as much.
+          </p>
+          <p style="margin-bottom: 0;">
+            Creativity plays an equally big role. When you rummage through a thrift rack, nobody else in your class will own the exact same piece. Even if a shirt is slightly flawed or too oversized, short online tutorials show how easy it is to crop, dye, or upcycle it at home. For today's shoppers, circular fashion isn't about having too little choice — it's about having enough imagination to give great pieces a second life.
+          </p>
+        </article>
+
+        <div class="sub-exercise" id="hw3ReadingBox" style="margin-bottom: 0;">
+          <div class="match-row">
+            <span>1. Where do many young shoppers find second-hand clothes today?</span>
+            <select class="zine-select" data-question="HW3 Q1" data-answer="Resale apps, swap meets, and charity shops">
+              <option value="">Choose...</option>
+              <option value="Only in luxury vintage boutiques">Only in luxury vintage boutiques</option>
+              <option value="Resale apps, swap meets, and charity shops">Resale apps, swap meets, and charity shops</option>
+              <option value="Only in dusty back-street basements">Only in dusty back-street basements</option>
+            </select>
+          </div>
+    /* --- 5. HYBRID AUDIO ENGINE (GENERATED BLOB / LOCAL MP3 + ELEVENLABS API + WEB SPEECH FALLBACK) --- */
+    let activeQueue = [];
+    let queueRunning = false;
+    let mp3Available = false;
+    let generatedAudioUrl = null;
+
+    const mp3El = document.getElementById('elevenLabsPlayer');
+    if (mp3El) {
+      mp3El.addEventListener('loadedmetadata', () => {
+        mp3Available = true;
+        document.getElementById('marketAudioStatus').textContent = 'STUDIO MP3 LOADED // Maya & Leo Dialogue Ready';
+      });
+      mp3El.addEventListener('error', () => {
+        mp3Available = false;
+      });
+    }
+
+    function toggleElevenLabsDrawer() {
+      const drawer = document.getElementById('elevenLabsDrawer');
+      if (!drawer) return;
+      drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function getEnVoices() {
+      if (!('speechSynthesis' in window)) return [];
+      return window.speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => getEnVoices();
+    }
+
+    function sayTerm(term) {
+      stopMarketAudio();
+      if (!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(term);
+      u.lang = 'en-GB';
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    }
+
+    const marketDialogueTurns = [
+      ['Maya', 'Look at this pre-loved corduroy jacket, Leo! The olive colour is gorgeous, and the pockets are big enough for my sketchbook.'],
+      ['Leo', 'Let me check the price tag... Hmm, it is twenty-eight euros. Is not that a bit too expensive for a flea market find?'],
+      ['Maya', 'True, and look at the sleeve — it is slightly flawed because the bottom button is missing. Maybe I can ask the stallholder for a discount.'],
+      ['Leo', 'Good idea! Offer twenty euros. If he agrees, it is a real bargain, and you can easily upcycle it with vintage brass buttons from home.'],
+      ['Maya', 'Do you have enough cash on you? I only have a ten-euro note in my wallet.'],
+      ['Leo', 'Do not worry, I have got fifteen euros in coins and notes — just make sure you ask for a receipt!']
+    ];
+
+    // Concatenates MP3 chunks cleanly for single-file audio playback and download
+    function concatMp3Buffers(buffers) {
+      const totalBytes = buffers.reduce((sum, buf) => sum + buf.byteLength, 0);
+      const merged = new Uint8Array(totalBytes);
+      let offset = 0;
+      buffers.forEach((buf) => {
+        merged.set(new Uint8Array(buf), offset);
+        offset += buf.byteLength;
+      });
+      return new Blob([merged], { type: 'audio/mpeg' });
+    }
+
+    async function generateElevenLabsDialogue() {
+      const keyInput = document.getElementById('elevenApiKeyField');
+      const genBtn = document.getElementById('btnGenerateElevenLabs');
+      const logEl = document.getElementById('elevenGeneratorLog');
+      const statusEl = document.getElementById('marketAudioStatus');
+      const dlLink = document.getElementById('downloadGeneratedMp3Link');
+
+      const apiKey = (keyInput ? keyInput.value : '').trim();
+      if (!apiKey) {
+        if (logEl) logEl.textContent = '⚠ Please enter a valid ElevenLabs API key.';
+        return;
+      }
+
+      stopMarketAudio();
+      if (genBtn) genBtn.disabled = true;
+      if (logEl) logEl.textContent = '1/3 Fetching voices from ElevenLabs...';
+
+      try {
+        const headers = { 'xi-api-key': apiKey };
+        const voicesRes = await fetch('https://api.elevenlabs.io/v1/voices', { headers });
+        if (!voicesRes.ok) {
+          const errText = await voicesRes.text();
+          throw new Error(`Voices request failed (${voicesRes.status}): ${errText.slice(0, 160)}`);
+        }
+        const voicesData = await voicesRes.json();
+        const voices = Array.isArray(voicesData.voices) ? voicesData.voices : [];
+        if (voices.length === 0) {
+          throw new Error('No voices found in this ElevenLabs account.');
+        }
+
+        const pickVoice = (preferredNames, gender) => {
+          for (const pref of preferredNames) {
+            const found = voices.find(v => (v.name || '').toLowerCase().startsWith(pref.toLowerCase()));
+            if (found) return found;
+          }
+          const byGender = voices.find(v => ((v.labels && v.labels.gender) || '').toLowerCase() === gender);
+          if (byGender) return byGender;
+          return voices[0];
+        };
+
+        const mayaVoice = pickVoice(['Laura', 'Jessica', 'Alice', 'Bella', 'Sarah'], 'female');
+        const leoVoice = pickVoice(['Liam', 'Will', 'Chris', 'Charlie', 'Brian'], 'male');
+
+        if (logEl) {
+          logEl.textContent = `2/3 Voices: Maya (${mayaVoice.name}) & Leo (${leoVoice.name}). Generating ${marketDialogueTurns.length} lines...`;
+        }
+
+        const audioChunks = [];
+        for (let i = 0; i < marketDialogueTurns.length; i++) {
+          const [speaker, line] = marketDialogueTurns[i];
+          const voiceId = speaker === 'Maya' ? mayaVoice.voice_id : leoVoice.voice_id;
+          if (logEl) {
+            logEl.textContent = `2/3 Generating line ${i + 1}/${marketDialogueTurns.length} (${speaker})...`;
+          }
+
+          const ttsRes = await fetch(
+            `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`,
+            {
+              method: 'POST',
+              headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                text: line,
+                model_id: 'eleven_multilingual_v2',
+                voice_settings: {
+                  stability: 0.48,
+                  similarity_boost: 0.78,
+                  style: 0.18,
+                  use_speaker_boost: true
+                }
+              })
+            }
+          );
+
+          if (!ttsRes.ok) {
+            const errBody = await ttsRes.text();
+            throw new Error(`TTS error on line ${i + 1} (${ttsRes.status}): ${errBody.slice(0, 180)}`);
+          }
+          audioChunks.push(await ttsRes.arrayBuffer());
+        }
+
+        const combinedBlob = concatMp3Buffers(audioChunks);
+        if (generatedAudioUrl) {
+          URL.revokeObjectURL(generatedAudioUrl);
+        }
+        generatedAudioUrl = URL.createObjectURL(combinedBlob);
+
+        if (mp3El) {
+          mp3El.src = generatedAudioUrl;
+          mp3El.load();
+          mp3Available = true;
+        }
+
+        if (dlLink) {
+          dlLink.href = generatedAudioUrl;
+          dlLink.style.display = 'inline-flex';
+        }
+
+        if (logEl) {
+          logEl.textContent = '3/3 Done! Playing ElevenLabs dialogue now — you can also download thrift_market_listening.mp3.';
+        }
+        if (statusEl) {
+          statusEl.textContent = `ELEVENLABS READY // Maya (${mayaVoice.name}) & Leo (${leoVoice.name})`;
+        }
+
+        playMarketAudio(1.0);
+      } catch (err) {
+        if (logEl) {
+          logEl.textContent = `⚠ ElevenLabs API notice: ${err.message}. Using Web Speech fallback.`;
+        }
+        if (statusEl) {
+          statusEl.textContent = 'FALLBACK ACTIVE // Using browser Web Speech audio.';
+        }
+      } finally {
+        if (genBtn) genBtn.disabled = false;
+      }
+    }
+
+    function playMarketAudio(rate = 1.0) {
+      stopMarketAudio();
+      const statusEl = document.getElementById('marketAudioStatus');
+
+      if ((mp3Available || generatedAudioUrl) && mp3El) {
+        mp3El.playbackRate = rate;
+        mp3El.play().then(() => {
+          statusEl.textContent = `PLAYING STUDIO AUDIO // Speed ${rate}x`;
+          mp3El.onended = () => { statusEl.textContent = 'FINISHED // Dialogue complete.'; };
+        }).catch(() => runWebSpeechDialogue(rate));
+      } else {
+        runWebSpeechDialogue(rate);
+      }
+    }
+
+    function runWebSpeechDialogue(rate) {
+      const statusEl = document.getElementById('marketAudioStatus');
+      if (!('speechSynthesis' in window)) {
+        statusEl.textContent = 'AUDIO UNAVAILABLE // Click Show Transcript to read.';
+        return;
+      }
+      activeQueue = marketDialogueTurns.slice();
+      queueRunning = true;
+      const voices = getEnVoices();
+      const fVoice = voices.find(v => /female|samantha|victoria|zira|hazel|serena|aria|jenny|libby/i.test(v.name)) || voices[0];
+      const mVoice = voices.find(v => /male|daniel|david|george|mark|ryan|guy|tom|alex/i.test(v.name)) || voices[Math.min(1, voices.length - 1)];
+
+      function nextTurn() {
+        if (!queueRunning || activeQueue.length === 0) {
+          queueRunning = false;
+          statusEl.textContent = 'FINISHED // Dialogue complete.';
+          return;
+        }
+        const [speaker, line] = activeQueue.shift();
+        statusEl.textContent = `SPEAKING // ${speaker} (${rate}x)`;
+        const u = new SpeechSynthesisUtterance(line);
+        u.lang = 'en-GB';
+        u.rate = rate;
+        if (speaker === 'Maya') {
+          if (fVoice) u.voice = fVoice;
+          u.pitch = 1.14;
+        } else {
+          if (mVoice) u.voice = mVoice;
+          u.pitch = 0.94;
+        }
+        u.onend = () => setTimeout(nextTurn, 170);
+        u.onerror = () => nextTurn();
+        window.speechSynthesis.speak(u);
+      }
+      nextTurn();
+    }
+
+    function pauseMarketAudio() {
+      if ((mp3Available || generatedAudioUrl) && mp3El && !mp3El.paused) {
+        mp3El.pause();
+        return;
+      }
+      if ('speechSynthesis' in window) {
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+        else window.speechSynthesis.pause();
+      }
+    }
+
+    function stopMarketAudio() {
+      queueRunning = false;
+      activeQueue = [];
+      if (mp3El) {
+        mp3El.pause();
+        mp3El.currentTime = 0;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    /* --- 6. GRADING & INTERACTION HELPERS --- */
+    function gradeSelectGroup(boxId, scoreId) {
+      const selects = document.querySelectorAll(`#${boxId} select[data-answer]`);
+      let total = 0, ok = 0;
+      selects.forEach(sel => {
+        total++;
+        const val = (sel.value || '').trim().toLowerCase();
+        const ans = sel.dataset.answer.toLowerCase();
+        sel.classList.remove('ok-state', 'bad-state');
+        if (!val) return;
+        if (val === ans) { sel.classList.add('ok-state'); ok++; }
+        else { sel.classList.add('bad-state'); }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#385137' : '#a64420';
+    }
+
+    function gradeInputGroup(boxId, scoreId) {
+      const inputs = document.querySelectorAll(`#${boxId} input[data-answer]`);
+      let total = 0, ok = 0;
+      inputs.forEach(inp => {
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('ok-state', 'bad-state');
+        if (!val) return;
+        if (valid.includes(val)) { inp.classList.add('ok-state'); ok++; }
+        else { inp.classList.add('bad-state'); }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#385137' : '#a64420';
+    }
+
+    function checkExplainedInputs(boxId, scoreId) {
+      const rows = document.querySelectorAll(`#${boxId} .gap-item`);
+      let total = 0, ok = 0;
+      rows.forEach(row => {
+        const inp = row.querySelector('input[data-answer]');
+        const expl = row.querySelector('.inline-explanation');
+        if (!inp) return;
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('ok-state', 'bad-state');
+        if (expl) expl.classList.add('shown');
+        if (val && valid.includes(val)) {
+          inp.classList.add('ok-state');
+          ok++;
+          if (expl) expl.textContent = `✓ Correct: ${row.dataset.explain || ''}`;
+        } else {
+          inp.classList.add('bad-state');
+          if (expl) expl.textContent = `✗ Answer: "${inp.dataset.answer.split('|')[0]}" — ${row.dataset.explain || ''}`;
+        }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#385137' : '#a64420';
+    }
+
+    function pickMcqOpt(optEl) {
+      const card = optEl.closest('.mcq-card');
+      card.querySelectorAll('.mcq-opt').forEach(o => o.classList.remove('selected'));
+      optEl.classList.add('selected');
+      card.dataset.userPick = optEl.dataset.val;
+    }
+
+    function scoreMcqBox(boxId, scoreId) {
+      const cards = document.querySelectorAll(`#${boxId} .mcq-card`);
+      let total = 0, ok = 0;
+      cards.forEach(card => {
+        total++;
+        const ans = card.dataset.answer;
+        const pick = card.dataset.userPick || '';
+        card.querySelectorAll('.mcq-opt').forEach(o => {
+          o.classList.remove('ans-ok', 'ans-bad');
+          if (o.dataset.val === ans) o.classList.add('ans-ok');
+          else if (o.dataset.val === pick && pick !== ans) o.classList.add('ans-bad');
+        });
+        if (pick === ans) ok++;
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#385137' : '#a64420';
+    }
+
+    function gradeMixedHw2() {
+      const selects = document.querySelectorAll('#hw2Box select[data-answer]');
+      const inputs = document.querySelectorAll('#hw2Box input[data-answer]');
+      let total = 0, ok = 0;
+      selects.forEach(sel => {
+        total++;
+        sel.classList.remove('ok-state', 'bad-state');
+        if (sel.value === sel.dataset.answer) { sel.classList.add('ok-state'); ok++; }
+        else if (sel.value) { sel.classList.add('bad-state'); }
+      });
+      inputs.forEach(inp => {
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('ok-state', 'bad-state');
+        if (val && valid.includes(val)) { inp.classList.add('ok-state'); ok++; }
+        else if (val) { inp.classList.add('bad-state'); }
+      });
+      const out = document.getElementById('hw2Score');
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#385137' : '#a64420';
+    }
+
+    /* --- 7. STAGE 6 CAPSULE BUILDER (€40 BUDGET) & SPEAKING TIMER --- */
+    function toggleCapsuleItem(btn) {
+      const selected = Array.from(document.querySelectorAll('#capsuleGrid .capsule-item.selected-piece'));
+      if (!btn.classList.contains('selected-piece') && selected.length >= 3) {
+        return;
+      }
+      btn.classList.toggle('selected-piece');
+      const nowSelected = Array.from(document.querySelectorAll('#capsuleGrid .capsule-item.selected-piece'));
+      const totalCost = nowSelected.reduce((sum, el) => sum + Number(el.dataset.price || 0), 0);
+      const remaining = 40 - totalCost;
+
+      document.getElementById('capsuleCountLabel').textContent = `Selected: ${nowSelected.length} / 3 items`;
+      const budgetEl = document.getElementById('capsuleBudgetLabel');
+      if (remaining >= 0) {
+        budgetEl.textContent = `Total Spent: €${totalCost} / €40 Budget (€${remaining} left)`;
+        budgetEl.style.color = '#385137';
+      } else {
+        budgetEl.textContent = `Over Budget: €${totalCost} / €40 (€${Math.abs(remaining)} too expensive!)`;
+        budgetEl.style.color = '#a64420';
+      }
+    }
+
+    let capTimer = null;
+    function startCapsuleClock(seconds = 60) {
+      clearInterval(capTimer);
+      let left = seconds;
+      const disp = document.getElementById('capsuleClock');
+      function paint() {
+        const m = String(Math.floor(left / 60)).padStart(2, '0');
+        const s = String(left % 60).padStart(2, '0');
+        disp.textContent = `${m}:${s}`;
+      }
+      paint();
+      capTimer = setInterval(() => {
+        left--;
+        paint();
+        if (left <= 0) {
+          clearInterval(capTimer);
+          disp.textContent = '00:00';
+        }
+      }, 1000);
+    }
+
+    function resetCapsuleClock() {
+      clearInterval(capTimer);
+      document.getElementById('capsuleClock').textContent = '01:00';
+    }
+
+    /* --- 8. HOMEWORK 4 LIVE WRITING CHECKLIST --- */
+    function checkHwWriting() {
+      const txt = document.getElementById('hwParagraphInput').value;
+      const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+      const hasToo = /\btoo(\s+much|\s+many)?\b/i.test(txt);
+      const hasEnough = /\benough\b/i.test(txt);
+      const vocabMatches = txt.match(/\b(bargain|charity shop|thrift store|brand-new|pre-loved|vintage|receipt|fit|upcycle|flawed|rummage)\b/gi) || [];
+      const uniqueVocab = new Set(vocabMatches.map(w => w.toLowerCase()));
+
+      document.getElementById('hwCheckWords').innerHTML = `${words >= 85 ? '✅' : '⬜'} Word count: <b id="hwWordNum">${words}</b> / 90–110 words`;
+      document.getElementById('hwCheckToo').innerHTML = `${hasToo ? '✅' : '⬜'} Use <i>too / too much / too many</i>`;
+      document.getElementById('hwCheckEnough').innerHTML = `${hasEnough ? '✅' : '⬜'} Use <i>enough</i>`;
+      document.getElementById('hwCheckVocab').innerHTML = `${uniqueVocab.size >= 2 ? '✅' : '⬜'} Use at least 2 lesson words (${uniqueVocab.size}/2)`;
+    }
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
