@@ -3,7 +3,7 @@ const LESSONS = [
         title: "Writing - Education (IELTS)",
         level: "B2",
         type: "Lesson plan",
-        category: "Education",
+        category: "Exam",
         description: "Interactive IELTS lesson exploring the education, learning how to reach 8.5 in writing task 2.",
         file: "lessons/IELTS_Writing_Task_2.html"
     },
@@ -141,7 +141,7 @@ const LESSONS = [
     },
       {
         title: "Relationship",
-        level: "A2-B1",
+        level: "A2",
         type: "Vocabulary",
         category: "Daily life",
         description: "Learn common phrasal verbs related to the relationship. Learn about question words and sunject/object questions.",
@@ -162,7 +162,7 @@ const LESSONS = [
         title: "AHS English B2 Interactive Mock Exam",
         level: "B2",
         type: "Lesson plan",
-        category: "Work & Study",
+        category: "Exam",
         description: "Practice taking the B2-level test as in the real environment.",
         file: "lessons/AHS_English_B2_Interactive_Mock_Exam.html"
     },
@@ -178,9 +178,16 @@ const LESSONS = [
         title: "IELTS Listening & Grammar",
         level: "B2",
         type: "Lesson plan",
-        category: "Daily Life",
-        description: "....",
+        category: "Exam",
+        description: "Build B1-to-B2 IELTS Listening accuracy by spotting distractors, changed plans, and contrast cues (was going to, was supposed to, meant to, although, despite, whereas) across 90 minutes of guided practice, Part 2 & Part 3 simulations, and speaking tasks.",
         file: "lessons/ielts_listening.html"
     },
-    
+     {
+        title: "Thrifting is a trend",
+        level: "B1",
+        type: "Lesson plan",
+        category: "Culture & Trends",
+        description: "Explore second-hand shopping, hidden market gems, and upcycling at A2–B1 level through a 60-minute interactive lesson with 10 vocabulary items, reading tasks, too vs. enough practice, two-speaker listening, and role-play.",
+        file: "lessons/thrift_and_secondhand_finds.html"
+    },
 ];
