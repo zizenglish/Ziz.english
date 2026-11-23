@@ -190,4 +190,12 @@ const LESSONS = [
         description: "Explore second-hand shopping, hidden market gems, and upcycling at A2–B1 level through a 60-minute interactive lesson with 10 vocabulary items, reading tasks, too vs. enough practice, two-speaker listening, and role-play.",
         file: "lessons/thrift_and_secondhand_finds.html"
     },
+    {
+    title: "The Fine Art of Pushing Back: Boundaries, Diplomacy & Difficult Conversations",
+    level: "C1",
+    type: "Lesson plan",
+    category: "Communication & Work",
+    description: "Practise C1 diplomacy, pushback, and boundary-setting through 10 high-nuance expressions, analytical reading, inversion and contrast structures, two-speaker listening, and negotiation role-plays.",
+    file: "lessons/c1_art_of_pushing_back.html"
+},
 ];
