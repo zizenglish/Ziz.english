@@ -357,19 +357,6 @@
       color: var(--charcoal);
       line-height: 1.2;
     }
-    .audio-chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 700;
-      background: var(--pine-soft);
-      color: var(--pine);
-      border: 1px solid #bfd1cb;
-      padding: 3px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .audio-chip:hover { background: var(--pine); color: #ffffff; }
     .vocab-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--umber-dark); }
     .vocab-meaning { font-size: 13.5px; color: var(--charcoal); }
     .vocab-quote {
@@ -426,16 +413,21 @@
       background: var(--paper-card);
       border: var(--border-arch);
       border-radius: 8px;
-      padding: 12px 15px;
-      margin-bottom: 9px;
+      padding: 13px 16px;
+      margin-bottom: 10px;
       font-size: 14.5px;
+      line-height: 1.75;
     }
     .line-flex {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
+    }
+    .line-prompt-text {
+      flex: 1 1 360px;
+      min-width: 240px;
     }
 
     .feedback-note {
@@ -449,6 +441,84 @@
       font-weight: 600;
     }
     .feedback-note.open { display: block; }
+
+    /* --- MCQ CARDS (.mcq-opt & .opt-pill) --- */
+    .mcq-block {
+      background: var(--paper-card);
+      border: var(--border-arch);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .mcq-stem {
+      font-weight: 700;
+      font-size: 14.8px;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .mcq-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mcq-opt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid #d5cbb8;
+      background: var(--paper-tint);
+      color: var(--charcoal);
+      font-size: 14px;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .mcq-opt:hover {
+      background: #ffffff;
+      border-color: var(--pine);
+      transform: translateX(2px);
+    }
+    .mcq-opt.selected {
+      background: var(--pine-soft);
+      border: 2px solid var(--pine);
+      font-weight: 700;
+    }
+    .mcq-opt.ans-ok {
+      background: var(--pine-soft) !important;
+      border: 2px solid var(--pine) !important;
+      color: var(--pine-dark) !important;
+      font-weight: 700;
+    }
+    .mcq-opt.ans-bad {
+      background: var(--umber-soft) !important;
+      border: 2px solid var(--umber) !important;
+      color: var(--umber-dark) !important;
+    }
+    .opt-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .mcq-opt.selected .opt-pill,
+    .mcq-opt.ans-ok .opt-pill {
+      background: var(--pine);
+      color: #ffffff;
+    }
+    .mcq-opt.ans-bad .opt-pill {
+      background: var(--umber);
+      color: #ffffff;
+    }
 
     /* --- STAGE 3: ANALYTICAL ESSAY --- */
     .essay-article {
@@ -504,6 +574,16 @@
     }
     .structure-card.umber-top .formula-badge { background: var(--umber); }
     .structure-card h4 { font-family: 'Newsreader', serif; font-size: 20px; margin-bottom: 6px; }
+    .structure-card p { font-size: 13.6px; color: var(--charcoal-sub); margin-bottom: 8px; }
+    .structure-example {
+      font-size: 13px;
+      background: #ffffff;
+      border: 1px solid #e2d8c6;
+      padding: 9px 12px;
+      border-radius: 6px;
+      color: var(--charcoal);
+    }
+
     /* --- STAGE 5: CLEAN AUDIO STUDIO (PURE FOLDER MP3 PLAYER) --- */
     .studio-console {
       background: var(--charcoal);
@@ -656,7 +736,8 @@
       border-color: var(--pine);
       box-shadow: 0 0 0 3px rgba(30, 58, 50, 0.14);
     }
-    input.ed-input { width: 225px; }
+    select.ed-select { max-width: 100%; }
+    input.ed-input { width: 225px; max-width: 100%; }
     textarea.ed-textarea { width: 100%; resize: vertical; }
 
     .mark-correct { border-color: var(--pine) !important; background: var(--pine-soft) !important; color: var(--pine-dark) !important; font-weight: 700 !important; }
@@ -792,7 +873,7 @@
           <span class="timing-tag">12 MIN • 10 EXPRESSIONS + 2 TASKS</span>
         </div>
         <h2>Nuanced C1 Lexis for Pressure, Boundaries &amp; Subtext</h2>
-        <p class="ed-lead">Review all <b>10 C1 expressions</b> below (click <b>🔊</b> for British English pronunciation), then complete <b>Task 2A</b> and <b>Task 2B</b>.</p>
+        <p class="ed-lead">Review all <b>10 C1 expressions</b> below, then complete <b>Task 2A</b> and <b>Task 2B</b>.</p>
 
         <div class="vocab-deck-grid">
           <div class="c1-vocab-card">
@@ -891,14 +972,30 @@
             <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'overextending yourself')">overextending yourself</button>
           </div>
 
-          <div class="line-item">1. <i>[Flat: stop the problem early]</i> If a client starts messaging you at midnight, <input type="text" class="ed-input" data-question="2B Upgrade 1" data-answer="nip it in the bud" placeholder="C1 expression..." /> before it becomes routine.</div>
-          <div class="line-item">2. <i>[Flat: given an unwanted task]</i> Because nobody else volunteered, I got <input type="text" class="ed-input" data-question="2B Upgrade 2" data-answer="lumbered with" placeholder="C1 expression..." /> organizing the entire archive.</div>
-          <div class="line-item">3. <i>[Flat: feeling secret anger]</i> Agreeing out of politeness often results in <input type="text" class="ed-input" data-question="2B Upgrade 3" data-answer="harbouring resentment" placeholder="C1 expression..." /> toward the person who asked.</div>
-          <div class="line-item">4. <i>[Flat: didn't back down]</i> Despite intense questioning from the board, Elena <input type="text" class="ed-input" data-question="2B Upgrade 4" data-answer="held her ground" placeholder="C1 expression..." /> on the launch date.</div>
-          <div class="line-item">5. <i>[Flat: force me to accept]</i> He tried to <input type="text" class="ed-input" data-question="2B Upgrade 5" data-answer="strong-arm me into" placeholder="C1 expression..." /> cutting my fee by claiming another consultant was cheaper.</div>
-          <div class="line-item">6. <i>[Flat: unspoken rule]</i> Nobody wrote it in the handbook, yet there was a <input type="text" class="ed-input" data-question="2B Upgrade 6" data-answer="tacit agreement" placeholder="C1 expression..." /> to skip lunch during release week.</div>
-          <div class="line-item">7. <i>[Flat: courteous refusal]</i> Saying “We'll keep your proposal on file” is usually a <input type="text" class="ed-input" data-question="2B Upgrade 7" data-answer="polite brush-off" placeholder="C1 expression..." />.</div>
-          <div class="line-item" style="margin-bottom: 14px;">8. <i>[Flat: taking on too much]</i> You're <input type="text" class="ed-input" data-question="2B Upgrade 8" data-answer="overextending yourself" placeholder="C1 expression..." /> by mentoring four juniors on top of your own accounts.</div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">1. <i>[Flat: stop the problem early]</i> If a client starts messaging you at midnight, <input type="text" class="ed-input" data-question="2B Upgrade 1" data-answer="nip it in the bud" placeholder="C1 expression..." /> before it becomes routine.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">2. <i>[Flat: given an unwanted task]</i> Because nobody else volunteered, I got <input type="text" class="ed-input" data-question="2B Upgrade 2" data-answer="lumbered with" placeholder="C1 expression..." /> organizing the entire archive.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">3. <i>[Flat: feeling secret anger]</i> Agreeing out of politeness often results in <input type="text" class="ed-input" data-question="2B Upgrade 3" data-answer="harbouring resentment" placeholder="C1 expression..." /> toward the person who asked.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">4. <i>[Flat: didn't back down]</i> Despite intense questioning from the board, Elena <input type="text" class="ed-input" data-question="2B Upgrade 4" data-answer="held her ground" placeholder="C1 expression..." /> on the launch date.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">5. <i>[Flat: force me to accept]</i> He tried to <input type="text" class="ed-input" data-question="2B Upgrade 5" data-answer="strong-arm me into" placeholder="C1 expression..." /> cutting my fee by claiming another consultant was cheaper.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">6. <i>[Flat: unspoken rule]</i> Nobody wrote it in the handbook, yet there was a <input type="text" class="ed-input" data-question="2B Upgrade 6" data-answer="tacit agreement" placeholder="C1 expression..." /> to skip lunch during release week.</span>
+          </div>
+          <div class="line-item line-flex">
+            <span class="line-prompt-text">7. <i>[Flat: courteous refusal]</i> Saying “We'll keep your proposal on file” is usually a <input type="text" class="ed-input" data-question="2B Upgrade 7" data-answer="polite brush-off" placeholder="C1 expression..." />.</span>
+          </div>
+          <div class="line-item line-flex" style="margin-bottom: 14px;">
+            <span class="line-prompt-text">8. <i>[Flat: taking on too much]</i> You're <input type="text" class="ed-input" data-question="2B Upgrade 8" data-answer="overextending yourself" placeholder="C1 expression..." /> by mentoring four juniors on top of your own accounts.</span>
+          </div>
 
           <button type="button" class="btn-umber" onclick="gradeInputs('c1Upgrade2B', 'score2B')">Check Task 2B</button>
           <span class="score-pill" id="score2B"></span>
@@ -937,9 +1034,9 @@
           <div class="mcq-block" data-question="Reading 3A Q1" data-answer="B">
             <div class="mcq-stem">1. What does the author imply happens when someone replies “I'll try to squeeze that in”?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Colleagues immediately recognize it as a polite brush-off.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> The requester assumes commitment while the responder quietly builds resentment.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Management automatically extends the project deadline.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Colleagues immediately recognize it as a polite brush-off.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> The requester assumes commitment while the responder quietly builds resentment.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Management automatically extends the project deadline.</div>
             </div>
             <div class="feedback-note"><b>Why B?</b> Paragraph 1 notes that an ambiguous reply is taken as a <i>tacit agreement</i>, leaving the responder overextended and <i>harbouring resentment</i>.</div>
           </div>
@@ -947,9 +1044,9 @@
           <div class="mcq-block" data-question="Reading 3A Q2" data-answer="C">
             <div class="mcq-stem">2. According to Paragraph 2, how do conscientious professionals end up overloaded?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> They publicly refuse to collaborate with assertive colleagues.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> They lack the technical skills to delegate effectively.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Their one-off concessions silently become permanent expectations.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> They publicly refuse to collaborate with assertive colleagues.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> They lack the technical skills to delegate effectively.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Their one-off concessions silently become permanent expectations.</div>
             </div>
             <div class="feedback-note"><b>Why C?</b> <i>“Once an employee or consultant caves in to a last-minute demand without renegotiating deadlines, that exception swiftly hardens into an unwritten baseline.”</i></div>
           </div>
@@ -957,9 +1054,9 @@
           <div class="mcq-block" data-question="Reading 3A Q3" data-answer="A" style="margin-bottom: 12px;">
             <div class="mcq-stem">3. What is the author's core definition of effective pushback in Paragraph 3?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Combining interpersonal warmth with unambiguous, unapologetic limits.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Using blunt language so colleagues stop asking for favours altogether.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Apologizing extensively whenever a deadline cannot be met.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Combining interpersonal warmth with unambiguous, unapologetic limits.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Using blunt language so colleagues stop asking for favours altogether.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Apologizing extensively whenever a deadline cannot be met.</div>
             </div>
             <div class="feedback-note"><b>Why A?</b> The essay states that skilled communicators <i>“separate warmth from compliance”</i> and state constraints <i>“without apology.”</i></div>
           </div>
@@ -973,31 +1070,31 @@
           <h3>Task 3B · True, False, or Not Given (5 Items)</h3>
 
           <div class="line-item line-flex">
-            <span>1. The author argues that chronic hedging protects long-term workplace harmony.</span>
+            <span class="line-prompt-text">1. The author argues that chronic hedging protects long-term workplace harmony.</span>
             <select class="ed-select" data-question="Reading 3B Q1" data-answer="False">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>2. Colleagues who offload extra tasks always act with malicious intent.</span>
+            <span class="line-prompt-text">2. Colleagues who offload extra tasks always act with malicious intent.</span>
             <select class="ed-select" data-question="Reading 3B Q2" data-answer="False">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>3. Most companies currently reward realistic boundary-setting more than overtime.</span>
+            <span class="line-prompt-text">3. Most companies currently reward realistic boundary-setting more than overtime.</span>
             <select class="ed-select" data-question="Reading 3B Q3" data-answer="False">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>4. Remote workers experience higher rates of scope creep than office-based staff.</span>
+            <span class="line-prompt-text">4. Remote workers experience higher rates of scope creep than office-based staff.</span>
             <select class="ed-select" data-question="Reading 3B Q4" data-answer="Not Given">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
             </select>
           </div>
           <div class="line-item line-flex" style="margin-bottom: 12px;">
-            <span>5. A clear refusal today is presented as more respectful than an unreliable commitment.</span>
+            <span class="line-prompt-text">5. A clear refusal today is presented as more respectful than an unreliable commitment.</span>
             <select class="ed-select" data-question="Reading 3B Q5" data-answer="True">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
             </select>
@@ -1101,41 +1198,55 @@
           <div class="mcq-block" data-question="4B Nuance 1" data-answer="B">
             <div class="mcq-stem">1. A stakeholder pressures you to skip user testing. Which response is firm, polished, and non-defensive?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> You're trying to strong-arm me into shipping broken code, and I won't do it.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Were we to skip user testing now, we would risk costly rework immediately after launch.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> I'm super sorry, maybe we can skip it if you really think we have to?</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> You're trying to strong-arm me into shipping broken code, and I won't do it.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Were we to skip user testing now, we would risk costly rework immediately after launch.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> I'm super sorry, maybe we can skip it if you really think we have to?</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="4B Nuance 2" data-answer="A">
             <div class="mcq-stem">2. A colleague implies you are being inflexible by refusing an extra task. How do you reframe it?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Far from being uncooperative, protecting our core milestones ensures nothing slips.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> I am always getting lumbered with everyone else's work around here.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Whatever, I'll try to look at it if I get five spare minutes.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Far from being uncooperative, protecting our core milestones ensures nothing slips.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> I am always getting lumbered with everyone else's work around here.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Whatever, I'll try to look at it if I get five spare minutes.</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="4B Nuance 3" data-answer="C">
             <div class="mcq-stem">3. You want to decline a friend's request for unpaid legal/financial advice without damaging the friendship:</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Email me the files and I'll eventually get around to it.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Never bring work documents when we meet for dinner.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Much as I'd like to weigh in properly, I keep evenings off-duty—I can send you two great referrals tomorrow.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Email me the files and I'll eventually get around to it.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Never bring work documents when we meet for dinner.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Much as I'd like to weigh in properly, I keep evenings off-duty—I can send you two great referrals tomorrow.</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="4B Nuance 4" data-answer="B" style="margin-bottom: 12px;">
             <div class="mcq-stem">4. How do you clarify that your objection is about timing rather than the quality of a colleague's proposal?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Your proposal has too many flaws to launch this quarter.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> It is not so much the concept itself as the current Q3 bandwidth that makes this unfeasible.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Let's circle back someday when things calm down.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Your proposal has too many flaws to launch this quarter.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> It is not so much the concept itself as the current Q3 bandwidth that makes this unfeasible.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Let's circle back someday when things calm down.</div>
             </div>
           </div>
 
           <button type="button" class="btn-umber" onclick="gradeMcqPanel('diplomacyMcq4B', 'score4B')">Check Task 4B</button>
           <span class="score-pill" id="score4B"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 5 (11 MIN): TWO-SPEAKER LISTENING (CLARA & JULIAN)          -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage5">
+        <div class="ed-card-header">
+          <span class="stage-tag">Stage 5 • Two-Speaker Listening &amp; Subtext</span>
+          <span class="timing-tag">11 MIN • CLARA &amp; JULIAN</span>
+        </div>
+        <h2>Negotiating Scope Without Damaging Rapport</h2>
+        <p class="ed-lead">Listen to <b>Clara</b> and <b>Julian</b> discuss an accelerated client launch and an extra analytics deck, then complete Tasks 5A and 5B.</p>
+
         <!-- Pure HTML5 Folder MP3 Player (../audio/c1_pushback_listening.mp3) -->
         <div class="studio-console">
           <audio id="c1StudioMp3" src="../audio/c1_pushback_listening.mp3" preload="metadata"></audio>
@@ -1182,45 +1293,45 @@
           <div class="mcq-block" data-question="C1 Listening 5A Q1" data-answer="B">
             <div class="mcq-stem">1. How does Julian initially try to persuade Clara to accept the extra analytics deck?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> By offering to extend the client launch date by ten days</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> By minimizing the workload (“just a few extra slides”) and asking her to squeeze it in</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> By offering to handle the slide formatting himself</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> By offering to extend the client launch date by ten days</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> By minimizing the workload (“just a few extra slides”) and asking her to squeeze it in</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> By offering to handle the slide formatting himself</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="C1 Listening 5A Q2" data-answer="C">
             <div class="mcq-stem">2. What is Julian's real personal reason for wanting Clara to take the task?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> He believes Clara has plenty of free capacity this week.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Senior management specifically assigned the deck to Clara.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> He wants to avoid getting lumbered with the formatting himself.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> He believes Clara has plenty of free capacity this week.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Senior management specifically assigned the deck to Clara.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> He wants to avoid getting lumbered with the formatting himself.</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="C1 Listening 5A Q3" data-answer="A">
             <div class="mcq-stem">3. How does Clara frame the choice when Julian resists moving the deadline?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> As an objective trade-off between moving the launch date or dropping the secondary report</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> As a personal refusal to collaborate with the account team</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> As a request for extra overtime pay before Friday</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> As an objective trade-off between moving the launch date or dropping the secondary report</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> As a personal refusal to collaborate with the account team</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> As a request for extra overtime pay before Friday</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="C1 Listening 5A Q4" data-answer="B">
             <div class="mcq-stem">4. Why does Clara warn against saying yes “just to keep the peace”?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> The client has already cancelled the analytics deck.</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Agreeing reluctantly will leave her harbouring resentment later.</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Her team does not have access to the analytics software.</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> The client has already cancelled the analytics deck.</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Agreeing reluctantly will leave her harbouring resentment later.</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Her team does not have access to the analytics software.</div>
             </div>
           </div>
 
           <div class="mcq-block" data-question="C1 Listening 5A Q5" data-answer="C" style="margin-bottom: 12px;">
             <div class="mcq-stem">5. What do Clara and Julian finally agree to do?</div>
             <div class="mcq-choices">
-              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Postpone the client launch until next month</div>
-              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Split the slide formatting equally before Friday</div>
-              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Keep the extra deck out of this sprint and review it next week</div>
+              <div class="mcq-opt" data-val="A" onclick="selectMcq(this)"><span class="opt-pill">A</span> Postpone the client launch until next month</div>
+              <div class="mcq-opt" data-val="B" onclick="selectMcq(this)"><span class="opt-pill">B</span> Split the slide formatting equally before Friday</div>
+              <div class="mcq-opt" data-val="C" onclick="selectMcq(this)"><span class="opt-pill">C</span> Keep the extra deck out of this sprint and review it next week</div>
             </div>
           </div>
 
@@ -1391,7 +1502,7 @@
 
         <div class="task-panel" id="hw3ReadingPanel" style="margin-bottom: 0;">
           <div class="line-item line-flex">
-            <span>1. What unintended effect have instant messaging tools created in many workplaces?</span>
+            <span class="line-prompt-text">1. What unintended effect have instant messaging tools created in many workplaces?</span>
             <select class="ed-select" data-question="HW3 Q1" data-answer="An unspoken expectation of constant availability">
               <option value="">Choose...</option>
               <option value="A complete elimination of scheduled meetings">A complete elimination of scheduled meetings</option>
@@ -1399,7 +1510,7 @@
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>2. According to Paragraph 1, what is often confused with genuine dedication?</span>
+            <span class="line-prompt-text">2. According to Paragraph 1, what is often confused with genuine dedication?</span>
             <select class="ed-select" data-question="HW3 Q2" data-answer="Fast reply times">
               <option value="">Choose...</option>
               <option value="Fast reply times">Fast reply times</option>
@@ -1407,19 +1518,19 @@
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>3. Experienced leaders go offline without telling their teams.</span>
+            <span class="line-prompt-text">3. Experienced leaders go offline without telling their teams.</span>
             <select class="ed-select" data-question="HW3 Q3" data-answer="False">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option>
             </select>
           </div>
           <div class="line-item line-flex">
-            <span>4. The author acknowledges that genuine emergencies sometimes require immediate action.</span>
+            <span class="line-prompt-text">4. The author acknowledges that genuine emergencies sometimes require immediate action.</span>
             <select class="ed-select" data-question="HW3 Q4" data-answer="True">
               <option value="">Choose...</option><option value="True">True</option><option value="False">False</option>
             </select>
           </div>
           <div class="line-item line-flex" style="margin-bottom: 12px;">
-            <span>5. What happens when every routine request is treated as urgent?</span>
+            <span class="line-prompt-text">5. What happens when every routine request is treated as urgent?</span>
             <select class="ed-select" data-question="HW3 Q5" data-answer="Teams become overextended and lose strategic focus">
               <option value="">Choose...</option>
               <option value="Teams become overextended and lose strategic focus">Teams become overextended and lose strategic focus</option>
@@ -1513,7 +1624,7 @@
         const row = document.createElement('div');
         row.className = 'line-item line-flex';
         row.innerHTML = `
-          <span><b>${index + 1}.</b> ${item.def}</span>
+          <span class="line-prompt-text"><b>${index + 1}.</b> ${item.def}</span>
           <select class="ed-select" data-question="C1 Vocab 2A #${index + 1}" data-answer="${item.term}">
             <option value="">Select C1 expression...</option>
             ${shuffledTerms.map(t => `<option value="${t}">${t}</option>`).join('')}
@@ -1544,47 +1655,7 @@
       }
     }
 
-    /* --- 5. CLEAN TWO-SPEAKER AUDIO ENGINE (LOCAL MP3 + WEB SPEECH FALLBACK) --- */
-    let speechTurnQueue = [];
-    let isDialogueRunning = false;
-    let localMp3Ready = false;
-
-    const studioMp3El = document.getElementById('c1StudioMp3');
-    if (studioMp3El) {
-      studioMp3El.addEventListener('loadedmetadata', () => {
-        localMp3Ready = true;
-        document.getElementById('c1AudioStatus').textContent = 'STUDIO MP3 LOADED // Clara & Julian Ready';
-      });
-      studioMp3El.addEventListener('error', () => {
-        localMp3Ready = false;
-      });
-    }
-
-    function getEnVoices() {
-      if (!('speechSynthesis' in window)) return [];
-      return window.speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
-    }
-
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => getEnVoices();
-    }
-
-    function speakPhrase(phrase) {
-      stopC1Dialogue();
-      if (!('speechSynthesis' in window)) return;
-      const u = new SpeechSynthesisUtterance(phrase);
-      u.lang = 'en-GB';
-      u.rate = 0.92;
-      window.speechSynthesis.speak(u);
-    }
-
-    const c1DialogueTurns = [
-      ['Julian', 'Clara, thanks for jumping on this call. We are bringing forward the client launch by ten days, and I thought you could take on the extra analytics deck too.'],
-      ['Clara', 'Much as I want the launch to go smoothly, Julian, taking on a full analytics deck right now would mean overextending myself.'],
-      ['Julian', 'Come on, it is just a few extra slides. Surely you can squeeze it in before Friday?'],
-      ['Clara', 'I am not going to hedge around it: if I squeeze that in without moving the deadline, the core deliverables will suffer.'],
-      ['Julian', 'Look, everyone else is swamped, and I really do not want to get lumbered with the formatting myself.'],
-    /* --- 5. PURE HTML5 FOLDER MP3 PLAYER (NO SPEECH SYNTHESIS) --- */
+    /* --- 5. PURE HTML5 FOLDER MP3 PLAYER --- */
     const folderAudio = document.getElementById('c1StudioMp3');
     const audioStatusEl = document.getElementById('c1AudioStatus');
     const audioTimeEl = document.getElementById('c1TimeReadout');
@@ -1726,11 +1797,11 @@
       out.style.color = ok === total ? '#1e3a32' : '#9e472a';
     }
 
-    function selectMcq(choiceEl) {
-      const block = choiceEl.closest('.mcq-block');
-      block.querySelectorAll('.mcq-choice').forEach(c => c.classList.remove('selected'));
-      choiceEl.classList.add('selected');
-      block.dataset.userPick = choiceEl.dataset.val;
+    function selectMcq(optEl) {
+      const block = optEl.closest('.mcq-block');
+      block.querySelectorAll('.mcq-opt').forEach(o => o.classList.remove('selected'));
+      optEl.classList.add('selected');
+      block.dataset.userPick = optEl.dataset.val;
     }
 
     function gradeMcqPanel(panelId, scoreId) {
@@ -1740,10 +1811,10 @@
         total++;
         const ans = block.dataset.answer;
         const pick = block.dataset.userPick || '';
-        block.querySelectorAll('.mcq-choice').forEach(c => {
-          c.classList.remove('is-correct', 'is-wrong');
-          if (c.dataset.val === ans) c.classList.add('is-correct');
-          else if (c.dataset.val === pick && pick !== ans) c.classList.add('is-wrong');
+        block.querySelectorAll('.mcq-opt').forEach(opt => {
+          opt.classList.remove('ans-ok', 'ans-bad');
+          if (opt.dataset.val === ans) opt.classList.add('ans-ok');
+          else if (opt.dataset.val === pick && pick !== ans) opt.classList.add('ans-bad');
         });
         if (pick === ans) ok++;
         const note = block.querySelector('.feedback-note');
