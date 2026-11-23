@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Fine Art of Pushing Back: Boundaries, Diplomacy &amp; Difficult Conversations | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,600;0,6..72,700;1,6..72,600;1,6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Bespoke Adult Editorial: Warm Ivory-Stone, Deep Botanical Pine & Burnt-Umber */
+      --stone-bg: #f6f2eb;
+      --stone-deep: #ece6db;
+      --paper-card: #fcfbf8;
+      --paper-tint: #f8f4ec;
+      --charcoal: #181c1e;
+      --charcoal-sub: #52595d;
+      --pine: #1e3a32;
+      --pine-dark: #132721;
+      --pine-soft: #e6efec;
+      --umber: #9e472a;
+      --umber-dark: #7d361f;
+      --umber-soft: #faece7;
+      --sand-ochre: #e8dec8;
+      --border-arch: 1.5px solid #d5cbb8;
+      --shadow-editorial: 0 12px 32px rgba(24, 28, 30, 0.055);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--stone-bg);
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(30, 58, 50, 0.055) 0%, transparent 42%),
+        radial-gradient(circle at 88% 82%, rgba(158, 71, 42, 0.055) 0%, transparent 45%);
+      color: var(--charcoal);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      line-height: 1.66;
+      padding-bottom: 96px;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP STICKY EDITORIAL HEADER --- */
+    .ed-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 950;
+      background: rgba(252, 251, 248, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: var(--border-arch);
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand-group { display: flex; align-items: center; gap: 12px; }
+    .brand-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+    }
+    .brand-title span { color: var(--umber); font-style: italic; }
+
+    .cefr-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--pine-soft);
+      color: var(--pine);
+      border: 1px solid #bfd1cb;
+      padding: 4px 11px;
+      border-radius: 6px;
+    }
+
+    .mode-switch-bar {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--stone-deep);
+      padding: 4px;
+      border-radius: 8px;
+      border: var(--border-arch);
+    }
+
+    .mode-tab {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--charcoal-sub);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .mode-tab.active {
+      background: var(--pine);
+      color: #ffffff;
+    }
+
+    .scroll-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(24, 28, 30, 0.07);
+    }
+    .scroll-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--pine), var(--umber));
+      transition: width 0.15s ease;
+    }
+
+    /* --- CONTAINER & PANELS --- */
+    .ed-shell { max-width: 1080px; margin: 28px auto 0; padding: 0 20px; }
+    .view-panel { display: none; animation: revealPanel 0.24s ease; }
+    .view-panel.active { display: block; }
+    @keyframes revealPanel {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HERO FEATURE HEADER --- */
+    .hero-editorial {
+      background: var(--paper-card);
+      border: 1.5px solid var(--charcoal);
+      border-radius: 14px;
+      padding: 36px 40px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-editorial);
+      display: grid;
+      grid-template-columns: 1.55fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--umber);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .hero-editorial h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(31px, 4.4vw, 46px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+    .hero-editorial h1 em { color: var(--pine); font-style: italic; }
+    .hero-editorial p { font-size: 15px; color: var(--charcoal-sub); margin-bottom: 18px; }
+
+    .hero-meta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .meta-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--paper-tint);
+      color: var(--charcoal);
+      border: var(--border-arch);
+      padding: 4px 11px;
+      border-radius: 5px;
+    }
+
+    .hero-callout-card {
+      background: var(--pine);
+      color: #fcfbf8;
+      border-radius: 10px;
+      padding: 22px;
+      border: 1.5px solid var(--pine-dark);
+    }
+    .hero-callout-card .callout-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sand-ochre);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .hero-callout-card blockquote {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    /* --- QUICK STAGE JUMP BAR --- */
+    .stage-jump-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 24px;
+    }
+    .jump-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--charcoal);
+      background: var(--paper-card);
+      border: var(--border-arch);
+      padding: 7px 13px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.14s ease;
+    }
+    .jump-pill:hover { background: var(--pine); color: #ffffff; border-color: var(--pine); }
+
+    /* --- ARCHITECTURAL LESSON SHEETS --- */
+    .ed-card {
+      background: var(--paper-card);
+      border: var(--border-arch);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-editorial);
+    }
+
+    .ed-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1.5px solid var(--stone-deep);
+    }
+
+    .stage-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--pine);
+      background: var(--pine-soft);
+      padding: 4px 11px;
+      border-radius: 5px;
+    }
+    .stage-tag.umber { color: var(--umber-dark); background: var(--umber-soft); }
+
+    .timing-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--sand-ochre);
+      color: var(--charcoal);
+      padding: 4px 11px;
+      border-radius: 5px;
+    }
+
+    .ed-card h2 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(25px, 3.3vw, 34px);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .ed-lead { font-size: 15px; color: var(--charcoal-sub); margin-bottom: 22px; }
+
+    /* --- STAGE 1: DILEMMA SPECTRUM --- */
+    .dilemma-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 22px; }
+    .dilemma-card {
+      background: var(--paper-tint);
+      border: var(--border-arch);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .dilemma-title {
+      font-family: 'Newsreader', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--charcoal);
+    }
+    .dilemma-btns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 12px;
+    }
+    .stance-btn {
+      padding: 9px 12px;
+      border-radius: 7px;
+      border: var(--border-arch);
+      background: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+    .stance-btn:hover { border-color: var(--pine); }
+    .stance-btn.picked { background: var(--pine); border-color: var(--pine); color: #ffffff; }
+
+    .reflection-callout {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 15px;
+      background: #ffffff;
+      border-left: 3.5px solid var(--umber);
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: var(--charcoal);
+    }
+    .reflection-callout.open { display: block; }
+
+    /* --- STAGE 2: C1 VOCABULARY DECK --- */
+    .vocab-deck-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .c1-vocab-card {
+      background: var(--paper-tint);
+      border: var(--border-arch);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .vocab-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .vocab-headword {
+      font-family: 'Newsreader', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+    .audio-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      background: var(--pine-soft);
+      color: var(--pine);
+      border: 1px solid #bfd1cb;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .audio-chip:hover { background: var(--pine); color: #ffffff; }
+    .vocab-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--umber-dark); }
+    .vocab-meaning { font-size: 13.5px; color: var(--charcoal); }
+    .vocab-quote {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--charcoal-sub);
+      background: #ffffff;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #e3dacb;
+    }
+
+    /* --- SUB-EXERCISES & WORD BANK --- */
+    .task-panel {
+      background: var(--stone-deep);
+      border: var(--border-arch);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+    }
+    .task-panel h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .word-bank-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      background: var(--paper-card);
+      border: 1.5px dashed #bfb39d;
+      border-radius: 8px;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+    }
+    .bank-token {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--paper-tint);
+      color: var(--charcoal);
+      border: var(--border-arch);
+      padding: 5px 11px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.13s ease;
+    }
+    .bank-token:hover { background: var(--pine); color: #ffffff; border-color: var(--pine); }
+
+    .line-item {
+      background: var(--paper-card);
+      border: var(--border-arch);
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-bottom: 9px;
+      font-size: 14.5px;
+    }
+    .line-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .feedback-note {
+      display: none;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--sand-ochre);
+      color: var(--charcoal);
+      font-size: 12.8px;
+      font-weight: 600;
+    }
+    .feedback-note.open { display: block; }
+
+    /* --- STAGE 3: ANALYTICAL ESSAY --- */
+    .essay-article {
+      background: var(--paper-tint);
+      border: var(--border-arch);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 22px;
+    }
+    .essay-byline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--umber);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .essay-article h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--charcoal);
+    }
+    .essay-article p { font-size: 15.2px; line-height: 1.82; margin-bottom: 14px; color: var(--charcoal); }
+
+    /* --- STAGE 4: C1 DIPLOMACY & INVERSION LAB --- */
+    .grammar-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .structure-card {
+      background: var(--paper-tint);
+      border: var(--border-arch);
+      border-top: 3.5px solid var(--pine);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .structure-card.umber-top { border-top-color: var(--umber); }
+    .formula-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      background: var(--pine);
+      color: #ffffff;
+      padding: 3px 9px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .structure-card.umber-top .formula-badge { background: var(--umber); }
+    .structure-card h4 { font-family: 'Newsreader', serif; font-size: 20px; margin-bottom: 6px; }
+    /* --- STAGE 5: CLEAN AUDIO STUDIO (PURE FOLDER MP3 PLAYER) --- */
+    .studio-console {
+      background: var(--charcoal);
+      color: #fcfbf8;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 22px;
+    }
+    .studio-btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .audio-seek-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .audio-seek-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .audio-seek-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--sand-ochre), #e08a6b);
+      border-radius: 999px;
+      transition: width 0.08s linear;
+    }
+    .audio-time-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sand-ochre);
+      white-space: nowrap;
+    }
+    .studio-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .studio-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--sand-ochre);
+    }
+    .local-mp3-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fcfbf8;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px dashed rgba(232, 222, 200, 0.55);
+      padding: 4px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.14s ease;
+    }
+    .local-mp3-label:hover { background: rgba(255, 255, 255, 0.22); }
+    .transcript-drawer {
+      display: none;
+      margin-top: 14px;
+      padding: 18px 20px;
+      background: var(--paper-card);
+      color: var(--charcoal);
+      border-radius: 8px;
+      font-size: 14.2px;
+      line-height: 1.78;
+    }
+    .transcript-drawer.open { display: block; }
+
+    /* --- STAGE 6: HIGH-STAKES ROLE-PLAY --- */
+    .scenario-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .scenario-card {
+      background: var(--paper-tint);
+      border: var(--border-arch);
+      border-radius: 10px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .scenario-card h4 { font-family: 'Newsreader', serif; font-size: 19px; color: var(--pine); }
+
+    .clock-bar {
+      background: var(--sand-ochre);
+      border: var(--border-arch);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .timer-digits {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      background: var(--charcoal);
+      color: var(--sand-ochre);
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+
+    /* --- BUTTONS & FORM ELEMENTS --- */
+    .btn-pine, .btn-umber, .btn-ghost {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-pine { background: var(--pine); color: #ffffff; border: 1px solid var(--pine); }
+    .btn-pine:hover { background: var(--pine-dark); }
+    .btn-umber { background: var(--umber); color: #ffffff; border: 1px solid var(--umber); }
+    .btn-umber:hover { background: var(--umber-dark); }
+    .btn-ghost { background: #ffffff; color: var(--charcoal); border: var(--border-arch); padding: 8px 14px; }
+    .btn-ghost:hover { border-color: var(--pine); color: var(--pine); }
+
+    select.ed-select, input.ed-input, textarea.ed-textarea {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border: 1.5px solid #bfb39d;
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--charcoal);
+      outline: none;
+    }
+    select.ed-select:focus, input.ed-input:focus, textarea.ed-textarea:focus {
+      border-color: var(--pine);
+      box-shadow: 0 0 0 3px rgba(30, 58, 50, 0.14);
+    }
+    input.ed-input { width: 225px; }
+    textarea.ed-textarea { width: 100%; resize: vertical; }
+
+    .mark-correct { border-color: var(--pine) !important; background: var(--pine-soft) !important; color: var(--pine-dark) !important; font-weight: 700 !important; }
+    .mark-wrong { border-color: var(--umber) !important; background: var(--umber-soft) !important; color: var(--umber-dark) !important; }
+
+    .score-pill {
+      display: inline-block;
+      margin-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .hero-editorial, .grammar-grid-2, .scenario-grid-3, .dilemma-btns { grid-template-columns: 1fr; }
+      .ed-card { padding: 24px 18px; }
+      .hero-editorial { padding: 26px 20px; }
+      .ed-topbar { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <header class="ed-topbar">
+    <div class="brand-group">
+      <div class="brand-title">ziz<span>.</span>english</div>
+      <span class="cefr-badge">CEFR C1 • 60-Min Adult Lesson</span>
+    </div>
+
+    <div class="mode-switch-bar">
+      <button type="button" class="mode-tab active" data-panel="lesson" onclick="switchView('lesson')">🎯 60-Min Lesson</button>
+      <button type="button" class="mode-tab" data-panel="homework" onclick="switchView('homework')">📝 Homework (30m)</button>
+    </div>
+
+    <div class="scroll-track"><div class="scroll-fill" id="scrollFill"></div></div>
+  </header>
+
+  <div class="ed-shell">
+
+    <!-- =================================================================== -->
+    <!-- PANEL 1: 60-MINUTE INTERACTIVE C1 LESSON                            -->
+    <!-- =================================================================== -->
+    <div id="panel-lesson" class="view-panel active">
+
+      <!-- HERO EDITORIAL BANNER -->
+      <section class="hero-editorial">
+        <div>
+          <span class="hero-kicker">ADVANCED COMMUNICATION &amp; REGISTER • LEVEL C1 • 60 MINUTES</span>
+          <h1>The Fine Art of Pushing Back: <em>Boundaries, Diplomacy &amp; Difficult Conversations</em></h1>
+          <p>Move beyond blunt refusals or vague apologies. Master nuanced C1 idioms for workplace pressure, analyse the hidden cost of tacit agreements, and deploy <b>concessive fronting &amp; inversion</b> to hold your ground with poise.</p>
+          <div class="hero-meta-row">
+            <span class="meta-tag">⏱ 60 Minutes</span>
+            <span class="meta-tag">🗣️ 10 C1 Idioms &amp; Collocations</span>
+            <span class="meta-tag">⚖️ Concessive Fronting &amp; Inversion</span>
+            <span class="meta-tag">🎧 Two-Speaker Audio</span>
+          </div>
+        </div>
+
+        <div class="hero-callout-card">
+          <span class="callout-label">Editorial Thesis</span>
+          <blockquote>“A vague ‘maybe’ rarely protects harmony; more often, it merely postpones a harder conversation.”</blockquote>
+          <div style="font-size: 12.5px; color: rgba(252,251,248,0.82);">Focus: High-register diplomacy, subtext listening &amp; assertive reframing.</div>
+        </div>
+      </section>
+
+      <!-- STAGE JUMP BAR -->
+      <nav class="stage-jump-bar" aria-label="Lesson stages">
+        <a href="#stage1" class="jump-pill">01 · Dilemmas (7m)</a>
+        <a href="#stage2" class="jump-pill">02 · C1 Lexis (12m)</a>
+        <a href="#stage3" class="jump-pill">03 · Reading (12m)</a>
+        <a href="#stage4" class="jump-pill">04 · Diplomacy &amp; Inversion (12m)</a>
+        <a href="#stage5" class="jump-pill">05 · Listening (11m)</a>
+        <a href="#stage6" class="jump-pill">06 · Role-Play (6m)</a>
+      </nav>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 1 (7 MIN): LEAD-IN & DILEMMA SPECTRUM                       -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage1">
+        <div class="ed-card-header">
+          <span class="stage-tag">Stage 1 • Lead-In &amp; Boundary Audit</span>
+          <span class="timing-tag">7 MIN • SPEAKING</span>
+        </div>
+        <h2>How Do You Respond When Someone Pushes Your Limits?</h2>
+        <p class="ed-lead">Read the three adult scenarios below. Select your instinctive response to unlock a targeted C1 discussion prompt.</p>
+
+        <div class="dilemma-grid">
+          <div class="dilemma-card" id="dil1">
+            <div class="dilemma-title">1. The Last-Minute Scope Expansion</div>
+            <p style="font-size: 14px; color: var(--charcoal-sub);">At 4:30 PM on Thursday, a client or senior colleague messages: <i>“Could you quickly fold in three extra market comparisons before tomorrow morning's review? Shouldn't take you long.”</i></p>
+            <div class="dilemma-btns">
+              <button type="button" class="stance-btn" data-question="Dilemma 1 Stance" onclick="selectDilemma('dil1', this, 'Automatic Compliance', 'When we automatically comply to keep the peace, we often create a tacit agreement that late requests are always acceptable. How do you break that pattern later?')">Automatic Compliance</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 1 Stance" onclick="selectDilemma('dil1', this, 'Vague Hedging', 'Saying “I will try my best to squeeze it in” sounds polite, yet leaves the other person expecting delivery. Why is hedging risky here?')">Vague Hedging</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 1 Stance" onclick="selectDilemma('dil1', this, 'Diplomatic Pushback', 'Offering a clear trade-off (“I can include those comparisons if we move the review to Monday”) protects quality without sounding obstructive.')">Diplomatic Pushback</button>
+            </div>
+            <div class="reflection-callout"></div>
+          </div>
+
+          <div class="dilemma-card" id="dil2">
+            <div class="dilemma-title">2. The “Quick Coffee” Consulting Request</div>
+            <p style="font-size: 14px; color: var(--charcoal-sub);">An acquaintance invites you for coffee, then brings a laptop and asks you to audit their strategy or edit a complex proposal for free.</p>
+            <div class="dilemma-btns">
+              <button type="button" class="stance-btn" data-question="Dilemma 2 Stance" onclick="selectDilemma('dil2', this, 'Automatic Compliance', 'Helping once feels generous, but doing unpaid specialist work on the spot often leads to harbouring quiet resentment afterward.')">Automatic Compliance</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 2 Stance" onclick="selectDilemma('dil2', this, 'Vague Hedging', 'Giving a polite brush-off (“Send it over and I might glance at it next month”) delays clarity. When is a clean boundary kinder?')">Vague Hedging</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 2 Stance" onclick="selectDilemma('dil2', this, 'Diplomatic Pushback', 'Separating social time from paid consulting (“Let’s enjoy coffee today; if you’d like a full audit, I can send over my rates”) keeps both dignity and warmth.')">Diplomatic Pushback</button>
+            </div>
+            <div class="reflection-callout"></div>
+          </div>
+
+          <div class="dilemma-card" id="dil3">
+            <div class="dilemma-title">3. Subtle Task Offloading in a Team</div>
+            <p style="font-size: 14px; color: var(--charcoal-sub);">During a project call, a peer says: <i>“Since you're already great with spreadsheets, I'll let you clean up the raw data for everyone.”</i></p>
+            <div class="dilemma-btns">
+              <button type="button" class="stance-btn" data-question="Dilemma 3 Stance" onclick="selectDilemma('dil3', this, 'Automatic Compliance', 'Being reliable can ironically get you lumbered with repetitive tasks that others simply avoid.')">Automatic Compliance</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 3 Stance" onclick="selectDilemma('dil3', this, 'Vague Hedging', 'Hesitating in silence often gets interpreted as consent. How can you nip task-offloading in the bud within ten seconds?')">Vague Hedging</button>
+              <button type="button" class="stance-btn" data-question="Dilemma 3 Stance" onclick="selectDilemma('dil3', this, 'Diplomatic Pushback', 'Redirecting calmly (“I’m happy to share my template, though each owner will need to clean their own dataset”) holds your ground cleanly.')">Diplomatic Pushback</button>
+            </div>
+            <div class="reflection-callout"></div>
+          </div>
+        </div>
+
+        <label style="font-size: 13.5px; font-weight: 700; display: block; margin-bottom: 6px;">🗒️ Warm-Up Reflection Notes (Which scenario feels most familiar in your work or personal life?):</label>
+        <textarea class="ed-textarea" rows="2" data-question="Stage 1 Reflection Notes" placeholder="In my experience, the hardest situation to push back on is..."></textarea>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 2 (12 MIN): C1 VOCABULARY DECK & NUANCE PRACTICE            -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage2">
+        <div class="ed-card-header">
+          <span class="stage-tag umber">Stage 2 • C1 Lexical Precision</span>
+          <span class="timing-tag">12 MIN • 10 EXPRESSIONS + 2 TASKS</span>
+        </div>
+        <h2>Nuanced C1 Lexis for Pressure, Boundaries &amp; Subtext</h2>
+        <p class="ed-lead">Review all <b>10 C1 expressions</b> below (click <b>🔊</b> for British English pronunciation), then complete <b>Task 2A</b> and <b>Task 2B</b>.</p>
+
+        <div class="vocab-deck-grid">
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">1. strong-arm (sb) into doing sth</span></div>
+            <div class="vocab-meta">/ˈstrɒŋ.ɑːm/ • transitive verb • idiomatic</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To pressure or coerce someone into agreeing when they are reluctant.</div></div>
+            <div class="vocab-quote">“Don't let them strong-arm you into signing before you've read the fine print.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">2. be lumbered with (sth)</span></div>
+            <div class="vocab-meta">/ˈlʌm.bəd wɪð/ • verb phrase • BrE C1</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To be given an unwanted or inconvenient task/responsibility that others avoided.</div></div>
+            <div class="vocab-quote">“Because I stayed quiet, I got lumbered with writing the entire compliance report.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">3. cave in (to pressure)</span></div>
+            <div class="vocab-meta">/keɪv ˈɪn/ • phrasal verb</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To finally yield or surrender after resisting arguments or pressure.</div></div>
+            <div class="vocab-quote">“She held out for two days before caving in to the client's rushed timeline.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">4. overextend oneself</span></div>
+            <div class="vocab-meta">/ˌəʊ.vər.ɪkˈstend/ • reflexive verb</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To commit to more obligations than your time, energy, or resources can sustain.</div></div>
+            <div class="vocab-quote">“By taking on three parallel launches, the studio seriously overextended itself.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">5. hold one's ground</span></div>
+            <div class="vocab-meta">/həʊld wʌnz ˈɡraʊnd/ • idiom</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To refuse to back down or compromise your position despite opposition.</div></div>
+            <div class="vocab-quote">“He stayed completely calm and held his ground during the fee negotiation.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">6. nip (sth) in the bud</span></div>
+            <div class="vocab-meta">/nɪp ɪn ðə ˈbʌd/ • idiom</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To stop an unwelcome habit or problem at an early stage before it escalates.</div></div>
+            <div class="vocab-quote">“Address late-night messages early so you nip that expectation in the bud.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">7. hedge (around an issue)</span></div>
+            <div class="vocab-meta">/hedʒ/ • verb</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To avoid giving a direct, unambiguous answer in order to evade commitment.</div></div>
+            <div class="vocab-quote">“Instead of giving a firm date, he hedged around the question for ten minutes.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">8. a polite brush-off</span></div>
+            <div class="vocab-meta">/ˈbrʌʃ.ɒf/ • noun phrase</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">A courteous yet unmistakable dismissal or refusal of someone's request.</div></div>
+            <div class="vocab-quote">“‘Let’s circle back next quarter’ is often just a polite brush-off.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">9. harbour resentment</span></div>
+            <div class="vocab-meta">/ˈhɑː.bə rɪˈzent.mənt/ • collocation</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">To keep feelings of bitterness or anger alive silently over a long period.</div></div>
+            <div class="vocab-quote">“Saying yes out of guilt usually leaves you harbouring resentment later.”</div>
+          </div>
+
+          <div class="c1-vocab-card">
+            <div><div class="vocab-top"><span class="vocab-headword">10. a tacit agreement</span></div>
+            <div class="vocab-meta">/ˈtæs.ɪt əˈɡriː.mənt/ • collocation</div>
+            <div class="vocab-meaning" style="margin-top: 6px;">An unspoken understanding or expectation accepted without being stated aloud.</div></div>
+            <div class="vocab-quote">“There was a tacit agreement that senior staff answered emails on Sundays.”</div>
+          </div>
+        </div>
+
+        <!-- TASK 2A: 10-ITEM RANDOMLY SHUFFLED NUANCE MATCHING -->
+        <div class="task-panel" id="c1VocabMatch2A">
+          <h3>Task 2A · Match All 10 C1 Expressions to Their Exact Nuance</h3>
+          <p style="font-size: 13px; color: var(--charcoal-sub); margin-bottom: 12px;">The definitions and dropdown choices are shuffled — read each nuance carefully before selecting.</p>
+          <div id="vocab10Container"></div>
+          <div style="margin-top: 12px;">
+            <button type="button" class="btn-pine" onclick="gradeSelects('c1VocabMatch2A', 'score2A')">Check Task 2A</button>
+            <span class="score-pill" id="score2A"></span>
+          </div>
+        </div>
+
+        <!-- TASK 2B: UPGRADE FLAT B2 TO NATURAL C1 -->
+        <div class="task-panel" id="c1Upgrade2B" style="margin-bottom: 0;">
+          <h3>Task 2B · Upgrade Flat B2 Sentences to Natural C1 (Click a chip to fill the active box)</h3>
+          <div class="word-bank-bar" id="c1BankBar">
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'nip it in the bud')">nip it in the bud</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'lumbered with')">lumbered with</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'harbouring resentment')">harbouring resentment</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'held her ground')">held her ground</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'strong-arm me into')">strong-arm me into</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'tacit agreement')">tacit agreement</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'polite brush-off')">polite brush-off</button>
+            <button type="button" class="bank-token" onclick="fillActiveToken('c1BankBar', 'overextending yourself')">overextending yourself</button>
+          </div>
+
+          <div class="line-item">1. <i>[Flat: stop the problem early]</i> If a client starts messaging you at midnight, <input type="text" class="ed-input" data-question="2B Upgrade 1" data-answer="nip it in the bud" placeholder="C1 expression..." /> before it becomes routine.</div>
+          <div class="line-item">2. <i>[Flat: given an unwanted task]</i> Because nobody else volunteered, I got <input type="text" class="ed-input" data-question="2B Upgrade 2" data-answer="lumbered with" placeholder="C1 expression..." /> organizing the entire archive.</div>
+          <div class="line-item">3. <i>[Flat: feeling secret anger]</i> Agreeing out of politeness often results in <input type="text" class="ed-input" data-question="2B Upgrade 3" data-answer="harbouring resentment" placeholder="C1 expression..." /> toward the person who asked.</div>
+          <div class="line-item">4. <i>[Flat: didn't back down]</i> Despite intense questioning from the board, Elena <input type="text" class="ed-input" data-question="2B Upgrade 4" data-answer="held her ground" placeholder="C1 expression..." /> on the launch date.</div>
+          <div class="line-item">5. <i>[Flat: force me to accept]</i> He tried to <input type="text" class="ed-input" data-question="2B Upgrade 5" data-answer="strong-arm me into" placeholder="C1 expression..." /> cutting my fee by claiming another consultant was cheaper.</div>
+          <div class="line-item">6. <i>[Flat: unspoken rule]</i> Nobody wrote it in the handbook, yet there was a <input type="text" class="ed-input" data-question="2B Upgrade 6" data-answer="tacit agreement" placeholder="C1 expression..." /> to skip lunch during release week.</div>
+          <div class="line-item">7. <i>[Flat: courteous refusal]</i> Saying “We'll keep your proposal on file” is usually a <input type="text" class="ed-input" data-question="2B Upgrade 7" data-answer="polite brush-off" placeholder="C1 expression..." />.</div>
+          <div class="line-item" style="margin-bottom: 14px;">8. <i>[Flat: taking on too much]</i> You're <input type="text" class="ed-input" data-question="2B Upgrade 8" data-answer="overextending yourself" placeholder="C1 expression..." /> by mentoring four juniors on top of your own accounts.</div>
+
+          <button type="button" class="btn-umber" onclick="gradeInputs('c1Upgrade2B', 'score2B')">Check Task 2B</button>
+          <span class="score-pill" id="score2B"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 3 (12 MIN): ANALYTICAL READING ESSAY                        -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage3">
+        <div class="ed-card-header">
+          <span class="stage-tag">Stage 3 • Analytical Reading &amp; Subtext</span>
+          <span class="timing-tag">12 MIN • INFERENCE &amp; T/F/NG</span>
+        </div>
+        <h2>Why Vague “Maybes” Cost More Than a Clean “No”</h2>
+        <p class="ed-lead">Read the essay below, paying attention to the author's tone and implicit arguments, then complete Tasks 3A and 3B.</p>
+
+        <article class="essay-article">
+          <span class="essay-byline">ORGANISATIONAL BEHAVIOUR ESSAY • 3 MIN READ</span>
+          <h3>Why Vague “Maybes” Cost More Than a Clean “No”</h3>
+          <p>
+            In professional cultures that prize likability, a direct refusal is often treated as a minor social failure. Rather than risk momentary friction, capable adults frequently hedge around unrealistic requests with soothing phrases like <i>“Let me see what I can do”</i> or <i>“I'll try to squeeze that in.”</i> Yet far from preserving goodwill, chronic hedging quietly erodes trust. When an ambiguous reply is interpreted as a tacit agreement, the person who said “maybe” ends up overextending themselves—and worse, harbouring resentment toward colleagues who genuinely believed the workload was manageable.
+          </p>
+          <p>
+            Equally costly is the slow creep of unspoken expectations. Once an employee or consultant caves in to a last-minute demand without renegotiating deadlines, that exception swiftly hardens into an unwritten baseline. Before long, conscientious team members find themselves lumbered with peripheral tasks while louder peers protect their calendars. Were organisations to reward transparent capacity limits as highly as heroic overtime, burnout would drop dramatically. Until then, individuals have to nip scope creep in the bud themselves.
+          </p>
+          <p style="margin-bottom: 0;">
+            Crucially, holding your ground does not require bluntness or hostility. The most respected communicators separate warmth from compliance: they validate the importance of the other person's goal while stating their own constraints without apology. Much as we might wish to be endlessly accommodating, clarity is ultimately the most respectful form of collegiality—because an honest “no” today prevents a broken promise next week.
+          </p>
+        </article>
+
+        <!-- TASK 3A: INFERENCE & AUTHOR ATTITUDE -->
+        <div class="task-panel" id="readingInf3A">
+          <h3>Task 3A · Inference &amp; Author Attitude (3 Items)</h3>
+
+          <div class="mcq-block" data-question="Reading 3A Q1" data-answer="B">
+            <div class="mcq-stem">1. What does the author imply happens when someone replies “I'll try to squeeze that in”?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Colleagues immediately recognize it as a polite brush-off.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> The requester assumes commitment while the responder quietly builds resentment.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Management automatically extends the project deadline.</div>
+            </div>
+            <div class="feedback-note"><b>Why B?</b> Paragraph 1 notes that an ambiguous reply is taken as a <i>tacit agreement</i>, leaving the responder overextended and <i>harbouring resentment</i>.</div>
+          </div>
+
+          <div class="mcq-block" data-question="Reading 3A Q2" data-answer="C">
+            <div class="mcq-stem">2. According to Paragraph 2, how do conscientious professionals end up overloaded?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> They publicly refuse to collaborate with assertive colleagues.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> They lack the technical skills to delegate effectively.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Their one-off concessions silently become permanent expectations.</div>
+            </div>
+            <div class="feedback-note"><b>Why C?</b> <i>“Once an employee or consultant caves in to a last-minute demand without renegotiating deadlines, that exception swiftly hardens into an unwritten baseline.”</i></div>
+          </div>
+
+          <div class="mcq-block" data-question="Reading 3A Q3" data-answer="A" style="margin-bottom: 12px;">
+            <div class="mcq-stem">3. What is the author's core definition of effective pushback in Paragraph 3?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Combining interpersonal warmth with unambiguous, unapologetic limits.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Using blunt language so colleagues stop asking for favours altogether.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Apologizing extensively whenever a deadline cannot be met.</div>
+            </div>
+            <div class="feedback-note"><b>Why A?</b> The essay states that skilled communicators <i>“separate warmth from compliance”</i> and state constraints <i>“without apology.”</i></div>
+          </div>
+
+          <button type="button" class="btn-pine" onclick="gradeMcqPanel('readingInf3A', 'score3A')">Check Task 3A &amp; Reveal Notes</button>
+          <span class="score-pill" id="score3A"></span>
+        </div>
+
+        <!-- TASK 3B: C1 TRUE / FALSE / NOT GIVEN -->
+        <div class="task-panel" id="readingTf3B" style="margin-bottom: 0;">
+          <h3>Task 3B · True, False, or Not Given (5 Items)</h3>
+
+          <div class="line-item line-flex">
+            <span>1. The author argues that chronic hedging protects long-term workplace harmony.</span>
+            <select class="ed-select" data-question="Reading 3B Q1" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>2. Colleagues who offload extra tasks always act with malicious intent.</span>
+            <select class="ed-select" data-question="Reading 3B Q2" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>3. Most companies currently reward realistic boundary-setting more than overtime.</span>
+            <select class="ed-select" data-question="Reading 3B Q3" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>4. Remote workers experience higher rates of scope creep than office-based staff.</span>
+            <select class="ed-select" data-question="Reading 3B Q4" data-answer="Not Given">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+          <div class="line-item line-flex" style="margin-bottom: 12px;">
+            <span>5. A clear refusal today is presented as more respectful than an unreliable commitment.</span>
+            <select class="ed-select" data-question="Reading 3B Q5" data-answer="True">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option><option value="Not Given">Not Given</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-umber" onclick="gradeSelects('readingTf3B', 'score3B')">Check Task 3B</button>
+          <span class="score-pill" id="score3B"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 4 (12 MIN): C1 DIPLOMACY & INVERSION LAB                    -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage4">
+        <div class="ed-card-header">
+          <span class="stage-tag umber">Stage 4 • C1 Grammar &amp; Rhetorical Diplomacy</span>
+          <span class="timing-tag">12 MIN • FRONTING, INVERSION &amp; REFRAMING</span>
+        </div>
+        <h2>Concessive Fronting, Inversion &amp; Strategic Reframing</h2>
+        <p class="ed-lead">Notice how the essay used sophisticated C1 syntax to soften refusals without weakening the message. Study the four structures and complete Tasks 4A and 4B.</p>
+
+        <div class="grammar-grid-2">
+          <div class="structure-card">
+            <span class="formula-badge">Much as + Subject + Verb...</span>
+            <h4>1. Concessive Fronting (Warm Refusal)</h4>
+            <p>Acknowledges genuine goodwill first, then pivots cleanly to your boundary (more elevated than <i>Although</i>).</p>
+            <div class="structure-example">“<b>Much as I'd love to step in</b> on this launch, my Q4 bandwidth is fully committed.”</div>
+          </div>
+
+          <div class="structure-card umber-top">
+            <span class="formula-badge">Were + Subject + to + V1...</span>
+            <h4>2. Inverted Hypothetical (Objective Trade-Off)</h4>
+            <p>Replaces <i>If I were to...</i> to frame consequences neutrally and professionally rather than emotionally.</p>
+            <div class="structure-example">“<b>Were we to add</b> three extra modules now, we would jeopardize Friday's release.”</div>
+          </div>
+
+          <div class="structure-card umber-top">
+            <span class="formula-badge">Far from + V-ing / Noun...</span>
+            <h4>3. Reframing a Negative Assumption</h4>
+            <p>Pre-empts criticism by showing that your boundary achieves the exact opposite of what the other person fears.</p>
+            <div class="structure-example">“<b>Far from being obstructive</b>, clarifying priorities now protects your launch quality.”</div>
+          </div>
+
+          <div class="structure-card">
+            <span class="formula-badge">It is not so much X as Y...</span>
+            <h4>4. Rhetorical Contrast (Shifting the Frame)</h4>
+            <p>Clarifies the real issue diplomatically without blaming the other speaker.</p>
+            <div class="structure-example">“<b>It is not so much a lack of willingness as</b> a question of realistic capacity.”</div>
+          </div>
+        </div>
+
+        <!-- TASK 4A: DIPLOMATIC REWRITE -->
+        <div class="task-panel" id="diplomacyRewrite4A">
+          <h3>Task 4A · Diplomatic Rewrite Drill (6 Items)</h3>
+          <p style="font-size: 13.5px; color: var(--charcoal-sub); margin-bottom: 12px;">Complete each C1 diplomatic upgrade using the cue in brackets.</p>
+
+          <div class="line-item" data-tip="Use 'Much as I'd like to' or 'Much as I would like to' + base verb 'help'.">
+            <div>1. <i>[Blunt: I really want to help you, but I can't.]</i> <b>(MUCH AS)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 245px;" data-question="4A Rewrite 1" data-answer="Much as I'd like to help|Much as I would like to help" placeholder="Much as..." /> you, my schedule is locked until Tuesday.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <div class="line-item" data-tip="Inverted conditional: 'Were I to take on' or 'Were I to accept'.">
+            <div>2. <i>[Blunt: If I take on another client right now, quality will drop.]</i> <b>(WERE I)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 235px;" data-question="4A Rewrite 2" data-answer="Were I to take on|Were I to accept" placeholder="Were I..." /> another client right now, quality would suffer.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <div class="line-item" data-tip="'Far from' + gerund ('being unhelpful' / 'delaying the project').">
+            <div>3. <i>[Defensive: Pushing back doesn't delay the project; it keeps us focused.]</i> <b>(FAR FROM)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 245px;" data-question="4A Rewrite 3" data-answer="Far from delaying the project|Far from being unhelpful" placeholder="Far from + -ing..." /> , narrowing the scope keeps us focused.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <div class="line-item" data-tip="Use 'It's not so much' or 'It is not so much'.">
+            <div>4. <i>[Blunt: The problem isn't money; it's the impossible deadline.]</i> <b>(NOT SO MUCH)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 235px;" data-question="4A Rewrite 4" data-answer="It's not so much|It is not so much" placeholder="It's..." /> the budget as the compressed timeline.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <div class="line-item" data-tip="'Much as I appreciate' + noun phrase.">
+            <div>5. <i>[Blunt: Thanks for thinking of me, but I have to decline.]</i> <b>(MUCH AS I APPRECIATE)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 245px;" data-question="4A Rewrite 5" data-answer="Much as I appreciate" placeholder="Much as..." /> the invitation, I must decline this round.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <div class="line-item" data-tip="Inverted conditional: 'Were we to cave in'." style="margin-bottom: 12px;">
+            <div>6. <i>[Blunt: If we cave in to every request, we'll burn out.]</i> <b>(WERE WE)</b></div>
+            <div style="margin-top: 6px;">→ <input type="text" class="ed-input" style="width: 225px;" data-question="4A Rewrite 6" data-answer="Were we to cave in" placeholder="Were we..." /> to every last-minute request, we would burn out.</div>
+            <div class="feedback-note"></div>
+          </div>
+
+          <button type="button" class="btn-pine" onclick="checkRewrites4A()">Check Task 4A</button>
+          <span class="score-pill" id="score4A"></span>
+        </div>
+
+        <!-- TASK 4B: REGISTER & NUANCE MCQ -->
+        <div class="task-panel" id="diplomacyMcq4B" style="margin-bottom: 0;">
+          <h3>Task 4B · Register &amp; Pragmatic Nuance (4 Items)</h3>
+
+          <div class="mcq-block" data-question="4B Nuance 1" data-answer="B">
+            <div class="mcq-stem">1. A stakeholder pressures you to skip user testing. Which response is firm, polished, and non-defensive?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> You're trying to strong-arm me into shipping broken code, and I won't do it.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Were we to skip user testing now, we would risk costly rework immediately after launch.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> I'm super sorry, maybe we can skip it if you really think we have to?</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="4B Nuance 2" data-answer="A">
+            <div class="mcq-stem">2. A colleague implies you are being inflexible by refusing an extra task. How do you reframe it?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Far from being uncooperative, protecting our core milestones ensures nothing slips.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> I am always getting lumbered with everyone else's work around here.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Whatever, I'll try to look at it if I get five spare minutes.</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="4B Nuance 3" data-answer="C">
+            <div class="mcq-stem">3. You want to decline a friend's request for unpaid legal/financial advice without damaging the friendship:</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Email me the files and I'll eventually get around to it.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Never bring work documents when we meet for dinner.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Much as I'd like to weigh in properly, I keep evenings off-duty—I can send you two great referrals tomorrow.</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="4B Nuance 4" data-answer="B" style="margin-bottom: 12px;">
+            <div class="mcq-stem">4. How do you clarify that your objection is about timing rather than the quality of a colleague's proposal?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Your proposal has too many flaws to launch this quarter.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> It is not so much the concept itself as the current Q3 bandwidth that makes this unfeasible.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Let's circle back someday when things calm down.</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-umber" onclick="gradeMcqPanel('diplomacyMcq4B', 'score4B')">Check Task 4B</button>
+          <span class="score-pill" id="score4B"></span>
+        <!-- Pure HTML5 Folder MP3 Player (../audio/c1_pushback_listening.mp3) -->
+        <div class="studio-console">
+          <audio id="c1StudioMp3" src="../audio/c1_pushback_listening.mp3" preload="metadata"></audio>
+          <div class="studio-btn-row">
+            <button type="button" class="btn-pine" onclick="playFolderAudio(1.0)">▶ Play (1.0x)</button>
+            <button type="button" class="btn-ghost" onclick="playFolderAudio(0.85)">🐢 Slow (0.85x)</button>
+            <button type="button" class="btn-ghost" onclick="pauseFolderAudio()">Ⅱ Pause</button>
+            <button type="button" class="btn-ghost" onclick="stopFolderAudio()">■ Stop</button>
+            <button type="button" class="btn-umber" onclick="document.getElementById('c1TranscriptBox').classList.toggle('open')">📄 Show / Hide Transcript</button>
+          </div>
+
+          <div class="audio-seek-row">
+            <div class="audio-seek-bar" id="c1SeekBar" onclick="seekFolderAudio(event)" title="Click anywhere on the bar to jump">
+              <div class="audio-seek-fill" id="c1SeekFill"></div>
+            </div>
+            <span class="audio-time-code" id="c1TimeReadout">00:00 / 00:00</span>
+          </div>
+
+          <div class="studio-status-row">
+            <div class="studio-status" id="c1AudioStatus">SOURCE // ../audio/c1_pushback_listening.mp3</div>
+            <label class="local-mp3-label" title="Preview your ElevenLabs MP3 locally before uploading to GitHub">
+              📂 Load local MP3
+              <input type="file" accept="audio/mp3,audio/*" style="display: none;" onchange="loadLocalMp3File(event)" />
+            </label>
+          </div>
+
+          <div class="transcript-drawer" id="c1TranscriptBox">
+            <p style="margin-bottom: 8px;"><b>Julian:</b> Clara, thanks for jumping on this call. We are bringing forward the client launch by ten days, and I thought you could take on the extra analytics deck too.</p>
+            <p style="margin-bottom: 8px;"><b>Clara:</b> Much as I want the launch to go smoothly, Julian, taking on a full analytics deck right now would mean overextending myself.</p>
+            <p style="margin-bottom: 8px;"><b>Julian:</b> Come on, it is just a few extra slides. Surely you can squeeze it in before Friday?</p>
+            <p style="margin-bottom: 8px;"><b>Clara:</b> I am not going to hedge around it: if I squeeze that in without moving the deadline, the core deliverables will suffer.</p>
+            <p style="margin-bottom: 8px;"><b>Julian:</b> Look, everyone else is swamped, and I really do not want to get lumbered with the formatting myself.</p>
+            <p style="margin-bottom: 8px;"><b>Clara:</b> I hear that, and I am not trying to be unhelpful. Were we to add those slides, we would need to push the launch back or drop the secondary report.</p>
+            <p style="margin-bottom: 8px;"><b>Julian:</b> Hmm... management would probably push back on a later launch date.</p>
+            <p style="margin-bottom: 8px;"><b>Clara:</b> Then let us hold our ground on the original scope for now. If I say yes just to keep the peace, I will end up harbouring resentment later.</p>
+            <p style="margin-bottom: 0;"><b>Julian:</b> Fair point. Let us leave the extra deck out of this sprint and review it next week.</p>
+          </div>
+        </div>
+
+        <!-- TASK 5A: SUBTEXT & ATTITUDE COMPREHENSION -->
+        <div class="task-panel" id="listeningSubtext5A">
+          <h3>Task 5A · Subtext, Tone &amp; Strategy Comprehension (5 Items)</h3>
+
+          <div class="mcq-block" data-question="C1 Listening 5A Q1" data-answer="B">
+            <div class="mcq-stem">1. How does Julian initially try to persuade Clara to accept the extra analytics deck?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> By offering to extend the client launch date by ten days</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> By minimizing the workload (“just a few extra slides”) and asking her to squeeze it in</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> By offering to handle the slide formatting himself</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="C1 Listening 5A Q2" data-answer="C">
+            <div class="mcq-stem">2. What is Julian's real personal reason for wanting Clara to take the task?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> He believes Clara has plenty of free capacity this week.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Senior management specifically assigned the deck to Clara.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> He wants to avoid getting lumbered with the formatting himself.</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="C1 Listening 5A Q3" data-answer="A">
+            <div class="mcq-stem">3. How does Clara frame the choice when Julian resists moving the deadline?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> As an objective trade-off between moving the launch date or dropping the secondary report</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> As a personal refusal to collaborate with the account team</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> As a request for extra overtime pay before Friday</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="C1 Listening 5A Q4" data-answer="B">
+            <div class="mcq-stem">4. Why does Clara warn against saying yes “just to keep the peace”?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> The client has already cancelled the analytics deck.</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Agreeing reluctantly will leave her harbouring resentment later.</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Her team does not have access to the analytics software.</div>
+            </div>
+          </div>
+
+          <div class="mcq-block" data-question="C1 Listening 5A Q5" data-answer="C" style="margin-bottom: 12px;">
+            <div class="mcq-stem">5. What do Clara and Julian finally agree to do?</div>
+            <div class="mcq-choices">
+              <div class="mcq-choice" data-val="A" onclick="selectMcq(this)"><span class="choice-letter">A</span> Postpone the client launch until next month</div>
+              <div class="mcq-choice" data-val="B" onclick="selectMcq(this)"><span class="choice-letter">B</span> Split the slide formatting equally before Friday</div>
+              <div class="mcq-choice" data-val="C" onclick="selectMcq(this)"><span class="choice-letter">C</span> Keep the extra deck out of this sprint and review it next week</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-pine" onclick="gradeMcqPanel('listeningSubtext5A', 'score5A')">Check Task 5A</button>
+          <span class="score-pill" id="score5A"></span>
+        </div>
+
+        <!-- TASK 5B: EXACT PHRASE & LISTENING GAP-FILL -->
+        <div class="task-panel" id="listeningGap5B" style="margin-bottom: 0;">
+          <h3>Task 5B · Listen Again &amp; Complete the Exact C1 Phrases (5 Items)</h3>
+          <div class="line-item">1. “<input type="text" class="ed-input" style="width: 195px;" data-question="C1 5B Gap 1" data-answer="Much as I want" placeholder="4 words..." /> the launch to go smoothly, Julian, taking on a full analytics deck right now would mean <input type="text" class="ed-input" style="width: 195px;" data-question="C1 5B Gap 1b" data-answer="overextending myself" placeholder="2 words..." />.”</div>
+          <div class="line-item">2. “I am not going to <input type="text" class="ed-input" style="width: 165px;" data-question="C1 5B Gap 2" data-answer="hedge around" placeholder="2 words..." /> it: if I squeeze that in without moving the deadline, the core deliverables will suffer.”</div>
+          <div class="line-item">3. “I really do not want to get <input type="text" class="ed-input" style="width: 165px;" data-question="C1 5B Gap 3" data-answer="lumbered with" placeholder="2 words..." /> the formatting myself.”</div>
+          <div class="line-item">4. “<input type="text" class="ed-input" style="width: 165px;" data-question="C1 5B Gap 4" data-answer="Were we to add" placeholder="4 words..." /> those slides, we would need to push the launch back.”</div>
+          <div class="line-item" style="margin-bottom: 12px;">5. “Then let us <input type="text" class="ed-input" style="width: 165px;" data-question="C1 5B Gap 5" data-answer="hold our ground" placeholder="3 words..." /> on the original scope for now.”</div>
+
+          <button type="button" class="btn-umber" onclick="gradeInputs('listeningGap5B', 'score5B')">Check Task 5B</button>
+          <span class="score-pill" id="score5B"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- STAGE 6 (6 MIN): HIGH-STAKES ROLE-PLAY & SPEAKING CLOCK           -->
+      <!-- ================================================================= -->
+      <section class="ed-card" id="stage6" style="margin-bottom: 0;">
+        <div class="ed-card-header">
+          <span class="stage-tag umber">Stage 6 • High-Stakes Role-Play &amp; Production</span>
+          <span class="timing-tag">6 MIN • LIVE NEGOTIATION</span>
+        </div>
+        <h2>Your Turn: Hold Your Ground with Poise</h2>
+        <p class="ed-lead">Choose one scenario below and deliver a 90-second diplomatic response using at least <b>two C1 expressions</b> and <b>one fronting/inversion structure</b>.</p>
+
+        <div class="scenario-grid-3">
+          <div class="scenario-card">
+            <div>
+              <span class="vocab-meta">SCENARIO A • CLIENT / STAKEHOLDER</span>
+              <h4>The Unpaid Scope Creep</h4>
+              <p style="font-size: 13.5px; color: var(--charcoal-sub); margin-top: 6px;">A long-term client asks you to deliver two extra workshops “as part of the current package” because you already prepared the slides.</p>
+            </div>
+            <div style="font-size: 12.5px; background: #ffffff; padding: 8px 10px; border-radius: 6px; border: 1px solid #e2d9c8;">
+              <b>Target Cues:</b> <i>Much as I'd like to...</i> • <i>nip this in the bud</i> • <i>overextend</i>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div>
+              <span class="vocab-meta">SCENARIO B • PERSONAL / SOCIAL</span>
+              <h4>The “Favour” That Crosses a Line</h4>
+              <p style="font-size: 13.5px; color: var(--charcoal-sub); margin-top: 6px;">A close friend assumes you will host and organize a 15-person weekend gathering at your place without asking first.</p>
+            </div>
+            <div style="font-size: 12.5px; background: #ffffff; padding: 8px 10px; border-radius: 6px; border: 1px solid #e2d9c8;">
+              <b>Target Cues:</b> <i>tacit agreement</i> • <i>Far from...</i> • <i>harbour resentment</i>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div>
+              <span class="vocab-meta">SCENARIO C • PEER / LEADERSHIP</span>
+              <h4>The Offloaded Responsibility</h4>
+              <p style="font-size: 13.5px; color: var(--charcoal-sub); margin-top: 6px;">A colleague tries to strong-arm you into taking over an administrative audit they have been avoiding for weeks.</p>
+            </div>
+            <div style="font-size: 12.5px; background: #ffffff; padding: 8px 10px; border-radius: 6px; border: 1px solid #e2d9c8;">
+              <b>Target Cues:</b> <i>lumbered with</i> • <i>Were I to...</i> • <i>hold my ground</i>
+            </div>
+          </div>
+        </div>
+
+        <textarea class="ed-textarea" rows="3" data-question="Stage 6 Role-Play Outline" placeholder="Draft your opening two sentences here before speaking (e.g., Much as I appreciate your trust, were I to take this on right now...)"></textarea>
+
+        <div class="clock-bar">
+          <div>
+            <b style="font-size: 14px;">⏱️ Negotiation Timer:</b>
+            <span style="font-size: 13px; color: var(--charcoal-sub);">Deliver your response smoothly without hedging!</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span class="timer-digits" id="roleplayClock">01:30</span>
+            <button type="button" class="btn-pine" onclick="startEdClock(90)">▶ 90s</button>
+            <button type="button" class="btn-umber" onclick="startEdClock(120)">▶ 2m</button>
+            <button type="button" class="btn-ghost" onclick="resetEdClock()">Reset</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PANEL 2: HOMEWORK (30 MIN)                                          -->
+    <!-- =================================================================== -->
+    <div id="panel-homework" class="view-panel">
+
+      <section class="hero-editorial">
+        <div>
+          <span class="hero-kicker">HOMEWORK CONSOLIDATION • LEVEL C1 • 30 MINUTES</span>
+          <h1>Homework: <em>Collocations, Inversion &amp; Diplomatic Writing</em></h1>
+          <p>Complete all four homework sections (HW1–HW4). Every answer and your final email are saved automatically for your teacher via <b>tracker.js</b>.</p>
+        </div>
+        <div class="hero-callout-card">
+          <span class="callout-label">Self-Study Targets</span>
+          <blockquote>“Precision in syntax creates authority without aggression.”</blockquote>
+          <div style="font-size: 12.5px; color: rgba(252,251,248,0.82);">HW1 Lexis • HW2 Inversion • HW3 Essay • HW4 140–170w Email</div>
+        </div>
+      </section>
+
+      <!-- HW1: 8-ITEM C1 COLLOCATIONS & PREPOSITIONS -->
+      <section class="ed-card">
+        <div class="ed-card-header">
+          <span class="stage-tag">Homework 1 • C1 Collocations &amp; Prepositions</span>
+          <span class="timing-tag">8 ITEMS</span>
+        </div>
+        <h2>Complete Each Sentence with the Exact Word or Preposition</h2>
+
+        <div class="task-panel" id="hw1Panel" style="margin-bottom: 0;">
+          <div class="line-item">1. Management tried to strong-arm the team <input type="text" class="ed-input" style="width: 115px;" data-question="HW1 Q1" data-answer="into" placeholder="prep..." /> accepting unpaid weekend shifts.</div>
+          <div class="line-item">2. Nobody wants to be lumbered <input type="text" class="ed-input" style="width: 115px;" data-question="HW1 Q2" data-answer="with" placeholder="prep..." /> fixing someone else's poorly documented code.</div>
+          <div class="line-item">3. If you cave <input type="text" class="ed-input" style="width: 115px;" data-question="HW1 Q3" data-answer="in" placeholder="particle..." /> to every urgent ping, people will stop respecting your focus hours.</div>
+          <div class="line-item">4. It is vital to nip scope creep in the <input type="text" class="ed-input" style="width: 125px;" data-question="HW1 Q4" data-answer="bud" placeholder="noun..." /> during the very first kickoff call.</div>
+          <div class="line-item">5. Rather than answering directly, the spokesperson hedged <input type="text" class="ed-input" style="width: 135px;" data-question="HW1 Q5" data-answer="around" placeholder="prep..." /> the budget question.</div>
+          <div class="line-item">6. Unspoken expectations often lead quiet employees to <input type="text" class="ed-input" style="width: 145px;" data-question="HW1 Q6" data-answer="harbour" placeholder="verb..." /> resentment over time.</div>
+          <div class="line-item">7. She refused to back down and held her <input type="text" class="ed-input" style="width: 135px;" data-question="HW1 Q7" data-answer="ground" placeholder="noun..." /> throughout the contract review.</div>
+          <div class="line-item" style="margin-bottom: 12px;">8. What sounded like encouragement was actually a polite <input type="text" class="ed-input" style="width: 155px;" data-question="HW1 Q8" data-answer="brush-off|brush off" placeholder="noun..." />.</div>
+
+          <button type="button" class="btn-pine" onclick="gradeInputs('hw1Panel', 'hw1Score')">Check Homework 1</button>
+          <span class="score-pill" id="hw1Score"></span>
+        </div>
+      </section>
+
+      <!-- HW2: 8-ITEM INVERSION & FRONTING TRANSFORMATIONS -->
+      <section class="ed-card">
+        <div class="ed-card-header">
+          <span class="stage-tag umber">Homework 2 • Inversion &amp; Fronting Transformations</span>
+          <span class="timing-tag">8 ITEMS</span>
+        </div>
+        <h2>Transform Each Sentence Using the C1 Cue</h2>
+
+        <div class="task-panel" id="hw2Panel" style="margin-bottom: 0;">
+          <div class="line-item">1. Although I respect your ambition, I cannot endorse an unrealistic timeline. → <b>Much as I</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T1" data-answer="respect your ambition" placeholder="..." /> , I cannot endorse an unrealistic timeline.</div>
+          <div class="line-item">2. If we were to compromise on safety standards, our reputation would collapse. → <b>Were we</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T2" data-answer="to compromise" placeholder="to + V1..." /> on safety standards, our reputation would collapse.</div>
+          <div class="line-item">3. Setting clear boundaries does not weaken teamwork; it strengthens accountability. → <b>Far from</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T3" data-answer="weakening teamwork" placeholder="V-ing..." /> , setting clear boundaries strengthens accountability.</div>
+          <div class="line-item">4. The issue isn't a lack of talent; it's a lack of clear prioritization. → <b>It is not so much</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T4" data-answer="a lack of talent" placeholder="..." /> as a lack of clear prioritization.</div>
+          <div class="line-item">5. Although I would love to attend the summit, I am chairing a board session that day. → <b>Much as</b> <input type="text" class="ed-input" style="width: 225px;" data-question="HW2 T5" data-answer="I'd love to attend|I would love to attend" placeholder="..." /> the summit, I am chairing a board session that day.</div>
+          <div class="line-item">6. If I were to accept that role, I would have to step down from my advisory board. → <b>Were I</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T6" data-answer="to accept that role" placeholder="..." /> , I would have to step down from my advisory board.</div>
+          <div class="line-item">7. Giving a direct answer isn't rude; it saves everyone time. → <b>Far from</b> <input type="text" class="ed-input" style="width: 195px;" data-question="HW2 T7" data-answer="being rude" placeholder="being..." /> , giving a direct answer saves everyone time.</div>
+          <div class="line-item" style="margin-bottom: 12px;">8. If they were to rush the contract, key clauses would be overlooked. → <b>Were they</b> <input type="text" class="ed-input" style="width: 215px;" data-question="HW2 T8" data-answer="to rush the contract|to rush" placeholder="to + V1..." /> , key clauses would be overlooked.</div>
+
+          <button type="button" class="btn-umber" onclick="gradeInputs('hw2Panel', 'hw2Score')">Check Homework 2</button>
+          <span class="score-pill" id="hw2Score"></span>
+        </div>
+      </section>
+
+      <!-- HW3: SECOND ANALYTICAL READING -->
+      <section class="ed-card">
+        <div class="ed-card-header">
+          <span class="stage-tag">Homework 3 • Reading Comprehension</span>
+          <span class="timing-tag">5 ITEMS</span>
+        </div>
+        <h2>The Hidden Cost of Perpetual Availability</h2>
+
+        <article class="essay-article" style="margin-bottom: 18px;">
+          <span class="essay-byline">WORKPLACE CULTURE BRIEFING • 2 MIN READ</span>
+          <h3>The Hidden Cost of Perpetual Availability</h3>
+          <p>
+            Instant messaging platforms were originally designed to streamline quick coordination, yet in many modern workplaces they have fostered a tacit agreement that every colleague is perpetually on call. When response speed is mistaken for dedication, thoughtful deep work is routinely sacrificed to trivial notifications.
+          </p>
+          <p style="margin-bottom: 0;">
+            High-performing teams counter this drift deliberately. Far from disappearing without explanation, seasoned leaders establish predictable communication windows and model respectful pushback. Much as urgent crises occasionally demand immediate attention, treating every routine request as an emergency leaves teams chronically overextended and depleted of strategic focus.
+          </p>
+        </article>
+
+        <div class="task-panel" id="hw3ReadingPanel" style="margin-bottom: 0;">
+          <div class="line-item line-flex">
+            <span>1. What unintended effect have instant messaging tools created in many workplaces?</span>
+            <select class="ed-select" data-question="HW3 Q1" data-answer="An unspoken expectation of constant availability">
+              <option value="">Choose...</option>
+              <option value="A complete elimination of scheduled meetings">A complete elimination of scheduled meetings</option>
+              <option value="An unspoken expectation of constant availability">An unspoken expectation of constant availability</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>2. According to Paragraph 1, what is often confused with genuine dedication?</span>
+            <select class="ed-select" data-question="HW3 Q2" data-answer="Fast reply times">
+              <option value="">Choose...</option>
+              <option value="Fast reply times">Fast reply times</option>
+              <option value="Long strategic reports">Long strategic reports</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>3. Experienced leaders go offline without telling their teams.</span>
+            <select class="ed-select" data-question="HW3 Q3" data-answer="False">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option>
+            </select>
+          </div>
+          <div class="line-item line-flex">
+            <span>4. The author acknowledges that genuine emergencies sometimes require immediate action.</span>
+            <select class="ed-select" data-question="HW3 Q4" data-answer="True">
+              <option value="">Choose...</option><option value="True">True</option><option value="False">False</option>
+            </select>
+          </div>
+          <div class="line-item line-flex" style="margin-bottom: 12px;">
+            <span>5. What happens when every routine request is treated as urgent?</span>
+            <select class="ed-select" data-question="HW3 Q5" data-answer="Teams become overextended and lose strategic focus">
+              <option value="">Choose...</option>
+              <option value="Teams become overextended and lose strategic focus">Teams become overextended and lose strategic focus</option>
+              <option value="Clients stop sending messages altogether">Clients stop sending messages altogether</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-pine" onclick="gradeSelects('hw3ReadingPanel', 'hw3Score')">Check Homework 3</button>
+          <span class="score-pill" id="hw3Score"></span>
+        </div>
+      </section>
+
+      <!-- HW4: DIPLOMATIC DECLINE EMAIL (140-170 WORDS) WITH LIVE CHECKLIST -->
+      <section class="ed-card" style="margin-bottom: 0;">
+        <div class="ed-card-header">
+          <span class="stage-tag umber">Homework 4 • Diplomatic Decline Email</span>
+          <span class="timing-tag">140–170 WORDS</span>
+        </div>
+        <h2>Draft a High-Register Diplomatic Pushback Email</h2>
+        <p class="ed-lead">Write a <b>140–170 word</b> professional email declining a last-minute request to take on an extra project/event while proposing a constructive alternative.</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; font-weight: 700; margin-bottom: 10px;">
+          <span id="chkC1Words">⬜ Word count: <b id="c1WordNum">0</b> / 140–170 words</span>
+          <span id="chkC1Syntax">⬜ Use <i>Much as / Were I / Were we / Far from / not so much</i></span>
+          <span id="chkC1Lexis">⬜ Use at least 3 C1 expressions (0/3)</span>
+        </div>
+
+        <textarea id="hwC1EmailInput" class="ed-textarea" rows="6" data-question="HW4 Diplomatic Email (140-170w)" oninput="updateC1Checklist()" placeholder="Dear Alex,&#10;&#10;Thank you for thinking of me for the upcoming summit panel. Much as I appreciate the invitation and value our collaboration, were I to take on a keynote slot next week, I would overextend myself across two active client deliveries..."></textarea>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script>
+    /* --- 1. PANEL SWITCHER & SCROLL PROGRESS --- */
+    function switchView(panelName) {
+      stopFolderAudio();
+      document.querySelectorAll('.mode-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.panel === panelName));
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + panelName));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      document.getElementById('scrollFill').style.width = pct + '%';
+    });
+
+    /* --- 2. STAGE 1 DILEMMA SELECTOR --- */
+    function selectDilemma(cardId, btn, label, promptText) {
+      const card = document.getElementById(cardId);
+      card.querySelectorAll('.stance-btn').forEach(b => b.classList.remove('picked'));
+      btn.classList.add('picked');
+      card.dataset.userChoice = label;
+      const box = card.querySelector('.reflection-callout');
+      box.innerHTML = `<b>${label}:</b> ${promptText}`;
+      box.classList.add('open');
+    }
+
+    /* --- 3. POPULATE STAGE 2A WITH FISHER-YATES RANDOM SHUFFLE --- */
+    const c1LexisItems = [
+      { term: 'strong-arm (sb) into doing sth', def: 'Pressure or coerce someone into agreeing when reluctant' },
+      { term: 'be lumbered with (sth)', def: 'Be given an unwanted or inconvenient task others avoided' },
+      { term: 'cave in (to pressure)', def: 'Finally yield or surrender after resisting demands' },
+      { term: 'overextend oneself', def: 'Commit to more obligations than your time or energy can sustain' },
+      { term: "hold one's ground", def: 'Refuse to back down or compromise despite opposition' },
+      { term: 'nip (sth) in the bud', def: 'Stop an unwelcome habit or problem early before it escalates' },
+      { term: 'hedge (around an issue)', def: 'Avoid giving a direct, unambiguous answer to evade commitment' },
+      { term: 'a polite brush-off', def: 'A courteous yet unmistakable dismissal or refusal' },
+      { term: 'harbour resentment', def: 'Silently keep feelings of bitterness or anger alive over time' },
+      { term: 'a tacit agreement', def: 'An unspoken understanding accepted without being stated aloud' }
+    ];
+
+    function fisherYatesShuffle(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    (function buildShuffledVocab10() {
+      const target = document.getElementById('vocab10Container');
+      if (!target) return;
+      const shuffledDefs = fisherYatesShuffle(c1LexisItems);
+      const shuffledTerms = fisherYatesShuffle(c1LexisItems.map(i => i.term));
+
+      shuffledDefs.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'line-item line-flex';
+        row.innerHTML = `
+          <span><b>${index + 1}.</b> ${item.def}</span>
+          <select class="ed-select" data-question="C1 Vocab 2A #${index + 1}" data-answer="${item.term}">
+            <option value="">Select C1 expression...</option>
+            ${shuffledTerms.map(t => `<option value="${t}">${t}</option>`).join('')}
+          </select>
+        `;
+        target.appendChild(row);
+      });
+    })();
+
+    /* --- 4. CLICKABLE WORD BANK (STAGE 2B) --- */
+    let activeC1Input = null;
+    document.addEventListener('focusin', (e) => {
+      if (e.target.matches('#c1Upgrade2B input.ed-input')) {
+        activeC1Input = e.target;
+      }
+    });
+
+    function fillActiveToken(bankId, phrase) {
+      const container = document.getElementById(bankId).parentElement;
+      const inputs = Array.from(container.querySelectorAll('input.ed-input'));
+      const chosen = (activeC1Input && container.contains(activeC1Input))
+        ? activeC1Input
+        : inputs.find(inp => !inp.value.trim()) || inputs[0];
+      if (chosen) {
+        chosen.value = phrase;
+        chosen.focus();
+        activeC1Input = inputs.find(inp => !inp.value.trim()) || chosen;
+      }
+    }
+
+    /* --- 5. CLEAN TWO-SPEAKER AUDIO ENGINE (LOCAL MP3 + WEB SPEECH FALLBACK) --- */
+    let speechTurnQueue = [];
+    let isDialogueRunning = false;
+    let localMp3Ready = false;
+
+    const studioMp3El = document.getElementById('c1StudioMp3');
+    if (studioMp3El) {
+      studioMp3El.addEventListener('loadedmetadata', () => {
+        localMp3Ready = true;
+        document.getElementById('c1AudioStatus').textContent = 'STUDIO MP3 LOADED // Clara & Julian Ready';
+      });
+      studioMp3El.addEventListener('error', () => {
+        localMp3Ready = false;
+      });
+    }
+
+    function getEnVoices() {
+      if (!('speechSynthesis' in window)) return [];
+      return window.speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => getEnVoices();
+    }
+
+    function speakPhrase(phrase) {
+      stopC1Dialogue();
+      if (!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(phrase);
+      u.lang = 'en-GB';
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    }
+
+    const c1DialogueTurns = [
+      ['Julian', 'Clara, thanks for jumping on this call. We are bringing forward the client launch by ten days, and I thought you could take on the extra analytics deck too.'],
+      ['Clara', 'Much as I want the launch to go smoothly, Julian, taking on a full analytics deck right now would mean overextending myself.'],
+      ['Julian', 'Come on, it is just a few extra slides. Surely you can squeeze it in before Friday?'],
+      ['Clara', 'I am not going to hedge around it: if I squeeze that in without moving the deadline, the core deliverables will suffer.'],
+      ['Julian', 'Look, everyone else is swamped, and I really do not want to get lumbered with the formatting myself.'],
+    /* --- 5. PURE HTML5 FOLDER MP3 PLAYER (NO SPEECH SYNTHESIS) --- */
+    const folderAudio = document.getElementById('c1StudioMp3');
+    const audioStatusEl = document.getElementById('c1AudioStatus');
+    const audioTimeEl = document.getElementById('c1TimeReadout');
+    const audioSeekFillEl = document.getElementById('c1SeekFill');
+
+    function formatAudioClock(sec) {
+      if (!Number.isFinite(sec) || sec < 0) return '00:00';
+      const mins = String(Math.floor(sec / 60)).padStart(2, '0');
+      const secs = String(Math.floor(sec % 60)).padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    if (folderAudio) {
+      folderAudio.addEventListener('loadedmetadata', () => {
+        audioTimeEl.textContent = `00:00 / ${formatAudioClock(folderAudio.duration)}`;
+        audioStatusEl.textContent = 'READY // ../audio/c1_pushback_listening.mp3 loaded';
+      });
+
+      folderAudio.addEventListener('timeupdate', () => {
+        const cur = folderAudio.currentTime || 0;
+        const dur = folderAudio.duration || 0;
+        audioTimeEl.textContent = `${formatAudioClock(cur)} / ${formatAudioClock(dur)}`;
+        const pct = dur > 0 ? (cur / dur) * 100 : 0;
+        audioSeekFillEl.style.width = `${pct}%`;
+      });
+
+      folderAudio.addEventListener('ended', () => {
+        audioStatusEl.textContent = 'FINISHED // Click Play to listen again';
+      });
+
+      folderAudio.addEventListener('error', () => {
+        audioStatusEl.textContent = 'FILE NOT FOUND AT ../audio/c1_pushback_listening.mp3 — Upload MP3 to /audio/ or use "Load local MP3"';
+      });
+    }
+
+    function playFolderAudio(rate = 1.0) {
+      if (!folderAudio) return;
+      folderAudio.playbackRate = rate;
+      folderAudio.play().then(() => {
+        audioStatusEl.textContent = `PLAYING // ElevenLabs Studio MP3 (${rate}x)`;
+      }).catch(() => {
+        audioStatusEl.textContent = 'UNABLE TO PLAY // Ensure c1_pushback_listening.mp3 is in /audio/ or click "Load local MP3"';
+      });
+    }
+
+    function pauseFolderAudio() {
+      if (!folderAudio) return;
+      if (!folderAudio.paused) {
+        folderAudio.pause();
+        audioStatusEl.textContent = 'PAUSED';
+      }
+    }
+
+    function stopFolderAudio() {
+      if (!folderAudio) return;
+      folderAudio.pause();
+      folderAudio.currentTime = 0;
+      audioSeekFillEl.style.width = '0%';
+      const dur = folderAudio.duration || 0;
+      audioTimeEl.textContent = `00:00 / ${formatAudioClock(dur)}`;
+      audioStatusEl.textContent = 'STOPPED // Ready';
+    }
+
+    function seekFolderAudio(event) {
+      if (!folderAudio || !folderAudio.duration) return;
+      const bar = document.getElementById('c1SeekBar');
+      const rect = bar.getBoundingClientRect();
+      const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+      folderAudio.currentTime = ratio * folderAudio.duration;
+    }
+
+    function loadLocalMp3File(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !folderAudio) return;
+      const objectUrl = URL.createObjectURL(file);
+      folderAudio.src = objectUrl;
+      folderAudio.load();
+      audioStatusEl.textContent = `LOADED LOCAL FILE // ${file.name}`;
+    }
+
+    /* --- 6. AUTO-GRADING HELPERS --- */
+    function gradeSelects(boxId, scoreId) {
+      const selects = document.querySelectorAll(`#${boxId} select[data-answer]`);
+      let total = 0, ok = 0;
+      selects.forEach(sel => {
+        total++;
+        const val = (sel.value || '').trim().toLowerCase();
+        const ans = sel.dataset.answer.toLowerCase();
+        sel.classList.remove('mark-correct', 'mark-wrong');
+        if (!val) return;
+        if (val === ans) { sel.classList.add('mark-correct'); ok++; }
+        else { sel.classList.add('mark-wrong'); }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#1e3a32' : '#9e472a';
+    }
+
+    function gradeInputs(boxId, scoreId) {
+      const inputs = document.querySelectorAll(`#${boxId} input[data-answer]`);
+      let total = 0, ok = 0;
+      inputs.forEach(inp => {
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const accepted = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('mark-correct', 'mark-wrong');
+        if (!val) return;
+        if (accepted.includes(val)) { inp.classList.add('mark-correct'); ok++; }
+        else { inp.classList.add('mark-wrong'); }
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#1e3a32' : '#9e472a';
+    }
+
+    function checkRewrites4A() {
+      const items = document.querySelectorAll('#diplomacyRewrite4A .line-item');
+      let total = 0, ok = 0;
+      items.forEach(item => {
+        const inp = item.querySelector('input[data-answer]');
+        const note = item.querySelector('.feedback-note');
+        if (!inp) return;
+        total++;
+        const val = (inp.value || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+        const accepted = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('mark-correct', 'mark-wrong');
+        if (note) note.classList.add('open');
+        if (val && accepted.includes(val)) {
+          inp.classList.add('mark-correct');
+          ok++;
+          if (note) note.textContent = `✓ Accurate: ${item.dataset.tip || ''}`;
+        } else {
+          inp.classList.add('mark-wrong');
+          if (note) note.textContent = `✗ Model: "${inp.dataset.answer.split('|')[0]}" — ${item.dataset.tip || ''}`;
+        }
+      });
+      const out = document.getElementById('score4A');
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#1e3a32' : '#9e472a';
+    }
+
+    function selectMcq(choiceEl) {
+      const block = choiceEl.closest('.mcq-block');
+      block.querySelectorAll('.mcq-choice').forEach(c => c.classList.remove('selected'));
+      choiceEl.classList.add('selected');
+      block.dataset.userPick = choiceEl.dataset.val;
+    }
+
+    function gradeMcqPanel(panelId, scoreId) {
+      const blocks = document.querySelectorAll(`#${panelId} .mcq-block`);
+      let total = 0, ok = 0;
+      blocks.forEach(block => {
+        total++;
+        const ans = block.dataset.answer;
+        const pick = block.dataset.userPick || '';
+        block.querySelectorAll('.mcq-choice').forEach(c => {
+          c.classList.remove('is-correct', 'is-wrong');
+          if (c.dataset.val === ans) c.classList.add('is-correct');
+          else if (c.dataset.val === pick && pick !== ans) c.classList.add('is-wrong');
+        });
+        if (pick === ans) ok++;
+        const note = block.querySelector('.feedback-note');
+        if (note) note.classList.add('open');
+      });
+      const out = document.getElementById(scoreId);
+      out.textContent = `${ok} / ${total} correct`;
+      out.style.color = ok === total ? '#1e3a32' : '#9e472a';
+    }
+
+    /* --- 7. STAGE 6 NEGOTIATION TIMER --- */
+    let edTimerHandle = null;
+    function startEdClock(seconds) {
+      clearInterval(edTimerHandle);
+      let left = seconds;
+      const disp = document.getElementById('roleplayClock');
+      function render() {
+        const m = String(Math.floor(left / 60)).padStart(2, '0');
+        const s = String(left % 60).padStart(2, '0');
+        disp.textContent = `${m}:${s}`;
+      }
+      render();
+      edTimerHandle = setInterval(() => {
+        left--;
+        render();
+        if (left <= 0) {
+          clearInterval(edTimerHandle);
+          disp.textContent = '00:00';
+        }
+      }, 1000);
+    }
+
+    function resetEdClock() {
+      clearInterval(edTimerHandle);
+      document.getElementById('roleplayClock').textContent = '01:30';
+    }
+
+    /* --- 8. HOMEWORK 4 LIVE WRITING CHECKLIST --- */
+    function updateC1Checklist() {
+      const txt = document.getElementById('hwC1EmailInput').value;
+      const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+      const hasSyntax = /(much as|were i to|were we to|far from|not so much)/i.test(txt);
+      const lexisHits = txt.match(/(strong-arm|lumbered with|cave in|caved in|overextend|hold my ground|held my ground|nip .* in the bud|hedge|brush-off|resentment|tacit agreement)/gi) || [];
+      const uniqueHits = new Set(lexisHits.map(x => x.toLowerCase()));
+
+      document.getElementById('chkC1Words').innerHTML = `${words >= 135 ? '✅' : '⬜'} Word count: <b id="c1WordNum">${words}</b> / 140–170 words`;
+      document.getElementById('chkC1Syntax').innerHTML = `${hasSyntax ? '✅' : '⬜'} Use <i>Much as / Were I / Were we / Far from / not so much</i>`;
+      document.getElementById('chkC1Lexis').innerHTML = `${uniqueHits.size >= 3 ? '✅' : '⬜'} Use at least 3 C1 expressions (${uniqueHits.size}/3)`;
+    }
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
