@@ -204,6 +204,6 @@ const LESSONS = [
         type: "Lesson plan",
         category: "Daily Life",
         description: "...",
-        file: "lessons/Appearance_ziz_Interactive_Lesson_v4.html"
+        file: "lessons/Appearance.html"
     },
 ];
