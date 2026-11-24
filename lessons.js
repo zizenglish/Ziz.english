@@ -198,4 +198,12 @@ const LESSONS = [
     description: "Practise C1 diplomacy, pushback, and boundary-setting through 10 high-nuance expressions, analytical reading, inversion and contrast structures, two-speaker listening, and negotiation role-plays.",
     file: "lessons/c1_art_of_pushing_back.html"
 },
+       {
+        title: "Appearance",
+        level: "A2",
+        type: "Lesson plan",
+        category: "Daily Life",
+        description: "...",
+        file: "lessons/Appearance_ziz_Interactive_Lesson_v4.html"
+    },
 ];
