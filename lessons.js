@@ -206,4 +206,15 @@ const LESSONS = [
         description: "...",
         file: "lessons/Appearance.html"
     },
+      {
+        title: "IELTS Listening",
+        level: "B2",
+        type: "Vocabulary",
+        category: "Exam",
+        description: "Practise IELTS listening.",
+        files: {
+         student:   "IELTS_Speaking_Student.html",
+            teacher: "lessons/IELTS_Speaking_Teacher.html"
+}
+    },
 ];
