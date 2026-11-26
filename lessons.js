@@ -203,7 +203,7 @@ const LESSONS = [
         level: "A2",
         type: "Lesson plan",
         category: "Daily Life",
-        description: "..."
+        description: "...",
         file: "lessons/Appearance.html"
     },
    {
