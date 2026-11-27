@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A2/B1 Grammar Control Test Prep &amp; Mock Exam | ziz.english</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Nordic Graphite, Mist-Silver, Sage-Teal & Warm Coral Workbook Palette */
+      --bg-mist: #f7f8fa;
+      --surface-white: #ffffff;
+      --surface-tint: #f1f4f8;
+      --graphite: #181c20;
+      --graphite-muted: #525a65;
+      --teal: #0f766e;
+      --teal-dark: #115e59;
+      --teal-soft: #f0fdfa;
+      --teal-border: #99f6e4;
+      --coral: #e11d48;
+      --coral-warm: #ea580c;
+      --coral-soft: #fff1f2;
+      --coral-border: #fecdd3;
+      --amber-soft: #fffbeb;
+      --amber-border: #fde68a;
+      --amber-ink: #92400e;
+      --hairline: #e2e6ec;
+      --hairline-strong: #cbd3de;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-mist);
+      color: var(--graphite);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.62;
+      padding-bottom: 88px;
+      border-top: 4px solid var(--teal);
+    }
+
+    /* --- COMPACT STICKY UTILITY TOPBAR (NO HERO INTRO BANNER) --- */
+    .utility-bar {
+      position: sticky;
+      top: 0;
+      z-index: 950;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hairline);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--graphite);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-name span {
+      color: var(--teal);
+    }
+
+    .level-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid var(--teal-border);
+      padding: 3px 9px;
+      border-radius: 5px;
+    }
+
+    .view-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--surface-tint);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--hairline);
+    }
+
+    .view-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--graphite-muted);
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .view-tab.active {
+      background: var(--graphite);
+      color: #ffffff;
+    }
+
+    .timers-cluster {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .timer-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-white);
+      border: 1px solid var(--hairline-strong);
+      border-radius: 7px;
+      padding: 4px 9px;
+    }
+
+    .timer-strip.active-exam {
+      background: var(--coral-soft);
+      border-color: var(--coral-border);
+    }
+
+    .timer-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--graphite-muted);
+    }
+
+    .timer-digits {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      background: var(--teal-soft);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .timer-strip.active-exam .timer-digits {
+      color: var(--coral);
+      background: #ffffff;
+    }
+
+    .timer-digits.low {
+      background: var(--coral);
+      color: #ffffff;
+    }
+
+    .t-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid var(--hairline-strong);
+      background: var(--bg-mist);
+      color: var(--graphite);
+      cursor: pointer;
+    }
+
+    .t-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .progress-rail {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--teal);
+      transition: width 0.12s linear;
+    }
+
+    /* --- MAIN WORKBOOK LAYOUT --- */
+    .workbook-shell {
+      max-width: 1020px;
+      margin: 22px auto 0;
+      padding: 0 20px;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Compact Syllabus Topic Index Strip */
+    .syllabus-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .syllabus-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--graphite-muted);
+      background: var(--surface-white);
+      border: 1px solid var(--hairline-strong);
+      padding: 6px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: all 0.14s ease;
+    }
+
+    .syllabus-link:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      background: var(--teal-soft);
+    }
+
+    /* --- MODULE SECTIONS (CLEAN ARCHITECTURAL DIVIDERS, NO CLONED BOXES) --- */
+    .grammar-module {
+      padding: 28px 0 42px;
+      border-bottom: 2px solid var(--hairline);
+    }
+
+    .grammar-module:last-child {
+      border-bottom: none;
+    }
+
+    .module-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .module-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .module-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(23px, 3.2vw, 30px);
+      font-weight: 700;
+      color: var(--graphite);
+      line-height: 1.18;
+    }
+
+    .module-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--graphite-muted);
+      background: var(--surface-white);
+      border: 1px solid var(--hairline-strong);
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    /* --- EXPLANATION BLOCKS (DISTINCT VISUAL TREATMENTS PER MODULE) --- */
+    .theory-surface {
+      background: var(--surface-white);
+      border: 1px solid var(--hairline);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-bottom: 26px;
+    }
+
+    .theory-surface.coral-rail {
+      border-left-color: var(--coral-warm);
+    }
+
+    .theory-surface h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--graphite);
+      margin-bottom: 10px;
+    }
+
+    .split-theory {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .theory-col {
+      background: var(--bg-mist);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 15px 18px;
+    }
+
+    .theory-col h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+
+    .formula-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid var(--teal-border);
+      padding: 4px 9px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .trap-strip {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: var(--coral-soft);
+      border: 1px solid var(--coral-border);
+      border-radius: 7px;
+      font-size: 13.5px;
+      color: #881337;
+    }
+
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.8px;
+      margin-top: 8px;
+    }
+
+    .clean-table th {
+      text-align: left;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--graphite-muted);
+      border-bottom: 2px solid var(--hairline-strong);
+      padding: 8px 10px;
+    }
+
+    .clean-table td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+    }
+
+    /* --- VARIED PRACTICE LAYOUTS (UNBOXED LISTS, TABLES, PILL ROWS, INLINE BLANKS) --- */
+    .practice-block {
+      margin-bottom: 24px;
+    }
+
+    .practice-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .practice-heading h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--graphite);
+    }
+
+    .practice-sub {
+      font-size: 13.5px;
+      color: var(--graphite-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Layout Style A: Clean Horizontal Rule List */
+    .rule-list {
+      background: var(--surface-white);
+      border-top: 1.5px solid var(--graphite);
+      border-bottom: 1.5px solid var(--graphite);
+    }
+
+    .rule-row {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 14.5px;
+    }
+
+    .rule-row:last-child {
+      border-bottom: none;
+    }
+
+    .row-stem {
+      flex: 1 1 380px;
+    }
+
+    /* Layout Style B: Inline Pill Selector Rows (No dropdowns!) */
+    .pill-choice-group {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .choice-pill {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--hairline-strong);
+      background: var(--bg-mist);
+      color: var(--graphite);
+      cursor: pointer;
+      transition: all 0.13s ease;
+    }
+
+    .choice-pill:hover {
+      border-color: var(--teal);
+    }
+
+    .choice-pill.picked {
+      background: var(--graphite);
+      color: #ffffff;
+      border-color: var(--graphite);
+    }
+
+    .choice-pill.ok {
+      background: var(--teal) !important;
+      color: #ffffff !important;
+      border-color: var(--teal) !important;
+    }
+
+    .choice-pill.bad {
+      background: var(--coral) !important;
+      color: #ffffff !important;
+      border-color: var(--coral) !important;
+    }
+
+    /* Layout Style C: Two-Column Sentence Transformation Grid */
+    .transform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .transform-cell {
+      background: var(--surface-white);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 13px 15px;
+      font-size: 14px;
+    }
+
+    .feedback-line {
+      display: none;
+      width: 100%;
+      margin-top: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--amber-ink);
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .feedback-line.shown {
+      display: block;
+    }
+
+    /* Form Controls */
+    select.wb-select,
+    input.wb-input {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.8px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border: 1.5px solid var(--hairline-strong);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--graphite);
+      outline: none;
+    }
+
+    select.wb-select:focus,
+    input.wb-input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    input.wb-input {
+      width: 195px;
+      max-width: 100%;
+    }
+
+    .state-ok {
+      border-color: var(--teal) !important;
+      background: var(--teal-soft) !important;
+      color: var(--teal-dark) !important;
+      font-weight: 700 !important;
+    }
+
+    .state-bad {
+      border-color: var(--coral) !important;
+      background: var(--coral-soft) !important;
+      color: var(--coral) !important;
+    }
+
+    .btn-check {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--teal);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.14s ease;
+    }
+
+    .btn-check:hover {
+      background: var(--teal-dark);
+    }
+
+    .btn-check.dark {
+      background: var(--graphite);
+    }
+
+    .btn-check.dark:hover {
+      background: #2c333a;
+    }
+
+    .score-tag {
+      display: inline-block;
+      margin-left: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    /* --- FULL CONTROL TEST TAB (50 POINTS, 100% OBJECTIVE) --- */
+    .exam-topbar-summary {
+      background: var(--surface-white);
+      border: 1px solid var(--hairline-strong);
+      border-left: 4px solid var(--coral);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .exam-topbar-summary h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .exam-part {
+      margin-bottom: 28px;
+    }
+
+    .exam-part-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--graphite);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--graphite);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .exam-part-title span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--teal-dark);
+      background: var(--teal-soft);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .final-score-box {
+      display: none;
+      margin-top: 20px;
+      background: var(--surface-white);
+      border: 2px solid var(--teal);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+
+    .final-score-box.open {
+      display: block;
+    }
+
+    @media (max-width: 780px) {
+      .split-theory,
+      .transform-grid {
+        grid-template-columns: 1fr;
+      }
+      .utility-bar {
+        padding: 10px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COMPACT STICKY UTILITY TOPBAR (STARTS DIRECTLY WITHOUT HERO INTRO) -->
+  <header class="utility-bar">
+    <div class="brand-cluster">
+      <div class="brand-name">ziz<span>.</span>english</div>
+      <span class="level-tag">A2/B1 Grammar Control Test</span>
+    </div>
+
+    <div class="view-switcher">
+      <button type="button" class="view-tab active" data-pane="lesson" onclick="switchTab('lesson')">60-Min Grammar Prep</button>
+      <button type="button" class="view-tab" data-pane="homework" onclick="switchTab('homework')">Full Control Test (45 min)</button>
+    </div>
+
+    <div class="timers-cluster">
+      <div class="timer-strip" id="lessonTimerStrip">
+        <span class="timer-name">Lesson</span>
+        <span class="timer-digits" id="lessonDigits">60:00</span>
+        <button type="button" class="t-btn" onclick="startTimer('lesson')">Start</button>
+        <button type="button" class="t-btn" onclick="pauseTimer('lesson')">Pause</button>
+        <button type="button" class="t-btn" onclick="resetTimer('lesson')">Reset</button>
+      </div>
+
+      <div class="timer-strip" id="examTimerStrip">
+        <span class="timer-name">Test</span>
+        <span class="timer-digits" id="examDigits">45:00</span>
+        <button type="button" class="t-btn" onclick="startTimer('exam')">Start</button>
+        <button type="button" class="t-btn" onclick="pauseTimer('exam')">Pause</button>
+        <button type="button" class="t-btn" onclick="resetTimer('exam')">Reset</button>
+      </div>
+    </div>
+
+    <div class="progress-rail"><div class="progress-bar" id="scrollProgress"></div></div>
+  </header>
+
+  <div class="workbook-shell">
+
+    <!-- =================================================================== -->
+    <!-- PANE 1: 60-MIN GRAMMAR PREP (5 SEPARATE EXPLANATION + PRACTICE UNITS) -->
+    <!-- =================================================================== -->
+    <div id="pane-lesson" class="tab-pane active">
+
+      <!-- Compact Syllabus Jump Strip -->
+      <nav class="syllabus-strip" aria-label="Grammar modules">
+        <a href="#mod1" class="syllabus-link">1. 1st &amp; 2nd Conditionals</a>
+        <a href="#mod2" class="syllabus-link">2. when / unless / as</a>
+        <a href="#mod3" class="syllabus-link">3. Relative &amp; Subordinate Clauses</a>
+        <a href="#mod4" class="syllabus-link">4. Modals (must / need / should)</a>
+        <a href="#mod5" class="syllabus-link">5. -ed vs. -ing Adjectives</a>
+      </nav>
+
+      <!-- ================================================================= -->
+      <!-- MODULE 1: FIRST & SECOND CONDITIONALS                             -->
+      <!-- ================================================================= -->
+      <section class="grammar-module" id="mod1">
+        <div class="module-header">
+          <div>
+            <span class="module-num">Module 01 • Explanation &amp; Practice</span>
+            <h2>First &amp; Second Conditionals</h2>
+          </div>
+          <span class="module-time">12 min</span>
+        </div>
+
+        <!-- Full Explanation -->
+        <div class="theory-surface">
+          <h3>How to Choose Between First and Second Conditional</h3>
+          <div class="split-theory">
+            <div class="theory-col">
+              <h4>First Conditional (Real Future Possibility)</h4>
+              <span class="formula-tag">If + Present Simple, will / can / may + V1</span>
+              <p style="font-size: 13.8px; margin-bottom: 6px;">Use for realistic situations in the future and their likely result.</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                • If it <b>rains</b> tomorrow, we <b>will stay</b> at home.<br>
+                • If she <b>passes</b> the test, her parents <b>will buy</b> her a bike.
+              </p>
+            </div>
+
+            <div class="theory-col">
+              <h4>Second Conditional (Imaginary / Unlikely)</h4>
+              <span class="formula-tag">If + Past Simple, would / could + V1</span>
+              <p style="font-size: 13.8px; margin-bottom: 6px;">Use for unreal, imaginary, or very unlikely situations now or in the future.</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                • If I <b>had</b> a million euros, I <b>would travel</b> around the world.<br>
+                • If I <b>were</b> you, I <b>would revise</b> tonight. <i>(advice)</i>
+              </p>
+            </div>
+          </div>
+          <div class="trap-strip">
+            <b>Control Test Rule:</b> Never put <b>will</b> or <b>would</b> inside the <b>If</b>-clause! (✗ <i>If I will see him</i> → ✓ <i>If I see him</i>; ✗ <i>If I would have time</i> → ✓ <i>If I had time</i>).
+          </div>
+        </div>
+
+        <!-- Practice 1A: Pill Choice -->
+        <div class="practice-block" id="m1PracticeA">
+          <div class="practice-heading">
+            <h4>Practice 1A · Select the Correct Verb Form (8 Items)</h4>
+          </div>
+          <div class="rule-list">
+            <div class="rule-row" data-tip="First Conditional: 'will miss' for a real future consequence.">
+              <span class="row-stem">1. If we don't leave soon, we _____ the last bus.</span>
+              <div class="pill-choice-group" data-answer="will miss">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">will miss</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">would miss</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="Second Conditional: imaginary present → Past Simple 'lived'.">
+              <span class="row-stem">2. If I _____ closer to the sea, I would swim every morning.</span>
+              <div class="pill-choice-group" data-answer="lived">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">live</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">lived</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="Standard advice structure: 'If I were you'.">
+              <span class="row-stem">3. If I _____ you, I would check every answer before handing in the paper.</span>
+              <div class="pill-choice-group" data-answer="were">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">were</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">would be</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="First Conditional: Present Simple 'finishes' in the 'if' clause.">
+              <span class="row-stem">4. Mark will call us as soon as he _____ his meeting.</span>
+              <div class="pill-choice-group" data-answer="finishes">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">finishes</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">will finish</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="Second Conditional: 'would buy' matches Past Simple 'won'.">
+              <span class="row-stem">5. What _____ you buy if you won €5,000 in a competition?</span>
+              <div class="pill-choice-group" data-answer="would">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">will</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">would</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="First Conditional: real possibility → Present Simple 'rains'.">
+              <span class="row-stem">6. If it _____ this afternoon, we'll play indoor tennis instead.</span>
+              <div class="pill-choice-group" data-answer="rains">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">rains</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">rained</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="Second Conditional: imaginary situation now → 'had'.">
+              <span class="row-stem">7. She would learn Japanese if she _____ more free time after work.</span>
+              <div class="pill-choice-group" data-answer="had">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">has</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">had</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="First Conditional: 'can go' is a realistic future result.">
+              <span class="row-stem">8. If you tidy your desk now, you _____ go out with your friends later.</span>
+              <div class="pill-choice-group" data-answer="can">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">can</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">could have</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check" onclick="gradePills('m1PracticeA', 'm1ScoreA')">Check Practice 1A</button>
+          <span class="score-tag" id="m1ScoreA"></span>
+        </div>
+
+        <!-- Practice 1B: Verb Form Gap-Fill -->
+        <div class="practice-block" id="m1PracticeB" style="margin-bottom: 0;">
+          <div class="practice-heading">
+            <h4>Practice 1B · Write the Correct Form of the Verb in Brackets (6 Items)</h4>
+          </div>
+          <div class="transform-grid">
+            <div class="transform-cell" data-tip="First Conditional: Present Simple 'studies'.">
+              1. If Anna <input type="text" class="wb-input" style="width: 130px;" data-answer="studies" placeholder="(study)" /> tonight, she will pass easily.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Second Conditional: 'would travel' / 'could travel'.">
+              2. If I had a car, I <input type="text" class="wb-input" style="width: 155px;" data-answer="would travel|'d travel|could travel" placeholder="(travel)" /> across Europe.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Second Conditional: Past Simple 'knew'.">
+              3. I would tell you the password if I <input type="text" class="wb-input" style="width: 130px;" data-answer="knew" placeholder="(know)" /> it.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="First Conditional: 'will get' / ''ll get'.">
+              4. If you eat too much ice cream, you <input type="text" class="wb-input" style="width: 145px;" data-answer="will get|'ll get" placeholder="(get)" /> a stomach ache.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Second Conditional: Past Simple negative 'didn't live'.">
+              5. We would visit you more often if we <input type="text" class="wb-input" style="width: 155px;" data-answer="didn't live|did not live" placeholder="(not / live)" /> so far away.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="First Conditional: Present Simple negative 'don't hurry'.">
+              6. If they <input type="text" class="wb-input" style="width: 155px;" data-answer="don't hurry|do not hurry" placeholder="(not / hurry)" /> , the museum will close.
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check dark" onclick="gradeInputs('m1PracticeB', 'm1ScoreB')">Check Practice 1B</button>
+          <span class="score-tag" id="m1ScoreB"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- MODULE 2: COMPLEX SENTENCES WITH WHEN, UNLESS, AS                 -->
+      <!-- ================================================================= -->
+      <section class="grammar-module" id="mod2">
+        <div class="module-header">
+          <div>
+            <span class="module-num">Module 02 • Explanation &amp; Practice</span>
+            <h2>Complex Sentences with <em>when, unless, as</em></h2>
+          </div>
+          <span class="module-time">12 min</span>
+        </div>
+
+        <!-- Full Explanation -->
+        <div class="theory-surface coral-rail">
+          <h3>How <em>when</em>, <em>unless</em>, and <em>as</em> Connect Clauses</h3>
+          <table class="clean-table">
+            <thead>
+              <tr>
+                <th style="width: 18%;">Word</th>
+                <th style="width: 34%;">Meaning &amp; Grammar Rule</th>
+                <th style="width: 48%;">Example Sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>unless</b></td>
+                <td>Means <b>if ... not</b>. Followed by an <b>affirmative</b> verb.</td>
+                <td><b>Unless</b> you <b>book</b> a table, we won't get a seat. <i>(= If you don't book...)</i></td>
+              </tr>
+              <tr>
+                <td><b>when</b></td>
+                <td>Means <b>at the time that</b> (sure to happen). Use <b>Present Simple</b> for future meaning.</td>
+                <td>Text me <b>when</b> you <b>arrive</b> at the airport. <i>(NOT: when you will arrive)</i></td>
+              </tr>
+              <tr>
+                <td><b>as</b></td>
+                <td>1) <b>while / at the same time</b><br>2) <b>because / since</b></td>
+                <td>1) <b>As</b> I was walking home, it started to snow.<br>2) <b>As</b> it was late, we took a taxi.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="trap-strip">
+            <b>Punctuation Tip:</b> When the subordinate clause (<i>When / Unless / As...</i>) comes <b>first</b>, put a <b>comma</b> after it. When it comes second, no comma is needed.
+          </div>
+        </div>
+
+        <!-- Practice 2A: Dropdown Selection -->
+        <div class="practice-block" id="m2PracticeA">
+          <div class="practice-heading">
+            <h4>Practice 2A · Choose <em>when, unless,</em> or <em>as</em> (7 Items)</h4>
+          </div>
+          <div class="rule-list">
+            <div class="rule-row" data-tip="'Unless' = 'If we don't water them'.">
+              <span class="row-stem">1. _____ we water the plants today, they will dry out in the sun.</span>
+              <select class="wb-select" data-answer="Unless">
+                <option value="">Choose...</option><option value="When">When</option><option value="Unless">Unless</option><option value="As">As</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'when' + Present Simple ('rings') for a certain future moment.">
+              <span class="row-stem">2. Please put your phones in your bags _____ the lesson starts.</span>
+              <select class="wb-select" data-answer="when">
+                <option value="">Choose...</option><option value="when">when</option><option value="unless">unless</option><option value="as">as</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'As' = 'Because' (explaining the reason why they took umbrellas).">
+              <span class="row-stem">3. _____ the weather forecast predicted rain, everyone brought an umbrella.</span>
+              <select class="wb-select" data-answer="As">
+                <option value="">Choose...</option><option value="Unless">Unless</option><option value="As">As</option><option value="When">When</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'unless' = 'if you don't show your student card'.">
+              <span class="row-stem">4. You can't get the student discount _____ you show a valid ID card.</span>
+              <select class="wb-select" data-answer="unless">
+                <option value="">Choose...</option><option value="when">when</option><option value="unless">unless</option><option value="as">as</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'As' = 'While' (two actions happening at the same time).">
+              <span class="row-stem">5. _____ she was unlocking the front door, her phone rang inside her bag.</span>
+              <select class="wb-select" data-answer="As">
+                <option value="">Choose...</option><option value="Unless">Unless</option><option value="As">As</option><option value="When">When</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'when' marks the future time when dinner is ready.">
+              <span class="row-stem">6. I'll call everyone to the kitchen _____ dinner is ready.</span>
+              <select class="wb-select" data-answer="when">
+                <option value="">Choose...</option><option value="when">when</option><option value="unless">unless</option><option value="as">as</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'Unless' = 'If he doesn't apologize'.">
+              <span class="row-stem">7. _____ Tom apologizes for being rude, Mia won't speak to him.</span>
+              <select class="wb-select" data-answer="Unless">
+                <option value="">Choose...</option><option value="When">When</option><option value="Unless">Unless</option><option value="As">As</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check" onclick="gradeSelects('m2PracticeA', 'm2ScoreA')">Check Practice 2A</button>
+          <span class="score-tag" id="m2ScoreA"></span>
+        </div>
+
+        <!-- Practice 2B: Rewriting -->
+        <div class="practice-block" id="m2PracticeB" style="margin-bottom: 0;">
+          <div class="practice-heading">
+            <h4>Practice 2B · Rewrite Using <em>unless</em> or Fix the Time Clause (5 Items)</h4>
+          </div>
+          <div class="transform-grid">
+            <div class="transform-cell" data-tip="Replace 'If you don't' with 'Unless you'.">
+              1. If you don't wear a coat, you'll catch a cold.<br>
+              → <input type="text" class="wb-input" style="width: 210px; margin-top: 6px;" data-answer="Unless you wear a coat" placeholder="Unless..." /> , you'll catch a cold.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Replace 'if she doesn't' with 'unless she'.">
+              2. We won't start the film if she doesn't arrive by 8:00.<br>
+              → We won't start the film <input type="text" class="wb-input" style="width: 195px; margin-top: 6px;" data-answer="unless she arrives" placeholder="unless..." /> by 8:00.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use Present Simple 'gets' after 'when' (never 'will get').">
+              3. Fix: <i>“Tell him the news when he <s>will get</s> home.”</i><br>
+              → Tell him the news <input type="text" class="wb-input" style="width: 175px; margin-top: 6px;" data-answer="when he gets" placeholder="when he..." /> home.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Replace 'If they don't' with 'Unless they'.">
+              4. If they don't practise daily, they won't win the tournament.<br>
+              → <input type="text" class="wb-input" style="width: 215px; margin-top: 6px;" data-answer="Unless they practise daily|Unless they practice daily" placeholder="Unless..." /> , they won't win the tournament.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use Present Simple 'finishes' after 'when'.">
+              5. Fix: <i>“We'll go for ice cream when the test <s>will finish</s>.”</i><br>
+              → We'll go for ice cream <input type="text" class="wb-input" style="width: 185px; margin-top: 6px;" data-answer="when the test finishes" placeholder="when..." /> .
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check dark" onclick="gradeInputs('m2PracticeB', 'm2ScoreB')">Check Practice 2B</button>
+          <span class="score-tag" id="m2ScoreB"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- MODULE 3: RELATIVE & SUBORDINATE CLAUSES ("ВИЗНАЧАЛЬНІ ТА ПІДРЯДНІ") -->
+      <!-- ================================================================= -->
+      <section class="grammar-module" id="mod3">
+        <div class="module-header">
+          <div>
+            <span class="module-num">Module 03 • Explanation &amp; Practice</span>
+            <h2>Relative Clauses &amp; Subordinate Clauses</h2>
+          </div>
+          <span class="module-time">12 min</span>
+        </div>
+
+        <!-- Full Explanation -->
+        <div class="theory-surface">
+          <h3>Understanding Defining, Non-Defining &amp; Subordinate Clauses</h3>
+          <div class="split-theory">
+            <div class="theory-col">
+              <h4>1. Defining Relative Clauses (No Commas)</h4>
+              <p style="font-size: 13.5px; margin-bottom: 6px;">Give <b>essential</b> information to show <i>which</i> person, thing, or place we mean:</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                • <b>who / that</b> → people (<i>The boy <b>who</b> won is 14.</i>)<br>
+                • <b>which / that</b> → things/animals (<i>The book <b>which</b> I bought...</i>)<br>
+                • <b>where</b> → places (<i>The café <b>where</b> we met...</i>)<br>
+                • <b>whose</b> → possession (<i>The girl <b>whose</b> bag was lost...</i>)
+              </p>
+            </div>
+
+            <div class="theory-col">
+              <h4>2. Non-Defining &amp; Subordinate Clauses</h4>
+              <p style="font-size: 13.5px; margin-bottom: 6px;"><b>Non-defining</b> clauses add extra info between <b>commas</b>:</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted); margin-bottom: 6px;">
+                • My uncle, <b>who</b> lives in Lviv, is an architect.<br>
+                • Kyiv, <b>which</b> stands on the Dnipro, is very green.
+              </p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                <b>Subordinate clauses</b> (time, reason, contrast) attach to a main clause using <i>because, although, when, while</i>.
+              </p>
+            </div>
+          </div>
+          <div class="trap-strip">
+            <b>Control Test Rule:</b> After a <b>comma</b> in a non-defining clause, you can use <b>who</b> or <b>which</b>, but you can <b>NEVER use "that"</b>!
+          </div>
+        </div>
+
+        <!-- Practice 3A: Relative Pronoun Choice -->
+        <div class="practice-block" id="m3PracticeA">
+          <div class="practice-heading">
+            <h4>Practice 3A · Complete with <em>who, which, that, where,</em> or <em>whose</em> (8 Items)</h4>
+          </div>
+          <div class="rule-list">
+            <div class="rule-row" data-tip="'who' refers to a person ('the scientist').">
+              <span class="row-stem">1. Dr. Reed is the scientist _____ discovered the new vaccine.</span>
+              <select class="wb-select" data-answer="who">
+                <option value="">Choose...</option><option value="who">who</option><option value="which">which</option><option value="where">where</option><option value="whose">whose</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'which' is required after a comma in a non-defining clause (never 'that').">
+              <span class="row-stem">2. Our school library, _____ was renovated last year, has 10,000 books.</span>
+              <select class="wb-select" data-answer="which">
+                <option value="">Choose...</option><option value="that">that</option><option value="which">which</option><option value="who">who</option><option value="where">where</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'where' refers to a place ('the stadium').">
+              <span class="row-stem">3. That is the stadium _____ the championship final will take place.</span>
+              <select class="wb-select" data-answer="where">
+                <option value="">Choose...</option><option value="who">who</option><option value="which">which</option><option value="where">where</option><option value="whose">whose</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'whose' shows possession ('whose phone').">
+              <span class="row-stem">4. The passenger _____ suitcase was missing spoke to the airline desk.</span>
+              <select class="wb-select" data-answer="whose">
+                <option value="">Choose...</option><option value="who">who</option><option value="whose">whose</option><option value="which">which</option><option value="where">where</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'that' (or 'which') defines a thing ('the laptop').">
+              <span class="row-stem">5. Have you found the charger _____ you left in the classroom?</span>
+              <select class="wb-select" data-answer="that">
+                <option value="">Choose...</option><option value="who">who</option><option value="where">where</option><option value="that">that</option><option value="whose">whose</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'who' is required in a non-defining clause for a person ('Mrs. Koval, who...').">
+              <span class="row-stem">6. Mrs. Koval, _____ teaches biology, organizes our ecology club.</span>
+              <select class="wb-select" data-answer="who">
+                <option value="">Choose...</option><option value="that">that</option><option value="who">who</option><option value="which">which</option><option value="whose">whose</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'which' refers to a thing ('the train') as the subject of 'leaves'.">
+              <span class="row-stem">7. The express train _____ leaves at 9:15 goes straight to the airport.</span>
+              <select class="wb-select" data-answer="which">
+                <option value="">Choose...</option><option value="where">where</option><option value="who">who</option><option value="which">which</option><option value="whose">whose</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'whose' shows possession ('whose mother').">
+              <span class="row-stem">8. I sit next to a girl _____ mother writes children's books.</span>
+              <select class="wb-select" data-answer="whose">
+                <option value="">Choose...</option><option value="who">who</option><option value="whose">whose</option><option value="which">which</option><option value="where">where</option>
+              </select>
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check" onclick="gradeSelects('m3PracticeA', 'm3ScoreA')">Check Practice 3A</button>
+          <span class="score-tag" id="m3ScoreA"></span>
+        </div>
+
+        <!-- Practice 3B: Sentence Combining -->
+        <div class="practice-block" id="m3PracticeB" style="margin-bottom: 0;">
+          <div class="practice-heading">
+            <h4>Practice 3B · Join the Two Sentences Using a Relative Pronoun (5 Items)</h4>
+          </div>
+          <div class="transform-grid">
+            <div class="transform-cell" data-tip="Use 'who' (or 'that') and remove 'He'.">
+              1. I thanked the driver. He returned my lost wallet.<br>
+              → I thanked the driver <input type="text" class="wb-input" style="width: 215px; margin-top: 6px;" data-answer="who returned my lost wallet|that returned my lost wallet" placeholder="who / that..." /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'where' and remove 'there'.">
+              2. This is the bakery. We buy fresh croissants there.<br>
+              → This is the bakery <input type="text" class="wb-input" style="width: 215px; margin-top: 6px;" data-answer="where we buy fresh croissants" placeholder="where..." /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'whose' instead of 'His'.">
+              3. That's the musician. His song won first prize.<br>
+              → That's the musician <input type="text" class="wb-input" style="width: 205px; margin-top: 6px;" data-answer="whose song won first prize" placeholder="whose..." /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'which' (or 'that') and remove 'it'.">
+              4. She showed me the painting. She finished it yesterday.<br>
+              → She showed me the painting <input type="text" class="wb-input" style="width: 215px; margin-top: 6px;" data-answer="which she finished yesterday|that she finished yesterday" placeholder="which / that..." /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Subordinate clause of reason: 'because it was snowing'.">
+              5. Join with <b>because</b>: We cancelled the hike. It was snowing.<br>
+              → We cancelled the hike <input type="text" class="wb-input" style="width: 205px; margin-top: 6px;" data-answer="because it was snowing" placeholder="because..." /> .
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check dark" onclick="gradeInputs('m3PracticeB', 'm3ScoreB')">Check Practice 3B</button>
+          <span class="score-tag" id="m3ScoreB"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- MODULE 4: MODAL VERBS (MUST, HAVE TO, NEED, SHOULD, MIGHT)        -->
+      <!-- ================================================================= -->
+      <section class="grammar-module" id="mod4">
+        <div class="module-header">
+          <div>
+            <span class="module-num">Module 04 • Explanation &amp; Practice</span>
+            <h2>Modal Verbs: <em>must, have to, need, should, might</em></h2>
+          </div>
+          <span class="module-time">12 min</span>
+        </div>
+
+        <!-- Full Explanation -->
+        <div class="theory-surface coral-rail">
+          <h3>Obligation, Prohibition, No Necessity, Advice &amp; Possibility</h3>
+          <table class="clean-table">
+            <thead>
+              <tr>
+                <th style="width: 24%;">Modal / Form</th>
+                <th style="width: 34%;">Meaning</th>
+                <th style="width: 42%;">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>must / have to + V1</b></td>
+                <td>Strong obligation or rule (<i>повинен / мусиш</i>)</td>
+                <td>You <b>must / have to</b> wear a seatbelt in the car.</td>
+              </tr>
+              <tr>
+                <td><b>mustn't + V1</b></td>
+                <td>Prohibition — strictly forbidden (<i>заборонено</i>)</td>
+                <td>You <b>mustn't</b> use your phone during the test.</td>
+              </tr>
+              <tr>
+                <td><b>don't have to / needn't + V1</b></td>
+                <td>No obligation — not necessary (<i>не обов'язково</i>)</td>
+                <td>You <b>don't have to / needn't</b> print the ticket.</td>
+              </tr>
+              <tr>
+                <td><b>need to + V1</b> vs. <b>needn't + V1</b></td>
+                <td><i>need to</i> takes <b>to</b>; modal <i>needn't</i> takes <b>no to</b></td>
+                <td>I <b>need to</b> leave early. / You <b>needn't</b> worry.</td>
+              </tr>
+              <tr>
+                <td><b>should / shouldn't + V1</b></td>
+                <td>Advice or recommendation (<i>варто / не варто</i>)</td>
+                <td>You <b>should</b> get eight hours of sleep before an exam.</td>
+              </tr>
+              <tr>
+                <td><b>might / may + V1</b></td>
+                <td>Possibility / uncertainty (<i>можливо</i>)</td>
+                <td>Take a sweater—it <b>might</b> get cold later.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="trap-strip">
+            <b>#1 Exam Trap:</b> <b>mustn't</b> (заборонено) and <b>don't have to / needn't</b> (не потрібно) have completely different meanings! Also never say <i>"needn't to go"</i>.
+          </div>
+        </div>
+
+        <!-- Practice 4A: Pill Choice -->
+        <div class="practice-block" id="m4PracticeA">
+          <div class="practice-heading">
+            <h4>Practice 4A · Choose the Best Modal Verb (8 Items)</h4>
+          </div>
+          <div class="rule-list">
+            <div class="rule-row" data-tip="'mustn't' = strictly forbidden in a hospital.">
+              <span class="row-stem">1. Visitors _____ make loud noise in the hospital corridor.</span>
+              <div class="pill-choice-group" data-answer="mustn't">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">don't have to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">might</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'don't have to' = not necessary because it's Saturday.">
+              <span class="row-stem">2. Tomorrow is Saturday, so I _____ wake up at 6:30 AM.</span>
+              <div class="pill-choice-group" data-answer="don't have to">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">don't have to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">must</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'needn't' + V1 (without 'to') = no need to rush.">
+              <span class="row-stem">3. We have plenty of time before boarding, so we _____ rush.</span>
+              <div class="pill-choice-group" data-answer="needn't">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">must</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'need to' + V1 expresses personal necessity.">
+              <span class="row-stem">4. My glasses are broken—I _____ visit the optician this week.</span>
+              <div class="pill-choice-group" data-answer="need to">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">need to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'should' gives friendly advice.">
+              <span class="row-stem">5. If your eyes feel tired, you _____ take a ten-minute screen break.</span>
+              <div class="pill-choice-group" data-answer="should">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">should</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'might' shows possibility when you aren't sure.">
+              <span class="row-stem">6. Don't call Leo yet—he _____ still be in his piano lesson.</span>
+              <div class="pill-choice-group" data-answer="might">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">might</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'have to' = official rule for all passengers.">
+              <span class="row-stem">7. All passengers _____ show their boarding pass at the gate.</span>
+              <div class="pill-choice-group" data-answer="have to">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">have to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">might</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'mustn't' = strict safety rule.">
+              <span class="row-stem">8. You _____ cross the street when the pedestrian light is red.</span>
+              <div class="pill-choice-group" data-answer="mustn't">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">mustn't</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">don't have to</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">needn't</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check" onclick="gradePills('m4PracticeA', 'm4ScoreA')">Check Practice 4A</button>
+          <span class="score-tag" id="m4ScoreA"></span>
+        </div>
+
+        <!-- Practice 4B: Paraphrase with Modals -->
+        <div class="practice-block" id="m4PracticeB" style="margin-bottom: 0;">
+          <div class="practice-heading">
+            <h4>Practice 4B · Rewrite the Sentence Using the Modal Given (6 Items)</h4>
+          </div>
+          <div class="transform-grid">
+            <div class="transform-cell" data-tip="Use 'needn't' or 'don't have to' / 'don't need to'.">
+              1. It isn't necessary to bring a dictionary.<br>
+              → You <input type="text" class="wb-input" style="width: 175px; margin-top: 6px;" data-answer="needn't bring|don't have to bring|don't need to bring" placeholder="needn't / don't..." /> a dictionary.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'mustn't' for prohibition.">
+              2. Parking in front of the school gate is forbidden.<br>
+              → You <input type="text" class="wb-input" style="width: 155px; margin-top: 6px;" data-answer="mustn't park|must not park" placeholder="mustn't..." /> in front of the school gate.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'should' for advice.">
+              3. I advise you to back up your presentation.<br>
+              → You <input type="text" class="wb-input" style="width: 165px; margin-top: 6px;" data-answer="should back up" placeholder="should..." /> your presentation.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'might' for possibility.">
+              4. Perhaps it will snow later tonight.<br>
+              → It <input type="text" class="wb-input" style="width: 145px; margin-top: 6px;" data-answer="might snow|may snow" placeholder="might..." /> later tonight.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'need to' or 'have to' / 'must'.">
+              5. It is necessary for me to finish this form today.<br>
+              → I <input type="text" class="wb-input" style="width: 165px; margin-top: 6px;" data-answer="need to finish|have to finish|must finish" placeholder="need to..." /> this form today.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Use 'needn't' or 'don't have to'.">
+              6. It isn't necessary for Emma to pay for the bus.<br>
+              → Emma <input type="text" class="wb-input" style="width: 175px; margin-top: 6px;" data-answer="needn't pay|doesn't have to pay|doesn't need to pay" placeholder="needn't / doesn't..." /> for the bus.
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check dark" onclick="gradeInputs('m4PracticeB', 'm4ScoreB')">Check Practice 4B</button>
+          <span class="score-tag" id="m4ScoreB"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- MODULE 5: -ED VS. -ING ADJECTIVES (SEPARATE STANDALONE MODULE)    -->
+      <!-- ================================================================= -->
+      <section class="grammar-module" id="mod5">
+        <div class="module-header">
+          <div>
+            <span class="module-num">Module 05 • Explanation &amp; Practice</span>
+            <h2>Adjectives Ending in <em>-ed</em> vs. <em>-ing</em></h2>
+          </div>
+          <span class="module-time">12 min</span>
+        </div>
+
+        <!-- Full Explanation -->
+        <div class="theory-surface">
+          <h3>Feeling (<em>-ed</em>) vs. Cause of the Feeling (<em>-ing</em>)</h3>
+          <div class="split-theory">
+            <div class="theory-col">
+              <h4>Adjectives ending in <em>-ed</em> → HOW SOMEONE FEELS</h4>
+              <p style="font-size: 13.8px; margin-bottom: 8px;">Describes a person's (or animal's) emotional state:</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                • I felt <b>bored</b> during the lecture.<br>
+                • She was <b>amazed</b> by the concert.<br>
+                • They were <b>confused</b> by the map.
+              </p>
+            </div>
+
+            <div class="theory-col">
+              <h4>Adjectives ending in <em>-ing</em> → WHAT CAUSES THE FEELING</h4>
+              <p style="font-size: 13.8px; margin-bottom: 8px;">Describes the thing, event, or person creating that emotion:</p>
+              <p style="font-size: 13.5px; color: var(--graphite-muted);">
+                • The lecture was <b>boring</b>.<br>
+                • The concert was <b>amazing</b>.<br>
+                • The map was <b>confusing</b>.
+              </p>
+            </div>
+          </div>
+          <div class="trap-strip">
+            <b>Quick Test:</b> Ask yourself: <i>"Is this how someone feels inside?"</i> → <b>-ed</b>. <i>"Is this describing a thing/situation (or what a person is like to others)?"</i> → <b>-ing</b> (e.g., <i>an interesting teacher</i>).
+          </div>
+        </div>
+
+        <!-- Practice 5A: Pill Choice -->
+        <div class="practice-block" id="m5PracticeA">
+          <div class="practice-heading">
+            <h4>Practice 5A · Choose <em>-ed</em> or <em>-ing</em> (8 Items)</h4>
+          </div>
+          <div class="rule-list">
+            <div class="rule-row" data-tip="'exhausted' (-ed) describes how the hikers felt.">
+              <span class="row-stem">1. After walking 18 kilometres in the mountains, the hikers were _____.</span>
+              <div class="pill-choice-group" data-answer="exhausted">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">exhausted</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">exhausting</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'fascinating' (-ing) describes the museum exhibition.">
+              <span class="row-stem">2. We spent three hours at the space exhibition—it was _____.</span>
+              <div class="pill-choice-group" data-answer="fascinating">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">fascinated</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">fascinating</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'disappointed' (-ed) describes how Daniel felt.">
+              <span class="row-stem">3. Daniel felt _____ when his favourite band cancelled their tour.</span>
+              <div class="pill-choice-group" data-answer="disappointed">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">disappointed</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">disappointing</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'frightening' (-ing) describes the horror movie.">
+              <span class="row-stem">4. That horror movie was so _____ that I couldn't sleep afterward!</span>
+              <div class="pill-choice-group" data-answer="frightening">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">frightened</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">frightening</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'confused' (-ed) describes how the tourists felt.">
+              <span class="row-stem">5. The tourists looked _____ because two streets had the exact same name.</span>
+              <div class="pill-choice-group" data-answer="confused">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">confused</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">confusing</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'relaxing' (-ing) describes the weekend by the lake.">
+              <span class="row-stem">6. Spending a quiet weekend by the lake was really _____.</span>
+              <div class="pill-choice-group" data-answer="relaxing">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">relaxed</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">relaxing</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'embarrassed' (-ed) describes how Clara felt.">
+              <span class="row-stem">7. Clara turned bright red and felt _____ when she spilled juice on the table.</span>
+              <div class="pill-choice-group" data-answer="embarrassed">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">embarrassed</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">embarrassing</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+
+            <div class="rule-row" data-tip="'surprising' (-ing) describes the exam results.">
+              <span class="row-stem">8. The high score on our practice quiz was a very _____ result!</span>
+              <div class="pill-choice-group" data-answer="surprising">
+                <button type="button" class="choice-pill" onclick="pickPill(this)">surprised</button>
+                <button type="button" class="choice-pill" onclick="pickPill(this)">surprising</button>
+              </div>
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check" onclick="gradePills('m5PracticeA', 'm5ScoreA')">Check Practice 5A</button>
+          <span class="score-tag" id="m5ScoreA"></span>
+        </div>
+
+        <!-- Practice 5B: Word Formation -->
+        <div class="practice-block" id="m5PracticeB" style="margin-bottom: 0;">
+          <div class="practice-heading">
+            <h4>Practice 5B · Form the Correct <em>-ed</em> or <em>-ing</em> Adjective (6 Items)</h4>
+          </div>
+          <div class="transform-grid">
+            <div class="transform-cell" data-tip="Describes the journey → 'tiring'.">
+              1. The overnight bus journey was long and <input type="text" class="wb-input" style="width: 135px;" data-answer="tiring" placeholder="(tire)" /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Describes how the students felt → 'excited'.">
+              2. The students were <input type="text" class="wb-input" style="width: 135px;" data-answer="excited" placeholder="(excite)" /> about the school trip.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Describes how you feel about history → 'interested'.">
+              3. Are you <input type="text" class="wb-input" style="width: 145px;" data-answer="interested" placeholder="(interest)" /> in ancient history?
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Describes the delay → 'annoying'.">
+              4. Waiting forty minutes for a delayed train is really <input type="text" class="wb-input" style="width: 135px;" data-answer="annoying" placeholder="(annoy)" /> .
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Describes how we felt → 'amazed'.">
+              5. We were <input type="text" class="wb-input" style="width: 135px;" data-answer="amazed" placeholder="(amaze)" /> by the view from the castle tower.
+              <div class="feedback-line"></div>
+            </div>
+            <div class="transform-cell" data-tip="Describes the instructions → 'confusing'.">
+              6. The assembly instructions for the desk were super <input type="text" class="wb-input" style="width: 135px;" data-answer="confusing" placeholder="(confuse)" /> .
+              <div class="feedback-line"></div>
+            </div>
+          </div>
+          <button type="button" class="btn-check dark" onclick="gradeInputs('m5PracticeB', 'm5ScoreB')">Check Practice 5B</button>
+          <span class="score-tag" id="m5ScoreB"></span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- PANE 2: FULL CONTROL TEST (HOMEWORK • 45 MIN • 50 POINTS)           -->
+    <!-- =================================================================== -->
+    <div id="pane-homework" class="tab-pane">
+
+      <div class="exam-topbar-summary">
+        <div>
+          <h2>Full Mock Control Test (50 Points • 45 Minutes)</h2>
+          <p style="font-size: 13.8px; color: var(--graphite-muted);">Complete Parts I–V (50 auto-graded points). Press <b>Start</b> on the <b>Test</b> timer in the top bar before you begin.</p>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--teal-dark); background: var(--teal-soft); padding: 8px 12px; border-radius: 7px; border: 1px solid var(--teal-border);">
+          Part I: 10 pts • Part II: 10 pts • Part III: 10 pts • Part IV: 10 pts • Part V: 10 pts
+        </div>
+      </div>
+
+      <!-- PART I (10 PTS): CONDITIONALS & WHEN / UNLESS / AS -->
+      <section class="exam-part" id="examPart1">
+        <div class="exam-part-title">Part I · First &amp; Second Conditionals + <em>when / unless / as</em> <span>10 points</span></div>
+        <div class="rule-list">
+          <div class="rule-row" data-tip="'Unless' = 'If we don't leave now'.">
+            <span class="row-stem">1. _____ we leave right now, we'll miss the opening scene of the film.</span>
+            <select class="wb-select" data-answer="Unless"><option value="">Choose...</option><option value="When">When</option><option value="Unless">Unless</option><option value="As">As</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'when' + Present Simple ('lands') for a future time point.">
+            <span class="row-stem">2. Send me a message _____ your plane lands in London.</span>
+            <select class="wb-select" data-answer="when"><option value="">Choose...</option><option value="unless">unless</option><option value="when">when</option><option value="which">which</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'As' = 'Because' (explaining why they took the bus).">
+            <span class="row-stem">3. _____ it was raining heavily, we decided to take the bus instead of walking.</span>
+            <select class="wb-select" data-answer="As"><option value="">Choose...</option><option value="Unless">Unless</option><option value="As">As</option><option value="When">When</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Second Conditional: 'would move' for an imaginary present situation.">
+            <span class="row-stem">4. If Claire spoke Spanish fluently, she _____ to Madrid for a year.</span>
+            <select class="wb-select" data-answer="would move"><option value="">Choose...</option><option value="will move">will move</option><option value="would move">would move</option><option value="moved">moved</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'As' = 'While' (two simultaneous actions).">
+            <span class="row-stem">5. _____ I was opening the window, the wind blew my papers off the desk.</span>
+            <select class="wb-select" data-answer="As"><option value="">Choose...</option><option value="Unless">Unless</option><option value="As">As</option><option value="If">If</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="First Conditional: 'will feel' / ''ll feel'.">
+            <span class="row-stem">6. If you revise regularly, you <input type="text" class="wb-input" style="width: 145px;" data-answer="will feel|'ll feel" placeholder="(feel)" /> calm on test day.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Second Conditional: Past Simple 'found' in the 'if' clause.">
+            <span class="row-stem">7. What would you do if you <input type="text" class="wb-input" style="width: 130px;" data-answer="found" placeholder="(find)" /> a wallet on the street?</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Present Simple 'stops' after 'when'.">
+            <span class="row-stem">8. We can go outside when the rain <input type="text" class="wb-input" style="width: 130px;" data-answer="stops" placeholder="(stop)" /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Second Conditional advice: 'If I were you'.">
+            <span class="row-stem">9. If I <input type="text" class="wb-input" style="width: 120px;" data-answer="were|was" placeholder="(be)" /> you, I would read the instructions carefully.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="First Conditional: Present Simple 'invites' after 'unless'.">
+            <span class="row-stem">10. Tom won't come unless Kate <input type="text" class="wb-input" style="width: 135px;" data-answer="invites" placeholder="(invite)" /> him personally.</span>
+            <div class="feedback-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART II (10 PTS): RELATIVE & SUBORDINATE CLAUSES -->
+      <section class="exam-part" id="examPart2">
+        <div class="exam-part-title">Part II · Relative &amp; Subordinate Clauses <span>10 points</span></div>
+        <div class="rule-list">
+          <div class="rule-row" data-tip="'who' refers to a person ('the volunteer').">
+            <span class="row-stem">1. The volunteer _____ organized the charity run raised €2,000.</span>
+            <select class="wb-select" data-answer="who"><option value="">Choose...</option><option value="who">who</option><option value="which">which</option><option value="where">where</option><option value="whose">whose</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'which' must follow a comma in a non-defining clause (never 'that').">
+            <span class="row-stem">2. Lviv, _____ is famous for its historic cafés, attracts many visitors.</span>
+            <select class="wb-select" data-answer="which"><option value="">Choose...</option><option value="that">that</option><option value="which">which</option><option value="where">where</option><option value="who">who</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'where' refers to a place ('the bench').">
+            <span class="row-stem">3. That's the bench _____ we sat during our lunch break.</span>
+            <select class="wb-select" data-answer="where"><option value="">Choose...</option><option value="who">who</option><option value="which">which</option><option value="where">where</option><option value="whose">whose</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'whose' shows possession ('whose paintings').">
+            <span class="row-stem">4. We met an artist _____ paintings hang in the national gallery.</span>
+            <select class="wb-select" data-answer="whose"><option value="">Choose...</option><option value="who">who</option><option value="whose">whose</option><option value="which">which</option><option value="where">where</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'that' (or 'which') defines a thing ('the train').">
+            <span class="row-stem">5. The train _____ goes to the airport leaves from Platform 4.</span>
+            <select class="wb-select" data-answer="that"><option value="">Choose...</option><option value="who">who</option><option value="where">where</option><option value="that">that</option><option value="whose">whose</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'who' is required after a comma for a person.">
+            <span class="row-stem">6. Elena, _____ speaks four languages, works as an interpreter.</span>
+            <select class="wb-select" data-answer="who"><option value="">Choose...</option><option value="that">that</option><option value="who">who</option><option value="which">which</option><option value="whose">whose</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Subordinate conjunction of contrast: 'Although'.">
+            <span class="row-stem">7. _____ the exam was challenging, everyone finished on time.</span>
+            <select class="wb-select" data-answer="Although"><option value="">Choose...</option><option value="Although">Although</option><option value="Unless">Unless</option><option value="Whose">Whose</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Subordinate conjunction of reason: 'because'.">
+            <span class="row-stem">8. We cancelled the outdoor concert _____ a storm was approaching.</span>
+            <select class="wb-select" data-answer="because"><option value="">Choose...</option><option value="because">because</option><option value="where">where</option><option value="which">which</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Use 'who' (or 'that') and drop 'He'.">
+            <span class="row-stem">9. Combine: <i>“I thanked the mechanic. He repaired my bike.”</i> → I thanked the mechanic <input type="text" class="wb-input" style="width: 215px;" data-answer="who repaired my bike|that repaired my bike" placeholder="who / that..." /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Use 'where' and drop 'there'.">
+            <span class="row-stem">10. Combine: <i>“We visited the town. Mozart was born there.”</i> → We visited the town <input type="text" class="wb-input" style="width: 205px;" data-answer="where Mozart was born" placeholder="where..." /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART III (10 PTS): MODAL VERBS -->
+      <section class="exam-part" id="examPart3">
+        <div class="exam-part-title">Part III · Modal Verbs (<em>must, have to, need, should, might</em>) <span>10 points</span></div>
+        <div class="rule-list">
+          <div class="rule-row" data-tip="'mustn't' = strictly forbidden.">
+            <span class="row-stem">1. You _____ feed the wild animals in the national park.</span>
+            <select class="wb-select" data-answer="mustn't"><option value="">Choose...</option><option value="mustn't">mustn't</option><option value="don't have to">don't have to</option><option value="might">might</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'don't have to' = no obligation on a public holiday.">
+            <span class="row-stem">2. Tomorrow is a public holiday, so we _____ go to school.</span>
+            <select class="wb-select" data-answer="don't have to"><option value="">Choose...</option><option value="must">must</option><option value="don't have to">don't have to</option><option value="mustn't">mustn't</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'need to' + V1 expresses necessity.">
+            <span class="row-stem">3. If you want to travel abroad, you _____ renew your passport first.</span>
+            <select class="wb-select" data-answer="need to"><option value="">Choose...</option><option value="need to">need to</option><option value="needn't">needn't</option><option value="mustn't">mustn't</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'needn't' + V1 (no 'to') = not necessary.">
+            <span class="row-stem">4. Lunch is included in the ticket, so you _____ bring sandwiches.</span>
+            <select class="wb-select" data-answer="needn't"><option value="">Choose...</option><option value="needn't">needn't</option><option value="must">must</option><option value="have to">have to</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'should' gives sensible advice.">
+            <span class="row-stem">5. You look exhausted—you _____ take a short break from your screen.</span>
+            <select class="wb-select" data-answer="should"><option value="">Choose...</option><option value="should">should</option><option value="mustn't">mustn't</option><option value="needn't">needn't</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'might' expresses possibility.">
+            <span class="row-stem">6. Bring a light jacket—it _____ get chilly by the river tonight.</span>
+            <select class="wb-select" data-answer="might"><option value="">Choose...</option><option value="might">might</option><option value="mustn't">mustn't</option><option value="needn't">needn't</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'must' = strong safety rule.">
+            <span class="row-stem">7. Cyclists _____ wear a helmet on main roads in this city.</span>
+            <select class="wb-select" data-answer="must"><option value="">Choose...</option><option value="must">must</option><option value="needn't">needn't</option><option value="might">might</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'shouldn't' gives negative advice.">
+            <span class="row-stem">8. You _____ eat too much sugar right before going to sleep.</span>
+            <select class="wb-select" data-answer="shouldn't"><option value="">Choose...</option><option value="shouldn't">shouldn't</option><option value="have to">have to</option><option value="might">might</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'don't need to' / 'needn't' / 'don't have to'.">
+            <span class="row-stem">9. Rewrite: <i>“It isn't necessary to translate every word.”</i> → You <input type="text" class="wb-input" style="width: 175px;" data-answer="don't need to|needn't|don't have to" placeholder="modal..." /> translate every word.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'mustn't' / 'must not' for prohibition.">
+            <span class="row-stem">10. Rewrite: <i>“Taking photos inside this hall is forbidden.”</i> → You <input type="text" class="wb-input" style="width: 140px;" data-answer="mustn't|must not" placeholder="modal..." /> take photos inside this hall.</span>
+            <div class="feedback-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART IV (10 PTS): -ED VS. -ING ADJECTIVES -->
+      <section class="exam-part" id="examPart4">
+        <div class="exam-part-title">Part IV · Adjectives Ending in <em>-ed</em> vs. <em>-ing</em> <span>10 points</span></div>
+        <div class="rule-list">
+          <div class="rule-row" data-tip="'boring' (-ing) describes the documentary.">
+            <span class="row-stem">1. I turned off the TV because the documentary was so _____.</span>
+            <select class="wb-select" data-answer="boring"><option value="">Choose...</option><option value="bored">bored</option><option value="boring">boring</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'exhausted' (-ed) describes how the runners felt.">
+            <span class="row-stem">2. All the runners looked completely _____ at the finish line.</span>
+            <select class="wb-select" data-answer="exhausted"><option value="">Choose...</option><option value="exhausted">exhausted</option><option value="exhausting">exhausting</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'confusing' (-ing) describes the road signs.">
+            <span class="row-stem">3. The road signs near the old port were very _____.</span>
+            <select class="wb-select" data-answer="confusing"><option value="">Choose...</option><option value="confused">confused</option><option value="confusing">confusing</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'interested' (-ed) describes Noah's interest.">
+            <span class="row-stem">4. Noah has always been _____ in architecture and design.</span>
+            <select class="wb-select" data-answer="interested"><option value="">Choose...</option><option value="interested">interested</option><option value="interesting">interesting</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'exciting' (-ing) describes the news.">
+            <span class="row-stem">5. Winning a scholarship to study abroad is really _____ news!</span>
+            <select class="wb-select" data-answer="exciting"><option value="">Choose...</option><option value="excited">excited</option><option value="exciting">exciting</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'surprised' (-ed) describes the teacher's emotion.">
+            <span class="row-stem">6. Our teacher was _____ by how well the whole class scored.</span>
+            <select class="wb-select" data-answer="surprised"><option value="">Choose...</option><option value="surprised">surprised</option><option value="surprising">surprising</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'annoying' (-ing) describes the background noise.">
+            <span class="row-stem">7. The constant buzzing sound from the projector was _____.</span>
+            <select class="wb-select" data-answer="annoying"><option value="">Choose...</option><option value="annoyed">annoyed</option><option value="annoying">annoying</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'embarrassed' (-ed) describes how Alex felt.">
+            <span class="row-stem">8. Alex felt slightly _____ when he forgot his lines on stage.</span>
+            <select class="wb-select" data-answer="embarrassed"><option value="">Choose...</option><option value="embarrassed">embarrassed</option><option value="embarrassing">embarrassing</option></select>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'tiring' (-ing) describes the long journey.">
+            <span class="row-stem">9. Travelling for twelve hours by train is very <input type="text" class="wb-input" style="width: 130px;" data-answer="tiring" placeholder="(tire)" /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'amazed' (-ed) describes how the audience felt.">
+            <span class="row-stem">10. The audience was <input type="text" class="wb-input" style="width: 130px;" data-answer="amazed" placeholder="(amaze)" /> by the acrobat's performance.</span>
+            <div class="feedback-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART V (10 PTS): MIXED ERROR CORRECTION & SENTENCE TRANSFORMATION -->
+      <section class="exam-part" id="examPart5" style="margin-bottom: 0;">
+        <div class="exam-part-title">Part V · Mixed Error Correction &amp; Sentence Transformations <span>10 points</span></div>
+        <div class="rule-list">
+          <div class="rule-row" data-tip="Remove 'will' in the 'if' clause: 'If you heat ice'.">
+            <span class="row-stem">1. <b>Fix the error:</b> <i>“If you <s>will heat</s> ice, it melts.”</i> → If you <input type="text" class="wb-input" style="width: 130px;" data-answer="heat" placeholder="verb..." /> ice, it melts.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Second Conditional: 'would help' in the result clause.">
+            <span class="row-stem">2. <b>Fix the error:</b> <i>“If I lived closer, I <s>will help</s> you move.”</i> → If I lived closer, I <input type="text" class="wb-input" style="width: 155px;" data-answer="would help|'d help" placeholder="would + V1..." /> you move.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'unless' = 'if not' → 'Unless you apologise'.">
+            <span class="row-stem">3. <b>Fix the error:</b> <i>“<s>Unless you don't apologise</s>, she won't forgive you.”</i> → <input type="text" class="wb-input" style="width: 195px;" data-answer="Unless you apologise|Unless you apologize" placeholder="Unless..." /> , she won't forgive you.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Never use 'that' after a comma → 'which'.">
+            <span class="row-stem">4. <b>Fix the error:</b> <i>“My phone, <s>that</s> is three years old, still works well.”</i> → My phone, <input type="text" class="wb-input" style="width: 110px;" data-answer="which" placeholder="pronoun..." /> is three years old, still works well.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Modal 'needn't' does not take 'to' → 'needn't worry' / 'don't need to worry'.">
+            <span class="row-stem">5. <b>Fix the error:</b> <i>“You <s>needn't to worry</s> about the tickets.”</i> → You <input type="text" class="wb-input" style="width: 175px;" data-answer="needn't worry|don't need to worry|don't have to worry" placeholder="modal + worry..." /> about the tickets.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Present Simple 'arrives' after 'when'.">
+            <span class="row-stem">6. <b>Fix the error:</b> <i>“Call me when the train <s>will arrive</s>.”</i> → Call me when the train <input type="text" class="wb-input" style="width: 135px;" data-answer="arrives" placeholder="verb..." /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'who's' = who is; 'whose' = possession.">
+            <span class="row-stem">7. <b>Fix the error:</b> <i>“The boy <s>who's</s> bicycle was stolen called the police.”</i> → The boy <input type="text" class="wb-input" style="width: 115px;" data-answer="whose" placeholder="pronoun..." /> bicycle was stolen called the police.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'don't have to' / 'needn't' = no obligation.">
+            <span class="row-stem">8. <b>Fix the error:</b> <i>“You <s>mustn't</s> wear a tie—casual clothes are fine.”</i> → You <input type="text" class="wb-input" style="width: 175px;" data-answer="don't have to|needn't|don't need to" placeholder="modal..." /> wear a tie—casual clothes are fine.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="'shocked' (-ed) describes how people felt.">
+            <span class="row-stem">9. <b>Fix the error:</b> <i>“We were <s>shocking</s> when we heard the news.”</i> → We were <input type="text" class="wb-input" style="width: 130px;" data-answer="shocked" placeholder="-ed adj..." /> when we heard the news.</span>
+            <div class="feedback-line"></div>
+          </div>
+          <div class="rule-row" data-tip="Use 'whose' to show possession.">
+            <span class="row-stem">10. <b>Combine:</b> <i>“I know a writer. Her novels are famous.”</i> → I know a writer <input type="text" class="wb-input" style="width: 205px;" data-answer="whose novels are famous" placeholder="whose..." /> .</span>
+            <div class="feedback-line"></div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-check" style="margin-top: 18px; font-size: 14px; padding: 11px 22px;" onclick="gradeFullControlTest()">Submit Full Control Test &amp; Calculate Score (out of 50)</button>
+
+        <div class="final-score-box" id="finalScoreBox">
+          <div id="finalScoreHeadline" style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700;"></div>
+          <div id="finalScoreRemark" style="font-size: 14.5px; font-weight: 600; margin-top: 4px;"></div>
+          <div id="finalScoreBreakdown" style="font-size: 13.5px; color: var(--graphite-muted); margin-top: 8px; line-height: 1.7;"></div>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script>
+    /* --- 1. TAB SWITCHER & PROGRESS BAR --- */
+    function switchTab(paneName) {
+      document.querySelectorAll('.view-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.pane === paneName));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + paneName));
+      document.getElementById('examTimerStrip').classList.toggle('active-exam', paneName === 'homework');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      document.getElementById('scrollProgress').style.width = pct + '%';
+    });
+
+    /* --- 2. LESSON (60:00) & CONTROL TEST (45:00) TIMERS --- */
+    const timers = {
+      lesson: { defaultSec: 60 * 60, left: 60 * 60, id: 'lessonDigits', handle: null },
+      exam:   { defaultSec: 45 * 60, left: 45 * 60, id: 'examDigits',   handle: null }
+    };
+
+    function formatClock(totalSec) {
+      const safe = Math.max(0, totalSec);
+      const m = String(Math.floor(safe / 60)).padStart(2, '0');
+      const s = String(safe % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function paintTimer(key) {
+      const t = timers[key];
+      const el = document.getElementById(t.id);
+      el.textContent = formatClock(t.left);
+      el.classList.toggle('low', t.left > 0 && t.left <= 120);
+    }
+
+    function startTimer(key) {
+      const t = timers[key];
+      if (t.handle) return;
+      t.handle = setInterval(() => {
+        if (t.left > 0) {
+          t.left--;
+          paintTimer(key);
+        } else {
+          pauseTimer(key);
+        }
+      }, 1000);
+    }
+
+    function pauseTimer(key) {
+      const t = timers[key];
+      clearInterval(t.handle);
+      t.handle = null;
+    }
+
+    function resetTimer(key) {
+      pauseTimer(key);
+      timers[key].left = timers[key].defaultSec;
+      paintTimer(key);
+    }
+
+    /* --- 3. INTERACTIVE PILLS & GRADING ENGINES --- */
+    function normalizeText(str) {
+      return (str || '').trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ');
+    }
+
+    function pickPill(btn) {
+      const group = btn.closest('.pill-choice-group');
+      group.querySelectorAll('.choice-pill').forEach(p => p.classList.remove('picked'));
+      btn.classList.add('picked');
+      group.dataset.userPick = btn.textContent.trim();
+    }
+
+    function gradePills(boxId, scoreId) {
+      const rows = document.querySelectorAll(`#${boxId} .rule-row`);
+      let total = 0, ok = 0;
+      rows.forEach(row => {
+        const group = row.querySelector('.pill-choice-group');
+        const fb = row.querySelector('.feedback-line');
+        if (!group) return;
+        total++;
+        const ans = group.dataset.answer;
+        const pick = group.dataset.userPick || '';
+        group.querySelectorAll('.choice-pill').forEach(p => {
+          p.classList.remove('ok', 'bad');
+          const txt = p.textContent.trim();
+          if (txt === ans) p.classList.add('ok');
+          else if (txt === pick && pick !== ans) p.classList.add('bad');
+        });
+        if (fb) {
+          fb.textContent = row.dataset.tip || '';
+          fb.classList.add('shown');
+        }
+        if (pick === ans) ok++;
+      });
+      const badge = document.getElementById(scoreId);
+      badge.textContent = `${ok} / ${total} correct`;
+      badge.style.color = ok === total ? '#0f766e' : '#e11d48';
+    }
+
+    function gradeSelects(boxId, scoreId) {
+      const rows = document.querySelectorAll(`#${boxId} .rule-row`);
+      let total = 0, ok = 0;
+      rows.forEach(row => {
+        const sel = row.querySelector('select[data-answer]');
+        const fb = row.querySelector('.feedback-line');
+        if (!sel) return;
+        total++;
+        const val = normalizeText(sel.value);
+        const ans = normalizeText(sel.dataset.answer);
+        sel.classList.remove('state-ok', 'state-bad');
+        if (fb) {
+          fb.textContent = `Answer: "${sel.dataset.answer}" — ${row.dataset.tip || ''}`;
+          fb.classList.add('shown');
+        }
+        if (val === ans) {
+          sel.classList.add('state-ok');
+          ok++;
+        } else {
+          sel.classList.add('state-bad');
+        }
+      });
+      const badge = document.getElementById(scoreId);
+      badge.textContent = `${ok} / ${total} correct`;
+      badge.style.color = ok === total ? '#0f766e' : '#e11d48';
+    }
+
+    function gradeInputs(boxId, scoreId) {
+      const cells = document.querySelectorAll(`#${boxId} .transform-cell`);
+      let total = 0, ok = 0;
+      cells.forEach(cell => {
+        const inp = cell.querySelector('input[data-answer]');
+        const fb = cell.querySelector('.feedback-line');
+        if (!inp) return;
+        total++;
+        const val = normalizeText(inp.value);
+        const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+        inp.classList.remove('state-ok', 'state-bad');
+        if (fb) {
+          fb.textContent = `Expected: "${inp.dataset.answer.split('|')[0]}" — ${cell.dataset.tip || ''}`;
+          fb.classList.add('shown');
+        }
+        if (val && valid.includes(val)) {
+          inp.classList.add('state-ok');
+          ok++;
+        } else {
+          inp.classList.add('state-bad');
+        }
+      });
+      const badge = document.getElementById(scoreId);
+      badge.textContent = `${ok} / ${total} correct`;
+      badge.style.color = ok === total ? '#0f766e' : '#e11d48';
+    }
+
+    /* --- 4. FULL 50-POINT CONTROL TEST GRADER --- */
+    function gradeExamPart(partId) {
+      const rows = document.querySelectorAll(`#${partId} .rule-row`);
+      let total = 0, ok = 0;
+      rows.forEach(row => {
+        const sel = row.querySelector('select[data-answer]');
+        const inp = row.querySelector('input[data-answer]');
+        const fb = row.querySelector('.feedback-line');
+        const tip = row.dataset.tip || '';
+
+        if (sel) {
+          total++;
+          const val = normalizeText(sel.value);
+          const ans = normalizeText(sel.dataset.answer);
+          sel.classList.remove('state-ok', 'state-bad');
+          if (fb) {
+            fb.textContent = `Answer: "${sel.dataset.answer}" — ${tip}`;
+            fb.classList.add('shown');
+          }
+          if (val === ans) {
+            sel.classList.add('state-ok');
+            ok++;
+          } else {
+            sel.classList.add('state-bad');
+          }
+        } else if (inp) {
+          total++;
+          const val = normalizeText(inp.value);
+          const valid = inp.dataset.answer.toLowerCase().split('|').map(s => s.trim());
+          inp.classList.remove('state-ok', 'state-bad');
+          if (fb) {
+            fb.textContent = `Expected: "${inp.dataset.answer.split('|')[0]}" — ${tip}`;
+            fb.classList.add('shown');
+          }
+          if (val && valid.includes(val)) {
+            inp.classList.add('state-ok');
+            ok++;
+          } else {
+            inp.classList.add('state-bad');
+          }
+        }
+      });
+      return { total, ok };
+    }
+
+    function gradeFullControlTest() {
+      pauseTimer('exam');
+      const p1 = gradeExamPart('examPart1');
+      const p2 = gradeExamPart('examPart2');
+      const p3 = gradeExamPart('examPart3');
+      const p4 = gradeExamPart('examPart4');
+      const p5 = gradeExamPart('examPart5');
+
+      const earned = p1.ok + p2.ok + p3.ok + p4.ok + p5.ok;
+      const maxPts = 50;
+      const pct = Math.round((earned / maxPts) * 100);
+
+      let remark = 'Keep practising — review the highlighted explanations above and retake the test.';
+      if (pct >= 90) remark = 'Excellent (10–12 / A) — Ready for the Director\'s Control Test!';
+      else if (pct >= 76) remark = 'Strong Result (8–9 / B) — Very solid work! Check any red items above.';
+      else if (pct >= 60) remark = 'Satisfactory (6–7 / C) — Good progress, revise the rules you missed.';
+
+      const box = document.getElementById('finalScoreBox');
+      const headline = document.getElementById('finalScoreHeadline');
+      const remEl = document.getElementById('finalScoreRemark');
+      const breakEl = document.getElementById('finalScoreBreakdown');
+
+      box.classList.add('open');
+      headline.textContent = `Final Control Test Score: ${earned} / ${maxPts} (${pct}%)`;
+      headline.style.color = pct >= 76 ? '#0f766e' : '#e11d48';
+      remEl.textContent = remark;
+      breakEl.innerHTML = `
+        <b>Part I (Conditionals &amp; when/unless/as):</b> ${p1.ok}/10 &nbsp;•&nbsp;
+        <b>Part II (Relative &amp; Subordinate Clauses):</b> ${p2.ok}/10 &nbsp;•&nbsp;
+        <b>Part III (Modal Verbs):</b> ${p3.ok}/10<br>
+        <b>Part IV (-ed / -ing Adjectives):</b> ${p4.ok}/10 &nbsp;•&nbsp;
+        <b>Part V (Error Correction &amp; Rewriting):</b> ${p5.ok}/10
+      `;
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+
+  <script src="../tracker.js"></script>
+</body>
+</html>
