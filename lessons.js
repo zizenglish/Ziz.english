@@ -214,6 +214,13 @@ const LESSONS = [
     description: "Practise IELTS Speaking with structured prompts, useful phrases, and exam tasks.",
     file: "lessons/IELTS_Speaking_Student.html",
 },
-
+{
+    title: "Control Test Prep: Conditionals, Clauses, Modals & -ed/-ing",
+    level: "A2-B1",
+    type: "Grammar",
+    category: "Exam",
+    description: "Complete A2/B1 grammar revision and 45-minute mock control test covering First & Second Conditionals, when/unless/as clauses, relative clauses, modal verbs, and -ed/-ing adjectives.",
+    file: "lessons/a2b1_control_test_prep.html"
+},
      
 ];
